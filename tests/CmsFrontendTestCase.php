@@ -3,28 +3,21 @@
 namespace cmstests;
 
 use yii\helpers\Inflector;
+use luya\testsuite\cases\WebApplicationTestCase;
 
 require 'vendor/autoload.php';
 require 'data/env.php';
 
-class CmsFrontendTestCase extends \PHPUnit_Framework_TestCase
+class CmsFrontendTestCase extends WebApplicationTestCase
 {
-    public $app;
-    
-    public function setUp()
+    public function getConfigArray()
     {
-        $this->mockApp();
+        return include(__DIR__ .'/data/configs/cms.php');
     }
     
-    public function mockApp()
+    public function beforeSetup()
     {
-        if ($this->app === null) {
-            $this->app = new \luya\Boot();
-            $this->app->configFile = __DIR__ .'/data/configs/cms.php';
-            $this->app->mockOnly = true;
-            $this->app->setBaseYiiFile(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
-            $this->app->applicationWeb();
-        }
+        include(__DIR__ .'/data/env.php');
     }
 
     public static function mockMenuArray()

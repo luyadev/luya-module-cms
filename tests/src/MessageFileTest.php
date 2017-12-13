@@ -3,20 +3,20 @@
 namespace cmstests\src;
 
 use Yii;
-use luyatests\data\MessageFileComperatorTrait;
 use cmstests\CmsFrontendTestCase;
+use luya\testsuite\traits\MessageFileCompareTrait;
 
 class MessageFileTest extends CmsFrontendTestCase
 {
-    use MessageFileComperatorTrait;
+    use MessageFileCompareTrait;
 
     public function testAdminMessages()
     {
-        $this->compare(Yii::getAlias('@cmsadmin/messages'), 'en');
+        $this->compareMessages(Yii::getAlias('@cmsadmin/messages'), 'en');
     }
     
     public function testFrontendMessages()
     {
-        $this->compare(Yii::getAlias('@cms/messages'), 'en');
+        $this->compareMessages(Yii::getAlias('@cms/messages'), 'en');
     }
 }

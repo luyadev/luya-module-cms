@@ -25,6 +25,7 @@ class TagInjectorTest extends CmsFrontendTestCase
     public function testTagInjector()
     {
         $model = new TagFixture();
+        $model->unload();
         $model->load();
         
         $block = new StubTagBlock();
@@ -37,14 +38,21 @@ class TagInjectorTest extends CmsFrontendTestCase
             ['value' => 2, 'label' => 'Jane'],
             ['value' => 1, 'label' => 'John'],
         ]], $vars[0]);
+        
+        $model->unload();
     }
 
     public function testEvalTagInjector()
     {
+        $model = new TagFixture();
+        $model->load();
+        
         $block = new StubTagBlock();
         $block->setVarValues(['tags' => [['value' => 2]]]);
         $injector = new TagInjector(['context' => $block, 'varName' => 'tags']);
         $injector->setup();
         $this->assertArrayHasKey('Jane', $injector->getAssignedTags());
+        
+        $model->unload();
     }
 }
