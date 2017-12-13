@@ -16,7 +16,7 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require-dev" : {
-	   "luyadev/luya-testsuite" : "^1.0@dev",
+	   "luyadev/luya-testsuite" : "~1.0.0",
 	   "php-coveralls/php-coveralls": "^1.0"
 	},
 	"autoload" : {
