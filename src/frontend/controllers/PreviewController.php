@@ -17,7 +17,17 @@ use luya\cms\frontend\base\Controller;
  */
 class PreviewController extends Controller
 {
-    public function actionIndex($itemId, $version = false)
+	/**
+	 * Renders the preview action.
+	 * 
+	 * @param unknown $itemId The nav item to render.
+	 * @param string $version The version to display.
+	 * @param string $date The date from the preview frame, is false when not using the preview frame from the cms.
+	 * @throws ForbiddenHttpException
+	 * @throws NotFoundHttpException
+	 * @return \yii\web\Response|string
+	 */
+    public function actionIndex($itemId, $version = false, $date = false)
     {
         if (Yii::$app->adminuser->isGuest) {
             throw new ForbiddenHttpException('Unable to see the preview page, session expired or not logged in.');
@@ -35,6 +45,10 @@ class PreviewController extends Controller
 
         $item = Yii::$app->menu->find()->where(['id' => $itemId])->with('hidden')->lang($langShortCode)->one();
 
+        if ($item && !$version && !$date) {
+        	return $this->redirect($item->link);
+        }
+        
         // this item is still offline so we have to inject and fake it with the inject api
         if (!$item) {
             // create new item to inject
