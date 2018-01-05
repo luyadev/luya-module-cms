@@ -199,7 +199,7 @@ return [
     'cmsadmin_settings_time_title' => '页面调度',
     'cmsadmin_settings_time_title_from' => '开始日期',
     'cmsadmin_settings_time_title_till' => '截止日期',
-    'view_index_page_meta_timestamp_create' => '页面创建日期',
+    'view_index_page_meta_timestamp_create' => '页面创作日期',
     'nav_item_model_error_modulenacd /var   meexists' => 'The alias "{alias}" exists already as module. Use another alias name or rename the module with this alias in your config.',
     'nav_item_model_error_parentnavidcannotnull' => 'The parent nav id can not be null, something went wrong while extending from parent page.',
     'nav_item_model_error_urlsegementexistsalready' => 'This alias exists already, please take another name.',
