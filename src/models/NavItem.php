@@ -220,9 +220,11 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
         if ($this->parent_nav_id === null) {
             $this->addError('parent_nav_id', Module::t('nav_item_model_error_parentnavidcannotnull'));
+            
+            return false;
         }
 
-        if ($this->find()->where(['alias' => $alias, 'lang_id' => $langId])->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')->andWhere(['=', 'cms_nav.parent_nav_id', $this->parent_nav_id])->one()) {
+        if ($this->find()->where(['alias' => $alias, 'lang_id' => $langId])->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')->andWhere(['=', 'cms_nav.parent_nav_id', $this->parent_nav_id])->exists()) {
             $this->addError('alias', Module::t('nav_item_model_error_urlsegementexistsalready'));
 
             return false;

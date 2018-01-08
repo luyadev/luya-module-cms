@@ -444,27 +444,35 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         ];
     }
     
+    /**
+     * Copy blocks from one page to another.
+     * 
+     * @param integer $fromPageId
+     * @param integer $toPageId
+     * @return boolean
+     */
     public static function copyBlocks($fromPageId, $toPageId)
     {
-        $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $fromPageId]);
+        $pageBlocks = NavItemPageBlockItem::find()->where(['nav_item_page_id' => $fromPageId])->asArray(true)->all();
         
         $idLink = [];
         foreach ($pageBlocks as $block) {
             $blockItem = new NavItemPageBlockItem();
-            $blockItem->attributes = $block->toArray();
+            $blockItem->attributes = $block;
             $blockItem->nav_item_page_id = $toPageId;
-            $blockItem->insert();
-            $idLink[$block->id] = $blockItem->id;
-        }
-        // check if prev_id is used, check if id is in set - get new id and set new prev_ids in copied items
-        $newPageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $toPageId]);
-        foreach ($newPageBlocks as $block) {
-            if ($block->prev_id) {
-                if (isset($idLink[$block->prev_id])) {
-                    $block->prev_id = $idLink[$block->prev_id];
-                }
+            if ($blockItem->insert()) {
+                $idLink[$block['id']] = $blockItem->id;
             }
-            $block->update(false);
+        }
+        
+        // as blocks with subblocks have the previous block id stored in prev_id those values must be replaced from the old prev_id
+        // with the new prev_id
+        $newPageBlocks = NavItemPageBlockItem::find()->where(['nav_item_page_id' => $toPageId])->asArray(true)->all();
+        foreach ($newPageBlocks as $block) {
+            if ($block['prev_id'] && isset($idLink[$block['prev_id']])) {
+                // update the given blocks' prev_id
+                NavItemPageBlockItem::updateAll(['prev_id' => $idLink[$block['prev_id']]], ['id' => $block['id']]);
+            }
         }
         
         return true;

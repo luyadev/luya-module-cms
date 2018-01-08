@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.1 (in progress)
 
+### Fixed
+
++ [#22](https://github.com/luyadev/luya-module-cms/issues/22) Fixed memory issue when creating new version from existing page with large amount of blocks.
+
 ### Add
 
 + [#19](https://github.com/luyadev/luya-module-cms/pull/19) Add Chinese Translations
