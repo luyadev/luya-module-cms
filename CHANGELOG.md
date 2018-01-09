@@ -12,3 +12,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Add
 
 + [#19](https://github.com/luyadev/luya-module-cms/pull/19) Add Chinese Translations
+
+## 1.0.0 (12, December 2017)
+
+- First stable release.
