@@ -128,6 +128,11 @@ abstract class Controller extends \luya\web\Controller
         return $content;
     }
     
+    /**
+     * Render the LUYA Toolbar.
+     *
+     * @param \yii\base\Event $event
+     */
     public function renderToolbar($event)
     {
         Yii::info('LUYA CMS Toolbar rendering start', __METHOD__);
