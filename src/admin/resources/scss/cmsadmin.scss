@@ -2,32 +2,32 @@
 // Include Bootstrap Mixins / Functions
 // ==================================================
 
-@import "../../../../../admin/vendor/twbs/bootstrap/scss/mixins/clearfix";
-@import "../../../../../admin/vendor/twbs/bootstrap/scss/functions";
+@import "../../../../vendor/twbs/bootstrap/scss/mixins/clearfix";
+@import "../../../../vendor/twbs/bootstrap/scss/functions";
 
 // ==================================================
 // Variables
 // ==================================================
 
-@import "../../../../../admin/src/resources/scss/variables/colors";
-@import "../../../../../admin/src/resources/scss/variables/bootstrap";
-@import "../../../../../admin/src/resources/scss/variables/custom";
-@import "../../../../../admin/src/resources/scss/variables/flags";
-@import "../../../../../admin/src/resources/scss/variables/zindex";
+@import "../../../../vendor/luyadev/luya-module-admin/src/resources/scss/variables/colors";
+@import "../../../../vendor/luyadev/luya-module-admin/src/resources/scss/variables/bootstrap";
+@import "../../../../vendor/luyadev/luya-module-admin/src/resources/scss/variables/custom";
+@import "../../../../vendor/luyadev/luya-module-admin/src/resources/scss/variables/flags";
+@import "../../../../vendor/luyadev/luya-module-admin/src/resources/scss/variables/zindex";
 
 // ==================================================
 // Include Bootstrap variables
 // ==================================================
 
-@import "../../../../../admin/vendor/twbs/bootstrap/scss/variables";
+@import "../../../../vendor/twbs/bootstrap/scss/variables";
 
 // ==================================================
 // Helpers
 // ==================================================
 
-@import "../../../../../admin/src/resources/scss/helpers/google-chrome-font-offset-fix";
-@import "../../../../../admin/src/resources/scss/helpers/overflow-no-scrollbars";
-@import "../../../../../admin/src/resources/scss/helpers/zindex";
+@import "../../../../vendor/luyadev/luya-module-admin/src/resources/scss/helpers/google-chrome-font-offset-fix";
+@import "../../../../vendor/luyadev/luya-module-admin/src/resources/scss/helpers/overflow-no-scrollbars";
+@import "../../../../vendor/luyadev/luya-module-admin/src/resources/scss/helpers/zindex";
 
 
 // ==================================================
