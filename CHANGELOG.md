@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#24](https://github.com/luyadev/luya-module-cms/issues/24) Fixed SCSS dependency issues with external luya-module-admin project links and missing bootstrap style functions
 + [#22](https://github.com/luyadev/luya-module-cms/issues/22) Fixed memory issue when creating new version from existing page with large amount of blocks.
 
 ### Add
