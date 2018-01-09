@@ -68,3 +68,10 @@ After successfully installation and configuration run the migrate, import and se
 
 > Please note that the module names *cms* and *cmsadmin* are required and should not be changed!
 
+### Dependencies
+
+#### CSS Styles
+
+We're using variables defined in style definitions (scss) from [luya-module-admin](https://github.com/luyadev/luya-module-admin).
+The paths in **admin/resources/cmsadmin.scss** are pointing to **luya-module-admin** assuming it's in the same directory as **luya-module-cms**.
+If you're not using **gulp** to compile styles for **luya-module-cms**, you can discard this information. The Javascript files will be compiled without any dependencies.
