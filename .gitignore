@@ -5,3 +5,4 @@
 /.settings/
 /phpunit.xml
 /luya
+node_modules/
