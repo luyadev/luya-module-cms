@@ -86,9 +86,9 @@ return [
     'js_state_visible' => '%title% 可见',
     'js_state_is_home' => '%title% 是根页面',
     'js_state_is_not_home' => '%title% 不是根页面',
-    'js_page_item_update_ok' => ' «%title%» 页已更新.',
-    'js_page_block_update_ok' => ' «%name%» 块已更新.',
-    'js_page_block_remove_ok' => ' «%name%» 块已删除.',
+    'js_page_item_update_ok' => '«%title%» 页已更新.',
+    'js_page_block_update_ok' => '«%name%» 块已更新.',
+    'js_page_block_remove_ok' => '«%name%» 块已删除.',
     'js_page_block_visbility_change' => '«%name%»可见性修改成功.',
 
 // added translation in 1.0.0-beta4:
