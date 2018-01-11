@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Add
 
 + [#19](https://github.com/luyadev/luya-module-cms/pull/19) Add Chinese Translations
++ [#18](https://github.com/luyadev/luya-module-cms/issues/18) When page is default version and online, the original site path will be used to preview the page.
 
 ## 1.0.0 (12, December 2017)
 
