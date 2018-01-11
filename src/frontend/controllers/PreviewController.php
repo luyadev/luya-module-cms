@@ -20,9 +20,9 @@ class PreviewController extends Controller
 	/**
 	 * Renders the preview action.
 	 * 
-	 * @param unknown $itemId The nav item to render.
-	 * @param string $version The version to display.
-	 * @param string $date The date from the preview frame, is false when not using the preview frame from the cms.
+	 * @param integer $itemId The nav item to render.
+	 * @param integer $version The version to display.
+	 * @param integer $date The date from the preview frame, is false when not using the preview frame from the cms.
 	 * @throws ForbiddenHttpException
 	 * @throws NotFoundHttpException
 	 * @return \yii\web\Response|string
@@ -45,7 +45,7 @@ class PreviewController extends Controller
 
         $item = Yii::$app->menu->find()->where(['id' => $itemId])->with('hidden')->lang($langShortCode)->one();
 
-        if ($item && !$version && !$date) {
+        if ($item && !$date && $navItem->nav_item_type_id == $version) {
         	return $this->redirect($item->link);
         }
         
