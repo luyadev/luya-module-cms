@@ -16,6 +16,6 @@ class m150108_154017_cms_block extends Migration
 
     public function safeDown()
     {
-        $this->dropTable('createTable');
+        $this->dropTable('cms_block');
     }
 }
