@@ -41,6 +41,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'api-cms-navitempageblockitem' => 'luya\cms\admin\\apis\\NavItemPageBlockItemController',
         'api-cms-nav' => 'luya\cms\admin\apis\NavController',
         'api-cms-navitem' => 'luya\cms\admin\\apis\\NavItemController',
+        'api-cms-navitempage' => 'luya\cms\admin\\apis\\NavItemPageController',
         'api-cms-menu' => 'luya\cms\admin\apis\MenuController',
         'api-cms-layout' => 'luya\cms\admin\\apis\\LayoutController',
         'api-cms-block' => 'luya\cms\admin\\apis\\BlockController',
@@ -238,6 +239,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         return [
             ['api' => 'api-cms-navitempageblockitem', 'alias' => static::t('module_permission_page_blocks')],
+            ['api' => 'api-cms-navitempage', 'alias' => static::t('module_permission_page')],
         ];
     }
 
