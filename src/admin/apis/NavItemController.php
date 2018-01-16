@@ -325,15 +325,29 @@ class NavItemController extends \luya\admin\base\RestController
                     $typeModel->update();
                     break;
             }
-            // store updated type model and nav item model!
-            return $model->save();
         } else {
             // set the new type
             $model->nav_item_type = $navItemType;
             switch ($navItemType) {
                 case 1:
+                    // check for existent version, if not available create "First version"
+                    if (!NavItemPage::find()->where(['nav_item_id' => $navItemId])->exists()) {
+                        $pageModel = new NavItemPage();
+                        $pageModel->attributes = [
+                            'nav_item_id' => $navItemId,
+                            'timestamp_create' => time(),
+                            'create_user_id' => Yii::$app->adminuser->getId(),
+                            'version_alias' => Module::t('Initial'),
+                            'layout_id' => Yii::$app->request->post('layout_id'),
+                        ];
+                        if ($pageModel->validate()) {
+                            $pageModel->save();
+                        } else  {
+                            return $this->sendModelError($pageModel);
+                        }
+                    }
                     $model->nav_item_type_id = 0;
-                    return $model->update();
+                    break;
                 case 2:
                     $typeModel = new NavItemModule();
                     $this->setPostAttribute($typeModel, 'module_name');
@@ -342,7 +356,6 @@ class NavItemController extends \luya\admin\base\RestController
                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
-                    return $model->update();
                     break;
                 case 3:
                     $typeModel = new NavItemRedirect();
@@ -353,11 +366,19 @@ class NavItemController extends \luya\admin\base\RestController
                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
-                    return $model->update();
+                    break;
+                default:
+                    throw new \luya\cms\Exception("Invalid nav item type.");
                     break;
             }
         }
-        
+
+        if ($model->update()) {
+            return [
+                'item' => $model,
+                'typeData' => ($model->nav_item_type == 1) ? NavItemPage::getVersionList($model->id) : $model->getType()->toArray()
+                ];
+        }
         return false;
     }
 
