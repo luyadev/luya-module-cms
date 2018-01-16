@@ -446,7 +446,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
     /**
      * Copy blocks from one page to another.
-     * 
+     *
      * @param integer $fromPageId
      * @param integer $toPageId
      * @return boolean

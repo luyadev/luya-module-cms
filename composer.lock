@@ -509,16 +509,16 @@
         },
         {
             "name": "luyadev/luya-composer",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-composer.git",
-                "reference": "d2cb071f72a0652832615e18b5134478a510e0db"
+                "reference": "d5274bd0e7a67987c7b4b3ee9d91f8268f638174"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d2cb071f72a0652832615e18b5134478a510e0db",
-                "reference": "d2cb071f72a0652832615e18b5134478a510e0db",
+                "url": "https://api.github.com/repos/luyadev/luya-composer/zipball/d5274bd0e7a67987c7b4b3ee9d91f8268f638174",
+                "reference": "d5274bd0e7a67987c7b4b3ee9d91f8268f638174",
                 "shasum": ""
             },
             "require": {
@@ -555,7 +555,7 @@
                 "composer",
                 "luya"
             ],
-            "time": "2017-12-03T12:32:47+00:00"
+            "time": "2018-01-16T09:12:39+00:00"
         },
         {
             "name": "luyadev/luya-core",
@@ -688,16 +688,16 @@
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "900a29a5b2461ad9be3067856d3c5f7624c23de3"
+                "reference": "5d2dbf63962546149d0e9c7995c4fcf383a2142a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/900a29a5b2461ad9be3067856d3c5f7624c23de3",
-                "reference": "900a29a5b2461ad9be3067856d3c5f7624c23de3",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/5d2dbf63962546149d0e9c7995c4fcf383a2142a",
+                "reference": "5d2dbf63962546149d0e9c7995c4fcf383a2142a",
                 "shasum": ""
             },
             "require": {
@@ -708,7 +708,7 @@
                 "phpunit/phpunit": "~6.0.0",
                 "twig/twig": "^1.0"
             },
-            "type": "luya-module",
+            "type": "luya-core",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
@@ -737,7 +737,7 @@
                 "module",
                 "php"
             ],
-            "time": "2017-12-13T12:03:50+00:00"
+            "time": "2018-01-12T13:50:25+00:00"
         },
         {
             "name": "myclabs/deep-copy",
