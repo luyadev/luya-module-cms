@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Fixed
 
 + [#25](https://github.com/luyadev/luya-module-cms/issues/25) Hide deleted pages in dashboard object "last page updates".
++ [#17](https://github.com/luyadev/luya-module-cms/issues/17) Create new page version if changing from page type to "page" and no version is available.
 + [#3](https://github.com/luyadev/luya-module-cms/issues/3) Bootstrap apply only when module exists in modules list.
 + [#24](https://github.com/luyadev/luya-module-cms/issues/24) Fixed SCSS dependency issues with external luya-module-admin project links and missing bootstrap style functions
 + [#22](https://github.com/luyadev/luya-module-cms/issues/22) Fixed memory issue when creating new version from existing page with large amount of blocks.
