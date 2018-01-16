@@ -201,4 +201,8 @@ return [
     'redirect_model_atr_redirect_status_code_hint' => 'Redirection type. When using 301: Moved Permanently, browsers will cache the redirection so that changes to the destination might not take effect without clearing the browser\'s cache.',
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
+
+// 1.0.1
+    'module_permission_page' => 'Page Content',
 ];
+

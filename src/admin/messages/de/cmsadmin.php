@@ -211,4 +211,8 @@ return [
     'redirect_model_atr_redirect_status_code_hint' => 'Art der Weiterleitung. Bei der Verwendung von 301: Moved Permanently werden Browser die Weiterleitung im Cache speichern, so dass Änderungen des Ziels erst nach dem Löschen des Browser-Caches wirksam werden.',
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
+
+// 1.0.1
+    'module_permission_page' => 'Page Content',
 ];
+

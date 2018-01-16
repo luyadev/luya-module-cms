@@ -214,4 +214,8 @@ return [
     'redirect_model_atr_redirect_status_code_hint' => '重定向类型. \'redirect_model_atr_redirect_status_code_hint\'=>\'重定向类型。 当使用301：永久移动时，浏览器将缓存重定向，这将导致在不清除浏览器缓存的情况下对目标路径的更改可能不会生效。',
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
+
+// 1.0.1
+    'module_permission_page' => 'Page Content',
 ];
+
