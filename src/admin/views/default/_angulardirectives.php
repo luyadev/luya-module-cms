@@ -157,12 +157,24 @@ use luya\cms\admin\Module;
 
 <!-- PAGE UPDATE FORM -->
 <script type="text/ng-template" id="updateformpage.html">
+<div class="form-group form-side-by-side" ng-show="!isEditAvailable()">
+    <div class="form-side form-side-label">
+        <label class="input__label"><?= Module::t('view_index_page_layout'); ?></label>
+    </div>
+    <div class="form-side">
+        <select class="form-control" ng-model="data.layout_id" convert-to-number>
+            <option value="0"><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
+            <option value="">-----</option>
+            <option ng-repeat="item in layoutsData" value="{{item.id}}">{{item.name}}</option>
+        </select>
+    </div>
+</div>
 <div class="form-group form-side-by-side" ng-show="isEditAvailable()">
 	<div class="form-side form-side-label">
     	<label><?= Module::t('view_index_page_version_chooser'); ?></label>
     </div>
 	<div class="form-side">
-		<select class="form-control" ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
+		<select class="form-control" ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in versionsData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
 	</div>
 </div>
 </script>
