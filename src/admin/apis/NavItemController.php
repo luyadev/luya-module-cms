@@ -25,6 +25,9 @@ use luya\cms\admin\Module;
  */
 class NavItemController extends \luya\admin\base\RestController
 {
+	/**
+	 * @inheritdoc
+	 */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -46,13 +49,32 @@ class NavItemController extends \luya\admin\base\RestController
         return $behaviors;
     }
 
+    /**
+     * Returns an array of 10 items for last updated pages.
+     * 
+     * @return array
+     */
     public function actionLastUpdates()
     {
-        return NavItem::find()->select(['cms_nav_item.title', 'timestamp_update', 'update_user_id', 'nav_id'])->limit(10)->orderBy(['timestamp_update' => SORT_DESC])->joinWith(['updateUser' => function ($q) {
-            $q->select(['firstname', 'lastname', 'id']);
-        }])->asArray(true)->all();
+        return NavItem::find()
+        	->select(['cms_nav_item.title', 'timestamp_update', 'update_user_id', 'nav_id'])
+        	->limit(10)
+        	->orderBy(['timestamp_update' => SORT_DESC])
+        	->joinWith(['updateUser' => function ($q) {
+            	$q->select(['firstname', 'lastname', 'id'])->where([]);
+        	}, 'nav'])
+        	->where(['cms_nav.is_deleted' => false])
+        	->asArray(true)
+        	->all();
     }
     
+    /**
+     * Delete a nav item based on the id.
+     * 
+     * @param integer $navItemId The id of the item to delete.
+     * @throws ForbiddenHttpException
+     * @return array|boolean
+     */
     public function actionDelete($navItemId)
     {
         if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
@@ -69,12 +91,13 @@ class NavItemController extends \luya\admin\base\RestController
     }
     
     /**
+     * The data api for a nav id and correspoding language.
+     * 
      * http://example.com/admin/api-cms-navitem/nav-lang-item?access-token=XXX&navId=A&langId=B.
      *
-     * @param unknown_type $navId
-     * @param unknown_type $langId
-     *
-     * @return multitype:unknown
+     * @param integer $navId
+     * @param ineger $langId
+     * @return array
      */
     public function actionNavLangItem($navId, $langId)
     {
@@ -91,16 +114,34 @@ class NavItemController extends \luya\admin\base\RestController
         return ['error' => true];
     }
 
+    /**
+     * Get the data for a given placeholder variable inside a page id.
+     * 
+     * @param integer $navItemPageId
+     * @param integer $prevId The previous id if its a nested element.
+     * @param string $placeholderVar
+     */
     public function actionReloadPlaceholder($navItemPageId, $prevId, $placeholderVar)
     {
         return NavItemPage::getPlaceholder($placeholderVar, (int) $navItemPageId, (int) $prevId);
     }
 
+    /**
+     * Update data for a given nav item id.
+     * 
+     * @param integer $navItemId
+     * @return boolean
+     */
     public function actionUpdateItemTypeData($navItemId)
     {
         return NavItem::findOne($navItemId)->updateType(Yii::$app->request->post());
     }
     
+    /**
+     * Change the layout of a page version.
+     * 
+     * @return number|boolean
+     */
     public function actionChangePageVersionLayout()
     {
         $params =  Yii::$app->request->bodyParams;
@@ -118,6 +159,11 @@ class NavItemController extends \luya\admin\base\RestController
         return false;
     }
     
+    /**
+     * Delete a given page from pageId body param.
+     * 
+     * @return boolean
+     */
     public function actionRemovePageVersion()
     {
         $pageId = Yii::$app->request->getBodyParam('pageId');
@@ -126,12 +172,14 @@ class NavItemController extends \luya\admin\base\RestController
         
         if ($page) {
             $page->forceNavItem->updateTimestamp();
-            $page->delete();
+            return $page->delete();
         }
+        
+        return false;
     }
     
     /**
-     * Create a new cms_nv_item_page for an existing nav_item, this is also known as a "new version" of a page item.
+     * Create a new cms_nav_item_page for an existing nav_item, this is also known as a "new version" of a page item.
      *
      */
     public function actionCreatePageVersion()
