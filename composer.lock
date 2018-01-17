@@ -559,16 +559,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "d4440bc579ad64b34af3e6a86814b0a536bd7b2f"
+                "reference": "73f5670cf9c927f2a490182130329d8af827967c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/d4440bc579ad64b34af3e6a86814b0a536bd7b2f",
-                "reference": "d4440bc579ad64b34af3e6a86814b0a536bd7b2f",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/73f5670cf9c927f2a490182130329d8af827967c",
+                "reference": "73f5670cf9c927f2a490182130329d8af827967c",
                 "shasum": ""
             },
             "require": {
@@ -612,7 +612,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-01-03T16:58:07+00:00"
+            "time": "2018-01-17T09:34:13+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
