@@ -25,9 +25,9 @@ use luya\cms\admin\Module;
  */
 class NavItemController extends \luya\admin\base\RestController
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -51,26 +51,26 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * Returns an array of 10 items for last updated pages.
-     * 
+     *
      * @return array
      */
     public function actionLastUpdates()
     {
         return NavItem::find()
-        	->select(['cms_nav_item.title', 'timestamp_update', 'update_user_id', 'nav_id'])
-        	->limit(10)
-        	->orderBy(['timestamp_update' => SORT_DESC])
-        	->joinWith(['updateUser' => function ($q) {
-            	$q->select(['firstname', 'lastname', 'id'])->where([]);
-        	}, 'nav'])
-        	->where(['cms_nav.is_deleted' => false])
-        	->asArray(true)
-        	->all();
+            ->select(['cms_nav_item.title', 'timestamp_update', 'update_user_id', 'nav_id'])
+            ->limit(10)
+            ->orderBy(['timestamp_update' => SORT_DESC])
+            ->joinWith(['updateUser' => function ($q) {
+                $q->select(['firstname', 'lastname', 'id'])->where([]);
+            }, 'nav'])
+            ->where(['cms_nav.is_deleted' => false])
+            ->asArray(true)
+            ->all();
     }
     
     /**
      * Delete a nav item based on the id.
-     * 
+     *
      * @param integer $navItemId The id of the item to delete.
      * @throws ForbiddenHttpException
      * @return array|boolean
@@ -92,7 +92,7 @@ class NavItemController extends \luya\admin\base\RestController
     
     /**
      * The data api for a nav id and correspoding language.
-     * 
+     *
      * http://example.com/admin/api-cms-navitem/nav-lang-item?access-token=XXX&navId=A&langId=B.
      *
      * @param integer $navId
@@ -116,7 +116,7 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * Get the data for a given placeholder variable inside a page id.
-     * 
+     *
      * @param integer $navItemPageId
      * @param integer $prevId The previous id if its a nested element.
      * @param string $placeholderVar
@@ -128,7 +128,7 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * Update data for a given nav item id.
-     * 
+     *
      * @param integer $navItemId
      * @return boolean
      */
@@ -139,7 +139,7 @@ class NavItemController extends \luya\admin\base\RestController
     
     /**
      * Change the layout of a page version.
-     * 
+     *
      * @return number|boolean
      */
     public function actionChangePageVersionLayout()
@@ -161,7 +161,7 @@ class NavItemController extends \luya\admin\base\RestController
     
     /**
      * Delete a given page from pageId body param.
-     * 
+     *
      * @return boolean
      */
     public function actionRemovePageVersion()
