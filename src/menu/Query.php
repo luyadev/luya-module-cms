@@ -3,9 +3,10 @@
 namespace luya\cms\menu;
 
 use Yii;
+use yii\base\BaseObject;
 use luya\cms\Exception;
 use luya\cms\Menu;
-use yii\base\BaseObject;
+use luya\helpers\ArrayHelper;
 
 /**
  * Menu Query Builder.
@@ -295,6 +296,39 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         return $this;
     }
 
+    private $_order;
+    
+    /**
+     * Order the query by one or multiple fields asc or desc.
+     * 
+     * Use following PHP constants for directions:
+     * 
+     * + SORT_ASC: 1..10, A..Z
+     * + SORT_DESC: 10..1, Z..A
+     * 
+     * Example using orderBy:
+     * 
+     * ```php
+     * $query = new Query()->orderBy([Query::FIELD_TIMESTAMPCREATE => SORT_ASC, Query::FIELD_ALIAS => SORT_DESC'])->all();
+     * ```
+     * 
+     * @param array $order An array with fields to sort where key is the field and value the direction.
+     * @since 1.0.2
+     */
+    public function orderBy(array $order)
+    {
+        $orderBy = ['keys' => [], 'directions' => []];
+        
+        foreach ($order as $key => $direction) {
+            $orderBy['keys'][] = $key;
+            $orderBy['directions'][] = $direction;
+        }
+        
+        $this->_order = $orderBy;
+        
+        return $this;
+    }
+    
     /**
      * Retrieve only one result for your query, even if there are more rows then one, it will
      * just pick the first row from the filtered result and return the item object. If the filtering
@@ -390,14 +424,18 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
             $data = array_slice($data, 0, $this->_limit, true);
         }
     
+        if ($this->_order !== null) {
+            ArrayHelper::multisort($data, $this->_order['keys'], $this->_order['directions']);
+        }
+        
         return $data;
     }
     
     /**
      * Filter an array item based on the where expression.
      *
-     * @param unknown $value
-     * @param unknown $field
+     * @param string $value
+     * @param string $field
      * @param array $where
      * @param array $with
      * @return boolean

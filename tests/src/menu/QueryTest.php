@@ -123,6 +123,27 @@ class QueryTest extends CmsFrontendTestCase
         
         $this->assertSame(3, $in);
     }
+
+    public function testOrderByQuery()
+    {
+        Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuContainerArray());
+        
+        $unOrdered = (new Query())->all();
+        
+        $array = iterator_to_array($unOrdered);
+
+        $this->assertSame(1, $array[0]->id);
+        $last = end($array)->id;
+        $this->assertSame(6, $last);
+        
+        $ordered = (new Query())->orderBy(['id' => SORT_DESC])->all();
+        
+        $sortedArray = iterator_to_array($ordered);
+        
+        $this->assertSame(6, $sortedArray[0]->id);
+        $last = end($sortedArray)->id;
+        $this->assertSame(1, $last);
+    }
     
     public function testPreloadModels()
     {
