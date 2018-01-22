@@ -343,8 +343,7 @@ class NavItemController extends \luya\admin\base\RestController
                             'version_alias' => Module::t('Initial'),
                             'layout_id' => Yii::$app->request->post('layout_id'),
                         ];
-                        if (!$pageModel->save())
-                        {
+                        if (!$pageModel->save()) {
                             return $this->sendModelError($pageModel);
                         }
                         $model->nav_item_type_id = $navItemId;
