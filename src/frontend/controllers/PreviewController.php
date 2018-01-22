@@ -17,16 +17,16 @@ use luya\cms\frontend\base\Controller;
  */
 class PreviewController extends Controller
 {
-    /**
-     * Renders the preview action.
-     *
-     * @param integer $itemId The nav item to render.
-     * @param integer $version The version to display.
-     * @param integer $date The date from the preview frame, is false when not using the preview frame from the cms.
-     * @throws ForbiddenHttpException
-     * @throws NotFoundHttpException
-     * @return \yii\web\Response|string
-     */
+	/**
+	 * Renders the preview action.
+	 * 
+	 * @param integer $itemId The nav item to render.
+	 * @param integer $version The version to display.
+	 * @param integer $date The date from the preview frame, is false when not using the preview frame from the cms.
+	 * @throws ForbiddenHttpException
+	 * @throws NotFoundHttpException
+	 * @return \yii\web\Response|string
+	 */
     public function actionIndex($itemId, $version = false, $date = false)
     {
         if (Yii::$app->adminuser->isGuest) {
@@ -46,7 +46,7 @@ class PreviewController extends Controller
         $item = Yii::$app->menu->find()->where(['id' => $itemId])->with('hidden')->lang($langShortCode)->one();
 
         if ($item && !$date && $navItem->nav_item_type_id == $version) {
-            return $this->redirect($item->link);
+        	return $this->redirect($item->link);
         }
         
         // this item is still offline so we have to inject and fake it with the inject api
