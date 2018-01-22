@@ -174,7 +174,9 @@ use luya\cms\admin\Module;
     	<label><?= Module::t('view_index_page_version_chooser'); ?></label>
     </div>
 	<div class="form-side">
-		<select class="form-control" ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in versionsData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
+        <select class="form-control" ng-model="data.nav_item_type_id" convert-to-number>
+            <option ng-repeat="item in versionsData" value="{{item.id}}">{{item.version_alias}}</option>
+        </select>
 	</div>
 </div>
 </script>

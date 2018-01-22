@@ -19,7 +19,7 @@ class NavItemPageController extends RestActiveController
      * Returns all versions/pages for a given navItemId
      *
      * @param $navItemId
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array
      */
     public function actionVersions($navItemId)
     {

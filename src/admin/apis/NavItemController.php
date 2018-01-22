@@ -7,7 +7,6 @@ use luya\cms\models\NavItemModule;
 use luya\cms\models\NavItemPage;
 use luya\cms\models\NavItemRedirect;
 use Yii;
-use Exception;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
 use luya\cms\models\NavItemPageBlockItem;
@@ -16,6 +15,7 @@ use yii\caching\DbDependency;
 use luya\cms\models\Layout;
 use yii\web\ForbiddenHttpException;
 use luya\cms\admin\Module;
+use luya\cms\Exception;
 
 /**
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
@@ -200,7 +200,7 @@ class NavItemController extends \luya\admin\base\RestController
         $navItemModel = NavItem::findOne($navItemId);
         
         if (!$navItemModel) {
-            throw new \luya\Exception("Unable to find nav item model");
+            throw new Exception("Unable to find nav item model");
         }
         
         if (!empty($fromPageId)) {
@@ -324,6 +324,9 @@ class NavItemController extends \luya\admin\base\RestController
                     }
                     $typeModel->update();
                     break;
+                default:
+                    throw new Exception("Invalid nav item type.");
+                    break;
             }
         } else {
             // set the new type
@@ -340,10 +343,9 @@ class NavItemController extends \luya\admin\base\RestController
                             'version_alias' => Module::t('Initial'),
                             'layout_id' => Yii::$app->request->post('layout_id'),
                         ];
-                        if ($pageModel->validate()) {
-                            $pageModel->save();
-                        } else  {
-                            return $this->sendModelError($pageModel);
+                        if (!$pageModel->save())
+                        {
+                            return $this->sendMOdelError($pageModel);
                         }
                         $model->nav_item_type_id = $navItemId;
                     } else {
@@ -370,7 +372,7 @@ class NavItemController extends \luya\admin\base\RestController
                     $model->nav_item_type_id = $typeModel->id;
                     break;
                 default:
-                    throw new \luya\cms\Exception("Invalid nav item type.");
+                    throw new Exception("Invalid nav item type.");
                     break;
             }
         }
@@ -379,7 +381,7 @@ class NavItemController extends \luya\admin\base\RestController
             return [
                 'item' => $model,
                 'typeData' => ($model->nav_item_type == 1) ? NavItemPage::getVersionList($model->id) : $model->getType()->toArray()
-                ];
+            ];
         }
         return false;
     }
