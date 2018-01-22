@@ -7,7 +7,6 @@ use luya\cms\models\NavItemModule;
 use luya\cms\models\NavItemPage;
 use luya\cms\models\NavItemRedirect;
 use Yii;
-use Exception;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
 use luya\cms\models\NavItemPageBlockItem;
@@ -16,6 +15,7 @@ use yii\caching\DbDependency;
 use luya\cms\models\Layout;
 use yii\web\ForbiddenHttpException;
 use luya\cms\admin\Module;
+use luya\cms\Exception;
 
 /**
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
@@ -200,7 +200,7 @@ class NavItemController extends \luya\admin\base\RestController
         $navItemModel = NavItem::findOne($navItemId);
         
         if (!$navItemModel) {
-            throw new \luya\Exception("Unable to find nav item model");
+            throw new Exception("Unable to find nav item model");
         }
         
         if (!empty($fromPageId)) {
@@ -324,16 +324,33 @@ class NavItemController extends \luya\admin\base\RestController
                     }
                     $typeModel->update();
                     break;
+                default:
+                    throw new Exception("Invalid nav item type.");
+                    break;
             }
-            // store updated type model and nav item model!
-            return $model->save();
         } else {
             // set the new type
             $model->nav_item_type = $navItemType;
             switch ($navItemType) {
                 case 1:
-                    $model->nav_item_type_id = 0;
-                    return $model->update();
+                    // check for existent version, if not available create "First version"
+                    if (!NavItemPage::find()->where(['nav_item_id' => $navItemId])->exists()) {
+                        $pageModel = new NavItemPage();
+                        $pageModel->attributes = [
+                            'nav_item_id' => $navItemId,
+                            'timestamp_create' => time(),
+                            'create_user_id' => Yii::$app->adminuser->getId(),
+                            'version_alias' => Module::t('Initial'),
+                            'layout_id' => Yii::$app->request->post('layout_id'),
+                        ];
+                        if (!$pageModel->save()) {
+                            return $this->sendModelError($pageModel);
+                        }
+                        $model->nav_item_type_id = $navItemId;
+                    } else {
+                        $this->setPostAttribute($model, 'nav_item_type_id');
+                    }
+                    break;
                 case 2:
                     $typeModel = new NavItemModule();
                     $this->setPostAttribute($typeModel, 'module_name');
@@ -342,7 +359,6 @@ class NavItemController extends \luya\admin\base\RestController
                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
-                    return $model->update();
                     break;
                 case 3:
                     $typeModel = new NavItemRedirect();
@@ -353,11 +369,19 @@ class NavItemController extends \luya\admin\base\RestController
                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
-                    return $model->update();
+                    break;
+                default:
+                    throw new Exception("Invalid nav item type.");
                     break;
             }
         }
-        
+
+        if ($model->update()) {
+            return [
+                'item' => $model,
+                'typeData' => ($model->nav_item_type == 1) ? NavItemPage::getVersionList($model->id) : $model->getType()->toArray()
+            ];
+        }
         return false;
     }
 

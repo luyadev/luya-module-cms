@@ -114,20 +114,46 @@
 		}
 	});
 
-    zaa.directive("updateFormPage", function() {
+    zaa.directive("updateFormPage", function(ServiceLayoutsData) {
         return {
             restrict : 'EA',
             scope : {
                 data : '='
             },
             templateUrl : 'updateformpage.html',
-            controller : function($scope) {
+            controller : function($scope, $http) {
 
             	$scope.parent = $scope.$parent.$parent;
+				$scope.navItemId = $scope.parent.item.id;
+
+				/* layoutsData */
+
+				$scope.data.layout_id = 0;
+				$scope.layoutsData = ServiceLayoutsData.data;
+
+				$scope.$on('service:LayoutsData', function(event, data) {
+					$scope.layoutsData = data;
+				});
+
+				/* get all versions for navitemid */
+
+				$scope.versionsData = [];
+
+				$scope.getVersionList = function() {
+					$http.get('admin/api-cms-navitempage/versions', { params : { navItemId : $scope.navItemId }}).then(function(response) {
+						$scope.versionsData = response.data;
+					});
+				};
 
             	$scope.isEditAvailable = function() {
-            		return $scope.parent.item.nav_item_type == 1;
-            	}
+					return $scope.versionsData.length;
+            	};
+
+				function init() {
+					$scope.getVersionList();
+				}
+
+				init();
             }
         }
     });
@@ -1100,11 +1126,24 @@
 				'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type,
 				$.param(typeDataCopy),
 				headers
-			).then(function successCallback(response) {
+			).then(function(response) {
 				if (itemCopy.nav_item_type !== 1) {
 					$scope.currentPageVersion = 0;
 				}
 				$scope.loaded = false;
+				if (response.data) {
+					/* switch version if type is page */
+					if (itemCopy.nav_item_type == 1 && typeof response.data['typeData'] === 'object') {
+						/* choose given version or choose first available version */
+						var pageVersionKey = response.data['item'].nav_item_type_id;
+						if (response.data['item'].nav_item_type_id == 0) {
+							pageVersionKey = Object.keys(response.data['typeData'])[0];
+						}
+						$scope.container = response.data['typeData'][pageVersionKey]['contentAsArray'];
+						$scope.currentPageVersionAlias = response.data['typeData'][pageVersionKey]['version_alias'];
+						$scope.currentPageVersion = pageVersionKey;
+					}
+				}
 				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}));
 				$scope.menuDataReload();
 				$scope.refresh();
