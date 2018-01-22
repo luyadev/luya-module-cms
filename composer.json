@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-cms",
-	"description" : "Frontend module to display CMS content",
+	"description" : "The LUYA CMS module provides a full functional Content Management System for adding contents based on blocks.",
 	"type" : "luya-core",
 	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms"],
 	"license": "MIT",
