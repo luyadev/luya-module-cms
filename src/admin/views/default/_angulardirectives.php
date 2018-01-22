@@ -65,8 +65,8 @@ use luya\cms\admin\Module;
                 <div class="alert alert-success mt-3 mb-0" ng-show="success">
                     <i class="material-icons">check_circle</i> <?= Module::t('view_index_page_success'); ?>
                 </div>
-                <ul class="list-group mt-3" ng-show="error.length != 0">
-                    <li class="list-group-item list-group-item-danger" ng-repeat="err in error">{{ err[0] }}</li>
+                <ul class="list-group" ng-show="error.length != 0">
+                    <li class="list-group-item list-group-item-danger mt-3" ng-repeat="err in error">{{ err[0] }}</li>
                 </ul>
             </form>
         </div>
