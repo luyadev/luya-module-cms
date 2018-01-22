@@ -458,7 +458,7 @@ class Nav extends ActiveRecord
     /**
      * Create a new nav item with a specific language, title and alias based on a given nav item id.
      * All content of the source nav item will be copied dependent on the nav item type (page content, module link, redirect informations).
-     * 
+     *
      * @param integer $navItemId
      * @param integer $langId
      * @param string $title
@@ -499,7 +499,7 @@ class Nav extends ActiveRecord
 
     /**
      * Create a page from a from a draft.
-     * 
+     *
      * @param integer $parentNavId
      * @param integer $navContainerId
      * @param integer $langId
@@ -593,7 +593,7 @@ class Nav extends ActiveRecord
 
     /**
      * Create a new page.
-     * 
+     *
      * @param integer $parentNavId
      * @param integer $navContainerId
      * @param integer $langId

@@ -217,4 +217,3 @@ return [
 // 1.0.1
     'module_permission_page' => 'Page Content',
 ];
-

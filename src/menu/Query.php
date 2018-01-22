@@ -300,18 +300,18 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     
     /**
      * Order the query by one or multiple fields asc or desc.
-     * 
+     *
      * Use following PHP constants for directions:
-     * 
+     *
      * + SORT_ASC: 1..10, A..Z
      * + SORT_DESC: 10..1, Z..A
-     * 
+     *
      * Example using orderBy:
-     * 
+     *
      * ```php
      * $query = new Query()->orderBy([Query::FIELD_TIMESTAMPCREATE => SORT_ASC, Query::FIELD_ALIAS => SORT_DESC'])->all();
      * ```
-     * 
+     *
      * @param array $order An array with fields to sort where key is the field and value the direction.
      * @since 1.0.2
      */

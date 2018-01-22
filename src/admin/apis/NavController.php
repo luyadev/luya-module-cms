@@ -357,7 +357,7 @@ class NavController extends \luya\admin\base\RestController
     
     /**
      * Create a new page from another existing Page.
-     * 
+     *
      * @return boolean|array
      */
     public function actionCreateFromPage()
