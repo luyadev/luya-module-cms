@@ -108,6 +108,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         ];
     }
     
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getLayout()
     {
         return $this->hasOne(Layout::className(), ['id' => 'layout_id']);
@@ -116,8 +119,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     /**
      * Get the list of version/pages for a specific nav item id
      *
-     * @param unknown $navItemId
-     * @return array|\yii\db\ActiveRecord[]
+     * @param integer $navItemId
+     * @return \yii\db\ActiveRecord
      */
     public static function getVersionList($navItemId)
     {
@@ -194,6 +197,14 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         return $this->renderPlaceholderRecursive($this->id, $placeholderName, 0);
     }
     
+    /**
+     * Render a placeholder recursive based on navItemPageId, a placeholder variable and a previous id.
+     * 
+     * @param integer $navItemPageId
+     * @param string $placeholderVar
+     * @param integer $prevId
+     * @return string
+     */
     private function renderPlaceholderRecursive($navItemPageId, $placeholderVar, $prevId)
     {
         $string = '';
@@ -291,14 +302,21 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         return $string;
     }
 
+    /**
+     * Get all placeholders as array for a given pageId, placeholder and prevId.
+     * 
+     * @param integer $navItemPageId
+     * @param string $placeholderVar
+     * @param integer $prevId
+     */
     private function getPlaceholders($navItemPageId, $placeholderVar, $prevId)
     {
         return (new Query())
-        ->from('cms_nav_item_page_block_item t1')
-        ->select('t1.*')
-        ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId, 'is_hidden' => 0])
-        ->orderBy('sort_index ASC')
-        ->all();
+	        ->from('cms_nav_item_page_block_item t1')
+	        ->select('t1.*')
+	        ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId, 'is_hidden' => 0])
+	        ->orderBy(['sort_index' => SORT_ASC])
+	        ->all();
     }
     
     /**
@@ -313,8 +331,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
         return (empty($response)) ? [] : $response;
     }
-    
-    // ajax parts to get the tree moved from the controller to the model in version beta 6
 
     /**
      * Get the full array content from all the blocks, placeholders, vars configs and values recursiv for this current NavItemPage (which is layout version for a nav item)
@@ -353,6 +369,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         return $return;
     }
     
+    /**
+     * Get the blocks for a given placeholder, **without recursion**.
+     * 
+     * @param string $placeholderVar
+     * @param integer $navItemPageId
+     * @param integer $prevId
+     */
     public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)
     {
         $nav_item_page_block_item_data = (new \yii\db\Query())->select(['id'])->from('cms_nav_item_page_block_item')->orderBy('sort_index ASC')->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])->all();
