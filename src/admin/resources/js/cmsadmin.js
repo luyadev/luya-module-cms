@@ -502,6 +502,8 @@
 				} else {
 					AdminToastService.error(i18n['js_added_translation_error']);
 				}
+			}, function(response) {
+				AdminToastService.errorArray(response.data);
 			});
 		}
 

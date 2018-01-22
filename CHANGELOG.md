@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.2 (in progress)
 
+## Fixed
+
++ [#31](https://github.com/luyadev/luya-module-cms/issues/31) Fixed missing error handling for create page translation from existing version.
+
 ### Added
 
 + [#12](https://github.com/luyadev/luya-module-cms/issues/12) Add new orderBy() method for sorting the query data.

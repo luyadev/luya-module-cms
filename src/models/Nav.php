@@ -6,11 +6,8 @@ use Yii;
 use yii\db\Query;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
-
 use luya\admin\models\Group;
 use luya\cms\models\Property as CmsProperty;
-
-
 use luya\cms\admin\Module;
 
 /**
@@ -459,75 +456,25 @@ class Nav extends ActiveRecord
     }
 
     /**
-     *
-     * @param unknown $title
-     * @param unknown $langId
-     * @return boolean
-     * @deprecated remove in 1.0.1 in favor of static method.
-     */
-    public function createDraft($title, $langId)
-    {
-        $_errors = [];
-
-        // nav
-        $nav = $this;
-        $nav->attributes = [
-            'parent_nav_id' => 0,
-            'nav_container_id' => 0,
-            'sort_index' => 0,
-            'is_draft' => true,
-            'is_hidden' => true,
-            'is_offline' => true,
-        ];
-        // nav item
-        $navItem = new NavItem();
-        $navItem->parent_nav_id = 0;
-        $navItem->attributes = [
-            'lang_id' => $langId,
-            'nav_item_type' => 4,
-            'nav_item_type_id' => 0,
-            'title' => $title,
-            'alias' => time()
-        ];
-
-        if (!$nav->validate()) {
-            $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
-        }
-
-        if (!$navItem->validate()) {
-            $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
-        }
-
-        if (!empty($_errors)) {
-            return $_errors;
-        }
-
-        $nav->save();
-        $navItem->nav_id = $nav->id;
-        return $navItem->save();
-    }
-
-    /**
-     *
      * Create a new nav item with a specific language, title and alias based on a given nav item id.
      * All content of the source nav item will be copied dependent on the nav item type (page content, module link, redirect informations).
-     *
-     * @param $navItemId source nav item
-     * @param $langId (new) target language
-     * @param $title title of nav item
-     * @param $alias alias of nav item
-     * @return bool
+     * 
+     * @param integer $navItemId
+     * @param integer $langId
+     * @param string $title
+     * @param string $alias
+     * @return boolean|array If an array is returned, the creation had an error, the array contains the messages.
      */
     public function createItemLanguageCopy($navItemId, $langId, $title, $alias)
     {
         $sourceNavItem = NavItem::findOne($navItemId);
-
+        
         if (!$sourceNavItem) {
-            return false;
+            return ['id' => ["Unable to find nav item id {$navItemId}"]];
         }
 
-        if (NavItem::find()->where(['nav_id' => $sourceNavItem->nav_id, 'lang_id' => $langId])->one()) {
-            return false;
+        if (NavItem::find()->where(['nav_id' => $sourceNavItem->nav_id, 'lang_id' => $langId])->exists()) {
+            return ['lang_id' => ["A translation for the given page already exists."]];
         }
 
         $navItem = new NavItem();
@@ -538,7 +485,7 @@ class Nav extends ActiveRecord
         $navItem->setParentFromModel();
 
         if (!$navItem->save()) {
-            return false;
+            return $navItem->getErrors();
         }
 
         // we have created the copy, but its seems like no version existis for the original to copy page,
@@ -551,16 +498,17 @@ class Nav extends ActiveRecord
     }
 
     /**
-     *
-     * @param unknown $parentNavId
-     * @param unknown $navContainerId
-     * @param unknown $langId
-     * @param unknown $title
-     * @param unknown $alias
-     * @param unknown $description
-     * @param unknown $fromDraftNavId
+     * Create a page from a from a draft.
+     * 
+     * @param integer $parentNavId
+     * @param integer $navContainerId
+     * @param integer $langId
+     * @param string $title
+     * @param string $alias
+     * @param string $description
+     * @param integer $fromDraftNavId
      * @param string $isDraft
-     * @return boolean
+     * @return boolean|array If an array is returned, the creation had an error, the array contains the messages.
      */
     public function createPageFromDraft($parentNavId, $navContainerId, $langId, $title, $alias, $description, $fromDraftNavId, $isDraft = false)
     {
@@ -644,16 +592,17 @@ class Nav extends ActiveRecord
     }
 
     /**
-     *
-     * @param unknown $parentNavId
-     * @param unknown $navContainerId
-     * @param unknown $langId
-     * @param unknown $title
-     * @param unknown $alias
-     * @param unknown $layoutId
-     * @param unknown $description
+     * Create a new page.
+     * 
+     * @param integer $parentNavId
+     * @param integer $navContainerId
+     * @param integer $langId
+     * @param string $title
+     * @param string $alias
+     * @param integer $layoutId
+     * @param string $description
      * @param string $isDraft
-     * @return boolean
+     * @return boolean|array If an array is returned, the creation had an error, the array contains the messages.
      */
     public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)
     {

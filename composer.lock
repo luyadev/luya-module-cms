@@ -69,7 +69,7 @@
             "version": "2.0.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yiisoft/jquery-pjax.git",
+                "url": "git@github.com:yiisoft/jquery-pjax.git",
                 "reference": "aef7b953107264f00234902a3880eb50dafc48be"
             },
             "dist": {
@@ -559,16 +559,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.2",
+            "version": "1.0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "73f5670cf9c927f2a490182130329d8af827967c"
+                "reference": "2972c80f6124400c18eed81f8bf1bf5bfaee2b47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/73f5670cf9c927f2a490182130329d8af827967c",
-                "reference": "73f5670cf9c927f2a490182130329d8af827967c",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/2972c80f6124400c18eed81f8bf1bf5bfaee2b47",
+                "reference": "2972c80f6124400c18eed81f8bf1bf5bfaee2b47",
                 "shasum": ""
             },
             "require": {
@@ -612,20 +612,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-01-17T09:34:13+00:00"
+            "time": "2018-01-22T13:17:58+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "7861fe4f77f87f6ede734a077247e590fd59340d"
+                "reference": "886638fd88973ca5c34be1a870d8a243288adfc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/7861fe4f77f87f6ede734a077247e590fd59340d",
-                "reference": "7861fe4f77f87f6ede734a077247e590fd59340d",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/886638fd88973ca5c34be1a870d8a243288adfc1",
+                "reference": "886638fd88973ca5c34be1a870d8a243288adfc1",
                 "shasum": ""
             },
             "require": {
@@ -638,6 +638,7 @@
                 "bower-asset/angular-loading-bar": "^0.9",
                 "bower-asset/angularjs-datepicker": "^2.1.0",
                 "bower-asset/bowser": "~1.7.3",
+                "bower-asset/echarts": "~3.8.5",
                 "bower-asset/ng-file-upload": "~12.2.0",
                 "bower-asset/ng-flow": "~2.7.0",
                 "bower-asset/ng-wig": "~3.0.0",
@@ -684,7 +685,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-01-05T14:43:40+00:00"
+            "time": "2018-01-20T14:14:20+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",

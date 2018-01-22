@@ -3,7 +3,7 @@
 namespace luya\cms\models;
 
 use Yii;
-use Exception;
+use luya\cms\Exception;
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
@@ -88,7 +88,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
             case self::TYPE_LINK_TO_FILE:
                 $file = Yii::$app->storage->getFile($this->value);
                 if (!$file) {
-                    throw new Excetion("Unable to find the file with id " . $this->value);
+                    throw new Exception("Unable to find the file with id " . $this->value);
                 }
                 
                 return $file->href;

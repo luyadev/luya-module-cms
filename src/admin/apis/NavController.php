@@ -355,15 +355,21 @@ class NavController extends \luya\admin\base\RestController
         return $create;
     }
     
+    /**
+     * Create a new page from another existing Page.
+     * 
+     * @return boolean|array
+     */
     public function actionCreateFromPage()
     {
         Yii::$app->menu->flushCache();
         $model = new Nav();
-        $create = $model->createItemLanguageCopy($this->postArg('id'), $this->postArg('toLangId'), $this->postArg('title'), $this->postArg('alias'));
-        if ($create !== true) {
-            Yii::$app->response->statusCode = 422;
+        $response = $model->createItemLanguageCopy($this->postArg('id'), $this->postArg('toLangId'), $this->postArg('title'), $this->postArg('alias'));
+        
+        if (is_array($response)) {
+            return $this->sendArrayError($response);
         }
         
-        return $create;
+        return $response;
     }
 }
