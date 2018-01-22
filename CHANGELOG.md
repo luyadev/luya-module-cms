@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file. This projec
 + [#24](https://github.com/luyadev/luya-module-cms/issues/24) Fixed SCSS dependency issues with external luya-module-admin project links and missing bootstrap style functions
 + [#22](https://github.com/luyadev/luya-module-cms/issues/22) Fixed memory issue when creating new version from existing page with large amount of blocks.
 
-### Add
+### Added
 
 + [#19](https://github.com/luyadev/luya-module-cms/pull/19) Add Chinese Translations
 + [#18](https://github.com/luyadev/luya-module-cms/issues/18) When page is default version and online, the original site path will be used to preview the page.
