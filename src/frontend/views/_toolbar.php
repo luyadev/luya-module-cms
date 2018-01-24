@@ -1,6 +1,7 @@
 <?php
 use luya\helpers\Url;
 use luya\cms\frontend\Module;
+use yii\helpers\VarDumper;
 
 ?>
 <div id="luya-cms-toolbar-wrapper">
@@ -133,15 +134,7 @@ use luya\cms\frontend\Module;
                         </div>
                         <div class="luya-cms-toolbar__list-entry-right">
                             <p>
-                            	<?php if (is_object($prop['value'])): ?>
-                            		Type Object
-                            	<?php elseif (is_array($prop['value'])): ?>
-                            		Type Array: <?= count($prop['value']); ?> item(s);
-                            	<?php elseif (is_scalar($prop['value'])): ?>
-                            		<?= $prop['value']; ?>
-                            	<?php else: ?>
-                            		Type Undefined
-                            	<?php endif; ?>
+                                <?= VarDumper::dumpAsString($prop['value'], 10, true); ?>
                             </p>
                         </div>
                     </div>
