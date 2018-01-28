@@ -100,10 +100,49 @@ class PhpBlockView extends View
     }
     
     /**
+     * Returns the Unique ID for this block.
+     *
+     * This value is absolute unique.
+     *
+     * @return integer The unique identifier for this block from the database.
+     * @since 1.0.2
+     */
+    public function getId()
+    {
+    	return $this->context->getEnvOption('id');
+    }
+    
+    /**
+     * Returns the ID for the block type in the database.
+     * 
+     * This means when having two text blocks they would have the same Id.
+     *
+     * @return mixed Returns the Id for the block type in the database. So the same type of block (like text) would return the same Id.
+     * @since 1.0.2
+     */
+    public function getBlockId()
+    {
+    	return $this->context->getEnvOption('blockId');
+    }
+    
+    /**
+     * Returns the {{luya\cms\models\NavItem}} context Page Object.
+     * 
+     * Returns the context page object where the block is implemented.
+     * 
+     * @return \luya\cms\models\NavItem
+     * @since 1.0.2
+     */
+    public function getPageObject()
+    {
+    	return $this->context->getEnvOption('pageObject');
+    }
+    
+    /**
      * Get a block environment value.
      *
-     * + **id**: Return the unique identifier from the cms context
-     * + **blockId**: Returns the id of this block (unique identifier)
+     * + **id**: Return the unique identifier for this block, each blocks has its id from the database, this is absolute unique.
+     * + **blockId**: Returns the id of the block in the database. Two blocks of the same type would have the same blockId.
      * + **context**: Returns frontend or backend to find out in which context you are.
      * + **pageObject**: Returns the `luya\cms\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
      * + **isFirst**: Returns whether this block is the first in its placeholder or not.
