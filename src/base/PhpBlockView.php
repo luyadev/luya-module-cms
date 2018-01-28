@@ -14,8 +14,11 @@ use luya\web\View;
  * @property boolean $isLast Whether this is the last block element inside this placeholder or not.
  * @property integer $itemsCount Returns the number of items inside this placeholder.
  * @property boolean $isNextEqual Whether the next element (the element after the current element) is the same or not.
- * @property boolean $isLastEqual Whether the previous element (the element before the current element) is the same or not.
+ * @property boolean $isPrevEqual Whether the previous element (the element before the current element) is the same or not.
  * @property integer $equalIndex Get the index number within the equal elements.
+ * @property integer $id Returns the Unique ID for this block (absolute unique value).
+ * @property integer $blockId Returns the block type ID from database, assume two text blocks would have the same ID.
+ * @property \luya\cms\models\NavItem $pageObject Returns the NavItem object for the context the block is implemented.
  * @property \luya\web\View $appView The application view object in order to register data to the layout view.
  *
  * @author Basil Suter <basil@nadar.io>
