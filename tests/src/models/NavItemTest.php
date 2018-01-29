@@ -21,6 +21,6 @@ class NavItemTest extends CmsFrontendTestCase
 
         $model->alias = "a1Zあ新~!@#$^&*()_[];',:?";
         $model->slugifyAlias();
-        $this->assertSame("a1zあ新~!@#$^&*()_[];',:?", $model->alias);
+        $this->assertSame("a1zあ新~!@#$^&*()[];',:?", $model->alias);
     }
 }
