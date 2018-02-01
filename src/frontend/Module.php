@@ -20,7 +20,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * no module is provided. So the CMS url alias does only apply on default behavior.
      */
     public $urlRules = [
-        ['pattern' => 'preview/<itemId:\d+>', 'route' => 'cms/preview/index'],
+        ['pattern' => 'cms-page-preview', 'route' => 'cms/preview/index'],
         ['pattern' => 'block-ajax/<id:\d+>/<callback:[a-z0-9\-]+>', 'route' => 'cms/block/index'],
     ];
 

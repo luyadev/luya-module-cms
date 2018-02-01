@@ -9,6 +9,7 @@ use luya\cms\admin\importers\CmslayoutImporter;
 use luya\cms\admin\importers\PropertyConsistencyImporter;
 use luya\base\CoreModuleInterface;
 use luya\admin\components\AdminMenuBuilder;
+use luya\helpers\Url;
 
 /**
  * CMS Admin Module.
@@ -70,6 +71,28 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             'title' => ['cmsadmin', 'cmsadmin_dashboard_lastupdate'],
         ],
     ];
+    
+    private $_previewUrl;
+    
+    /**
+     * 
+     * @param unknown $url
+     * @since 1.0.2
+     */
+    public function setPreviewUrl($url)
+    {
+    	$this->_previewUrl = rtrim($url, '/');
+    }
+    
+    /**
+     * 
+     * @return string
+     * @since 1.0.2
+     */
+    public function getPreviewUrl()
+    {
+    	return $this->_previewUrl === null ?  Url::home(true) . 'cms-page-preview' : $this->_previewUrl;
+    }
     
     /**
      * Returns all Asset files to registered in the administration interfaces.

@@ -8,8 +8,10 @@ use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\helpers\ArrayHelper;
 use luya\cms\frontend\Module;
+use luya\cms\admin\Module as AdminModule;
 use luya\cms\models\Config;
 use luya\cms\models\Log;
+use luya\helpers\Url;
 
 /**
  * Admin Api delievers common api tasks like blocks and layouts.
@@ -32,7 +34,7 @@ class AdminController extends \luya\admin\base\RestController
         
         $data = [];
         $data[Config::HTTP_EXCEPTION_NAV_ID] = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
-        
+        $data['previewUrl'] = AdminModule::getInstance()->previewUrl;
         return $data;
     }
     

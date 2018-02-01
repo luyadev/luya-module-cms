@@ -562,7 +562,7 @@
 		};
 	});
 
-	zaa.controller("CmsMenuTreeController", function($scope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
+	zaa.controller("CmsMenuTreeController", function($scope, $rootScope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
 
 		// live edit service
 
@@ -572,6 +572,14 @@
 			ServiceLiveEditMode.state = n;
 		});
 
+		$scope.loadCmsConfig = function() {
+			$http.get('admin/api-cms-admin/config').then(function(response) {
+				$rootScope.cmsConfig = response.data;
+			});
+		};
+		
+		$scope.loadCmsConfig();
+		
 		// menu Data
 
 		$scope.menuData = ServiceMenuData.data;

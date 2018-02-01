@@ -120,7 +120,7 @@ use luya\helpers\Html;
         </li>
         <?php endif; ?>
         <li class="nav-item nav-item-alternative nav-item-icon" ng-show="isTranslated">
-            <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="nav-link" ng-show="!liveEditState">
+            <a ng-href="{{cmsConfig.previewUrl}}?itemId={{item.id}}&version={{currentPageVersion}}" target="_blank" class="nav-link" ng-show="!liveEditState">
                 <i class="material-icons">open_in_new</i>
             </a>
             <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="nav-link">

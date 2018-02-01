@@ -189,7 +189,7 @@ zaa.factory("ServiceLiveEditMode", function($rootScope) {
 	service.setUrl = function(itemId, versionId) {
 		var d = new Date();
 		var n = d.getTime();
-		service.url = $rootScope.luyacfg.homeUrl  + 'preview/' + itemId + '?version=' + versionId + '&date=' + n;
+		service.url = $rootScope.cmsConfig.previewUrl + '?itemId='+itemId+'&version=' + versionId + '&date=' + n;
 	};
 	
 	service.changeUrl = function(itemId, versionId) {
