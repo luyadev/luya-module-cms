@@ -86,13 +86,14 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         if ($this->_content == null) {
             $module = $this->getModule();
             
+            /** @var \luya\base\ModuleReflection $reflection */
             $reflection = Yii::createObject(['class' => ModuleReflection::className(), 'module' => $module]);
             $reflection->suffix = $this->getOption('restString');
             
             $this->_content = $reflection->run();
             
             $this->controller = $reflection->controller;
-            
+
             Yii::$app->menu->setCurrentUrlRule($reflection->getUrlRule());
         }
         
