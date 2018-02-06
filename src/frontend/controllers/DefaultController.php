@@ -9,6 +9,7 @@ use Exception;
 use luya\cms\frontend\base\Controller;
 use luya\helpers\StringHelper;
 use luya\cms\models\Redirect;
+use yii\web\Response;
 
 /**
  * CMS Default Rendering
@@ -69,9 +70,15 @@ class DefaultController extends Controller
 
         $content = $this->renderItem($current->id, Yii::$app->menu->currentAppendix);
         
-        // it is a json response (so the Response object is set to JSON_FORMAT).
+        // It seems to be a json response. Yii::$app->response->format should be FORMAT_JSON or FORMAT_JSONP
         if (is_array($content)) {
             return $content;
+        }
+        
+        // Default format is FORMAT_HTML, if RAW is used we render the content without layout.
+        // @see https://github.com/luyadev/luya-module-cms/issues/35
+        if (Yii::$app->response->format == Response::FORMAT_RAW) {
+        	return $content;
         }
         
         return $this->renderContent($content);

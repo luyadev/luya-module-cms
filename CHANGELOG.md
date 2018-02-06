@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file. This projec
 ## Fixed
 
 + [#31](https://github.com/luyadev/luya-module-cms/issues/31) Fixed missing error handling for create page translation from existing version.
++ [#35](https://github.com/luyadev/luya-module-cms/issues/35) Do not render layout when RAW response format is given.
 
 ### Added
 
