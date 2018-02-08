@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## Fixed
 
++ [#1768](https://github.com/luyadev/luya/issues/1768) Use static render path for toolbar due to controller override for module context.
 + [#31](https://github.com/luyadev/luya-module-cms/issues/31) Fixed missing error handling for create page translation from existing version.
 + [#35](https://github.com/luyadev/luya-module-cms/issues/35) Do not render layout when RAW response format is given.
 
