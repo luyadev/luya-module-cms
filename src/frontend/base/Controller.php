@@ -11,6 +11,7 @@ use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
 use luya\cms\frontend\events\BeforeRenderEvent;
 use luya\helpers\StringHelper;
+use luya\cms\frontend\Module;
 
 /**
  * Abstract Controller for CMS Controllers.
@@ -167,12 +168,17 @@ abstract class Controller extends \luya\web\Controller
             }
         }
         
+        // As the view path can not evaluated from controller context, we have to force the viewPath trough
+        // the module instance.
+        // @see https://github.com/luyadev/luya/issues/1768
+        $viewSourcePath = Module::getInstance()->viewPath;
+        
         // echo is used in order to support cases where asset manager is not available
-        echo '<style>' . $this->renderPartial('/inline/toolbar.css') . '</style>';
+        echo '<style>' . $this->view->renderFile($viewSourcePath . '/inline/toolbar.css') . '</style>';
         // mabye ensure that jquery is loaded,  better put this at the End of body tag
-        echo '<script>' . $this->renderPartial('/inline/toolbar.js') . '</script>';
+        echo '<script>' . $this->view->renderFile($viewSourcePath . '/inline/toolbar.js') . '</script>';
     
-        echo $this->renderPartial('/_toolbar.php', [
+        echo $this->view->renderFile($viewSourcePath . '/_toolbar.php', [
             'keywords' => $keywords,
             'seoAlertCount' => $seoAlert,
             'menu' => $menu,
