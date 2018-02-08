@@ -2,6 +2,7 @@
 
 namespace luya\cms\frontend\controllers;
 
+use luya\cms\frontend\base\Controller;
 use Yii;
 use yii\helpers\Inflector;
 use yii\base\Exception;
@@ -15,7 +16,7 @@ use luya\cms\models\NavItemPageBlockItem;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class BlockController extends \cms\base\Controller
+class BlockController extends Controller
 {
     public $enableCsrfValidation = false;
     
