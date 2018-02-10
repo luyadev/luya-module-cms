@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
-+ [#34](https://github.com/luyadev/luya-module-cms/issues/34) Add option for preview url.
++ [#34](https://github.com/luyadev/luya-module-cms/issues/34) Add option to configure the preview url.
 + [#17](https://github.com/luyadev/luya-module-cms/issues/17) Create new page version if changing from other page types to "page" and no version is available.
 + [#12](https://github.com/luyadev/luya-module-cms/issues/12) Add new orderBy() method for sorting the query data.
 
