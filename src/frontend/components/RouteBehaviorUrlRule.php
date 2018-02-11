@@ -3,7 +3,7 @@
 namespace luya\cms\frontend\components;
 
 use Yii;
-use yii\web\UrlRule;
+use luya\web\UrlRule;
 
 /**
  * Routing Rule for UrlManager.
@@ -13,14 +13,26 @@ use yii\web\UrlRule;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class RouteBehaviorUrlRule extends \yii\web\UrlRule
+class RouteBehaviorUrlRule extends UrlRule
 {
+	/**
+	 * @inheritdoc  
+	 */
     public $pattern = '<module>/<controller>/<action>';
     
+    /**
+     * @inheritdoc
+     */
     public $route = '<module>/<controller>/<action>';
     
+    /**
+     * @inheritdoc
+     */
     public $defaults = ['controller' => 'default', 'action' => 'index'];
     
+    /**
+     * @inheritdoc
+     */
     public $mode = UrlRule::PARSING_ONLY;
     
     /**
@@ -28,9 +40,10 @@ class RouteBehaviorUrlRule extends \yii\web\UrlRule
      */
     public function parseRequest($manager, $request)
     {
-        // return the custom route
+        // return route in parts where key 0 should be the module assuming routed strings.
         $parts = explode("/", $request->pathInfo);
         
+        // if there is no key 0, the module does not exists in module list or the module name is cms, its an invalid request.
         if (!isset($parts[0]) || !Yii::$app->hasModule($parts[0]) || $parts[0] === 'cms') {
             return false;
         }

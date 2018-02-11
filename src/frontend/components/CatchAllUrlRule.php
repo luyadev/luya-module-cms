@@ -3,6 +3,7 @@
 namespace luya\cms\frontend\components;
 
 use Yii;
+use luya\web\UrlRule;
 
 /**
  * Catch rule for UrlManager.
@@ -14,12 +15,21 @@ use Yii;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class CatchAllUrlRule extends \yii\web\UrlRule
+class CatchAllUrlRule extends UrlRule
 {
+	/**
+	 * @inheritdoc
+	 */
     public $pattern = '<alias:(.*)+>';
     
+    /**
+     * @inheritdoc
+     */
     public $route = 'cms/default/index';
     
+    /**
+     * @inheritdoc
+     */
     public $encodeParams = false;
     
     /**
@@ -30,8 +40,17 @@ class CatchAllUrlRule extends \yii\web\UrlRule
         // add trace info
         Yii::info('LUYA-CMS CatchAllUrlRule is parsing the Request for path info \'' . $request->pathInfo .'\'', __METHOD__);
         
-        if (empty($request->pathInfo)) {
+        $pathInfo = $request->pathInfo;
+        
+        // if no path is given, the route should not apply.
+        if (empty($pathInfo)) {
             return false;
+        }
+        
+        // if there is a trailing slash given, the request is invalid as long as the urlManager suffix
+        // does not contain a trailing slash.
+        if (rtrim($pathInfo, '//') !== $pathInfo && substr($manager->suffix, -1) !== '/') {
+        	return false;
         }
         
         // return the custom route
