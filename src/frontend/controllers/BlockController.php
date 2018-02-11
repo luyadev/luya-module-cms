@@ -4,10 +4,11 @@ namespace luya\cms\frontend\controllers;
 
 use Yii;
 use yii\helpers\Inflector;
-use yii\base\Exception;
 use luya\helpers\ObjectHelper;
 use luya\cms\models\Block;
 use luya\cms\models\NavItemPageBlockItem;
+use luya\cms\frontend\base\Controller;
+use luya\cms\Exception;
 
 /**
  * CMS Ajax-Block Controller Responder.
@@ -15,10 +16,21 @@ use luya\cms\models\NavItemPageBlockItem;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class BlockController extends \cms\base\Controller
+class BlockController extends Controller
 {
+	/**
+	 * @inheritdoc
+	 */
     public $enableCsrfValidation = false;
     
+    /**
+     * Run the callback for a given block.
+     * 
+     * @param string $callback The name of the callback to call inside the block object. Without callback prefix.
+     * @param integer $id The id of the block item where the callbacke is located.
+     * @throws \luya\cms\Exception
+     * @return mixed
+     */
     public function actionIndex($callback, $id)
     {
         $model = NavItemPageBlockItem::findOne($id);

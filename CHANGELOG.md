@@ -7,13 +7,14 @@ All notable changes to this project will be documented in this file. This projec
 ## Fixed
 
 + [#39](https://github.com/luyadev/luya-module-cms/issues/39) Disallow trailing slashes in url parsing in order to prevent DC.
++ [#38](https://github.com/luyadev/luya-module-cms/pull/38) Fixed wrong namespace reference in BlockController.
 + [#1768](https://github.com/luyadev/luya/issues/1768) Use static render path for toolbar due to controller override for module context.
 + [#31](https://github.com/luyadev/luya-module-cms/issues/31) Fixed missing error handling for create page translation from existing version.
 + [#35](https://github.com/luyadev/luya-module-cms/issues/35) Do not render layout when RAW response format is given.
 
 ### Added
 
-+ [#34](https://github.com/luyadev/luya-module-cms/issues/34) Add option for preview url.
++ [#34](https://github.com/luyadev/luya-module-cms/issues/34) Add option to configure the preview url.
 + [#17](https://github.com/luyadev/luya-module-cms/issues/17) Create new page version if changing from other page types to "page" and no version is available.
 + [#12](https://github.com/luyadev/luya-module-cms/issues/12) Add new orderBy() method for sorting the query data.
 
