@@ -66,7 +66,7 @@ module.exports = {
             "dist/css/": ['scss/**/*.scss']
         },
         js: {
-            "dist/js/main.min.js": [
+            "dist/js/main.js": [
                 "js/cmsadmin.js",
                 "js/services.js"
             ]

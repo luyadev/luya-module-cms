@@ -19,7 +19,7 @@ class Main extends \yii\web\AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'dist/js/main.min.js'
+        'dist/js/main.js'
     ];
 
     /**
