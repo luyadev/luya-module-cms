@@ -45,7 +45,6 @@ use yii\helpers\VarDumper;
         <div class="luya-cms-toolbar__pull-right">
             <div class="luya-cms-toolbar__logo">
                 <a href="https://luya.io" target="_blank">
-                    <span class="luya-cms-toolbar__logo-version"><?= Luya\Boot::VERSION; ?></span>
                     <svg class="luya-cms-toolbar__logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 445.3">
                         <path fill="#a00093" d="M174.6 0a42.8 42.8 0 0 0-37.8 21.6L6 248a43.3 43.3 0 0 0-.3 43.5l.7 1.2L8 295a43 43 0 0 0 35.3 18.7h77l44-76.2L276.4 43.2l12.4-21.5A43.3 43.3 0 0 1 325.3.1H174.6z"></path>
                         <path d="M43.2 313.4h77l44-76.2L8 295a43 43 0 0 0 35.3 18.5z" class="cls-2" data-name="shadow purple" opacity="0.1" isolation="isolate"></path>
