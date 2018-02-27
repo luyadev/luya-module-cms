@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## Fixed
 
+- [#44](https://github.com/luyadev/luya-module-cms/issues/44) Removed layouts add button.
 + [#40](https://github.com/luyadev/luya-module-cms/issues/40) Renamed main.min.js to main.js and updated the assets file
 + [#37](https://github.com/luyadev/luya-module-cms/issues/37) Updated toolbar color and added new LUYA Logo as SVG
 + [#39](https://github.com/luyadev/luya-module-cms/issues/39) Disallow trailing slashes in url parsing in order to prevent DC.

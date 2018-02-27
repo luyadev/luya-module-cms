@@ -43,7 +43,7 @@ class Layout extends NgRestModel
     {
         return [
             ['list', ['name', 'json_config', 'view_file'], ],
-            [['create', 'update'], ['name']],
+            [['update'], ['name']],
         ];
     }
 
