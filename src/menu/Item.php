@@ -453,14 +453,13 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function getHasParent()
     {
-        $parent = $this->getParent();
-        return ($parent && count($parent) > 0) ? true : false;
+        return (bool) $this->getParent();
     }
     
     /**
      * Returns a Item-Object of the parent element, if no parent element exists returns false.
      *
-     * @return \luya\cms\menu\Item|bool Returns the parent item-object or false if not exists.
+     * @return \luya\cms\menu\Item|boolean Returns the parent item-object or false if not exists.
      */
     public function getParent()
     {
