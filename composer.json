@@ -16,9 +16,9 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require-dev" : {
-	   "luyadev/luya-testsuite" : "~1.0.0",
-	   "php-coveralls/php-coveralls": "^1.0",
-		"twbs/bootstrap": "v4.0.0-beta"
+	    "luyadev/luya-testsuite" : "~1.0.0",
+	    "php-coveralls/php-coveralls": "^1.0",
+        "twbs/bootstrap": "v4.0.0-beta"
 	},
 	"autoload" : {
 		"psr-4" : {

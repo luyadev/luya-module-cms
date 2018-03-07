@@ -30,6 +30,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(true, $obj->isActive);
         $this->assertEquals(1, $obj->depth);
         $this->assertEquals(false, $obj->parent);
+        $this->assertFalse($obj->hasParent);
         $this->assertEquals(0, count($obj->parents));
         $this->assertEquals(1, count($obj->teardown));
         $this->assertEquals(0, count($obj->children));
@@ -117,6 +118,16 @@ class ItemTest extends CmsFrontendTestCase
     {
         $this->assertEquals("/luya/envs/dev/public_html/en/page4", (new Query())->where(['nav_id' => 5])->lang('en')->one()->link);
         //$this->assertEquals("/luya/envs/dev/public_html/de/seite-1", (new Query())->where(['nav_id' => 5])->lang('de')->one()->link);
+    }
+    
+    public function testParentAndGetHasParent()
+    {
+        $itemWithParent = (new Query)->where(['nav_id' => 10])->one();
+        
+        $this->assertTrue(is_object($itemWithParent));
+        
+        $this->assertTrue($itemWithParent->hasParent);
+        $this->assertTrue(is_object($itemWithParent->parent));
     }
     
     /*
