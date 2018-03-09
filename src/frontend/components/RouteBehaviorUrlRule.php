@@ -15,9 +15,9 @@ use luya\web\UrlRule;
  */
 class RouteBehaviorUrlRule extends UrlRule
 {
-	/**
-	 * @inheritdoc  
-	 */
+    /**
+     * @inheritdoc
+     */
     public $pattern = '<module>/<controller>/<action>';
     
     /**

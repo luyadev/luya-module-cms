@@ -199,7 +199,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
     /**
      * Render a placeholder recursive based on navItemPageId, a placeholder variable and a previous id.
-     * 
+     *
      * @param integer $navItemPageId
      * @param string $placeholderVar
      * @param integer $prevId
@@ -304,7 +304,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
     /**
      * Get all placeholders as array for a given pageId, placeholder and prevId.
-     * 
+     *
      * @param integer $navItemPageId
      * @param string $placeholderVar
      * @param integer $prevId
@@ -312,11 +312,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     private function getPlaceholders($navItemPageId, $placeholderVar, $prevId)
     {
         return (new Query())
-	        ->from('cms_nav_item_page_block_item t1')
-	        ->select('t1.*')
-	        ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId, 'is_hidden' => 0])
-	        ->orderBy(['sort_index' => SORT_ASC])
-	        ->all();
+            ->from('cms_nav_item_page_block_item t1')
+            ->select('t1.*')
+            ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId, 'is_hidden' => 0])
+            ->orderBy(['sort_index' => SORT_ASC])
+            ->all();
     }
     
     /**
@@ -371,7 +371,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
     /**
      * Get the blocks for a given placeholder, **without recursion**.
-     * 
+     *
      * @param string $placeholderVar
      * @param integer $navItemPageId
      * @param integer $prevId

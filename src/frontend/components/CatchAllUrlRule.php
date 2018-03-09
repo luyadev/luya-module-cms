@@ -17,9 +17,9 @@ use luya\web\UrlRule;
  */
 class CatchAllUrlRule extends UrlRule
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $pattern = '<alias:(.*)+>';
     
     /**
@@ -50,7 +50,7 @@ class CatchAllUrlRule extends UrlRule
         // if there is a trailing slash given, the request is invalid as long as the urlManager suffix
         // does not contain a trailing slash.
         if (rtrim($pathInfo, '//') !== $pathInfo && substr($manager->suffix, -1) !== '/') {
-        	return false;
+            return false;
         }
         
         // return the custom route

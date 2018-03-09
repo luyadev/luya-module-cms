@@ -19,14 +19,14 @@ use luya\helpers\Inflector;
  */
 class BlockController extends Controller
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public $enableCsrfValidation = false;
     
     /**
      * Run the callback for a given block.
-     * 
+     *
      * @param string $callback The name of the callback to call inside the block object.
      * @param integer $id The id of the block item where the callbacke is located.
      * @throws \luya\cms\Exception
@@ -51,18 +51,18 @@ class BlockController extends Controller
     
     /**
      * Ensure the callback method from a given name.
-     * 
+     *
      * The callback method must start with 'callback'.
-     * 
+     *
      * @param string $callbackName The name of the callback, like `my-action`
      * @return string Convert the callbackname to `callbackMyAction`
      */
     protected function callbackToMethod($callbackName)
     {
-    	if (!StringHelper::startsWith($callbackName, 'callback')) {
-    		return 'callback' . Inflector::id2camel($callbackName);
-    	}
-    	
-    	return lcfirst(Inflector::id2camel($callbackName));
+        if (!StringHelper::startsWith($callbackName, 'callback')) {
+            return 'callback' . Inflector::id2camel($callbackName);
+        }
+        
+        return lcfirst(Inflector::id2camel($callbackName));
     }
 }

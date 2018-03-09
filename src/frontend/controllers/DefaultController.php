@@ -78,7 +78,7 @@ class DefaultController extends Controller
         // Default format is FORMAT_HTML, if RAW is used we render the content without layout.
         // @see https://github.com/luyadev/luya-module-cms/issues/35
         if (Yii::$app->response->format == Response::FORMAT_RAW) {
-        	return $content;
+            return $content;
         }
         
         return $this->renderContent($content);

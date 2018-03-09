@@ -15,7 +15,7 @@ use luya\helpers\Url;
  * CMS Admin Module.
  *
  * @property string $previewUrl Configuration option for the auto preview and preview button link.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -78,10 +78,10 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     
     /**
      * Setter method for previewUrl.
-     * 
+     *
      * The get params navId, version and date (optional) will be auto added. Remove
      * the trailing slash.
-     * 
+     *
      * ```php
      * 'modules' => [
      *     'cmsadmin' => [
@@ -90,18 +90,18 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      *     ],
      * ]
      * ```
-     * 
+     *
      * @param string $url The url to use as preview url, without trailing slash. Params will be auto added.
      * @since 1.0.2
      */
     public function setPreviewUrl($url)
     {
-    	$this->_previewUrl = rtrim($url, '/');
+        $this->_previewUrl = rtrim($url, '/');
     }
     
     /**
      * Getter method for previewUrl.
-     * 
+     *
      * Uses the default urlRule when no value has been provided.
      *
      * @return string Returns the preview url used for autoPreview and preview button click.
@@ -109,7 +109,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public function getPreviewUrl()
     {
-    	return $this->_previewUrl === null ?  Url::home(true) . 'cms-page-preview' : $this->_previewUrl;
+        return $this->_previewUrl === null ?  Url::home(true) . 'cms-page-preview' : $this->_previewUrl;
     }
     
     /**

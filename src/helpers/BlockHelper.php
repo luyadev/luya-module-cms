@@ -158,7 +158,7 @@ class BlockHelper
             foreach ($value as $key => $item) {
                 $image = static::imageUpload($item['imageId'], $applyFilter, true);
                 if ($image) {
-                    if($item['caption']) {
+                    if ($item['caption']) {
                         $image->caption = $item['caption'];
                     }
     

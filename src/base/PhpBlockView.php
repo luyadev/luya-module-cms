@@ -112,12 +112,12 @@ class PhpBlockView extends View
      */
     public function getId()
     {
-    	return $this->context->getEnvOption('id');
+        return $this->context->getEnvOption('id');
     }
     
     /**
      * Returns the ID for the block type in the database.
-     * 
+     *
      * This means when having two text blocks they would have the same Id.
      *
      * @return mixed Returns the Id for the block type in the database. So the same type of block (like text) would return the same Id.
@@ -125,20 +125,20 @@ class PhpBlockView extends View
      */
     public function getBlockId()
     {
-    	return $this->context->getEnvOption('blockId');
+        return $this->context->getEnvOption('blockId');
     }
     
     /**
      * Returns the {{luya\cms\models\NavItem}} context Page Object.
-     * 
+     *
      * Returns the context page object where the block is implemented.
-     * 
+     *
      * @return \luya\cms\models\NavItem
      * @since 1.0.2
      */
     public function getPageObject()
     {
-    	return $this->context->getEnvOption('pageObject');
+        return $this->context->getEnvOption('pageObject');
     }
     
     /**
