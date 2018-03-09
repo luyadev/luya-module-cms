@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/luyadev/luya/master/docs/logo/luya-logo-0.2x.png" alt="LUYA Logo"/>
 </p>
 
-# LUYA CMS module
+# LUYA Content Management System
 
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
@@ -27,6 +27,7 @@ For the installation of modules Composer is required.
 ```sh
 composer require luyadev/luya-module-cms:~1.0.0
 ```
+
 ### Configuration 
 
 Add the frontend and admin module of the cms module to your configuration modules section and bootstrap the cms frontend module:
@@ -38,12 +39,6 @@ return [
         'cms' => 'luya\cms\frontend\Module',
         'cmsadmin' => 'luya\cms\admin\Module',
         // ...
-    ],
-    
-    // ...
-    
-    'bootstrap' => [
-        'cms',
     ],
 ];
 ```
@@ -67,4 +62,3 @@ After successfully installation and configuration run the migrate, import and se
 
 
 > Please note that the module names *cms* and *cmsadmin* are required and should not be changed!
-
