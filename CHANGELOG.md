@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.3 (in progress)
 
+### Fixed
+
++ [#49](https://github.com/luyadev/luya-module-cms/pull/49) Editing a block, will clear the cache of first parent now.
+
 ## 1.0.2 (9. March 2018)
 
 ### Fixed
