@@ -174,6 +174,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             $this->create_user_id = Module::getAuthorUserId();
         } else {
             $this->deleteHasCache(['blockcache', (int) $this->id]);
+            $this->deleteHasCache(['blockcache', (int) $this->prev_id]);
             $this->is_dirty = true;
             $this->update_user_id = Module::getAuthorUserId();
             $this->timestamp_update = time();
