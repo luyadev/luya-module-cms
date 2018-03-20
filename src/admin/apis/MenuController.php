@@ -99,7 +99,7 @@ class MenuController extends \luya\admin\base\RestController
      */
     private function groupHasFullPermission(Group $group)
     {
-        return (new Query())->select("id")->from("cms_nav_permission")->where(['group_id' => $group->id])->exists();
+        return !(new Query())->from("cms_nav_permission")->where(['group_id' => $group->id])->exists();
     }
 
     private $_groups;
@@ -198,7 +198,7 @@ class MenuController extends \luya\admin\base\RestController
             throw new InvalidArgumentException("navId and groupId can not be empty.");
         }
 
-        $exists = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->exists();
+        $exists = (new Query())->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->exists();
 
         if ($exists) {
             Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
@@ -236,7 +236,7 @@ class MenuController extends \luya\admin\base\RestController
             throw new InvalidArgumentException("navId and groupId can not be empty.");
         }
 
-        $exists = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->exists();
+        $exists = (new Query())->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->exists();
 
         if ($exists) {
             return Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
