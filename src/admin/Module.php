@@ -313,7 +313,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     /**
      * Translations for CMS Module.
      *
-     * @param unknown $message
+     * @param string $message
      * @param array $params
      * @return string
      */

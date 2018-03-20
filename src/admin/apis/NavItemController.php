@@ -96,7 +96,7 @@ class NavItemController extends \luya\admin\base\RestController
      * http://example.com/admin/api-cms-navitem/nav-lang-item?access-token=XXX&navId=A&langId=B.
      *
      * @param integer $navId
-     * @param ineger $langId
+     * @param integer $langId
      * @return array
      */
     public function actionNavLangItem($navId, $langId)
