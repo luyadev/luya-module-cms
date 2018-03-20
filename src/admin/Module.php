@@ -247,7 +247,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     /**
      * Getter method for blockVarionts.
      *
-     * @return mixed[]|array[]
+     * @return array
      */
     public function getBlockVariations()
     {
