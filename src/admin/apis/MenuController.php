@@ -3,9 +3,11 @@
 namespace luya\cms\admin\apis;
 
 use Yii;
+use yii\base\InvalidArgumentException;
+use yii\db\Query;
 use luya\helpers\ArrayHelper;
 use luya\cms\admin\helpers\MenuHelper;
-use yii\db\Query;
+use luya\cms\models\Nav;
 use luya\admin\models\Group;
 use luya\cms\models\NavContainer;
 
@@ -17,6 +19,16 @@ use luya\cms\models\NavContainer;
  */
 class MenuController extends \luya\admin\base\RestController
 {
+    /**
+     * Returns an array with all data for the admin menu.
+     *
+     * + items
+     * + drafts
+     * + containers
+     * + hiddenCats
+     *
+     * @return array
+     */
     public function actionDataMenu()
     {
         return [
@@ -28,8 +40,32 @@ class MenuController extends \luya\admin\base\RestController
     }
 
     /**
+     * Provides all menu items for a given langId and containerId index by the parent_nav_id.
+     *
+     * @param $langId
+     * @param $containerId
+     * @since 1.0.3
+     */
+    public function actionItems($langId, $containerId)
+    {
+        $items = Nav::find()->where(['nav_container_id' => $containerId, 'is_offline' => false, 'ni.lang_id' => $langId])->joinWith(['navItems ni'])->asArray()->all();
+        $result = [];
+
+        foreach ($items as $item) {
+            // rename from navItems to item
+            $item['item'] = reset($item['navItems']);
+            unset($item['navItems']);
+            $result[$item['parent_nav_id']][] = $item;
+        }
+
+        return $result;
+    }
+
+    /**
      * Returns the full tree with groups, pages, is_inherit or not, does have rights or not as it was to hard to
-     * implement does features directly with angular, now we just prepare anything withing php and delivers to angular only to display the data.
+     * implement this features directly with angular, now we just prepare anything withing php and delivers to angular only to display the data.
+     *
+     * @return array
      */
     public function actionDataPermissionTree()
     {
@@ -55,19 +91,24 @@ class MenuController extends \luya\admin\base\RestController
         return $data;
     }
 
+    /**
+     * Checks whether a group hass full permission or not
+     *
+     * @param Group $group
+     * @return bool
+     */
     private function groupHasFullPermission(Group $group)
     {
-        $count = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id])->count();
-
-        if ($count > 0) {
-            return false;
-        }
-
-        return true;
+        return (new Query())->select("id")->from("cms_nav_permission")->where(['group_id' => $group->id])->exists();
     }
 
     private $_groups;
 
+    /**
+     * Get all groups as singleton instance.
+     *
+     * @return \yii\db\ActiveRecord
+     */
     private function getGroups()
     {
         if ($this->_groups === null) {
@@ -79,11 +120,17 @@ class MenuController extends \luya\admin\base\RestController
 
     private static $_permissionItemData = [];
 
+    /**
+     * Build a trree with items for a given NavContainer.
+     *
+     * @param NavContainer $container
+     * @param int $parentNavId
+     * @param array $parentGroup
+     * @param int $index
+     */
     private function getItems(NavContainer $container, $parentNavId = 0, $parentGroup = [], $index = 1)
     {
         $navs = $container->getNavs()->andWhere(['parent_nav_id' => $parentNavId])->all();
-
-        $data = [];
 
         foreach ($navs as $nav) {
             $array = $nav->toArray();
@@ -117,68 +164,98 @@ class MenuController extends \luya\admin\base\RestController
             self::$_permissionItemData[$container->id][] = $array;
 
             $this->getItems($container, $nav->id, $array['groups'], $index+1);
-
-            //$data[] = $array;
-        }
-
-        //return $data;
-    }
-
-    public function actionDataPermissionDelete()
-    {
-        $navId = Yii::$app->request->getBodyParam('navId');
-        $groupId = Yii::$app->request->getBodyParam('groupId');
-
-        if (!empty($navId) && !empty($groupId)) {
-            return Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
         }
     }
 
+    /**
+     * Save a new permission for a given group and nav id.
+     *
+     * @return int
+     */
     public function actionDataPermissionInsert()
     {
-        $navId = Yii::$app->request->getBodyParam('navId');
-        $groupId = Yii::$app->request->getBodyParam('groupId');
+        $navId = (int) Yii::$app->request->getBodyParam('navId');
+        $groupId = (int) Yii::$app->request->getBodyParam('groupId');
 
-        if (!empty($navId) && !empty($groupId)) {
-            return Yii::$app->db->createCommand()->insert('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
+        if (empty($navId) || empty($groupId)) {
+            throw new InvalidArgumentException("navId and groupId can not be empty.");
         }
+
+        return Yii::$app->db->createCommand()->insert('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
     }
 
+    /**
+     * Save a new permission inhertiance for a given group and nav id.
+     *
+     * @return boolean
+     */
     public function actionDataPermissionInsertInheritance()
     {
-        $navId = Yii::$app->request->getBodyParam('navId');
-        $groupId = Yii::$app->request->getBodyParam('groupId');
+        $navId = (int) Yii::$app->request->getBodyParam('navId');
+        $groupId = (int) Yii::$app->request->getBodyParam('groupId');
 
-        if (!empty($navId) && !empty($groupId)) {
-            $one = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->one();
-
-            if ($one) {
-                Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
-            }
-
-            return Yii::$app->db->createCommand()->insert('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId, 'inheritance' => true])->execute();
+        if (empty($navId) || empty($groupId)) {
+            throw new InvalidArgumentException("navId and groupId can not be empty.");
         }
+
+        $exists = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->exists();
+
+        if ($exists) {
+            Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
+        }
+
+        return Yii::$app->db->createCommand()->insert('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId, 'inheritance' => true])->execute();
     }
 
+    /**
+     * Delete the permission for a given group and nav id.
+     *
+     * @return int
+     */
+    public function actionDataPermissionDelete()
+    {
+        $navId = (int) Yii::$app->request->getBodyParam('navId');
+        $groupId = (int) Yii::$app->request->getBodyParam('groupId');
+
+        if (empty($navId) || empty($groupId)) {
+            throw new InvalidArgumentException("navId and groupId can not be empty.");
+        }
+
+        return Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
+    }
+
+    /**
+     * Delete the permission inheritance for a given group and nav id.
+     */
     public function actionDataPermissionDeleteInheritance()
     {
-        $navId = Yii::$app->request->getBodyParam('navId');
-        $groupId = Yii::$app->request->getBodyParam('groupId');
+        $navId = (int) Yii::$app->request->getBodyParam('navId');
+        $groupId = (int) Yii::$app->request->getBodyParam('groupId');
 
-        if (!empty($navId) && !empty($groupId)) {
-            $one = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->one();
-
-            if ($one) {
-                Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
-            }
+        if (empty($navId) || empty($groupId)) {
+            throw new InvalidArgumentException("navId and groupId can not be empty.");
         }
+
+        $exists = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->exists();
+
+        if ($exists) {
+            return Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
+        }
+
+        return false;
     }
 
+    /**
+     * Grant access to a given group.
+     */
     public function actionDataPermissionGrantGroup()
     {
-        $groupId = Yii::$app->request->getBodyParam('groupId');
-        if ($groupId) {
-            Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId])->execute();
+        $groupId = (int) Yii::$app->request->getBodyParam('groupId');
+
+        if (empty($groupId)) {
+            throw new InvalidArgumentException("groupId can not be empty.");
         }
+
+        return Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId])->execute();
     }
 }
