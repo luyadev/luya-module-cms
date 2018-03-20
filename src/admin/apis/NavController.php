@@ -51,7 +51,7 @@ class NavController extends \luya\admin\base\RestController
     
     public function actionDeepPageCopy()
     {
-        $navId = Yii::$app->request->getBodyParam('navId');
+        $navId = (int) Yii::$app->request->getBodyParam('navId');
         
         if (empty($navId)) {
             throw new InvalidCallException("navId can not be empty.");

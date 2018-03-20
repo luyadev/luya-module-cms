@@ -42,7 +42,7 @@ class NavItemBlockController extends \luya\admin\base\RestController
 
     public function actionCopyBlockFromStack()
     {
-        $model = NavItemPageBlockItem::findOne(Yii::$app->request->getBodyParam('copyBlockId', 0));
+        $model = NavItemPageBlockItem::findOne((int) Yii::$app->request->getBodyParam('copyBlockId', 0));
 
         if (($model) && ((Yii::$app->request->getBodyParam('copyBlockId', 0) !== Yii::$app->request->getBodyParam('prev_id', false)))) {
             $newModel = new NavItemPageBlockItem();

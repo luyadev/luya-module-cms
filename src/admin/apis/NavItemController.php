@@ -168,7 +168,7 @@ class NavItemController extends \luya\admin\base\RestController
     {
         $pageId = Yii::$app->request->getBodyParam('pageId');
         
-        $page = NavItemPage::findOne($pageId);
+        $page = NavItemPage::findOne((int) $pageId);
         
         if ($page) {
             $page->forceNavItem->updateTimestamp();
@@ -185,8 +185,8 @@ class NavItemController extends \luya\admin\base\RestController
     public function actionCreatePageVersion()
     {
         $name = Yii::$app->request->post('name');
-        $fromPageId = Yii::$app->request->post('fromPageId');
-        $navItemId = Yii::$app->request->post('navItemId');
+        $fromPageId = (int) Yii::$app->request->post('fromPageId');
+        $navItemId = (int) Yii::$app->request->post('navItemId');
         $layoutId = Yii::$app->request->post('layoutId');
         
         if (empty($name) || empty($navItemId)) {
