@@ -2,11 +2,15 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.3 (in progress)
+## 1.0.3 (26. March 2018)
 
 ### Fixed
 
 + [#49](https://github.com/luyadev/luya-module-cms/pull/49) Editing a block, will clear the cache of first parent now.
+
+### Added
+
++ [#50](https://github.com/luyadev/luya-module-cms/issues/50) Added new APIs for headless usage.
 
 ## 1.0.2 (9. March 2018)
 
