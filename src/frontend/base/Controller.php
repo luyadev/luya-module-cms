@@ -73,8 +73,7 @@ abstract class Controller extends \luya\web\Controller
         ]);
         
         $content = $typeModel->getContent();
-        
-        
+
         if ($content instanceof Response) {
             return Yii::$app->end(0, $content);
         }
@@ -106,8 +105,7 @@ abstract class Controller extends \luya\web\Controller
         
         $this->view->registerMetaTag(['name' => 'og:title', 'content' => $this->view->title], 'fbTitle');
         $this->view->registerMetaTag(['name' => 'og:type', 'content' => 'website'], 'ogType');
-        
-        
+
         if (!empty($model->description)) {
             $this->view->registerMetaTag(['name' => 'description', 'content' => $model->description], 'metaDescription');
             $this->view->registerMetaTag(['name' => 'og:description', 'content' => $model->description], 'fbDescription');
@@ -123,7 +121,7 @@ abstract class Controller extends \luya\web\Controller
         
         if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {
             $this->view->registerCssFile('//fonts.googleapis.com/icon?family=Material+Icons');
-            $this->getView()->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar'], ['content' => $content]);
+            $this->view->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar'], ['content' => $content]);
         }
         
         return $content;

@@ -3,10 +3,9 @@
 namespace luya\cms\models;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\db\Query;
 use luya\Exception;
-
-
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
@@ -22,6 +21,7 @@ use yii\base\ViewContextInterface;
  * @property integer $timestamp_create
  * @property integer $create_user_id
  * @property string $version_alias
+ * @property \luya\cms\models\Layout $layout
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -29,8 +29,6 @@ use yii\base\ViewContextInterface;
 class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewContextInterface
 {
     use CacheableTrait;
-
-    private $_view;
 
     /**
      * @inheritdoc
@@ -52,20 +50,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $this->on(self::EVENT_AFTER_UPDATE, function ($event) {
             $event->sender->forceNavItem->updateTimestamp();
         });
-    }
-
-    /**
-     * Get the view object to render the templates.
-     *
-     * @return \yii\base\View|\yii\web\View|\luya\web\View
-     */
-    public function getView()
-    {
-        if ($this->_view === null) {
-            $this->_view = Yii::$app->getView();
-        }
-        
-        return $this->_view;
     }
     
     /**
@@ -109,11 +93,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
-     * @return \yii\db\ActiveQuery
+     * @return \luya\cms\models\Layout
      */
     public function getLayout()
     {
-        return $this->hasOne(Layout::className(), ['id' => 'layout_id']);
+        return $this->hasOne(Layout::class, ['id' => 'layout_id']);
     }
 
     /**
@@ -141,7 +125,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
-     * The folder where all cmslayouts are stored.
+     * The folder where all cms layouts are stored in order to enable partial rendering.
      *
      * @see \yii\base\ViewContextInterface::getViewPath()
      */
@@ -158,18 +142,20 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public function getContent()
     {
-        if ($this->layout) {
-            $layoutFile = $this->layout->view_file;
-            $placholders = [];
-            foreach ($this->layout->getJsonConfig('placeholders') as $row) {
-                foreach ($row as $item) {
-                    $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
-                }
-            }
-            return $this->getView()->render($layoutFile, ['placeholders' => $placholders], $this);
+        if (!$this->layout) {
+            throw new InvalidConfigException("Unable to find the requested cms layout '{$this->layout_id}' for nav item page id '{$this->id}'. Make sure your page does not have an old inactive/deleted cms layout selected.");
         }
-        
-        throw new Exception("Could not find the requested cms layout id '".$this->layout_id."' for nav item page id '". $this->id . "'. Make sure your page does not have an old inactive/deleted cms layout selected.");
+
+        $placholders = [];
+        foreach ($this->layout->getJsonConfig('placeholders') as $row) {
+            foreach ($row as $item) {
+                $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
+            }
+        }
+
+        return Yii::$app->view->render($this->layout->view_file, [
+            'placeholders' => $placholders,
+        ], $this);
     }
 
     /**
@@ -308,6 +294,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * @param integer $navItemPageId
      * @param string $placeholderVar
      * @param integer $prevId
+     * @return array
      */
     private function getPlaceholders($navItemPageId, $placeholderVar, $prevId)
     {
@@ -375,6 +362,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * @param string $placeholderVar
      * @param integer $navItemPageId
      * @param integer $prevId
+     * @return array
      */
     public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)
     {
@@ -515,7 +503,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     /**
      * Return all page block items for the current corresponding page. Not related to any sortings or placeholders.
      *
-     * @return ActiveQuery
+     * @return \luya\cms\models\NavItemPageBlockItem
      */
     public function getNavItemPageBlockItems()
     {
