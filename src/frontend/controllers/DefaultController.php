@@ -70,9 +70,6 @@ class DefaultController extends Controller
 
         $content = $this->renderItem($current->id, Yii::$app->menu->currentAppendix);
 
-        var_dump(Yii::$app->menu->currentAppendix);
-        exit;
-
         // It seems to be a json response. Yii::$app->response->format should be FORMAT_JSON or FORMAT_JSONP
         if (is_array($content)) {
             return $content;
