@@ -201,7 +201,7 @@ return [
     'nav_item_model_error_modulenacd /var   meexists' => 'The alias "{alias}" exists already as module. Use another alias name or rename the module with this alias in your config.',
     'nav_item_model_error_parentnavidcannotnull' =>  'The parent nav id can not be null, something went wrong while extending from parent page.',
     'nav_item_model_error_urlsegementexistsalready' => 'This alias exists already, please take another name.',
-    'menu_group_item_env_redirections' => 'Redirects',
+    'menu_group_item_env_redirections' => 'Редиректы',
     'redirect_model_atr_timestamp_create' => 'Create timestamp',
     'redirect_model_atr_catch_path' => 'From path',
     'redirect_model_atr_catch_path_hint' => 'The path which should be redirected from. If you want to match all subpaths of a path, you can use the * wildcard like in /blog*, which will match every subpath of /blog.',
