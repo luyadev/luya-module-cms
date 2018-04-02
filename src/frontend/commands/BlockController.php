@@ -143,7 +143,8 @@ class BlockController extends \luya\console\Command
             'cms-page' => 'Returns CMS page selection tree (only when cms is registered).',
             'slug' => 'Slugified input field which allows only lower chars and - for url rules.',
             'radio' => 'Generate radio inputs which allows to select and return a single value.',
-            'multiple-inputs' => 'Nesting all types inside an array.'
+            'multiple-inputs' => 'Nesting all types inside an array.',
+            'color' => 'A color picker.',
         ];
     }
     
@@ -172,6 +173,7 @@ class BlockController extends \luya\console\Command
             'slug' => 'self::TYPE_SLUG',
             'radio' => 'self::TYPE_RADIO',
             'multiple-inputs' => 'self::TYPE_MULTIPLE_INPUTS',
+            'color' => 'self::TYPE_COLOR',
         ];
     }
 
