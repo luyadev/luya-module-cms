@@ -73,7 +73,7 @@ use luya\admin\helpers\Angular;
             <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
             <div ng-switch-when="6">
                 <h1><?= Module::t('cmsadmin_settings_trashpage_title'); ?></h1>
-                <p><a ng-click="trash()" class="btn btn-delete btn-icon">Remove Page</a></p>
+                <p><a ng-click="trash()" class="btn btn-delete btn-icon"><?= Module::t('cmsadmin_settings_trashpage_title'); ?></a></p>
             </div>
             <?php endif; ?>
             
