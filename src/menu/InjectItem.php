@@ -161,7 +161,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     private $_alias;
     
     /**
-     * Setter methdo for the item alias.
+     * Setter method for the item alias.
      *
      * @param string $alias A slugable alias string will be parsed by the inflector::slug method.
      * @return \luya\cms\menu\InjectItem
@@ -383,7 +383,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     private $_id;
     
     /**
-     * Setter methdo for the id (unique id).
+     * Setter method for the id (unique id).
      *
      * @param integer $id
      */
