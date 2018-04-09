@@ -4,6 +4,7 @@ namespace luya\cms\helpers;
 
 use Yii;
 use luya\cms\Exception;
+use luya\cms\Menu;
 
 /**
  * CMS Url Helper class extends luya\helpers\Url by CMS routing methods.
@@ -59,7 +60,6 @@ class Url extends \luya\helpers\Url
      * ];
      * ```
      *
-     *
      * @param string $moduleName The ID of the module, which should be found inside the nav items.
      * @param string|array $route The route of the module `module/controller/action` or an array like in Url::to with param infos `['/module/controller/action', 'foo' => 'bar']`.
      * @param array  $params The parameters for the url rule. If the route is provided as an array with params the further defined params or overwritten by the array_merge process.
@@ -67,14 +67,9 @@ class Url extends \luya\helpers\Url
      * @return string
      * @see \luya\helpers\Url::toModule()
      */
-    public static function toModuleRoute($moduleName, $route, array $params = [])
+    public static function toModuleRoute($moduleName, array $route)
     {
         $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
-        
-        if (!empty($params)) {
-            trigger_error('third argument $params is deprecated use the array notation', E_USER_DEPRECATED);
-        }
-        
         
         if ($item) {
             return static::toMenuItem($item->id, $route, $params);
@@ -84,27 +79,51 @@ class Url extends \luya\helpers\Url
     }
 
     /**
-     * create an url based on a context nav item informaiton inside the urlManager.
+     * Create an url to a cms page based on the unique nav item id.
+     * 
+     * This method uses the UNIQUE CMS NAV ITEM identifier.
      *
      * @param integer $navItemId The menu item Id where the url should be created from
-     * @param string|array $route Can be a string `module/controller/action` or an array like in the Yii Url helpers::to methods `['/module/controller/action', 'param' => 'bar]`.
-     * @param array $params An array with params which are going to be attached to the route.
-     *
-     * @return string
+     * @param array $route An array with a route and optional params `['/module/controller/action', 'param' => 'bar]`.
+     * @return string The generate id
+     * @deprecated Deprecated since 1.0.4 use {{luya\cms\helpers\Url::toMenuNavItem()}} instead.
      */
-    public static function toMenuItem($navItemId, $route, array $params = [])
+    public static function toMenuItem($navItemId, array $route)
     {
-        if (is_array($route)) {
-            $routeParams = array_merge($route, $params);
-        } else {
-            trigger_error('third argument $params is deprecated use the array notation', E_USER_DEPRECATED);
-            
-            $routeParams = [$route];
-            foreach ($params as $key => $value) {
-                $routeParams[$key] = $value;
-            }
-        }
+        return self::toMenuNavItem($navItemId, $route);
+    }
 
-        return Yii::$app->urlManager->createMenuItemUrl($routeParams, $navItemId);
+    
+    /**
+     * Create an url to a cms page based on the unique nav item id.
+     *
+     * This method uses the UNIQUE CMS NAV ITEM identifier.
+     *
+     * @param integer $navItemId The nav item id of the given page which is the base path for the generated url.
+     * @param array $route An array with a route and optional params `['/module/controller/action', 'param' => 'bar]`.
+     * @return string The url with the base path from the nav item id and the appended route.
+     * @since 1.0.4
+     */
+    public static function toMenuNavItem($navItemId, array $route)
+    {
+        return Yii::$app->urlManager->createMenuItemUrl($route, $navItemId);
+    }
+    
+    
+    /**
+     * Create an url to a cms page based on the nav id.
+     * 
+     * This method uses the language independent navId which is displayed in the cms page tree.
+     * 
+     * @param integer $navId The nav id of the given page which is the base path for the generated url.
+     * @param array $route An array with a route and optional params `['/module/controller/action', 'param' => 'bar]`.
+     * @return string The url with the base path from the nav id and the appended route.
+     * @since 1.0.4
+     */
+    public static function toMenuNav($navId, array $route)
+    {
+        $menu = Yii::$app->menu->find()->where([Menu::FIELD_NAVID => $navId])->with(['hidden'])->one();
+        
+        return static::toMenuNavItem($menu->id, $route);
     }
 }
