@@ -19,7 +19,7 @@ class Main extends \yii\web\AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'dist/js/main.js'
+        'dist/js/main.uglified.js'
     ];
 
     /**
