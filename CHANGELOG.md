@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
++ [#64](https://github.com/luyadev/luya-module-cms/issues/64) Uglify javascript code.
 + [#61](https://github.com/luyadev/luya-module-cms/issues/61) Deprecated method `toNavItem()` in class `luya\cms\helpers\Url` in favor of `toMenuNavItem()` and also added new method `toMenuNav()`.
 
 ## 1.0.3 (26. March 2018)

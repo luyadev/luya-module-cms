@@ -1,9 +1,9 @@
 (function() {
 	"use strict";
-
+	
 	// directive.js
 
-    zaa.directive("menuDropdown", function(ServiceMenuData) {
+    zaa.directive("menuDropdown", ['ServiceMenuData', function(ServiceMenuData) {
         return {
             restrict : 'E',
             scope : {
@@ -59,9 +59,9 @@
                     '<div>';
             }
         }
-    });
+    }]);
 
-	zaa.directive("zaaCmsPage", function($compile) {
+	zaa.directive("zaaCmsPage", function() {
         return {
             restrict: "E",
             scope: {
@@ -91,7 +91,7 @@
 			scope : {
 				navId : '='
 			},
-			controller : function($scope, $http, $state) {
+			controller : ['$scope', '$http', '$state', function($scope, $http, $state) {
 
 				$scope.$watch('navId', function(n) {
 					if (n) {
@@ -107,21 +107,21 @@
 				$scope.goTo = function(navId) {
 					$state.go('custom.cmsedit', { navId : navId });
 				}
-			},
+			}],
 			template : function() {
 				return '<a ng-click="goTo(navId)" style="cursor:pointer">{{path}}</a> in {{container}}';
 			}
 		}
 	});
 
-    zaa.directive("updateFormPage", function(ServiceLayoutsData) {
+    zaa.directive("updateFormPage", ['ServiceLayoutsData', function(ServiceLayoutsData) {
         return {
             restrict : 'EA',
             scope : {
                 data : '='
             },
             templateUrl : 'updateformpage.html',
-            controller : function($scope, $http) {
+            controller : ['$scope', '$http', function($scope, $http) {
 
             	$scope.parent = $scope.$parent.$parent;
 				$scope.navItemId = $scope.parent.item.id;
@@ -154,9 +154,9 @@
 				}
 
 				init();
-            }
+            }]
         }
-    });
+    }]);
 
 	zaa.directive("updateFormModule", function() {
 		return {
@@ -165,12 +165,12 @@
 				data : '='
 			},
 			templateUrl : 'updateformmodule.html',
-			controller : function($scope, $http) {
+			controller : ['$scope', '$http', function($scope, $http) {
 				$scope.modules = [];
 				$http.get('admin/api-admin-common/data-modules').then(function(response) {
 					$scope.modules = response.data;
 				});
-			}
+			}]
 		}
 	});
 
@@ -181,13 +181,13 @@
 				data : '='
 			},
 			templateUrl : 'updateformredirect.html',
-			controller : function($scope) {
+			controller : ['$scope', function($scope) {
 				$scope.$watch(function() { return $scope.data }, function(n, o) {
 					if (angular.isArray(n)) {
 						$scope.data = {};
 					}
 				});
-			}
+			}]
 		}
 	});
 
@@ -198,7 +198,7 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : function($scope, $http, $filter, ServiceMenuData, ServiceLanguagesData, AdminToastService) {
+			controller : ['$scope', '$http', '$filter', 'ServiceMenuData', 'ServiceLanguagesData', 'AdminToastService', function($scope, $http, $filter, ServiceMenuData, ServiceLanguagesData, AdminToastService) {
 
 				$scope.error = [];
 				$scope.success = false;
@@ -277,18 +277,18 @@
 					});
 				}
 
-			}
+			}]
 		}
 	});
 
-	zaa.directive("createFormPage", function(ServiceLayoutsData, ServiceMenuData) {
+	zaa.directive("createFormPage", function() {
 		return {
 			restrict : 'EA',
 			scope : {
 				data : '='
 			},
 			templateUrl : 'createformpage.html',
-			controller : function($scope) {
+			controller : ['$scope', 'ServiceLayoutsData', 'ServiceMenuData', function($scope, ServiceLayoutsData, ServiceMenuData) {
 
 				$scope.data.use_draft = 0;
 				$scope.data.layout_id = 0;
@@ -320,29 +320,29 @@
 				$scope.save = function() {
 					$scope.$parent.exec();
 				}
-			}
+			}]
 		}
 	});
 
-	zaa.directive("createFormModule", function($http) {
+	zaa.directive("createFormModule", function() {
 		return {
 			restrict : 'EA',
 			scope : {
 				data : '='
 			},
 			templateUrl : 'createformmodule.html',
-			controller : function($scope) {
+			controller : ['$scope', '$http', function($scope, $http) {
 
 				$scope.modules = [];
 
 				$http.get('admin/api-admin-common/data-modules').then(function(response) {
 					$scope.modules = response.data;
-				})
+				});
 
 				$scope.save = function() {
 					$scope.$parent.exec();
 				}
-			}
+			}]
 		}
 	});
 
@@ -353,12 +353,11 @@
 				data : '='
 			},
 			templateUrl : 'createformredirect.html',
-			controller : function($scope) {
-
+			controller : ['$scope', function($scope) {
 				$scope.save = function() {
 					$scope.$parent.exec();
-				}
-			}
+				};
+			}]
 		}
 	});
 
@@ -378,7 +377,7 @@
 
 	/* layout.js */
 
-	zaa.config(function($stateProvider, resolverProvider) {
+	zaa.config(['$stateProvider', function($stateProvider) {
 		$stateProvider
 		.state("custom.cmsedit", {
 			url : "/update/:navId",
@@ -392,9 +391,9 @@
 			url: '/drafts',
 			templateUrl: 'cmsadmin/page/drafts'
 		});
-	});
+	}]);
 
-	zaa.controller("DraftsController", function($scope, $state, ServiceMenuData) {
+	zaa.controller("DraftsController", ['$scope', '$state', 'ServiceMenuData', function($scope, $state, ServiceMenuData) {
 
 		$scope.menuData = ServiceMenuData.data;
 
@@ -405,19 +404,18 @@
 		$scope.go = function(navId) {
 			$state.go('custom.cmsedit', { navId : navId });
 		};
-
-	});
+	}]);
 
 	/* controllers */
 
-	zaa.controller("CmsDashboard", function($scope, $http) {
+	zaa.controller("CmsDashboard", ['$scope', '$http', function($scope, $http) {
 		$scope.dashboard = [];
 		$http.get('admin/api-cms-admin/dashboard-log').then(function(response) {
 			$scope.dashboard = response.data;
 		});
-	});
+	}]);
 	
-	zaa.controller("ConfigController", function($scope, $http, AdminToastService) {
+	zaa.controller("ConfigController", ['$scope', '$http', 'AdminToastService', function($scope, $http, AdminToastService) {
 		$scope.data = {};
 
 		$http.get('admin/api-cms-admin/config').then(function(response) {
@@ -429,9 +427,9 @@
 				AdminToastService.success(i18n['js_config_update_success']);
 			});
 		}
-	});
+	}]);
 
-	zaa.controller("PageVersionsController", function($scope, $http, ServiceLayoutsData, AdminToastService) {
+	zaa.controller("PageVersionsController", ['$scope', '$http', 'ServiceLayoutsData', 'AdminToastService', function($scope, $http, ServiceLayoutsData, AdminToastService) {
 		/**
 		 * @var object $typeData From parent scope controller NavItemController
 		 * @var object $item From parent scope controller NavItemController
@@ -470,9 +468,9 @@
 				AdminToastService.success(i18n['js_version_create_success']);
 			});
 		};
-	});
+	}]);
 
-	zaa.controller("CopyPageController", function($scope, $http, $filter, AdminToastService) {
+	zaa.controller("CopyPageController", ['$scope', '$http', '$filter', 'AdminToastService', function($scope, $http, $filter, AdminToastService) {
 
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 
@@ -533,7 +531,7 @@
 			});
 		}
 
-	});
+	}]);
 
 	zaa.filter("menuparentfilter", function() {
 		return function(input, containerId, parentNavId) {
@@ -562,7 +560,7 @@
 		};
 	});
 
-	zaa.controller("CmsMenuTreeController", function($scope, $rootScope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
+	zaa.controller("CmsMenuTreeController", ['$scope', '$rootScope', '$state', '$http', '$filter', 'ServiceMenuData', 'ServiceLiveEditMode', function($scope, $rootScope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
 
 		// live edit service
 
@@ -705,11 +703,11 @@
 			return false;
 		};
 
-	});
+	}]);
 
 	// create.js
 
-	zaa.controller("CmsadminCreateController", function($scope, $q, $http) {
+	zaa.controller("CmsadminCreateController", ['$scope', '$q', '$http', function($scope, $q, $http) {
 
 		$scope.data = {};
 		$scope.data.isInline = false;
@@ -745,9 +743,9 @@
 				}
 			});
 		}
-	});
+	}]);
 
-	zaa.controller("CmsadminCreateInlineController", function($scope, $q, $http) {
+	zaa.controller("CmsadminCreateInlineController", ['$scope', '$q', '$http', function($scope, $q, $http) {
 
 		$scope.data = {
 			nav_id : $scope.$parent.NavController.id
@@ -789,11 +787,13 @@
 			})
 		}
 
-	});
+	}]);
 
 	// update.js
 
-	zaa.controller("NavController", function($scope, $rootScope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService, HtmlStorage) {
+	zaa.controller("NavController", [
+		'$scope', '$rootScope', '$filter', '$stateParams', '$http', 'PlaceholderService', 'ServicePropertiesData', 'ServiceMenuData', 'ServiceLanguagesData', 'ServiceLiveEditMode', 'AdminToastService', 'AdminClassService', 'AdminLangService', 'HtmlStorage',
+		function($scope, $rootScope, $filter, $stateParams, $http, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService, HtmlStorage) {
 
 
 		$scope.pageSettingsOverlayHidden = true;
@@ -1017,12 +1017,14 @@
 		}
 
 			initializer();
-	});
+	}]);
 
 	/**
 	 * @param $scope.lang from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $rootScope, $http, $filter, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
+	zaa.controller("NavItemController", [
+		'$scope', '$rootScope', '$http', '$filter', '$timeout', 'ServiceMenuData', 'AdminLangService', 'AdminToastService', 'ServiceLiveEditMode', 'ServiceLayoutsData',
+		function($scope, $rootScope, $http, $filter, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
 
 		$scope.loaded = false;
 
@@ -1361,14 +1363,16 @@
 		};
 		
 		$scope.refresh();
-	});
+	}]);
 
 
 
 	/**
 	 * @param $scope.block From ng-repeat scope assignment
 	 */
-	zaa.controller("PageBlockEditController", function($scope, $sce, $http, AdminClassService, AdminToastService, ServiceBlockCopyStack, ServiceLiveEditMode) {
+	zaa.controller("PageBlockEditController", [
+		'$scope', '$sce', '$http', 'AdminClassService', 'AdminToastService', 'ServiceBlockCopyStack', 'ServiceLiveEditMode',
+		function($scope, $sce, $http, AdminClassService, AdminToastService, ServiceBlockCopyStack, ServiceLiveEditMode) {
 
 		$scope.NavItemTypePageController = $scope.$parent;
 
@@ -1589,9 +1593,9 @@
 				$scope.evalVariationVisbility($scope.block.variation);
 			});
 		};
-	});
+	}]);
 
-	zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, ServiceBlocksData, ServiceBlockCopyStack, $sce) {
+	zaa.controller("DroppableBlocksController", ['$scope', '$http', 'AdminClassService', 'ServiceBlocksData', 'ServiceBlockCopyStack', function($scope, $http, AdminClassService, ServiceBlocksData, ServiceBlockCopyStack) {
 
 		/* service ServiceBlocksData inheritance */
 
@@ -1657,6 +1661,5 @@
 		});
 
 
-	});
-
+	}]);
 })();

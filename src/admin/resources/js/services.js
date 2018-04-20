@@ -27,20 +27,22 @@
 (function() {
 	"use strict";
 	
-zaa.config(function(resolverProvider) {
-	resolverProvider.addCallback(function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, LuyaLoading) {
+zaa.config(['resolverProvider', function(resolverProvider) {
+	resolverProvider.addCallback(['ServiceMenuData', 'ServiceBlocksData', 'ServiceLayoutsData', 'LuyaLoading', function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, LuyaLoading) {
 		LuyaLoading.start();
 		ServiceBlocksData.load();
 		ServiceLayoutsData.load();
 		ServiceMenuData.load().then(function(r) {
 			LuyaLoading.stop();
 		});
-	});
-});
+	}]);
+}]);
 
-/* block data copy stack */
 
-zaa.factory("ServiceBlockCopyStack", function($rootScope) {
+/**
+ * Copy Block Stack service.
+ */
+zaa.factory("ServiceBlockCopyStack", ['$rootScope', function($rootScope) {
 	var service = [];
 	
 	service.stack = [];
@@ -59,23 +61,23 @@ zaa.factory("ServiceBlockCopyStack", function($rootScope) {
 	};
 	
 	return service;
-});
+}]);
 
-/*
-
-$scope.menuData = ServiceMenuData.data;
-				
-$scope.$on('service:MenuData', function(event, data) {
-	$scope.menuData = data;
-});
-
-$scope.menuDataReload = function() {
-	return ServiceMenuData.load(true);
-}
-				
-*/
-
-zaa.factory("ServiceMenuData", function($http, $q, $rootScope) {
+/**
+ * Menu Service.
+ * 
+ * $scope.menuData = ServiceMenuData.data;
+ * 				
+ * $scope.$on('service:MenuData', function(event, data) {
+ * 	$scope.menuData = data;
+ * });
+ * 
+ * $scope.menuDataReload = function() {
+ * 	return ServiceMenuData.load(true);
+ * }
+ * 				
+ */
+zaa.factory("ServiceMenuData", ['$http', '$q', '$rootScope', function($http, $q, $rootScope) {
 	var service = [];
 	
 	service.data = [];
@@ -95,23 +97,24 @@ zaa.factory("ServiceMenuData", function($http, $q, $rootScope) {
 	};
 	
 	return service;
-});
+}]);
 
-/*
-
-$scope.blocksData = ServiceBlocksData.data;
-				
-$scope.$on('service:BlocksData', function(event, data) {
-	$scope.blocksData = data;
-});
-
-$scope.blocksDataReload = function() {
-	return ServiceBlocksData.load(true);
-}
-				
-*/
-
-zaa.factory("ServiceBlocksData", function($http, $q, $rootScope) {
+/**
+ * Blocks Service.
+ * 
+ * 
+ * $scope.blocksData = ServiceBlocksData.data;
+ * 				
+ * $scope.$on('service:BlocksData', function(event, data) {
+ * 	$scope.blocksData = data;
+ * });
+ * 
+ * $scope.blocksDataReload = function() {
+ * 	return ServiceBlocksData.load(true);
+ * }
+ * 				
+ */
+zaa.factory("ServiceBlocksData", ['$htto', '$q', '$rootScope', function($http, $q, $rootScope) {
 	var service = [];
 	
 	service.data = [];
@@ -131,9 +134,10 @@ zaa.factory("ServiceBlocksData", function($http, $q, $rootScope) {
 	};
 	
 	return service;
-});
+}]);
 
-/*
+/**
+ * Layouts Service.
 
 $scope.layoutsData = ServiceLayoutsData.data;
 				
@@ -146,8 +150,7 @@ $scope.layoutsDataReload = function() {
 }
 				
 */
-
-zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
+zaa.factory("ServiceLayoutsData", ['$http', '$q', '$rootScope', function($http, $q, $rootScope) {
 	var service = [];
 	
 	service.data = [];
@@ -167,15 +170,14 @@ zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
 	};
 	
 	return service;
-});
+}]);
 
-/*
+/**
  * CMS LIVE EDIT SERIVCE
  * 
  * $scope.liveEditMode = ServiceLiveEditMode.state
  */
-
-zaa.factory("ServiceLiveEditMode", function($rootScope) {
+zaa.factory("ServiceLiveEditMode", ['$rootScope', function($rootScope) {
 	
 	var service = [];
 	
@@ -201,7 +203,7 @@ zaa.factory("ServiceLiveEditMode", function($rootScope) {
 	};
 	
 	return service;
-});
+}]);
 
 /* end of use strict */
 
