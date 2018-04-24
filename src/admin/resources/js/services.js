@@ -23,10 +23,9 @@
  * ```
  * 
  */
-
-(function() {
-	"use strict";
 	
+/*
+ * does not work due to missing injection.
 zaa.config(['resolverProvider', function(resolverProvider) {
 	resolverProvider.addCallback(['ServiceMenuData', 'ServiceBlocksData', 'ServiceLayoutsData', 'LuyaLoading', function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, LuyaLoading) {
 		LuyaLoading.start();
@@ -37,6 +36,7 @@ zaa.config(['resolverProvider', function(resolverProvider) {
 		});
 	}]);
 }]);
+*/
 
 
 /**
@@ -114,7 +114,7 @@ zaa.factory("ServiceMenuData", ['$http', '$q', '$rootScope', function($http, $q,
  * }
  * 				
  */
-zaa.factory("ServiceBlocksData", ['$htto', '$q', '$rootScope', function($http, $q, $rootScope) {
+zaa.factory("ServiceBlocksData", ['$http', '$q', '$rootScope', function($http, $q, $rootScope) {
 	var service = [];
 	
 	service.data = [];
@@ -204,7 +204,3 @@ zaa.factory("ServiceLiveEditMode", ['$rootScope', function($rootScope) {
 	
 	return service;
 }]);
-
-/* end of use strict */
-
-})();

@@ -9,7 +9,7 @@
             scope : {
                 navId : '='
             },
-            controller : function($scope) {
+            controller : ['$scope', function($scope) {
 
                 $scope.changeModel = function(data) {
                     $scope.navId = data.id;
@@ -34,7 +34,7 @@
                 $scope.toggler = true;
 
                 init();
-            },
+            }],
             template : function() {
                 return '<div class="menu-dropdown-category">' +
                         '<b class="menu-dropdown-toggle-all" ng-click="toggler=!toggler"><i class="material-icons" ng-if="!toggler">keyboard_arrow_right</i><i class="material-icons" ng-if="toggler">keyboard_arrow_down</i><span>Toggle Containers</span></b><br />' +
@@ -742,7 +742,7 @@
 					});
 				}
 			});
-		}
+		};
 	}]);
 
 	zaa.controller("CmsadminCreateInlineController", ['$scope', '$q', '$http', function($scope, $q, $http) {
