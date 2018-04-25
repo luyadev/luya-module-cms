@@ -24,10 +24,8 @@
  * 
  */
 	
-/*
- * does not work due to missing injection.
-zaa.config(['resolverProvider', function(resolverProvider) {
-	resolverProvider.addCallback(['ServiceMenuData', 'ServiceBlocksData', 'ServiceLayoutsData', 'LuyaLoading', function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, LuyaLoading) {
+zaa.config(['customStateResolverProvider', function(customStateResolverProvider) {
+	customStateResolverProvider.addCallback(['ServiceMenuData', 'ServiceBlocksData', 'ServiceLayoutsData', 'LuyaLoading', function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, LuyaLoading) {
 		LuyaLoading.start();
 		ServiceBlocksData.load();
 		ServiceLayoutsData.load();
@@ -36,7 +34,6 @@ zaa.config(['resolverProvider', function(resolverProvider) {
 		});
 	}]);
 }]);
-*/
 
 
 /**
