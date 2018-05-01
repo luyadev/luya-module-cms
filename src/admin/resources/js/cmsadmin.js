@@ -938,8 +938,7 @@
 		};
 
 		$scope.trash = function() {
-			AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], function($timeout, $toast) {
-
+			AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], ['$toast', function($toast) {
 				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.id }}).then(function(response) {
 	    			$scope.isDeleted = true;
 	    			$scope.menuDataReload().then(function() {
@@ -949,7 +948,7 @@
 	    		}, function(response) {
 					AdminToastService.error(i18n['js_page_delete_error_cause_redirects']);
 				});
-			});
+			}]);
 	    };
 
 	    $scope.isDraft = false;
@@ -1090,7 +1089,7 @@
 
 		$scope.trashItem = function() {
 			if ($scope.lang.is_default == 0) {
-				AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], function($timeout, $toast) {
+				AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], ['$toast', function() {
 					$http.delete('admin/api-cms-navitem/delete?navItemId=' + $scope.item.id).then(function(response) {
 						$scope.menuDataReload().then(function() {
 							$scope.isTranslated = false;
@@ -1108,7 +1107,7 @@
 		    		}, function(response) {
 						AdminToastService.error(i18n['js_page_delete_error_cause_redirects']);
 					});
-				});
+				}]);
 			}
 	    };
 
@@ -1173,13 +1172,13 @@
 		});
 
 		$scope.removeVersion = function(version) {
-			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: version.version_alias}), i18n['cmsadmin_version_remove'], function($toast, $http) {
+			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: version.version_alias}), i18n['cmsadmin_version_remove'], ['$toast', '$http', function($toast, $http) {
 				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : version.id}).then(function(response) {
 					$scope.refreshForce();
 					$toast.close();
 					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: version.version_alias}));
 				});
-			});
+			}]);
 		};
 		
     	$scope.editVersionItem;
@@ -1569,14 +1568,14 @@
 		};
 
 		$scope.removeBlock = function() {
-			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), i18n['view_update_block_tooltip_delete'], function($timeout, $toast) {
+			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), i18n['view_update_block_tooltip_delete'], [function($toast) {
 				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + $scope.block.id).then(function(response) {
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 					$scope.NavItemTypePageController.loadLiveUrl();
 					$toast.close();
 					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: $scope.block.name}));
 				});
-			});
+			}]);
 		};
 
 		$scope.save = function () {
