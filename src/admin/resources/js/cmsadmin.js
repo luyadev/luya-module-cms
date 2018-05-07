@@ -1568,7 +1568,7 @@
 		};
 
 		$scope.removeBlock = function() {
-			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), i18n['view_update_block_tooltip_delete'], [function($toast) {
+			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: $scope.block.name}), i18n['view_update_block_tooltip_delete'], ['$toast', function($toast) {
 				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + $scope.block.id).then(function(response) {
 					$scope.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 					$scope.NavItemTypePageController.loadLiveUrl();
