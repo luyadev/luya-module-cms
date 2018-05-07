@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.4 (in progress)
 
+### Added
+
++ [#67](https://github.com/luyadev/luya-module-cms/issues/67) New `cms/block/find` command in order to search for blocks and display how many times its used in the content.
+
 ### Changed
 
 + [#64](https://github.com/luyadev/luya-module-cms/issues/64) Uglify javascript code.
