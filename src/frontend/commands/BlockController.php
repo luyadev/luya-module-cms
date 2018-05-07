@@ -7,6 +7,8 @@ use yii\helpers\Inflector;
 use yii\helpers\Console;
 use luya\helpers\StringHelper;
 use luya\helpers\FileHelper;
+use luya\cms\models\Block;
+use yii\console\widgets\Table;
 
 /**
  * Block console commands.
@@ -444,5 +446,55 @@ class BlockController extends \luya\console\Command
         }
         
         return $this->outputError("Error while creating block '$filePath'");
+    }
+    
+    /**
+     * Search for a given block by its class or return all.
+     * 
+     * Returns all blocks:
+     * 
+     * ```
+     * ./luya cms/block/find
+     * ```
+     * 
+     * Filter for a given name:
+     * 
+     * ```
+     * ./luya cms/block/find html
+     * ```
+     * 
+     * Filter for different names combined as OR conditions:
+     * 
+     * ```
+     * ./luya cms/block/find html,module
+     * ```
+     * 
+     * @param string $search Optional query to search inside the class. In order to performe multiple criterias use comma separated list of key words.
+     * @since 1.0.4
+     */
+    public function actionFind($search = null)
+    {
+        $rows = [];
+        $query = Block::find();
+        
+        foreach (StringHelper::explode($search) as $q) {
+            $query->orFilterWhere(['like', 'class', $q]);
+        }
+        
+        $blocks = $query->with(['navItemPageBlockItems'])->all();
+        foreach ($blocks as $block) {
+            $rows[] = [$block->id, $block->class, $block->usageCount];
+        }
+        
+        if ($search) {
+            $this->outputInfo("Filtering for: {$search}");
+        }
+        
+        $table = new Table();
+        $table->setHeaders(['ID', 'Class', 'Usage count']);
+        $table->setRows($rows);
+        echo $table->run();
+        
+        return $this->outputSuccess(count($blocks) . " block(s) found.");
     }
 }

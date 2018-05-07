@@ -116,7 +116,17 @@ class Block extends NgRestModel
      */
     public function getUsageCount()
     {
-        return NavItemPageBlockItem::find()->where(['block_id' => $this->id])->count();
+        return $this->getNavItemPageBlockItems()->count();
+    }
+    
+    /**
+     * 
+     * @return \yii\db\ActiveQuery
+     * @since 1.0.4
+     */
+    public function getNavItemPageBlockItems()
+    {
+        return $this->hasMany(NavItemPageBlockItem::class, ['block_id' => 'id']);
     }
     
     /**
@@ -213,10 +223,10 @@ class Block extends NgRestModel
     /**
      * Get the block object from the database with context informations.
      *
-     * @param unknown $blockId
-     * @param unknown $id
-     * @param unknown $context
-     * @param unknown $pageObject
+     * @param integer $blockId
+     * @param integer $id
+     * @param mixed $context
+     * @param object $pageObject
      * @return \luya\cms\base\BlockInterface
      */
     public static function objectId($blockId, $id, $context, $pageObject = null)
