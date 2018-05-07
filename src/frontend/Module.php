@@ -2,10 +2,7 @@
 
 namespace luya\cms\frontend;
 
-use Yii;
-use luya\web\Application;
 use luya\base\CoreModuleInterface;
-use luya\web\ErrorHandler;
 
 /**
  * Cms Module.
@@ -16,14 +13,16 @@ use luya\web\ErrorHandler;
 final class Module extends \luya\base\Module implements CoreModuleInterface
 {
     /**
-     * @var array We have no urlRules in cms Module. the UrlRoute file will only be used when
-     * no module is provided. So the CMS url alias does only apply on default behavior.
+     * @inheritdoc
      */
     public $urlRules = [
         ['pattern' => 'cms-page-preview', 'route' => 'cms/preview/index'],
         ['pattern' => 'block-ajax/<id:\d+>/<callback:[a-z0-9\-]+>', 'route' => 'cms/block/index'],
     ];
 
+    /**
+     * @inheritdoc
+     */
     public $tags = [
         'menu' => ['class' => 'luya\cms\tags\MenuTag'],
         'page' => ['class' => 'luya\cms\tags\PageTag'],
@@ -34,6 +33,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * @var string Define an error view file who is going to be renderd when the errorAction points to the `cms/error/index` route.
      *
      * In order to handle error messages in your application configure the error handler compononent in you configuration:
+     *
      * ```php
      * 'errorHandler' => [
      *     'errorAction' => 'cms/error/index',
@@ -80,6 +80,9 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public static function onLoad()
     {
         self::registerTranslation('cms', '@cms/messages', [
@@ -87,6 +90,13 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
         ]);
     }
     
+    /**
+     * Translations for CMS frontend Module.
+     *
+     * @param string $message
+     * @param array $params
+     * @return string
+     */
     public static function t($message, array $params = [])
     {
         return parent::baseT('cms', $message, $params);
