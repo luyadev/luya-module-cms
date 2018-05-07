@@ -15,7 +15,9 @@ use luya\helpers\Url;
  * CMS Admin Module.
  *
  * @property string $previewUrl Configuration option for the auto preview and preview button link.
- *
+ * @property array $blocks Optional blocks or folders to scan for the {{luya\cms\admin\importers\BlockImporter}}.
+ * @property array $blockVariations An array with variations to pass for a given block.
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -74,6 +76,82 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         ],
     ];
     
+    /**
+     * @var array Defined blocks to hidde from the cmsadmin. Those blocks are not listed in the Page Content blocks overview. You can override this
+     * variable inside your configuration of the cmsadmin.
+     *
+     * ```php
+     *  'modules' => [
+     *      'cmsadmin' => [
+     *          'class' => 'cmsadmin\Module',
+     *          'hiddenBlocks' => [
+     *              'cmsadmin\blocks\TextBlock',
+     *          ],
+     *      ],
+     *  ],
+     * ```
+     *
+     * You can define blocks by using the string notation:
+     *
+     * ```php
+     * 'hiddenBlocks' => [
+     *     'cmsadmin\blocks\TextBlock',
+     *     'cmsadmin\blocks\AudioBlock',
+     * ],
+     * ```
+     *
+     * or you can use the object notation with static className method this is more convient as an IDE will auto complet the Input:
+     *
+     * ```php
+     * 'hiddenBlocks' => [
+     *     \cmsadmin\blocks\TextBlock::className(),
+     *     \cmsadmin\blocks\AudioBlock::className(),
+     * ],
+     * ```
+     */
+    public $hiddenBlocks = [];
+    
+    private $_blocks = [];
+    
+    /**
+     * Setter method for additional cms blocks.
+     * 
+     * @param string|array $definition This can be either a string (for directories or a single file) or an array with files or diretories.
+     * 
+     * Example usage with differnt types of informations.
+     * 
+     * ```php
+     * 'cmsadmin' => [
+     *     'class' => 'luya\cms\admin\Module',
+     *     'blocks' => [
+     *         '@app/extras/blocks', // a folder which contains blocks.
+     *         '@app/somewhere/MyBlock.php', // a path to a specific block.
+     *     ]
+     * ]
+     * ```
+     * 
+     * The blocks will be add/update/deleted within the import process trough {{luya\cms\admin\importers\BlockImporter}}.
+     * 
+     * @since 1.0.4
+     */
+    public function setBlocks($definition)
+    {
+        $this->_blocks = (array) $definition;
+    }
+    
+    /**
+     * Get an array with custom block definitions.
+     * 
+     * The array of additional blocks or folders with blocks will be passed trough to the importer class {{luya\cms\admin\importers\BlockImporter}}.
+     * 
+     * @return array
+     * @since 1.0.4
+     */
+    public function getBlocks()
+    {
+        return $this->_blocks;
+    }
+    
     private $_previewUrl;
     
     /**
@@ -112,107 +190,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         return $this->_previewUrl === null ?  Url::home(true) . 'cms-page-preview' : $this->_previewUrl;
     }
     
-    /**
-     * Returns all Asset files to registered in the administration interfaces.
-     *
-     * As the adminstration UI is written in angular, the assets must be pre assigned to the adminisration there for the `getAdminAssets()` method exists.
-     *
-     * ```php
-     * public function getAdminAssets()
-     * {
-     *     return [
-     *          'luya\admin\assets\Main',
-     *          'luya\admin\assets\Flow',
-     *     ];
-     * }
-     * ```
-     *
-     * @return array An array with with assets files where the array has no key and the value is the path to the asset class.
-     */
-    public function getAdminAssets()
-    {
-        return  [
-            'luya\cms\admin\assets\Main',
-        ];
-    }
-    
-    /**
-     * Returns all message identifier for the current module which should be assigned to the javascript admin interface.
-     *
-     * As the administration UI is written in angular, translations must also be available in different javascript section of the page.
-     *
-     * The response array of this method returns all messages keys which will be assigned:
-     *
-     * Example:
-     *
-     * ```php
-     * public function getJsTranslationMessages()
-     * {
-     *     return ['js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error'],
-     * }
-     * ```
-     *
-     * Assuming the aboved keys are also part of the translation messages files.
-     *
-     * @return array An array with values of the message keys based on the Yii translation system.
-     */
-    public function getJsTranslationMessages()
-    {
-        return [
-            'js_added_translation_ok', 'js_added_translation_error', 'js_page_add_exists', 'js_page_property_refresh', 'js_page_confirm_delete', 'js_page_delete_error_cause_redirects', 'js_state_online', 'js_state_offline',
-            'js_state_hidden', 'js_state_visible', 'js_state_is_home', 'js_state_is_not_home', 'js_page_item_update_ok', 'js_page_block_update_ok', 'js_page_block_remove_ok', 'js_page_block_visbility_change', 'js_page_block_delete_confirm',
-            'js_version_update_success', 'js_version_error_empty_fields', 'js_version_create_success', 'js_version_delete_confirm', 'js_version_delete_confirm_success',
-            'view_index_page_success', 'js_config_update_success', 'js_page_update_layout_save_success', 'js_page_create_copy_success', 'view_update_block_tooltip_delete',
-            'cmsadmin_settings_trashpage_title', 'cmsadmin_version_remove',
-        ];
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public static function onLoad()
-    {
-        self::registerTranslation('cmsadmin*', '@cmsadmin/messages', [
-            'cmsadmin' => 'cmsadmin.php',
-        ]);
-    }
-    
-    /**
-     * @var array Defined blocks to hidde from the cmsadmin. Those blocks are not listed in the Page Content blocks overview. You can override this
-     * variable inside your configuration of the cmsadmin.
-     *
-     * ```php
-     *  'modules' => [
-     *      'cmsadmin' => [
-     *          'class' => 'cmsadmin\Module',
-     *          'hiddenBlocks' => [
-     *              'cmsadmin\blocks\TextBlock',
-     *          ],
-     *      ],
-     *  ],
-     * ```
-     *
-     * You can define blocks by using the string notation:
-     *
-     * ```php
-     * 'hiddenBlocks' => [
-     *     'cmsadmin\blocks\TextBlock',
-     *     'cmsadmin\blocks\AudioBlock',
-     * ],
-     * ```
-     *
-     * or you can use the object notation with static className method this is more convient as an IDE will auto complet the Input:
-     *
-     * ```php
-     * 'hiddenBlocks' => [
-     *     \cmsadmin\blocks\TextBlock::className(),
-     *     \cmsadmin\blocks\AudioBlock::className(),
-     * ],
-     * ```
-     */
-    public $hiddenBlocks = [];
-    
-    private $_blockVariation;
+    private $_blockVariations;
     
     /**
      * Set block variations.
@@ -241,7 +219,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
                 $_variations[$key] = $content;
             }
         }
-        $this->_blockVariation = $_variations;
+        $this->_blockVariations = $_variations;
     }
     
     /**
@@ -251,7 +229,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public function getBlockVariations()
     {
-        return $this->_blockVariation;
+        return $this->_blockVariations;
     }
     
     /**
@@ -304,14 +282,48 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     public function import(ImportControllerInterface $importer)
     {
         return [
-            BlockImporter::className(),
-            CmslayoutImporter::className(),
-            PropertyConsistencyImporter::className(),
+            BlockImporter::class,
+            CmslayoutImporter::class,
+            PropertyConsistencyImporter::class,
         ];
     }
 
     /**
-     * Translations for CMS Module.
+     * @inheritdoc
+     */
+    public function getAdminAssets()
+    {
+        return  [
+            'luya\cms\admin\assets\Main',
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getJsTranslationMessages()
+    {
+        return [
+            'js_added_translation_ok', 'js_added_translation_error', 'js_page_add_exists', 'js_page_property_refresh', 'js_page_confirm_delete', 'js_page_delete_error_cause_redirects', 'js_state_online', 'js_state_offline',
+            'js_state_hidden', 'js_state_visible', 'js_state_is_home', 'js_state_is_not_home', 'js_page_item_update_ok', 'js_page_block_update_ok', 'js_page_block_remove_ok', 'js_page_block_visbility_change', 'js_page_block_delete_confirm',
+            'js_version_update_success', 'js_version_error_empty_fields', 'js_version_create_success', 'js_version_delete_confirm', 'js_version_delete_confirm_success',
+            'view_index_page_success', 'js_config_update_success', 'js_page_update_layout_save_success', 'js_page_create_copy_success', 'view_update_block_tooltip_delete',
+            'cmsadmin_settings_trashpage_title', 'cmsadmin_version_remove',
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public static function onLoad()
+    {
+        self::registerTranslation('cmsadmin*', '@cmsadmin/messages', [
+            'cmsadmin' => 'cmsadmin.php',
+        ]);
+    }
+    
+    /**
+     * Translations for CMS admin Module.
      *
      * @param string $message
      * @param array $params

@@ -1,8 +1,7 @@
 <html>
 <head>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <style>
         .center {
             text-align: center;
@@ -26,14 +25,11 @@
                 <?php if ($exception !== null): ?>
                     <h1><?php echo $exception->getMessage(); ?>
                         <small><br/><br/>
-
-                            <p class="red">Error <?php echo $exception->statusCode; ?></p></small>
+                        <p class="red">Error <?php echo $exception->statusCode; ?></p></small>
                     </h1>
                 <?php endif ?>
                 <br/>
-
                 <p>The above error occurred while the Web server was processing your request.</p>
-
                 <p>Please contact us if you think this is a server error. Thank you.</p>
             </div>
             <br/>
