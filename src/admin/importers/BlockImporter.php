@@ -45,7 +45,10 @@ class BlockImporter extends Importer
             $exists = array_merge($exists, $this->handleBlockDefinitions($config->blocks));
         }
         
-        $exists = array_merge($exists, $this->handleBlockDefinitions($this->module->blocks));
+        // provide backwards compatibility for core 1.0.7 and below
+        if ($this->hasProperty('module')) {
+            $exists = array_merge($exists, $this->handleBlockDefinitions($this->module->blocks));
+        }
         
         foreach ($allblocks as $block) {
             if (!in_array($block->id, $exists)) {
@@ -55,7 +58,6 @@ class BlockImporter extends Importer
         }
         
         // remove unused block groups
-        
         foreach (BlockGroup::find()->andWhere(['not in', 'id', $this->blockGroupIds])->all() as $oldBlockGroup) {
             if ($oldBlockGroup->delete()) {
                 $this->addLog('Old blockgroup has been deleted: ' . $oldBlockGroup->name);
