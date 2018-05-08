@@ -16,6 +16,7 @@ use luya\admin\ngrest\plugins\ToggleStatus;
  * @property integer $group_id
  * @property string $class
  * @property integer $usageCount returns the amount of how much this block is used inside a page.
+ * @property integer $is_disabled
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
