@@ -22,7 +22,8 @@ class BlockTest extends ModelTestCase
         ]);
         
         $model = $fixture->getNewModel();
-        $model->attributes = ['group_id' => 1, 'class' => 'FooBar'];
+        $model->attributes = ['group_id' => 1, 'class' => 'FooBar', 'is_disabled' => 0];
         $this->assertTrue($model->save());
+        $this->assertSame(0, $model->fileExists);
     }
 }
