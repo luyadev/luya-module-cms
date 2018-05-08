@@ -34,7 +34,6 @@ class BlockImporter extends Importer
             throw new Exception("You have to run the generic block updater. ./vendor/bin/luya cms/updater/generic");
         }
         
-        $allblocks = Block::find()->all();
         $exists = [];
         
         foreach ($this->getImporter()->getDirectoryFiles('blocks') as $file) {
@@ -50,10 +49,9 @@ class BlockImporter extends Importer
             $exists = array_merge($exists, $this->handleBlockDefinitions($this->module->blocks));
         }
         
-        foreach ($allblocks as $block) {
-            if (!in_array($block->id, $exists)) {
-                $this->addLog('- Deleted block ID '.$block->id.' from database.');
-                $block->delete();
+        foreach (Block::find()->all() as $block) {
+            if (!class_exists($block->class)) {
+                $this->addLog("[!] The block {$block->class} used {$block->usageCount} times, does not exists anymore. You should either use migrate or cleanup command.");
             }
         }
         

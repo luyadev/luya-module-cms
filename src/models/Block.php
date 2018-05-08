@@ -7,6 +7,7 @@ use luya\cms\base\BlockInterface;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
 use luya\admin\ngrest\plugins\SelectModel;
+use luya\admin\ngrest\plugins\ToggleStatus;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
@@ -42,14 +43,6 @@ class Block extends NgRestModel
     /**
      * @inheritdoc
      */
-    public function extraFields()
-    {
-        return ['usageCount', 'translationName'];
-    }
-    
-    /**
-     * @inheritdoc
-     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -73,6 +66,7 @@ class Block extends NgRestModel
         return [
             'usageCount' => 'number',
             'translationName' => 'text',
+            'fileExists' => ['class' => ToggleStatus::class, 'interactive' => false],
         ];
     }
     
@@ -82,10 +76,12 @@ class Block extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'group_id' => 'Group',
+            'translationName' => 'Name',
             'class' => 'Object Class',
-            'usageCount' => 'Used in Content',
-            'is_disabled' => 'Is Disabled',
+            'usageCount' => 'Used in content',
+            'group_id' => 'Group',
+            'is_disabled' => 'Is disabled',
+            'fileExists' => 'File exists',
         ];
     }
 
@@ -95,7 +91,10 @@ class Block extends NgRestModel
     public function ngRestActiveWindows()
     {
         return [
-            ['class' => DetailViewActiveWindow::class],
+            [
+                'class' => DetailViewActiveWindow::class,
+                'attributes' => array_keys($this->attributeLabels())
+            ],
         ];
     }
     
@@ -105,10 +104,15 @@ class Block extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['translationName', 'group_id', 'usageCount', 'is_disabled']],
+            ['list', ['translationName', 'group_id', 'usageCount', 'fileExists', 'is_disabled']],
         ];
     }
 
+    public function getFileExists()
+    {
+        return class_exists($this->class) ? 1 : 0;
+    }
+    
     /**
      * Returns the amount where the block is used inside the content.
      *
@@ -136,7 +140,7 @@ class Block extends NgRestModel
      */
     public function getTranslationName()
     {
-        return $this->getClassObject()->name();
+        return $this->getClassObject() ? $this->getClassObject()->name() : $this->class;
     }
     
     /**
@@ -184,26 +188,13 @@ class Block extends NgRestModel
     }
 
     /**
-     * Returns the object class based on the Active Record entry.
-     *
-     * @return \luya\cms\base\BlockInterface
-     * @deprecated use get ClassObject Instead
-     */
-    public function getObject()
-    {
-        trigger_error('This method is deprecated use getClassObject() instead.', E_USER_DEPRECATED);
-        
-        return $this->getClassObject();
-    }
-
-    /**
      * Returns the origin block object based on the current active record entry.
      *
      * @return \luya\cms\base\BlockInterface
      */
     public function getClassObject()
     {
-        return Yii::createObject(['class' => $this->class]);
+        return $this->getFileExists() ? Yii::createObject(['class' => $this->class]) : false;
     }
     
     /**
