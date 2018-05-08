@@ -77,7 +77,7 @@ class Block extends NgRestModel
     {
         return [
             'translationName' => 'Name',
-            'class' => 'Object Class',
+            'class' => 'Class',
             'usageCount' => 'Used in content',
             'group_id' => 'Group',
             'is_disabled' => 'Is disabled',
@@ -104,7 +104,7 @@ class Block extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['translationName', 'group_id', 'usageCount', 'fileExists', 'is_disabled']],
+            ['list', ['translationName', 'class', 'group_id', 'usageCount', 'fileExists', 'is_disabled']],
         ];
     }
 
