@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
++ [#70](https://github.com/luyadev/luya-module-cms/issues/70) New migrate and cleanup commands blocks as outdated blocks wont be deleted by the importer anymore.
 + [#68](https://github.com/luyadev/luya-module-cms/issues/68) Provide blocks by configure new `$blocks` property of the cms admin module. The path can either be a folder or a file. Multiple folders or files can be added by providing an array.
 + [#67](https://github.com/luyadev/luya-module-cms/issues/67) New `cms/block/find` command in order to search for blocks and display how many times its used in the content.
 
