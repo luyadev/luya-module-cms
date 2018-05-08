@@ -3,64 +3,64 @@ use luya\cms\admin\Module;
 
 ?>
 <script>
-    zaa.bootstrap.register('PermissionController', function($scope, $http, ServiceMenuData) {
+zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuData', function($scope, $http, ServiceMenuData) {
 
-    	$scope.$on('service:MenuData', function(event, data) {
-    		$scope.loadPermissions();
-    	});
+	$scope.$on('service:MenuData', function(event, data) {
+		$scope.loadPermissions();
+	});
 
-        $scope.data = null;
+    $scope.data = null;
 
-        $scope.groupInjection = null;
+    $scope.groupInjection = null;
 
-    	$scope.loadPermissions = function() {
-    		$http.get('admin/api-cms-menu/data-permission-tree').then(function(response) {
-                $scope.data = response.data;
-                $scope.groupInjection = response.data.groups;
-    		});
-    	};
+	$scope.loadPermissions = function() {
+		$http.get('admin/api-cms-menu/data-permission-tree').then(function(response) {
+            $scope.data = response.data;
+            $scope.groupInjection = response.data.groups;
+		});
+	};
 
-    	$scope.reloadMenuData = function() {
-    		ServiceMenuData.load(true);
-    	};
+	$scope.reloadMenuData = function() {
+		ServiceMenuData.load(true);
+	};
 
-        $scope.deletePermission = function(navId, groupId) {
-        	// delete request
-            $http.post('admin/api-cms-menu/data-permission-delete', {navId: navId, groupId: groupId}).then(function() {
-                $scope.reloadMenuData();
-            });
-        };
-
-        $scope.insertPermission = function(navId, groupId) {
-        	$http.post('admin/api-cms-menu/data-permission-insert', {navId: navId, groupId: groupId}).then(function() {
-        	    $scope.reloadMenuData();
-        	});
-        };
-
-        $scope.deleteInheritance = function(navId, groupId) {
-        	$http.post('admin/api-cms-menu/data-permission-delete-inheritance', {navId: navId, groupId: groupId}).then(function() {
-        		$scope.reloadMenuData();
-            });
-        };
-
-        $scope.insertInheritance = function(navId, groupId) {
-        	$http.post('admin/api-cms-menu/data-permission-insert-inheritance', {navId: navId, groupId: groupId}).then(function() {
-        		$scope.reloadMenuData();
-            });
-        };
-
-        $scope.grantFullPermission = function(groupId) {
-            $http.post('admin/api-cms-menu/data-permission-grant-group', {groupId: groupId}).then(function() {
-                $scope.reloadMenuData();
-            });
-        }
-
-        $scope.init = function() {
+    $scope.deletePermission = function(navId, groupId) {
+    	// delete request
+        $http.post('admin/api-cms-menu/data-permission-delete', {navId: navId, groupId: groupId}).then(function() {
             $scope.reloadMenuData();
-        };
+        });
+    };
 
-        $scope.init();
-    });
+    $scope.insertPermission = function(navId, groupId) {
+    	$http.post('admin/api-cms-menu/data-permission-insert', {navId: navId, groupId: groupId}).then(function() {
+    	    $scope.reloadMenuData();
+    	});
+    };
+
+    $scope.deleteInheritance = function(navId, groupId) {
+    	$http.post('admin/api-cms-menu/data-permission-delete-inheritance', {navId: navId, groupId: groupId}).then(function() {
+    		$scope.reloadMenuData();
+        });
+    };
+
+    $scope.insertInheritance = function(navId, groupId) {
+    	$http.post('admin/api-cms-menu/data-permission-insert-inheritance', {navId: navId, groupId: groupId}).then(function() {
+    		$scope.reloadMenuData();
+        });
+    };
+
+    $scope.grantFullPermission = function(groupId) {
+        $http.post('admin/api-cms-menu/data-permission-grant-group', {groupId: groupId}).then(function() {
+            $scope.reloadMenuData();
+        });
+    }
+
+    $scope.init = function() {
+        $scope.reloadMenuData();
+    };
+
+    $scope.init();
+}]);
 </script>
 <h1><?= Module::t('menu_group_item_env_permission'); ?></h1>
 <div ng-controller="PermissionController" class="card">
