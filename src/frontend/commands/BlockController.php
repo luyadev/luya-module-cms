@@ -469,15 +469,15 @@ class BlockController extends \luya\console\Command
      * ./luya cms/block/find html,module
      * ```
      * 
-     * @param string $old Optional query to search inside the class. In order to performe multiple criterias use comma separated list of key words.
+     * @param string $search Optional query to search inside the class. In order to performe multiple criterias use comma separated list of key words.
      * @since 1.0.4
      */
-    public function actionFind($old = null)
+    public function actionFind($search = null)
     {
         $rows = [];
         $query = Block::find();
         
-        foreach (StringHelper::explode($old) as $q) {
+        foreach (StringHelper::explode($search) as $q) {
             $query->orFilterWhere(['like', 'class', $q]);
         }
         
@@ -486,8 +486,8 @@ class BlockController extends \luya\console\Command
             $rows[] = [$block->id, $block->class, $block->usageCount];
         }
         
-        if ($old) {
-            $this->outputInfo("Filtering for: {$old}");
+        if ($search) {
+            $this->outputInfo("Filtering for: {$search}");
         }
         
         $table = new Table();
