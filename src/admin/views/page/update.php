@@ -43,7 +43,7 @@ use luya\cms\admin\Module;
                 </div>
                 <div class="toolbar-item" ng-class="{'ml-auto': AdminLangService.data.length <= 1}">
                     <div class="dropdown" ng-class="{'show': toggleSettings}"  ng-click="toggleSettings=!toggleSettings">
-                        <button type="button" class="btn btn-outline-config btn-icon" ng-class="{'btn--active': toggleSettings}"></button>
+                        <button type="button" class="btn btn-outline-config btn-icon" ng-class="{'btn-active': toggleSettings}"></button>
                         <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(2)" ng-if="propertiesData.length > 0">
                                 <i class="material-icons">settings</i> <span><?= Module::t('view_update_properties_title'); ?></span>
