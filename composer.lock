@@ -617,16 +617,16 @@
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "1.1.1.3",
+            "version": "1.1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "81a51a3119d3ab0ab4bdf063b48092a14f0c8942"
+                "reference": "d742fad60a22a14fcae6816138ccbae80f720ad1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/81a51a3119d3ab0ab4bdf063b48092a14f0c8942",
-                "reference": "81a51a3119d3ab0ab4bdf063b48092a14f0c8942",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/d742fad60a22a14fcae6816138ccbae80f720ad1",
+                "reference": "d742fad60a22a14fcae6816138ccbae80f720ad1",
                 "shasum": ""
             },
             "require": {
@@ -686,7 +686,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-04-18T07:59:08+00:00"
+            "time": "2018-05-09T08:28:45+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -694,12 +694,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "8eb3f56e11def7259fcfd9f8b560c59de1359815"
+                "reference": "5dc09766965cb01e92b6bcb54720a969c75a6af7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/8eb3f56e11def7259fcfd9f8b560c59de1359815",
-                "reference": "8eb3f56e11def7259fcfd9f8b560c59de1359815",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/5dc09766965cb01e92b6bcb54720a969c75a6af7",
+                "reference": "5dc09766965cb01e92b6bcb54720a969c75a6af7",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +739,7 @@
                 "module",
                 "php"
             ],
-            "time": "2018-05-09T07:57:59+00:00"
+            "time": "2018-05-09T11:49:54+00:00"
         },
         {
             "name": "myclabs/deep-copy",
