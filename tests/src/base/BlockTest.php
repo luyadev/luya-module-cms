@@ -2,9 +2,7 @@
 
 namespace tests\web\cmsadmin\base;
 
-use luya\cms\base\Block;
 use cmstests\data\blocks\TestBlock;
-use cmstests\data\blocks\FailureBlock;
 use cmstests\CmsFrontendTestCase;
 use luya\cms\base\PhpBlock;
 
@@ -89,7 +87,9 @@ class BlockTest extends CmsFrontendTestCase
         $c = $gs->extraVars();
         $d = $gs->admin();
 
-        $gs->setPlaceholderValues(['blabl' => 'Gandalf ist mein Vorbild']);
+        $gs->setPlaceholderValues(['foo' => 'bar']);
+        
+        $this->assertSame(['foo' => 'bar'], $gs->getPlaceholderValues());
     }
 
     public function testAjaxCreation()
