@@ -8,6 +8,23 @@ class CmsConsoleTestCase extends ConsoleApplicationTestCase
 {
     public function getConfigArray()
     {
-        return include(__DIR__ .'/data/configs/cms.php');
+        return [
+            'id' => 'basetestcase',
+            'basePath' => dirname(__DIR__),
+            'components' => [
+                'db' => [
+                    'class' => 'yii\db\Connection',
+                    'dsn' => 'sqlite::memory:',
+                ]
+            ],
+            'modules' => [
+                'admin' => 'luya\admin\Module',
+                'cms' => [
+                    'class' => '\luya\cms\frontend\Module'
+                ],
+                'cmsadmin' => 'luya\cms\admin\Module',
+                'CmsUnitModule' => '\cmstests\data\modules\CmsUnitModule',
+            ],
+        ];
     }
 }
