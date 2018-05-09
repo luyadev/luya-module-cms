@@ -694,12 +694,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "5dc09766965cb01e92b6bcb54720a969c75a6af7"
+                "reference": "7bee8faea042367b6fa4f3306f698823e76305bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/5dc09766965cb01e92b6bcb54720a969c75a6af7",
-                "reference": "5dc09766965cb01e92b6bcb54720a969c75a6af7",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/7bee8faea042367b6fa4f3306f698823e76305bb",
+                "reference": "7bee8faea042367b6fa4f3306f698823e76305bb",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +739,7 @@
                 "module",
                 "php"
             ],
-            "time": "2018-05-09T11:49:54+00:00"
+            "time": "2018-05-09T12:15:32+00:00"
         },
         {
             "name": "myclabs/deep-copy",

@@ -4,22 +4,29 @@ namespace tests\web\cmsadmin\models;
 
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use cmstests\ModelTestCase;
+use cmstests\CmsNgRestTestCase;
 
-class BlockTest extends ModelTestCase
+class BlockTest extends CmsNgRestTestCase
 {
+    public $modelFixtureData = [
+        'model1' => [
+            'id' => 1,
+            'group_id' => 1,
+            'class' => 'path\to\Block',
+            'is_disabled' => 0,
+        ]
+    ];
+    
+    public $modelClass = 'luya\cms\models\Block';
+    public $apiClass = 'luya\cms\admin\apis\BlockController';
+    public $controllerClass = 'luya\cms\admin\controllers\BlockController';
+    
+    /**
+     * @runInSeparateProcess
+     */
     public function testFindOne()
     {
-        $fixture = new ActiveRecordFixture([
-            'modelClass' => 'luya\cms\models\Block',
-            'fixtureData' => [
-                'model1' => [
-                    'id' => 1,
-                    'group_id' => 1,
-                    'class' => 'path\to\Block',
-                    'is_disabled' => 0,
-                ]
-            ]
-        ]);
+        $fixture = $this->modelFixture;
         
         $relationFixture = new ActiveRecordFixture([
             'modelClass' => 'luya\cms\models\NavItemPageBlockItem',
@@ -37,7 +44,7 @@ class BlockTest extends ModelTestCase
                     'update_user_id' => 1,
                     'timestamp_create' => time(),
                     'timestamp_update' => time(),
-                ]    
+                ]
             ]
         ]);
         
@@ -63,5 +70,12 @@ class BlockTest extends ModelTestCase
         $this->assertTrue($model->save());
         $this->assertSame(0, $model->fileExists);
         
+    }
+    
+    public function testControllerMethods()
+    {
+        $this->assertNull($this->api->actionToFav());
+        $this->assertNull($this->api->actionRemoveFav());
+        $this->assertNull($this->api->actionToggleGroup());
     }
 }
