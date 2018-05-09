@@ -20,9 +20,7 @@ class BlockTest extends CmsNgRestTestCase
     public $apiClass = 'luya\cms\admin\apis\BlockController';
     public $controllerClass = 'luya\cms\admin\controllers\BlockController';
     
-    /**
-     * @runInSeparateProcess
-     */
+    /*
     public function testFindOne()
     {
         $fixture = $this->modelFixture;
@@ -70,6 +68,7 @@ class BlockTest extends CmsNgRestTestCase
         //$this->assertSame(0, $model->fileExists);
         
     }
+    */
     
     public function testControllerMethods()
     {
