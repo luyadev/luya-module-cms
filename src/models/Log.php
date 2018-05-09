@@ -108,7 +108,7 @@ class Log extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_insertion', 'is_deletion', 'is_update', 'message', 'data_json', 'row_id', 'table_name'], 'safe'],
+            [['is_insertion', 'is_deletion', 'is_update', 'message', 'data_json', 'row_id', 'table_name', 'timestamp', 'user_id'], 'safe'],
         ];
     }
     
