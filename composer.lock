@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5de801d1af0c1d3cb36db1909433c072",
+    "content-hash": "fa77aee53f4c84ba3bdeb0e597a12bc9",
     "packages": [],
     "packages-dev": [
         {
@@ -145,6 +145,61 @@
                 "markdown-extra"
             ],
             "time": "2017-07-16T21:13:23+00:00"
+        },
+        {
+            "name": "cpliakas/git-wrapper",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cpliakas/git-wrapper.git",
+                "reference": "1a2f1131ec9ebe04a0b729b141396fa55f992d44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cpliakas/git-wrapper/zipball/1a2f1131ec9ebe04a0b729b141396fa55f992d44",
+                "reference": "1a2f1131ec9ebe04a0b729b141396fa55f992d44",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/event-dispatcher": "~2.3|~3.0",
+                "symfony/process": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "pdepend/pdepend": "~1.0",
+                "phploc/phploc": "~2.0",
+                "phpmd/phpmd": "~1.0",
+                "phpunit/phpunit": "~3.0",
+                "psr/log": "~1.0",
+                "scrutinizer/ocular": "~1.0",
+                "sebastian/phpcpd": "~2.0",
+                "symfony/filesystem": "~2.0"
+            },
+            "suggest": {
+                "monolog/monolog": "Enables logging of executed git commands"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "GitWrapper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Pliakas",
+                    "email": "opensource@chrispliakas.com"
+                }
+            ],
+            "description": "A PHP wrapper around the Git command line utility.",
+            "homepage": "https://github.com/cpliakas/git-wrapper",
+            "keywords": [
+                "git"
+            ],
+            "time": "2016-04-19T16:12:33+00:00"
         },
         {
             "name": "curl/curl",
@@ -509,6 +564,80 @@
             "time": "2017-05-16T10:31:22+00:00"
         },
         {
+            "name": "luyadev/luya",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/luyadev/luya.git",
+                "reference": "b6bb86fd0e9c66a35cfeb92500559d1bf4a46523"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/b6bb86fd0e9c66a35cfeb92500559d1bf4a46523",
+                "reference": "b6bb86fd0e9c66a35cfeb92500559d1bf4a46523",
+                "shasum": ""
+            },
+            "require": {
+                "cpliakas/git-wrapper": "~1.0",
+                "curl/curl": "~1.0",
+                "luyadev/luya-composer": "~1.0.0",
+                "nadar/php-composer-reader": "^1.0",
+                "phpmailer/phpmailer": "^6.0",
+                "yiisoft/yii2": "~2.0.15"
+            },
+            "require-dev": {
+                "luyadev/luya-testsuite": "~1.0.0",
+                "nadar/github-markdown-fixer": "^1.0",
+                "php-coveralls/php-coveralls": "^1.0"
+            },
+            "bin": [
+                "core/bin/luya",
+                "dev/luyadev"
+            ],
+            "type": "project",
+            "extra": {
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                },
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "luya\\": "core/",
+                    "luya\\dev\\": "dev",
+                    "luyatests\\": "tests/",
+                    "Aspsms\\": "repos/aspsms/src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Basil Suter",
+                    "email": "git@nadar.io",
+                    "homepage": "https://github.com/nadar"
+                }
+            ],
+            "description": "LUYA is a fast and flexible PHP framework and content management system built with the goal to please developers, clients and users alike. Built upon Yii 2.",
+            "homepage": "https://luya.io",
+            "keywords": [
+                "angular",
+                "cms",
+                "content",
+                "framework",
+                "luya",
+                "modules",
+                "php",
+                "website",
+                "yii2"
+            ],
+            "time": "2018-05-07T20:08:46+00:00"
+        },
+        {
             "name": "luyadev/luya-composer",
             "version": "1.0.3",
             "source": {
@@ -690,16 +819,16 @@
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "dev-master",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "7bee8faea042367b6fa4f3306f698823e76305bb"
+                "reference": "cf085193dfb4e2fc24f97a8edd57b1240bf02e83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/7bee8faea042367b6fa4f3306f698823e76305bb",
-                "reference": "7bee8faea042367b6fa4f3306f698823e76305bb",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/cf085193dfb4e2fc24f97a8edd57b1240bf02e83",
+                "reference": "cf085193dfb4e2fc24f97a8edd57b1240bf02e83",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +868,7 @@
                 "module",
                 "php"
             ],
-            "time": "2018-05-09T12:15:32+00:00"
+            "time": "2018-05-09T12:42:53+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -785,6 +914,42 @@
                 "object graph"
             ],
             "time": "2017-10-19T19:58:43+00:00"
+        },
+        {
+            "name": "nadar/php-composer-reader",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nadar/php-composer-reader.git",
+                "reference": "5561e0a541660dd7419ca15de95c57c3e185c3cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nadar/php-composer-reader/zipball/5561e0a541660dd7419ca15de95c57c3e185c3cd",
+                "reference": "5561e0a541660dd7419ca15de95c57c3e185c3cd",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nadar\\PhpComposerReader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Basil Suter",
+                    "email": "git@nadar.io"
+                }
+            ],
+            "description": "Read and manipulate composer.json",
+            "time": "2018-01-03T15:53:35+00:00"
         },
         {
             "name": "php-coveralls/php-coveralls",
@@ -2481,6 +2646,55 @@
             "time": "2018-04-26T10:06:28+00:00"
         },
         {
+            "name": "symfony/process",
+            "version": "v3.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "07432804942b9f6dd7b7377faf9920af5f95d70a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/07432804942b9f6dd7b7377faf9920af5f95d70a",
+                "reference": "07432804942b9f6dd7b7377faf9920af5f95d70a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-07-13T13:05:09+00:00"
+        },
+        {
             "name": "symfony/stopwatch",
             "version": "v3.3.6",
             "source": {
@@ -2996,7 +3210,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "luyadev/luya-testsuite": 20,
+        "luyadev/luya": 20,
         "twbs/bootstrap": 10
     },
     "prefer-stable": false,

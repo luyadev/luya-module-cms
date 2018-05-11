@@ -16,7 +16,8 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require-dev" : {
-	    "luyadev/luya-testsuite" : "dev-master",
+	    "luyadev/luya-testsuite" : "~1.0.0",
+	    "luyadev/luya" : "dev-master",
 	    "php-coveralls/php-coveralls": "^1.0",
         "twbs/bootstrap": "v4.0.0-beta"
 	},

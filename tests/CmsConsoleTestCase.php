@@ -11,6 +11,9 @@ class CmsConsoleTestCase extends ConsoleApplicationTestCase
         return [
             'id' => 'basetestcase',
             'basePath' => dirname(__DIR__),
+            'aliases' => [
+                '@cmstests' => dirname(__DIR__),  
+            ],
             'components' => [
                 'db' => [
                     'class' => 'yii\db\Connection',
@@ -22,7 +25,10 @@ class CmsConsoleTestCase extends ConsoleApplicationTestCase
                 'cms' => [
                     'class' => '\luya\cms\frontend\Module'
                 ],
-                'cmsadmin' => 'luya\cms\admin\Module',
+                'cmsadmin' => [
+                    'class' => 'luya\cms\admin\Module',
+                    'blocks' => ['@cmstests/tests/data/blocks/import']
+                ],
                 'CmsUnitModule' => '\cmstests\data\modules\CmsUnitModule',
             ],
         ];
