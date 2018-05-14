@@ -94,7 +94,15 @@ class Block extends NgRestModel
         return [
             [
                 'class' => DetailViewActiveWindow::class,
-                'attributes' => array_keys($this->attributeLabels())
+                'attributes' => [
+                    'id',
+                    'translationName',
+                    'class',
+                    'blockGroup.groupLabel:text:Group',
+                    'usageCount',
+                    'is_disabled:boolean',
+                    'fileExists:boolean',
+                ]
             ],
         ];
     }
@@ -109,6 +117,12 @@ class Block extends NgRestModel
         ];
     }
 
+    /**
+     * Wehther the class file exists or not.
+     * 
+     * @return number
+     * @since 1.0.4
+     */
     public function getFileExists()
     {
         return class_exists($this->class) ? 1 : 0;
@@ -188,6 +202,17 @@ class Block extends NgRestModel
         parent::afterDelete();
     }
 
+    /**
+     * BlockGroup ActiveQuery.
+     * 
+     * @return \yii\db\ActiveQuery
+     * @since 1.0.4
+     */
+    public function getBlockGroup()
+    {
+        return $this->hasOne(BlockGroup::class, ['id' => 'group_id']);
+    }
+    
     /**
      * Returns the origin block object based on the current active record entry.
      *
