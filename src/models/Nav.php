@@ -118,7 +118,9 @@ class Nav extends ActiveRecord
     }
     
     /**
-     *
+     * CmsProperty Active Query.
+     * 
+     * @return \luya\cms\models\Property
      */
     public function getProperties()
     {
@@ -128,11 +130,11 @@ class Nav extends ActiveRecord
     /**
      *
      * @param string $varName
-     * @return boolean
+     * @return boolean|\luya\admin\base\Property
      */
     public function getProperty($varName)
     {
-        foreach ($this->properties as $prop) {
+        foreach ($this->getProperties()->with(['adminProperty'])->all() as $prop) {
             if ($prop->adminProperty->var_name == $varName) {
                 return $prop->getObject();
             }

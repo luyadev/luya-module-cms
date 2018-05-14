@@ -5,7 +5,6 @@ namespace luya\cms\models;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\Query;
-use luya\Exception;
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;

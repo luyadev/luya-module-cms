@@ -3,11 +3,13 @@
 namespace luya\cms\models;
 
 use Yii;
-use luya\admin\models\Lang;
+
+use yii\db\ActiveRecordInterface;
+use yii\db\ActiveRecord;
 use yii\base\Exception;
 use luya\cms\admin\Module;
+use luya\admin\models\Lang;
 use luya\admin\base\GenericSearchInterface;
-use yii\db\ActiveRecordInterface;
 use luya\admin\models\User;
 use luya\helpers\Inflector;
 
@@ -36,7 +38,7 @@ use luya\helpers\Inflector;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
+class NavItem extends ActiveRecord implements GenericSearchInterface
 {
     const TYPE_PAGE = 1;
 
@@ -124,11 +126,19 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         ];
     }
 
+    /**
+     * Update User relation.
+     * 
+     * @return \luya\admin\models\User
+     */
     public function getUpdateUser()
     {
         return $this->hasOne(User::class, ['id' => 'update_user_id']);
     }
     
+    /**
+     * Slugify the current alias attribute.
+     */
     public function slugifyAlias()
     {
         $this->alias = Inflector::slug($this->alias, '-', true, false);
@@ -172,11 +182,11 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /**
      * Get the related nav entry for this nav_item.
      *
-     * @return ActiveQuery
+     * @return \luya\cms\models\Nav
      */
     public function getNav()
     {
-        return $this->hasOne(Nav::className(), ['id' => 'nav_id']);
+        return $this->hasOne(Nav::class, ['id' => 'nav_id']);
     }
 
     /**
@@ -211,6 +221,13 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $this->parent_nav_id = $this->nav->parent_nav_id;
     }
 
+    /**
+     * Alias verification.
+     * 
+     * @param string $alias
+     * @param integer $langId
+     * @return boolean
+     */
     public function verifyAlias($alias, $langId)
     {
         if (Yii::$app->hasModule($alias) && $this->parent_nav_id == 0) {
@@ -232,6 +249,11 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         }
     }
 
+    /**
+     * Alias Validator.
+     *
+     * @return boolean
+     */
     public function validateAlias()
     {
         $dirty = $this->getDirtyAttributes(['alias']);
@@ -244,6 +266,9 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         }
     }
 
+    /**
+     * Before create event.
+     */
     public function beforeCreate()
     {
         $this->timestamp_create = time();
@@ -253,6 +278,9 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $this->slugifyAlias();
     }
     
+    /**
+     * Before update event.
+     */
     public function eventBeforeUpdate()
     {
         $this->timestamp_update = time();
@@ -260,27 +288,17 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $this->slugifyAlias();
     }
 
+    /**
+     * Udpate the current model timestamp and user.
+     * 
+     * This is triggered from outside model as short cut.
+     */
     public function updateTimestamp()
     {
         $this->updateAttributes([
             'timestamp_update' => time(),
             'update_user_id' => Module::getAuthorUserId(),
         ]);
-    }
-
-    /**
-     * temp disabled the links for the specific module, cause we are not yet able to handle module integration blocks (find the module inside the content), so wo just
-     * display all nav items tempo.
-     *
-     *
-     * @param unknown $moduleName
-     * @return array|\yii\db\ActiveRecord[]
-     * @deprecated remove in 1.0.1
-     */
-    public static function fromModule($moduleName)
-    {
-        return self::find()->all();
-        //return self::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->all();
     }
 
     /* GenericSearchInterface */
@@ -322,12 +340,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
     
     /**
-     * Return the angular state provider config for custom.cmsedit to handle the selection
-     * and jump/linking in the search results container.
-     *
-     * {@inheritDoc}
-     *
-     * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
+     * @inheritdoc
      */
     public function genericSearchStateProvider()
     {
@@ -339,9 +352,14 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         ];
     }
     
+    /**
+     * Lang Active Query.
+     * 
+     * @return \luya\admin\models\Lang
+     */
     public function getLang()
     {
-        return $this->hasOne(Lang::className(), ['id' => 'lang_id']);
+        return $this->hasOne(Lang::class, ['id' => 'lang_id']);
     }
 
     /**
@@ -475,5 +493,19 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         }
 
         throw new Exception("Unable to find nav item type.");
+    }
+    
+    /**
+     * Display all pages where the given module name is integrated.
+     * 
+     * > Due to the module block which can integrate a module as well, we just return all the pages available.
+     * > This method should be removed and not used.
+     * 
+     * @param string $moduleName
+     * @return \luya\cms\models\NavItem
+     */
+    public static function fromModule($moduleName)
+    {
+        return self::find()->all();
     }
 }
