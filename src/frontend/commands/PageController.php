@@ -15,6 +15,8 @@ use luya\cms\models\Log;
 /**
  * Page command cms interaction.
  * 
+ * The page controller contains all interaction with cms nav, pages, blocks.
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.4
  */
@@ -71,7 +73,7 @@ class PageController extends Command
             $this->printRows(Log::deleteAll(['and', ['in', 'row_id', $navItemIds], ['table_name' => 'cms_nav_item']]), 'Page language log');
             $this->printRows(Log::deleteAll(['and', ['in', 'row_id', $navItemPageBlockIds], ['table_name' => 'cms_nav_item_page_block_item']]), 'Block log');
 
-            return $this->outputSuccess('Complet');
+            return $this->outputSuccess('Done');
         }
 
         return $this->outputError('Abort by user.');
