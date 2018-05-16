@@ -7,7 +7,6 @@ use yii\web\View;
 use yii\web\NotFoundHttpException;
 use Exception;
 use luya\cms\frontend\base\Controller;
-use luya\helpers\StringHelper;
 use luya\cms\models\Redirect;
 use yii\web\Response;
 
