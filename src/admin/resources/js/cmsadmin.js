@@ -103,13 +103,9 @@
 						});
 					}
 				});
-
-				$scope.goTo = function(navId) {
-					$state.go('custom.cmsedit', { navId : navId });
-				}
 			}],
 			template : function() {
-				return '<a ng-click="goTo(navId)" style="cursor:pointer">{{path}}</a> in {{container}}';
+				return '<a class="btn btn-secondary btn-sm" ui-sref="custom.cmsedit({ navId : navId, templateId: \'cmsadmin/default/index\'})">{{path}}</a> in {{container}}';
 			}
 		}
 	});

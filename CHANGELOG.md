@@ -17,6 +17,10 @@ All notable changes to this project will be documented in this file. This projec
 + [#64](https://github.com/luyadev/luya-module-cms/issues/64) Uglify javascript code.
 + [#61](https://github.com/luyadev/luya-module-cms/issues/61) Deprecated method `toNavItem()` in class `luya\cms\helpers\Url` in favor of `toMenuNavItem()` and also added new method `toMenuNav()`.
 
+## Fixed
+
++ [#73](https://github.com/luyadev/luya-module-cms/issues/73) Wrong link definition for internal links directive.
+
 ## 1.0.3 (26. March 2018)
 
 ### Fixed
