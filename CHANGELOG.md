@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.5 (in progress)
 
+### Added
+
++ [#74](https://github.com/luyadev/luya-module-cms/issues/74) New active window in block view to see on which page a block is implemented.
+
 ## 1.0.4 (17. May 2018)
 
 ### Added

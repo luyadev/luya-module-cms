@@ -8,6 +8,7 @@ use luya\traits\CacheableTrait;
 use luya\helpers\ArrayHelper;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
+use yii\db\ActiveRecord;
 
 /**
  * Represents an ITEM for the type NavItemPage.
@@ -34,7 +35,7 @@ use yii\helpers\Json;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class NavItemPageBlockItem extends \yii\db\ActiveRecord
+class NavItemPageBlockItem extends ActiveRecord
 {
     private $_olds = [];
 
@@ -81,6 +82,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
                         unset($data['__e']);
                     }
                 
+                    // placeholder in order to make sure an object will be unserailized instead of an array.
                     if (empty($data)) {
                         $data['__e'] = '__v';
                     }
@@ -144,6 +146,10 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         return $fields;
     }
     
+    /**
+     * 
+     * @param \yii\base\Event $event
+     */
     protected function ensureInputValues($event)
     {
         // sort index fixture
@@ -181,6 +187,9 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * Event after update
+     */
     public function eventAfterUpdate()
     {
         $this->updateNavItemTimesamp();
@@ -195,6 +204,9 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * Event before delete
+     */
     public function eventBeforeDelete()
     {
         // delete all attached sub blocks
@@ -207,6 +219,9 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         Log::add(3, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'delete', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $class], 'cms_nav_item_page_block_item', $this->id);
     }
 
+    /**
+     * Event after delete
+     */
     public function eventAfterDelete()
     {
         $this->updateNavItemTimesamp();
@@ -215,6 +230,9 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * Event after insert
+     */
     public function eventAfterInsert()
     {
         $this->updateNavItemTimesamp();
@@ -222,6 +240,10 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         Log::add(1, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'insert', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $this->block->getNameForLog()], 'cms_nav_item_page_block_item', $this->id);
     }
 
+    /**
+     * 
+     * @param unknown $blockId
+     */
     private function deleteAllSubBlocks($blockId)
     {
         if ($blockId) {

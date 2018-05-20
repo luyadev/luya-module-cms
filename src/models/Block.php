@@ -8,6 +8,7 @@ use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
 use luya\admin\ngrest\plugins\SelectModel;
 use luya\admin\ngrest\plugins\ToggleStatus;
+use luya\cms\admin\aws\BlockPagesActiveWindow;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
@@ -102,8 +103,11 @@ class Block extends NgRestModel
                     'usageCount',
                     'is_disabled:boolean',
                     'fileExists:boolean',
-                ]
+                ],
             ],
+            [
+                'class' => BlockPagesActiveWindow::class,
+            ]
         ];
     }
     
