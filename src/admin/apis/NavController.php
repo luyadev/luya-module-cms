@@ -251,9 +251,9 @@ class NavController extends \luya\admin\base\RestController
      */
     public function actionCreatePage()
     {
-        $fromDraft = $this->postArg('use_draft');
+        Yii::$app->menu->flushCache();
         $model = new Nav();
-        
+        $fromDraft = $this->postArg('use_draft');
         $parentNavId = $this->postArg('parent_nav_id');
         $navContainerId = $this->postArg('nav_container_id');
         
@@ -267,10 +267,10 @@ class NavController extends \luya\admin\base\RestController
             $create = $model->createPage($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'), $this->postArg('is_draft'));
         }
         
-        if ($create !== true) {
+        if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
-        Yii::$app->menu->flushCache();
+        
         return $create;
     }
     
@@ -282,7 +282,7 @@ class NavController extends \luya\admin\base\RestController
         Yii::$app->menu->flushCache();
         $model = new Nav();
         $create = $model->createPageItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'));
-        if ($create !== true) {
+        if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
 
@@ -302,7 +302,7 @@ class NavController extends \luya\admin\base\RestController
         }
         
         $create = $model->createModule($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
-        if ($create !== true) {
+        if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
 
@@ -314,7 +314,7 @@ class NavController extends \luya\admin\base\RestController
         Yii::$app->menu->flushCache();
         $model = new Nav();
         $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
-        if ($create !== true) {
+        if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
 
@@ -336,7 +336,7 @@ class NavController extends \luya\admin\base\RestController
         }
         
         $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
-        if ($create !== true) {
+        if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
 
@@ -348,7 +348,7 @@ class NavController extends \luya\admin\base\RestController
         Yii::$app->menu->flushCache();
         $model = new Nav();
         $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
-        if ($create !== true) {
+        if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
     

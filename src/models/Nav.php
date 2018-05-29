@@ -143,6 +143,12 @@ class Nav extends ActiveRecord
         return false;
     }
     
+    /**
+     * See if a given group has perrmission for the current nav model.
+     * 
+     * @param Group $group
+     * @return boolean
+     */
     public function hasGroupPermission(Group $group)
     {
         $definitions = (new Query())->select("nav_id")->from("cms_nav_permission")->where(['group_id' => $group->id])->all();
@@ -161,6 +167,12 @@ class Nav extends ActiveRecord
         return false;
     }
     
+    /**
+     * See if the given group has permission to the current nav model.
+     * 
+     * @param Group $group
+     * @return boolean
+     */
     public function hasGroupPermissionSelected(Group $group)
     {
         $definition = (new Query())->select("inheritance")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
@@ -172,6 +184,12 @@ class Nav extends ActiveRecord
         return false;
     }
     
+    /**
+     * See if a given group has inherited permission to the current nav model.
+     * 
+     * @param Group $group
+     * @return boolean
+     */
     public function isGroupPermissionInheritNode(Group $group)
     {
         $definition = (new Query())->select("inheritance")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
@@ -199,6 +217,11 @@ class Nav extends ActiveRecord
         }
     }
 
+    /**
+     * Rindex the current pages.
+     * 
+     * @param \yii\base\Event $e
+     */
     public function reindex($e)
     {
         $i = 1;
@@ -251,6 +274,13 @@ class Nav extends ActiveRecord
 
     // static helpers to move and copie
 
+    /**
+     * Move a nav model to a container.
+     * 
+     * @param integer $moveNavId
+     * @param integer $toCatId
+     * @return boolean
+     */
     public static function moveToContainer($moveNavId, $toCatId)
     {
         $move = self::findOne($moveNavId);
@@ -289,9 +319,10 @@ class Nav extends ActiveRecord
     }
 
     /**
-     *
-     * @param unknown $moveNavId
-     * @param unknown $toBeforeNavId
+     * Move a nav model before another nav model.
+     * 
+     * @param integer $moveNavId
+     * @param integer $toBeforeNavId
      * @return boolean|boolean|mixed
      */
     public static function moveToBefore($moveNavId, $toBeforeNavId)
@@ -326,8 +357,8 @@ class Nav extends ActiveRecord
     /**
      * Moves an element ($moveNavId) after another one ($toAfterNavId).
      *
-     * @param unknown $moveNavId
-     * @param unknown $toAfterNavId
+     * @param integer $moveNavId
+     * @param integer $toAfterNavId
      * @return boolean|boolean|mixed
      */
     public static function moveToAfter($moveNavId, $toAfterNavId)
@@ -359,9 +390,10 @@ class Nav extends ActiveRecord
     }
 
     /**
-     *
-     * @param unknown $moveNavId
-     * @param unknown $droppedOnItemId
+     * Move a nav model to a child.
+     * 
+     * @param integer $moveNavId
+     * @param integer $droppedOnItemId
      * @return boolean|boolean|mixed
      */
     public static function moveToChild($moveNavId, $droppedOnItemId)
@@ -604,7 +636,7 @@ class Nav extends ActiveRecord
      * @param integer $layoutId
      * @param string $description
      * @param string $isDraft
-     * @return boolean|array If an array is returned, the creation had an error, the array contains the messages.
+     * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
     public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)
     {
@@ -626,6 +658,7 @@ class Nav extends ActiveRecord
             'is_offline' => true,
             'is_draft' => $isDraft
         ];
+        
         $navItem->attributes = [
             'lang_id' => $langId,
             'title' => $title,
@@ -633,6 +666,7 @@ class Nav extends ActiveRecord
             'description' => $description,
             'nav_item_type' => 1
         ];
+        
         $navItemPage->attributes = ['nav_item_id' => 0, 'layout_id' => $layoutId, 'create_user_id' => Module::getAuthorUserId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
 
         if (!$nav->validate()) {
@@ -649,27 +683,30 @@ class Nav extends ActiveRecord
             return $_errors;
         }
 
-        $navItemPage->save();
-        $nav->save();
+        $navItemPage->save(false); // as validation is done already
+        $nav->save(false); // as validation is done already
 
         $navItem->nav_item_type_id = $navItemPage->id;
         $navItem->nav_id = $nav->id;
-        $navItemId = $navItem->save();
+        $navItemId = $navItem->save(false); // as validation is done already
 
         $navItemPage->updateAttributes(['nav_item_id' => $navItem->id]);
         
-        return $navItemId;
+        return $nav->id;
     }
 
     /**
-     *
-     * @param unknown $navId
-     * @param unknown $langId
-     * @param unknown $title
-     * @param unknown $alias
-     * @param unknown $layoutId
-     * @param unknown $description
-     * @return boolean
+     * Create a nav item for a given NavId.
+     * 
+     * If an array occurs an array with all errors is returned, if success the NavItem id is returned.
+     * 
+     * @param integer $navId
+     * @param integer $langId
+     * @param string $title
+     * @param string $alias
+     * @param integer $layoutId
+     * @param string $description
+     * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
      */
     public function createPageItem($navId, $langId, $title, $alias, $layoutId, $description)
     {
@@ -685,9 +722,16 @@ class Nav extends ActiveRecord
             'title' => $title,
             'alias' => $alias,
             'description' => $description,
-            'nav_item_type' => 1
+            'nav_item_type' => 1,
         ];
-        $navItemPage->attributes = ['nav_item_id' => 0, 'layout_id' => $layoutId, 'create_user_id' => Module::getAuthorUserId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
+        
+        $navItemPage->attributes = [
+            'nav_item_id' => 0, 
+            'layout_id' => $layoutId, 
+            'create_user_id' => Module::getAuthorUserId(), 
+            'timestamp_create' => time(), 
+            'version_alias' => Module::VERSION_INIT_LABEL,
+        ];
 
         if (!$navItem->validate()) {
             $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
@@ -700,26 +744,27 @@ class Nav extends ActiveRecord
             return $_errors;
         }
 
-        $navItemPage->save();
+        $navItemPage->save(false); // as validation is done already
 
         $navItem->nav_item_type_id = $navItemPage->id;
-        $navItemId = $navItem->save();
+        $navItemId = $navItem->save(false); // as validation is done already
 
         $navItemPage->updateAttributes(['nav_item_id' => $navItem->id]);
         
-        return $navItemId;
+        return $navItem->id;
     }
 
     /**
-     *
-     * @param unknown $parentNavId
-     * @param unknown $navContainerId
-     * @param unknown $langId
-     * @param unknown $title
-     * @param unknown $alias
-     * @param unknown $moduleName
-     * @param unknown $description
-     * @return boolean
+     * Create a new Module Page.
+     * 
+     * @param integer $parentNavId
+     * @param integer $navContainerId
+     * @param integer $langId
+     * @param string $title
+     * @param string $alias
+     * @param string $moduleName
+     * @param string $description
+     * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
     public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName, $description)
     {
@@ -736,6 +781,7 @@ class Nav extends ActiveRecord
             'is_hidden' => true,
             'is_offline' => true,
         ];
+        
         $navItem->attributes = [
             'lang_id' => $langId,
             'title' => $title,
@@ -743,6 +789,7 @@ class Nav extends ActiveRecord
             'description' => $description,
             'nav_item_type' => 2
         ];
+        
         $navItemModule->attributes = ['module_name' => $moduleName];
 
         if (!$nav->validate()) {
@@ -759,27 +806,27 @@ class Nav extends ActiveRecord
             return $_errors;
         }
 
-        $navItemModule->save();
-        $nav->save();
+        $navItemModule->save(false); // as validation is done already
+        $nav->save(false); // as validation is done already
 
         $navItem->nav_item_type_id = $navItemModule->id;
         $navItem->nav_id = $nav->id;
-        $navItemId = $navItem->save();
+        $navItemId = $navItem->save(false); // as validation is done already
 
-        return $navItemId;
+        return $nav->id;
     }
 
     /**
      *
-     * @param unknown $parentNavId
-     * @param unknown $navContainerId
-     * @param unknown $langId
-     * @param unknown $title
-     * @param unknown $alias
-     * @param unknown $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
-     * @param unknown $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
-     * @param unknown $description
-     * @return boolean
+     * @param integer $parentNavId
+     * @param integer $navContainerId
+     * @param integer $langId
+     * @param string $title
+     * @param string $alias
+     * @param integer $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
+     * @param string $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+     * @param string $description
+     * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
     public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
     {
@@ -819,25 +866,26 @@ class Nav extends ActiveRecord
             return $_errors;
         }
 
-        $navItemRedirect->save();
-        $nav->save();
+        $navItemRedirect->save(false); // as validation is done already
+        $nav->save(false); // as validation is done already
 
         $navItem->nav_item_type_id = $navItemRedirect->id;
         $navItem->nav_id = $nav->id;
-        $navItemId = $navItem->save();
+        $navItemId = $navItem->save(false); // as validation is done already
 
-        return $navItemId;
+        return $nav->id;
     }
 
     /**
-     *
-     * @param unknown $navId
-     * @param unknown $langId
-     * @param unknown $title
-     * @param unknown $alias
-     * @param unknown $moduleName
-     * @param unknown $description
-     * @return boolean
+     * Create a module for a given Nav Model.
+     * 
+     * @param integer $navId
+     * @param integer $langId
+     * @param string $title
+     * @param string $alias
+     * @param string $moduleName
+     * @param string $description
+     * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
      */
     public function createModuleItem($navId, $langId, $title, $alias, $moduleName, $description)
     {
@@ -868,24 +916,24 @@ class Nav extends ActiveRecord
             return $_errors;
         }
 
-        $navItemModule->save();
+        $navItemModule->save(false); // as validation is done already
 
         $navItem->nav_item_type_id = $navItemModule->id;
-        $navItemId = $navItem->save();
+        $navItemId = $navItem->save(false); // as validation is done already
 
-        return $navItemId;
+        return $navItem->id;
     }
 
     /**
-     *
-     * @param unknown $navId
-     * @param unknown $langId
-     * @param unknown $title
-     * @param unknown $alias
-     * @param unknown $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
-     * @param unknown $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
-     * @param unknown $description
-     * @return boolean
+     * Create a redirecte for a given Nav Model.
+     * @param integer $navId
+     * @param integer $langId
+     * @param string $title
+     * @param string $alias
+     * @param integer $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
+     * @param string $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+     * @param string $description
+     * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
      */
     public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
     {
@@ -916,11 +964,11 @@ class Nav extends ActiveRecord
             return $_errors;
         }
 
-        $navItemRedirect->save();
+        $navItemRedirect->save(false); // as validation is done already
 
         $navItem->nav_item_type_id = $navItemRedirect->id;
-        $navItemId = $navItem->save();
+        $navItemId = $navItem->save(false); // as validation is done already
 
-        return $navItemId;
+        return $navItem->id;
     }
 }

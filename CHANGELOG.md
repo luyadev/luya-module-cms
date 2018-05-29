@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file. This projec
 
 + [#74](https://github.com/luyadev/luya-module-cms/issues/74) New active window in block view to see on which page a block is implemented.
 
+### Changed
+
++ [#75](https://github.com/luyadev/luya-module-cms/issues/75) Nav model create* functions does now return the id of the given nav or nav item model.
+
 ## 1.0.4 (17. May 2018)
 
 ### Added
