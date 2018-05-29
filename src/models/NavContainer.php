@@ -51,7 +51,7 @@ class NavContainer extends NgRestModel
         $config->update->copyFrom('list');
 
         $config->options = [
-            'saveCallback' => 'function(ServiceMenuData) { ServiceMenuData.load(true); }',
+            'saveCallback' => "['ServiceMenuData', function(ServiceMenuData) { ServiceMenuData.load(true); }]",
         ];
         
         return $config;
