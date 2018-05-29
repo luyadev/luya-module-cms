@@ -205,12 +205,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $prev = $key-1;
             $next = $key+1;
             $cacheKey = ['blockcache', (int) $placeholder['id']];
-            
+            $cacheKeyAssets = array_merge($cacheKey, ['assetsBundels']);
+
             $blockResponse = $this->getHasCache($cacheKey);
-            
+
             if ($blockResponse === false) {
                 
-                /** @var $blockObject \luya\cms\base\InternalBaseBlock */
+                /** @var $blockObject \luya\cms\base\PhpBlock */
                 $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
                 
                 // see if its a valid block object
@@ -269,13 +270,22 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $blockObject->setPlaceholderValues($insertedHolders);
                     // output buffer the rendered frontend method of the block
                     $blockResponse = $blockObject->renderFrontend();
-                    
+
                     if ($blockObject->getIsCacheEnabled()) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
+
+                        $assetBundels = array_keys($blockObject->getView()->assetBundles);
+                        $this->setHasCache($cacheKeyAssets, $assetBundels, null, $blockObject->getCacheExpirationTime());
                     }
                 }
             }
-            
+            else {
+                $assetBundels = $this->getHasCache($cacheKeyAssets) ?: [];
+                foreach ($assetBundels as $bundel) {
+                    Yii::$app->view->registerAssetBundle($bundel);
+                }
+            }
+
             $string.= $blockResponse;
             
             unset($blockResponse);
