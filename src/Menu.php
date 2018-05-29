@@ -3,12 +3,9 @@
 namespace luya\cms;
 
 use Yii;
-
-use ArrayAccess;
 use yii\base\Component;
 use yii\web\NotFoundHttpException;
 use yii\db\Query as DbQuery;
-
 use luya\cms\menu\Query as MenuQuery;
 use luya\cms\models\NavItemModule;
 use luya\traits\CacheableTrait;
@@ -89,7 +86,7 @@ use luya\cms\menu\QueryOperatorFieldInterface;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
+class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterface
 {
     use CacheableTrait;
     
