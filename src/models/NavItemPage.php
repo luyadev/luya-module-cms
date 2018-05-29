@@ -278,8 +278,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                         $this->setHasCache($cacheKeyAssets, $assetBundels, null, $blockObject->getCacheExpirationTime());
                     }
                 }
-            }
-            else {
+            } else {
                 $assetBundels = $this->getHasCache($cacheKeyAssets) ?: [];
                 foreach ($assetBundels as $bundel) {
                     Yii::$app->view->registerAssetBundle($bundel);
