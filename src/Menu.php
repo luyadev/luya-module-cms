@@ -103,6 +103,14 @@ class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
      */
     const EVENT_AFTER_LOAD = 'eventAfterLoad';
     
+    /**
+     * @var string Event which is triggered after the resolvment of the current item. Sometimes using the
+     * EVENT_AFTER_LOAD will add an item into the menu, but the path is also part of the resolvement. This means
+     * if you are injecting a fake menu item from a module the injected item would be resolved and the nav item
+     * could not be found. In order to fix behavior you can use this event, as it will still inject the items
+     * into the menu, but they wont be resolved when the request parsing start.
+     * @since 1.0.5
+     */
     const EVENT_AFTER_RESOLVE_CURRENT = 'eventAfterResolveCurrent';
     
     const ITEM_TYPE_PAGE = 1;
