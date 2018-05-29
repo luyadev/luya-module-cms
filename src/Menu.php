@@ -103,6 +103,8 @@ class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
      */
     const EVENT_AFTER_LOAD = 'eventAfterLoad';
     
+    const EVENT_AFTER_RESOLVE_CURRENT = 'eventAfterResolveCurrent';
+    
     const ITEM_TYPE_PAGE = 1;
     
     const ITEM_TYPE_MODULE = 2;
@@ -363,6 +365,7 @@ class Menu extends Component implements ArrayAccess, QueryOperatorFieldInterface
     {
         if ($this->_current === null) {
             $this->_current = $this->resolveCurrent();
+            $this->trigger(self::EVENT_AFTER_RESOLVE_CURRENT);
         }
 
         return $this->_current;
