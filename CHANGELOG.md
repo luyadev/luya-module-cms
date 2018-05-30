@@ -46,10 +46,6 @@ All notable changes to this project will be documented in this file. This projec
 
 + [#50](https://github.com/luyadev/luya-module-cms/issues/50) Added new APIs for headless usage.
 
-### Fixed
-
-+ [#49](https://github.com/luyadev/luya-module-cms/pull/49) Editing a block, will clear the cache of first parent now.
-
 ## 1.0.2 (9. March 2018)
 
 ### Fixed
