@@ -2,6 +2,7 @@
 
 namespace luya\cms;
 
+use luya\web\TelephoneLink;
 use Yii;
 use yii\base\BaseObject;
 use luya\helpers\ArrayHelper;
@@ -72,6 +73,8 @@ class LinkConverter extends BaseObject
     
     const TYPE_LINK_TO_EMAIL = 4;
     
+    const TYPE_LINK_TO_TELEPHONE = 5;
+
     public $type;
     
     public $value;
@@ -123,6 +126,11 @@ class LinkConverter extends BaseObject
                 
             // mailto link
             case self::TYPE_LINK_TO_EMAIL:
+                return $this->getEmailLink($this->value);
+                break;
+
+            // tel link
+            case self::TYPE_LINK_TO_TELEPHONE:
                 return $this->getEmailLink($this->value);
                 break;
         }
@@ -189,5 +197,14 @@ class LinkConverter extends BaseObject
     public function getEmailLink($email)
     {
         return new EmailLink(['email' => $email]);
+    }
+
+    /**
+     * @param string $telephone
+     * @return \luya\web\TelephoneLink
+     */
+    public function getTelephoneLink($telephone)
+    {
+        return new TelephoneLink(['telephone' => $telephone]);
     }
 }
