@@ -7,6 +7,7 @@ use luya\web\WebsiteLink;
 use luya\TagParser;
 use luya\admin\helpers\Angular;
 use luya\web\EmailLink;
+use luya\web\TelephoneLink;
 
 /**
  * Helper methods for CMS Blocks.
@@ -265,7 +266,7 @@ class BlockHelper
         if (!empty($config) && isset($config['type']) && isset($config['value'])) {
             // get the target config value from the object.
             $target = isset($config['target']) ? $config['target'] : null;
-            
+
             switch ($config['type']) {
                 case 1: // cms page link
                     $link =  Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();
@@ -287,6 +288,9 @@ class BlockHelper
                     break;
                 case 4: // email link
                     return new EmailLink(['email' => $config['value']]);
+                    break;
+                case 5: // telephone link
+                    return new TelephoneLink(['telephone' => $config['value']]);
                     break;
             }
         }
