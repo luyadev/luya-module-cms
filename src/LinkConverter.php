@@ -131,7 +131,7 @@ class LinkConverter extends BaseObject
 
             // tel link
             case self::TYPE_LINK_TO_TELEPHONE:
-                return $this->getEmailLink($this->value);
+                return $this->getTelephoneLink($this->value);
                 break;
         }
         
