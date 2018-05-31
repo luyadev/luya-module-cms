@@ -11,6 +11,9 @@ use luya\web\LinkTrait;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
 use yii\base\BaseObject;
+use luya\cms\models\NavItemRedirect;
+use luya\web\EmailLink;
+use luya\cms\LinkConverter;
 
 /**
  * Menu item Object.
@@ -370,12 +373,18 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     }
     
     /**
-     * Internal used to retriev redirect data if any
+     * Internal used to retriev redirect data.
+     * 
+     * The redirect data commonly has the following keys:
+     * 
+     * + type: Its a number which represents the redirect type (1 = internal, 2 = external, etc.)
+     * + value: A value which associated for the type (file could a file id but external link could be a string with the url)
+     * 
      * @return multitype:
      */
     protected function redirectMapData($key)
     {
-        return (!empty($this->itemArray['redirect'])) ? $this->itemArray['redirect'][$key] : false;
+        return !empty($this->itemArray['redirect']) ? $this->itemArray['redirect'][$key] : false;
     }
 
     /**
@@ -392,19 +401,25 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         // take care of redirect
         if ($this->getType() === 3) {
-            switch ($this->redirectMapData('type')) {
-                case 1:
-                    $navId = $this->redirectMapData('value');
-                    if (empty($navId) || $navId == $this->navId) {
-                        return null;
-                    }
-                    return (($item = (new Query())->where(['nav_id' => $navId])->with(['hidden'])->lang($this->lang)->one())) ? $item->getLink() : null;
-                case 2:
-                    return $this->redirectMapData('value');
+            $converter = new LinkConverter(['type' => $this->redirectMapData('type'), 'value' => $this->redirectMapData('value')]);
+            switch ($converter->type) {
+                case $converter::TYPE_EXTERNAL_URL:
+                    return $converter->getWebsiteLink($converter->value, $converter->target)->getHref();
+                    break;
+                case $converter::TYPE_INTERNAL_PAGE:
+                    return $converter->getPageLink($converter->value, $converter->target, $this->lang)->getHref();
+                    break;
+                case $converter::TYPE_LINK_TO_EMAIL:
+                    return $converter->getEmailLink($converter->value)->getHref();
+                    break;
+                case $converter::TYPE_LINK_TO_FILE:
+                    return $converter->getFileLink($converter->value, $converter->target)->getHref();
+                    break;
             }
         }
         
-        if ($this->itemArray['is_home'] && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) {
+        // if its the homepage and the default lang short code is equasl to this lang the link has no path.
+        if ($this->isHome && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) {
             return Yii::$app->urlManager->prependBaseUrl('');
         }
         

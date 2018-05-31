@@ -8,6 +8,9 @@ use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
 use luya\web\EmailLink;
+use luya\web\WebsiteLink;
+use luya\cms\LinkConverter;
+use yii\base\InvalidConfigException;
 
 /**
  * Represents the type REDIRECT for a NavItem.
@@ -21,14 +24,6 @@ use luya\web\EmailLink;
  */
 class NavItemRedirect extends NavItemType implements NavItemTypeInterface
 {
-    const TYPE_INTERNAL_PAGE = 1;
-
-    const TYPE_EXTERNAL_URL = 2;
-
-    const TYPE_LINK_TO_FILE = 3;
-    
-    const TYPE_LINK_TO_EMAIL = 4;
-
     /**
      * @inheritdoc
      */
@@ -66,45 +61,32 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
         ];
     }
 
+    /**
+     * Resolve the values with {{luya\cms\LinkConverter}}.
+     * 
+     * @return \luya\web\LinkInterface|boolean
+     */
     public function resolveValue()
     {
-        switch ($this->type) {
-            // internal page redirect
-            case self::TYPE_INTERNAL_PAGE:
-                $item = Yii::$app->menu->find()->where(['nav_id' => $this->value])->with('hidden')->one();
-                if (!$item) {
-                    throw new Exception('Unable to find item '.$this->value . ' in order to resolve an internal page redirect. Maybe the page does not exist anymore or is offline.');
-                }
+        $converter = new LinkConverter();
+        $converter->value = $this->value;
+        $converter->type = $this->type;
 
-                return $item->link;
-                break;
-                
-            // external page redirect
-            case self::TYPE_EXTERNAL_URL:
-                return $this->value;
-                break;
-                
-            // link to storage file
-            case self::TYPE_LINK_TO_FILE:
-                $file = Yii::$app->storage->getFile($this->value);
-                if (!$file) {
-                    throw new Exception("Unable to find the file with id " . $this->value);
-                }
-                
-                return $file->href;
-                break;
-            
-            // link to an email address
-            case self::TYPE_LINK_TO_EMAIL:
-                $mail = new EmailLink(['email' => $this->value]);
-                return $mail->getHref();
-                break;
-        }
+        return $converter->getLink();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getContent()
     {
-        Yii::$app->getResponse()->redirect($this->resolveValue());
+        $link = $this->resolveValue();
+        
+        if (!$link) {
+            throw new InvalidConfigException("Wrong link configuration provided.");
+        }
+        
+        Yii::$app->getResponse()->redirect($link->getHref());
         Yii::$app->end();
         
         return;
