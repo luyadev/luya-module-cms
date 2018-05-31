@@ -26,6 +26,15 @@ use luya\web\View;
  */
 class PhpBlockView extends View
 {
+    public function init()
+    {
+        parent::init();
+        
+        $this->on(self:: EVENT_AFTER_RENDER, function() {
+            self::registerToAppView($this->getBlockAssets(), array_keys($this->assetBundles));
+        });
+    }
+    
     /**
      * Get the current index number of the block inside the current placeholder.
      *
@@ -260,20 +269,6 @@ class PhpBlockView extends View
     public function getAppView()
     {
         return $this;
-    }
-
-    /**
-     * @param string $viewFile
-     * @param array $params
-     * @param string $output
-     * @throws \yii\base\InvalidConfigException
-     * @since 1.0.5
-     */
-    public function afterRender($viewFile, $params, &$output)
-    {
-        self::registerToAppView($this->getBlockAssets(), array_keys($this->assetBundles));
-
-        parent::afterRender($viewFile, $params, $output);
     }
 
     /**
