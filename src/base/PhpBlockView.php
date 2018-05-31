@@ -2,6 +2,7 @@
 
 namespace luya\cms\base;
 
+use luya\helpers\ArrayHelper;
 use Yii;
 use luya\web\View;
 
@@ -30,7 +31,7 @@ class PhpBlockView extends View
     {
         parent::init();
         
-        $this->on(self:: EVENT_AFTER_RENDER, function() {
+        $this->on(self::EVENT_AFTER_RENDER, function() {
             self::registerToAppView($this->getBlockAssets(), array_keys($this->assetBundles));
         });
     }
@@ -299,13 +300,27 @@ class PhpBlockView extends View
 
         foreach ($blockAssets as $attribute => $blockAsset) {
             if (!empty($blockAsset)) {
+                
+                if ($attribute == 'js' || $attribute == 'jsFiles') {
+                    /**
+                     * js and jsFiles must keep the array keys as position and have subarray
+                     * @see \yii\web\View::POS_HEAD
+                     */
 
-                $appView->{$attribute} = array_merge($appView->{$attribute}, $blockAsset);
+                    $appAssets = &$appView->{$attribute};
+                    
+                    foreach ($blockAsset as $key => $value) {
+                        $appAssets[$key] = array_merge($appAssets[$key] ?: [], $value);
+                    }
+                }
+                else {
+                    $appView->{$attribute} = array_merge($appView->{$attribute}, $blockAsset);
+                }
             }
         }
 
         foreach ($assetBundles as $bundle) {
-            Yii::$app->view->registerAssetBundle($bundle);
+            $appView->registerAssetBundle($bundle);
         }
     }
 }
