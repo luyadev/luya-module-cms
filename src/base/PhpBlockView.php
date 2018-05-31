@@ -254,9 +254,63 @@ class PhpBlockView extends View
      * ```
      *
      * @return \luya\web\View The global application View Object which is also the same as the layout or cmslayout.
+     * @deprecated Please use `MyBlockAsset::register($this);` instead.
+     * @since 1.0.5 Deprecated.
      */
     public function getAppView()
     {
-        return Yii::$app->getView();
+        return $this;
+    }
+
+    /**
+     * @param string $viewFile
+     * @param array $params
+     * @param string $output
+     * @throws \yii\base\InvalidConfigException
+     * @since 1.0.5
+     */
+    public function afterRender($viewFile, $params, &$output)
+    {
+        self::registerToAppView($this->getBlockAssets(), array_keys($this->assetBundles));
+
+        parent::afterRender($viewFile, $params, $output);
+    }
+
+    /**
+     * @return array
+     * @since 1.0.5
+     */
+    public function getBlockAssets()
+    {
+        return [
+            'metaTags' => $this->metaTags,
+            'linkTags' => $this->linkTags,
+            'cssFiles' => $this->cssFiles,
+            'css' => $this->css,
+            'jsFiles' => $this->jsFiles,
+            'js' => $this->js,
+        ];
+    }
+
+    /**
+     * @param array $blockAssets
+     * @param array $assetBundles
+     * @throws \yii\base\InvalidConfigException
+     * @since 1.0.5
+     */
+    public static function registerToAppView(array $blockAssets, array $assetBundles)
+    {
+        $appView = Yii::$app->view;
+
+        foreach ($blockAssets as $attribute => $blockAsset) {
+            if (!empty($blockAsset)) {
+
+                $appView->{$attribute} = array_merge($appView->{$attribute}, $blockAsset);
+            }
+        }
+
+        foreach ($assetBundles as $bundle) {
+            Yii::$app->view->registerAssetBundle($bundle);
+        }
     }
 }

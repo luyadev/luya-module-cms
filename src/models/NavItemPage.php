@@ -2,6 +2,7 @@
 
 namespace luya\cms\models;
 
+use luya\cms\base\PhpBlockView;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\Query;
@@ -205,7 +206,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $prev = $key-1;
             $next = $key+1;
             $cacheKey = ['blockcache', (int) $placeholder['id']];
-            $cacheKeyAssets = array_merge($cacheKey, ['assetsBundels']);
+            $cacheKeyAssetBundels = array_merge($cacheKey, ['assetBundles']);
+            $cacheKeyAssets = array_merge($cacheKey, ['assets']);
 
             $blockResponse = $this->getHasCache($cacheKey);
 
@@ -274,15 +276,19 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     if ($blockObject->getIsCacheEnabled()) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
 
-                        $assetBundels = array_keys($blockObject->getView()->assetBundles);
-                        $this->setHasCache($cacheKeyAssets, $assetBundels, null, $blockObject->getCacheExpirationTime());
+                        $phpBlockView = $blockObject->getView();
+
+                        $assetBundels = array_keys($phpBlockView->assetBundles);
+                        $this->setHasCache($cacheKeyAssetBundels, $assetBundels, null, $blockObject->getCacheExpirationTime());
+
+                        $this->setHasCache($cacheKeyAssets, $phpBlockView->getBlockAssets(), null, $blockObject->getCacheExpirationTime());
                     }
                 }
             } else {
-                $assetBundels = $this->getHasCache($cacheKeyAssets) ?: [];
-                foreach ($assetBundels as $bundel) {
-                    Yii::$app->view->registerAssetBundle($bundel);
-                }
+                $assetBundels = $this->getHasCache($cacheKeyAssetBundels) ?: [];
+                $assets = $this->getHasCache($cacheKeyAssets) ?: [];
+
+                PhpBlockView::registerToAppView($assets, $assetBundels);
             }
 
             $string.= $blockResponse;
