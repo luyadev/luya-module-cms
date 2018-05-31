@@ -2,13 +2,13 @@
 
 namespace luya\cms;
 
-use luya\web\TelephoneLink;
 use Yii;
 use yii\base\BaseObject;
 use luya\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
 use luya\web\WebsiteLink;
 use luya\web\EmailLink;
+use luya\web\TelephoneLink;
 
 /**
  * Convert a given config into a {{luya\web\LinkInterface}} Object.
