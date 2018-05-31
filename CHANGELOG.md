@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
++ [#80](https://github.com/luyadev/luya-module-cms/issues/80) Add luya\cms\LinkConverter in order to convert type and value informations to a luya\web\LinkInterface object.
 + [#77](https://github.com/luyadev/luya-module-cms/issues/77) Add new after resolve current event for menu item injection.
 + [#74](https://github.com/luyadev/luya-module-cms/issues/74) New active window in block view to see on which page a block is implemented.
 

@@ -7,7 +7,7 @@ use luya\web\WebsiteLink;
 use luya\TagParser;
 use luya\admin\helpers\Angular;
 use luya\web\EmailLink;
-use luya\web\TelephoneLink;
+use luya\cms\LinkConverter;
 
 /**
  * Helper methods for CMS Blocks.
@@ -258,44 +258,17 @@ class BlockHelper
     /**
      * Generate a link object based on the configuration (array).
      *
-     * @param string|array $config The configuration array to build the object
+     * @param array $config The configuration array to build the object the config array requires the following keys
+     * + type: The type of redirect (1 = internal, 2 = external, 3 = file, etc.)
+     * + value: The value assoiated to the type (link to a file can be an integer, redirect to an external page string with an url)
+     * + target: (optional)
      * @return \luya\web\LinkInterface|false Returns a linkable resource object or false if configuration is wrong.
      */
     public static function linkObject($config)
     {
-        if (!empty($config) && isset($config['type']) && isset($config['value'])) {
-            // get the target config value from the object.
-            $target = isset($config['target']) ? $config['target'] : null;
-
-            switch ($config['type']) {
-                case 1: // cms page link
-                    $link =  Yii::$app->menu->find()->where(['nav_id' => $config['value']])->with(['hidden'])->one();
-                    // if a page is found, set the target value from the config.
-                    if ($link) {
-                        $link->setTarget($target);
-                    }
-                    return $link;
-                    break;
-                case 2: // website link
-                    return new WebsiteLink(['href' => $config['value'], 'target' => $target]);
-                    break;
-                case 3: // file link
-                    $file = Yii::$app->storage->getFile($config['value']);
-                    if ($file) {
-                        $file->setTarget($target);
-                    }
-                    return $file;
-                    break;
-                case 4: // email link
-                    return new EmailLink(['email' => $config['value']]);
-                    break;
-                case 5: // telephone link
-                    return new TelephoneLink(['telephone' => $config['value']]);
-                    break;
-            }
-        }
-    
-        return false;
+        $converter = LinkConverter::fromArray($config);
+        
+        return $converter->getLink();
     }
     
     /**
