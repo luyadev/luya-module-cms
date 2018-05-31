@@ -404,17 +404,16 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             $converter = new LinkConverter(['type' => $this->redirectMapData('type'), 'value' => $this->redirectMapData('value')]);
             switch ($converter->type) {
                 case $converter::TYPE_EXTERNAL_URL:
+                    if (empty($converter->value) || $converter->value == $this->navId) {
+                        return;
+                    }
                     return $converter->getWebsiteLink($converter->value, $converter->target)->getHref();
-                    break;
                 case $converter::TYPE_INTERNAL_PAGE:
                     return $converter->getPageLink($converter->value, $converter->target, $this->lang)->getHref();
-                    break;
                 case $converter::TYPE_LINK_TO_EMAIL:
                     return $converter->getEmailLink($converter->value)->getHref();
-                    break;
                 case $converter::TYPE_LINK_TO_FILE:
                     return $converter->getFileLink($converter->value, $converter->target)->getHref();
-                    break;
             }
         }
         
