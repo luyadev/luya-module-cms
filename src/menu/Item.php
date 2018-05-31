@@ -400,25 +400,33 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     public function getLink()
     {
         // take care of redirect
-        if ($this->getType() === 3) {
-            $converter = new LinkConverter(['type' => $this->redirectMapData('type'), 'value' => $this->redirectMapData('value')]);
+        if ($this->getType() === 3 && !empty($this->redirectMapData('value'))) {
+            
+            // generate convert object to determine correctn usage.
+            $converter = new LinkConverter([
+                'type' => $this->redirectMapData('type'), 
+                'value' => $this->redirectMapData('value'),
+            ]);
+            
             switch ($converter->type) {
                 case $converter::TYPE_EXTERNAL_URL:
+                    return $converter->getWebsiteLink($converter->value, $converter->target)->getHref();
+                case $converter::TYPE_INTERNAL_PAGE:
                     if (empty($converter->value) || $converter->value == $this->navId) {
                         return;
                     }
-                    return $converter->getWebsiteLink($converter->value, $converter->target)->getHref();
-                case $converter::TYPE_INTERNAL_PAGE:
                     return $converter->getPageLink($converter->value, $converter->target, $this->lang)->getHref();
                 case $converter::TYPE_LINK_TO_EMAIL:
                     return $converter->getEmailLink($converter->value)->getHref();
                 case $converter::TYPE_LINK_TO_FILE:
                     return $converter->getFileLink($converter->value, $converter->target)->getHref();
+               
             }
+            
         }
         
         // if its the homepage and the default lang short code is equasl to this lang the link has no path.
-        if ($this->isHome && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) {
+        if ($this->itemArray['is_home'] && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) {
             return Yii::$app->urlManager->prependBaseUrl('');
         }
         
