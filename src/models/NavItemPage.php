@@ -206,7 +206,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $prev = $key-1;
             $next = $key+1;
             $cacheKey = ['blockcache', (int) $placeholder['id']];
-            $cacheKeyAssetBundels = array_merge($cacheKey, ['assetBundles']);
+            $cacheKeyAssetBundles = array_merge($cacheKey, ['assetBundles']);
             $cacheKeyAssets = array_merge($cacheKey, ['assets']);
 
             $blockResponse = $this->getHasCache($cacheKey);
@@ -278,17 +278,17 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
                         $phpBlockView = $blockObject->getView();
 
-                        $assetBundels = array_keys($phpBlockView->assetBundles);
-                        $this->setHasCache($cacheKeyAssetBundels, $assetBundels, null, $blockObject->getCacheExpirationTime());
+                        $assetBundles = array_keys($phpBlockView->assetBundles);
+                        $this->setHasCache($cacheKeyAssetBundles, $assetBundles, null, $blockObject->getCacheExpirationTime());
 
                         $this->setHasCache($cacheKeyAssets, $phpBlockView->getBlockAssets(), null, $blockObject->getCacheExpirationTime());
                     }
                 }
             } else {
-                $assetBundels = $this->getHasCache($cacheKeyAssetBundels) ?: [];
+                $assetBundles = $this->getHasCache($cacheKeyAssetBundles) ?: [];
                 $assets = $this->getHasCache($cacheKeyAssets) ?: [];
 
-                PhpBlockView::registerToAppView($assets, $assetBundels);
+                PhpBlockView::registerToAppView($assets, $assetBundles);
             }
 
             $string.= $blockResponse;
