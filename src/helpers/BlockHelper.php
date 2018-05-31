@@ -266,6 +266,10 @@ class BlockHelper
      */
     public static function linkObject($config)
     {
+        if (empty($config) || !is_array($config)) {
+            return false;
+        }
+        
         $converter = LinkConverter::fromArray($config);
         
         return $converter->getLink();
