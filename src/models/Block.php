@@ -123,7 +123,7 @@ class Block extends NgRestModel
 
     /**
      * Wehther the class file exists or not.
-     * 
+     *
      * @return number
      * @since 1.0.4
      */
@@ -143,7 +143,7 @@ class Block extends NgRestModel
     }
     
     /**
-     * 
+     *
      * @return \yii\db\ActiveQuery
      * @since 1.0.4
      */
@@ -208,7 +208,7 @@ class Block extends NgRestModel
 
     /**
      * BlockGroup ActiveQuery.
-     * 
+     *
      * @return \yii\db\ActiveQuery
      * @since 1.0.4
      */

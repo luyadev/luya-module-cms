@@ -119,7 +119,7 @@ class Nav extends ActiveRecord
     
     /**
      * CmsProperty Active Query.
-     * 
+     *
      * @return \luya\cms\models\Property
      */
     public function getProperties()
@@ -145,7 +145,7 @@ class Nav extends ActiveRecord
     
     /**
      * See if a given group has perrmission for the current nav model.
-     * 
+     *
      * @param Group $group
      * @return boolean
      */
@@ -169,7 +169,7 @@ class Nav extends ActiveRecord
     
     /**
      * See if the given group has permission to the current nav model.
-     * 
+     *
      * @param Group $group
      * @return boolean
      */
@@ -186,7 +186,7 @@ class Nav extends ActiveRecord
     
     /**
      * See if a given group has inherited permission to the current nav model.
-     * 
+     *
      * @param Group $group
      * @return boolean
      */
@@ -219,7 +219,7 @@ class Nav extends ActiveRecord
 
     /**
      * Rindex the current pages.
-     * 
+     *
      * @param \yii\base\Event $e
      */
     public function reindex($e)
@@ -276,7 +276,7 @@ class Nav extends ActiveRecord
 
     /**
      * Move a nav model to a container.
-     * 
+     *
      * @param integer $moveNavId
      * @param integer $toCatId
      * @return boolean
@@ -320,7 +320,7 @@ class Nav extends ActiveRecord
 
     /**
      * Move a nav model before another nav model.
-     * 
+     *
      * @param integer $moveNavId
      * @param integer $toBeforeNavId
      * @return boolean|boolean|mixed
@@ -391,7 +391,7 @@ class Nav extends ActiveRecord
 
     /**
      * Move a nav model to a child.
-     * 
+     *
      * @param integer $moveNavId
      * @param integer $droppedOnItemId
      * @return boolean|boolean|mixed
@@ -697,9 +697,9 @@ class Nav extends ActiveRecord
 
     /**
      * Create a nav item for a given NavId.
-     * 
+     *
      * If an array occurs an array with all errors is returned, if success the NavItem id is returned.
-     * 
+     *
      * @param integer $navId
      * @param integer $langId
      * @param string $title
@@ -726,10 +726,10 @@ class Nav extends ActiveRecord
         ];
         
         $navItemPage->attributes = [
-            'nav_item_id' => 0, 
-            'layout_id' => $layoutId, 
-            'create_user_id' => Module::getAuthorUserId(), 
-            'timestamp_create' => time(), 
+            'nav_item_id' => 0,
+            'layout_id' => $layoutId,
+            'create_user_id' => Module::getAuthorUserId(),
+            'timestamp_create' => time(),
             'version_alias' => Module::VERSION_INIT_LABEL,
         ];
 
@@ -756,7 +756,7 @@ class Nav extends ActiveRecord
 
     /**
      * Create a new Module Page.
-     * 
+     *
      * @param integer $parentNavId
      * @param integer $navContainerId
      * @param integer $langId
@@ -878,7 +878,7 @@ class Nav extends ActiveRecord
 
     /**
      * Create a module for a given Nav Model.
-     * 
+     *
      * @param integer $navId
      * @param integer $langId
      * @param string $title

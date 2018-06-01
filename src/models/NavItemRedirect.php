@@ -63,7 +63,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
 
     /**
      * Resolve the values with {{luya\cms\LinkConverter}}.
-     * 
+     *
      * @return \luya\web\LinkInterface|boolean
      */
     public function resolveValue()

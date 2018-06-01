@@ -80,7 +80,7 @@ class Url extends \luya\helpers\Url
 
     /**
      * Create an url to a cms page based on the unique nav item id.
-     * 
+     *
      * This method uses the UNIQUE CMS NAV ITEM identifier.
      *
      * @param integer $navItemId The menu item Id where the url should be created from
@@ -112,9 +112,9 @@ class Url extends \luya\helpers\Url
     
     /**
      * Create an url to a cms page based on the nav id.
-     * 
+     *
      * This method uses the language independent navId which is displayed in the cms page tree.
-     * 
+     *
      * @param integer $navId The nav id of the given page which is the base path for the generated url.
      * @param array $route An array with a route and optional params `['/module/controller/action', 'param' => 'bar]`.
      * @return string The url with the base path from the nav id and the appended route.

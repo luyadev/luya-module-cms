@@ -24,7 +24,7 @@ class BlockTest extends CmsNgRestTestCase
     public function testFindOne()
     {
         $fixture = $this->modelFixture;
-        
+
         $relationFixture = new ActiveRecordFixture([
             'modelClass' => 'luya\cms\models\NavItemPageBlockItem',
             'fixtureData' => [
@@ -44,29 +44,29 @@ class BlockTest extends CmsNgRestTestCase
                 ]
             ]
         ]);
-        
+
         $pageFixture = new ActiveRecordFixture([
             'modelClass' => 'luya\cms\models\NavItemPage',
         ]);
-        
+
         $pageFixture = new ActiveRecordFixture([
             'modelClass' => 'luya\cms\models\Log',
         ]);
-        
+
         // get existing
         $block = $fixture->getModel('model1');
         $this->assertSame(1, $block->id);
         $this->assertEquals(1, $block->usageCount);
         $this->assertSame(1, $block->delete());
-        
-        
-        
+
+
+
         // add new model
         $model = $fixture->getNewModel();
         $model->attributes = ['group_id' => 2, 'class' => 'FooBar', 'is_disabled' => 0];
         $this->assertTrue($model->save());
         //$this->assertSame(0, $model->fileExists);
-        
+
     }
     */
     

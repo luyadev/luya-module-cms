@@ -8,7 +8,7 @@ use luya\admin\models\Property as AdminProperty;
  * CMS PROPERTY
  *
  * Each CMS property is attached to an ADMIN PROPERTY with the current navigation (nav_id) context.
- * 
+ *
  * > Rename to NavProperty in 1.1.x
  *
  * @author Basil Suter <basil@nadar.io>
@@ -36,7 +36,7 @@ final class Property extends \yii\db\ActiveRecord
     
     /**
      * Property Active Query.
-     * 
+     *
      * @return \luya\admin\models\Property
      */
     public function getAdminProperty()
@@ -48,7 +48,7 @@ final class Property extends \yii\db\ActiveRecord
     
     /**
      * Create the Property object with the given value.
-     * 
+     *
      * @return \luya\admin\base\Property
      */
     public function getObject()

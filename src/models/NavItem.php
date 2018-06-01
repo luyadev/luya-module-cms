@@ -128,7 +128,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
 
     /**
      * Update User relation.
-     * 
+     *
      * @return \luya\admin\models\User
      */
     public function getUpdateUser()
@@ -223,7 +223,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
 
     /**
      * Alias verification.
-     * 
+     *
      * @param string $alias
      * @param integer $langId
      * @return boolean
@@ -290,7 +290,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
 
     /**
      * Udpate the current model timestamp and user.
-     * 
+     *
      * This is triggered from outside model as short cut.
      */
     public function updateTimestamp()
@@ -354,7 +354,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     
     /**
      * Lang Active Query.
-     * 
+     *
      * @return \luya\admin\models\Lang
      */
     public function getLang()
@@ -497,10 +497,10 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     
     /**
      * Display all pages where the given module name is integrated.
-     * 
+     *
      * > Due to the module block which can integrate a module as well, we just return all the pages available.
      * > This method should be removed and not used.
-     * 
+     *
      * @param string $moduleName
      * @return \luya\cms\models\NavItem
      */

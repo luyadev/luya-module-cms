@@ -2,7 +2,6 @@
 
 namespace cmstests;
 
-
 use luya\testsuite\cases\NgRestTestCase;
 
 class CmsNgRestTestCase extends NgRestTestCase

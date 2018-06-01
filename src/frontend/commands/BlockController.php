@@ -450,25 +450,25 @@ class BlockController extends \luya\console\Command
     
     /**
      * Search for a given block by its class or return all.
-     * 
+     *
      * Returns all blocks:
-     * 
+     *
      * ```
      * ./luya cms/block/find
      * ```
-     * 
+     *
      * Filter for a given name:
-     * 
+     *
      * ```
      * ./luya cms/block/find html
      * ```
-     * 
+     *
      * Filter for different names combined as OR conditions:
-     * 
+     *
      * ```
      * ./luya cms/block/find html,module
      * ```
-     * 
+     *
      * @param string $search Optional query to search inside the class. In order to performe multiple criterias use comma separated list of key words.
      * @since 1.0.4
      */
@@ -500,38 +500,38 @@ class BlockController extends \luya\console\Command
     
     /**
      * Search for a given block and replace the class by replace argument.
-     * 
+     *
      * This is commonly used when a block does not exists anymore and you want to provide
      * another block for the none existing one.
-     * 
+     *
      * The most common case is to search ($old) for a class which has been used in the content but does not exist anymore,
      * therfore you can replace it with a new ($replace) block which has not been used in the content. This will change the
      * class identifier from the old block with the new (replace) ones. If the replace block has not been used, he will be deleted.
-     * 
+     *
      * Searching for the blocks could look like this:
-     * 
+     *
      * ```sh
      * ./luya cms/block/migrate OldBlockWhichDoesNotExists TheNewBlockWhichShouldReplaceTheOld
      * ```
-     * 
+     *
      * Example for using different namespaces but the same block name:
-     * 
+     *
      * ```sh
      * ./luya cms/block/migrate \\blocks\\MyBlock \\newblocks\\MyBlock
      * ```
-     * 
+     *
      * Example usage when working with absolute class names.
-     * 
+     *
      * ```sh
      * ./luya cms/block/migrate app\\blocks\\OldBlockName app\\blocks\\NewBlockName
      * ```
-     * 
+     *
      * As the search for the old block is done by a like statements this would work as well:
-     * 
+     *
      * ```sh
      * ./luya cms/block/migrate OldBlockName app\\blocks\\NewBlockName
      * ```
-     * 
+     *
      * @param string $old
      * @param string $replace
      * @since 1.0.4
@@ -569,9 +569,9 @@ class BlockController extends \luya\console\Command
     
     /**
      * Search for blocks with none existing class files and remove them.
-     * 
+     *
      * > Attention: Keep in the mind if the blocks do have been used in content, those data will be delete as well!
-     * 
+     *
      * @since 1.0.4
      */
     public function actionCleanup()

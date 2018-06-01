@@ -14,9 +14,9 @@ use luya\cms\models\Log;
 
 /**
  * Page command cms interaction.
- * 
+ *
  * The page controller contains all interaction with cms nav, pages, blocks.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.4
  */
@@ -24,9 +24,9 @@ class PageController extends Command
 {
     /**
      * Cleanup routine.
-     * 
+     *
      * The are differente cases which are part of the cleanup process:
-     * 
+     *
      * + find is_deleted cms nav items and remove them (with all its depending items, blocks etc.)
      * + see if cms_nav_item has a none existing cms_nav and remove them.
      * + check if cms_nav_item_page has nav_item_id which does not exists anymore if yes delete the page with all its blocks.
@@ -38,7 +38,7 @@ class PageController extends Command
         $navIds = Nav::find()->where(['is_deleted' => true])->select(['id'])->column();
         
         // get all nav items where the page is deleted.
-        $navItemIds = NavItem::find()->joinWith(['nav' => function($q) {
+        $navItemIds = NavItem::find()->joinWith(['nav' => function ($q) {
             $q->where(['is_deleted' => true]);
         }])->select(['{{cms_nav_item}}.id'])->column();
         
@@ -60,7 +60,6 @@ class PageController extends Command
         echo $table->run();
         
         if ($this->confirm('The delete process can not be undone! Are you sure you want to delete those data?')) {
-            
             $this->printRows(Nav::deleteAll(['in', 'id', $navIds]), 'Page');
             $this->printRows(NavItem::deleteAll(['in', 'id', $navItemIds]), 'Page language');
             $this->printRows(NavItemPage::deleteAll(['in', 'id', $navItemPageIds]), 'Page version');

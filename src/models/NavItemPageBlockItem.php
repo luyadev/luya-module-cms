@@ -147,7 +147,7 @@ class NavItemPageBlockItem extends ActiveRecord
     }
     
     /**
-     * 
+     *
      * @param \yii\base\Event $event
      */
     protected function ensureInputValues($event)
@@ -241,7 +241,7 @@ class NavItemPageBlockItem extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $blockId
      */
     private function deleteAllSubBlocks($blockId)

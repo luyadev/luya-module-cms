@@ -8,7 +8,7 @@ namespace luya\cms\models;
  * @property int $group_id
  * @property int $nav_id
  * @property int $inheritance
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.4
  */

@@ -4,7 +4,6 @@ namespace cmstests;
 
 use luya\testsuite\cases\ConsoleApplicationTestCase;
 
-
 class ModelTestCase extends ConsoleApplicationTestCase
 {
     public function getConfigArray()

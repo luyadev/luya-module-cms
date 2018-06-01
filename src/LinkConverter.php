@@ -12,36 +12,36 @@ use luya\web\TelephoneLink;
 
 /**
  * Convert a given config into a {{luya\web\LinkInterface}} Object.
- * 
+ *
  * From a array with config:
- * 
+ *
  * ```php
  * $converter = LinkConverter::fromArray($config);
  * return $converter->getLink();
  * ```
- * 
+ *
  * or from object context
- * 
+ *
  * ```php
  * $converter = new LinkConverter();
- * 
+ *
  * // set value and type from current object context.
  * $converter->value = $this->value;
  * $converter->type = $this->type;
  *
  * return $converter->getLink();
  * ```
- * 
- * In very rare case you may want to provide some extra informations to the 
+ *
+ * In very rare case you may want to provide some extra informations to the
  * the different link types, like for intern pages a language container, then
  * you can also use the converter like this.
- * 
+ *
  * ```php
  * $converter = new LinkConverter([
  *     'type' => $this->redirectMapData('type'),
  *     'value' => $this->redirectMapData('value'),
  * ]);
- * 
+ *
  * switch ($converter->type) {
  *     case $converter::TYPE_EXTERNAL_URL:
  *         return $converter->getWebsiteLink($converter->value, $converter->target)->getHref();
@@ -57,9 +57,9 @@ use luya\web\TelephoneLink;
  *         break;
  * }
  * ```
- * 
+ *
  * But keep in mind, with this solution you have to adjust new TYPES by yourself.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.5
  */
@@ -91,7 +91,7 @@ class LinkConverter extends BaseObject
     public $target;
     
     /**
-     * 
+     *
      * @param array $configuration
      * @throws InvalidConfigException
      * @return \luya\cms\LinkConverter
@@ -111,7 +111,7 @@ class LinkConverter extends BaseObject
     
     /**
      * Get the {{luya\web\LinkInterface}} from the given configuration trough type.
-     * 
+     *
      * @return \luya\web\LinkInterface|boolean
      */
     public function getLink()
@@ -149,7 +149,7 @@ class LinkConverter extends BaseObject
     
     /**
      * Get a Website Link Object.
-     * 
+     *
      * @param string $href
      * @param string $target
      * @return \luya\web\WebsiteLink
@@ -161,7 +161,7 @@ class LinkConverter extends BaseObject
     
     /**
      * Get a File Link Object.
-     * 
+     *
      * @param integer $fileId
      * @param string $target
      * @return \luya\admin\file\Item|boolean
@@ -177,7 +177,7 @@ class LinkConverter extends BaseObject
     
     /**
      * Get CMS Page Link Object.
-     * 
+     *
      * @param integer $navId
      * @param string $target
      * @param string $lang
@@ -203,7 +203,7 @@ class LinkConverter extends BaseObject
     
     /**
      * Get an Email Link Object.
-     * 
+     *
      * @param string $email
      * @return \luya\web\EmailLink
      */

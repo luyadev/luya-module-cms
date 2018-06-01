@@ -17,7 +17,7 @@ use luya\helpers\Url;
  * @property string $previewUrl Configuration option for the auto preview and preview button link.
  * @property array $blocks Optional blocks or folders to scan for the {{luya\cms\admin\importers\BlockImporter}}.
  * @property array $blockVariations An array with variations to pass for a given block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -115,11 +115,11 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     
     /**
      * Setter method for additional cms blocks.
-     * 
+     *
      * @param string|array $definition This can be either a string (for directories or a single file) or an array with files or diretories.
-     * 
+     *
      * Example usage with differnt types of informations.
-     * 
+     *
      * ```php
      * 'cmsadmin' => [
      *     'class' => 'luya\cms\admin\Module',
@@ -129,9 +129,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      *     ]
      * ]
      * ```
-     * 
+     *
      * The blocks will be add/update/deleted within the import process trough {{luya\cms\admin\importers\BlockImporter}}.
-     * 
+     *
      * @since 1.0.4
      */
     public function setBlocks($definition)
@@ -141,9 +141,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     
     /**
      * Get an array with custom block definitions.
-     * 
+     *
      * The array of additional blocks or folders with blocks will be passed trough to the importer class {{luya\cms\admin\importers\BlockImporter}}.
-     * 
+     *
      * @return array
      * @since 1.0.4
      */

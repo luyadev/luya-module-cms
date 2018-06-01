@@ -374,12 +374,12 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     
     /**
      * Internal used to retriev redirect data.
-     * 
+     *
      * The redirect data commonly has the following keys:
-     * 
+     *
      * + type: Its a number which represents the redirect type (1 = internal, 2 = external, etc.)
      * + value: A value which associated for the type (file could a file id but external link could be a string with the url)
-     * 
+     *
      * @return multitype:
      */
     protected function redirectMapData($key)
@@ -404,7 +404,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             
             // generate convert object to determine correctn usage.
             $converter = new LinkConverter([
-                'type' => $this->redirectMapData('type'), 
+                'type' => $this->redirectMapData('type'),
                 'value' => $this->redirectMapData('value'),
             ]);
             
@@ -422,7 +422,6 @@ class Item extends BaseObject implements LinkInterface, Arrayable
                     return $converter->getFileLink($converter->value, $converter->target)->getHref();
                
             }
-            
         }
         
         // if its the homepage and the default lang short code is equasl to this lang the link has no path.

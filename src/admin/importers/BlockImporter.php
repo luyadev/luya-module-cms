@@ -69,7 +69,7 @@ class BlockImporter extends Importer
     
     /**
      * Handle an array with defintions whether they are files or folders.
-     * 
+     *
      * @param array $definitions
      * @return array
      * @since 1.0.8
@@ -97,7 +97,7 @@ class BlockImporter extends Importer
     
     /**
      * Save all blocks from a given folder.
-     * 
+     *
      * @param string $folder
      * @return number[]|boolean[]
      * @since 1.0.8
@@ -116,9 +116,9 @@ class BlockImporter extends Importer
     
     /**
      * Save a block by its given full class name.
-     * 
+     *
      * Example full class name: luya\cms\blocks\ModuleBlock
-     * 
+     *
      * @param string $fullClassName
      * @return number
      */
@@ -159,9 +159,9 @@ class BlockImporter extends Importer
     
     /**
      * Save a block by its path, this will extract the namespace of the block in order to save it.
-     * 
+     *
      * Example path: /apps/myblocks/ExampleBlock.php
-     * 
+     *
      * Example path: `
      * @param string $path
      * @return number|boolean
@@ -183,7 +183,7 @@ class BlockImporter extends Importer
     
     /**
      * Create a block object based from the class name.
-     * 
+     *
      * @param string $className
      * @return object|mixed
      */
