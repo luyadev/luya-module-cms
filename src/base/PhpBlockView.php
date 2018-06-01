@@ -264,11 +264,12 @@ class PhpBlockView extends View
      * ```
      *
      * @return \luya\web\View The global application View Object which is also the same as the layout or cmslayout.
-     * @deprecated Please use `MyBlockAsset::register($this);` instead.
-     * @since 1.0.5 Deprecated.
+     * @deprecated deprecated since 1.0.5 and will be removed in 1.1.0
      */
     public function getAppView()
     {
+        trigger_error('The getAppView() has been deprecated and will be removed in version 1.1.0. Use the view object to register assets, js and files.', E_USER_DEPRECATED);
+    
         return $this;
     }
 
