@@ -311,7 +311,12 @@ class PhpBlockView extends View
                     $appAssets = &$appView->{$attribute};
                     
                     foreach ($blockAsset as $key => $value) {
-                        $appAssets[$key] = array_merge($appAssets[$key] ?: [], $value);
+                        if (isset($appAssets[$key])) {
+                            $appAssets[$key] = array_merge($appAssets[$key], $value);
+                        }
+                        else {
+                            $appAssets[$key] = $value;
+                        }
                     }
                 }
                 else {

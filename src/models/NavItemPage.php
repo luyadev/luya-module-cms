@@ -213,7 +213,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
             if ($blockResponse === false) {
                 
-                /** @var $blockObject \luya\cms\base\PhpBlock */
+                /** @var $blockObject \luya\cms\base\InternalBaseBlock */
                 $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
                 
                 // see if its a valid block object
@@ -279,9 +279,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                         $phpBlockView = $blockObject->getView();
 
                         $assetBundles = array_keys($phpBlockView->assetBundles);
+                        $blockAssets = $phpBlockView->getBlockAssets();
+                        
                         $this->setHasCache($cacheKeyAssetBundles, $assetBundles, null, $blockObject->getCacheExpirationTime());
-
-                        $this->setHasCache($cacheKeyAssets, $phpBlockView->getBlockAssets(), null, $blockObject->getCacheExpirationTime());
+                        $this->setHasCache($cacheKeyAssets, $blockAssets, null, $blockObject->getCacheExpirationTime());
                     }
                 }
             } else {
