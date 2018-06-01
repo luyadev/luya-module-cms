@@ -4,8 +4,8 @@ namespace luya\cms;
 
 use Yii;
 use yii\base\BaseObject;
-use luya\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
+use luya\helpers\ArrayHelper;
 use luya\web\WebsiteLink;
 use luya\web\EmailLink;
 use luya\web\TelephoneLink;
@@ -75,10 +75,19 @@ class LinkConverter extends BaseObject
     
     const TYPE_LINK_TO_TELEPHONE = 5;
 
+    /**
+     * @var integer A numeric representation of the type of link.
+     */
     public $type;
     
+    /**
+     * @var mixed The value which will be associated to the type.
+     */
     public $value;
     
+    /**
+     * @var string Whether its _blank or _self.
+     */
     public $target;
     
     /**
@@ -139,9 +148,10 @@ class LinkConverter extends BaseObject
     }
     
     /**
+     * Get a Website Link Object.
      * 
-     * @param unknown $href
-     * @param unknown $target
+     * @param string $href
+     * @param string $target
      * @return \luya\web\WebsiteLink
      */
     public function getWebsiteLink($href, $target)
@@ -150,9 +160,10 @@ class LinkConverter extends BaseObject
     }
     
     /**
+     * Get a File Link Object.
      * 
-     * @param unknown $fileId
-     * @param unknown $target
+     * @param integer $fileId
+     * @param string $target
      * @return \luya\admin\file\Item|boolean
      */
     public function getFileLink($fileId, $target)
@@ -165,10 +176,11 @@ class LinkConverter extends BaseObject
     }
     
     /**
+     * Get CMS Page Link Object.
      * 
-     * @param unknown $navId
-     * @param unknown $target
-     * @param unknown $lang
+     * @param integer $navId
+     * @param string $target
+     * @param string $lang
      * @return \luya\cms\menu\Item|boolean
      */
     public function getPageLink($navId, $target, $lang = null)
@@ -190,8 +202,9 @@ class LinkConverter extends BaseObject
     }
     
     /**
+     * Get an Email Link Object.
      * 
-     * @param unknown $email
+     * @param string $email
      * @return \luya\web\EmailLink
      */
     public function getEmailLink($email)
@@ -200,6 +213,8 @@ class LinkConverter extends BaseObject
     }
 
     /**
+     * Get a Telefphone Link Object.
+     *
      * @param string $telephone
      * @return \luya\web\TelephoneLink
      */
