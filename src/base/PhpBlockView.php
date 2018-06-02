@@ -2,9 +2,8 @@
 
 namespace luya\cms\base;
 
-use luya\helpers\ArrayHelper;
-use Yii;
 use luya\web\View;
+use Yii;
 
 /**
  * View context helper of php block view file.
@@ -31,7 +30,7 @@ class PhpBlockView extends View
     {
         parent::init();
         
-        $this->on(self::EVENT_AFTER_RENDER, function() {
+        $this->on(self::EVENT_AFTER_RENDER, function () {
             self::registerToAppViewInternal($this->getBlockAssets(), $this->getAssetBundleNames());
         });
     }
@@ -208,7 +207,7 @@ class PhpBlockView extends View
             return $value;
         }
         
-        return str_replace(['{{'.$key. '}}'], $value, $template);
+        return str_replace(['{{' . $key . '}}'], $value, $template);
     }
     
     /**
@@ -269,10 +268,10 @@ class PhpBlockView extends View
     public function getAppView()
     {
         trigger_error('The getAppView() has been deprecated and will be removed in version 1.1.0. Use the view object to register assets, js and files.', E_USER_DEPRECATED);
-    
+        
         return $this;
     }
-
+    
     /**
      * @return array
      * @since 1.0.5
@@ -303,7 +302,7 @@ class PhpBlockView extends View
     public static function registerToAppViewInternal(array $blockAssets, array $assetBundles)
     {
         $appView = Yii::$app->view;
-
+        
         foreach ($blockAssets as $attribute => $blockAsset) {
             if (!empty($blockAsset)) {
                 
@@ -312,14 +311,13 @@ class PhpBlockView extends View
                      * js and jsFiles must keep the array keys as position and have subarray
                      * @see \yii\web\View::POS_HEAD
                      */
-
+                    
                     $appAssets = &$appView->{$attribute};
                     
                     foreach ($blockAsset as $key => $value) {
                         if (isset($appAssets[$key])) {
                             $appAssets[$key] = array_merge($appAssets[$key], $value);
-                        }
-                        else {
+                        } else {
                             $appAssets[$key] = $value;
                         }
                     }
@@ -328,7 +326,7 @@ class PhpBlockView extends View
                 }
             }
         }
-
+        
         foreach ($assetBundles as $bundle) {
             $appView->registerAssetBundle($bundle);
         }
