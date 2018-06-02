@@ -32,7 +32,7 @@ class PhpBlockView extends View
         parent::init();
         
         $this->on(self::EVENT_AFTER_RENDER, function() {
-            self::registerToAppView($this->getBlockAssets(), array_keys($this->assetBundles));
+            self::registerToAppViewInternal($this->getBlockAssets(), $this->getAssetBundleNames());
         });
     }
     
@@ -288,14 +288,19 @@ class PhpBlockView extends View
             'js' => $this->js,
         ];
     }
-
+    
+    public function getAssetBundleNames()
+    {
+        return array_keys($this->assetBundles);
+    }
+    
     /**
      * @param array $blockAssets
      * @param array $assetBundles
      * @throws \yii\base\InvalidConfigException
      * @since 1.0.5
      */
-    public static function registerToAppView(array $blockAssets, array $assetBundles)
+    public static function registerToAppViewInternal(array $blockAssets, array $assetBundles)
     {
         $appView = Yii::$app->view;
 
@@ -318,8 +323,7 @@ class PhpBlockView extends View
                             $appAssets[$key] = $value;
                         }
                     }
-                }
-                else {
+                } else {
                     $appView->{$attribute} = array_merge($appView->{$attribute}, $blockAsset);
                 }
             }

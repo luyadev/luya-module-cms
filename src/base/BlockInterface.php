@@ -13,6 +13,11 @@ namespace luya\cms\base;
 interface BlockInterface
 {
     // block methods defintions implementations
+    
+    /**
+     * @todo
+     */
+    public function onRegister();
 
     /**
      * Get the name of the block in order to display in administration context.
