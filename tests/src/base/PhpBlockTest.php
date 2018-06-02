@@ -5,6 +5,7 @@ namespace cmstests\src\blocks;
 use cmstests\CmsFrontendTestCase;
 use cmstests\data\blocks\PhpTestBlock;
 use yii\bootstrap\BootstrapAsset;
+use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 
 class PhpBlockTest extends CmsFrontendTestCase

@@ -10,7 +10,7 @@ return [
         'cmstests' => dirname(__DIR__) . '/../',
     ],
     'language' => 'en',
-    'vendorPath' => '/var/www/luya/envs/phpunit/vendor',
+    'vendorPath' => '/var/www/vendor',
     'modules' => [
         'admin' => 'luya\admin\Module',
         'cms' => [
@@ -35,7 +35,7 @@ return [
         ],
         'cache' => \yii\caching\ArrayCache::class,
         'assetManager' => [
-            'basePath' => '/var/www/luya/envs/phpunit/public_html/assets'
+            'basePath' => dirname(__DIR__) . '/assets',
         ]
     ],
 ];
