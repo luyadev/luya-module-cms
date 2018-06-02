@@ -10,6 +10,7 @@ return [
         'cmstests' => dirname(__DIR__) . '/../',
     ],
     'language' => 'en',
+    'vendorPath' => '/var/www/luya/envs/dev/vendor',
     'modules' => [
         'admin' => 'luya\admin\Module',
         'cms' => [
@@ -32,5 +33,6 @@ return [
             'password' => DB_PASS,
             'charset' => 'utf8',
         ],
+        'cache' => \yii\caching\ArrayCache::class
     ],
 ];

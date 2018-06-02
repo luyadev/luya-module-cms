@@ -294,6 +294,8 @@ class PhpBlockView extends View
     }
     
     /**
+     *
+     *
      * @param array $blockAssets
      * @param array $assetBundles
      * @throws \yii\base\InvalidConfigException
@@ -326,7 +328,7 @@ class PhpBlockView extends View
                 }
             }
         }
-        
+    
         foreach ($assetBundles as $bundle) {
             $appView->registerAssetBundle($bundle);
         }
