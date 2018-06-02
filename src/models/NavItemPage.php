@@ -2,6 +2,7 @@
 
 namespace luya\cms\models;
 
+use luya\cms\base\PhpBlock;
 use luya\cms\base\PhpBlockView;
 use Yii;
 use yii\base\InvalidConfigException;
@@ -209,11 +210,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
             $blockResponse = $this->getHasCache($cacheKey);
     
-            /** @var $blockObject \luya\cms\base\InternalBaseBlock */
-            $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
+            if ($blockResponse === false) {
+        
+                /** @var $blockObject \luya\cms\base\InternalBaseBlock */
+                $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
     
-            if ($blockObject) {
-                if ($blockResponse === false) {
+                if ($blockObject) {
         
                     $className = get_class($blockObject);
                     // insert var and cfg values from database
@@ -273,9 +275,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     if ($blockObject->getIsCacheEnabled()) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
                     }
+                 
+                    $blockObject->onRegister();
                 }
-
-                $blockObject->onRegister();
+            } else {
+                PhpBlock::onRegisterFromCache($placeholder['id']);
             }
 
             $string.= $blockResponse;

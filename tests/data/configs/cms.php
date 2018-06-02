@@ -10,7 +10,6 @@ return [
         'cmstests' => dirname(__DIR__) . '/../',
     ],
     'language' => 'en',
-    'vendorPath' => '/var/www/vendor',
     'modules' => [
         'admin' => 'luya\admin\Module',
         'cms' => [
