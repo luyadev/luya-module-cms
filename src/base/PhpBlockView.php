@@ -31,7 +31,7 @@ class PhpBlockView extends View
         parent::init();
         
         $this->on(self::EVENT_AFTER_RENDER, function () {
-            self::registerToAppViewInternal($this->getBlockAssets(), $this->getAssetBundleNames());
+            self::registerToAppView($this->getBlockAssets(), $this->getAssetBundleNames());
         });
     }
     
@@ -299,7 +299,7 @@ class PhpBlockView extends View
      * @throws \yii\base\InvalidConfigException
      * @since 1.0.5
      */
-    public static function registerToAppViewInternal(array $blockAssets, array $assetBundles)
+    public static function registerToAppView(array $blockAssets, array $assetBundles)
     {
         $appView = Yii::$app->view;
         

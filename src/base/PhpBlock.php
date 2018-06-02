@@ -80,7 +80,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
             $assets = Yii::$app->cache->getOrSet($cacheKeyAssets, [$phpBlockView, 'getBlockAssets'], $this->getCacheExpirationTime());
             $assetBundles = Yii::$app->cache->getOrSet($cacheKeyAssetBundles, [$phpBlockView, 'getAssetBundleNames'], $this->getCacheExpirationTime());
         
-            PhpBlockView::registerToAppViewInternal($assets, $assetBundles);
+            PhpBlockView::registerToAppView($assets, $assetBundles);
         }
     }
 }
