@@ -18,7 +18,9 @@ interface BlockInterface
      * @todo
      */
     public function onRegister();
-
+    
+    public function onRegisterFromCache();
+    
     /**
      * Get the name of the block in order to display in administration context.
      */

@@ -85,8 +85,10 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         }
     }
     
-    public static function onRegisterFromCache($blockId)
+    public function onRegisterFromCache()
     {
+        $blockId = $this->getEnvOption('id');
+    
         $cacheKeyAssets = ['blockassets', $blockId];
         $cacheKeyAssetBundles = ['blockassetbundles', $blockId];
     

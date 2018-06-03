@@ -210,12 +210,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
             $blockResponse = $this->getHasCache($cacheKey);
     
-            if ($blockResponse === false) {
-        
-                /** @var $blockObject \luya\cms\base\InternalBaseBlock */
-                $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
+            /** @var $blockObject \luya\cms\base\InternalBaseBlock */
+            $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
     
-                if ($blockObject) {
+            if ($blockObject) {
+                if ($blockResponse === false) {
         
                     $className = get_class($blockObject);
                     // insert var and cfg values from database
@@ -274,14 +273,14 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         
                     if ($blockObject->getIsCacheEnabled()) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
+                        $blockObject->onRegister();
                     }
-                 
-                    $blockObject->onRegister();
                 }
-            } else {
-                PhpBlock::onRegisterFromCache($placeholder['id']);
+                else {
+                    $blockObject->onRegisterFromCache();
+                }
             }
-
+    
             $string.= $blockResponse;
             
             unset($blockResponse);
