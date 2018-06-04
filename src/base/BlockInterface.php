@@ -15,10 +15,17 @@ interface BlockInterface
     // block methods defintions implementations
     
     /**
-     * @todo
+     * Will called when the block is saved to the cache.
+     *
+     * @since 1.0.5
      */
     public function onRegister();
     
+    /**
+     * Will called when the block is loaded from the cache.
+     *
+     * @since 1.0.5
+     */
     public function onRegisterFromCache();
     
     /**

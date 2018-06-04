@@ -68,6 +68,11 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         return $this->admin();
     }
     
+    /**
+     * Save the registered assets form block to the cache.
+     *
+     * @since 1.0.5
+     */
     public function onRegister()
     {
         if ($this->getIsCacheEnabled()) {
@@ -80,12 +85,19 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
             
             $assets = Yii::$app->cache->getOrSet($cacheKeyAssets, [$phpBlockView, 'getBlockAssets'], $this->getCacheExpirationTime());
             $assetBundles = Yii::$app->cache->getOrSet($cacheKeyAssetBundles, [$phpBlockView, 'getAssetBundleNames'], $this->getCacheExpirationTime());
-
-
+    
+            /**
+             * @todo i think this is not need because in PhpBlockView::init() the EVENT_AFTER_RENDER is listen also.
+             */
             PhpBlockView::registerToAppView($assets, $assetBundles);
         }
     }
     
+    /**
+     * Load the block assets from cache and register to the app view.
+     *
+     * @since 1.0.5
+     */
     public function onRegisterFromCache()
     {
         $blockId = $this->getEnvOption('id');
