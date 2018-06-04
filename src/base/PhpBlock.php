@@ -2,6 +2,7 @@
 
 namespace luya\cms\base;
 
+use luya\traits\CacheableTrait;
 use Yii;
 use yii\base\ViewContextInterface;
 
@@ -78,8 +79,8 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
             $cacheKeyAssets = ['blockassets', $blockId];
             $cacheKeyAssetBundles = ['blockassetbundles', $blockId];
             
-            $assets = Yii::$app->cache->getOrSet($cacheKeyAssets, [$phpBlockView, 'getBlockAssets'], $this->getCacheExpirationTime());
-            $assetBundles = Yii::$app->cache->getOrSet($cacheKeyAssetBundles, [$phpBlockView, 'getAssetBundleNames'], $this->getCacheExpirationTime());
+            $assets = $this->getOrSetHasCache($cacheKeyAssets, [$phpBlockView, 'getBlockAssets'], $this->getCacheExpirationTime());
+            $assetBundles = $this->getOrSetHasCache($cacheKeyAssetBundles, [$phpBlockView, 'getAssetBundleNames'], $this->getCacheExpirationTime());
 
             PhpBlockView::registerToAppView($assets, $assetBundles);
         }
@@ -92,8 +93,8 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         $cacheKeyAssets = ['blockassets', $blockId];
         $cacheKeyAssetBundles = ['blockassetbundles', $blockId];
     
-        $assets = Yii::$app->cache->get($cacheKeyAssets) ?: [];
-        $assetBundles = Yii::$app->cache->get($cacheKeyAssetBundles) ?: [];
+        $assets = $this->getHasCache($cacheKeyAssets) ?: [];
+        $assetBundles = $this->getHasCache($cacheKeyAssetBundles) ?: [];
     
         PhpBlockView::registerToAppView($assets, $assetBundles);
     }
