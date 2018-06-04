@@ -79,8 +79,8 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
             $cacheKeyAssets = ['blockassets', $blockId];
             $cacheKeyAssetBundles = ['blockassetbundles', $blockId];
             
-            $assets = $this->getOrSetHasCache($cacheKeyAssets, [$phpBlockView, 'getBlockAssets'], $this->getCacheExpirationTime());
-            $assetBundles = $this->getOrSetHasCache($cacheKeyAssetBundles, [$phpBlockView, 'getAssetBundleNames'], $this->getCacheExpirationTime());
+            $assets = $this->getOrSetHasCache($cacheKeyAssets, \Closure::fromCallable([$phpBlockView, 'getBlockAssets']), $this->getCacheExpirationTime());
+            $assetBundles = $this->getOrSetHasCache($cacheKeyAssetBundles, \Closure::fromCallable([$phpBlockView, 'getAssetBundleNames']), $this->getCacheExpirationTime());
 
             PhpBlockView::registerToAppView($assets, $assetBundles);
         }
