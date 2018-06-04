@@ -10,6 +10,10 @@ abstract class UnitTestBlock extends InternalBaseBlock
     {
     }
     
+    public function onRegisterFromCache()
+    {
+    }
+    
     public function renderAdmin()
     {
     }

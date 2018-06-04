@@ -7,10 +7,11 @@ use luya\cms\frontend\blockgroups\DevelopmentGroup;
 
 class ConcretImplementationBlock implements BlockInterface
 {
-    /**
-     * @todo
-     */
     public function onRegister()
+    {
+    }
+    
+    public function onRegisterFromCache()
     {
     }
     
