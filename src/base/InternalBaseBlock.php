@@ -2,7 +2,6 @@
 
 namespace luya\cms\base;
 
-use luya\traits\CacheableTrait;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
 use luya\helpers\ArrayHelper;
@@ -23,8 +22,6 @@ use yii\base\BaseObject;
  */
 abstract class InternalBaseBlock extends BaseObject implements BlockInterface, TypesInterface, \ArrayAccess
 {
-    use CacheableTrait;
-    
     /**
      * Returns the configuration array.
      *
@@ -43,16 +40,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     const INJECTOR_CFG = 'cfg';
 
     private $_injectorObjects;
-    
-    public function __construct(array $config = [])
-    {
-        /**
-         * Set the default cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true. 0 means never expire.
-         */
-        $this->cacheExpiration  = 3600;
-    
-        parent::__construct($config);
-    }
     
     /**
      * Setup injectors.
@@ -95,6 +82,16 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     }
     
     /**
+     * @var bool Enable or disable the block caching
+     */
+    public $cacheEnabled = false;
+    
+    /**
+     * @var int The cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true. 0 means never expire.
+     */
+    public $cacheExpiration = 3600;
+    
+    /**
      * @var bool Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
      * in a different way for a better user experience. Container block will not display isDirty colorizing.
      */
@@ -112,7 +109,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public function getIsCacheEnabled()
     {
-        return $this->isCachable();
+        return $this->cacheEnabled;
     }
     
     /**
