@@ -2,6 +2,8 @@
 
 namespace luya\cms\models;
 
+use luya\cms\base\PhpBlock;
+use luya\cms\base\PhpBlockView;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\Query;
@@ -205,24 +207,23 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $prev = $key-1;
             $next = $key+1;
             $cacheKey = ['blockcache', (int) $placeholder['id']];
-            
+
             $blockResponse = $this->getHasCache($cacheKey);
-            
-            if ($blockResponse === false) {
-                
-                /** @var $blockObject \luya\cms\base\InternalBaseBlock */
-                $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
-                
-                // see if its a valid block object
-                if ($blockObject) {
+    
+            /** @var $blockObject \luya\cms\base\InternalBaseBlock */
+            $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
+    
+            if ($blockObject) {
+                if ($blockResponse === false) {
+        
                     $className = get_class($blockObject);
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
-                    
+        
                     // inject variations variables
                     $possibleVariations = isset($variations[$className]) ? $variations[$className] : false;
-                    
+        
                     if (isset($possibleVariations[$placeholder['variation']])) {
                         $ensuredVariation = $possibleVariations[$placeholder['variation']];
                         foreach ($ensuredVariation as $type => $typeContent) {
@@ -240,12 +241,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                             }
                         }
                     }
-                    
+        
                     // set env options from current object environment
                     foreach ($this->getOptions() as $optKey => $optValue) {
                         $blockObject->setEnvOption($optKey, $optValue);
                     }
-                    
+        
                     $blockObject->setEnvOption('index', $i);
                     $blockObject->setEnvOption('itemsCount', $blocksCount);
                     $blockObject->setEnvOption('isFirst', ($i == 1));
@@ -253,14 +254,14 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $prevIsEqual = array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id'];
                     $blockObject->setEnvOption('isPrevEqual', $prevIsEqual);
                     $blockObject->setEnvOption('isNextEqual', array_key_exists($next, $placeholders) && $placeholder['block_id'] == $placeholders[$next]['block_id']);
-                    
+        
                     if (!$prevIsEqual) {
                         $equalIndex = 1;
                     } else {
                         $equalIndex++;
                     }
                     $blockObject->setEnvOption('equalIndex', $equalIndex);
-                    
+        
                     // render sub placeholders and set into object
                     $insertedHolders = [];
                     foreach ($blockObject->getConfigPlaceholdersExport() as $item) {
@@ -269,13 +270,17 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $blockObject->setPlaceholderValues($insertedHolders);
                     // output buffer the rendered frontend method of the block
                     $blockResponse = $blockObject->renderFrontend();
-                    
+        
                     if ($blockObject->getIsCacheEnabled()) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
+                        $blockObject->onRegister();
                     }
                 }
+                else {
+                    $blockObject->onRegisterFromCache();
+                }
             }
-            
+    
             $string.= $blockResponse;
             
             unset($blockResponse);

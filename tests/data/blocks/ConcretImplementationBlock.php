@@ -7,6 +7,14 @@ use luya\cms\frontend\blockgroups\DevelopmentGroup;
 
 class ConcretImplementationBlock implements BlockInterface
 {
+    public function onRegister()
+    {
+    }
+    
+    public function onRegisterFromCache()
+    {
+    }
+    
     /**
      * Get the name of the block in order to display in administration context.
      */
@@ -65,8 +73,8 @@ class ConcretImplementationBlock implements BlockInterface
         return DevelopmentGroup::class;
     }
     
+    
     // getters & setters from outside
-
     
     /**
      * Returns an array with additional help informations for specific field (var or cfg).
@@ -136,7 +144,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return ['foo' => 'bar'];
     }
-     
+    
     /**
      * Returns all config vars element of key value pairing to pass to the API and frontend.
      *
@@ -146,7 +154,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return [];
     }
-     
+    
     /**
      * Returns all config cfgs element of key value pairing to pass to the API and frontend.
      *
@@ -166,7 +174,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return [];
     }
-
+    
     public function getConfigPlaceholdersByRowsExport()
     {
         return [];

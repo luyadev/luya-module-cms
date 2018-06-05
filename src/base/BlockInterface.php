@@ -13,7 +13,21 @@ namespace luya\cms\base;
 interface BlockInterface
 {
     // block methods defintions implementations
-
+    
+    /**
+     * Will called when the block is saved to the cache.
+     *
+     * @since 1.0.5
+     */
+    public function onRegister();
+    
+    /**
+     * Will called when the block is loaded from the cache.
+     *
+     * @since 1.0.5
+     */
+    public function onRegisterFromCache();
+    
     /**
      * Get the name of the block in order to display in administration context.
      */

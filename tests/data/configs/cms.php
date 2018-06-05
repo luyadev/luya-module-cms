@@ -32,5 +32,9 @@ return [
             'password' => DB_PASS,
             'charset' => 'utf8',
         ],
+        'cache' => \yii\caching\ArrayCache::class,
+        'assetManager' => [
+            'basePath' => dirname(__DIR__) . '/assets',
+        ]
     ],
 ];

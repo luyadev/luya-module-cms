@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file. This projec
 ### Fixed
 
 + [#76](https://github.com/luyadev/luya-module-cms/issues/76) Fix strict di bug when creating a new cms page container.
++ [#13](https://github.com/luyadev/luya-module-cms/issues/13) Register assets of blocks and register them to app view (also with enabled cache).
 
 ### Added
 

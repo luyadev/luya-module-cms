@@ -4,6 +4,7 @@ namespace cmstests\src\blocks;
 
 use cmstests\CmsFrontendTestCase;
 use cmstests\data\blocks\PhpTestBlock;
+use yii\web\AssetBundle;
 
 class PhpBlockTest extends CmsFrontendTestCase
 {
@@ -35,5 +36,22 @@ class PhpBlockTest extends CmsFrontendTestCase
     {
         $block = new PhpTestBlock();
         $this->assertArrayHasKey('foo', $block->getExtraVarValues());
+    }
+    
+    /**
+     * @todo Test register multiple asset bundles
+     */
+    public function testOnRegister()
+    {
+        $block = new PhpTestBlock();
+        $block->cacheEnabled = true;
+    
+        $block->getView()->registerAssetBundle(AssetBundle::class);
+//        $block->getView()->registerAssetBundle(JqueryAsset::class);
+        
+        $block->onRegister();
+
+        $this->assertSame([AssetBundle::class], \Yii::$app->cache->get(['blockassetbundles', $block->getEnvOption('id')]));
+//        $this->assertSame([AssetBundle::class, JqueryAsset::class], \Yii::$app->cache->get(['blockassetbundles', $block->getEnvOption('id')]));
     }
 }

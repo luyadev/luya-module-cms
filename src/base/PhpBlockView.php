@@ -2,8 +2,8 @@
 
 namespace luya\cms\base;
 
-use Yii;
 use luya\web\View;
+use Yii;
 
 /**
  * View context helper of php block view file.
@@ -26,6 +26,15 @@ use luya\web\View;
  */
 class PhpBlockView extends View
 {
+    public function init()
+    {
+        parent::init();
+        
+        $this->on(self::EVENT_AFTER_RENDER, function () {
+            self::registerToAppView($this->getBlockAssets(), $this->getAssetBundleNames());
+        });
+    }
+    
     /**
      * Get the current index number of the block inside the current placeholder.
      *
@@ -198,7 +207,7 @@ class PhpBlockView extends View
             return $value;
         }
         
-        return str_replace(['{{'.$key. '}}'], $value, $template);
+        return str_replace(['{{' . $key . '}}'], $value, $template);
     }
     
     /**
@@ -254,9 +263,74 @@ class PhpBlockView extends View
      * ```
      *
      * @return \luya\web\View The global application View Object which is also the same as the layout or cmslayout.
+     * @deprecated deprecated since 1.0.5 and will be removed in 1.1.0
      */
     public function getAppView()
     {
-        return Yii::$app->getView();
+        trigger_error('The getAppView() has been deprecated and will be removed in version 1.1.0. Use the view object to register assets, js and files.', E_USER_DEPRECATED);
+        
+        return $this;
+    }
+    
+    /**
+     * @return array
+     * @since 1.0.5
+     */
+    public function getBlockAssets()
+    {
+        return [
+            'metaTags' => $this->metaTags,
+            'linkTags' => $this->linkTags,
+            'cssFiles' => $this->cssFiles,
+            'css' => $this->css,
+            'jsFiles' => $this->jsFiles,
+            'js' => $this->js,
+        ];
+    }
+    
+    public function getAssetBundleNames()
+    {
+        return array_keys($this->assetBundles);
+    }
+    
+    /**
+     *
+     *
+     * @param array $blockAssets
+     * @param array $assetBundles
+     * @throws \yii\base\InvalidConfigException
+     * @since 1.0.5
+     */
+    public static function registerToAppView(array $blockAssets, array $assetBundles)
+    {
+        $appView = Yii::$app->view;
+        
+        foreach ($blockAssets as $attribute => $blockAsset) {
+            if (!empty($blockAsset)) {
+                
+                if ($attribute == 'js' || $attribute == 'jsFiles') {
+                    /**
+                     * js and jsFiles must keep the array keys as position and have subarray
+                     * @see \yii\web\View::POS_HEAD
+                     */
+                    
+                    $appAssets = &$appView->{$attribute};
+                    
+                    foreach ($blockAsset as $key => $value) {
+                        if (isset($appAssets[$key])) {
+                            $appAssets[$key] = array_merge($appAssets[$key], $value);
+                        } else {
+                            $appAssets[$key] = $value;
+                        }
+                    }
+                } else {
+                    $appView->{$attribute} = array_merge($appView->{$attribute}, $blockAsset);
+                }
+            }
+        }
+    
+        foreach ($assetBundles as $bundle) {
+            $appView->registerAssetBundle($bundle);
+        }
     }
 }
