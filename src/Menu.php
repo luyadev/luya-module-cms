@@ -12,6 +12,7 @@ use luya\traits\CacheableTrait;
 use luya\cms\menu\Item;
 use luya\cms\menu\InjectItemInterface;
 use luya\cms\menu\QueryOperatorFieldInterface;
+use yii\db\Expression;
 
 /**
  * Menu container component by language.
@@ -565,16 +566,17 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      */
     private function getNavData($langId)
     {
-        return (new DbQuery())->from(['cms_nav_item item'])
-        ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
-        ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
-        ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
-        ->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
-        ->andWhere(['or', ['publish_from' => null], ['<=', 'publish_from', time()]])
-        ->andWhere(['or', ['publish_till' => null], ['>=', 'publish_till', time()]])
-        ->orderBy(['container' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
-        ->indexBy('id')
-        ->all();
+        return (new DbQuery())
+            ->from(['cms_nav_item item'])
+            ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
+            ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
+            ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
+            ->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
+            ->andWhere(['or', ['publish_from' => null], ['<=', 'publish_from', new Expression('UNIX_TIMESTAMP()')]])
+            ->andWhere(['or', ['publish_till' => null], ['>=', 'publish_till', new Expression('UNIX_TIMESTAMP()')]])
+            ->orderBy(['container' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
+            ->indexBy('id')
+            ->all();
     }
         
     private $_paths = [];
@@ -597,19 +599,19 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
         }
         
         foreach ($this->_nodes as $node) {
-            $this->_paths[$node['nav_id']] = $this->processParant($node['nav_id'], null);
+            $this->_paths[$node['nav_id']] = $this->processParent($node['nav_id'], null);
         }
         
         return $this->_paths;
     }
      
-    private function processParant($nodeId, $path)
+    private function processParent($nodeId, $path)
     {
         $parentId = $this->_nodes[$nodeId]['parent_nav_id'];
         $alias = $this->_nodes[$nodeId]['alias'];
     
         if ($parentId > 0 && array_key_exists($parentId, $this->_nodes)) {
-            return $this->processParant($parentId, $path) . '/' . $alias;
+            return $this->processParent($parentId, $path) . '/' . $alias;
         }
     
         return $alias;
