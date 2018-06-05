@@ -239,6 +239,29 @@ class Block extends NgRestModel
         return $this->class;
     }
     
+    public static function findObjectClassesById(array $ids)
+    {
+        return self::find()->select('class')->indexBy('id')->where(['in', 'id', $ids])->column();
+    }
+    
+    public static function createObject($class, $blockId, $id, $context, $pageObject = null)
+    {
+        if (!class_exists($class)) {
+            return false;
+        }
+        
+        $object = Yii::createObject([
+            'class' => $class,
+        ]);
+        
+        $object->setEnvOption('id', $id);
+        $object->setEnvOption('blockId', $blockId);
+        $object->setEnvOption('context', $context);
+        $object->setEnvOption('pageObject', $pageObject);
+        
+        return $object;
+    }
+    
     private static $blocks = [];
     
     /**
@@ -252,6 +275,8 @@ class Block extends NgRestModel
      */
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
+        
+        Yii::warning('load block object id' . $blockId);
         if (isset(self::$blocks[$blockId])) {
             $block = self::$blocks[$blockId];
         } else {

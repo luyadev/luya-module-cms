@@ -12,6 +12,7 @@ use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
 use luya\traits\CacheableTrait;
 use yii\base\ViewContextInterface;
+use luya\helpers\ArrayHelper;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -211,7 +212,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $blockResponse = $this->getHasCache($cacheKey);
     
             /** @var $blockObject \luya\cms\base\InternalBaseBlock */
-            $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
+            //$blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
+            $blockObject = Block::createObject($placeholder['class'], $placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
     
             if ($blockObject) {
                 if ($blockResponse === false) {
@@ -304,7 +306,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         return (new Query())
             ->from('cms_nav_item_page_block_item t1')
-            ->select('t1.*')
+            ->select(['t1.id', 't1.block_id', 't1.json_config_values', 't1.json_config_cfg_values', 't1.variation', 't2.class'])
+            ->innerJoin('cms_block t2', 't2.id=t1.block_id')
             ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId, 'is_hidden' => 0])
             ->orderBy(['sort_index' => SORT_ASC])
             ->all();
