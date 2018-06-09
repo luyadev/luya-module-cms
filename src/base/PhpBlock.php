@@ -75,7 +75,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function onRegister()
     {
-        if ($this->getIsCacheEnabled()) {
+        if ($this->getIsCacheEnabled() && $this->isCachingEnabled()) {
             $phpBlockView = $this->getView();
     
             $blockId = $this->getEnvOption('id');
@@ -100,14 +100,27 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function onRegisterFromCache()
     {
-        $blockId = $this->getEnvOption('id');
+        if ($this->isCachingEnabled()) {
+            $blockId = $this->getEnvOption('id');
+        
+            $cacheKeyAssets = ['blockassets', $blockId];
+            $cacheKeyAssetBundles = ['blockassetbundles', $blockId];
+        
+            $assets = Yii::$app->cache->get($cacheKeyAssets) ?: [];
+            $assetBundles = Yii::$app->cache->get($cacheKeyAssetBundles) ?: [];
+        
+            PhpBlockView::registerToAppView($assets, $assetBundles);
+        }
+    }
     
-        $cacheKeyAssets = ['blockassets', $blockId];
-        $cacheKeyAssetBundles = ['blockassetbundles', $blockId];
     
-        $assets = Yii::$app->cache->get($cacheKeyAssets) ?: [];
-        $assetBundles = Yii::$app->cache->get($cacheKeyAssetBundles) ?: [];
-    
-        PhpBlockView::registerToAppView($assets, $assetBundles);
+    /**
+     * Will be replaced with cachable trait in future.
+     * 
+     * @return boolean
+     */
+    private function isCachingEnabled()
+    {
+        return Yii::$app->has('cache');
     }
 }

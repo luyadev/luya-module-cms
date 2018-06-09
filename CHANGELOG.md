@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.0.5.1 (in progress)
+
+### Fixed
+
++ [#88](https://github.com/luyadev/luya-module-cms/issues/88) Fix regression with block caching if cache is not available.
+
 ## 1.0.5 (5. June 2018)
 
 ### Fixed
