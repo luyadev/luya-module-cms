@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+ 	 
     'view_index_add_type' => '페이지 유형',
     'view_index_type_page' => '페이지',
     'view_index_type_module' => '모듈',
@@ -53,7 +53,3 @@ return [
     'btn_abort' => '중단',
     'btn_refresh' => '새로 만들기',
     'btn_save' => '저장',
-// added translation in 1.0.0-beta3:
-
-   
-];
