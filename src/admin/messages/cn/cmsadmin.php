@@ -1,3 +1,7 @@
+<?php
+
+return[
+	
 'view_index_add_type' => '页面类型',	
     'view_index_type_page' => '页面',	
     'view_index_type_module' => '模块',	
