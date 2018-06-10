@@ -1,3 +1,5 @@
+<?php
+
 return [
  	 
 -    'view_index_add_type' => '페이지 유형',
