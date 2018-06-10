@@ -37,7 +37,7 @@ return [
 -    'view_update_is_homepage' => '홈페이지',
 -    'view_update_properties_title' => '페이지 속성',
 -    'view_update_no_properties_exists' => '이 페이지에는 아직 등록된 속성이 없습니다.',
--    'view_update_draft_no_lang_error' => '템플릿이 이 언어로 설정되어 있지 않습니다..',
+-    'view_update_draft_no_lang_error' => '템플릿이  언어로 설정되어 있지 않습니다..',
 -    'view_update_no_translations' => '이 페이지는 아직 번역되지 않았습니다..',
 -    'view_update_page_is_module' => '이 페이지는 <strong> module </ strong>입니다.',
 -    'view_update_page_is_redirect_internal' => '이 페이지는 <show-internal-redirection nav-id = "typeData.value"/>에 대한 <strong>external redirection </strong>입니다.',
