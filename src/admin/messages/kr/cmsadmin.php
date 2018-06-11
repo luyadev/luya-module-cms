@@ -53,3 +53,4 @@ return [
     'btn_abort' => '중단',
     'btn_refresh' => '새로 만들기',
     'btn_save' => '저장',
+]
