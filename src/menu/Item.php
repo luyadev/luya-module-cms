@@ -415,11 +415,14 @@ class Item extends BaseObject implements LinkInterface, Arrayable
                     if (empty($converter->value) || $converter->value == $this->navId) {
                         return;
                     }
-                    return $converter->getPageLink($converter->value, $converter->target, $this->lang)->getHref();
+                    $page = $converter->getPageLink($converter->value, $converter->target, $this->lang);
+                    return $page ? $page->getHref() : '';
                 case $converter::TYPE_LINK_TO_EMAIL:
                     return $converter->getEmailLink($converter->value)->getHref();
                 case $converter::TYPE_LINK_TO_FILE:
                     return $converter->getFileLink($converter->value, $converter->target)->getHref();
+                case $converter::TYPE_LINK_TO_TELEPHONE:
+                    return $converter->getTelephoneLink($converter->value)->getHref();
                
             }
         }
