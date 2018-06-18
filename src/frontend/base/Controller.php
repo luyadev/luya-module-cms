@@ -112,7 +112,7 @@ abstract class Controller extends \luya\web\Controller
         }
         
         if (!empty($model->keywords)) {
-            $this->view->registerMetaTag(['name' => 'keywords', 'content' => implode(", ", $currentMenu->keywords)], 'metyKeywords');
+            $this->view->registerMetaTag(['name' => 'keywords', 'content' => implode(", ", $currentMenu->keywords)], 'metaKeywords');
         }
         
         if ($this->module->enableTagParsing) {
