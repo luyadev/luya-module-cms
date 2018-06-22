@@ -75,7 +75,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function onRegister()
     {
-        if ($this->getIsCacheEnabled() && $this->isCachingEnabled()) {
+        if ($this->isCachingEnabled()) {
             $phpBlockView = $this->getView();
     
             $blockId = $this->getEnvOption('id');
@@ -121,6 +121,6 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     private function isCachingEnabled()
     {
-        return Yii::$app->has('cache');
+        return $this->getIsCacheEnabled() && Yii::$app->has('cache');
     }
 }
