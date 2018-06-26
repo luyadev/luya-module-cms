@@ -163,7 +163,7 @@ class NavController extends \luya\admin\base\RestController
         $item = Nav::find()->where(['id' => $navId])->one();
 
         if ($item) {
-            Yii::$app->menu->flushCache();
+            $this->menuFlush();
             $item->is_hidden = $hiddenStatus;
             $item->update(false);
 
@@ -176,7 +176,7 @@ class NavController extends \luya\admin\base\RestController
     public function actionToggleHome($navId, $homeState)
     {
         $item = Nav::find()->where(['id' => $navId])->one();
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         if ($homeState == 1) {
             Nav::updateAll(['is_home' => false]);
             $item->setAttributes([
@@ -196,7 +196,7 @@ class NavController extends \luya\admin\base\RestController
         $item = Nav::find()->where(['id' => $navId])->one();
 
         if ($item) {
-            Yii::$app->menu->flushCache();
+            $this->menuFlush();
             $item->is_offline = $offlineStatus;
             $item->update(false);
 
@@ -219,7 +219,7 @@ class NavController extends \luya\admin\base\RestController
         
         $model = Nav::find()->where(['id' => $navId])->one();
         if ($model) {
-            Yii::$app->menu->flushCache();
+            $this->menuFlush();
             // check for internal redirects
             $redirectResult = false;
             $redirects = NavItemRedirect::find()->where(['value' => $navId])->asArray()->all();
@@ -251,7 +251,7 @@ class NavController extends \luya\admin\base\RestController
      */
     public function actionCreatePage()
     {
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         $model = new Nav();
         $fromDraft = $this->postArg('use_draft');
         $parentNavId = $this->postArg('parent_nav_id');
@@ -279,7 +279,7 @@ class NavController extends \luya\admin\base\RestController
      */
     public function actionCreatePageItem()
     {
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         $model = new Nav();
         $create = $model->createPageItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'));
         if (is_array($create)) {
@@ -291,7 +291,7 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionCreateModule()
     {
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         $model = new Nav();
         
         $parentNavId = $this->postArg('parent_nav_id');
@@ -311,7 +311,7 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionCreateModuleItem()
     {
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         $model = new Nav();
         $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
         if (is_array($create)) {
@@ -325,7 +325,7 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionCreateRedirect()
     {
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         $model = new Nav();
         
         $parentNavId = $this->postArg('parent_nav_id');
@@ -345,7 +345,7 @@ class NavController extends \luya\admin\base\RestController
     
     public function actionCreateRedirectItem()
     {
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         $model = new Nav();
         $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
         if (is_array($create)) {
@@ -362,7 +362,7 @@ class NavController extends \luya\admin\base\RestController
      */
     public function actionCreateFromPage()
     {
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         $model = new Nav();
         $response = $model->createItemLanguageCopy($this->postArg('id'), $this->postArg('toLangId'), $this->postArg('title'), $this->postArg('alias'));
         
@@ -371,5 +371,17 @@ class NavController extends \luya\admin\base\RestController
         }
         
         return $response;
+    }
+    
+    /**
+     * Flush the menu data if component exits.
+     * 
+     * @since 1.0.6
+     */
+    protected function menuFlush()
+    {
+        if (Yii::$app->get('menu', false)) {
+            Yii::$app->menu->flushCache();
+        }
     }
 }
