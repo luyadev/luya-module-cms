@@ -317,7 +317,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public static function onLoad()
     {
-        self::registerTranslation('cmsadmin*', '@cmsadmin/messages', [
+        self::registerTranslation('cmsadmin*', static::staticBasePath() . '/messages', [
             'cmsadmin' => 'cmsadmin.php',
         ]);
     }

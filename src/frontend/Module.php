@@ -85,7 +85,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      */
     public static function onLoad()
     {
-        self::registerTranslation('cms', '@cms/messages', [
+        self::registerTranslation('cms', static::staticBasePath() . '/messages', [
             'cms' => 'cms.php',
         ]);
     }
