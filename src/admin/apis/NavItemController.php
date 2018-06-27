@@ -300,7 +300,7 @@ class NavItemController extends \luya\admin\base\RestController
             return $this->sendModelError($model);
         }
       
-        Yii::$app->menu->flushCache();
+        $this->menuFlush();
         
         if ($model->nav_item_type == $navItemType) {
             $typeModel = $model->getType();
@@ -387,6 +387,8 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * returns all the PAGE type specific informations.
+     * 
+     * @return array
      */
     public function actionTypePageContainer($navItemId)
     {
@@ -407,9 +409,9 @@ class NavItemController extends \luya\admin\base\RestController
     /**
      * Move an item to a container.
      *
-     * @param unknown $moveItemId
-     * @param unknown $droppedOnCatId
-     * @return boolean[]
+     * @param integer $moveItemId
+     * @param integer $droppedOnCatId
+     * @return array
      */
     public function actionMoveToContainer($moveItemId, $droppedOnCatId)
     {
@@ -419,9 +421,9 @@ class NavItemController extends \luya\admin\base\RestController
     /**
      * Move an item before an existing item.
      *
-     * @param unknown $moveItemId
-     * @param unknown $droppedBeforeItemId
-     * @return boolean[]|mixed[]
+     * @param integer $moveItemId
+     * @param integer $droppedBeforeItemId
+     * @return array
      */
     public function actionMoveBefore($moveItemId, $droppedBeforeItemId)
     {
@@ -437,9 +439,9 @@ class NavItemController extends \luya\admin\base\RestController
     /**
      * Move an item after an existing item.
      *
-     * @param unknown $moveItemId
-     * @param unknown $droppedAfterItemId
-     * @return boolean[]|mixed[]
+     * @param integer $moveItemId
+     * @param integer $droppedAfterItemId
+     * @return array
      */
     public function actionMoveAfter($moveItemId, $droppedAfterItemId)
     {
@@ -455,9 +457,9 @@ class NavItemController extends \luya\admin\base\RestController
     /**
      * Move an item to a child item (make the parent of).
      *
-     * @param unknown $moveItemId
-     * @param unknown $droppedOnItemId
-     * @return boolean[]|mixed[]
+     * @param integer $moveItemId
+     * @param integer $droppedOnItemId
+     * @return array
      */
     public function actionMoveToChild($moveItemId, $droppedOnItemId)
     {
@@ -473,9 +475,9 @@ class NavItemController extends \luya\admin\base\RestController
     /**
      * Toggle visibilty of a block.
      *
-     * @param unknown $blockId
-     * @param unknown $hiddenState
-     * @return number|\yii\db\false|boolean
+     * @param integer $blockId
+     * @param integer $hiddenState
+     * @return array
      */
     public function actionToggleBlockHidden($blockId, $hiddenState)
     {
@@ -534,5 +536,17 @@ class NavItemController extends \luya\admin\base\RestController
             }
         }
         return "";
+    }
+    
+    /**
+     * Flush the menu data if component exits.
+     *
+     * @since 1.0.6
+     */
+    protected function menuFlush()
+    {
+        if (Yii::$app->get('menu', false)) {
+            $this->menuFlush();
+        }
     }
 }
