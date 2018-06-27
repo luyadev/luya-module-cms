@@ -48,7 +48,11 @@ class MenuController extends \luya\admin\base\RestController
      */
     public function actionItems($langId, $containerId)
     {
-        $items = Nav::find()->where(['nav_container_id' => $containerId, 'is_offline' => false, 'ni.lang_id' => $langId])->joinWith(['navItems ni'])->asArray()->all();
+        $items = Nav::find()
+            ->where(['nav_container_id' => $containerId, 'is_offline' => false, 'ni.lang_id' => $langId, 'is_deleted' => false])
+            ->joinWith(['navItems ni'])
+            ->asArray()
+            ->all();
         $result = [];
 
         foreach ($items as $item) {
