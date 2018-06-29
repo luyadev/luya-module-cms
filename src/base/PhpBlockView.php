@@ -26,6 +26,12 @@ use Yii;
  */
 class PhpBlockView extends View
 {
+    /**
+     * @var is disabled by default as its already registered by global view and layout files are not used in block views.
+     * @see https://github.com/luyadev/luya/issues/1807
+     */
+    public $autoRegisterCsrf = false;
+    
     public function init()
     {
         parent::init();
