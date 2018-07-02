@@ -27,7 +27,8 @@ class CmsConsoleTestCase extends ConsoleApplicationTestCase
                 ],
                 'cmsadmin' => [
                     'class' => 'luya\cms\admin\Module',
-                    'blocks' => ['@cmstests/tests/data/blocks/import']
+                    'blocks' => ['@cmstests/tests/data/blocks/import'],
+                    'cmsLayouts' => ['@cmstests/tests/data/cmslayouts'],
                 ],
                 'CmsUnitModule' => '\cmstests\data\modules\CmsUnitModule',
             ],

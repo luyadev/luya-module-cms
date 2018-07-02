@@ -1,0 +1,8 @@
+{
+    "rows" : [
+        [
+            {"cols": 8, "var": "left", "label": "Main content Left"},
+            {"cols": 4, "var": "right", "label": "Sidebar Right"}
+        ]
+    ]
+}

@@ -8,28 +8,47 @@ use luya\admin\ngrest\base\NgRestModel;
 /**
  * Layout Model for CMS-Layouts.
  *
+ * @property int $id
+ * @property string $name
+ * @property string $json_config
+ * @property string $view_file
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class Layout extends NgRestModel
 {
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_layout';
     }
     
+    /**
+     * @inheritdoc
+     */
     public static function ngRestApiEndpoint()
     {
         return 'api-cms-layout';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['name', 'json_config', 'view_file'], 'required'],
+            [['json_config'], 'string'],
+            [['name', 'view_file'], 'string', 'max' => 255],
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -39,16 +58,24 @@ class Layout extends NgRestModel
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestScopes()
     {
         return [
-            ['list', ['name', 'json_config', 'view_file'], ],
+            ['list', ['name', 'json_config', 'view_file']],
             [['update'], ['name']],
         ];
     }
 
-    
-    public function getJsonConfig($node = false)
+    /**
+     * Get the json config as array.
+     * 
+     * @param string $node Get a given key from the config array.
+     * @return array If the given node is not found an empty array will be returned.
+     */
+    public function getJsonConfig($node = null)
     {
         $json = Json::decode($this->json_config);
 

@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file. This projec
 + [#103](https://github.com/luyadev/luya-module-cms/issues/103) Switched page visibility indicator and logo position
 + [#107](https://github.com/luyadev/luya-module-cms/issues/107) Add all table fields into the rules defintion.
 
+## Added
+
++ [#110](https://github.com/luyadev/luya-module-cms/issues/110) Option to defined a folder with cms layouts (for headless usage).
+
 ### Fixed
 
 + [#97](https://github.com/luyadev/luya-module-cms/issues/97) Fixed bug where not existing redirect page throws an exception.

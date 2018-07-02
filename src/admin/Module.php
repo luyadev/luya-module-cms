@@ -111,6 +111,20 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public $hiddenBlocks = [];
     
+    /**
+     * @var array An array with folders where layouts are contained or direct paths to a given layout file.
+     * 
+     * ```php
+     * 'cmsLayouts' => [
+     *     '@app/path/to/cmslayouts', // a folder with layout files
+     *     '@app/file/TheCmsLayout.php', // a layout file
+     * ],
+     * ```
+     * 
+     * @since 1.0.6
+     */
+    public $cmsLayouts = [];
+    
     private $_blocks = [];
     
     /**

@@ -20,126 +20,187 @@ use yii\helpers\Json;
  */
 class CmslayoutImporter extends Importer
 {
+    /**
+     * @var array A list of prefix keys which will be skipped.
+     */
     public $ignorePrefix = ['_', '.'];
     
-    private function verifyVariable($chars)
+    /**
+     * @inheritdoc
+     */
+    public function run()
     {
-        if (preg_match('/[^a-zA-Z0-9]+/', $chars, $matches)) {
+        $layoutFiles = [];
+        
+        // get and import cmslayouts from @app/views/cmslayouts path
+        $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
+        if (file_exists($cmslayouts)) {
+            foreach ($this->getFilesFromFolder($cmslayouts) as $file) {
+                $layoutFiles[] = $this->importLayoutFile($file);
+            }
+        }
+        
+        // import files from the cmsadmin module $cmsLayouts property.
+        foreach ($this->module->cmsLayouts as $layoutDefintion) {
+            $path = Yii::getAlias($layoutDefintion, false);
+            
+            if (is_dir($path)) {
+                foreach ($this->getFilesFromFolder($path) as $file) {
+                    $this->importLayoutFile($file);
+                }
+            } else {
+                $this->importLayoutFile($path);
+            }
+        }
+        
+        // remove all view files not found somewhere ... 
+        foreach (Layout::find()->where(['not in', 'view_file', $layoutFiles])->all() as $layoutItem) {
+            $layoutItem->delete();
+        }
+        
+        return $this->addLog("cms layout importer finished with ".count($layoutFiles) . " layout files.");
+    }
+
+    /**
+     * Get files from a given folder.
+     * 
+     * @param string $folderPath
+     * @return array
+     */
+    protected function getFilesFromFolder($folderPath)
+    {
+        return FileHelper::findFiles($folderPath, [
+            'recursive' => false,
+            'caseSensitive' => false,
+            'only' => ['*.php'],
+            'filter' => function ($path) {
+                return in_array(substr(basename($path), 0, 1), $this->ignorePrefix) ? false : null;
+            }]);
+    }
+    
+    /**
+     * Importer the given layout file from a path.
+     * @param string $file The path to the layout file.
+     * @throws Exception
+     * @return string
+     */
+    protected function importLayoutFile($file)
+    {
+        $fileinfo = FileHelper::getFileInfo($file);
+        $fileBaseName = $fileinfo->name . '.' . $fileinfo->extension;
+        
+        $json = false;
+        
+        if (file_exists($fileinfo->sourceFilename. '.json')) {
+            $json = FileHelper::getFileContent($fileinfo->sourceFilename. '.json');
+            
+            try {
+                if ($json) {
+                    $json = Json::decode($json);
+                    // the rows column defines the placeholders
+                    // if the rows column does not exists fail back to normal layout processing
+                    if (isset($json['rows'])) {
+                        $json = $json['rows'];
+                    } else {
+                        $json = false;
+                    }
+                }
+            } catch (\Exception $e) {
+                $json = false;
+            }
+        }
+        
+        $readableFileName = $this->generateReadableName($fileinfo->name);
+        
+        $content = file_get_contents($file);
+        
+        preg_match_all("/placeholders\[[\'\"](.*?)[\'\"]\]/", $content, $results);
+        
+        if (!$json) {
+            $placeholder = [];
+            foreach (array_unique($results[1]) as $holderName) {
+                if (!$this->isValidPlaceholderName($holderName)) {
+                    throw new Exception("Wrong variable name detected '".$holderName."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
+                }
+                $placeholder[] = ['label' => $this->generateReadableName($holderName), 'var' => $holderName];
+            }
+            $_placeholders = ['placeholders' => [$placeholder]];
+        } else {
+            $_placeholders = ['placeholders' => $json];
+        }
+        
+        $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName]])->one();
+        
+        if ($layoutItem) {
+            $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
+            $matchRevert = $this->comparePlaceholders(json_decode($layoutItem->json_config, true), $_placeholders);
+            if ($match && $matchRevert) {
+                $layoutItem->updateAttributes([
+                    'name' => $readableFileName,
+                    'view_file' => $fileBaseName,
+                ]);
+            } else {
+                $layoutItem->updateAttributes([
+                    'name' => $readableFileName,
+                    'view_file' => $fileBaseName,
+                    'json_config' => json_encode($_placeholders),
+                ]);
+                $this->addLog('Existing file '.$readableFileName.' updated.');
+            }
+        } else {
+            // add item into the database table
+            $data = new Layout();
+            $data->scenario = 'restcreate';
+            $data->setAttributes([
+                'name' => $readableFileName,
+                'view_file' => $fileBaseName,
+                'json_config' => json_encode($_placeholders),
+            ]);
+            $data->save(false);
+            $this->addLog('New file '.$readableFileName.' found and registered.');
+        }
+        
+        return $fileBaseName;
+    }
+    
+    
+    
+    /**
+     * Verificy if a given string matches the variable rules.
+     * 
+     * @param string $chars
+     * @return boolean
+     */
+    protected function isValidPlaceholderName($chars)
+    {
+        if (preg_match('/[^a-zA-Z0-9]+/', $chars, $matches) == 1) {
             return false;
         }
         
         return true;
     }
     
-    public function generateReadableName($name)
+    /**
+     * Generate readable name from name.
+     * 
+     * @param string $name
+     * @return string
+     */
+    protected function generateReadableName($name)
     {
         return Inflector::humanize(Inflector::camel2words($name));
     }
     
-    public function run()
-    {
-        $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
-        $layoutFiles = [];
-        if (file_exists($cmslayouts)) {
-            $files = FileHelper::findFiles($cmslayouts, [
-                'recursive' => false,
-                'caseSensitive' => false,
-                'only' => ['*.php'],
-                'filter' => function ($path) {
-                    return in_array(substr(basename($path), 0, 1), $this->ignorePrefix) ? false : null;
-                }]);
-            
-            foreach ($files as $file) {
-                $fileinfo = FileHelper::getFileInfo($file);
-                $fileBaseName = $fileinfo->name . '.' . $fileinfo->extension;
-
-                $json = false;
-                
-                if (file_exists($fileinfo->sourceFilename. '.json')) {
-                    $json = FileHelper::getFileContent($fileinfo->sourceFilename. '.json');
-                    
-                    try {
-                        $json = Json::decode($json);
-                        
-                        // the rows column defines the placeholders
-                        // if the rows column does not exists fail back to normal layout processing
-                        if (isset($json['rows'])) {
-                            $json = $json['rows'];
-                        } else {
-                            $json = false;
-                        }
-                    } catch (\Exception $e) {
-                        $json = false;
-                    }
-                }
-                
-                $readableFileName = $this->generateReadableName($fileinfo->name);
-                
-                $layoutFiles[] = $fileBaseName;
-
-                $content = file_get_contents($file);
-                
-                preg_match_all("/placeholders\[[\'\"](.*?)[\'\"]\]/", $content, $results);
-
-                if (!$json) {
-                    $placeholder = [];
-                    foreach (array_unique($results[1]) as $holderName) {
-                        if (!$this->verifyVariable($holderName)) {
-                            throw new Exception("Wrong variable name detected '".$holderName."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
-                        }
-                        $placeholder[] = ['label' => $this->generateReadableName($holderName), 'var' => $holderName];
-                    }
-                    $_placeholders = ['placeholders' => [$placeholder]];
-                } else {
-                    $_placeholders = ['placeholders' => $json];
-                }
-                
-                
-                $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName]])->one();
-                
-                if ($layoutItem) {
-                    $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
-                    $matchRevert = $this->comparePlaceholders(json_decode($layoutItem->json_config, true), $_placeholders);
-                    if ($match && $matchRevert) {
-                        $layoutItem->updateAttributes([
-                            'name' => $readableFileName,
-                            'view_file' => $fileBaseName,
-                        ]);
-                    } else {
-                        $layoutItem->updateAttributes([
-                            'name' => $readableFileName,
-                            'view_file' => $fileBaseName,
-                            'json_config' => json_encode($_placeholders),
-                        ]);
-                        $this->addLog('existing cmslayout '.$readableFileName.' updated');
-                    }
-                } else {
-                    // add item into the database table
-                    $data = new Layout();
-                    $data->scenario = 'restcreate';
-                    $data->setAttributes([
-                        'name' => $readableFileName,
-                        'view_file' => $fileBaseName,
-                        'json_config' => json_encode($_placeholders),
-                    ]);
-                    $data->save(false);
-                    $this->addLog('new cmslayout '.$readableFileName.' found and added to database.');
-                }
-            }
-
-            foreach (Layout::find()->where(['not in', 'view_file', $layoutFiles])->all() as $layoutItem) {
-                $layoutItem->delete();
-            }
-        }
-    }
-
     /**
+     * Compare two arrays with each in order to determined whether they have differences or not.
+     * 
+     * An array must contain the keys `placeholders` otherwise false is returned too.
+     * 
      * @param array $array1
      * @param array $array2
-     *
      * @return bool true if the same, false if not the same
      */
-    private function comparePlaceholders($array1, $array2)
+    protected function comparePlaceholders($array1, $array2)
     {
         if (!array_key_exists('placeholders', $array1) || !array_key_exists('placeholders', $array2)) {
             return false;
