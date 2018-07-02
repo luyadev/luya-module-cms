@@ -8,7 +8,7 @@ use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\cms\admin\importers\CmslayoutImporter;
 use luya\cms\models\Layout;
 
-class BlockImporterTest extends CmsConsoleTestCase
+class CmslayoutImporterTest extends CmsConsoleTestCase
 {
     public function testBasicLayoutImporter()
     {
