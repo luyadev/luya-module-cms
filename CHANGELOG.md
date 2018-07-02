@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
++ [#103](https://github.com/luyadev/luya-module-cms/issues/103) Switched page visibility indicator and logo position
 + [#107](https://github.com/luyadev/luya-module-cms/issues/107) Add all table fields into the rules defintion.
 
 ### Fixed

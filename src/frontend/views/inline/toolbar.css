@@ -58,6 +58,7 @@
     padding: 11px 15px;
     text-align: center;
     vertical-align: middle;
+    float: left;
 }
 
 .luya-cms-toolbar__logo a {
@@ -97,7 +98,6 @@
  * ================================================== */
 
 .luya-cms-toolbar__button {
-    border-right: 1px solid #fff;
     color: #E50060;
     display: inline-block;
     float: left;
@@ -125,8 +125,7 @@
 }
 
 .luya-cms-toolbar__button--info {
-    background-color: #f9f9f9;
-    color: #2196F3;
+    background-color: #f0f0f0;
 }
 
 .luya-cms-toolbar__button--info i {
