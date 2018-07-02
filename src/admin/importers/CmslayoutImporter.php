@@ -36,21 +36,13 @@ class CmslayoutImporter extends Importer
         $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
         if (file_exists($cmslayouts)) {
             foreach ($this->getFilesFromFolder($cmslayouts) as $file) {
-                $layoutFiles[] = $this->importLayoutFile($file);
+                $this->handleLayoutFile($layoutFiles, $file);
             }
         }
         
         // import files from the cmsadmin module $cmsLayouts property.
-        foreach ($this->module->cmsLayouts as $layoutDefintion) {
-            $path = Yii::getAlias($layoutDefintion, false);
-            
-            if (is_dir($path)) {
-                foreach ($this->getFilesFromFolder($path) as $file) {
-                    $this->importLayoutFile($file);
-                }
-            } else {
-                $this->importLayoutFile($path);
-            }
+        foreach ((array) $this->module->cmsLayouts as $layoutDefintion) {
+            $this->handleLayoutFile($layoutFiles, $layoutDefintion);
         }
         
         // remove all view files not found somewhere ... 
@@ -59,6 +51,31 @@ class CmslayoutImporter extends Importer
         }
         
         return $this->addLog("cms layout importer finished with ".count($layoutFiles) . " layout files.");
+    }
+    
+    /**
+     * Assigne saved files into the layoutFiles array defintion.
+     * 
+     * @param array $layoutFiles
+     * @param string $path
+     */
+    protected function handleLayoutFile(&$layoutFiles, $path)
+    {
+        $path = Yii::getAlias($path, false);
+        
+        if (is_dir($path)) {
+            foreach ($this->getFilesFromFolder($path) as $file) {
+                $handler = $this->importLayoutFile($file);
+                if ($handler) {
+                    $layoutFiles[] = $handler;
+                }
+            }
+        } else {
+            $handler = $this->importLayoutFile($path);
+            if ($handler) {
+                $layoutFiles[] = $handler;
+            }
+        }
     }
 
     /**
@@ -86,6 +103,10 @@ class CmslayoutImporter extends Importer
      */
     protected function importLayoutFile($file)
     {
+        if (!file_exists($file)) {
+            return false;
+        }
+        
         $fileinfo = FileHelper::getFileInfo($file);
         $fileBaseName = $fileinfo->name . '.' . $fileinfo->extension;
         

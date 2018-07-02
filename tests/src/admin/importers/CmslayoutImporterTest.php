@@ -28,7 +28,7 @@ class BlockImporterTest extends CmsConsoleTestCase
             'luya\cms\admin\importers\CmslayoutImporter' => [
                 0 => 'New file Layoutwithjson found and registered.',
                 1 => 'New file Phplayout found and registered.',
-                2 => 'cms layout importer finished with 0 layout files.',
+                2 => 'cms layout importer finished with 2 layout files.',
             ]
         ], $log);
     }
