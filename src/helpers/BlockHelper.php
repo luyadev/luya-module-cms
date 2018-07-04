@@ -270,6 +270,10 @@ class BlockHelper
         
         $converter = LinkConverter::fromArray($config);
         
+        if (!$converter) {
+            return false;
+        }
+        
         return $converter->getLink();
     }
     

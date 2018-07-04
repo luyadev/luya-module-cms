@@ -91,10 +91,13 @@ class LinkConverter extends BaseObject
     public $target;
     
     /**
-     *
+     * Generate a link converter object from an array.
+     * 
+     * If type is empty, false is returned. This allows us to have predefined values from
+     * value and target and do not throw an exception.
+     * 
      * @param array $configuration
-     * @throws InvalidConfigException
-     * @return \luya\cms\LinkConverter
+     * @return \luya\cms\LinkConverter|false
      */
     public static function fromArray(array $configuration)
     {
@@ -103,7 +106,7 @@ class LinkConverter extends BaseObject
         $target = ArrayHelper::getValue($configuration, 'target');
         
         if (empty($type)) {
-            throw new InvalidConfigException("The type column can not be empty.");
+            return false;
         }
         
         return (new self(['type' => $type, 'value' => $value, 'target' => $target]));
