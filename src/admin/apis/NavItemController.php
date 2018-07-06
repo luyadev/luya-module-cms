@@ -546,7 +546,7 @@ class NavItemController extends \luya\admin\base\RestController
     protected function menuFlush()
     {
         if (Yii::$app->get('menu', false)) {
-            $this->menuFlush();
+            Yii::$app->menu->flushCache();
         }
     }
 }
