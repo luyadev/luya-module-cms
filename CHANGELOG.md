@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## Added
 
++ [#109](https://github.com/luyadev/luya-module-cms/issues/109) Added cms admin module $cmsLayouts propertie to import cms layouts (if no frontend module is available, example headless usage).
 + [#110](https://github.com/luyadev/luya-module-cms/issues/110) Option to defined a folder with cms layouts (for headless usage).
 
 ### Fixed
