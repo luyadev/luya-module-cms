@@ -184,10 +184,15 @@ class LangSwitcher extends \luya\base\Widget
 
         $items = [];
 
+        if (!Yii::$app->composition->hidden && property_exists(Yii::$app->composition, 'hideDefaultOnly')) {
+            $hideDefaultOnly = Yii::$app->composition->hideDefaultOnly;
+            Yii::$app->composition->hideDefaultOnly = false;
+        }
+
         foreach (self::getDataArray() as $langData) {
             $item = $langData['item'];
             $lang = $langData['lang'];
-            
+
             if ($item) {
                 if ($item->type == 2  && !empty($rule)) {
                     $routeParams = [$rule['route']];
@@ -209,7 +214,11 @@ class LangSwitcher extends \luya\base\Widget
             
             unset($item, $lang);
         }
-        
+
+        if (!Yii::$app->composition->hidden && property_exists(Yii::$app->composition, 'hideDefaultOnly')) {
+            Yii::$app->composition->hideDefaultOnly = $hideDefaultOnly;
+        }
+
         if (is_callable($this->itemsCallback)) {
             $items = call_user_func($this->itemsCallback, $items);
         }
