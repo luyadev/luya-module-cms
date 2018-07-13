@@ -184,9 +184,9 @@ class LangSwitcher extends \luya\base\Widget
 
         $items = [];
 
-        if (!Yii::$app->composition->hidden && property_exists(Yii::$app->composition, 'hideDefaultOnly')) {
-            $hideDefaultOnly = Yii::$app->composition->hideDefaultOnly;
-            Yii::$app->composition->hideDefaultOnly = false;
+        if (!Yii::$app->composition->hidden && property_exists(Yii::$app->composition, 'hideDefaultPrefixOnly')) {
+            $hideDefaultPrefixOnly = Yii::$app->composition->hideDefaultPrefixOnly;
+            Yii::$app->composition->hideDefaultPrefixOnly = false;
         }
 
         foreach (self::getDataArray() as $langData) {
@@ -215,8 +215,8 @@ class LangSwitcher extends \luya\base\Widget
             unset($item, $lang);
         }
 
-        if (!Yii::$app->composition->hidden && property_exists(Yii::$app->composition, 'hideDefaultOnly')) {
-            Yii::$app->composition->hideDefaultOnly = $hideDefaultOnly;
+        if (!Yii::$app->composition->hidden && property_exists(Yii::$app->composition, 'hideDefaultPrefixOnly')) {
+            Yii::$app->composition->hideDefaultPrefixOnly = $hideDefaultPrefixOnly;
         }
 
         if (is_callable($this->itemsCallback)) {
