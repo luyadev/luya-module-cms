@@ -97,6 +97,10 @@
         opacity: 1;
         pointer-events: all;
     }
+
+    .block--is-dragging > & {
+        display: none;
+    }
 }
 
 .block-front,

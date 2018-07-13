@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#14](https://github.com/luyadev/luya-module-cms/issues/14) Hide block toolbar on drag.
 + [#97](https://github.com/luyadev/luya-module-cms/issues/97) Fixed bug where not existing redirect page throws an exception.
 
 ## 1.0.5.1 (9. June 2018)
