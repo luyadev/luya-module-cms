@@ -1490,7 +1490,8 @@
         $scope.isConfigurable = function() {
             return typeof $scope.block.cfgs != "undefined" && $scope.block.cfgs.length > 0;
         };
-        
+		
+		
 		$scope.$watch(function() { return $scope.block.values }, function(n, o) {
 			$scope.data = n;
 		});
@@ -1537,12 +1538,19 @@
 		
 		$scope.modalHidden = true;
 
-		$scope.toggleEdit = function() {
-			if (!$scope.isEditable()) {
-				return;
+		$scope.modalMode = 1;
+
+		$scope.initModalMode = function() {
+			if ($scope.block.vars.length  == 0) {
+				$scope.modalMode = 2;
 			}
-			$scope.modalHidden = !$scope.modalHidden;
-			$scope.edit = !$scope.edit;
+		};
+
+		$scope.toggleEdit = function() {
+			if ($scope.isEditable() || $scope.isConfigurable()) {
+				$scope.modalHidden = !$scope.modalHidden;
+				$scope.edit = !$scope.edit;
+			}
 		};
 
 		$scope.renderTemplate = function(template, dataVars, cfgVars, block, extras) {

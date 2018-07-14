@@ -40,7 +40,7 @@ use luya\helpers\Html;
                     </div>
 					<?php endif; ?>
 					<?php if ($canBlockUpdate): ?>
-                    <div ng-show="isEditable()" ng-click="toggleEdit()" class="toolbar-item">
+                    <div ng-show="isEditable() || isConfigurable()" ng-click="toggleEdit()" class="toolbar-item">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_edit'));?>" tooltip-position="top">
                             <i class="material-icons">edit</i>
                         </button>
@@ -48,44 +48,52 @@ use luya\helpers\Html;
 					<?php endif; ?>
                 </div>
                 <modal is-modal-hidden="modalHidden" modal-title="{{block.name}}">
-                    <div ng-if="!modalHidden" class="card" ng-init="modalMode=1">
-						<div class="card-header" ng-show="block.cfgs.length > 0">
-                            <ul class="nav nav-tabs card-header-tabs">
-                                <li class="nav-item" ng-click="modalMode=1">
-                                    <a class="nav-link" ng-class="{'active' : modalMode==1}" ng-click="modalMode=1"><?= Module::t('view_update_block_tooltip_edit'); ?></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" ng-class="{'active' : modalMode==2}" ng-click="modalMode=2"><?= Module::t('view_update_block_tooltip_editcfg'); ?></a>
+                    <div ng-if="!modalHidden" class="row" ng-init="initModalMode()">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs">
+                                        <li class="nav-item" ng-click="modalMode=1" ng-show="block.vars.length > 0">
+                                            <a class="nav-link" ng-class="{'active' : modalMode==1}" ng-click="modalMode=1"><?= Module::t('view_update_block_tooltip_edit'); ?></a>
+                                        </li>
+                                        <li class="nav-item" ng-click="modalMode=2" ng-show="block.cfgs.length > 0">
+                                            <a class="nav-link" ng-class="{'active' : modalMode==2}" ng-click="modalMode=2"><?= Module::t('view_update_block_tooltip_editcfg'); ?></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <form class="block__edit" ng-submit="save()">
+                                        <div ng-if="modalMode==1" ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
+                                        <div class="col">
+                                                <span ng-if="getInfo(field.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(field.var)" tooltip-position="left"></span>
+                                                <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
+                                            </div>
+                                        </div>
+                                        <div ng-if="modalMode==2" ng-repeat="cfgField in block.cfgs" ng-hide="cfgField.invisible" class="row">
+                                            <div class="col">
+                                                <span ng-if="getInfo(cfgField.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(cfgField.var)" tooltip-position="left"></span>
+                                                <zaa-injector dir="cfgField.type"  options="cfgField.options" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}"  placeholder="{{cfgField.placeholder}}" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
+                                        </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-save btn-icon"><?= Module::t('view_update_btn_save'); ?></button>
+                                        <button type="button" class="btn btn-icon btn-help float-right" ng-click="showHelp=!showHelp">{{ showHelp == true ? 'Hide help' : 'Show help' }}</button>
+                                        <select ng-if="block.variations" class="btn float-right" ng-model="block.variation" style="margin-right:10px;">
+                                            <option value="0" selected><?= Module::t('view_update_variation_select'); ?></option>
+                                            <option value="{{variationKey}}" ng-repeat="(variationKey, variation) in block.variations">{{variation.title}}</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="showHelp" class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item" style="cursor:pointer;" click-paste-pusher="{{help.example}}" ng-repeat="help in navCfg.helptags">
+                                    <p><span class="badge badge-primary">{{ help.name }}</span></p>
+                                    <small><span ng-bind-html="help.readme | trustAsUnsafe"></span></small>
+                                    <span class="badge badge-secondary">{{help.example}}</span>
                                 </li>
                             </ul>
                         </div>
-                        <div class="card-body">
-                        <form class="block__edit" ng-submit="save()">
-                            <div ng-if="modalMode==1" ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
-                               <div class="col">
-									<span ng-if="getInfo(field.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(field.var)" tooltip-position="left"></span>
-									<zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
-								</div>
-                            </div>
-                            <div ng-if="modalMode==2"  ng-repeat="cfgField in block.cfgs" ng-hide="cfgField.invisible" class="row">
-                                <div class="col">
-									<span ng-if="getInfo(cfgField.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(cfgField.var)" tooltip-position="left"></span>
-                                   <zaa-injector dir="cfgField.type"  options="cfgField.options" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}"  placeholder="{{cfgField.placeholder}}" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
-                               </div>
-                            </div>
-                            <button type="submit" class="btn btn-save btn-icon"><?= Module::t('view_update_btn_save'); ?></button>
-                            <button type="button" class="btn btn-icon btn-help float-right" ng-click="showHelp=!showHelp">{{ showHelp == true ? 'Hide help' : 'Show help' }}</button>
-							<select ng-if="block.variations" class="btn float-right" ng-model="block.variation" style="margin-right:10px;">
-                            	<option value="0" selected><?= Module::t('view_update_variation_select'); ?></option>
-                                <option value="{{variationKey}}" ng-repeat="(variationKey, variation) in block.variations">{{variation.title}}</option>
-                            </select>
-                        </form>
-                        </div>
-						<div ng-if="showHelp">
-							<ul class="help">
-								<li click-paste-pusher="{{help.example}}"  ng-repeat="help in navCfg.helptags"><h3>{{help.name}}</h3><blockquote>{{help.example}}</blockquote><span ng-bind-html="help.readme | trustAsUnsafe"></span></li>
-							</ul>
-						</div>
                     </div>
                 </modal>
                 <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
