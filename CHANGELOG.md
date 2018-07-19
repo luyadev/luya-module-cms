@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#121](https://github.com/luyadev/luya-module-cms/issues/121) Blocks with configuration variables only where not editable.
 + [#14](https://github.com/luyadev/luya-module-cms/issues/14) Hide block toolbar on drag.
 + [#97](https://github.com/luyadev/luya-module-cms/issues/97) Fixed bug where not existing redirect page throws an exception.
 
