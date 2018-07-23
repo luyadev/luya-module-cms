@@ -394,7 +394,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $data = [];
     
         foreach ($nav_item_page_block_item_data as $blockItem) {
-            $data[] = self::getBlockItem($blockItem, $navItemPage);
+            $item = self::getBlockItem($blockItem, $navItemPage);
+            if ($item) {
+                $data[] = $item;
+            }
+            
+            unset($item);
         }
     
         return $data;
