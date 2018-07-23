@@ -334,6 +334,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         //$nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
         $nav_item_page = $this;
+        
+        if (!$nav_item_page->layout) {
+            return [];
+        }
+        
         $return = [
             'nav_item_page' => ['id' => $nav_item_page->id, 'layout_id' => $nav_item_page->layout_id, 'layout_name' => $nav_item_page->layout->name],
             '__placeholders' => [],
