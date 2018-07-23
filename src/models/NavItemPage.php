@@ -360,7 +360,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     
                     $placeholderVar = $placeholder['var'];
                     
-                    $return['__placeholders'][$rowKey][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
+                    $return['__placeholders'][$rowKey][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0, $this);
                 }
             }
         }
@@ -376,7 +376,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * @param integer $prevId
      * @return array
      */
-    public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)
+    public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId, NavItemPage $navItemPage)
     {
         /*
         $nav_item_page_block_item_data = (new \yii\db\Query())
@@ -388,14 +388,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         
         $nav_item_page_block_item_data = NavItemPageBlockItem::find()
             ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])
-            ->with(['navItemPage'])
             ->orderBy(['sort_index' => SORT_ASC])
             ->all();
         
         $data = [];
     
         foreach ($nav_item_page_block_item_data as $blockItem) {
-            $data[] = self::getBlockItem($blockItem);
+            $data[] = self::getBlockItem($blockItem, $navItemPage);
         }
     
         return $data;
@@ -411,7 +410,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         $blockItem = NavItemPageBlockItem::findOne($blockId);
         
-        return self::getBlockItem($blockItem);
+        return self::getBlockItem($blockItem, $blockItem->navItemPage);
     }
     
     /**
@@ -420,9 +419,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * @param integer $blockId
      * @return array
      */
-    public static function getBlockItem(NavItemPageBlockItem $blockItem)
+    public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage)
     {
-        $blockObject = Block::objectId($blockItem['block_id'], $blockItem['id'], 'admin', $blockItem->navItemPage);
+        $blockObject = Block::objectId($blockItem['block_id'], $blockItem['id'], 'admin', $navItemPage);
         if ($blockObject === false) {
             return false;
         }
@@ -444,7 +443,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 $pv['prev_id'] = $blockItem['id'];
                 $placeholderVar = $pv['var'];
         
-                $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
+                $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id'], $navItemPage);
         
                 $placeholder = $pv;
                 
