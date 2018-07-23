@@ -110,7 +110,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public static function getVersionList($navItemId)
     {
-        return self::find()->where(['nav_item_id' => $navItemId])->indexBy('id')->orderBy(['id' => SORT_ASC])->all();
+        return self::find()->where(['nav_item_id' => $navItemId])->with('layout')->indexBy('id')->orderBy(['id' => SORT_ASC])->all();
     }
 
     /**
@@ -332,17 +332,17 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public function getContentAsArray()
     {
-        $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
-        
+        //$nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
+        $nav_item_page = $this;
         $return = [
-                'nav_item_page' => ['id' => $nav_item_page['id'], 'layout_id' => $nav_item_page['layout_id'], 'layout_name' => $nav_item_page['name']],
-                '__placeholders' => [],
-            ];
+            'nav_item_page' => ['id' => $nav_item_page->id, 'layout_id' => $nav_item_page->layout_id, 'layout_name' => $nav_item_page->layout->name],
+            '__placeholders' => [],
+        ];
         
-        $nav_item_page['json_config'] = json_decode($nav_item_page['json_config'], true);
+        $config = json_decode($nav_item_page->layout->json_config, true);
         
-        if (isset($nav_item_page['json_config']['placeholders'])) {
-            foreach ($nav_item_page['json_config']['placeholders'] as $rowKey => $row) {
+        if (isset($config['placeholders'])) {
+            foreach ($config['placeholders'] as $rowKey => $row) {
                 foreach ($row as $placeholderKey => $placeholder) {
                     $placeholder['nav_item_page_id'] = $this->id;
                     $placeholder['prev_id'] = 0;
@@ -350,11 +350,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     if (!isset($placeholder['cols'])) {
                         $placeholder['cols'] = '12';
                     }
-            
+                    
                     $return['__placeholders'][$rowKey][$placeholderKey] = $placeholder;
-            
+                    
                     $placeholderVar = $placeholder['var'];
-            
+                    
                     $return['__placeholders'][$rowKey][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
                 }
             }
@@ -373,18 +373,40 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)
     {
-        $nav_item_page_block_item_data = (new \yii\db\Query())->select(['id'])->from('cms_nav_item_page_block_item')->orderBy('sort_index ASC')->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])->all();
-    
+        /*
+        $nav_item_page_block_item_data = (new \yii\db\Query())
+            ->select(['id'])->from('cms_nav_item_page_block_item')
+            ->orderBy('sort_index ASC')
+            ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])
+            ->all();
+        */
+        
+        $nav_item_page_block_item_data = NavItemPageBlockItem::find()
+            ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])
+            ->with(['navItemPage'])
+            ->orderBy(['sort_index' => SORT_ASC])
+            ->all();
+        
         $data = [];
     
         foreach ($nav_item_page_block_item_data as $blockItem) {
-            $block = static::getBlock($blockItem['id']);
-            if ($block) {
-                $data[] = $block;
-            }
+            $data[] = self::getBlockItem($blockItem);
         }
     
         return $data;
+    }
+    
+    /**
+     * 
+     * @param integer $blockId
+     * @return array
+     * @deprecated Deprecated since 1.0.6 use getBlockItem() instead.
+     */
+    public static function getBlock($blockId)
+    {
+        $blockItem = NavItemPageBlockItem::findOne($blockId);
+        
+        return self::getBlockItem($blockItem);
     }
     
     /**
@@ -393,11 +415,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * @param integer $blockId
      * @return array
      */
-    public static function getBlock($blockId)
+    public static function getBlockItem(NavItemPageBlockItem $blockItem)
     {
-        $blockItem = (new Query())->select('*')->from('cms_nav_item_page_block_item')->where(['id' => $blockId])->one();
-    
-        $blockObject = Block::objectId($blockItem['block_id'], $blockItem['id'], 'admin', NavItem::findOne($blockItem['nav_item_page_id']));
+        $blockObject = Block::objectId($blockItem['block_id'], $blockItem['id'], 'admin', $blockItem->navItemPage);
         if ($blockObject === false) {
             return false;
         }
