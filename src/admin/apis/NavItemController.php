@@ -123,7 +123,8 @@ class NavItemController extends \luya\admin\base\RestController
      */
     public function actionReloadPlaceholder($navItemPageId, $prevId, $placeholderVar)
     {
-        return NavItemPage::getPlaceholder($placeholderVar, (int) $navItemPageId, (int) $prevId);
+        $navItemPage = NavItemPage::findOne($navItemPageId);
+        return NavItemPage::getPlaceholder($placeholderVar, $prevId, $navItemPage);
     }
 
     /**

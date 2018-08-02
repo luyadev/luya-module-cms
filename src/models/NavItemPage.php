@@ -360,7 +360,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     
                     $placeholderVar = $placeholder['var'];
                     
-                    $return['__placeholders'][$rowKey][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0, $this);
+                    $return['__placeholders'][$rowKey][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, 0, $this);
                 }
             }
         }
@@ -370,24 +370,16 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
     /**
      * Get the blocks for a given placeholder, **without recursion**.
-     *
+     * 
      * @param string $placeholderVar
-     * @param integer $navItemPageId
      * @param integer $prevId
+     * @param NavItemPage $navItemPage
      * @return array
      */
-    public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId, NavItemPage $navItemPage)
+    public static function getPlaceholder($placeholderVar, $prevId, NavItemPage $navItemPage)
     {
-        /*
-        $nav_item_page_block_item_data = (new \yii\db\Query())
-            ->select(['id'])->from('cms_nav_item_page_block_item')
-            ->orderBy('sort_index ASC')
-            ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])
-            ->all();
-        */
-        
         $nav_item_page_block_item_data = NavItemPageBlockItem::find()
-            ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])
+            ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPage->id, 'placeholder_var' => $placeholderVar])
             ->orderBy(['sort_index' => SORT_ASC])
             ->all();
         
@@ -448,7 +440,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 $pv['prev_id'] = $blockItem['id'];
                 $placeholderVar = $pv['var'];
         
-                $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id'], $navItemPage);
+                $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['id'], $navItemPage);
         
                 $placeholder = $pv;
                 
