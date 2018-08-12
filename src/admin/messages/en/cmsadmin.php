@@ -163,7 +163,7 @@ return [
     'view_update_variation_select' => 'Normal',
     'menu_group_item_env_config' => 'Config',
     'js_config_update_success' => 'Configuration successfully updated.',
-    'config_index_httpexceptionnavid' => 'Specify the page 404 errors will redirect to.<br /><small>Tip: Create a 404 page containing your error message and mark it as hidden.',
+    'config_index_httpexceptionnavid' => 'Specify the page 404 errors will redirect to.<br /><small>Tip: Create a 404 page containing your error message and mark it as hidden.</small>',
     'module_permission_update_config' => 'CMS Configurations',
     'module_permission_delete_pages' => 'Delete Page',
     'page_update_actions_deepcopy_title' => 'Copy Page',
