@@ -156,7 +156,7 @@ return [
     'menu_group_item_env_config' => '구성',
     'js_config_update_success' => '구성이 성공적으로 업데이트되었습니다.',
     'config_index_httpexceptionnavid' => '리디렉션 될 오류 404 페이지를 지정하십시오.
-<br /> <small> 팁 : 오류 메시지가 포함 된 404 페이지를 만들고 숨김으로 표시하십시오.',
+<br /> <small> 팁 : 오류 메시지가 포함 된 404 페이지를 만들고 숨김으로 표시하십시오.</small>',
     'module_permission_update_config' => 'CMS 구성',
     'module_permission_delete_pages' => '페이지 삭제',
     'page_update_actions_deepcopy_title' => '페이지 복사',

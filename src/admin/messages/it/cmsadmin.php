@@ -152,7 +152,7 @@ return [
     'view_update_variation_select' => 'Nessuna versione del blocco selezionata',
     'menu_group_item_env_config' => 'Config',
     'js_config_update_success' => 'Configuraizone salvata con successo.',
-    'config_index_httpexceptionnavid' => 'Definisci la pagina a cui un errore 404 deve reindirizzare.<br /><small>Consiglio: Crea una pagina 404 contenente il tuo messaggio di errore e impostala come nascosta.',
+    'config_index_httpexceptionnavid' => 'Definisci la pagina a cui un errore 404 deve reindirizzare.<br /><small>Consiglio: Crea una pagina 404 contenente il tuo messaggio di errore e impostala come nascosta.</small>',
     'module_permission_update_config' => 'Configurazione CMS',
     'module_permission_delete_pages' => 'Cancella pagina',
     'page_update_actions_deepcopy_title' => 'Copia pagina',

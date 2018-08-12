@@ -163,9 +163,7 @@ return [
     'view_update_variation_select' => 'Normal',
     'menu_group_item_env_config' => '配置',
     'js_config_update_success' => '配置成功更新.',
-    'config_index_httpexceptionnavid' => '指定404错误跳转到指定页面.<br /><small>提示: 创建一个404页面包含错误消息,其标记为隐藏
-
-.',
+    'config_index_httpexceptionnavid' => '指定404错误跳转到指定页面.<br /><small>提示: 创建一个404页面包含错误消息,其标记为隐藏.</small>',
     'module_permission_update_config' => 'CMS 配置',
     'module_permission_delete_pages' => '删除页面',
     'page_update_actions_deepcopy_title' => '复制页面',

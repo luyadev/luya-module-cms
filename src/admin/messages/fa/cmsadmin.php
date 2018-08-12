@@ -152,7 +152,7 @@ return [
     'view_update_variation_select' => 'نرمال',
     'menu_group_item_env_config' => 'تنظیم',
     'js_config_update_success' => 'تنظیمات با موفقیت به روز رسانی شد',
-    'config_index_httpexceptionnavid' => 'Specify the page 404 errors will redirect to.<br /><small>Tip: Create a 404 page containing your error message and mark it as hidden.',
+    'config_index_httpexceptionnavid' => 'Specify the page 404 errors will redirect to.<br /><small>Tip: Create a 404 page containing your error message and mark it as hidden.</small>',
     'module_permission_update_config' => 'CMS تنظیمات',
     'module_permission_delete_pages' => 'حذف صفحه',
     'page_update_actions_deepcopy_title' => 'کپی صفحه',

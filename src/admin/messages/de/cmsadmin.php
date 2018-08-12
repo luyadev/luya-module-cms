@@ -162,7 +162,7 @@ return [
     'view_update_variation_select' => 'Keine Blockvariation ausgewählt',
     'menu_group_item_env_config' => 'Konfiguration',
     'js_config_update_success' => 'Konfiguration wurde gespeichert',
-    'config_index_httpexceptionnavid' => 'Gib die Seite an, welche bei einem 404 Fehler angezeigt werden soll.<br /><small>Tipp: Lege die 404-Seite im Stammverzeichnis an und markiere sie als versteckt.',
+    'config_index_httpexceptionnavid' => 'Gib die Seite an, welche bei einem 404 Fehler angezeigt werden soll.<br /><small>Tipp: Lege die 404-Seite im Stammverzeichnis an und markiere sie als versteckt.</small>',
     'module_permission_update_config' => 'CMS-Konfigurationen',
     'module_permission_delete_pages' => 'Seite löschen',
     'page_update_actions_deepcopy_title' => 'Seite kopieren',

@@ -152,7 +152,7 @@ return [
     'view_update_variation_select' => 'No block variation selected',
     'menu_group_item_env_config' => 'Config',
     'js_config_update_success' => 'Configuration successfull saved.',
-    'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message',
+    'config_index_httpexceptionnavid' => 'Define the page which 404 Erros will redirect to.<br /><small>Tip: Create a 404 Page and mark the page on the root als hidden, display your error message.</small>',
     'module_permission_update_config' => 'CMS Configurations',
     'module_permission_delete_pages' => 'Delete Page',
     'page_update_actions_deepcopy_title' => 'Copy Page',

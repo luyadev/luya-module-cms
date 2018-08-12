@@ -164,7 +164,7 @@ return [
     'view_update_variation_select' => 'Не вибрано жодного блокованого варіанта',
     'menu_group_item_env_config' => 'Конфігурація',
     'js_config_update_success' => 'Конфігурація успішно збережена.',
-    'config_index_httpexceptionnavid' => 'Визначте сторінку, до якої буде переадресовано 404 Erros.<br /><small>Порада: Створіть сторінку 404 і позначте сторінку в прихованому кореневому каталозі, відобразите повідомлення про помилку',
+    'config_index_httpexceptionnavid' => 'Визначте сторінку, до якої буде переадресовано 404 Erros.<br /><small>Порада: Створіть сторінку 404 і позначте сторінку в прихованому кореневому каталозі, відобразите повідомлення про помилку.</small>',
     'module_permission_update_config' => 'CMS конфігурації',
     'module_permission_delete_pages' => 'Видалити сторінку',
     'page_update_actions_deepcopy_title' => 'Скопіювати сторінку',
