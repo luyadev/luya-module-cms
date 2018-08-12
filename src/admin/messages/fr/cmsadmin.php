@@ -152,7 +152,7 @@ return [
     'view_update_variation_select' => 'Normal',
     'menu_group_item_env_config' => 'Configuration',
     'js_config_update_success' => 'Configuration enregistrée avec succès',
-    'config_index_httpexceptionnavid' => 'Indiquez la page vers laquelle les erreurs 404 redirigeront.<br/><small>Conseil : créez une page 404 contenant votre message d\'erreur et marquez-la comme cachée.',
+    'config_index_httpexceptionnavid' => 'Indiquez la page vers laquelle les erreurs 404 redirigeront.<br/><small>Conseil : créez une page 404 contenant votre message d\'erreur et marquez-la comme cachée.</small>',
     'module_permission_update_config' => 'Configurations du CMS',
     'module_permission_delete_pages' => 'Supprimer la page',
     'page_update_actions_deepcopy_title' => 'Copier la page',

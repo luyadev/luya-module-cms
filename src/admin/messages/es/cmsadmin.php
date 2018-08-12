@@ -143,7 +143,7 @@ return [
     'view_update_variation_select' => 'No se seleccionó ninguna variación de bloque',
     'menu_group_item_env_config' => 'Configuración',
     'js_config_update_success' => 'Configuración correctamente guardada.',
-    'config_index_httpexceptionnavid' => 'Selecione la página a la que se dirigirán los errores 404.<br /><small>Consejo: Cree una página 404 y marque la página en la raíz ocultada, muestre su mensaje de error',
+    'config_index_httpexceptionnavid' => 'Selecione la página a la que se dirigirán los errores 404.<br /><small>Consejo: Cree una página 404 y marque la página en la raíz ocultada, muestre su mensaje de error</small>',
     'module_permission_update_config' => 'Configuraciones de CMS',
     'module_permission_delete_pages' => 'Eliminar página',
     'page_update_actions_deepcopy_title' => 'Copiar página',

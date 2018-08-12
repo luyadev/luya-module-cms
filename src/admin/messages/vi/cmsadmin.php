@@ -164,7 +164,7 @@ return [
     'view_update_variation_select' => 'Không có block nào chọn thay đổi',
     'menu_group_item_env_config' => 'Thiết lập',
     'js_config_update_success' => 'Thực hiện nâng cấp thành công!',
-    'config_index_httpexceptionnavid' => 'Có lỗi khi khai báo trang 404.<br /><small>Gợi ý: Tạo trang 404 và trỏ trang root về als để hiện câu báo lỗi!',
+    'config_index_httpexceptionnavid' => 'Có lỗi khi khai báo trang 404.<br /><small>Gợi ý: Tạo trang 404 và trỏ trang root về als để hiện câu báo lỗi!</small>',
     'module_permission_update_config' => 'Cấu hình CMS',
     'module_permission_delete_pages' => 'Xóa Trang',
     'page_update_actions_deepcopy_title' => 'Copy Trang',

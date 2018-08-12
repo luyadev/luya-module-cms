@@ -163,7 +163,7 @@ return [
     'view_update_variation_select' => 'Nenhuma variação de bloco selecionada',
     'menu_group_item_env_config' => 'Configuração',
     'js_config_update_success' => 'Configuração gravada com sucesso.',
-    'config_index_httpexceptionnavid' => 'Defina a página, em que o erro 404 será redirecionado. <br /> <small> Dica: Crie uma página 404 e marque a página na raiz como oculta',
+    'config_index_httpexceptionnavid' => 'Defina a página, em que o erro 404 será redirecionado. <br /> <small> Dica: Crie uma página 404 e marque a página na raiz como oculta.</small>',
     'module_permission_update_config' => 'Configuraços do CMS',
     'module_permission_delete_pages' => 'Excluir página',
     'page_update_actions_deepcopy_title' => 'Copiar página',

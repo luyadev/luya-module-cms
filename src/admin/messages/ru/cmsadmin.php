@@ -163,7 +163,7 @@ return [
     'view_update_variation_select' => 'Не выбрано ни одного изменения блока',
     'menu_group_item_env_config' => 'Настройки',
     'js_config_update_success' => 'Настройки успешно сохранена.',
-    'config_index_httpexceptionnavid' => 'Определите страницу, на которую будут перенаправляться 404 ошибки.<br /><small>Совет: Создайте страницу 404 и пометьте страницу в скрытом корневом каталоге, отобразите сообщение об ошибке',
+    'config_index_httpexceptionnavid' => 'Определите страницу, на которую будут перенаправляться 404 ошибки.<br /><small>Совет: Создайте страницу 404 и пометьте страницу в скрытом корневом каталоге, отобразите сообщение об ошибке.</small>',
     'module_permission_update_config' => 'CMS настройки',
     'module_permission_delete_pages' => 'Удалить страницу',
     'page_update_actions_deepcopy_title' => 'Скопировать страницу',
