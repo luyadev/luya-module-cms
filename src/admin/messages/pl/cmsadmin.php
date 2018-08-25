@@ -59,8 +59,8 @@ return [
 "model_navitem_title_label" => "Tytuł strony",
 'model_navitem_alias_label' => 'Segment ścieżki URL',
 'model_navitempage_layout_label' => 'Układ',
-'model_navitemred_type_label' => 'Typ przekierowania',
-'model_navitemred_value_label' => 'Cel przekierowania',
+'model_navitemredirect_type_label' => 'Typ przekierowania',
+'model_navitemredirect_value_label' => 'Cel przekierowania',
 
 'view_index_add_title' => 'Dodaj nową stronę',
 "view_index_add_page_from_language" => 'Dodaj stronę z języka',
