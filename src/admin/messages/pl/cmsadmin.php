@@ -33,7 +33,7 @@ return [
 'view_update_holder_state_on' => 'Fold placeholders',
 'view_update_holder_state_off' => 'Rozwiń symbole zastępcze',
 "view_update_is_draft_mode" => 'Edycja w trybie roboczym.',
-"view_update_isomail" => "Strona główna",
+"view_update_is_homepage" => "Strona główna",
 'view_update_properties_title' => 'Właściwości strony',
 'view_update_no_properties_exists' => 'Na tej stronie nie zapisano jeszcze żadnych właściwości.',
 'view_update_draft_no_lang_error' => 'Szablon nie jest skonfigurowany w tym języku.',
