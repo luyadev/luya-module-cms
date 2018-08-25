@@ -197,7 +197,7 @@ return [
 'cmsadmin_settings_time_title_from'=> 'Od',
 'cmsadmin_settings_time_title_till'=> 'Do',
 'view_index_page_meta_timestamp_create' => 'Data utworzenia strony',
-'nav_item_model_error_modulenacd / var meexists' => 'Alias ​​"{alias}" istnieje już jako moduł. Użyj innego aliasu lub zmień nazwę modułu na ten alias w konfiguracji. ',
+'nav_item_model_error_modulenacd /var   meexists' => 'Alias ​​"{alias}" istnieje już jako moduł. Użyj innego aliasu lub zmień nazwę modułu na ten alias w konfiguracji. ',
 'nav_item_model_error_parentnavidcannotnull' => 'Główny identyfikator nawigacji nie może mieć wartości null, coś poszło nie tak podczas rozszerzania ze strony nadrzędnej.',
 'nav_item_model_error_urlsegementexistsalready' => 'Ten alias już istnieje, proszę, weź inne imię.',
 'menu_group_item_env_redirections' => 'Przekierowania',
