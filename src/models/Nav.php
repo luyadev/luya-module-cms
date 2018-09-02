@@ -104,14 +104,14 @@ class Nav extends ActiveRecord
     /**
      * @return
      */
-    public function createCopy()
+    public function createCopy($asTempalte = false)
     {
         $model = new self();
         $model->attributes = $this->toArray();
         $model->is_hidden = true;
         $model->is_offline = true;
         $model->is_home = false;
-        $model->is_draft = false;
+        $model->is_draft = $asTempalte;
         if ($model->save(false)) {
             return $model;
         }

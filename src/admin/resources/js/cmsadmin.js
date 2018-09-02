@@ -788,8 +788,8 @@
 	// update.js
 
 	zaa.controller("NavController", [
-		'$scope', '$rootScope', '$filter', '$stateParams', '$http', 'PlaceholderService', 'ServicePropertiesData', 'ServiceMenuData', 'ServiceLanguagesData', 'ServiceLiveEditMode', 'AdminToastService', 'AdminClassService', 'AdminLangService', 'HtmlStorage',
-		function($scope, $rootScope, $filter, $stateParams, $http, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService, HtmlStorage) {
+		'$scope', '$rootScope', '$filter', '$state', '$stateParams', '$http', 'PlaceholderService', 'ServicePropertiesData', 'ServiceMenuData', 'ServiceLanguagesData', 'ServiceLiveEditMode', 'AdminToastService', 'AdminClassService', 'AdminLangService', 'HtmlStorage',
+		function($scope, $rootScope, $filter, $state, $stateParams, $http, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, ServiceLiveEditMode, AdminToastService, AdminClassService, AdminLangService, HtmlStorage) {
 
 
 		$scope.pageSettingsOverlayHidden = true;
@@ -904,6 +904,16 @@
 				AdminToastService.success(i18n['js_page_create_copy_success']);
 				$scope.showActions = 1;
 				$scope.togglePageSettingsOverlay();
+			});
+		};
+
+		$scope.createDeepPageCopyAsTemplate = function() {
+			$http.post('admin/api-cms-nav/deep-page-copy-as-template', {navId: $scope.id}).then(function(response) {
+				$scope.menuDataReload();
+				AdminToastService.success(i18n['js_page_create_copy_as_template_success']);
+				$scope.showActions = 1;
+				$scope.togglePageSettingsOverlay();
+                $state.go('custom.cmsdraft');
 			});
 		};
 

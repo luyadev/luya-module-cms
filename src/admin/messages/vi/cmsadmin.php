@@ -216,4 +216,9 @@ return [
 
 // 1.0.1
 'module_permission_page' => 'Page Content',
+
+// 1.0.6
+	'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
+	'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
+	'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
 ];
