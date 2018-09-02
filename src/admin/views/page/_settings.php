@@ -16,6 +16,9 @@ use luya\admin\helpers\Angular;
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><i class="material-icons">content_copy</i><span><?= Module::t('page_update_actions_deepcopy_title'); ?></span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=8" ng-class="{'active':pageSettingsOverlayTab==8}"><i class="material-icons">collections</i><span><?= Module::t('page_update_actions_deepcopyastemplate_title'); ?></span></a>
+                </li>
                 <li class="nav-item" ng-show="!isDraft">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=5" ng-class="{'active':pageSettingsOverlayTab==5}"><i class="material-icons">home</i><span><?= Module::t('cmsadmin_settings_homepage_title'); ?></span></a>
                 </li>
@@ -40,7 +43,7 @@ use luya\admin\helpers\Angular;
                                 <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{lang.name}}: {{prop.label}}" model="propValues[prop.id][lang.short_code]"></zaa-injector>
                             </li>
                         </ul>
-                	</div>
+                    </div>
                     <div ng-if="!prop.i18n" class="col">
                         <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                     </div>
@@ -52,8 +55,8 @@ use luya\admin\helpers\Angular;
                 <h1><?= Module::t('page_update_actions_layout_title'); ?></h1>
                 <p><?= Module::t('page_update_actions_layout_text'); ?></p>
                 <form ng-submit="submitNavForm({layout_file: navData.layout_file})">
-	                <zaa-text model="navData.layout_file" label="<?= Module::t('page_update_actions_layout_file_field'); ?>" />
-	                <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
+                    <zaa-text model="navData.layout_file" label="<?= Module::t('page_update_actions_layout_file_field'); ?>" />
+                    <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
                 </form>
             </div>
             <div ng-switch-when="4">
@@ -80,10 +83,16 @@ use luya\admin\helpers\Angular;
             <div ng-switch-when="7">
                 <h1><?= Module::t('cmsadmin_settings_time_title'); ?></h1>
                 <form ng-submit="submitNavForm({publish_from: navData.publish_from, publish_till: navData.publish_till})">
-                	<?= Angular::datetime('navData.publish_from', Module::t('cmsadmin_settings_time_title_from')); ?>
-                	<?= Angular::datetime('navData.publish_till', Module::t('cmsadmin_settings_time_title_till')); ?>
-	                <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
+                    <?= Angular::datetime('navData.publish_from', Module::t('cmsadmin_settings_time_title_from')); ?>
+                    <?= Angular::datetime('navData.publish_till', Module::t('cmsadmin_settings_time_title_till')); ?>
+                    <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
                 </form>
+            </div>
+
+            <div ng-switch-when="8">
+                <h1><?= Module::t('page_update_actions_deepcopyastemplate_title'); ?></h1>
+                <p><?= Module::t('page_update_actions_deepcopyastemplate_text'); ?></p>
+                <p><button type="button" class="btn btn-save btn-icon" ng-click="createDeepPageCopyAsTemplate()"><?= Module::t('page_update_actions_deepcopyastemplate_btn'); ?></button></p>
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 <?php
+
 use luya\cms\admin\Module;
 
 ?>
@@ -53,6 +54,9 @@ use luya\cms\admin\Module;
                             </a>
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(4)">
                                 <i class="material-icons">content_copy</i> <span><?= Module::t('page_update_actions_deepcopy_title'); ?></span>
+                            </a>
+                            <a class="dropdown-item" ng-click="togglePageSettingsOverlay(8)">
+                                <i class="material-icons">collections</i> <span><?= Module::t('page_update_actions_deepcopyastemplate_title'); ?></span>
                             </a>
                             <a class="dropdown-item" ng-show="!isDraft" ng-click="togglePageSettingsOverlay(5)">
                                 <i class="material-icons">home</i> <span><?= Module::t('cmsadmin_settings_homepage_title'); ?></span>

@@ -15,7 +15,7 @@ use luya\cms\admin\Module;
 use yii\web\ForbiddenHttpException;
 
 /**
- * Nai Api provides tasks to create, modify and delete navigation items and properties of items.
+ * Nav Api provides tasks to create, modify and delete navigation items and properties of items.
  *
  * example.com/admin/api-cms-nav/create-page
  * example.com/admin/api-cms-nav/create-item-page
@@ -48,7 +48,12 @@ class NavController extends \luya\admin\base\RestController
         
         return true;
     }
-    
+
+    /**
+     * Create a page copy from existing page.
+     *
+     * @return bool
+     */
     public function actionDeepPageCopy()
     {
         $navId = (int) Yii::$app->request->getBodyParam('navId');
@@ -76,6 +81,42 @@ class NavController extends \luya\admin\base\RestController
             }
         }
         
+        return true;
+    }
+
+    /**
+     * Create a page template from a existing page.
+     *
+     * @return bool
+     * @since 1.0.6
+     */
+    public function actionDeepPageCopyAsTemplate()
+    {
+        $navId = (int) Yii::$app->request->getBodyParam('navId');
+
+        if (empty($navId)) {
+            throw new InvalidCallException("navId can not be empty.");
+        }
+
+        $nav = Nav::findOne($navId);
+
+        if (!$nav) {
+            throw new InvalidCallException("Unable to find the requested model.");
+        }
+
+        $model = $nav->createCopy(true);
+        foreach ($nav->navItems as $item) {
+            $newItem = new NavItem();
+            $newItem->attributes = $item->toArray();
+            $newItem->nav_id = $model->id;
+            $newItem->parent_nav_id = $model->parent_nav_id;
+            $newItem->title = $item->title . ' (template copy)';
+            $newItem->alias = $item->alias . '-' . time();
+            if ($newItem->save() && !empty($newItem->nav_item_type_id)) {
+                $item->copyTypeContent($newItem);
+            }
+        }
+
         return true;
     }
     
