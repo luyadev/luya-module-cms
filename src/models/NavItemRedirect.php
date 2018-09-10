@@ -83,7 +83,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
         $link = $this->resolveValue();
         
         if (!$link) {
-            throw new InvalidConfigException("Wrong link configuration provided.");
+            throw new InvalidConfigException(sprintf("Unable to redirect to the given page, invalid link object. Make sure the target page with id '%s' is online!", $this->value));
         }
         
         Yii::$app->getResponse()->redirect($link->getHref());
