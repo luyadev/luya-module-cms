@@ -239,21 +239,55 @@ class Block extends NgRestModel
         return $this->class;
     }
     
+    /**
+     * Find the the class names for a certain amount of block ids.
+     *
+     * @param array $ids
+     * @return array
+     */
     public static function findObjectClassesById(array $ids)
     {
         return self::find()->select('class')->indexBy('id')->where(['in', 'id', $ids])->column();
     }
-    
+
+    /**
+     * Get the object from current object-context (classname).
+     *
+     * @param [type] $id
+     * @param [type] $context
+     * @param [type] $pageObject
+     * @return void
+     * @since 1.0.6
+     */
+    public function getObject($id, $context, $pageObject = null)
+    {
+        return self::createObject($this->class, $this->id, $id, $context, $pageObject);
+    }
+
+    /**
+     * Creates the block object and stores the object within a static block container.  
+     *
+     * @param string $class
+     * @param integer $blockId The id of the cms_block table
+     * @param integer $id The context id, for example the id of the text block element
+     * @param string $context admin or frontend
+     * @param mixed $pageObject
+     * @return \luya\cms\base\BlockInterface
+     */
     public static function createObject($class, $blockId, $id, $context, $pageObject = null)
     {
-        if (!class_exists($class)) {
-            return false;
+        if (!isset(self::$blocks[$blockId])) {
+
+            if (!class_exists($class)) {
+                return false;
+            }
+
+            static::$blocks[$blockId] = Yii::createObject([
+                'class' => $class,
+            ]);
         }
         
-        $object = Yii::createObject([
-            'class' => $class,
-        ]);
-        
+        $object = self::$blocks[$blockId];
         $object->setEnvOption('id', $id);
         $object->setEnvOption('blockId', $blockId);
         $object->setEnvOption('context', $context);
@@ -272,11 +306,10 @@ class Block extends NgRestModel
      * @param mixed $context
      * @param object $pageObject
      * @return \luya\cms\base\BlockInterface
+     * @deprecated 1.1.0 use createObject() or getObject() instead!
      */
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
-        
-        Yii::warning('load block object id' . $blockId);
         if (isset(self::$blocks[$blockId])) {
             $block = self::$blocks[$blockId];
         } else {

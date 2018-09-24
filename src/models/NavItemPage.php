@@ -381,6 +381,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $nav_item_page_block_item_data = NavItemPageBlockItem::find()
             ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPage->id, 'placeholder_var' => $placeholderVar])
             ->orderBy(['sort_index' => SORT_ASC])
+            ->with(['block'])
             ->all();
         
         $data = [];
@@ -418,7 +419,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage)
     {
-        $blockObject = Block::objectId($blockItem['block_id'], $blockItem['id'], 'admin', $navItemPage);
+        $blockObject = $blockItem->block->getObject($blockItem->id, 'admin', $navItemPage);
+        //$blockObject = Block::objectId($blockItem['block_id'], $blockItem['id'], 'admin', $navItemPage);
         if ($blockObject === false) {
             return false;
         }

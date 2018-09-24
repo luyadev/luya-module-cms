@@ -40,7 +40,7 @@ class BlockController extends Controller
             throw new Exception("Unable to find item id.");
         }
         
-        $block = Block::objectId($model->block_id, $model->id, 'callback');
+        $block = $model->block->getObject($model->id, 'callback');
 
         if (!$block) {
             throw new Exception("Unable to find block object.");

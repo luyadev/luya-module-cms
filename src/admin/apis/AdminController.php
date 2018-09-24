@@ -19,6 +19,11 @@ use luya\cms\models\Log;
  */
 class AdminController extends \luya\admin\base\RestController
 {
+    /**
+     * Return the general cms page configuration.
+     *
+     * @return array
+     */
     public function actionConfig()
     {
         // valid keys
@@ -36,6 +41,11 @@ class AdminController extends \luya\admin\base\RestController
         return $data;
     }
     
+    /**
+     * Get all logs for the cms in order to render the dashboard
+     *
+     * @return array
+     */
     public function actionDashboardLog()
     {
         $data = Log::find()->orderBy(['timestamp' => SORT_DESC])->with(['user'])->limit(60)->all();
@@ -58,17 +68,24 @@ class AdminController extends \luya\admin\base\RestController
         return $array;
     }
     
+    /**
+     * Get all blocks which can be dropped into a page grouped by group.
+     *
+     * @return array An array with list of groups with an array key "blocks" containing the blocks.
+     */
     public function actionDataBlocks()
     {
         $favs = Yii::$app->adminuser->identity->setting->get("blockfav", []);
-        
         $groups = [];
-        foreach (BlockGroup::find()->asArray()->all() as $group) {
+        foreach (BlockGroup::find()->with(['blocks'])->all() as $blockGroup) {
             $blocks = [];
             $groupPosition = null;
-            foreach (Block::find()->where(['group_id' => $group['id'], 'is_disabled' => false])->all() as $block) {
-                $obj = Block::objectId($block['id'], 0, 'admin');
-                if (!$obj || in_array(get_class($obj), Yii::$app->getModule('cmsadmin')->hiddenBlocks)) {
+            foreach ($blockGroup->blocks as $block) {
+                // create the block object
+                $obj = $block->getObject(0, 'admin');
+
+                // check if in hidden blocks
+                if (!$obj || in_array(get_class($obj), $this->module->hiddenBlocks)) {
                     continue;
                 }
                 
@@ -76,23 +93,23 @@ class AdminController extends \luya\admin\base\RestController
                     $groupObject = Yii::createObject($obj->blockGroup());
                     $groupPosition = $groupObject->getPosition();
                 }
+
                 $blocks[] = [
-                    'id' => $block['id'],
+                    'id' => $block->id,
                     'name' => $obj->name(),
                     'icon' => $obj->icon(),
                     'full_name' => ($obj->icon() === null) ? $obj->name() : '<i class="material-icons">'.$obj->icon().'</i> <span>'.$obj->name().'</span>',
-                    'favorized' => array_key_exists($block['id'], $favs),
+                    'favorized' => array_key_exists($block->id, $favs),
                     'newblock' => 1,
                 ];
             }
-
-            if (empty($blocks)) {
-                continue;
-            }
             
-            $group['name'] = Module::t($group['name']);
+            // extend the group element b
+            $group = $blockGroup->toArray([]);
+            $group['name'] = $blockGroup->groupLabel;
             $group['is_fav'] = 0;
             $group['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get("togglegroup.{$group['id']}", 1);
+
             $groups[] = [
                 'groupPosition' => $groupPosition,
                 'group' => $group,
@@ -123,6 +140,11 @@ class AdminController extends \luya\admin\base\RestController
         return $groups;
     }
 
+    /**
+     * Get all cms layouts
+     *
+     * @return array
+     */
     public function actionDataLayouts()
     {
         return ArrayHelper::typeCast(Layout::find()->asArray()->all());

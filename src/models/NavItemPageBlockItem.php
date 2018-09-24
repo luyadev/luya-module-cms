@@ -300,7 +300,7 @@ class NavItemPageBlockItem extends ActiveRecord
     
     public static function originalFind()
     {
-        return Yii::createObject(ActiveQuery::className(), [get_called_class()]);
+        return Yii::createObject(ActiveQuery::class, [get_called_class()]);
     }
     
     /**
@@ -320,7 +320,7 @@ class NavItemPageBlockItem extends ActiveRecord
      */
     public function getBlock()
     {
-        return $this->hasOne(Block::className(), ['id' => 'block_id']);
+        return $this->hasOne(Block::class, ['id' => 'block_id']);
     }
     
     /**
@@ -330,6 +330,6 @@ class NavItemPageBlockItem extends ActiveRecord
      */
     public function getNavItemPage()
     {
-        return $this->hasOne(NavItemPage::className(), ['id' => 'nav_item_page_id']);
+        return $this->hasOne(NavItemPage::class, ['id' => 'nav_item_page_id']);
     }
 }

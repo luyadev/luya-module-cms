@@ -5,6 +5,7 @@ namespace luya\cms\models;
 use Yii;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\cms\admin\Module;
 
 /**
  * Represents a group of blocks.
@@ -89,16 +90,6 @@ class BlockGroup extends NgRestModel
             'groupLabel' => 'text',
         ];
     }
-
-    /**
-     * Get the Group label with translation evaled.
-     *
-     * @return string Returns the group name.
-     */
-    public function getGroupLabel()
-    {
-        return $this->classObject->label();
-    }
     
     /**
      * @inheritdoc
@@ -118,6 +109,18 @@ class BlockGroup extends NgRestModel
         return ['groupLabel'];
     }
     
+
+
+    /**
+     * Get the Group label with translation evaled.
+     *
+     * @return string Returns the group name.
+     */
+    public function getGroupLabel()
+    {
+        return $this->classObject->label();
+    }
+
     /**
      * Returns the block group object in order to retrieve translation data.
      *
@@ -126,5 +129,15 @@ class BlockGroup extends NgRestModel
     public function getClassObject()
     {
         return Yii::createObject(['class' => $this->class]);
+    }
+
+    /**
+     * The all blocks for the given group
+     * 
+     * @return \luya\cms\models\Block
+     */
+    public function getBlocks()
+    {
+        return $this->hasMany(Block::class, ['group_id' => 'id']);
     }
 }
