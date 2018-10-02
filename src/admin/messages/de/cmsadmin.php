@@ -30,6 +30,8 @@ return [
     'view_update_configs' => 'Optionale Konfiguration',
     'view_update_btn_save' => 'Speichern',
     'view_update_btn_cancel' => 'Abbrechen',
+    'view_update_btn_hide_help' => 'Hilfe ausblenden',
+    'view_update_btn_show_help' => 'Hilfe anzeigen',
     'view_update_holder_state_on' => 'Platzhalter einklappen',
     'view_update_holder_state_off' => 'Platzhalter ausklappen',
     'view_update_is_draft_mode' => 'Sie sind im Seitenvorlage Modus.',

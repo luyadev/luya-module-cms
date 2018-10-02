@@ -30,6 +30,8 @@ return [
     'view_update_configs' => 'Optional Configurations',
     'view_update_settings' => 'Settings',
     'view_update_btn_save' => 'Save',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_btn_cancel' => 'Abort',
     'view_update_holder_state_on' => 'Fold placeholders',
     'view_update_holder_state_off' => 'Unfold placeholders',
