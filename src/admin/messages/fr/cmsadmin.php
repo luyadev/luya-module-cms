@@ -31,6 +31,8 @@ return [
     'view_update_settings' => 'Paramètres',
     'view_update_btn_save' => 'Enregistrer',
     'view_update_btn_cancel' => 'Annuler',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Plier le conteneur',
     'view_update_holder_state_off' => 'Dérouler le conteneur',
     'view_update_is_draft_mode' => 'Edition en mode brouillon',

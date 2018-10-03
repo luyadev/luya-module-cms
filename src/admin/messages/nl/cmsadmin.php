@@ -31,6 +31,8 @@ return [
     'view_update_settings' => 'Instellingen',
     'view_update_btn_save' => 'Opslaan',
     'view_update_btn_cancel' => 'Afbreken',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Plaatsaanduidingen vouwen',
     'view_update_holder_state_off' => 'Open tijdelijke aanduidingen',
     'view_update_is_draft_mode' => 'Bewerken in conceptmodus.',
