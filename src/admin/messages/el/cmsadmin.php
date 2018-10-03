@@ -30,6 +30,8 @@ return [
     'view_update_settings' => 'Ρυθμίσεις',
     'view_update_btn_save' => 'Αποθήκευση',
     'view_update_btn_cancel' => 'Ματαίωση',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Σύμπτηξη placeholders',
     'view_update_holder_state_off' => 'Ανάπτυξη placeholders',
     'view_update_is_draft_mode' => 'Επεξεργασία σε draft mode.',

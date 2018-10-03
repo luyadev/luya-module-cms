@@ -31,6 +31,8 @@ return [
     'view_update_settings' => 'Cài đặt',
     'view_update_btn_save' => 'Lưu',
     'view_update_btn_cancel' => 'Hủy',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Thu nhỏ',
     'view_update_holder_state_off' => 'Mở rộng',
     'view_update_is_draft_mode' => 'Chỉnh sửa ở chế độ nháp.',

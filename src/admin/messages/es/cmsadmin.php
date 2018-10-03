@@ -29,6 +29,8 @@ return [
     'view_update_settings' => 'Ajustes',
     'view_update_btn_save' => 'Guardar',
     'view_update_btn_cancel' => 'Cancelar',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Ocultar',
     'view_update_holder_state_off' => 'Desplegar',
     'view_update_is_draft_mode' => 'Editarlo como un proyecto.',

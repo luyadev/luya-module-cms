@@ -31,6 +31,8 @@ return [
     'view_update_settings' => 'Налаштування',
     'view_update_btn_save' => 'Зберехти',
     'view_update_btn_cancel' => 'Відміна',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Приховати',
     'view_update_holder_state_off' => 'Показати',
     'view_update_is_draft_mode' => 'Редагування в режимі чернетки.',

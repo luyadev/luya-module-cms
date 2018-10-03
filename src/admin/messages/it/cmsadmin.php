@@ -30,6 +30,8 @@ return [
     'view_update_settings' => 'Impostazioni',
     'view_update_btn_save' => 'Salva',
     'view_update_btn_cancel' => 'Cancella',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Nascondi',
     'view_update_holder_state_off' => 'Visualizza',
     'view_update_is_draft_mode' => 'Modifica in bozza.',

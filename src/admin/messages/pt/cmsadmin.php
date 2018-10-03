@@ -30,6 +30,8 @@ return [
     'view_update_settings' => 'Configurações',
     'view_update_btn_save' => 'Gravar',
     'view_update_btn_cancel' => 'Abortar',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Dobrar espaços reservadors',
     'view_update_holder_state_off' => 'Desdobrar espaços reservados',
     'view_update_is_draft_mode' => 'Edição em modo rascunho.',

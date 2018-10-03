@@ -31,6 +31,8 @@ return [
     'view_update_settings' => 'Ayarlar',
     'view_update_btn_save' => 'Kaydet',
     'view_update_btn_cancel' => 'İptal et',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Katman yer tutucuları',
     'view_update_holder_state_off' => 'Açılmış yer tutucuları',
     'view_update_is_draft_mode' => 'Taslak modunda düzenle.',

@@ -31,6 +31,8 @@ return [
     'view_update_settings' => '设置',
     'view_update_btn_save' => '保存',
     'view_update_btn_cancel' => '放弃',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => '折叠占位符',
     'view_update_holder_state_off' => '展开占位符',
     'view_update_is_draft_mode' => '以草稿模式编辑.',

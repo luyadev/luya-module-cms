@@ -31,6 +31,8 @@ return [
     'view_update_settings' => 'Настройки',
     'view_update_btn_save' => 'Сохранить',
     'view_update_btn_cancel' => 'Прервать',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Скрыть',
     'view_update_holder_state_off' => 'Раскрыть',
     'view_update_is_draft_mode' => 'Редактировать как черновик',
