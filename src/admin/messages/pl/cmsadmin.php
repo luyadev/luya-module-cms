@@ -30,6 +30,8 @@ return [
     'view_update_settings' => 'Ustawienia',
     'view_update_btn_save' => 'Zapisz',
     'view_update_btn_cancel' => 'Przerwij',
+    'view_update_btn_hide_help' => 'Hide help',
+    'view_update_btn_show_help' => 'Show help',
     'view_update_holder_state_on' => 'Fold placeholders',
     'view_update_holder_state_off' => 'Rozwiń symbole zastępcze',
     'view_update_is_draft_mode' => 'Edycja w trybie roboczym.',
