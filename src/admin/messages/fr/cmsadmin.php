@@ -147,7 +147,7 @@ return [
     'page_update_actions_deepcopy_btn' => 'Créer une copie',
     
     /* rc2 */
-    'model_navitem_title_tag_label' => 'Balise <title> (SEO)',
+    'model_navitem_title_tag_label' => 'Balise title (SEO)',
     
     /* rc3 */
     'model_navitempage_empty_draft_id' => 'Impossible de créer une page à partir d\'un modèle vide',
