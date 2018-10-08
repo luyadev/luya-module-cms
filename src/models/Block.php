@@ -276,18 +276,14 @@ class Block extends NgRestModel
      */
     public static function createObject($class, $blockId, $id, $context, $pageObject = null)
     {
-        if (!isset(self::$blocks[$blockId])) {
-
-            if (!class_exists($class)) {
-                return false;
-            }
-
-            static::$blocks[$blockId] = Yii::createObject([
-                'class' => $class,
-            ]);
+        if (!class_exists($class)) {
+            return false;
         }
         
-        $object = self::$blocks[$blockId];
+        $object = Yii::createObject([
+            'class' => $class,
+        ]);
+        
         $object->setEnvOption('id', $id);
         $object->setEnvOption('blockId', $blockId);
         $object->setEnvOption('context', $context);
