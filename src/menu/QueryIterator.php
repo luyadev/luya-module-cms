@@ -62,7 +62,7 @@ class QueryIterator extends BaseObject implements Iterator
     public function loadModels()
     {
         if ($this->_loadModels === null) {
-            $this->_loadModels = Nav::find()->indexBy('id')->where(['in', 'id', ArrayHelper::getColumn($this->data, 'nav_id')])->with(['properties'])->all();
+            $this->_loadModels = Nav::find()->indexBy('id')->where(['in', 'id', ArrayHelper::getColumn($this->data, 'nav_id')])->with(['properties.adminProperty'])->all();
         }
         
         return $this->_loadModels;

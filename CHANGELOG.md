@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.0.7.2 (in progress)
+
++ [#145](https://github.com/luyadev/luya-module-cms/issues/145) Fixed issue where preloading of models wont have any effect for page properties.
+
 ## 1.0.7.1 (8. October 2018)
 
 + [#144](https://github.com/luyadev/luya-module-cms/issues/144) Fixed problem with using of exiting object, this broke cms pages where the same block is used multiple times.

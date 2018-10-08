@@ -124,7 +124,7 @@ class Nav extends ActiveRecord
      */
     public function getProperties()
     {
-        return $this->hasMany(CmsProperty::class, ['nav_id' => 'id'])->with('adminProperty');
+        return $this->hasMany(CmsProperty::class, ['nav_id' => 'id']);
     }
     
     /**
@@ -134,7 +134,7 @@ class Nav extends ActiveRecord
      */
     public function getProperty($varName)
     {
-        foreach ($this->getProperties()->with(['adminProperty'])->all() as $prop) {
+        foreach ($this->properties as $prop) {
             if ($prop->adminProperty->var_name == $varName) {
                 return $prop->getObject();
             }
