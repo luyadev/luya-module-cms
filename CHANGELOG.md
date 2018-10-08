@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 1.0.7 (8. October 2018)
+
++ [#143](https://github.com/luyadev/luya-module-cms/issues/143) Added block_class and block_class_name to block response in order to use as identifier for registering headless blocks instead of ID.
+
 ## 1.0.6 (3. September 2018)
 
 ### Changed
@@ -11,7 +15,6 @@ All notable changes to this project will be documented in this file. This projec
 
 ## Added
 
-+ Added block_class and block_class_name to block response in order to use as identifier for registering headless blocks instead of ID.
 + [#132](https://github.com/luyadev/luya-module-cms/pull/132) Added Polish translations.
 + [#84](https://github.com/luyadev/luya-module-cms/issues/84) Added index for FK fields.
 + [#107](https://github.com/luyadev/luya-module-cms/issues/107) Extend rules for nav item model.

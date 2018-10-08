@@ -53,7 +53,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
+                "url": "git@github.com:bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -148,16 +148,16 @@
         },
         {
             "name": "curl/curl",
-            "version": "1.9.2",
+            "version": "1.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "8fa349f9f82f8d892137fe87239a70b0d358d160"
+                "reference": "43436a604b18c2a985cbc3f983be817fbe500e99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/8fa349f9f82f8d892137fe87239a70b0d358d160",
-                "reference": "8fa349f9f82f8d892137fe87239a70b0d358d160",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/43436a604b18c2a985cbc3f983be817fbe500e99",
+                "reference": "43436a604b18c2a985cbc3f983be817fbe500e99",
                 "shasum": ""
             },
             "require": {
@@ -199,7 +199,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2018-08-18T15:32:01+00:00"
+            "time": "2018-09-05T17:16:47+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -560,16 +560,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.10",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "2619b21764ce1ecea301b33d01ba7307877607f5"
+                "reference": "82ae26e7b47f840f235fe2f0f40e0a1df29255c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/2619b21764ce1ecea301b33d01ba7307877607f5",
-                "reference": "2619b21764ce1ecea301b33d01ba7307877607f5",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/82ae26e7b47f840f235fe2f0f40e0a1df29255c6",
+                "reference": "82ae26e7b47f840f235fe2f0f40e0a1df29255c6",
                 "shasum": ""
             },
             "require": {
@@ -613,20 +613,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-07-18T14:13:30+00:00"
+            "time": "2018-10-08T14:45:51+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "1.2.1",
+            "version": "1.2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "11ff9381ce34dbe66d1eac58b8506ed883266a2a"
+                "reference": "4889d1a0c81a2ddbe50508ce5a4e8b5251381028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/11ff9381ce34dbe66d1eac58b8506ed883266a2a",
-                "reference": "11ff9381ce34dbe66d1eac58b8506ed883266a2a",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/4889d1a0c81a2ddbe50508ce5a4e8b5251381028",
+                "reference": "4889d1a0c81a2ddbe50508ce5a4e8b5251381028",
                 "shasum": ""
             },
             "require": {
@@ -638,6 +638,7 @@
                 "bower-asset/angular-filter": "~0.5.15",
                 "bower-asset/angular-loading-bar": "^0.9",
                 "bower-asset/angularjs-datepicker": "^2.1.0",
+                "bower-asset/angularjs-slider": "~6.6.0",
                 "bower-asset/bowser": "~1.7.3",
                 "bower-asset/echarts": "~3.8.5",
                 "bower-asset/ng-file-upload": "~12.2.0",
@@ -645,7 +646,7 @@
                 "bower-asset/ng-wig": "~3.0.0",
                 "bower-asset/twigjs-bower": "~0.10.5",
                 "bower-asset/ui-router": "~0.4.0",
-                "luyadev/luya-testsuite": "~1.0.0",
+                "luyadev/luya-testsuite": "~1.0.11",
                 "php-coveralls/php-coveralls": "^1.0",
                 "twbs/bootstrap": "v4.0.0-beta"
             },
@@ -686,7 +687,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-06-05T13:23:29+00:00"
+            "time": "2018-10-08T14:52:50+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -2314,7 +2315,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.45",
+            "version": "v2.8.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
