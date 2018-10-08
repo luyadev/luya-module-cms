@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## Added
 
++ Added block_class and block_class_name to block response in order to use as identifier for registering headless blocks instead of ID.
 + [#132](https://github.com/luyadev/luya-module-cms/pull/132) Added Polish translations.
 + [#84](https://github.com/luyadev/luya-module-cms/issues/84) Added index for FK fields.
 + [#107](https://github.com/luyadev/luya-module-cms/issues/107) Extend rules for nav item model.
