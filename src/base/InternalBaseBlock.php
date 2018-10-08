@@ -600,4 +600,20 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return (new BlockVariationRegister(new static));
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function onRegister()
+    {
+
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function onRegisterFromCache()
+    {
+
+    }
 }
