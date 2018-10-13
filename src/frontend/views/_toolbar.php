@@ -48,7 +48,7 @@ use yii\helpers\VarDumper;
                 <?php endif; ?>
                 <?php if ($menu->current->type == 2): ?>
                     <span class="luya-cms-toolbar__badge luya-cms-toolbar__margin-left">
-                        Modul: <strong><?= $menu->current->moduleName; ?></strong>
+                        Module: <strong><?= $menu->current->moduleName; ?></strong>
                     </span>
                 <?php endif; ?>
             </div>

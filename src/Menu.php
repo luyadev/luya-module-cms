@@ -13,6 +13,7 @@ use luya\cms\menu\Item;
 use luya\cms\menu\InjectItemInterface;
 use luya\cms\menu\QueryOperatorFieldInterface;
 use yii\db\Expression;
+use luya\helpers\Html;
 
 /**
  * Menu container component by language.
@@ -111,11 +112,28 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      */
     const EVENT_AFTER_RESOLVE_CURRENT = 'eventAfterResolveCurrent';
     
+    /**
+     * @var integer Item type cms page (renders blocks).
+     */
     const ITEM_TYPE_PAGE = 1;
     
+    /**
+     * @var integer Item type cms module (the page is a cms module).
+     */
     const ITEM_TYPE_MODULE = 2;
     
+    /**
+     * @var integer Item type redirect (the page contains a redirect model).
+     */
     const ITEM_TYPE_REDIRECT = 3;
+
+    /**
+     * @var boolean Whether all menu item text values should be html encoded or not, since version 1.0.7.2 this is enabled by default in order to
+     * ensure administrators can not inject xss code into frontend. If you where "abusing" the description or any other fields in order to use
+     * html you can disable this feature with `'encoding' => false` when configure the menu component in your config.
+     * @since 1.0.7.2
+     */
+    public $encoding = true;
     
     /**
      * @var \luya\web\Request Request object
@@ -230,6 +248,18 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
         }
 
         return $this->_composition;
+    }
+
+    /**
+     * Determines and encodes the given value if enabled. 
+     *
+     * @param string $value The value to encode.
+     * @return string The encoded value if enabled.
+     * @since 1.0.7.2
+     */
+    public function encodeValue($value)
+    {
+        return $this->encoding ? Html::encode($value) : $value;
     }
     
     /**
@@ -667,11 +697,11 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
                     'nav_id' => $item['nav_id'],
                     'lang' => $lang['short_code'],
                     'link' => $this->buildItemLink($alias, $langShortCode),
-                    'title' => $item['title'],
-                    'title_tag' => $item['title_tag'],
+                    'title' => $this->encodeValue($item['title']),
+                    'title_tag' => $this->encodeValue($item['title_tag']),
                     'alias' => $alias,
-                    'description' => $item['description'],
-                    'keywords' => $item['keywords'],
+                    'description' => $this->encodeValue($item['description']),
+                    'keywords' => $this->encodeValue($item['keywords']),
                     'create_user_id' => $item['create_user_id'],
                     'update_user_id' => $item['update_user_id'],
                     'timestamp_create' => $item['timestamp_create'],

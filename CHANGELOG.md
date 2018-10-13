@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.7.2 (in progress)
 
++ [#147](https://github.com/luyadev/luya-module-cms/issues/147) Enable auto encoding for menu component, this dasllows the usage of html code for page titles, descriptions and seo titles.
 + [#145](https://github.com/luyadev/luya-module-cms/issues/145) Fixed issue where preloading of models wont have any effect for page properties.
 
 ## 1.0.7.1 (8. October 2018)
