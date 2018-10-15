@@ -15,7 +15,14 @@ class BlockController extends Controller
 {
     public $modelClass = 'luya\cms\models\Block';
 
-    public function actionPreview($blockId = null)
+    /**
+     * Generate the the block preview.
+     *
+     * @param int $blockId
+     *
+     * @return string
+     */
+    public function actionPreview($blockId)
     {
         $blockItem = Block::findOne($blockId);
         /** @var $blockObject \luya\cms\base\InternalBaseBlock */

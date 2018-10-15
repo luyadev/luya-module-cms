@@ -50,9 +50,12 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         return $this->view->render($this->getViewFileName('php'), [], $this);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function adminPreview()
     {
-        // @todo empty method body or required implementation.
+
     }
     
     /**
@@ -80,8 +83,10 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     {
         if ($this->previewEnabled) {
             $this->injectorSetup();
+            // Prepare block for preview.
             $this->adminPreview();
 
+            // render the prepared block as frontend.
             return $this->frontend();
         }
 

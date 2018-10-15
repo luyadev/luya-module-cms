@@ -24,6 +24,9 @@ final class HtmlBlock extends PhpBlock
      */
     public $cacheEnabled = true;
 
+    /**
+     * @inheritdoc
+     */
     public $previewEnabled = true;
 
     /**

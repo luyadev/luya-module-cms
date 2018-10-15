@@ -97,6 +97,9 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public $isContainer = false;
 
+    /**
+     * @var int Enable or disable block preview for admin area.
+     */
     public $previewEnabled = false;
 
     /**
@@ -246,7 +249,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     }
 
     /**
-     * Returns true if block is active in frontend.
+     * Returns true if block is active in admin preview.
      *
      * @return bool
      */
