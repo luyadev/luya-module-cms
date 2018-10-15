@@ -51,14 +51,6 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
 
     /**
-     * Prepare block for admin preview.
-     */
-    public function prepareAdminPreview()
-    {
-
-    }
-    
-    /**
      * @inheritdoc
      */
     public function renderFrontend()
@@ -66,7 +58,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         $this->injectorSetup();
         return $this->frontend();
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -90,6 +82,14 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         }
 
         return false;
+    }
+
+    /**
+     * Prepare block for admin preview.
+     */
+    protected function prepareAdminPreview()
+    {
+
     }
 
     /**
