@@ -608,11 +608,21 @@ class Nav extends ActiveRecord
         
         $navItemPage->save();
         
+        $idLink = [];
         foreach ($pageBlocks as $block) {
             $i = new NavItemPageBlockItem();
             $i->attributes = $block->toArray();
             $i->nav_item_page_id = $navItemPage->id;
             $i->insert();
+            $idLink[$block->id] = $i->id;
+        }
+
+        // check if prev_id is used, check if id is in set - get new id and set new prev_ids in copied items
+        $newPageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $navItemPage->id]);
+        foreach ($newPageBlocks as $block) {
+            if ($block->prev_id && isset($idLink[$block->prev_id])) {
+                $block->updateAttributes(['prev_id' => $idLink[$block->prev_id]]);
+            }
         }
 
         $navItem->nav_id = $nav->id;

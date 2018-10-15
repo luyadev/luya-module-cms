@@ -406,12 +406,9 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
         // check if prev_id is used, check if id is in set - get new id and set new prev_ids in copied items
         $newPageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $pageItem->id]);
         foreach ($newPageBlocks as $block) {
-            if ($block->prev_id) {
-                if (isset($idLink[$block->prev_id])) {
-                    $block->prev_id = $idLink[$block->prev_id];
-                }
+            if ($block->prev_id && isset($idLink[$block->prev_id])) {
+                $block->updateAttributes(['prev_id' => $idLink[$block->prev_id]]);
             }
-            $block->update(false);
         }
 
         return true;
