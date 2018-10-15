@@ -121,7 +121,7 @@ use luya\cms\admin\Module;
                         <li class="blockholder-item" ng-show="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
                             dnd dnd-model="block" dnd-isvalid="true" dnd-drop-disabled dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
                         >
-	                        <div tooltip tooltip-preview-url="/cmsadmin/block/preview?blockId={{block.id}}" tooltip-position="left" tooltip-offset-left="30" tooltip-disabled="!isPreviewEnabled(block)">
+	                        <div tooltip tooltip-preview-url="/cmsadmin/block/preview?blockId={{block.id}}" tooltip-position="left" tooltip-offset-left="-30" tooltip-disabled="!isPreviewEnabled(block)">
 		                        <i class="material-icons blockholder-icon" tooltip tooltip-text="{{block.name}}" tooltip-position="left" tooltip-disabled="isBlockholderSmall">{{block.icon}}</i>
 		                        <span>{{block.name}}</span>
 		                        <button type="button" class="blockholder-favorite" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">
