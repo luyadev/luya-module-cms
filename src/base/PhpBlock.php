@@ -53,7 +53,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     /**
      * Prepare block for admin preview.
      */
-    public function adminPreview()
+    public function prepareAdminPreview()
     {
 
     }
@@ -83,8 +83,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     {
         if ($this->previewEnabled) {
             $this->injectorSetup();
-            // Prepare block for preview.
-            $this->adminPreview();
+            $this->prepareAdminPreview();
 
             // render the prepared block as frontend.
             return $this->frontend();

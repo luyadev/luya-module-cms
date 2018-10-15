@@ -86,7 +86,7 @@ final class HtmlBlock extends PhpBlock
 EOT;
     }
 
-    public function adminPreview()
+    public function prepareAdminPreview()
     {
         $this->setVarValues([
             'html' => 'Veniam non magni quia molestiae sit soluta soluta. Est optio nostrum sed aut officiis.',
