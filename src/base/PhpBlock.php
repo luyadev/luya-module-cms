@@ -51,7 +51,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
 
     /**
-     * @inheritdoc
+     * Prepare block for admin preview.
      */
     public function adminPreview()
     {
