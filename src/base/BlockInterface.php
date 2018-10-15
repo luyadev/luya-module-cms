@@ -53,6 +53,13 @@ interface BlockInterface
      * @return string
      */
     public function renderAdmin();
+
+    /**
+     * Get the output in administration preview context.
+     *
+     * @return string
+     */
+    public function renderAdminPreview();
     
     /**
      * Returns a class of the blocks group.
@@ -199,4 +206,11 @@ interface BlockInterface
      * @return boolean
      */
     public function getIsDirtyDialogEnabled();
+
+    /**
+     * Whether preview is enabled for this block or not.
+     *
+     * @return boolean
+     */
+    public function getIsPreviewEnabled();
 }

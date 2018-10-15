@@ -23,7 +23,9 @@ final class HtmlBlock extends PhpBlock
      * @inheritdoc
      */
     public $cacheEnabled = true;
-    
+
+    public $previewEnabled = true;
+
     /**
      * @inheritdoc
      */
@@ -79,5 +81,12 @@ final class HtmlBlock extends PhpBlock
     		{% endif %}
     	{% endif %}
 EOT;
+    }
+
+    public function adminPreview()
+    {
+        $this->setVarValues([
+            'html' => 'Veniam non magni quia molestiae sit soluta soluta. Est optio nostrum sed aut officiis.',
+        ]);
     }
 }

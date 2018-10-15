@@ -1646,6 +1646,10 @@
 			$http.post('admin/api-cms-block/toggle-group', {group: group}, {ignoreLoadingBar: true});
 		};
 
+		$scope.isPreviewEnabled = function(item) {
+			return item.preview_enabled;
+		};
+
 		// controller logic
 
 		$scope.copyStack = ServiceBlockCopyStack.stack;

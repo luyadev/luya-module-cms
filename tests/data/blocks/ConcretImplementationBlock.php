@@ -62,7 +62,12 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return 'admin!';
     }
-    
+
+    public function renderAdminPreview()
+    {
+
+    }
+
     /**
      * Returns a class of the blocks group.
      *
@@ -213,4 +218,10 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return true;
     }
+
+    public function getIsPreviewEnabled()
+    {
+        return false;
+    }
+
 }
