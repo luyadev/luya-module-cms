@@ -1254,7 +1254,6 @@
 		
 		$scope.switchVersion = function(pageVersionid, toggle) {
 			ServiceWorkingPageVersion.store($scope.item.id, pageVersionid);
-			$scope.lastVersionChoosen = pageVersionid;
 			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
 			$scope.currentPageVersionAlias = $scope.typeData[pageVersionid]['version_alias'];
 			$scope.currentPageVersion = pageVersionid;
