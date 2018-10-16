@@ -1028,8 +1028,8 @@
 	 * @param $scope.lang from ng-repeat
 	 */
 	zaa.controller("NavItemController", [
-		'$scope', '$rootScope', '$http', '$filter', '$timeout', 'ServiceMenuData', 'AdminLangService', 'AdminToastService', 'ServiceLiveEditMode', 'ServiceLayoutsData',
-		function($scope, $rootScope, $http, $filter, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData) {
+		'$scope', '$rootScope', '$http', '$filter', '$timeout', 'ServiceMenuData', 'AdminLangService', 'AdminToastService', 'ServiceLiveEditMode', 'ServiceLayoutsData', 'ServiceWorkingPageVersion',
+		function($scope, $rootScope, $http, $filter, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode, ServiceLayoutsData, ServiceWorkingPageVersion) {
 
 		$scope.loaded = false;
 
@@ -1220,12 +1220,19 @@
 						if (!response.data['nav'].is_draft) {
 							$scope.NavController.bubbleParents($scope.NavController.navData.parent_nav_id, $scope.NavController.navData.nav_container_id);
 							if ($scope.item.nav_item_type == 1) {
-								if ($scope.currentPageVersion == 0) {
-									$scope.currentPageVersion = response.data.item.nav_item_type_id;
-								}
-								if (response.data.item.nav_item_type_id in response.data.typeData) {
-									$scope.currentPageVersionAlias = $scope.container = response.data.typeData[$scope.currentPageVersion]['version_alias'];
-									$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
+
+								var lastVersion = ServiceWorkingPageVersion.hasVersion($scope.item.id);
+
+								if (lastVersion) {
+									$scope.switchVersion(lastVersion);
+								} else {
+									if ($scope.currentPageVersion == 0) {
+										$scope.currentPageVersion = response.data.item.nav_item_type_id;
+									}
+									if (response.data.item.nav_item_type_id in response.data.typeData) {
+										$scope.currentPageVersionAlias = $scope.container = response.data.typeData[$scope.currentPageVersion]['version_alias'];
+										$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
+									}
 								}
 							}
 						} else {
@@ -1245,12 +1252,16 @@
 			$scope.versionDropDownVisbility = !$scope.versionDropDownVisbility;
 		};
 		
-		$scope.switchVersion = function(pageVersionid) {
+		$scope.switchVersion = function(pageVersionid, toggle) {
+			ServiceWorkingPageVersion.store($scope.item.id, pageVersionid);
+			$scope.lastVersionChoosen = pageVersionid;
 			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
 			$scope.currentPageVersionAlias = $scope.typeData[pageVersionid]['version_alias'];
 			$scope.currentPageVersion = pageVersionid;
 			$scope.loadLiveUrl();
-			$scope.toggleVersionsDropdown();
+			if (toggle) {
+				$scope.toggleVersionsDropdown();
+			}
 		};
 
 		$scope.refreshForce = function() {

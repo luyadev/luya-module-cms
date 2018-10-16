@@ -201,3 +201,26 @@ zaa.factory("ServiceLiveEditMode", ['$rootScope', function($rootScope) {
 	
 	return service;
 }]);
+
+zaa.factory("ServiceWorkingPageVersion", [function() {
+	var service = {
+		page : {}
+	};
+
+
+
+	service.store = function(pageId, versionId) {
+		service.page[pageId] = versionId;
+	};
+
+
+	service.hasVersion = function(pageId) {
+		if (service.page.hasOwnProperty(pageId)) {
+			return service.page[pageId];
+		}
+
+		return false;
+	};
+
+	return service;
+}]);

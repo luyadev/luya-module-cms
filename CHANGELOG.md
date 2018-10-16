@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#15](https://github.com/luyadev/luya-module-cms/issues/15) Store latest working cms page version in service in order to restore afterwards.
 + [#21](https://github.com/luyadev/luya-module-cms/issues/21) Fix issue when using templates with block placeholders.
 + [#147](https://github.com/luyadev/luya-module-cms/issues/147) Enable auto encoding for menu component, this dasllows the usage of html code for page titles, descriptions and seo titles.
 + [#145](https://github.com/luyadev/luya-module-cms/issues/145) Fixed issue where preloading of models wont have any effect for page properties.
