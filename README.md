@@ -60,5 +60,8 @@ After successfully installation and configuration run the migrate, import and se
 ./vendor/bin/luya import
 ```
 
-
 > Please note that the module names *cms* and *cmsadmin* are required and should not be changed!
+
+## Developers
+
+If you want to contribute, make sure to read the following guidelines: https://luya.io/guide/luya-guideline
