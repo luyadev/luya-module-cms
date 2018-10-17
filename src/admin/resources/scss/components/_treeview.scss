@@ -131,7 +131,7 @@
     position: relative;
     width: 100%;
 
-    &:hover {
+    &:not(.treeview-label-container):hover {
         animation: treeviewLinkCursorMove 0s .5s forwards;
     }
 
@@ -256,7 +256,7 @@
             border-color: transparent;
         }
     }
-    &:hover {
+    .treeview-label:not(.treeview-label-container) &:hover {
         animation: treeviewLinkCursorMove 0s .5s forwards;
     }
 }
