@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
++ [#42](https://github.com/luyadev/luya-module-cms/issues/42) Added styles to change the cursor from pointer to move after .5s of hover on the treeview item.
 + [#111](https://github.com/luyadev/luya-module-cms/issues/111) Updated CMS Cards and style for blocks. Spacing is now better if you have no placeholder title.
 
 ### Fixed
