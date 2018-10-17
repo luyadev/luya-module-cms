@@ -32,7 +32,6 @@
 }
 
 .cmsadmin-blockholder-collapsed {
-
     @media (min-width: $mobile-nav-breakpoint) {
         margin: 0 $blockholder-width-small 0 15px;
     }
@@ -145,12 +144,8 @@
 }
 
 .cmsadmin-container-title {
-    margin-bottom: 10px;
-    margin-top: 20px;
-
-    .block-is-layout > .block > .block-front & {
-        margin-top: 0;
-    }
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 .cmsadmin-frame-wrapper {

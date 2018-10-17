@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.7.2 (in progress)
 
+### Changed
+
++ [#111](https://github.com/luyadev/luya-module-cms/issues/111) Updated CMS Cards and style for blocks. Spacing is now better if you have no placeholder title.
+
 ### Fixed
 
 + [#15](https://github.com/luyadev/luya-module-cms/issues/15) Store latest working cms page version in service in order to restore afterwards.

@@ -54,6 +54,9 @@
     &-is-virgin .block-front {
         background-color: lighten(color(blue), 30);
     }
+    &-first {
+        margin-top: 0;
+    }
 
     .show-block-lines & {
         border-color: rgba($block-border-color, .5);
@@ -117,6 +120,9 @@
 
     .block-is-layout > .block > & {
         padding: 10px 0;
+    }
+    .block-is-layout > .block-is-container > & {
+        padding: 0;
     }
 }
 
