@@ -249,16 +249,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     }
 
     /**
-     * Returns true if block is active in admin preview.
-     *
-     * @return bool
-     */
-    public function isAdminPreviewContext()
-    {
-        return ($this->getEnvOption('context', false) === 'admin-preview') ? true : false;
-    }
-
-    /**
      * Returns true if block is active in frontend.
      *
      * @return bool

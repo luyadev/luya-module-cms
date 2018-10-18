@@ -2,6 +2,10 @@
 
 namespace luya\cms\base;
 
+use luya\helpers\FileHelper;
+use luya\helpers\Html;
+use luya\helpers\Inflector;
+use luya\helpers\Url;
 use Yii;
 use yii\base\ViewContextInterface;
 
@@ -73,23 +77,28 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function renderAdminPreview()
     {
-        if ($this->previewEnabled) {
-            $this->injectorSetup();
-            $this->prepareAdminPreview();
-
-            // render the prepared block as frontend.
-            return $this->frontend();
+        $image = $this->getPreviewImageSource();
+        if ($image) {
+            return Html::img($image);
         }
 
         return false;
     }
 
     /**
-     * Prepare block for admin preview.
+     * Path to the preview image.
      */
-    protected function prepareAdminPreview()
+    protected function getPreviewImageSource()
     {
+        $imageName = $this->getViewFileName('jpg');
+        $imagePath = Yii::getAlias($this->ensureModule() . '/resources/img/' . $imageName);
 
+        if (file_exists($imagePath)) {
+            // @todo publish image and return image url
+            return $imagePath;
+        }
+
+        return false;
     }
 
     /**
