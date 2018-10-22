@@ -27,11 +27,6 @@ final class HtmlBlock extends PhpBlock
     /**
      * @inheritdoc
      */
-    public $previewEnabled = true;
-
-    /**
-     * @inheritdoc
-     */
     public function blockGroup()
     {
         return DevelopmentGroup::className();

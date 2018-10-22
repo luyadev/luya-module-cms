@@ -98,11 +98,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     public $isContainer = false;
 
     /**
-     * @var int Enable or disable block preview for admin area.
-     */
-    public $previewEnabled = false;
-
-    /**
      * @var string Containing the name of the environment (used to find the view files to render). The
      * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be
      * added automatically.
@@ -139,14 +134,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     public function getIsContainer()
     {
         return $this->isContainer;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getIsPreviewEnabled()
-    {
-        return $this->previewEnabled;
     }
     
     /**

@@ -206,11 +206,4 @@ interface BlockInterface
      * @return boolean
      */
     public function getIsDirtyDialogEnabled();
-
-    /**
-     * Whether preview is enabled for this block or not.
-     *
-     * @return boolean
-     */
-    public function getIsPreviewEnabled();
 }

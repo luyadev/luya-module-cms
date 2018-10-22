@@ -218,10 +218,4 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return true;
     }
-
-    public function getIsPreviewEnabled()
-    {
-        return false;
-    }
-
 }
