@@ -22,6 +22,7 @@ class BlockController extends Controller
      * @param int $blockId
      *
      * @return string
+     * @throws NotFoundHttpException
      * @since 1.0.7.3
      */
     public function actionPreview($blockId)
