@@ -131,6 +131,10 @@
     position: relative;
     width: 100%;
 
+    &:not(.treeview-label-container):hover {
+        animation: treeviewLinkCursorMove 0s .5s forwards;
+    }
+
     .treeview-chooser & {
         padding-right: 0;
     }
@@ -252,9 +256,21 @@
             border-color: transparent;
         }
     }
+    .treeview-label:not(.treeview-label-container) &:hover {
+        animation: treeviewLinkCursorMove 0s .5s forwards;
+    }
 }
 
 .treeview-chooser .treeview-label-page .treeview-icon {
     left: 4px;
     top: 2px;
+}
+
+@keyframes treeviewLinkCursorMove {
+    0% {
+        cursor: pointer;
+    }
+    100% {
+        cursor: move;
+    }
 }

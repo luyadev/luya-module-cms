@@ -1,0 +1,7 @@
+// Extend default bootstrap card behaviour
+
+.card-no-container-title {
+    .block-front .row:not(:first-of-type) & {
+        margin-top: 5px;
+    }
+}
