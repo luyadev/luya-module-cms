@@ -57,7 +57,8 @@ interface BlockInterface
     /**
      * Get the output in administration preview context.
      *
-     * @return string
+     * @return string|boolean False if no preview available, otherwise the html preview code.
+     * @since 1.0.7.3
      */
     public function renderAdminPreview();
     

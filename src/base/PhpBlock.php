@@ -73,7 +73,13 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
 
     /**
-     * @inheritdoc
+     * Create a html img tag and use the preview image at {module}/resources/img/{block-name}.jpg as source.
+     * If no image source exists, it will return false.
+     *
+     * @see PhpBlock::getPreviewImageSource
+     *
+     * @return string|boolean False if no preview available, otherwise the html img as string.
+     * @since 1.0.7.3
      */
     public function renderAdminPreview()
     {
