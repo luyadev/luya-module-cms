@@ -79,7 +79,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      * @see PhpBlock::getPreviewImageSource
      *
      * @return string|boolean False if no preview available, otherwise the html img as string.
-     * @since 1.0.7.3
+     * @since 1.0.8
      */
     public function renderAdminPreview()
     {
