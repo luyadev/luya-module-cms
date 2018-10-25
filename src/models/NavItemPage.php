@@ -225,34 +225,34 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         
                     // inject variations variables
                     $possibleVariations = isset($variations[$className]) ? $variations[$className] : false;
-        
+                    $ensuredVariation = false;
+
                     if (isset($possibleVariations[$placeholder['variation']])) {
                         $ensuredVariation = $possibleVariations[$placeholder['variation']];
-
-                        // when there is no variations set, but there is variation defined as default(), we use this one:
-                        if (empty($ensuredVariation)) {
-                            $ensuredVariation = ArrayHelper::searchColumn($possibleVariations, 'is_default', true);
+                    } else {
+                        foreach ($possibleVariations as $name => $content) {
+                            if ($content['is_default'] === true) {
+                                $ensuredVariation = $content;
+                            }
                         }
-
-                        if ($ensuredVariation) {
-                            // otherwise foreach the configuration variation and assign.
-                            foreach ($ensuredVariation as $type => $typeContent) {
-                                if (!empty($typeContent)) {
-                                    $type = strtolower($type);
-                                    switch ($type) {
-                                        case "vars": $blockObject->setVarValues($typeContent); break;
-                                        case "cfgs": $blockObject->setCfgValues($typeContent); break;
-                                        case "extras":
-                                            foreach ($typeContent as $extraKey => $extraValue) {
-                                                $blockObject->addExtraVar($extraKey, $extraValue);
-                                            }
-                                            break;
-                                    }
+                    }
+                    if ($ensuredVariation) {
+                        // otherwise foreach the configuration variation and assign.
+                        foreach ($ensuredVariation as $type => $typeContent) {
+                            if (!empty($typeContent)) {
+                                $type = strtolower($type);
+                                switch ($type) {
+                                    case "vars": $blockObject->setVarValues($typeContent); break;
+                                    case "cfgs": $blockObject->setCfgValues($typeContent); break;
+                                    case "extras":
+                                        foreach ($typeContent as $extraKey => $extraValue) {
+                                            $blockObject->addExtraVar($extraKey, $extraValue);
+                                        }
+                                        break;
                                 }
                             }
                         }
                     }
-        
                     // set env options from current object environment
                     foreach ($this->getOptions() as $optKey => $optValue) {
                         $blockObject->setEnvOption($optKey, $optValue);
