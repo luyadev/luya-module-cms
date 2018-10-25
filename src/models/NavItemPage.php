@@ -228,17 +228,26 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         
                     if (isset($possibleVariations[$placeholder['variation']])) {
                         $ensuredVariation = $possibleVariations[$placeholder['variation']];
-                        foreach ($ensuredVariation as $type => $typeContent) {
-                            if (!empty($typeContent)) {
-                                $type = strtolower($type);
-                                switch ($type) {
-                                    case "vars": $blockObject->setVarValues($typeContent); break;
-                                    case "cfgs": $blockObject->setCfgValues($typeContent); break;
-                                    case "extras":
-                                        foreach ($typeContent as $extraKey => $extraValue) {
-                                            $blockObject->addExtraVar($extraKey, $extraValue);
-                                        }
-                                        break;
+
+                        // when there is no variations set, but there is variation defined as default(), we use this one:
+                        if (empty($ensuredVariation)) {
+                            $ensuredVariation = ArrayHelper::searchColumn($possibleVariations, 'is_default', true);
+                        }
+
+                        if ($ensuredVariation) {
+                            // otherwise foreach the configuration variation and assign.
+                            foreach ($ensuredVariation as $type => $typeContent) {
+                                if (!empty($typeContent)) {
+                                    $type = strtolower($type);
+                                    switch ($type) {
+                                        case "vars": $blockObject->setVarValues($typeContent); break;
+                                        case "cfgs": $blockObject->setCfgValues($typeContent); break;
+                                        case "extras":
+                                            foreach ($typeContent as $extraKey => $extraValue) {
+                                                $blockObject->addExtraVar($extraKey, $extraValue);
+                                            }
+                                            break;
+                                    }
                                 }
                             }
                         }
