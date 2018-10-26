@@ -67,8 +67,24 @@ class BlockVariationRegister
             'cfgs' => [],
             'vars' => [],
             'extras' => [],
+            'is_default' => false,
         ];
         $this->_tempIdentifier = $identifier;
+        return $this;
+    }
+
+    /**
+     * Add option to register a variations as default. 
+     * 
+     * This means that when a cfg or value has no user input data, this value will be used.
+     *
+     * @return \luya\cms\base\BlockVariationRegister
+     * @since 1.0.8
+     */
+    public function default()
+    {
+        $this->_variations[$this->_tempIdentifier]['is_default'] = true;
+
         return $this;
     }
     
