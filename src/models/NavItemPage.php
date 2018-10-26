@@ -227,11 +227,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $possibleVariations = isset($variations[$className]) ? $variations[$className] : false;
                     $ensuredVariation = false;
 
-                    if (isset($possibleVariations[$placeholder['variation']])) {
+                    if ($possibleVariations && isset($possibleVariations[$placeholder['variation']])) {
                         $ensuredVariation = $possibleVariations[$placeholder['variation']];
-                    } else {
+                    } elseif ($possibleVariations) {
                         foreach ($possibleVariations as $name => $content) {
-                            if ($content['is_default'] === true) {
+                            if ($content['is_default']) {
                                 $ensuredVariation = $content;
                             }
                         }
