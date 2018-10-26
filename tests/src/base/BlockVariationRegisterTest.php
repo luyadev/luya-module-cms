@@ -42,7 +42,7 @@ class BlockVariationRegisterTest extends CmsFrontendTestCase
                     'title' => 'My default',
                     'cfgs' => [],
                     'vars' => [
-                        'var1' => 'default'
+                        'var1' => 'default' // THIS IS THE EXPECTED VALUE
                     ],
                     'extras' => [],
                     'is_default' => true,
@@ -104,6 +104,74 @@ class BlockVariationRegisterTest extends CmsFrontendTestCase
         $blockItem = $blockItemFixture->getModel('item1');
 
         $this->assertSame('default', $page->renderPlaceholder('content'));
+    }
+    
+    public function testVariationWhichIsSetAndNotDefault()
+    {
+        $this->app->getModule('cmsadmin')->blockVariations = [
+            TestingBlock::variations()
+                ->add('idf', 'My Test')
+                    ->vars(['var1' => 'barfoo']) // THIS IS THE EXPECTED VALUE
+                ->add('idf2', 'My default')
+                    ->vars(['var1' => 'default'])
+                    ->default()
+                ->register()
+        ];
+
+        $this->app->setComponents([
+                 'db' => [
+                     'class' => 'yii\db\Connection',
+                     'dsn' => 'sqlite::memory:',
+                 ]
+            ]);
+
+        $blockFixture = new NgRestModelFixture([
+            'modelClass' => Block::class,
+            'fixtureData' => [
+                'block1' => [
+                    'id' => 1,
+                    'group_id' => 1,
+                    'class' => TestingBlock::class,
+                    'is_disabled' => 0,
+                ]
+            ]
+        ]);
+
+        $pageFixture = new ActiveRecordFixture([
+            'modelClass' => NavItemPage::class,
+            'fixtureData' => [
+                'page1' => [
+                    'id' => 1,
+                    'layout_id' => 1,
+                    'nav_item_id' => 1,
+                    'timestamp_create' => time(),
+                    'version_alias' => 'barfoo',
+                ]
+            ]
+        ]);
+        
+        $blockItemFixture = new NgRestModelFixture([
+            'modelClass' => NavItemPageBlockItem::class,
+            'fixtureData' => [
+                'item1' => [
+                    'id' => 1,
+                    'block_id' => 1,
+                    'placeholder_var' => 'content',
+                    'nav_item_page_id' => 1,
+                    'prev_id' => 0,
+                    'json_config_values' => '{"var1":"foo"}',
+                    'json_config_cfg_values' => '{}',
+                    'variation' => 'idf',
+                    'is_hidden' => 0,
+                ]
+            ]
+        ]);
+
+        $block = $blockFixture->getModel('block1');
+        $page = $pageFixture->getModel('page1');
+        $blockItem = $blockItemFixture->getModel('item1');
+
+        $this->assertSame('barfoo', $page->renderPlaceholder('content'));
     }
 }
 
