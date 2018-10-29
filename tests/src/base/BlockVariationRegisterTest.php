@@ -20,7 +20,7 @@ class BlockVariationRegisterTest extends CmsFrontendTestCase
                     ->vars(['var1' => 'barfoo'])
                 ->add('idf2', 'My default')
                     ->vars(['var1' => 'default'])
-                    ->default()
+                    ->asDefault()
                 ->register()
         ];
 
@@ -114,7 +114,7 @@ class BlockVariationRegisterTest extends CmsFrontendTestCase
                     ->vars(['var1' => 'barfoo']) // THIS IS THE EXPECTED VALUE
                 ->add('idf2', 'My default')
                     ->vars(['var1' => 'default'])
-                    ->default()
+                    ->asDefault()
                 ->register()
         ];
 

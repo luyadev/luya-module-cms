@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
-+ [#86](https://github.com/luyadev/luya-module-cms/issues/86) Add option to set default variation.
++ [#86](https://github.com/luyadev/luya-module-cms/issues/86) Add option to set a variation as default value `asDefault()`.
 
 ## 1.0.7.2 (17. October 2018)
 
