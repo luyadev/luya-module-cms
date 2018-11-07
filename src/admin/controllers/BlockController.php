@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
  * Block Controller.
  *
  * @author Basil Suter <basil@nadar.io>
- * @since  1.0.0
+ * @since 1.0.0
  */
 class BlockController extends Controller
 {
@@ -20,7 +20,6 @@ class BlockController extends Controller
      * Generate the the block preview.
      *
      * @param int $blockId
-     *
      * @return string
      * @throws NotFoundHttpException
      * @since 1.0.8
