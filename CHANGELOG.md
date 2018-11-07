@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.8 (in progress)
 
+### Fixed
+
++ [#154](https://github.com/luyadev/luya-module-cms/issues/154) Fix bug where disabled blocks are visible in the block list of the CMS.
+
 ### Added
 
 + [#86](https://github.com/luyadev/luya-module-cms/issues/86) Add option to set a variation as default value `asDefault()`.
