@@ -2,6 +2,8 @@
 
 namespace luya\cms\base;
 
+use Yii;
+use luya\helpers\Html;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
 use luya\helpers\ArrayHelper;
@@ -615,5 +617,44 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     public function onRegisterFromCache()
     {
 
+    }
+    
+    /**
+     * Create a html img tag and use the preview image at {module}/resources/img/{block-name}.jpg as source.
+     * If no image source exists, it will return false.
+     *
+     * @see PhpBlock::getPreviewImageSource
+     *
+     * @return string|boolean False if no preview available, otherwise the html img as string.
+     * @since 1.0.8
+     */
+    public function renderAdminPreview()
+    {
+        $image = $this->getPreviewImageSource();
+        if ($image) {
+            return Html::img($image);
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Path to the preview image.
+     * @since 1.0.8
+     */
+    protected function getPreviewImageSource()
+    {
+        $imageName = $this->getViewFileName('jpg');
+        $imagePath = Yii::getAlias($this->ensureModule() . '/images/blocks/' . $imageName);
+        
+        if (file_exists($imagePath)) {
+            // @todo publish image and return image url
+            $data = file_get_contents($imagePath);
+            $base64 = 'data:image/jpg;base64,' . base64_encode($data);
+    
+            return $base64;
+        }
+        
+        return false;
     }
 }

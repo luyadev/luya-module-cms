@@ -2,10 +2,6 @@
 
 namespace luya\cms\base;
 
-use luya\helpers\FileHelper;
-use luya\helpers\Html;
-use luya\helpers\Inflector;
-use luya\helpers\Url;
 use Yii;
 use yii\base\ViewContextInterface;
 
@@ -70,41 +66,6 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     {
         $this->injectorSetup();
         return $this->admin();
-    }
-
-    /**
-     * Create a html img tag and use the preview image at {module}/resources/img/{block-name}.jpg as source.
-     * If no image source exists, it will return false.
-     *
-     * @see PhpBlock::getPreviewImageSource
-     *
-     * @return string|boolean False if no preview available, otherwise the html img as string.
-     * @since 1.0.7.3
-     */
-    public function renderAdminPreview()
-    {
-        $image = $this->getPreviewImageSource();
-        if ($image) {
-            return Html::img($image);
-        }
-
-        return false;
-    }
-
-    /**
-     * Path to the preview image.
-     */
-    protected function getPreviewImageSource()
-    {
-        $imageName = $this->getViewFileName('jpg');
-        $imagePath = Yii::getAlias($this->ensureModule() . '/resources/img/' . $imageName);
-
-        if (file_exists($imagePath)) {
-            // @todo publish image and return image url
-            return $imagePath;
-        }
-
-        return false;
     }
 
     /**
