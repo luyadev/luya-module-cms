@@ -7,6 +7,7 @@ use luya\helpers\Html;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
 use luya\helpers\ArrayHelper;
+use luya\helpers\FileHelper;
 use luya\admin\base\TypesInterface;
 use luya\cms\frontend\blockgroups\MainGroup;
 use yii\base\BaseObject;
@@ -645,14 +646,11 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     protected function getPreviewImageSource()
     {
         $imageName = $this->getViewFileName('jpg');
-        $imagePath = Yii::getAlias($this->ensureModule() . '/images/blocks/' . $imageName);
-        
-        if (file_exists($imagePath)) {
-            // @todo publish image and return image url
-            $data = file_get_contents($imagePath);
-            $base64 = 'data:image/jpg;base64,' . base64_encode($data);
-    
-            return $base64;
+        $imagePath = $this->ensureModule() . '/images/blocks/' . $imageName;
+        // file get content resolved Yii aliases.
+        $data = FileHelper::getFileContent($imagePath);
+        if ($data) {
+            return 'data:image/jpg;base64,' . base64_encode($data);   
         }
         
         return false;
