@@ -65,7 +65,7 @@ return [
     'model_navitemredirect_type_label' => 'Тип редиректа',
     'model_navitemredirect_value_label' => 'Цель редиректа',
 
-    'view_index_add_title' => 'Доавить новую страницу',
+    'view_index_add_title' => 'Добавить новую страницу',
     'view_index_add_page_from_language' => 'Добавить перевод для страницы',
     'view_index_add_page_from_language_info' => 'Хотите скопировать контент другого языка для создания записи?',
     'view_index_add_page_empty' => 'Добавить пустую страницу',
@@ -114,7 +114,7 @@ return [
     'version_input_name' => 'Имя',
     'version_input_layout' => 'Шаблон',
     'version_create_title' => 'Добавить новую версию',
-    'version_create_info' => 'Вы можете создать несколько версия с разным контентом. Опубликуйте версию чтоб она была видна на сайте.',
+    'version_create_info' => 'Вы можете создать несколько версий с разным контентом. Опубликуйте версию чтоб она была видна на сайте.',
     'version_input_copy_chooser' => 'Скопировать версию',
     'version_create_copy' => 'Создать копию из существующих версий.',
     'version_create_new' => 'Создать новую версию.',
@@ -131,7 +131,7 @@ return [
 // added translation in 1.0.0-beta8
 
     'module_permission_add_new_page' => 'Создать новую страницу',
-    'module_permission_update_pages' => 'редактировать страницу ',
+    'module_permission_update_pages' => 'Редактировать страницу ',
     'module_permission_edit_drafts' => 'Редактировать черновик',
     'module_permission_page_blocks' => 'Страница Контент-блоков',
     'js_version_delete_confirm' => 'Вы уверены, что хотите удалить версию страницы «%alias%»?',

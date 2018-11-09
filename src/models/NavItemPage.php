@@ -225,9 +225,19 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         
                     // inject variations variables
                     $possibleVariations = isset($variations[$className]) ? $variations[$className] : false;
-        
-                    if (isset($possibleVariations[$placeholder['variation']])) {
+                    $ensuredVariation = false;
+
+                    if ($possibleVariations && isset($possibleVariations[$placeholder['variation']])) {
                         $ensuredVariation = $possibleVariations[$placeholder['variation']];
+                    } elseif ($possibleVariations) {
+                        foreach ($possibleVariations as $name => $content) {
+                            if ($content['is_default']) {
+                                $ensuredVariation = $content;
+                            }
+                        }
+                    }
+                    if ($ensuredVariation) {
+                        // otherwise foreach the configuration variation and assign.
                         foreach ($ensuredVariation as $type => $typeContent) {
                             if (!empty($typeContent)) {
                                 $type = strtolower($type);
@@ -243,7 +253,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                             }
                         }
                     }
-        
                     // set env options from current object environment
                     foreach ($this->getOptions() as $optKey => $optValue) {
                         $blockObject->setEnvOption($optKey, $optValue);

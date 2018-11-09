@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 1.0.7.3 (in progress)
+## 1.0.8 (in progress)
 
-+ [#148](https://github.com/luyadev/luya-module-cms/pull/148) 
+### Fixed
+
++ [#154](https://github.com/luyadev/luya-module-cms/issues/154) Fix bug where disabled blocks are visible in the block list of the CMS.
+
+### Added
+
++ [#86](https://github.com/luyadev/luya-module-cms/issues/86) Add option to set a variation as default value `asDefault()`.
++ [#83](https://github.com/luyadev/luya-module-cms/issues/83) Show block preview on hover menu.
 
 ## 1.0.7.2 (17. October 2018)
 
@@ -35,7 +42,7 @@ All notable changes to this project will be documented in this file. This projec
 + [#103](https://github.com/luyadev/luya-module-cms/issues/103) Switched page visibility indicator and logo position
 + [#107](https://github.com/luyadev/luya-module-cms/issues/107) Add all table fields into the rules defintion.
 
-## Added
+### Added
 
 + [#132](https://github.com/luyadev/luya-module-cms/pull/132) Added Polish translations.
 + [#84](https://github.com/luyadev/luya-module-cms/issues/84) Added index for FK fields.

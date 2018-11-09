@@ -213,9 +213,11 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      * 'blockVariations' => [
      *     TextBlock::class => [
      *         'variation1' => [
-     *             'vars' => ['cssClass' => 'fetti-font-css-class'],
+     *             'title' => 'Super Bold Text',
+     *             'vars' => ['cssClass' => 'bold-font-css-class'],
      *             'cfgs' => [], // will be ignore as its empty, so you can also just remove this part.
      *             'extras' => [], // will be ignore as its empty, so you can also just remove this part.
+     *             'is_default' => false, // where this is the default value or not
      *         ],
      *     ]
      * ]

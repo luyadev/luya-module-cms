@@ -82,6 +82,9 @@ class AdminController extends \luya\admin\base\RestController
             $blocks = [];
             $groupPosition = null;
             foreach ($blockGroup->blocks as $block) {
+                if ($block->is_disabled) {
+                    continue;
+                }
                 // create the block object
                 /** @var BlockInterface $obj */
                 $obj = $block->getObject(0, 'admin');
@@ -105,6 +108,10 @@ class AdminController extends \luya\admin\base\RestController
                     'favorized' => array_key_exists($block->id, $favs),
                     'newblock' => 1,
                 ];
+            }
+
+            if (empty($blocks)) {
+                continue;
             }
             
             // extend the group element b
