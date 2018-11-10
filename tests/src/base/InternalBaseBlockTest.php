@@ -3,6 +3,8 @@
 namespace cmstests\data\blocks;
 
 use cmstests\CmsFrontendTestCase;
+use luya\helpers\FileHelper;
+use luya\helpers\Html;
 
 class InternalBaseBlockTest extends CmsFrontendTestCase
 {
@@ -63,5 +65,13 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
         $this->assertFalse($block->getVarValue('false', false));
         $this->assertFalse($block->getVarValue('0', false));
         $this->assertFalse($block->getVarValue('as0', false));
+    }
+    
+    public function testRenderAdminPreview()
+    {
+        $block = new TestBlock();
+
+        $expect = Html::img('data:image/jpg;base64,' . base64_encode(FileHelper::getFileContent('@cmstests/data/modules/images/blocks/TestBlock.jpg')));
+        $this->assertEquals($expect, $block->renderAdminPreview());
     }
 }

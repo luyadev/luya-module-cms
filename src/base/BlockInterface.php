@@ -53,6 +53,14 @@ interface BlockInterface
      * @return string
      */
     public function renderAdmin();
+
+    /**
+     * Get the output in administration preview context.
+     *
+     * @return string|boolean False if no preview available, otherwise the html preview code.
+     * @since 1.0.8
+     */
+    public function renderAdminPreview();
     
     /**
      * Returns a class of the blocks group.

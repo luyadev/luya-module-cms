@@ -121,14 +121,16 @@ use luya\cms\admin\Module;
                         <li class="blockholder-item" ng-show="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
                             dnd dnd-model="block" dnd-isvalid="true" dnd-drop-disabled dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
                         >
-                            <i class="material-icons blockholder-icon" tooltip tooltip-text="{{block.name}}" tooltip-position="left" tooltip-disabled="isBlockholderSmall">{{block.icon}}</i>
-                            <span>{{block.name}}</span>
-                            <button type="button" class="blockholder-favorite" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">
-                                <i class="material-icons">favorite</i>
-                            </button>
-                            <button type="button" class="blockholder-favorite blockholder-favorite-clear" ng-click="removeFromFav(block)" ng-if="item.group.is_fav">
-                                <i class="material-icons">clear</i>
-                            </button>
+	                        <div tooltip tooltip-preview-url="/cmsadmin/block/preview?blockId={{block.id}}" tooltip-position="left" tooltip-offset-left="-30" tooltip-disabled="!isPreviewEnabled(block)">
+		                        <i class="material-icons blockholder-icon" tooltip tooltip-text="{{block.name}}" tooltip-position="left" tooltip-disabled="isBlockholderSmall">{{block.icon}}</i>
+		                        <span>{{block.name}}</span>
+		                        <button type="button" class="blockholder-favorite" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">
+			                        <i class="material-icons">favorite</i>
+		                        </button>
+		                        <button type="button" class="blockholder-favorite blockholder-favorite-clear" ng-click="removeFromFav(block)" ng-if="item.group.is_fav">
+			                        <i class="material-icons">clear</i>
+		                        </button>
+	                        </div>
                         </li>
                     </ul>
                 </div>

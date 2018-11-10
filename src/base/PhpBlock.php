@@ -49,7 +49,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     {
         return $this->view->render($this->getViewFileName('php'), [], $this);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -58,7 +58,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         $this->injectorSetup();
         return $this->frontend();
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -67,7 +67,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         $this->injectorSetup();
         return $this->admin();
     }
-    
+
     /**
      * Save the registered assets form block to the cache.
      *

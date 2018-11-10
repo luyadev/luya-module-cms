@@ -6,7 +6,7 @@ use luya\cms\base\PhpBlock;
 
 class TestBlock extends PhpBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'CmsUnitModule';
 
     public function name()
     {

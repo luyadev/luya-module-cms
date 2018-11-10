@@ -62,7 +62,12 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return 'admin!';
     }
-    
+
+    public function renderAdminPreview()
+    {
+
+    }
+
     /**
      * Returns a class of the blocks group.
      *
