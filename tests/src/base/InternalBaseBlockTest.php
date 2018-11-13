@@ -71,7 +71,7 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
     {
         $block = new TestBlock();
 
-        $expect = Html::img('data:image/jpg;base64,' . base64_encode(FileHelper::getFileContent('@cmstests/data/modules/images/blocks/TestBlock.jpg')));
+        $expect = Html::img('data:image/jpg;base64,' . base64_encode(FileHelper::getFileContent('@cmstests/data/images/blocks/TestBlock.jpg')));
         $this->assertEquals($expect, $block->renderAdminPreview());
     }
 }
