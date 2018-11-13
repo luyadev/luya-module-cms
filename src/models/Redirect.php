@@ -105,7 +105,7 @@ class Redirect extends NgRestModel
     public function ngRestAttributeTypes()
     {
         return [
-            'catch_path' => ['text', 'placeholder' => '/path/to/catch'],
+            'catch_path' => ['text', 'placeholder' => '/path/to/catch', 'encoding' => false],
             'redirect_path' => ['text', 'placeholder' => '/path/to/redirect'],
             'redirect_status_code' => ['selectArray', 'data' => [
                 301 => Module::t('redirect_model_atr_redirect_status_code_opt_301'),
@@ -128,20 +128,43 @@ class Redirect extends NgRestModel
     
     /**
      * Match Request Path against catch_path.
+     * 
+     * Several version of the request path will be checked in order to ensure different siutations can be handled.
      *
      * @param string $requestPath
      * @return boolean
      */
     public function matchRequestPath($requestPath)
     {
+        foreach ([$requestPath, urlencode($requestPath), urldecode($requestPath)] as $path) {
+            foreach ([$this->catch_path, urlencode($this->catch_path), urldecode($this->catch_path)] as $catch) {
+                if ($this->pathMatcher($path, $catch)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Internal path matcher
+     *
+     * @param string $input The input request path
+     * @param string $catchPath The path to catch
+     * @return boolean
+     * @since 1.0.8
+     */
+    private function pathMatcher($input, $catchPath)
+    {
         // ensure request path is prefix with slash
-        $requestPath = '/'.ltrim($requestPath, '/');
+        $requestPath = '/'.ltrim($input, '/');
         // see if wildcard string matches
-        if (StringHelper::startsWithWildcard($requestPath, $this->catch_path)) {
+        if (StringHelper::startsWithWildcard($requestPath, $catchPath)) {
             return true;
         }
         // compare strings
-        return ($requestPath == $this->catch_path);
+        return ($requestPath == $catchPath);
     }
     
     /**
