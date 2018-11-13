@@ -2,7 +2,6 @@
 
 namespace luya\cms\base;
 
-use Yii;
 use luya\helpers\Html;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
@@ -646,7 +645,10 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     protected function getPreviewImageSource()
     {
         $imageName = $this->getViewFileName('jpg');
-        $imagePath = $this->ensureModule() . '/images/blocks/' . $imageName;
+    
+        $reflector = new \ReflectionClass($this);
+        $dirPath = dirname($reflector->getFileName(), 2);
+        $imagePath = $dirPath . '/images/blocks/' . $imageName;
         // file get content resolved Yii aliases.
         $data = FileHelper::getFileContent($imagePath);
         if ($data) {
