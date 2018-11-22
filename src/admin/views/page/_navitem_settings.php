@@ -10,6 +10,9 @@ use luya\admin\helpers\Angular;
             <li class="nav-item">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(1)" ng-class="{'active':tab==1}"><i class="material-icons">title</i><span><?= Module::t('cmsadmin_item_settings_titleslug'); ?></a>
             </li>
+	        <li class="nav-item">
+		        <a class="nav-link nav-link-icon" ng-click="changeTab(5)" ng-class="{'active':tab==5}"><i class="material-icons">settings</i><span><?= Module::t('cmsadmin_item_settings_properties'); ?></a>
+	        </li>
             <li class="nav-item" ng-show="!isDraft && item.nav_item_type == 1">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(3)" ng-class="{'active':tab==3}"><i class="material-icons">change_history</i><span><?= Module::t('version_create_title'); ?></span></a>
             </li>
@@ -46,6 +49,16 @@ use luya\admin\helpers\Angular;
                 <div ng-switch-when="3">
                     <update-form-redirect data="typeDataCopy"></update-form-redirect>
                 </div>
+                <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
+            </form>
+        </div>
+        <div ng-switch-when="5">
+            <h1><?= Module::t('cmsadmin_item_settings_properties'); ?></h1>
+            <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
+	            <zaa-text model="itemCopy.canonical" label="<?= Module::t('cmsadmin_item_settings_canonical'); ?>" />
+	            <zaa-text model="itemCopy.og_title" label="<?= Module::t('cmsadmin_item_settings_og_title'); ?>" />
+	            <zaa-textarea model="itemCopy.og_description" label="<?= Module::t('cmsadmin_item_settings_og_description'); ?>" />
+	            <zaa-image model="itemCopy.og_image" label="<?= Module::t('cmsadmin_item_settings_og_image'); ?>" />
                 <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
             </form>
         </div>
