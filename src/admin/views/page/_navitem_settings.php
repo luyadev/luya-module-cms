@@ -54,7 +54,7 @@ use luya\admin\helpers\Angular;
         </div>
         <div ng-switch-when="5">
             <h1><?= Module::t('cmsadmin_item_settings_properties'); ?></h1>
-            <form ng-submit="updateNavItemProperties(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
+            <form ng-submit="updateNavItemProperties(itemCopy)" ng-switch on="itemCopy.nav_item_type">
 	            <zaa-text model="itemCopy.navItemProperty.canonical" label="<?= Module::t('cmsadmin_item_settings_canonical'); ?>" />
 	            <zaa-text model="itemCopy.navItemProperty.og_title" label="<?= Module::t('cmsadmin_item_settings_og_title'); ?>" />
 	            <zaa-textarea model="itemCopy.navItemProperty.og_description" label="<?= Module::t('cmsadmin_item_settings_og_description'); ?>" />

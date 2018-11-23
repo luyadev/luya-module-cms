@@ -1171,7 +1171,7 @@
 			});
 		};
 
-		$scope.updateNavItemProperties = function(itemCopy, typeDataCopy) {
+		$scope.updateNavItemProperties = function(itemCopy) {
 			$scope.errors = [];
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			var navItemId = itemCopy.id;
@@ -1182,12 +1182,9 @@
 			navItemProperty.og_description = itemCopy.navItemProperty.og_description;
 			$http.post(
 				'admin/api-cms-navitem/update-properties?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type,
-				$.param(typeDataCopy),
+				$.param(navItemProperty),
 				headers
 			).then(function(response) {
-				if (itemCopy.nav_item_type !== 1) {
-					$scope.currentPageVersion = 0;
-				}
 				$scope.loaded = false;
 
 				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}));
