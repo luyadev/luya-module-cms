@@ -23,6 +23,6 @@ class NavItemPageController extends RestActiveController
      */
     public function actionVersions($navItemId)
     {
-        return NavItemPage::find()->where(['nav_item_id' => $navItemId])->asArray()->all();
+        return NavItemPage::find()->where([NavItemPage::tableName() . '.nav_item_id' => $navItemId])->joinWith('navItem.navItemProperty')->asArray()->all();
     }
 }

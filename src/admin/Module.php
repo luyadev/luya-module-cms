@@ -46,6 +46,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'api-cms-navitempageblockitem' => 'luya\cms\admin\\apis\\NavItemPageBlockItemController',
         'api-cms-nav' => 'luya\cms\admin\apis\NavController',
         'api-cms-navitem' => 'luya\cms\admin\\apis\\NavItemController',
+        'api-cms-navitemproperty' => 'luya\cms\admin\apis\NavItemPropertyController',
         'api-cms-navitempage' => 'luya\cms\admin\\apis\\NavItemPageController',
         'api-cms-menu' => 'luya\cms\admin\apis\MenuController',
         'api-cms-layout' => 'luya\cms\admin\\apis\\LayoutController',

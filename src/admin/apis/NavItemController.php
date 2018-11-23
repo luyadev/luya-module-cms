@@ -385,7 +385,12 @@ class NavItemController extends \luya\admin\base\RestController
         }
         return false;
     }
-
+    
+    public function actionUpdateProperties($navItemId, $navItemType)
+    {
+        // @todo implementation
+    }
+    
     /**
      * returns all the PAGE type specific informations.
      * 

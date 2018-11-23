@@ -517,6 +517,7 @@ class Nav extends ActiveRecord
         $navItem->alias = $alias;
         $navItem->lang_id = $langId;
         $navItem->setParentFromModel();
+        // @todo Copy NavItemProperties
 
         if (!$navItem->save()) {
             return $navItem->getErrors();

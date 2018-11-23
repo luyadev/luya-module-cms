@@ -54,11 +54,11 @@ use luya\admin\helpers\Angular;
         </div>
         <div ng-switch-when="5">
             <h1><?= Module::t('cmsadmin_item_settings_properties'); ?></h1>
-            <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
-	            <zaa-text model="itemCopy.canonical" label="<?= Module::t('cmsadmin_item_settings_canonical'); ?>" />
-	            <zaa-text model="itemCopy.og_title" label="<?= Module::t('cmsadmin_item_settings_og_title'); ?>" />
-	            <zaa-textarea model="itemCopy.og_description" label="<?= Module::t('cmsadmin_item_settings_og_description'); ?>" />
-	            <zaa-image model="itemCopy.og_image" label="<?= Module::t('cmsadmin_item_settings_og_image'); ?>" />
+            <form ng-submit="updateNavItemProperties(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
+	            <zaa-text model="itemCopy.navItemProperty.canonical" label="<?= Module::t('cmsadmin_item_settings_canonical'); ?>" />
+	            <zaa-text model="itemCopy.navItemProperty.og_title" label="<?= Module::t('cmsadmin_item_settings_og_title'); ?>" />
+	            <zaa-textarea model="itemCopy.navItemProperty.og_description" label="<?= Module::t('cmsadmin_item_settings_og_description'); ?>" />
+	            <zaa-image model="itemCopy.navItemProperty.og_image" label="<?= Module::t('cmsadmin_item_settings_og_image'); ?>" />
                 <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
             </form>
         </div>

@@ -4,6 +4,7 @@ namespace luya\cms\models;
 
 use Yii;
 
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecordInterface;
 use yii\db\ActiveRecord;
 use yii\base\Exception;
@@ -34,6 +35,7 @@ use luya\helpers\Inflector;
  * @property string $keywords
  * @property string $title_tag
  * @property \luya\cms\models\Nav $nav Nav Model.
+ * @property NavItemProperty $navItemProperty
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -188,7 +190,17 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     {
         return $this->hasOne(Nav::class, ['id' => 'nav_id']);
     }
-
+    
+    /**
+     * Return all page properties for the current corresponding page.
+     *
+     * @return ActiveQuery
+     */
+    public function getNavItemProperty()
+    {
+        return $this->hasOne(NavItemProperty::class, ['nav_item_id' => 'id'])->indexBy('name');
+    }
+    
     /**
      * Get the render content for the specific type, see the defintion of `getContent()` in the available types.
      *

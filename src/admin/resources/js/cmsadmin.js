@@ -1171,6 +1171,37 @@
 			});
 		};
 
+		$scope.updateNavItemProperties = function(itemCopy, typeDataCopy) {
+			$scope.errors = [];
+			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
+			var navItemId = itemCopy.id;
+
+            var navItemProperty = {};
+			navItemProperty.canonical = itemCopy.navItemProperty.canonical;
+			navItemProperty.og_title = itemCopy.navItemProperty.og_title;
+			navItemProperty.og_description = itemCopy.navItemProperty.og_description;
+			$http.post(
+				'admin/api-cms-navitem/update-properties?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type,
+				$.param(typeDataCopy),
+				headers
+			).then(function(response) {
+				if (itemCopy.nav_item_type !== 1) {
+					$scope.currentPageVersion = 0;
+				}
+				$scope.loaded = false;
+
+				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}));
+				$scope.menuDataReload();
+				$scope.refresh();
+				$scope.toggleSettingsOverlay();
+				$scope.reset();
+			}, function errorCallback(response) {
+				angular.forEach(response.data, function(item) {
+					AdminToastService.error(item.message);
+				});
+			});
+		};
+
 		$scope.$watch('itemCopy.alias', function(n, o) {
 			if (n!=o && n!=null) {
 				$scope.itemCopy.alias = $filter('slugify')(n);
