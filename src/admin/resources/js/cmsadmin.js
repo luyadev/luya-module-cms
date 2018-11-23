@@ -1180,6 +1180,7 @@
 			navItemProperty.canonical = itemCopy.navItemProperty.canonical;
 			navItemProperty.og_title = itemCopy.navItemProperty.og_title;
 			navItemProperty.og_description = itemCopy.navItemProperty.og_description;
+			navItemProperty.og_image = itemCopy.navItemProperty.og_image;
 			$http.post(
 				'admin/api-cms-navitem/update-properties?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type,
 				$.param(navItemProperty),
