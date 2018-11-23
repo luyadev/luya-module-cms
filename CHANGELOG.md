@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#156](https://github.com/luyadev/luya-module-cms/pull/156) Fix bug with resolve the correct block path without set the `$module` property.
 + [#158](https://github.com/luyadev/luya-module-cms/issues/158) Fix bug with redirect table and not language prefix paths.
 + [#154](https://github.com/luyadev/luya-module-cms/issues/154) Fix bug where disabled blocks are visible in the block list of the CMS.
 
