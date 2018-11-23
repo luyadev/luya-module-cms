@@ -16,8 +16,8 @@ class m181123_065051_cms_nav_item_property extends Migration
             'id' => $this->primaryKey(),
             'nav_item_id' => $this->integer(11)->notNull()->unique(),
             'canonical' => $this->string(),
-            'og_title' => $this->string(),
-            'og_type' => $this->string(),
+            'og_title' => $this->string(50),
+            'og_type' => $this->string(50),
             'og_description' => $this->string(),
             'og_image' => $this->string(),
         ]);

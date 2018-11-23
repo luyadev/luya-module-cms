@@ -58,7 +58,7 @@ use luya\admin\helpers\Angular;
 	            <zaa-text model="itemCopy.navItemProperty.canonical" label="<?= Module::t('cmsadmin_item_settings_canonical'); ?>" />
 	            <zaa-text model="itemCopy.navItemProperty.og_title" label="<?= Module::t('cmsadmin_item_settings_og_title'); ?>" />
 	            <zaa-textarea model="itemCopy.navItemProperty.og_description" label="<?= Module::t('cmsadmin_item_settings_og_description'); ?>" />
-	            <zaa-image model="itemCopy.navItemProperty.og_image" label="<?= Module::t('cmsadmin_item_settings_og_image'); ?>" />
+	            <zaa-image-upload model="itemCopy.navItemProperty.og_image" label="<?= Module::t('cmsadmin_item_settings_og_image'); ?>" />
                 <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
             </form>
         </div>
