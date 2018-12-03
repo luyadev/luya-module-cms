@@ -1680,6 +1680,9 @@
 			if (n !== '') {
 				$scope.searchIsDirty = true;
 				angular.forEach($scope.blocksData, function(value, key) {
+					if (value.group.is_fav) {
+						$scope.blocksData.splice(key, 1);
+					}
 					value.group.toggle_open = 1
 				});
 			} else if($scope.searchIsDirty) {

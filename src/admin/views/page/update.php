@@ -86,11 +86,14 @@ use luya\cms\admin\Module;
             <div class="blockholder">
                 <div class="blockholder-search">
                     <input class="blockholder-search-input" id="blockholder-search" ng-model="searchQuery" />
-                    <label class="blockholder-search-label" for="blockholder-search">
+                    <label class="blockholder-search-label" for="blockholder-search" ng-show="searchQuery.length == 0">
                         <i class="material-icons">search</i>
                     </label>
+                    <span class="blockholder-search-label" ng-show="searchQuery.length > 0" ng-click="searchQuery = ''">
+                        <i class="material-icons">clear</i>
+                    </span>
                 </div>
-                <div class="blockholder-group blockholder-group-copy-stack" ng-show="copyStack.length > 0">
+                <div class="blockholder-group blockholder-group-copy-stack" ng-show="copyStack.length > 0 && searchQuery.length == 0">
                     <span class="blockholder-group-title">
                         <i class="material-icons">bookmark</i>
                         <span>
