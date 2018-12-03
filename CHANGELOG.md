@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
++ [#159](https://github.com/luyadev/luya-module-cms/issues/159) Added twitter card and canonical url informations with override options by keys.
 + [#86](https://github.com/luyadev/luya-module-cms/issues/86) Add option to set a variation as default value `asDefault()`.
 + [#83](https://github.com/luyadev/luya-module-cms/issues/83) Show block preview on hover menu.
 

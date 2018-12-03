@@ -128,7 +128,7 @@ class Redirect extends NgRestModel
     
     /**
      * Match Request Path against catch_path.
-     * 
+     *
      * Several version of the request path will be checked in order to ensure different siutations can be handled.
      *
      * @param string $requestPath

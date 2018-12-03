@@ -20,7 +20,6 @@ abstract class UnitTestBlock extends InternalBaseBlock
 
     public function renderAdminPreview()
     {
-
     }
 
     public function renderFrontend()

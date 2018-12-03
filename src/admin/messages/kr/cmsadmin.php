@@ -1,7 +1,7 @@
 <?php
 
 return [
- 	 
+     
     'view_index_add_type' => '페이지 유형',
     'view_index_type_page' => '페이지',
     'view_index_type_module' => '모듈',
@@ -211,9 +211,9 @@ return [
     'module_permission_page' => '페이지 내용',
 
 // 1.0.6
-	'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
-	'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
-	'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
+    'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
+    'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
+    'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
 
-	'js_page_create_copy_as_template_success' => 'The template has been created.',
+    'js_page_create_copy_as_template_success' => 'The template has been created.',
 ];

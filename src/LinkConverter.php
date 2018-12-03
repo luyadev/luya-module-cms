@@ -92,10 +92,10 @@ class LinkConverter extends BaseObject
     
     /**
      * Generate a link converter object from an array.
-     * 
+     *
      * If type is empty, false is returned. This allows us to have predefined values from
      * value and target and do not throw an exception.
-     * 
+     *
      * @param array $configuration
      * @return \luya\cms\LinkConverter|false
      */

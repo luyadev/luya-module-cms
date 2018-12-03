@@ -416,7 +416,7 @@ class NavController extends \luya\admin\base\RestController
     
     /**
      * Flush the menu data if component exits.
-     * 
+     *
      * @since 1.0.6
      */
     protected function menuFlush()

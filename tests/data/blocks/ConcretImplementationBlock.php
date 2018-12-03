@@ -65,7 +65,6 @@ class ConcretImplementationBlock implements BlockInterface
 
     public function renderAdminPreview()
     {
-
     }
 
     /**

@@ -608,7 +608,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public function onRegister()
     {
-
     }
 
     /**
@@ -616,7 +615,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public function onRegisterFromCache()
     {
-
     }
     
     /**
@@ -652,7 +650,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         // file get content resolved Yii aliases.
         $data = FileHelper::getFileContent($imagePath);
         if ($data) {
-            return 'data:image/jpg;base64,' . base64_encode($data);   
+            return 'data:image/jpg;base64,' . base64_encode($data);
         }
         
         return false;

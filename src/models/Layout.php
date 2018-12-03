@@ -71,7 +71,7 @@ class Layout extends NgRestModel
 
     /**
      * Get the json config as array.
-     * 
+     *
      * @param string $node Get a given key from the config array.
      * @return array If the given node is not found an empty array will be returned.
      */

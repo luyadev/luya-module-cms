@@ -133,7 +133,7 @@ class BlockGroup extends NgRestModel
 
     /**
      * The all blocks for the given group
-     * 
+     *
      * @return \luya\cms\models\Block
      */
     public function getBlocks()

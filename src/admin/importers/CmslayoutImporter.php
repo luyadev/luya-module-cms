@@ -45,7 +45,7 @@ class CmslayoutImporter extends Importer
             $this->handleLayoutFile($layoutFiles, $layoutDefintion);
         }
         
-        // remove all view files not found somewhere ... 
+        // remove all view files not found somewhere ...
         foreach (Layout::find()->where(['not in', 'view_file', $layoutFiles])->all() as $layoutItem) {
             $layoutItem->delete();
         }
@@ -55,7 +55,7 @@ class CmslayoutImporter extends Importer
     
     /**
      * Assigne saved files into the layoutFiles array defintion.
-     * 
+     *
      * @param array $layoutFiles
      * @param string $path
      */
@@ -80,7 +80,7 @@ class CmslayoutImporter extends Importer
 
     /**
      * Get files from a given folder.
-     * 
+     *
      * @param string $folderPath
      * @return array
      */
@@ -188,7 +188,7 @@ class CmslayoutImporter extends Importer
     
     /**
      * Verificy if a given string matches the variable rules.
-     * 
+     *
      * @param string $chars
      * @return boolean
      */
@@ -203,7 +203,7 @@ class CmslayoutImporter extends Importer
     
     /**
      * Generate readable name from name.
-     * 
+     *
      * @param string $name
      * @return string
      */
@@ -214,9 +214,9 @@ class CmslayoutImporter extends Importer
     
     /**
      * Compare two arrays with each in order to determined whether they have differences or not.
-     * 
+     *
      * An array must contain the keys `placeholders` otherwise false is returned too.
-     * 
+     *
      * @param array $array1
      * @param array $array2
      * @return bool true if the same, false if not the same

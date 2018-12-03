@@ -265,7 +265,7 @@ class Block extends NgRestModel
     }
 
     /**
-     * Creates the block object and stores the object within a static block container.  
+     * Creates the block object and stores the object within a static block container.
      *
      * @param string $class
      * @param integer $blockId The id of the cms_block table

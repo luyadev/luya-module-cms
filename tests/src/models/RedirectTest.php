@@ -6,7 +6,6 @@ use cmstests\ModelTestCase;
 use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\cms\models\Redirect;
 
-
 class RedirectTest extends ModelTestCase
 {
     public function testMatchRequestPath()

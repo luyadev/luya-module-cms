@@ -116,7 +116,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     
     /**
      * Will be replaced with cachable trait in future.
-     * 
+     *
      * @return boolean
      */
     private function isCachingEnabled()

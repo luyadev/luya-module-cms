@@ -197,5 +197,4 @@ class TestingBlock extends InternalBaseBlock
     {
         return '<div>{{ vars.content | raw }}</div>';
     }
-
 }

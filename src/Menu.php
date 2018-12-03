@@ -251,7 +251,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     }
 
     /**
-     * Determines and encodes the given value if enabled. 
+     * Determines and encodes the given value if enabled.
      *
      * @param string $value The value to encode.
      * @return string The encoded value if enabled.

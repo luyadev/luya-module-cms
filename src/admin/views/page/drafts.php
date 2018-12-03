@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+
 ?>
 <div class="luya-content">
     <h1><?php echo Module::t('draft_title'); ?></h1>

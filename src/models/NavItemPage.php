@@ -217,7 +217,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
             if ($blockObject) {
                 if ($blockResponse === false) {
-        
                     $className = get_class($blockObject);
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
@@ -286,8 +285,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
                         $blockObject->onRegister();
                     }
-                }
-                else {
+                } else {
                     $blockObject->onRegisterFromCache();
                 }
             }
@@ -379,7 +377,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
     /**
      * Get the blocks for a given placeholder, **without recursion**.
-     * 
+     *
      * @param string $placeholderVar
      * @param integer $prevId
      * @param NavItemPage $navItemPage
@@ -408,7 +406,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
-     * 
+     *
      * @param integer $blockId
      * @return array
      * @deprecated Deprecated since 1.0.6 use getBlockItem() instead.

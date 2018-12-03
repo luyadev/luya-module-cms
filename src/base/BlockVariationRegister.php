@@ -74,10 +74,10 @@ class BlockVariationRegister
     }
 
     /**
-     * Add option to register a variations as default. 
-     * 
+     * Add option to register a variations as default.
+     *
      * This means that when a cfg or value has no user input data, this value will be used.
-     * 
+     *
      * This implementation does not check whether another variation has the default check,
      * so make sure that only a single entry can be the default entry.
      *

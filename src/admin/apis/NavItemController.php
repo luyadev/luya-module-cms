@@ -388,7 +388,7 @@ class NavItemController extends \luya\admin\base\RestController
 
     /**
      * returns all the PAGE type specific informations.
-     * 
+     *
      * @return array
      */
     public function actionTypePageContainer($navItemId)

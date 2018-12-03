@@ -4,7 +4,7 @@ namespace luya\cms\frontend\events;
 
 /**
  * Before Render Event.
- * 
+ *
  * An event will be triggered before the rendering of cms controller content.
  *
  * @author Basil Suter <basil@nadar.io>

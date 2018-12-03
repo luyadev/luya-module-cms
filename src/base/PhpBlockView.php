@@ -313,7 +313,6 @@ class PhpBlockView extends View
         
         foreach ($blockAssets as $attribute => $blockAsset) {
             if (!empty($blockAsset)) {
-                
                 if ($attribute == 'js' || $attribute == 'jsFiles') {
                     /**
                      * js and jsFiles must keep the array keys as position and have subarray
