@@ -218,8 +218,8 @@ return [
     'module_permission_page' => 'Zawartość strony',
 
 // 1.0.6
-    'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
-    'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
-    'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
-    'js_page_create_copy_as_template_success' => 'The template has been created.',
+    'page_update_actions_deepcopyastemplate_title' => 'Skopiuj jako szablon',
+    'page_update_actions_deepcopyastemplate_text' => 'Utwórz szablon bieżącej strony z całą jej zawartością. Szablon będzie zawierał wszystkie języki, lecz tylko wersję opublikowaną.',
+    'page_update_actions_deepcopyastemplate_btn' => 'Utwórz Szablon',
+    'js_page_create_copy_as_template_success' => 'Szablon został utworzony.',
 ];
