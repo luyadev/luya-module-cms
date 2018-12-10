@@ -26,8 +26,8 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
         
         $this->assertSame([
             'luya\cms\admin\importers\CmslayoutImporter' => [
-                0 => 'New file Layoutwithjson found and registered.',
-                1 => 'New file Phplayout found and registered.',
+                0 => 'New file Phplayout found and registered.',
+                1 => 'New file Layoutwithjson found and registered.',
                 2 => 'cms layout importer finished with 2 layout files.',
             ]
         ], $log);
