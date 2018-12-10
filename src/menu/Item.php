@@ -526,7 +526,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function down(callable $fn)
     {
-        $parent = $this->with($this->_with)->getChildren();
+        $parent = $this->with($this->_with)->getParent();
         while ($parent) {
             $response = call_user_func_array($fn, [$parent]);
             if ($response) {
