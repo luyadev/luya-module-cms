@@ -9,6 +9,7 @@ use luya\cms\Menu;
 use luya\web\Request;
 use luya\cms\menu\InjectItem;
 use cmstests\data\items\RootItem;
+use luya\cms\menu\Item;
 
 class ItemTest extends CmsFrontendTestCase
 {
@@ -130,6 +131,24 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertTrue(is_object($itemWithParent->parent));
     }
     
+    public function testGoDown()
+    {
+        $itemWithParent = (new Query)->where(['nav_id' => 10])->one();
+
+        $this->assertSame(2, $itemWithParent->depth);
+        $f = $itemWithParent->down(function(Item $item) {
+            if ($item->depth == 1) {
+                return $item;
+            }
+        });
+
+        $this->assertSame(1, $f->depth);
+
+        $this->assertFalse($itemWithParent->down(function(Item $item) {
+            // just do nothing means pass all elements.
+        }));
+    }
+
     /*
     public function testExternalRedirectLanguageCompare()
     {

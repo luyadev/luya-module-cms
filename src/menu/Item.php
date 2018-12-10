@@ -508,6 +508,37 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     }
 
     /**
+     * Go down to a given element which is evalutaed trough a callable.
+     * 
+     * Iterate trough parent elements until the last.
+     * 
+     * ```php
+     * $item = Yii::$app->menu->current->down(function(Item $item) {
+     *     if ($item->depth == 1) {
+     *         return $item;
+     *     }
+     * });
+     * ```
+     *
+     * @param callable $fn A function which holds the current iterated item.
+     * @return static|boolean If no item has been picked, false is returned.
+     * @since 1.0.9
+     */
+    public function down(callable $fn)
+    {
+        $parent = $this->with($this->_with)->getChildren();
+        while ($parent) {
+            $response = call_user_func_array($fn, [$parent]);
+            if ($response) {
+                return $response;
+            }
+            $parent = $parent->with($this->_with)->getParent();
+        }
+
+        return false;
+    }
+
+    /**
      * Get all sibilings for the current item, this also includes the current item iteself.
      *
      * @return array An array with all item-object siblings
