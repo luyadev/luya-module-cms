@@ -580,7 +580,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             ->andWhere(['<', 'sort_index', $this->sortIndex])
             ->with($this->_with)
             ->lang($this->lang)
-            ->orderBy(['sort_index' => SORT_ASC])
+            ->orderBy(['sort_index' => SORT_DESC])
             ->one();
     }
     
