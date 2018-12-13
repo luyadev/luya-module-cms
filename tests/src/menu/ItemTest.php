@@ -87,6 +87,10 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertSame(1, $menu->prevSibling->id);
         $this->assertSame(3, $menu->nextSibling->id);
         
+
+        $n = $menu->nextSibling;
+        $this->assertSame(1, $n->prevSibling->id);
+
         
         $menu = (new Query())->where(['id' => 1])->one();
         

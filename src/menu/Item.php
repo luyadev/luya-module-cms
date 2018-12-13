@@ -557,7 +557,13 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function getNextSibling()
     {
-        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->andWhere(['>', 'sort_index', $this->sortIndex])->with($this->_with)->lang($this->lang)->one();
+        return (new Query())
+            ->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])
+            ->andWhere(['>', 'sort_index', $this->sortIndex])
+            ->with($this->_with)
+            ->lang($this->lang)
+            ->orderBy(['sort_index' => SORT_ASC])
+            ->one();
     }
     
     /**
@@ -569,7 +575,13 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function getPrevSibling()
     {
-        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->andWhere(['<', 'sort_index', $this->sortIndex])->with($this->_with)->lang($this->lang)->one();
+        return (new Query())
+            ->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])
+            ->andWhere(['<', 'sort_index', $this->sortIndex])
+            ->with($this->_with)
+            ->lang($this->lang)
+            ->orderBy(['sort_index' => SORT_ASC])
+            ->one();
     }
     
     /**

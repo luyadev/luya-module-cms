@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.9 (in progress)
 
+### Fixed
+
++ [#170](https://github.com/luyadev/luya-module-cms/issues/170) Next and prev sibling functions in menu item not sorted correctly.
+
+### Added
+
 + [#169](https://github.com/luyadev/luya-module-cms/issues/169) Add down() method to iterate trough parent items until a certain item condition.
 
 ## 1.0.8 (3. December 2018)
