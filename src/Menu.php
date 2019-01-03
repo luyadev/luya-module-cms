@@ -310,7 +310,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * Load and return the language container for the specific langShortCode, this method is used
      * when using the ArrayAccess offsetGet() method.
      *
-     * @param string $langShortCode A languag short code which have to access in $this->getLanguages().
+     * @param string $langShortCode A language short code which have to access in $this->getLanguages().
      * @return array An array containing all items in theyr keys for the provided language short code.
      */
     public function getLanguageContainer($langShortCode)
