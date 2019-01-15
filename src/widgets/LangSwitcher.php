@@ -117,6 +117,12 @@ class LangSwitcher extends \luya\base\Widget
     public $itemsCallback;
     
     /**
+     * @var array An array with links which the link tag is already registered.
+     * @since 1.0.9
+     */
+    private static $registerLinkTags = [];
+
+    /**
      * Generate the item element.
      *
      * @param string $href
@@ -126,6 +132,10 @@ class LangSwitcher extends \luya\base\Widget
      */
     private function generateHtml($href, $isActive, $lang)
     {
+        if (!isset(static::$registerLinkTags[$href])) {
+            $this->view->registerLinkTag(['rel' => 'alternate', 'hreflang' => $lang['short_code'], 'href' => $href]);
+            static::$registerLinkTags[$href] = true;
+        }
         $elementOptions = $this->elementOptions;
         $linkOptions = $this->linkOptions;
         

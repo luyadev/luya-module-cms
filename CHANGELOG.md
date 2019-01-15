@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
++ [#173](https://github.com/luyadev/luya-module-cms/issues/173) LangSwitcher widget auto register hreflang link meta informations.
 + [#169](https://github.com/luyadev/luya-module-cms/issues/169) Add down() method to iterate trough parent items until a certain item condition.
 
 ## 1.0.8 (3. December 2018)
