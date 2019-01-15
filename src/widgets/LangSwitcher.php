@@ -133,7 +133,7 @@ class LangSwitcher extends \luya\base\Widget
     private function generateHtml($href, $isActive, $lang)
     {
         if (!isset(static::$registerLinkTags[$href])) {
-            $this->view->registerLinkTag(['rel' => 'alternate', 'hreflang' => $lang['short_code'], 'href' => $href]);
+            $this->view->registerLinkTag(['rel' => 'alternate', 'hreflang' => $lang['short_code'], 'href' => Yii::$app->urlManager->hostInfo . $href]);
             static::$registerLinkTags[$href] = true;
         }
         $elementOptions = $this->elementOptions;
