@@ -187,11 +187,11 @@ return [
     'view_update_block_tooltip_close' => 'Close',
 
 // 1.0.0
-    'cmsadmin_dashboard_lastupdate' => 'Last page updates',
+    'cmsadmin_dashboard_lastupdate' => 'Latest page updates',
     'cmsadmin_settings_homepage_title' => 'Default page',
     'cmsadmin_settings_trashpage_title' => 'Delete page',
     'cmsadmin_settings_modal_title' => 'Settings',
-    'cmsadmin_item_settings_titleslug' => 'Page informations',
+    'cmsadmin_item_settings_titleslug' => 'Page information',
     'cmsadmin_created_at' => 'Created at',
     'cmsadmin_version_remove' => 'Remove version',
     'view_index_sidebar_container_no_pages' => 'Empty container',
@@ -202,7 +202,7 @@ return [
     'view_index_page_meta_timestamp_create' => 'Page creation date',
     'nav_item_model_error_modulenacd /var   meexists' => 'The alias "{alias}" exists already as module. Use another alias name or rename the module with this alias in your config.',
     'nav_item_model_error_parentnavidcannotnull' =>  'The parent nav id can not be null, something went wrong while extending from parent page.',
-    'nav_item_model_error_urlsegementexistsalready' => 'This alias exists already, please take another name.',
+    'nav_item_model_error_urlsegementexistsalready' => 'This alias exists already, please choose another name.',
     'menu_group_item_env_redirections' => 'Redirects',
     'redirect_model_atr_timestamp_create' => 'Create timestamp',
     'redirect_model_atr_catch_path' => 'From path',
