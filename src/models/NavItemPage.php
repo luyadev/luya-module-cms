@@ -155,7 +155,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             }
         }
 
-        return Yii::$app->view->render($this->layout->view_file, [
+        // Using the absolute file path to render the file in order to make cmsLayouts work.
+        // @see https://github.com/luyadev/luya-module-cms/issues/177
+        return Yii::$app->view->renderFile($this->layout->view_file, [
             'placeholders' => $placholders,
         ], $this);
     }

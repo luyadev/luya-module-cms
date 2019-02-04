@@ -108,7 +108,7 @@ class CmslayoutImporter extends Importer
         }
         
         $fileinfo = FileHelper::getFileInfo($file);
-        $fileBaseName = $fileinfo->name . '.' . $fileinfo->extension;
+        $fileBaseName = $file; //$fileinfo->name . '.' . $fileinfo->extension;
         
         $json = false;
         
