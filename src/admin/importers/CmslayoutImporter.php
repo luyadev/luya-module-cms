@@ -25,6 +25,8 @@ class CmslayoutImporter extends Importer
      */
     public $ignorePrefix = ['_', '.'];
     
+    public $defaultPath = '@app/views/cmslayouts';
+
     /**
      * @inheritdoc
      */
@@ -33,12 +35,7 @@ class CmslayoutImporter extends Importer
         $layoutFiles = [];
         
         // get and import cmslayouts from @app/views/cmslayouts path
-        $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
-        if (file_exists($cmslayouts)) {
-            foreach ($this->getFilesFromFolder($cmslayouts) as $file) {
-                $this->handleLayoutFile($layoutFiles, $file);
-            }
-        }
+        $this->handleLayoutFile($layoutFiles, $this->defaultPath);
         
         // import files from the cmsadmin module $cmsLayouts property.
         foreach ((array) $this->module->cmsLayouts as $layoutDefintion) {
@@ -61,17 +58,18 @@ class CmslayoutImporter extends Importer
      */
     protected function handleLayoutFile(&$layoutFiles, $path)
     {
-        $path = Yii::getAlias($path, false);
+        $aliased = Yii::getAlias($path, false);
+        $filePath = $aliased ? $aliased : $path;
         
-        if (is_dir($path)) {
-            foreach ($this->getFilesFromFolder($path) as $file) {
-                $handler = $this->importLayoutFile($file);
+        if (is_dir($filePath)) {
+            foreach ($this->getFilesFromFolder($filePath) as $file) {
+                $handler = $this->importLayoutFile($file, $path);
                 if ($handler) {
                     $layoutFiles[] = $handler;
                 }
             }
         } else {
-            $handler = $this->importLayoutFile($path);
+            $handler = $this->importLayoutFile($filePath, $path);
             if ($handler) {
                 $layoutFiles[] = $handler;
             }
@@ -101,14 +99,14 @@ class CmslayoutImporter extends Importer
      * @throws Exception
      * @return string
      */
-    protected function importLayoutFile($file)
+    protected function importLayoutFile($file, $aliased)
     {
         if (!file_exists($file)) {
             return false;
         }
         
         $fileinfo = FileHelper::getFileInfo($file);
-        $fileBaseName = $file; //$fileinfo->name . '.' . $fileinfo->extension;
+        $fileBaseName = $aliased . DIRECTORY_SEPARATOR . $fileinfo->name . '.' . $fileinfo->extension;
         
         $json = false;
         
