@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Fixed
 
++ [#139](https://github.com/luyadev/luya-module-cms/issues/139) Stop hiding the block toolbar on drag because that caused issues in certain browsers.
 + [#177](https://github.com/luyadev/luya-module-cms/issues/177) Use absolute file paths for import command.
 + [#170](https://github.com/luyadev/luya-module-cms/issues/170) Next and prev sibling functions in menu item not sorted correctly.
 
