@@ -27,7 +27,7 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
                 'block1' => [
                     'id' => 1,
                     'group_id' => 1,
-                    'class' => TestingBlock::class,
+                    'class' => TestingTextBlock::class,
                     'is_disabled' => 0,
                 ],
                 'block2' => [
@@ -101,7 +101,7 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
     }
 }
 
-class TestingBlock extends InternalBaseBlock
+class TestingTextBlock extends InternalBaseBlock
 {
     public function name()
     {
