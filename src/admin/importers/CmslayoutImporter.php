@@ -43,7 +43,7 @@ class CmslayoutImporter extends Importer
         }
         
         // remove all view files not found somewhere ...
-        foreach (Layout::find()->where(['not in', 'view_file', $layoutFiles])->all() as $layoutItem) {
+        foreach (Layout::find()->where(['not in', 'id', $layoutFiles])->all() as $layoutItem) {
             $layoutItem->delete();
         }
         
@@ -106,7 +106,8 @@ class CmslayoutImporter extends Importer
         }
         
         $fileinfo = FileHelper::getFileInfo($file);
-        $fileBaseName = $aliased . DIRECTORY_SEPARATOR . $fileinfo->name . '.' . $fileinfo->extension;
+        $baseName = $fileinfo->name . '.' . $fileinfo->extension;
+        $fileBaseName = $aliased . DIRECTORY_SEPARATOR . $baseName;
         
         $json = false;
         
@@ -148,7 +149,7 @@ class CmslayoutImporter extends Importer
             $_placeholders = ['placeholders' => $json];
         }
         
-        $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName]])->one();
+        $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName], ['view_file' => $baseName]])->one();
         
         if ($layoutItem) {
             $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
@@ -166,23 +167,22 @@ class CmslayoutImporter extends Importer
                 ]);
                 $this->addLog('Existing file '.$readableFileName.' updated.');
             }
-        } else {
-            // add item into the database table
-            $data = new Layout();
-            $data->scenario = 'restcreate';
-            $data->setAttributes([
-                'name' => $readableFileName,
-                'view_file' => $fileBaseName,
-                'json_config' => json_encode($_placeholders),
-            ]);
-            $data->save(false);
-            $this->addLog('New file '.$readableFileName.' found and registered.');
-        }
-        
-        return $fileBaseName;
+
+            return $layoutItem->id;
+        } 
+
+        // add item into the database table
+        $data = new Layout();
+        $data->scenario = 'restcreate';
+        $data->setAttributes([
+            'name' => $readableFileName,
+            'view_file' => $fileBaseName,
+            'json_config' => json_encode($_placeholders),
+        ]);
+        $data->save(false);
+        $this->addLog('New file '.$readableFileName.' found and registered.');
+        return $data->id;
     }
-    
-    
     
     /**
      * Verificy if a given string matches the variable rules.
