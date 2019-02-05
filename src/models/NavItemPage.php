@@ -193,7 +193,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * @param integer $prevId
      * @return string
      */
-    private function renderPlaceholderRecursive($navItemPageId, $placeholderVar, $prevId)
+    private function renderPlaceholderRecursive($navItemPageId, $placeholderVar, $prevId, $layoutBlockInstance = null)
     {
         $string = '';
         $i = 0;
@@ -279,7 +279,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     }
                     $blockObject->setPlaceholderValues($insertedHolders);
                     // output buffer the rendered frontend method of the block
-                    $blockResponse = $blockObject->renderFrontend();
+                    if ($layoutBlockInstance) {
+                        $blockResponse = $layoutBlockInstance->placeholderRenderIteration($blockObject);
+                    } else {
+                        $blockResponse = $blockObject->renderFrontend();
+                    }
+                    
         
                     if ($blockObject->getIsCacheEnabled()) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());

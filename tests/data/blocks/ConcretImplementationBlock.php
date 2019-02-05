@@ -217,4 +217,9 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return true;
     }
+
+    public function placeholderRenderIteration(BlockInterface $block)
+    {
+        return $block->renderFrontend();
+    }
 }

@@ -55,9 +55,11 @@ interface BlockInterface
     public function renderAdmin();
 
     /**
-     * Get the output in administration preview context.
+     * Create a html img tag and use the preview image at {module}/resources/img/{block-name}.jpg as source.
+     * If no image source exists, it will return false.
      *
-     * @return string|boolean False if no preview available, otherwise the html preview code.
+     * @see PhpBlock::getPreviewImageSource
+     * @return string|boolean False if no preview available, otherwise the html img as string.
      * @since 1.0.8
      */
     public function renderAdminPreview();
@@ -207,4 +209,26 @@ interface BlockInterface
      * @return boolean
      */
     public function getIsDirtyDialogEnabled();
+
+    /**
+     * This method is called whenever a block inside a placeholder is rendered.
+     * 
+     * This allows you to change the render behavior of every block inside a placeholder. An example of
+     * adding a wrapper div to the iteration:
+     * 
+     * ```php
+     * public function placeholderRenderIteration(BlockInterface $block)
+     * {
+     *      return '<div class="block-wrapper">'.$block->renderFrontend().'</div>';
+     * }
+     * ```
+     * 
+     * This also allows you to determined whether the block should be rendered or not as the response is the content
+     * of the block inside the placholder.
+     *
+     * @param BlockInterface $block
+     * @return string
+     * @since 1.0.9
+     */
+    public function placeholderRenderIteration(BlockInterface $block);
 }

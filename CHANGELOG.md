@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
++ [#180](https://github.com/luyadev/luya-module-cms/issues/180) Add option for block placeholder iteration rendering.
 + [#173](https://github.com/luyadev/luya-module-cms/issues/173) LangSwitcher widget auto register hreflang link meta informations.
 + [#169](https://github.com/luyadev/luya-module-cms/issues/169) Add down() method to iterate trough parent items until a certain item condition.
 
