@@ -275,7 +275,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     // render sub placeholders and set into object
                     $insertedHolders = [];
                     foreach ($blockObject->getConfigPlaceholdersExport() as $item) {
-                        $insertedHolders[$item['var']] = $this->renderPlaceholderRecursive($navItemPageId, $item['var'], $placeholder['id']);
+                        $insertedHolders[$item['var']] = $this->renderPlaceholderRecursive($navItemPageId, $item['var'], $placeholder['id'], $blockObject);
                     }
                     $blockObject->setPlaceholderValues($insertedHolders);
                     // output buffer the rendered frontend method of the block
