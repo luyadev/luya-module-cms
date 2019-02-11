@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file. This projec
 + [#139](https://github.com/luyadev/luya-module-cms/issues/139) Stop hiding the block toolbar on drag because that caused issues in certain browsers.
 + [#177](https://github.com/luyadev/luya-module-cms/issues/177) Use dynamic file paths for cmslayouts import command.
 + [#170](https://github.com/luyadev/luya-module-cms/issues/170) Next and prev sibling functions in menu item not sorted correctly.
++ [#181](https://github.com/luyadev/luya-module-cms/issues/181) Fixed a bug with menu when using limit and order methods together.
 
 ### Added
 

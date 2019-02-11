@@ -415,6 +415,10 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     
             return true;
         });
+
+        if ($this->_order !== null) {
+            ArrayHelper::multisort($data, $this->_order['keys'], $this->_order['directions']);
+        }
     
         if ($this->_offset !== null) {
             $data = array_slice($data, $this->_offset, null, true);
@@ -422,10 +426,6 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     
         if ($this->_limit !== null) {
             $data = array_slice($data, 0, $this->_limit, true);
-        }
-    
-        if ($this->_order !== null) {
-            ArrayHelper::multisort($data, $this->_order['keys'], $this->_order['directions']);
         }
         
         return $data;
