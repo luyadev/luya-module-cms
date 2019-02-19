@@ -5,6 +5,10 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 2.0.0 (in progress)
 
+### Changed
+
++ [#182](https://github.com/luyadev/luya-module-cms/issues/182) Moved to SemVer. Use ^2.0 instead ~2.0.0 constraint in your project! 
+
 ### Added
 
 + [#159](https://github.com/luyadev/luya-module-cms/issues/159) Added new og:image and twitter:image meta informations. Its possible now to upload an image for a page.
