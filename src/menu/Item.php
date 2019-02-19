@@ -371,6 +371,17 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return User::findOne($this->itemArray['update_user_id']);
     }
+
+    /**
+     * Returns the image object if an object is uploaded.
+     *
+     * @return \luya\admin\image\Item|boolean The Image object or false if no image has been uploaded
+     * @since 2.0.0
+     */
+    public function getImage()
+    {
+        return Yii::$app->storage->getImage($this->itemArray['image_id']);
+    }
     
     /**
      * Internal used to retriev redirect data.

@@ -223,4 +223,8 @@ return [
     'page_update_actions_deepcopyastemplate_text' => 'Crie um modelo da página atual com todo o seu conteúdo. O modelo incluirá todos os idiomas, mas apenas a versão publicada.',
     'page_update_actions_deepcopyastemplate_btn' => 'Criar modelo',
     'js_page_create_copy_as_template_success' => 'O modelo foi criado.',
+
+// 2.0
+
+    'model_navitem_image_id_label' => 'Image',
 ];

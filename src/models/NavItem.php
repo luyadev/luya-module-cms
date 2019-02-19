@@ -33,6 +33,7 @@ use luya\helpers\Inflector;
  * @property string $description
  * @property string $keywords
  * @property string $title_tag
+ * @property integer $image_id
  * @property \luya\cms\models\Nav $nav Nav Model.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -109,7 +110,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
         return [
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
             [['nav_id', 'description', 'keywords', 'nav_item_type_id', 'title_tag'], 'safe'],
-            [['timestamp_create', 'timestamp_update'], 'integer'],
+            [['timestamp_create', 'timestamp_update', 'image_id'], 'integer'],
             [['alias'], 'match', 'pattern' => '/\_|\/|\\\/i', 'not' => true]
         ];
     }
@@ -123,6 +124,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             'title' => Module::t('model_navitem_title_label'),
             'alias' => Module::t('model_navitem_alias_label'),
             'title_tag' => Module::t('model_navitem_title_tag_label'),
+            'image_id' => Module::t('model_navitem_image_id_label'),
         ];
     }
 

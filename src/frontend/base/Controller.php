@@ -12,6 +12,7 @@ use yii\web\Response;
 use luya\cms\frontend\events\BeforeRenderEvent;
 use luya\helpers\StringHelper;
 use luya\cms\frontend\Module;
+use luya\admin\filters\LargeThumbnail;
 
 /**
  * Abstract Controller for CMS Controllers.
@@ -26,6 +27,18 @@ abstract class Controller extends \luya\web\Controller
      * @since 1.0.8
      */
     const LINK_CANONICAL = 'linkCanonical';
+
+    /**
+     * @var string The og:image constant.
+     * @since 2.0.0
+     */
+    const META_OG_IMAGE = 'ogImage';
+
+    /**
+     * @var string The twitter:image constant.
+     * @since 2.0.0
+     */
+    const META_TWITTER_IMAGE = 'twitterImage';
 
     /**
      * @var string og:type key which is used for meta registration. Use this constant in order to override the default implementation.
@@ -169,9 +182,6 @@ abstract class Controller extends \luya\web\Controller
             }
         }
 
-
-        
-
         $this->view->registerMetaTag(['name' => 'og:type', 'content' => 'website'], self::META_OG_TYPE);
         $this->view->registerMetaTag(['name' => 'twitter:card', 'content' => 'summary'], self::META_TWITTER_CARD);
         
@@ -190,6 +200,14 @@ abstract class Controller extends \luya\web\Controller
         
         if (!empty($model->keywords)) {
             $this->view->registerMetaTag(['name' => 'keywords', 'content' => implode(", ", $currentMenu->keywords)], self::META_KEYWORDS);
+        }
+
+        if (!empty($model->image_id)) {
+            $image = Yii::$app->storage->getImage($model->image_id);
+            if ($image) {
+                $this->view->registerMetaTag(['name' => 'og:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_OG_IMAGE);
+                $this->view->registerMetaTag(['name' => 'twitter:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_TWITTER_IMAGE);
+            }
         }
         
         if ($this->module->enableTagParsing) {

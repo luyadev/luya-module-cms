@@ -294,6 +294,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      *     		'module_name' => false,
      *     		'container' => 'default',
      *     		'depth' => 1,
+     *          'image_id' => 0,
      * 		],
      * ]
      * ```
@@ -598,7 +599,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         return (new DbQuery())
             ->from(['cms_nav_item item'])
-            ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
+            ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.image_id', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
             ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
             ->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
@@ -711,6 +712,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
                     'sort_index' => $item['sort_index'],
                     'is_hidden' => $item['is_hidden'],
                     'type' => $item['nav_item_type'],
+                    'image_id' => $item['image_id'],
                     'redirect' => ($item['nav_item_type'] == 3 && isset($this->redirectMap[$item['nav_item_type_id']])) ? $this->redirectMap[$item['nav_item_type_id']] : false,
                     'module_name' => ($item['nav_item_type'] == 2 && isset($this->modulesMap[$item['nav_item_type_id']])) ? $this->modulesMap[$item['nav_item_type_id']]['module_name'] : false,
                     'container' => $item['container'],

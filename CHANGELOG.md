@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 2.0.0 (in progress)
 
+### Added
+
++ [#159](https://github.com/luyadev/luya-module-cms/issues/159) Added new og:image and twitter:image meta informations. Its possible now to upload an image for a page.
+
 ## 1.0.9 (18. February 2019)
 
 ### Fixed

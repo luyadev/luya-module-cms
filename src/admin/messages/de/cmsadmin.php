@@ -222,4 +222,8 @@ return [
     'page_update_actions_deepcopyastemplate_text' => 'Erstelle eine Vorlage der aktuellen Seite mit allen dazugehörigen Inhalten. Es werden dabei alle Inhalte in allen angelegten Sprachen von allen veröffentlichten Versionen kopiert.',
     'page_update_actions_deepcopyastemplate_btn' => 'Vorlage erstellen',
     'js_page_create_copy_as_template_success' => 'Die Vorlage wurde erfolgreich erstellt.',
+
+// 2.0
+
+    'model_navitem_image_id_label' => 'Bild',
 ];

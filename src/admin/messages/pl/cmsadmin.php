@@ -222,4 +222,8 @@ return [
     'page_update_actions_deepcopyastemplate_text' => 'Utwórz szablon bieżącej strony z całą jej zawartością. Szablon będzie zawierał wszystkie języki, lecz tylko wersję opublikowaną.',
     'page_update_actions_deepcopyastemplate_btn' => 'Utwórz Szablon',
     'js_page_create_copy_as_template_success' => 'Szablon został utworzony.',
+
+// 2.0
+
+    'model_navitem_image_id_label' => 'Image',
 ];
