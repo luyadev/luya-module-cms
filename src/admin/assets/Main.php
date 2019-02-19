@@ -19,14 +19,14 @@ class Main extends \yii\web\AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'dist/js/main.uglified.js'
+        'dist/main.js'
     ];
 
     /**
      * @inheritdoc
      */
     public $css = [
-        'dist/css/cmsadmin.css',
+        'dist/main.css',
     ];
 
     /**
@@ -40,8 +40,8 @@ class Main extends \yii\web\AssetBundle
      * @inheritdoc
      */
     public $publishOptions = [
-            'except' => [
-                    'node_modules/',
-            ]
+        'except' => [
+            'node_modules/',
+        ]
     ];
 }
