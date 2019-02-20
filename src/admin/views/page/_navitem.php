@@ -164,13 +164,14 @@ use luya\helpers\Html;
         </div>
     </div>
     <div class="row" ng-if="item.nav_item_type==3">
-        <div ng-switch="typeData.type">
-            <div ng-switch-when="1" class="col-md-12">
-                <p><?= Module::t('view_update_page_is_redirect_internal'); ?></p>
-            </div>
-            <div ng-switch-when="2" class="col-md-12">
-                <p><?= Module::t('view_update_page_is_redirect_external'); ?>.</p>
-            </div>
+        <div ng-show="typeData.type == 1" class="col-md-12">
+            <p><?= Module::t('view_update_page_is_redirect_internal'); ?></p>
+        </div>
+        <div ng-show="typeData.type == 2" class="col-md-12">
+            <p><?= Module::t('view_update_page_is_redirect_external'); ?>.</p>
+        </div>
+        <div ng-show="typeData.type > 2" class="col-md-12">
+            <p><?= Module::t('model_navitemredirect_value_label'); ?>:<link-object-to-string class="ml-2" link="typeData"></link-object-to-string></p>
         </div>
     </div>
 </div>

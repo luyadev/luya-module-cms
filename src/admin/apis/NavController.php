@@ -375,8 +375,10 @@ class NavController extends \luya\admin\base\RestController
         if (!empty($parentNavId)) {
             $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
+
+        $redirect = $this->postArg('redirect');
         
-        $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
+        $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), isset($redirect['target']) ? $redirect['target'] : null);
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
@@ -388,7 +390,8 @@ class NavController extends \luya\admin\base\RestController
     {
         $this->menuFlush();
         $model = new Nav();
-        $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
+        $redirect = $this->postArg('redirect');
+        $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), isset($redirect['target']) ? $redirect['target'] : null);
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }

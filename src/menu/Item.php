@@ -417,7 +417,12 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             $converter = new LinkConverter([
                 'type' => $this->redirectMapData('type'),
                 'value' => $this->redirectMapData('value'),
+                'target' => $this->redirectMapData('target'),
             ]);
+
+            if ($this->redirectMapData('target')) {
+                $this->setTarget($this->redirectMapData('target'));
+            }
             
             switch ($converter->type) {
                 case $converter::TYPE_EXTERNAL_URL:

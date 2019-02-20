@@ -16,6 +16,7 @@ use luya\cms\models\Layout;
 use yii\web\ForbiddenHttpException;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
+use luya\helpers\ArrayHelper;
 
 /**
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
@@ -107,7 +108,7 @@ class NavItemController extends \luya\admin\base\RestController
                 'error' => false,
                 'item' => $item->toArray(),
                 'nav' => $item->nav->toArray(),
-                'typeData' => ($item->nav_item_type == 1) ? NavItemPage::getVersionList($item->id) : $item->getType()->toArray(),
+                'typeData' => ($item->nav_item_type == 1) ? NavItemPage::getVersionList($item->id) : ArrayHelper::typeCast($item->getType()->toArray()),
             ];
         }
         
@@ -321,6 +322,7 @@ class NavItemController extends \luya\admin\base\RestController
                 case 3:
                     $this->setPostAttribute($typeModel, 'type');
                     $this->setPostAttribute($typeModel, 'value');
+                    $this->setPostAttribute($typeModel, 'target');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
@@ -366,6 +368,7 @@ class NavItemController extends \luya\admin\base\RestController
                     $typeModel = new NavItemRedirect();
                     $this->setPostAttribute($typeModel, 'type');
                     $this->setPostAttribute($typeModel, 'value');
+                    $this->setPostAttribute($typeModel, 'target');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }

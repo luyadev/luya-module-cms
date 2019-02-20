@@ -113,40 +113,7 @@ use luya\cms\admin\Module;
 
 <!-- CREATE REDIRECT FORM -->
 <script type="text/ng-template" id="createformredirect.html">
-<div>
-    <div class="form-group form-side-by-side">
-        <div class="form-side form-side-label">
-            <label><?= \luya\admin\Module::t('view_index_redirect_type'); ?></label>
-        </div>
-        <div class="form-side">
-            <input type="radio" ng-model="data.redirect_type" ng-value="1" id="redirect_internal2">
-            <label for="redirect_internal2" ng-click="data.redirect_type = 1"><?= \luya\admin\Module::t('view_index_redirect_internal'); ?></label>
-
-            <input type="radio" ng-model="data.redirect_type" ng-value="2" id="redirect_external3">
-            <label for="redirect_external3" ng-click="data.redirect_type = 2"><?= \luya\admin\Module::t('view_index_redirect_external'); ?></label>
-        </div>
-    </div>
-    <div class="form-group form-side-by-side">
-        <div class="form-side form-side-label"></div>
-        <div class="form-side">
-            <div ng-switch on="data.redirect_type">
-                <div ng-switch-when="1">
-                    <p><?= \luya\admin\Module::t('view_index_redirect_internal_select'); ?></p>
-                    <menu-dropdown class="menu-dropdown" nav-id="data.redirect_type_value" />
-                </div>
-                <div ng-switch-when="2">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="material-icons">link</i></div>
-                            <input type="text" class="form-control" ng-model="data.redirect_type_value" placeholder="http://">
-                        </div>
-                        <small class="form-text text-muted"><?= \luya\admin\Module::t('view_index_redirect_external_link_help'); ?></small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<zaa-link model="data.redirect" />
 <button type="button" class="btn btn-save btn-icon" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
 

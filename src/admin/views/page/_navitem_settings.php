@@ -45,7 +45,7 @@ use luya\admin\helpers\Angular;
                     <update-form-module data="typeDataCopy"></update-form-module>
                 </div>
                 <div ng-switch-when="3">
-                    <update-form-redirect data="typeDataCopy"></update-form-redirect>
+                    <zaa-link model="typeDataCopy" />
                 </div>
                 <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
             </form>

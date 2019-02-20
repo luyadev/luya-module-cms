@@ -836,9 +836,10 @@ class Nav extends ActiveRecord
      * @param integer $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
      * @param string $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
      * @param string $description
+     * @param string $redirectTypeTarget redirect target (_blank, self) (since 2.0)
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
-    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
+    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description, $redirectTypeTarget)
     {
         $_errors = [];
 
@@ -860,7 +861,7 @@ class Nav extends ActiveRecord
             'description' => $description,
             'nav_item_type' => 3
         ];
-        $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
+        $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue, 'target' => $redirectTypeTarget];
 
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
@@ -943,9 +944,10 @@ class Nav extends ActiveRecord
      * @param integer $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
      * @param string $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
      * @param string $description
+     * @param string $redirectTypeTarget redirect target (_blank, self) (since 2.0)
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
      */
-    public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
+    public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description, $redirectTypeTarget)
     {
         $_errors = [];
 
@@ -961,7 +963,7 @@ class Nav extends ActiveRecord
             'description' => $description,
             'nav_item_type' => 3
         ];
-        $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
+        $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue, 'target' => $redirectTypeTarget];
 
         if (!$navItem->validate()) {
             $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
