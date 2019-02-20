@@ -225,4 +225,8 @@ return [
 // 2.0
 
     'model_navitem_image_id_label' => 'Image',
+    'view_index_page_label_subpage' => 'Select parent page',
+    'view_index_page_label_parent_nav_id' => 'Placement in navigation',
+    'view_index_page_label_parent_nav_id_root' => 'On the top level',
+    'view_index_page_label_parent_nav_id_subpage' => 'As a subpage',
 ];

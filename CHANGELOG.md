@@ -14,6 +14,10 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#82](https://github.com/luyadev/luya-module-cms/issues/82) Option to define target (new window or not) for redirect pages.
 + [#159](https://github.com/luyadev/luya-module-cms/issues/159) Added new og:image and twitter:image meta informations. Its possible now to upload an image for a page.
 
+### Fixed
+
++ [#20](https://github.com/luyadev/luya-module-cms/issues/20) Refactor parent page selection and menu-dropdown directive (added search, change styles).
+
 ## 1.0.9 (18. February 2019)
 
 ### Fixed

@@ -42,15 +42,25 @@ use luya\cms\admin\Module;
                     <label><?= Module::t('view_index_page_meta_description'); ?></label>
                     <textarea class="form-control" ng-model="data.description"></textarea>
                 </div>
+
+                <div class="form-group" ng-show="data.is_draft==0">
+                    <label for="navigationPos"><?= Module::t('view_index_page_label_parent_nav_id'); ?></label>
+                    <div class="form-check">
+                        <input class="form-check-input" ng-checked="data.parent_nav_id == 0" type="radio" name="navigationPos" id="nav-pos-root" />
+                        <label class="form-check-label" ng-click="data.parent_nav_id = 0" for="nav-pos-root"><?= Module::t('view_index_page_label_parent_nav_id_root'); ?></label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" ng-checked="data.parent_nav_id != 0" type="radio" name="navigationPos" id="nav-pos-subpage" />
+                        <label class="form-check-label" ng-click="data.parent_nav_id = 1" for="nav-pos-subpage"><?= Module::t('view_index_page_label_parent_nav_id_subpage'); ?></label>
+                    </div>
+                </div>
                 <div class="form-group" ng-show="data.is_draft==0" ng-hide="data.isInline || navcontainer.length == 1 || data.parent_nav_id!=0">
                     <label><?= Module::t('view_index_page_nav_container'); ?></label>
                     <select class="form-control" ng-model="data.nav_container_id" ng-options="item.id as item.name for item in navcontainers"></select>
                 </div>
-                <div class="form-group" ng-show="data.is_draft==0 && !data.isInline">
-                    <label><?= Module::t('view_index_page_parent_page'); ?></label>
-                    <input id="[checkbox-id]" ng-model="data.parent_nav_id" value="0" ng-true-value="0" type="checkbox"/>
-                    <label for="[checkbox-id]"><?= Module::t('view_index_page_parent_root'); ?></label>
-                    <menu-dropdown class="menu-dropdown" nav-id="data.parent_nav_id" />
+                <div class="form-group" ng-show="data.is_draft==0 && !data.isInline && data.parent_nav_id != 0">
+                    <label><?= Module::t('view_index_page_label_subpage'); ?></label>
+                    <menu-dropdown style="margin:0px; padding:0px;" class="menu-dropdown" nav-id="data.parent_nav_id" />
                 </div>
                 <hr />
                 <div ng-switch-when="1">

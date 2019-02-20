@@ -226,4 +226,8 @@ return [
 // 2.0
 
     'model_navitem_image_id_label' => 'Bild',
+    'view_index_page_label_subpage' => 'Übergeordnete Seite auswählen',
+    'view_index_page_label_parent_nav_id' => 'Platzierung in der Navigation',
+    'view_index_page_label_parent_nav_id_root' => 'Auf der Hauptebene',
+    'view_index_page_label_parent_nav_id_subpage' => 'Als Unterseite',
 ];

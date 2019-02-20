@@ -3,7 +3,7 @@
 	
 	// directive.js
 
-    zaa.directive("menuDropdown", ['ServiceMenuData', function(ServiceMenuData) {
+    zaa.directive("menuDropdown", ['ServiceMenuData', '$filter', function(ServiceMenuData, $filter) {
         return {
             restrict : 'E',
             scope : {
@@ -15,10 +15,12 @@
                     $scope.navId = data.id;
                 }
 
-                $scope.menuData = ServiceMenuData.data;
+				$scope.menuData = angular.copy(ServiceMenuData.data);
+				$scope.menuDataOriginal = angular.copy(ServiceMenuData.data);
 
                 $scope.$on('service:MenuData', function(event, data) {
-                    $scope.menuData = data;
+					$scope.menuData = angular.copy(data);
+					$scope.menuDataOriginal = angular.copy(data);
                 });
 
                 function init() {
@@ -29,34 +31,67 @@
 
                 for (var container in $scope.menuData.containers) {
                     $scope.menuData.containers[container].isHidden = false;
-                }
+				}
+				
+				$scope.$watch('searchQuery', function(n) {
+					if (n == null || n == '') {
+						$scope.menuData.items = angular.copy($scope.menuDataOriginal.items);
+						return;
+					}
+					var items = $filter('filter')($scope.menuDataOriginal.items, {title: n});
+
+					// find all parent elements of the found elements and re add them to the map in order to 
+					// ensure a correct menu tree.
+					angular.forEach(items, function(value) {
+						if (value['parent_nav_id'] > 0) {
+							$scope.bubbleParents(value['parent_nav_id'], value['nav_container_id'], items);
+						}
+					});
+
+					$scope.menuData.items = items;
+				});
+
+				$scope.bubbleParents = function(parentNavId, containerId, index) {
+					var item = $filter('menuchildfilter')($scope.menuDataOriginal.items, containerId, parentNavId);
+					if (item) {
+						var exists = false;
+						angular.forEach(index, function(i) {
+							if (i.id == item.id) {
+								exists = true;
+							}
+						})
+						if (!exists) {
+							index.push(item);
+						}
+						$scope.bubbleParents(item.parent_nav_id, item.nav_container_id, index);
+					}
+				};
 
                 $scope.toggler = true;
 
                 init();
             }],
             template : function() {
-                return '<div class="menu-dropdown-category">' +
-                        '<b class="menu-dropdown-toggle-all" ng-click="toggler=!toggler"><i class="material-icons" ng-if="!toggler">keyboard_arrow_right</i><i class="material-icons" ng-if="toggler">keyboard_arrow_down</i><span>Toggle Containers</span></b><br />' +
-                        '<div class="menu-dropdown-container" ng-show="toggler">' +
-                            '<ul class="treeview treeview-chooser">' +
-                                '<li class="treeview-container" ng-repeat="container in menuData.containers" ng-show="(menuData.items | menuparentfilter:container.id:0).length > 0">' +
-                                    '<div class="treeview-label treeview-label-container" ng-click="container.isHidden=!container.isHidden">' +
-                                        '<span class="treeview-icon treeview-icon-collapse">' +
-                                            '<i class="material-icons" ng-show="!container.isHidden">keyboard_arrow_right</i>' +
-                                            '<i class="material-icons" ng-show="container.isHidden">keyboard_arrow_down</i>' +
-                                        '</span>' +
-                                        '<span class="treeview-link">' +
-                                            '<span class="google-chrome-font-offset-fix">{{container.name}}</span>' +
-                                        '</span>' +
-                                    '</div>' +
-                                    '<ul class="treeview-items treeview-items-lvl1" ng-hide="!container.isHidden">' +
-                                        '<li class="treeview-item treeview-item-lvl1" ng-class="{\'treeview-item-has-children\' : (menuData.items | menuparentfilter:container.id:0).length}" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse\'"></li>' +
-                                    '</ul>' +
-                                '</li>' +
-                            '</ul>' +
-                        '</div>' +
-                    '<div>';
+				return '<div>'+
+					'<div class="input-group mb-2">'+
+						'<div class="input-group-addon" ng-hide="searchQuery"><i class="material-icons">search</i></div>'+
+						'<span class="input-group-addon" ng-show="searchQuery" ng-click="searchQuery = \'\'"><i class="material-icons">clear</i></span>'+
+						'<input class="form-control" ng-model="searchQuery" type="text" placeholder="'+i18n['ngrest_crud_search_text']+'">'+
+					'</div>' + 
+					'<div ng-repeat="(key, container) in menuData.containers" ng-show="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
+						'<div class="card-header" ng-click="container.isHidden=!container.isHidden">'+
+							'<span class="material-icons card-toggle-indicator">keyboard_arrow_down</span>'+
+							'<span>{{container.name}}</span>'+
+						'</div>'+
+						'<div class="card-body">'+ 
+							'<div class="treeview treeview-chooser">' +
+								'<ul class="treeview-items treeview-items-lvl1">' +
+									'<li class="treeview-item treeview-item-lvl1" ng-class="{\'treeview-item-has-children\' : (menuData.items | menuparentfilter:container.id:0).length}" ng-repeat="(key, data) in menuData.items | menuparentfilter:container.id:0 track by data.id" ng-include="\'menuDropdownReverse\'"></li>' +
+								'</ul>' +
+							'</div>' +
+						'</div>' +
+					'</div>'+
+				'</div>';
             }
         }
     }]);
