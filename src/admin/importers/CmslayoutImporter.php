@@ -219,7 +219,7 @@ class CmslayoutImporter extends Importer
      * @param array $array2
      * @return bool true if the same, false if not the same
      */
-    protected function comparePlaceholders($array1, $array2)
+    public function comparePlaceholders($array1, $array2)
     {
         if (!array_key_exists('placeholders', $array1) || !array_key_exists('placeholders', $array2)) {
             return false;
