@@ -80,7 +80,7 @@ class DefaultController extends Controller
 
         // It seems to be a json response. Yii::$app->response->format should be FORMAT_JSON or FORMAT_JSONP
         if (is_array($content)) {
-            return $content;
+            return $this->asJson($content);
         }
         
         // Default format is FORMAT_HTML, if RAW is used we render the content without layout.
