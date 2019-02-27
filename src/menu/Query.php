@@ -142,7 +142,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * where(['parent_nav_id' => 0, 'container' => 'footer']);
      * ```
      *
-     * Its **not possibile** to make where conditions on the same column:
+     * Its **not possibile** to make where conditions on the **same column name** (id in this example).
      *
      * ```php
      * where(['>', 'id', 1])->andWHere(['<', 'id', 3]);

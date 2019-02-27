@@ -100,4 +100,10 @@ interface QueryOperatorFieldInterface
      * @var string Operator Field
      */
     const FIELD_DEPTH = 'depth';
+
+    /**
+     * @var string Strict Parsing Operator Field
+     * @since 2.0.0
+     */
+    const FIELD_IS_URL_STRICT_PARSING_DISABLED = 'is_url_strict_parsing_disabled';
 }

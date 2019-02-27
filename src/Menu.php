@@ -296,6 +296,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      *     		'container' => 'default',
      *     		'depth' => 1,
      *          'image_id' => 0,
+     *          'is_url_strict_parsing_disabled' => 1,
      * 		],
      * ]
      * ```
@@ -545,7 +546,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
 
         if (!$item) {
             while (array_pop($urlParts)) {
-                if (($item = $this->aliasMatch($urlParts)) !== false) {
+                if (($item = $this->aliasMatch($urlParts, true)) !== false) {
                     break;
                 }
             }
@@ -608,7 +609,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         return (new DbQuery())
             ->from(['cms_nav_item item'])
-            ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.image_id', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
+            ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.image_id', 'item.is_url_strict_parsing_disabled', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
             ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
             ->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
@@ -663,9 +664,29 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @param array $urlParts
      * @return bool|Item
      */
-    private function aliasMatch(array $urlParts)
+    private function aliasMatch(array $urlParts, $strictParsing = false)
     {
-        return (new MenuQuery())->where([self::FIELD_ALIAS => implode('/', $urlParts)])->with('hidden')->one();
+        if ($strictParsing) {
+            $query = (new MenuQuery())
+                ->where([self::FIELD_ALIAS => implode('/', $urlParts)])
+                ->with('hidden')
+                ->andWhere([self::FIELD_TYPE => self::ITEM_TYPE_MODULE])
+                ->one();
+
+            if ($query) {
+                return $query;
+            }
+
+            return (new MenuQuery())
+                ->where([self::FIELD_ALIAS => implode('/', $urlParts)])
+                ->with('hidden')
+                ->andWhere([self::FIELD_IS_URL_STRICT_PARSING_DISABLED => 1])
+                ->one();
+        }
+        return (new MenuQuery())
+            ->where([self::FIELD_ALIAS => implode('/', $urlParts)])
+            ->with('hidden')
+            ->one();
     }
 
     /**
@@ -726,6 +747,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
                     'module_name' => ($item['nav_item_type'] == 2 && isset($this->modulesMap[$item['nav_item_type_id']])) ? $this->modulesMap[$item['nav_item_type_id']]['module_name'] : false,
                     'container' => $item['container'],
                     'depth' => count(explode('/', $alias)),
+                    'is_url_strict_parsing_disabled' => $item['is_url_strict_parsing_disabled'],
                 ];
             }
             
