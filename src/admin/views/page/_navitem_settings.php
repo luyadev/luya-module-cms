@@ -38,8 +38,8 @@ use luya\admin\helpers\Angular;
                     2 => Module::t('view_index_type_module'),
                     3 => Module::t('view_index_type_redirect'),
                 ]); ?>
-                <?= Angular::radio('itemCopy.is_url_strict_parsing_disabled', 'Strict URL Parsing', [0 => 'Enabled', 1 => 'Disabled']); ?>
-                <p class="text-muted">Strict parsing should be enabled unless you are using a Module-Block in the content which can generate URLs.</p>
+                <?= Angular::radio('itemCopy.is_url_strict_parsing_disabled', 'Strict URL Parsing', [0 => 'Enabled', 1 => 'Disabled'])
+                    ->hint('Strict parsing should be enabled unless you are using a Module-Block in the content which can generate URLs.'); ?>
                 <div ng-switch-when="1">
                     <update-form-page data="typeDataCopy"></update-form-page>
                 </div>
