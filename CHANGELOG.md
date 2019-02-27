@@ -8,10 +8,10 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ### Changed
 
 + [#182](https://github.com/luyadev/luya-module-cms/issues/182) Moved to SemVer. Use ^2.0 instead ~2.0.0 constraint in your project! 
++ [#51](https://github.com/luyadev/luya-module-cms/issues/51) Enable strict url parsing as long as the previous page is a module or strict parsing is disabled.
 
 ### Added
 
-+ [#51](https://github.com/luyadev/luya-module-cms/issues/51) Enable strict url parsing as long as the previous page is a module or strict parsing is disabled.
 + [#82](https://github.com/luyadev/luya-module-cms/issues/82) Option to define target (new window or not) for redirect pages.
 + [#159](https://github.com/luyadev/luya-module-cms/issues/159) Added new og:image and twitter:image meta informations. Its possible now to upload an image for a page.
 
