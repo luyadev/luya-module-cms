@@ -16,6 +16,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ### Fixed
 
++ [#71](https://github.com/luyadev/luya-module-cms/issues/71) If a not found page is defined a 404 is returned instead of redirect to the error page.
 + [#20](https://github.com/luyadev/luya-module-cms/issues/20) Refactor parent page selection and menu-dropdown directive (added search, change styles).
 
 ## 1.0.9 (18. February 2019)

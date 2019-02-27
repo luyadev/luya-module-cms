@@ -14,6 +14,7 @@ use luya\cms\menu\InjectItemInterface;
 use luya\cms\menu\QueryOperatorFieldInterface;
 use yii\db\Expression;
 use luya\helpers\Html;
+use luya\cms\models\Config;
 
 /**
  * Menu container component by language.
@@ -561,6 +562,14 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             return $this->getHome();
         }
         
+        // we could not resolve a page, check if the website has customized 404 error page defined.
+        $navId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
+        $menu = Yii::$app->menu->find()->with(['hidden'])->where(['nav_id' => $navId])->one();
+        if ($menu) {
+            $menu->is404Page = true;
+            return $menu;
+        }
+
         throw new NotFoundHttpException("Unable to resolve requested path '".$requestPath."'.");
     }
 

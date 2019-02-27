@@ -57,23 +57,23 @@ class DefaultController extends Controller
         try {
             $current = Yii::$app->menu->current;
         } catch (Exception $e) {
-            $path = Yii::$app->request->pathInfo;
-            $compositePath = Yii::$app->composition->prependTo($path);
-            foreach (Redirect::find()->all() as $redirect) {
-                if ($redirect->matchRequestPath($path)) {
-                    return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
-                }
-
-                // if its a multi linguage website and the language has not been omited form request path compare this version too.
-                // this is requred since the luya UrlManager can change the pathInfo
-                if ($path !== $compositePath) {
-                    if ($redirect->matchRequestPath($compositePath)) {
-                        return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
-                    }
-                }
+            // An exception while resolving, check for internal redirect otherwise throw not found exception.
+            if (($redirect = $this->findInternalRedirect())) {
+                return $redirect;
             }
             
             throw new NotFoundHttpException($e->getMessage());
+        }
+
+        // the current resolved item seems to be the 404 page
+        if ($current->is404Page) {
+            // find redirects
+            if (($redirect = $this->findInternalRedirect())) {
+                return $redirect;
+            }
+
+            // set status 404 and render the item
+            Yii::$app->response->statusCode = 404;
         }
 
         $content = $this->renderItem($current->id, Yii::$app->menu->currentAppendix);
@@ -91,4 +91,27 @@ class DefaultController extends Controller
         
         return $this->renderContent($content);
     }
+    
+    protected function findInternalRedirect()
+    {
+        $path = Yii::$app->request->pathInfo;
+        $compositePath = Yii::$app->composition->prependTo($path);
+        foreach (Redirect::find()->all() as $redirect) {
+            if ($redirect->matchRequestPath($path)) {
+                return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
+            }
+
+            // if its a multi linguage website and the language has not been omited form request path compare this version too.
+            // this is requred since the luya UrlManager can change the pathInfo
+            if ($path !== $compositePath) {
+                if ($redirect->matchRequestPath($compositePath)) {
+                    return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
+                }
+            }
+        }
+        
+        return false;
+    }
+
+
 }

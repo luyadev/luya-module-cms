@@ -75,6 +75,13 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * as the parent object which created this object.
      */
     public $lang;
+
+    /**
+     * @var boolean This property indicates whether the item is the 404 page item or not. This status is set by {{luya\cms\Menu::resolveCurrent()}} method and retrieved
+     * in the {{luya\cms\frontend\controllers\DefaultController::actionIndex()}} in order to send 404 response header.
+     * @since 2.0.0
+     */
+    public $is404Page = false;
     
     /**
      * @var array Privat property containing with informations for the Query Object.
