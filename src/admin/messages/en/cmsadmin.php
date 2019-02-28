@@ -12,7 +12,7 @@ return [
     'view_index_yes' => 'Yes',
     'view_index_page_title' => 'Page Title',
     'view_index_page_alias' => 'URL Path segment',
-    'view_index_page_meta_description' => 'Description (Meta Description for Google)',
+    'view_index_page_meta_description' => 'Description',
     'view_index_page_nav_container' => 'Navigation Container',
     'view_index_page_parent_page' => 'Parent Page',
     'view_index_page_success' => 'Successfully created the page',
@@ -103,7 +103,7 @@ return [
 
    
     'js_page_block_delete_confirm' => 'Do you really want to delete the block «%name%»?',
-    'view_index_page_meta_keywords' => 'Keywords for SEO analytics (example: restaurant, pizza, italy)',
+    'view_index_page_meta_keywords' => 'Keywords',
     'current_version' => 'Working version',
     'Initial' => 'First version',
     'view_index_page_version_chooser' => 'Published version',
@@ -231,4 +231,14 @@ return [
     'view_index_page_label_parent_nav_id' => 'Placement in navigation',
     'view_index_page_label_parent_nav_id_root' => 'On the top level',
     'view_index_page_label_parent_nav_id_subpage' => 'As a subpage',
+    'cmsadmin_item_settings_titleseo' => 'SEO',
+    'cmsadmin_item_settings_titleexpert' => 'Expert',
+    'model_navitem_is_url_strict_parsing_disabled_label' => 'Strict URL Parsing',
+    'model_navitem_is_url_strict_parsing_disabled_label_enabled' => 'Enabled',
+    'model_navitem_is_url_strict_parsing_disabled_label_disabled' => 'Disabled',
+    'model_navitem_is_url_strict_parsing_disabled_label_hint' => 'Strict parsing should be enabled unless you are using a Module-Block in the content which can generate URLs.',
+    'model_navitem_title_tag_label_hint' => 'The title tag is used in the Browser-Title and also which is generall taken by Search Engines as Title for the Page.',
+    'view_index_page_meta_description_hint' => 'The page description should be a sentence telling people whats the purpose of this page. This is generally used by search engines as description. Also important for social sharing dialogs.',
+    'view_index_page_meta_keywords_hint' => 'The keywords are seperated by commas (e.g. pizza,burger,pasta). Some search engines still relay on keyword inputs. Use only words which are really part of the content. The luya toolbar will help check whether the keywords are used in the frontend or not.',
+    'model_navitem_image_id_label_hint' => 'The image is very important for social sharing dialogs. As pages usually need a preview image, this image will be taken.',
 ];

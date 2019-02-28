@@ -11,7 +11,7 @@ return [
     'view_index_yes' => 'Tak',
     'view_index_page_title' => 'Tytuł strony',
     'view_index_page_alias' => 'Segment ścieżki URL',
-    'view_index_page_meta_description' => 'Opis (Meta Description for Google) ',
+    'view_index_page_meta_description' => 'Opis',
     'view_index_page_nav_container' => 'Kontener nawigacyjny',
     'view_index_page_parent_page' => 'Strona nadrzędna',
     'view_index_page_success' => 'Pomyślnie utworzono stronę',
@@ -102,7 +102,7 @@ return [
 
 
     'js_page_block_delete_confirm' => 'Czy na pewno chcesz usunąć blok «%name%»?',
-    'view_index_page_meta_keywords' => 'Słowa kluczowe dla analityki SEO (przykład: restauracja, pizza, Włochy)',
+    'view_index_page_meta_keywords' => 'Słowa kluczowe',
     'current_version' => 'Wersja robocza',
     'Initial' => 'Pierwsza wersja',
     'view_index_page_version_chooser' => 'Opublikowana wersja',

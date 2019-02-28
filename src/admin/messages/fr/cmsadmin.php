@@ -12,7 +12,7 @@ return [
     'view_index_yes' => 'Oui',
     'view_index_page_title' => 'Titre de la page',
     'view_index_page_alias' => 'Segment de l\'URL',
-    'view_index_page_meta_description' => 'Description (Meta Description pour Google)',
+    'view_index_page_meta_description' => 'Description',
     'view_index_page_nav_container' => 'Conteneur de navigation',
     'view_index_page_parent_page' => 'Page parente',
     'view_index_page_success' => 'La page a été créée avec succès',
@@ -96,7 +96,7 @@ return [
 
     /* added translation in 1.0.0-beta6: */
     'js_page_block_delete_confirm' => 'Voulez-vous vraiment supprimer le bloc «%name%» ?',
-    'view_index_page_meta_keywords' => 'Mots-clés pour l\'analyse SEO (exemple : restaurant, pizza, Italie)',
+    'view_index_page_meta_keywords' => 'Mots-clés',
     'current_version' => 'Version actuelle',
     'Initial' => 'Première version',
     'view_index_page_version_chooser' => 'Version publiée',

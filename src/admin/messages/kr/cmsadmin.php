@@ -12,7 +12,7 @@ return [
     'view_index_yes' => '네',
     'view_index_page_title' => '페이지 제목',
     'view_index_page_alias' => 'URL 경로 세그먼트',
-    'view_index_page_meta_description' => '설명 (구글의 메타설명)',
+    'view_index_page_meta_description' => '설명',
     'view_index_page_nav_container' => '탐색 컨테이너',
     'view_index_page_parent_page' => '기본 페이지',
     'view_index_page_success' => '페이지가 성공적으로 생성되었습니다.',
@@ -99,7 +99,7 @@ return [
 // added translation in 1.0.0-beta6:
    
     'js_page_block_delete_confirm' => '당신은 정말로  «%name%»블록을 삭제하기를 원하십니까?',
-    'view_index_page_meta_keywords' => 'SEO분석을 위한 키워드(예:레스토랑,피자,이탈리아)',
+    'view_index_page_meta_keywords' => 'SEO분석을 위한 키워드',
     'current_version' => '작업 버전',
     'Initial' => '초기 버전',
     'view_index_page_version_chooser' => '출시된 버전',

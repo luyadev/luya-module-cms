@@ -12,7 +12,7 @@ return [
     'view_index_yes' => 'Evet',
     'view_index_page_title' => 'Sayfa Başlığı',
     'view_index_page_alias' => 'URL sekmesi yolu',
-    'view_index_page_meta_description' => 'Açıklama (Google için Meta Açıklaması)',
+    'view_index_page_meta_description' => 'Açıklama',
     'view_index_page_nav_container' => 'Navigasyon Konteynerı',
     'view_index_page_parent_page' => 'Ebeveyn Sayfa',
     'view_index_page_success' => 'Sayfa başarıyla oluşturuldu',
@@ -103,7 +103,7 @@ return [
 
    
     'js_page_block_delete_confirm' => '«%name%» bloğunu silmek istediğinizden emin misiniz?',
-    'view_index_page_meta_keywords' => 'SEO analizi için Anahtar Kelimeler (örnek: restorant, pizza, italya)',
+    'view_index_page_meta_keywords' => 'SEO analizi için Anahtar Kelimeler',
     'current_version' => 'Çalışan sürüm',
     'Initial' => 'İlk sürüm',
     'view_index_page_version_chooser' => 'Yayınlanan sürüm',

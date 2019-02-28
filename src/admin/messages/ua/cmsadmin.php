@@ -12,7 +12,7 @@ return [
     'view_index_yes' => 'Так',
     'view_index_page_title' => 'Назва сторінки',
     'view_index_page_alias' => 'URL аліас',
-    'view_index_page_meta_description' => 'Опис (Мета опис для Гугла)',
+    'view_index_page_meta_description' => 'Опис',
     'view_index_page_nav_container' => 'Розділ навіігації',
     'view_index_page_parent_page' => 'Батьківська сторінка',
     'view_index_page_success' => 'Сотрінка успішно створена!',
@@ -104,7 +104,7 @@ return [
 
     
     'js_page_block_delete_confirm' => 'Ви дійсно хочете видалити «%name%»?',
-    'view_index_page_meta_keywords' => 'Ключові слова для SEO аналітики (наприклад: рктсоран, піца, італія)',
+    'view_index_page_meta_keywords' => 'Ключові слова',
     'current_version' => 'Робоча версія',
     'Initial' => 'Перша версія',
     'view_index_page_version_chooser' => 'Опублікована версія',

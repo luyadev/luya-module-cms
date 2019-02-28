@@ -12,7 +12,7 @@ return [
     'view_index_yes' => 'Không',
     'view_index_page_title' => 'Tiêu đề trang',
     'view_index_page_alias' => 'URL thân thiện',
-    'view_index_page_meta_description' => 'Mô tả (thẻ Meta Description dành cho Google)',
+    'view_index_page_meta_description' => 'Mô tả',
     'view_index_page_nav_container' => 'Chọn Menu',
     'view_index_page_parent_page' => 'Trang cha',
     'view_index_page_success' => 'Tạo trang thành công!',
@@ -104,7 +104,7 @@ return [
 
     
     'js_page_block_delete_confirm' => 'Xóa block «%name%»?',
-    'view_index_page_meta_keywords' => 'Keywords dành cho SEO analytics (ví dụ: restaurant, pizza, italy)',
+    'view_index_page_meta_keywords' => 'Keywords',
     'current_version' => 'Phiên bản đang làm việc',
     'Initial' => 'Phiên bản đầu tiên',
     'view_index_page_version_chooser' => 'Phiên bản công khai',

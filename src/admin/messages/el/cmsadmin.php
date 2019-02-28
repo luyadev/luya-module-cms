@@ -11,7 +11,7 @@ return [
     'view_index_yes' => 'Ναι',
     'view_index_page_title' => 'Τίτλος Σελίδας',
     'view_index_page_alias' => 'URL Path segment',
-    'view_index_page_meta_description' => 'Περιγραφή (Meta Description for Google)',
+    'view_index_page_meta_description' => 'Περιγραφή',
     'view_index_page_nav_container' => 'Navigation-Container',
     'view_index_page_parent_page' => 'Σελίδα Γονέας',
     'view_index_page_success' => 'Η σελίδα δημιουργήθηκε επιτυχώς!',
@@ -96,7 +96,7 @@ return [
 // added translation in 1.0.0-beta6:
     
     'js_page_block_delete_confirm' => 'Να διαγραφεί το «%name%»?',
-    'view_index_page_meta_keywords' => 'Λέξεις κλειδιά για SEO analytics (example: restaurant, pizza, italy)',
+    'view_index_page_meta_keywords' => 'Λέξεις κλειδιά',
     'current_version' => 'Εκδοση εργασίας',
     'Initial' => 'Πρώτη έκδοση',
     'view_index_page_version_chooser' => 'Δημοσιευμένη έκδοση',

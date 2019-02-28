@@ -12,7 +12,7 @@ return [
     'view_index_yes' => 'Ja',
     'view_index_page_title' => 'Paginatitel',
     'view_index_page_alias' => 'URL- padsegment',
-    'view_index_page_meta_description' => 'Beschrijving (meta-beschrijving voor Google)',
+    'view_index_page_meta_description' => 'Beschrijving',
     'view_index_page_nav_container' => 'Navigatiecontainer',
     'view_index_page_parent_page' => 'Bovenliggende pagina',
     'view_index_page_success' => 'De pagina is succesvol aangemaakt',
@@ -102,7 +102,7 @@ return [
 // added translation in 1.0.0-beta6:
 
     'js_page_block_delete_confirm' => 'Wilt u echt het blok «%name%» verwijderen?',
-    'view_index_page_meta_keywords' => 'Trefwoorden voor SEO-analyse (bijvoorbeeld: restaurant, pizza, italië)',
+    'view_index_page_meta_keywords' => 'Trefwoorden',
     'current_version' => 'Werkversie',
     'Initial' => 'Eerste versie',
     'view_index_page_version_chooser' => 'Gepubliceerde versie',

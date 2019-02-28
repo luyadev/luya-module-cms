@@ -12,7 +12,7 @@ return [
     'view_index_yes' => 'Да',
     'view_index_page_title' => 'Название страницы',
     'view_index_page_alias' => 'Алиас',
-    'view_index_page_meta_description' => 'Описание (Описание для поисковиков)',
+    'view_index_page_meta_description' => 'Описание',
     'view_index_page_nav_container' => 'Раздел навигации',
     'view_index_page_parent_page' => 'Родительская страница',
     'view_index_page_success' => 'Страница успешно создана!',
@@ -104,7 +104,7 @@ return [
 
 
     'js_page_block_delete_confirm' => 'Удалить блок «%name%»?',
-    'view_index_page_meta_keywords' => 'Ключевые слова для SEO аналитики (пример: ресторан, пицца, италия)',
+    'view_index_page_meta_keywords' => 'Ключевые слова',
     'current_version' => 'Рабочая версия',
     'Initial' => 'Первая версия',
     'view_index_page_version_chooser' => 'Опубликованная версия',

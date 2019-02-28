@@ -10,7 +10,7 @@ return [
     'view_index_yes' => 'Sí',
     'view_index_page_title' => 'Título de la página',
     'view_index_page_alias' => 'Alias',
-    'view_index_page_meta_description' => 'Descripción (Meta Descripción para motores de búsqueda)',
+    'view_index_page_meta_description' => 'Descripción',
     'view_index_page_nav_container' => 'Contenedor de navegación',
     'view_index_page_parent_page' => 'Página padre',
     'view_index_page_success' => 'Página creada con éxito!',
@@ -92,7 +92,7 @@ return [
     'view_update_blockholder_clipboard' => 'Portapapeles',
 // added translation in 1.0.0-beta6:
     'js_page_block_delete_confirm' => '¿Desea borrar el bloque «%name%»?',
-    'view_index_page_meta_keywords' => 'Palabra clave de análisis de SEO (ejemplo: restaurante, pizza, Italia)',
+    'view_index_page_meta_keywords' => 'Palabra clave',
     'current_version' => 'Versión actual',
     'Initial' => 'Versión inicial',
     'view_index_page_version_chooser' => 'Versión publicada',

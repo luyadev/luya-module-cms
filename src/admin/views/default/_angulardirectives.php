@@ -39,11 +39,6 @@ use luya\cms\admin\Module;
                     <input name="text" type="text" class="form-control" ng-model="data.alias" />
                 </div>
                 <div class="form-group" ng-show="data.is_draft==0">
-                    <label><?= Module::t('view_index_page_meta_description'); ?></label>
-                    <textarea class="form-control" ng-model="data.description"></textarea>
-                </div>
-
-                <div class="form-group" ng-show="data.is_draft==0">
                     <label for="navigationPos"><?= Module::t('view_index_page_label_parent_nav_id'); ?></label>
                     <div class="form-check">
                         <input class="form-check-input" ng-checked="data.parent_nav_id == 0" type="radio" name="navigationPos" id="nav-pos-root" />

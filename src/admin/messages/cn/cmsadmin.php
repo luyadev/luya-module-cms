@@ -12,7 +12,7 @@ return [
     'view_index_yes' => '是',
     'view_index_page_title' => '页面标题',
     'view_index_page_alias' => 'URL路径段',
-    'view_index_page_meta_description' => '描述 (HTML元描述信息)',
+    'view_index_page_meta_description' => '描述',
     'view_index_page_nav_container' => '导航容器',
     'view_index_page_parent_page' => '父页面',
     'view_index_page_success' => '页面创建成功',
@@ -103,7 +103,7 @@ return [
 
 
     'js_page_block_delete_confirm' => '你真的要删除块 «%name%»?',
-    'view_index_page_meta_keywords' => 'SEO关键字（例如：美食，旅游，购房）',
+    'view_index_page_meta_keywords' => 'SEO关键字',
     'current_version' => '当前版本',
     'Initial' => '第一版',
     'view_index_page_version_chooser' => '发布版本',

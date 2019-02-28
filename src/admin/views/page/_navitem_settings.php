@@ -10,6 +10,12 @@ use luya\admin\helpers\Angular;
             <li class="nav-item">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(1)" ng-class="{'active':tab==1}"><i class="material-icons">title</i><span><?= Module::t('cmsadmin_item_settings_titleslug'); ?></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-icon" ng-click="changeTab(5)" ng-class="{'active':tab==5}"><i class="material-icons">accessibility_new</i><span><?= Module::t('cmsadmin_item_settings_titleseo'); ?></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-icon" ng-click="changeTab(6)" ng-class="{'active':tab==6}"><i class="material-icons">tune</i><span><?= Module::t('cmsadmin_item_settings_titleexpert'); ?></a>
+            </li>
             <li class="nav-item" ng-show="!isDraft && item.nav_item_type == 1">
                 <a class="nav-link nav-link-icon" ng-click="changeTab(3)" ng-class="{'active':tab==3}"><i class="material-icons">change_history</i><span><?= Module::t('version_create_title'); ?></span></a>
             </li>
@@ -28,18 +34,12 @@ use luya\admin\helpers\Angular;
             <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
                 <zaa-text model="itemCopy.title" label="<?= Module::t('view_index_page_title'); ?>" />
                 <zaa-text model="itemCopy.alias" label="<?= Module::t('view_index_page_alias'); ?>" />
-                <zaa-text model="itemCopy.title_tag" label="<?= Module::t('model_navitem_title_tag_label'); ?>" />
-                <zaa-textarea model="itemCopy.description" label="<?= Module::t('view_index_page_meta_description'); ?>" />
-                <zaa-textarea model="itemCopy.keywords" label="<?= Module::t('view_index_page_meta_keywords'); ?>" />
-                <?= Angular::imageUpload('itemCopy.image_id', Module::t('model_navitem_image_id_label'), [], true); ?>
                 <?= Angular::datetime('itemCopy.timestamp_create', Module::t('view_index_page_meta_timestamp_create'), ['resetable' => false]); ?>
                 <?= Angular::radio('itemCopy.nav_item_type', Module::t('view_index_add_type'), [
                     1 => Module::t('view_index_type_page'),
                     2 => Module::t('view_index_type_module'),
                     3 => Module::t('view_index_type_redirect'),
                 ]); ?>
-                <?= Angular::radio('itemCopy.is_url_strict_parsing_disabled', 'Strict URL Parsing', [0 => 'Enabled', 1 => 'Disabled'])
-                    ->hint('Strict parsing should be enabled unless you are using a Module-Block in the content which can generate URLs.'); ?>
                 <div ng-switch-when="1">
                     <update-form-page data="typeDataCopy"></update-form-page>
                 </div>
@@ -49,6 +49,30 @@ use luya\admin\helpers\Angular;
                 <div ng-switch-when="3">
                     <zaa-link model="typeDataCopy" />
                 </div>
+                <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
+            </form>
+        </div>
+        <div ng-switch-when="5">
+            <h1><?= Module::t('cmsadmin_item_settings_titleseo'); ?></h1>
+            <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
+                <?= Angular::text('itemCopy.title_tag', Module::t('model_navitem_title_tag_label'))
+                    ->hint(Module::t('model_navitem_title_tag_label_hint')); ?>
+                <?= Angular::textarea('itemCopy.description', Module::t('view_index_page_meta_description'))
+                    ->hint(Module::t('view_index_page_meta_description_hint'));  ?>
+                <?= Angular::textarea('itemCopy.keywords', Module::t('view_index_page_meta_keywords'))
+                    ->hint(Module::t('view_index_page_meta_keywords_hint')) ?>
+                <?= Angular::imageUpload('itemCopy.image_id', Module::t('model_navitem_image_id_label'), [], true)
+                    ->hint(Module::t('model_navitem_image_id_label_hint')) ?>
+                <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
+            </form>
+        </div>
+        <div ng-switch-when="6">
+            <h1><?= Module::t('cmsadmin_item_settings_titleexpert'); ?></h1>
+            <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
+                <?= Angular::radio('itemCopy.is_url_strict_parsing_disabled', Module::t('model_navitem_is_url_strict_parsing_disabled_label'), [
+                    0 => Module::t('model_navitem_is_url_strict_parsing_disabled_label_enabled'),
+                    1 => Module::t('model_navitem_is_url_strict_parsing_disabled_label_disabled')])
+                    ->hint(Module::t('model_navitem_is_url_strict_parsing_disabled_label_hint')); ?>
                 <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
             </form>
         </div>
@@ -75,17 +99,15 @@ use luya\admin\helpers\Angular;
         </div>
         <div ng-switch-when="4">
             <h1><?= Module::t('version_edit_title'); ?> <span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=editVersionItem.id, 'badge-primary': item.nav_item_type_id==editVersionItem.id}">{{editVersionItem.version_alias}}</span></h1>
-            <h2></h2>
             <zaa-text model="editVersionItem.version_alias" label="<?= Module::t('version_input_name'); ?>" />
             <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name" />
             <button type="button" class="btn btn-save btn-icon" ng-click="editVersionUpdate(editVersionItem)"><?= Module::t('btn_save'); ?></button>
         </div>
         <div ng-switch-when="3" ng-controller="PageVersionsController">
             <form ng-submit="createNewVersionSubmit(create)">
-                <h2><?= Module::t('version_create_title'); ?></h2>
+                <h1><?= Module::t('version_create_title'); ?></h1>
                 <div class="alert alert-info"><?= Module::t('version_create_info'); ?></div>
                 <zaa-text model="create.versionName" label="<?= Module::t('version_input_name'); ?>" />
-
                 <div class="form-group">
                     <div class="form-check">
                         <input id="copyExistingVersion" name="radio" type="radio" ng-checked="create.copyExistingVersion" />
@@ -96,7 +118,6 @@ use luya\admin\helpers\Angular;
                         <label for="createNewVersion" ng-click="create.copyExistingVersion=false"><?= Module::t('version_create_new'); ?></label>
                     </div>
                 </div>
-
                 <div ng-show="create.copyExistingVersion" class="form-group">
                     <label><?= Module::t('version_input_copy_chooser'); ?></label>
                     <select class="form-control" ng-model="create.fromVersionPageId" ng-options="versionItem.id as versionItem.version_alias for versionItem in typeData"></select>

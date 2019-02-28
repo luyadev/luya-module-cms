@@ -11,7 +11,7 @@ return [
     'view_index_yes' => 'Ja',
     'view_index_page_title' => 'Seitentitel',
     'view_index_page_alias' => 'URL Pfadsegment',
-    'view_index_page_meta_description' => 'Beschreibung (Meta-Description für Google)',
+    'view_index_page_meta_description' => 'Beschreibung',
     'view_index_page_nav_container' => 'Navigations-Container',
     'view_index_page_parent_page' => 'Übergeordnete Seite',
     'view_index_page_success' => 'Diese Seite wurde erfolgreich erstellt!',
@@ -102,7 +102,7 @@ return [
 
 
     'js_page_block_delete_confirm' => 'Block «%name%» wirklich löschen?',
-    'view_index_page_meta_keywords' => 'Keywords für SEO-Analytics (Beispiel: restaurant, pizza, italien)',
+    'view_index_page_meta_keywords' => 'Keywords',
     'current_version' => 'Arbeitsversion',
     'Initial' => 'Erste Version',
     'view_index_page_version_chooser' => 'Publizierte Version',

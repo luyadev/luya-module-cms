@@ -11,7 +11,7 @@ return [
     'view_index_yes' => 'Si',
     'view_index_page_title' => 'Titolo pagina',
     'view_index_page_alias' => 'Alias',
-    'view_index_page_meta_description' => 'Descrizione (Meta Descrizione per Google)',
+    'view_index_page_meta_description' => 'Descrizione',
     'view_index_page_nav_container' => 'Contenitore di navigazione',
     'view_index_page_parent_page' => 'Pagina padre',
     'view_index_page_success' => 'La pagina è stata creata con successo!',
@@ -96,7 +96,7 @@ return [
     // added translation in 1.0.0-beta6:
 
     'js_page_block_delete_confirm' => 'Sei sicuro di cancellare il blocco «%name%»?',
-    'view_index_page_meta_keywords' => 'Parole chiave per il SEO (ad esempio: ristorante, pizza, italia)',
+    'view_index_page_meta_keywords' => 'Parole chiave',
     'current_version' => 'Versione corrente',
     'Initial' => 'Versione Iniziale',
     'view_index_page_version_chooser' => 'Versione pubblicata',
