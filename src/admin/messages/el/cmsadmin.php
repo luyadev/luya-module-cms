@@ -220,4 +220,15 @@ return [
     'view_index_page_label_parent_nav_id' => 'Placement in navigation',
     'view_index_page_label_parent_nav_id_root' => 'On the top level',
     'view_index_page_label_parent_nav_id_subpage' => 'As a subpage',
+    'cmsadmin_item_settings_titleseo' => 'SEO',
+    'cmsadmin_item_settings_titleexpert' => 'Expert',
+    'model_navitem_is_url_strict_parsing_disabled_label' => 'Strict URL Parsing',
+    'model_navitem_is_url_strict_parsing_disabled_label_enabled' => 'Enabled',
+    'model_navitem_is_url_strict_parsing_disabled_label_disabled' => 'Disabled',
+    'model_navitem_is_url_strict_parsing_disabled_label_hint' => 'Strict URL parsing should be enabled unless you are using a URL-generating module block in the content of this page.',
+    'model_navitem_title_tag_label_hint' => 'The title tag is displayed in many browsers\' title bar and as a page title in the results of search engines.',
+    'view_index_page_meta_description_hint' => 'The page description should be a sentence about the purpose of this page. It is often used by search engines as a description for a page in the search results. It is also relevant when sharing a page on social media.',
+    'view_index_page_meta_keywords_hint' => 'The keywords are separated by commas (e.g. pizza, burger, pasta). Very few search engines still rely on these keywords. Use only words that are relevant for the page\'s content. The LUYA toolbar of the frontend will help check whether keywords were defined for the current page or not.',
+    'model_navitem_image_id_label_hint' => 'The image is important when sharing the page on social media. Usually this image is displayed by social media platforms as a preview image for a page.',
+
 ];
