@@ -59,6 +59,7 @@ class CmsFrontendTestCase extends WebApplicationTestCase
             'keyowrds' => null,
             'create_user_id' => 0,
             'update_user_id' => 0,
+            'image_id' => 0,
             'timestamp_create' => time(),
             'timestamp_update' => time(),
             'parent_nav_id' => 0,
