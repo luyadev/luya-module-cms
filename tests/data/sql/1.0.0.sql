@@ -576,7 +576,7 @@ CREATE TABLE `admin_user` (
 
 LOCK TABLES `admin_user` WRITE;
 /*!40000 ALTER TABLE `admin_user` DISABLE KEYS */;
-INSERT INTO `admin_user` VALUES (1,'John','Doe',1,'test@luya.io','$2y$13$7TZy10K41AwgkIjn51OwFuHnafecDt.B5w/2RrA9frxExOh6biWRG','sWuayGA8P5PlEQBUirj0-BTdKimgQSj1',NULL,0,NULL,0,0,NULL,NULL);
+INSERT INTO `admin_user` VALUES (1,'John','Doe',1,'test@luya.io','$2y$13$7TZy10K41AwgkIjn51OwFuHnafecDt.B5w/2RrA9frxExOh6biWRG','sWuayGA8P5PlEQBUirj0-BTdKimgQSj1',NULL,0,NULL,0,0,NULL,NULL, 0);
 /*!40000 ALTER TABLE `admin_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -825,7 +825,7 @@ CREATE TABLE `cms_nav` (
 
 LOCK TABLES `cms_nav` WRITE;
 /*!40000 ALTER TABLE `cms_nav` DISABLE KEYS */;
-INSERT INTO `cms_nav` VALUES (1,1,0,1,0,0,1,0,0,NULL,NULL,NULL),(2,1,0,2,0,0,0,0,0,NULL,NULL,NULL),(3,1,0,3,0,0,0,0,0,NULL,NULL,NULL),(4,1,0,4,0,0,0,0,0,NULL,NULL,NULL),(5,1,0,5,0,0,0,0,0,NULL,NULL,NULL),(6,1,0,6,0,0,0,0,0,NULL,NULL,NULL),(7,1,0,7,0,0,0,0,0,NULL,NULL,NULL),(8,1,2,1,0,0,0,0,0,NULL,NULL,NULL),(9,1,2,2,0,0,0,0,0,NULL,NULL,NULL),(10,1,2,3,0,0,0,0,0,NULL,NULL,NULL),(11,1,2,4,0,0,0,0,0,NULL,NULL,NULL),(12,1,2,5,0,0,0,0,0,NULL,NULL,NULL),(13,1,2,6,0,0,0,0,0,NULL,NULL,NULL),(14,1,0,8,0,0,0,0,0,NULL,NULL,NULL),(15,1,0,9,0,0,0,0,0,NULL,NULL,NULL),(16,1,0,10,0,0,0,0,0,NULL,NULL,NULL),(17,1,0,11,0,0,0,0,0,NULL,NULL,NULL);
+INSERT INTO `cms_nav` VALUES (1,1,0,1,0,0,1,0,0,NULL,NULL,NULL, 0),(2,1,0,2,0,0,0,0,0,NULL,NULL,NULL, 0),(3,1,0,3,0,0,0,0,0,NULL,NULL,NULL, 0),(4,1,0,4,0,0,0,0,0,NULL,NULL,NULL, 0),(5,1,0,5,0,0,0,0,0,NULL,NULL,NULL, 0),(6,1,0,6,0,0,0,0,0,NULL,NULL,NULL, 0),(7,1,0,7,0,0,0,0,0,NULL,NULL,NULL, 0),(8,1,2,1,0,0,0,0,0,NULL,NULL,NULL, 0),(9,1,2,2,0,0,0,0,0,NULL,NULL,NULL, 0),(10,1,2,3,0,0,0,0,0,NULL,NULL,NULL, 0),(11,1,2,4,0,0,0,0,0,NULL,NULL,NULL, 0),(12,1,2,5,0,0,0,0,0,NULL,NULL,NULL, 0),(13,1,2,6,0,0,0,0,0,NULL,NULL,NULL, 0),(14,1,0,8,0,0,0,0,0,NULL,NULL,NULL, 0),(15,1,0,9,0,0,0,0,0,NULL,NULL,NULL, 0),(16,1,0,10,0,0,0,0,0,NULL,NULL,NULL, 0),(17,1,0,11,0,0,0,0,0,NULL,NULL,NULL, 0);
 /*!40000 ALTER TABLE `cms_nav` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -866,7 +866,6 @@ CREATE TABLE `cms_nav_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nav_id` int(11) NOT NULL,
   `lang_id` int(11) NOT NULL,
-  `image_id` int(11) DEFAULT '0',
   `nav_item_type` int(11) NOT NULL,
   `nav_item_type_id` int(11) NOT NULL,
   `create_user_id` int(11) NOT NULL,
@@ -878,6 +877,7 @@ CREATE TABLE `cms_nav_item` (
   `description` text,
   `keywords` text,
   `title_tag` varchar(255) DEFAULT NULL,
+  `image_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -888,7 +888,7 @@ CREATE TABLE `cms_nav_item` (
 
 LOCK TABLES `cms_nav_item` WRITE;
 /*!40000 ALTER TABLE `cms_nav_item` DISABLE KEYS */;
-INSERT INTO `cms_nav_item` VALUES (1,1,1,1,1,1,1,1513077719,0,'Homepage','homepage',NULL,NULL,NULL),(2,2,1,1,2,1,1,1513077719,0,'Page 1','page1','Description of Page 1',NULL,NULL),(3,3,1,1,3,1,1,1513077719,0,'Page 2','page2','Description of Page 2',NULL,NULL),(4,4,1,1,4,1,1,1513077719,0,'Page 3','page3','Description of Page 3',NULL,NULL),(5,5,1,1,5,1,1,1513077719,0,'Page 4','page4','Description of Page 4',NULL,NULL),(6,6,1,1,6,1,1,1513077719,0,'Page 5','page5','Description of Page 5',NULL,NULL),(7,7,1,1,7,1,1,1513077719,0,'Page 6','page6','Description of Page 6',NULL,NULL),(8,8,1,1,8,1,1,1513077719,0,'Page 1','p1-page1','Description of Page 1',NULL,NULL),(9,9,1,1,9,1,1,1513077720,0,'Page 2','p1-page2','Description of Page 2',NULL,NULL),(10,10,1,1,10,1,1,1513077720,0,'Page 3','p1-page3','Description of Page 3',NULL,NULL),(11,11,1,1,11,1,1,1513077720,0,'Page 4','p1-page4','Description of Page 4',NULL,NULL),(12,12,1,1,12,1,1,1513077720,0,'Page 5','p1-page5','Description of Page 5',NULL,NULL),(13,13,1,1,13,1,1,1513077720,0,'Page 6','p1-page6','Description of Page 6',NULL,NULL),(14,14,1,3,1,1,1,1513077720,0,'Redirect to Page 1','redirect-1','Description of Redirect to Page 1',NULL,NULL),(15,15,1,3,2,1,1,1513077720,0,'Redirect to Page 2','redirect-2','Description of Redirect to Page 2',NULL,NULL),(16,16,1,3,3,1,1,1513077720,0,'Redirect to Sub Page 2','redirect-3','Description of Redirect to Sub Page 2',NULL,NULL),(17,17,1,3,4,1,1,1513077720,0,'Redirect to luya.io','redirect-4','Description of Redirect to luya.io',NULL,NULL);
+INSERT INTO `cms_nav_item` VALUES (1,1,1,1,1,1,1,1513077719,0,'Homepage','homepage',NULL,NULL,NULL, 0),(2,2,1,1,2,1,1,1513077719,0,'Page 1','page1','Description of Page 1',NULL,NULL, 0),(3,3,1,1,3,1,1,1513077719,0,'Page 2','page2','Description of Page 2',NULL,NULL, 0),(4,4,1,1,4,1,1,1513077719,0,'Page 3','page3','Description of Page 3',NULL,NULL, 0),(5,5,1,1,5,1,1,1513077719,0,'Page 4','page4','Description of Page 4',NULL,NULL, 0),(6,6,1,1,6,1,1,1513077719,0,'Page 5','page5','Description of Page 5',NULL,NULL, 0),(7,7,1,1,7,1,1,1513077719,0,'Page 6','page6','Description of Page 6',NULL,NULL, 0),(8,8,1,1,8,1,1,1513077719,0,'Page 1','p1-page1','Description of Page 1',NULL,NULL, 0),(9,9,1,1,9,1,1,1513077720,0,'Page 2','p1-page2','Description of Page 2',NULL,NULL, 0),(10,10,1,1,10,1,1,1513077720,0,'Page 3','p1-page3','Description of Page 3',NULL,NULL, 0),(11,11,1,1,11,1,1,1513077720,0,'Page 4','p1-page4','Description of Page 4',NULL,NULL, 0),(12,12,1,1,12,1,1,1513077720,0,'Page 5','p1-page5','Description of Page 5',NULL,NULL, 0),(13,13,1,1,13,1,1,1513077720,0,'Page 6','p1-page6','Description of Page 6',NULL,NULL, 0),(14,14,1,3,1,1,1,1513077720,0,'Redirect to Page 1','redirect-1','Description of Redirect to Page 1',NULL,NULL, 0),(15,15,1,3,2,1,1,1513077720,0,'Redirect to Page 2','redirect-2','Description of Redirect to Page 2',NULL,NULL, 0),(16,16,1,3,3,1,1,1513077720,0,'Redirect to Sub Page 2','redirect-3','Description of Redirect to Sub Page 2',NULL,NULL, 0),(17,17,1,3,4,1,1,1513077720,0,'Redirect to luya.io','redirect-4','Description of Redirect to luya.io',NULL,NULL, 0);
 /*!40000 ALTER TABLE `cms_nav_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
