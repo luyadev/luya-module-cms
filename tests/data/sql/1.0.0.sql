@@ -877,7 +877,7 @@ CREATE TABLE `cms_nav_item` (
   `keywords` text,
   `title_tag` varchar(255) DEFAULT NULL,
   `image_id` int(11) DEFAULT '0',
-  `is_url_strict_parsing_disabled` int(11) DEFAULT '0'
+  `is_url_strict_parsing_disabled` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
