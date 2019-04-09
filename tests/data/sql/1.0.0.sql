@@ -1001,6 +1001,7 @@ CREATE TABLE `cms_nav_item_redirect` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
+  `target` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1011,7 +1012,7 @@ CREATE TABLE `cms_nav_item_redirect` (
 
 LOCK TABLES `cms_nav_item_redirect` WRITE;
 /*!40000 ALTER TABLE `cms_nav_item_redirect` DISABLE KEYS */;
-INSERT INTO `cms_nav_item_redirect` VALUES (1,1,'2'),(2,1,'3'),(3,1,'8'),(4,2,'https://luya.io');
+INSERT INTO `cms_nav_item_redirect` VALUES (1,1,'2', ''),(2,1,'3', ''),(3,1,'8', ''),(4,2,'https://luya.io', '');
 /*!40000 ALTER TABLE `cms_nav_item_redirect` ENABLE KEYS */;
 UNLOCK TABLES;
 
