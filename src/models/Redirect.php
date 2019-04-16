@@ -106,7 +106,7 @@ class Redirect extends NgRestModel
     {
         return [
             'catch_path' => ['text', 'placeholder' => '/path/to/catch', 'encoding' => false],
-            'redirect_path' => ['text', 'placeholder' => '/path/to/redirect'],
+            'redirect_path' => ['text', 'placeholder' => '/path/to/redirect', 'encoding' => false],
             'redirect_status_code' => ['selectArray', 'data' => [
                 301 => Module::t('redirect_model_atr_redirect_status_code_opt_301'),
                 302 => Module::t('redirect_model_atr_redirect_status_code_opt_302'),
