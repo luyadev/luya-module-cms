@@ -74,8 +74,8 @@
             template : function() {
 				return '<div>'+
 					'<div class="input-group mb-2">'+
-						'<div class="input-group-addon" ng-hide="searchQuery"><i class="material-icons">search</i></div>'+
-						'<span class="input-group-addon" ng-show="searchQuery" ng-click="searchQuery = \'\'"><i class="material-icons">clear</i></span>'+
+						'<div class="input-group-prepend" ng-hide="searchQuery"><div class="input-group-text"><i class="material-icons">search</i></div></div>'+
+						'<div class="input-group-prepend" ng-show="searchQuery" ng-click="searchQuery = \'\'"><div class="input-group-text"><i class="material-icons">clear</i></div></div>'+
 						'<input class="form-control" ng-model="searchQuery" type="text" placeholder="'+i18n['ngrest_crud_search_text']+'">'+
 					'</div>' + 
 					'<div ng-repeat="(key, container) in menuData.containers" ng-show="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
