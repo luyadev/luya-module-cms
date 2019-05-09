@@ -76,19 +76,27 @@ class BlockImporter extends Importer
      */
     protected function handleBlockDefinitions(array $definitions)
     {
+        $cwds = [Yii::getAlias('@app'), getcwd()];
+
         $ids = [];
         foreach ($definitions as $blockDefinition) {
+
             $block = Yii::getAlias($blockDefinition, false);
             // if there is no alias, or not found, switch back to original name
             if ($block === false) {
                 $block = $blockDefinition;
             }
-            if (is_file($block)) {
-                $ids[] = $this->saveBlockByPath($block);
-            } elseif (is_dir($block)) {
-                $ids = array_merge($ids, $this->saveBlocksFromFolder($block));
-            } else {
-                $this->addLog("Unable to process block definition '{$block}'");
+
+            foreach ($cwds as $prefix) {
+                $path = $prefix . DIRECTORY_SEPARATOR . ltrim($block, DIRECTORY_SEPARATOR);
+
+                if (is_file($path)) {
+                    $ids[] = $this->saveBlockByPath($path);
+                } elseif (is_dir($path)) {
+                    $ids = array_merge($ids, $this->saveBlocksFromFolder($path));
+                } else {
+                    $this->addLog("Unable to process block definition '{$path}'");
+                }
             }
         }
         
