@@ -66,9 +66,9 @@ class Block extends NgRestModel
     public function ngRestExtraAttributeTypes()
     {
         return [
-            'usageCount' => 'number',
-            'translationName' => 'text',
-            'fileExists' => ['class' => ToggleStatus::class, 'interactive' => false],
+            'usageCount' => ['number', 'sortField' => false],
+            'translationName' => ['text', 'sortField' => false],
+            'fileExists' => ['class' => ToggleStatus::class, 'interactive' => false, 'sortField' => false],
         ];
     }
     
