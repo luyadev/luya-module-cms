@@ -68,7 +68,7 @@ class BlockImporter extends Importer
     private $blockGroupIds = [];
     
     /**
-     * Handle an array with defintions whether they are files or folders.
+     * Handle an array with definitions whether they are files or folders.
      *
      * @param array $definitions
      * @return array
@@ -76,6 +76,9 @@ class BlockImporter extends Importer
      */
     protected function handleBlockDefinitions(array $definitions)
     {
+        // A list of directories which should be prefix to the current block definition,
+        // as a block definition can contain an alias with a full path, we need an empty "prefix"
+        // directory, which is represented as `null` value at the end of the array.
         $directories = array_unique([Yii::getAlias('@app'), getcwd(), null]);
 
         $ids = [];
@@ -150,7 +153,6 @@ class BlockImporter extends Importer
 
         return [];
     }
-
     
     /**
      * Save all blocks from a given folder.
