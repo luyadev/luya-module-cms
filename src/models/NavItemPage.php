@@ -2,17 +2,14 @@
 
 namespace luya\cms\models;
 
-use luya\cms\base\PhpBlock;
-use luya\cms\base\PhpBlockView;
 use Yii;
-use yii\base\InvalidConfigException;
 use yii\db\Query;
+use yii\base\InvalidConfigException;
+use yii\base\ViewContextInterface;
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
 use luya\traits\CacheableTrait;
-use yii\base\ViewContextInterface;
-use luya\helpers\ArrayHelper;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -23,7 +20,8 @@ use luya\helpers\ArrayHelper;
  * @property integer $timestamp_create
  * @property integer $create_user_id
  * @property string $version_alias
- * @property \luya\cms\models\Layout $layout
+ * @property Layout $layout
+ * @property NavItem $forceNavItem
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -535,14 +533,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
-     * This method is used to force the parent nav item for the corresponding page item. The default
-     * implemenation `getNavItem` works the invert way.
+     * This method is used to force the parent nav item for the corresponding page item whether the type matches or not:
      *
      * @return \luya\cms\models\NavItem
      */
     public function getForceNavItem()
     {
-        return NavItem::findOne($this->nav_item_id);
+        return $this->hasOne(NavItem::class, ['id' => 'nav_item_id']);
     }
     
     /**

@@ -18,14 +18,14 @@
 </tr>
 </thead>
 <?php foreach ($blocks as $block): ?>
-  <tr ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->navItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})" style="cursor:pointer;">
+  <tr ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})" style="cursor:pointer;">
     <td>
-      <a ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->navItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})"><?= $block->navItemPage->navItem->title; ?></a>
+      <a ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})"><?= $block->navItemPage->forceNavItem->title; ?></a>
     </td>
     <td><?= Yii::$app->formatter->asBoolean($block->is_hidden); ?></td>
-    <td><?= $block->navItemPage->navItem->lang->name; ?></td>
-    <td><?= Yii::$app->formatter->asDate($block->navItemPage->navItem->timestamp_update); ?></td>
-    <td><?= Yii::$app->formatter->asDate($block->navItemPage->navItem->timestamp_create); ?></td>
+    <td><?= $block->navItemPage->forceNavItem->lang->name; ?></td>
+    <td><?= Yii::$app->formatter->asDate($block->navItemPage->forceNavItem->timestamp_update); ?></td>
+    <td><?= Yii::$app->formatter->asDate($block->navItemPage->forceNavItem->timestamp_create); ?></td>
   </tr>
 <?php endforeach; ?>
 </table>
