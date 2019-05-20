@@ -50,10 +50,11 @@ class BlockPagesActiveWindow extends ActiveWindow
     {
         return $this->render('index', [
             'blocks' => $this->model->getNavItemPageBlockItems()
-                ->select(['nav_item_page_id', 'is_hidden'])
+                ->select(['nav_item_page_id', 'is_hidden', 'title'])
                 ->with(['navItemPage.forceNavItem.lang', 'navItemPage.forceNavItem.nav'])
+                ->joinWith(['navItemPage.forceNavItem'])
                 ->distinct()
-                ->orderBy([])
+                ->orderBy(['title' => SORT_ASC])
                 ->all(),
         ]);
     }
