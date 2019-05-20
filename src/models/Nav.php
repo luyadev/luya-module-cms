@@ -256,6 +256,8 @@ class Nav extends ActiveRecord
      *
      * This method is mainly to find all recursive children of a nav item when moving a page into a container
      * all childrens requires to update its container id as well, so this method contains the data of its children
+     * 
+     * @return array An array where each entry is a Nav object
      */
     public function getRecursiveChildren()
     {
@@ -264,6 +266,12 @@ class Nav extends ActiveRecord
         return $data;
     }
     
+    /**
+     * Resolve the current parent children of a given parent nav id informsion
+     *
+     * @param array $array
+     * @param integer $parentNavId
+     */
     private function internalGetRecursiveChildren(&$array, $parentNavId)
     {
         foreach (self::find()->where(['parent_nav_id' => $parentNavId])->all() as $item) {

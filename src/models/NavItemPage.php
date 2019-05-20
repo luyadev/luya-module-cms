@@ -552,6 +552,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public function getNavItemPageBlockItems()
     {
-        return $this->hasMany(NavItemPageBlockItem::className(), ['nav_item_page_id' => 'id']);
+        return $this->hasMany(NavItemPageBlockItem::class, ['nav_item_page_id' => 'id']);
     }
 }
