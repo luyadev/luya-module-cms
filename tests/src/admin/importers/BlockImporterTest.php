@@ -48,4 +48,20 @@ class BlockImporterTest extends CmsConsoleTestCase
             ]
         ], $log);
     }
+
+    public function testDsDirectory()
+    {
+        $controller = new ImportController('import-controller', $this->app);
+        $importer = new BlockImporter($controller, $this->app->getModule('cmsadmin'));
+
+        $this->assertSame('foo/bar', $importer->replaceDsSeperator("foo{{DS}}bar"));
+
+        $r = $this->invokeMethod($importer, 'handleBlockDefinitions', [
+            ['path{{DS}}to'],
+        ]);
+
+        $key0 = $importer->importer->getLog()['luya\cms\admin\importers\BlockImporter'][0];
+
+        $this->assertContains('path/to', $key0);
+    }
 }

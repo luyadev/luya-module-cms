@@ -64,6 +64,17 @@ class BlockImporter extends Importer
         
         return $this->addLog("Block importer finished with ".count($exists) . " blocks.");
     }
+
+    /**
+     * Replace {{DS}} seperator.
+     *
+     * @param string $path
+     * @return string
+     */
+    public function replaceDsSeperator($path)
+    {
+        return str_replace('{{DS}}', DIRECTORY_SEPARATOR, $path);
+    }
     
     private $blockGroupIds = [];
     
@@ -83,6 +94,12 @@ class BlockImporter extends Importer
             if ($block === false) {
                 $block = $blockDefinition;
             }
+
+            // update scalar block paths
+            if (is_scalar($block)) {
+                $block = $this->replaceDsSeperator($block);
+            }
+
             if (is_file($block)) {
                 $ids[] = $this->saveBlockByPath($block);
             } elseif (is_dir($block)) {
@@ -105,6 +122,7 @@ class BlockImporter extends Importer
     protected function saveBlocksFromFolder($folder)
     {
         $ids = [];
+        $folder = $this->replaceDsSeperator($folder);
         if (is_dir($folder)) {
             foreach (FileHelper::findFiles($folder) as $blockItem) {
                 $ids[] = $this->saveBlockByPath($blockItem);
