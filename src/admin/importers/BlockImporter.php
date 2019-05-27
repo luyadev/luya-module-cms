@@ -66,6 +66,17 @@ class BlockImporter extends Importer
     }
     
     private $blockGroupIds = [];
+
+    /**
+     * Replace {{DS}} separator.
+     *
+     * @param string $path
+     * @return string
+     */
+    public function replaceDsSeparator($path)
+    {
+        return str_replace('{{DS}}', DIRECTORY_SEPARATOR, $path);
+    }
     
     /**
      * Handle an array with definitions whether they are files or folders.
@@ -111,6 +122,8 @@ class BlockImporter extends Importer
             
             $path = rtrim($directoryPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($blockDefinition, DIRECTORY_SEPARATOR);
             
+            $path = $this->replaceDsSeparator($path);
+
             if (isset($results[$path])) {
                 continue;
             }

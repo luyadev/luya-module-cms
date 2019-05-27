@@ -62,7 +62,7 @@ class LangSwitcher extends \luya\base\Widget
     /**
      * @var array The Wrapping list element (ul tag) Options to pass.
      *  - tag: Default is ul
-     *  - seperator: The seperator for items defaults `\n`.
+     *  - separator: The separator for items defaults `\n`.
      *  - class: The class to observe for the elements.
      */
     public $listElementOptions = ['class' => 'list-element'];
