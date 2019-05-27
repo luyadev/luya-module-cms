@@ -54,7 +54,7 @@ class BlockImporterTest extends CmsConsoleTestCase
         $controller = new ImportController('import-controller', $this->app);
         $importer = new BlockImporter($controller, $this->app->getModule('cmsadmin'));
 
-        $this->assertSame('foo/bar', $importer->replaceDsSeperator("foo{{DS}}bar"));
+        $this->assertSame('foo/bar', $importer->replaceDsSeparator("foo{{DS}}bar"));
 
         $r = $this->invokeMethod($importer, 'handleBlockDefinitions', [
             ['path{{DS}}to'],

@@ -66,12 +66,12 @@ class BlockImporter extends Importer
     }
 
     /**
-     * Replace {{DS}} seperator.
+     * Replace {{DS}} separator.
      *
      * @param string $path
      * @return string
      */
-    public function replaceDsSeperator($path)
+    public function replaceDsSeparator($path)
     {
         return str_replace('{{DS}}', DIRECTORY_SEPARATOR, $path);
     }
@@ -97,7 +97,7 @@ class BlockImporter extends Importer
 
             // update scalar block paths
             if (is_scalar($block)) {
-                $block = $this->replaceDsSeperator($block);
+                $block = $this->replaceDsSeparator($block);
             }
 
             if (is_file($block)) {
@@ -122,7 +122,7 @@ class BlockImporter extends Importer
     protected function saveBlocksFromFolder($folder)
     {
         $ids = [];
-        $folder = $this->replaceDsSeperator($folder);
+        $folder = $this->replaceDsSeparator($folder);
         if (is_dir($folder)) {
             foreach (FileHelper::findFiles($folder) as $blockItem) {
                 $ids[] = $this->saveBlockByPath($blockItem);

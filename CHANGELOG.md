@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 1.0.9.1 (27. March 2019)
 
-+ [#195](https://github.com/luyadev/luya-module-cms/issues/195) Hot fix for missing {{DS}} seperator.
++ [#195](https://github.com/luyadev/luya-module-cms/issues/195) Hot fix for missing {{DS}} separator.
 
 ## 1.0.9 (18. February 2019)
 
