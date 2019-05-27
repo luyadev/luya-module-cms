@@ -68,7 +68,7 @@ class BlockImporter extends Importer
     private $blockGroupIds = [];
     
     /**
-     * Handle an array with defintions whether they are files or folders.
+     * Handle an array with definitions whether they are files or folders.
      *
      * @param array $definitions
      * @return array
@@ -76,23 +76,82 @@ class BlockImporter extends Importer
      */
     protected function handleBlockDefinitions(array $definitions)
     {
+        // A list of directories which should be prefix to the current block definition,
+        // as a block definition can contain an alias with a full path, we need an empty "prefix"
+        // directory, which is represented as `null` value at the end of the array.
+        $directories = array_unique([Yii::getAlias('@app'), getcwd(), null]);
+
         $ids = [];
         foreach ($definitions as $blockDefinition) {
+            // find an alias for the defintion (@app/xyz/Block)
             $block = Yii::getAlias($blockDefinition, false);
             // if there is no alias, or not found, switch back to original name
             if ($block === false) {
                 $block = $blockDefinition;
             }
-            if (is_file($block)) {
-                $ids[] = $this->saveBlockByPath($block);
-            } elseif (is_dir($block)) {
-                $ids = array_merge($ids, $this->saveBlocksFromFolder($block));
-            } else {
-                $this->addLog("Unable to process block definition '{$block}'");
-            }
+
+            $ids = array_merge($ids, $this->handleBlockDefintionInDirectories($directories, $block));
         }
         
         return $ids;
+    }
+
+    /**
+     * Handle a block defintion for different folders
+     *
+     * @param array $directories
+     * @param string $blockDefinition
+     * @return array
+     * @since 2.0.0
+     */
+    protected function handleBlockDefintionInDirectories(array $directories, $blockDefinition)
+    {
+        $results = [];
+        foreach ($directories as $directoryPath) {
+            
+            $path = rtrim($directoryPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($blockDefinition, DIRECTORY_SEPARATOR);
+            
+            if (isset($results[$path])) {
+                continue;
+            }
+
+            $blockIds = $this->getBlockIdsByPath($path);
+            if (!empty($blockIds)) {
+                $results[$path] = $blockIds;
+            }
+        }
+
+        if (empty($results)) {
+            $this->addLog("Unable to find '{$blockDefinition}' in any of those paths '".implode(",", $directories)."'");
+        }
+
+        $return = [];
+        foreach ($results as $path => $ids) {
+            $return = array_merge($return, $ids);
+        }
+
+        return $return;
+    }
+
+    /**
+     * Get an array of ids for a given path.
+     *
+     * @param string $path
+     * @return array An array with block ids or an empty array if not found.
+     * @since 2.0.0
+     */
+    protected function getBlockIdsByPath($path)
+    {
+        if (is_file($path)) {
+            $id = $this->saveBlockByPath($path);
+            if ($id) {
+                return [$id];
+            }
+        } elseif (is_dir($path)) {
+            return $this->saveBlocksFromFolder($path);
+        }
+
+        return [];
     }
     
     /**
@@ -176,7 +235,7 @@ class BlockImporter extends Importer
             return $this->saveBlock($className);
         }
         
-        $this->addLog('Unable to find block namespace for file ' . $path);
+        $this->addLog("Unable to find block namespace for file '{$path}'.");
         
         return false;
     }

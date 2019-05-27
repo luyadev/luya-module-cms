@@ -48,4 +48,42 @@ class BlockImporterTest extends CmsConsoleTestCase
             ]
         ], $log);
     }
+
+    public function testBasicBlockImporterWithFailingDefintion()
+    {
+        // config fixture
+        $configFixture = new ActiveRecordFixture([
+            'modelClass' => Config::class
+        ]);
+        
+        // block fixture
+        $blockFixture = new ActiveRecordFixture([
+            'modelClass' => Block::class,
+        ]);
+        
+        // block group fixture
+        $blockGroupFixture = new ActiveRecordFixture([
+            'modelClass' => BlockGroup::class,
+        ]);
+        
+        $controller = new ImportController('import-controller', $this->app);
+        $module = $this->app->getModule('cmsadmin');
+        $module->blocks = ['notfoundatall'];
+        $importer = new BlockImporter($controller, $module);
+
+        $this->assertNull($importer->run());
+        
+        $log = $importer->importer->getLog();
+        
+        $this->assertSame([
+            'luya\cms\admin\importers\BlockImporter' => [
+                0 => 'Insert new block group block_group_dev_elements.',
+                1 => 'block \luya\cms\frontend\blocks\HtmlBlock: Added to database',
+                2 => 'Insert new block group block_group_dev_elements.',
+                3 => 'block \luya\cms\frontend\blocks\ModuleBlock: Added to database',
+                4 => 'Unable to find \'notfoundatall\' in any of those paths \'/var/www/luya-module-cms,\'',
+                5 => 'Block importer finished with 2 blocks.',
+            ]
+        ], $log);
+    }
 }

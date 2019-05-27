@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7e157b48a57e26737d904dc83d65436",
+    "content-hash": "0655c8455bbd512294a9fa119c1cc7ef",
     "packages": [],
     "packages-dev": [
         {
@@ -3054,12 +3054,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "b80830c5f8c221b8bd6a830c5b2f45544f82c4d7"
+                "reference": "be563f0211bd5d4424680d0fcdef578090f08e41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/b80830c5f8c221b8bd6a830c5b2f45544f82c4d7",
-                "reference": "b80830c5f8c221b8bd6a830c5b2f45544f82c4d7",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/be563f0211bd5d4424680d0fcdef578090f08e41",
+                "reference": "be563f0211bd5d4424680d0fcdef578090f08e41",
                 "shasum": ""
             },
             "require": {
