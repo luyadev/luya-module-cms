@@ -36,6 +36,11 @@ class BlockPagesActiveWindow extends ActiveWindow
         return 'speaker_notes';
     }
 
+    public function getTitle()
+    {
+        return $this->model->translationName;
+    }
+
     /**
      * The default action which is going to be requested when clicking the ActiveWindow.
      *
@@ -44,7 +49,13 @@ class BlockPagesActiveWindow extends ActiveWindow
     public function index()
     {
         return $this->render('index', [
-            'pages' => $this->model->getNavItemPageBlockItems()->select(['nav_item_page_id'])->distinct()->orderBy([])->all(),
+            'blocks' => $this->model->getNavItemPageBlockItems()
+                ->select(['nav_item_page_id', 'is_hidden', 'title'])
+                ->with(['navItemPage.forceNavItem.lang', 'navItemPage.forceNavItem.nav'])
+                ->joinWith(['navItemPage.forceNavItem'])
+                ->distinct()
+                ->orderBy(['title' => SORT_ASC])
+                ->all(),
         ]);
     }
 }

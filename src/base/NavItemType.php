@@ -30,7 +30,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
      */
     public function getNavItem()
     {
-        return $this->hasOne(NavItem::className(), ['nav_item_type_id' => 'id'])->where(['nav_item_type' => static::getNummericType()]);
+        return $this->hasOne(NavItem::class, ['nav_item_type_id' => 'id'])->where(['nav_item_type' => static::getNummericType()]);
     }
 
     /**
