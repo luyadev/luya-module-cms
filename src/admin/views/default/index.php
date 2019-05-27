@@ -91,7 +91,7 @@ use \luya\admin\Module as AdminModule;
         </div>
     </div>
     <div class="luya-content luya-content-cmsadmin" ui-view>
-        <div ng-controller="CmsDashboard" class="luya-content">
+        <div ng-controller="CmsDashboard">
             <div class="card mb-2" ng-repeat="item in dashboard" ng-init="item.isToggled = ($index < 3)">
 	            <div class="card-header" ng-click="item.isToggled = !item.isToggled">
 	                <span class="card-title">{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span>
