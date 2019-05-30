@@ -144,84 +144,7 @@
 			}
 		}
 	});
-
-    zaa.directive("updateFormPage", ['ServiceLayoutsData', function(ServiceLayoutsData) {
-        return {
-            restrict : 'EA',
-            scope : {
-                data : '='
-            },
-            templateUrl : 'updateformpage.html',
-            controller : ['$scope', '$http', function($scope, $http) {
-
-            	$scope.parent = $scope.$parent.$parent;
-				$scope.navItemId = $scope.parent.item.id;
-
-				/* layoutsData */
-
-				$scope.data.layout_id = 0;
-				$scope.layoutsData = ServiceLayoutsData.data;
-
-				$scope.$on('service:LayoutsData', function(event, data) {
-					$scope.layoutsData = data;
-				});
-
-				/* get all versions for navitemid */
-
-				$scope.versionsData = [];
-
-				$scope.getVersionList = function() {
-					$http.get('admin/api-cms-navitempage/versions', { params : { navItemId : $scope.navItemId }}).then(function(response) {
-						$scope.versionsData = response.data;
-					});
-				};
-
-            	$scope.isEditAvailable = function() {
-					return $scope.versionsData.length;
-            	};
-
-				function init() {
-					$scope.getVersionList();
-				}
-
-				init();
-            }]
-        }
-    }]);
-
-	zaa.directive("updateFormModule", function() {
-		return {
-			restrict : 'EA',
-			scope : {
-				data : '='
-			},
-			templateUrl : 'updateformmodule.html',
-			controller : ['$scope', '$http', function($scope, $http) {
-				$scope.modules = [];
-				$http.get('admin/api-admin-common/data-modules').then(function(response) {
-					$scope.modules = response.data;
-				});
-			}]
-		}
-	});
-
-	zaa.directive("updateFormRedirect", function() {
-		return {
-			restrict : 'EA',
-			scope : {
-				data : '='
-			},
-			templateUrl : 'updateformredirect.html',
-			controller : ['$scope', function($scope) {
-				$scope.$watch(function() { return $scope.data }, function(n, o) {
-					if (angular.isArray(n)) {
-						$scope.data = {};
-					}
-				});
-			}]
-		}
-	});
-
+	
 	zaa.directive("createForm", function() {
 		return {
 			restrict : 'EA',
@@ -312,6 +235,48 @@
 		}
 	});
 
+	/** PAGE CREATE & UPDATE */
+    zaa.directive("updateFormPage", ['ServiceLayoutsData', function(ServiceLayoutsData) {
+        return {
+            restrict : 'EA',
+            scope : {
+                data : '='
+            },
+            templateUrl : 'updateformpage.html',
+            controller : ['$scope', '$http', function($scope, $http) {
+
+            	$scope.parent = $scope.$parent.$parent;
+				$scope.navItemId = $scope.parent.item.id;
+
+
+				$scope.data.layout_id = 0;
+				$scope.layoutsData = ServiceLayoutsData.data;
+
+				$scope.$on('service:LayoutsData', function(event, data) {
+					$scope.layoutsData = data;
+				});
+
+
+				$scope.versionsData = [];
+
+				$scope.getVersionList = function() {
+					$http.get('admin/api-cms-navitempage/versions', { params : { navItemId : $scope.navItemId }}).then(function(response) {
+						$scope.versionsData = response.data;
+					});
+				};
+
+            	$scope.isEditAvailable = function() {
+					return $scope.versionsData.length;
+            	};
+
+				function init() {
+					$scope.getVersionList();
+				}
+
+				init();
+            }]
+        }
+	}]);
 	zaa.directive("createFormPage", function() {
 		return {
 			restrict : 'EA',
@@ -355,39 +320,73 @@
 		}
 	});
 
-	zaa.directive("createFormModule", function() {
+	/* MODULE */
+
+	zaa.directive("formModule", function() {
 		return {
 			restrict : 'EA',
 			scope : {
 				data : '='
 			},
-			templateUrl : 'createformmodule.html',
+			templateUrl : 'formmodule.html',
 			controller : ['$scope', '$http', function($scope, $http) {
 
 				$scope.modules = [];
+				$scope.controllers = [];
+				$scope.actions = [];
 
 				$http.get('admin/api-admin-common/data-modules').then(function(response) {
 					$scope.modules = response.data;
 				});
 
-				$scope.save = function() {
-					$scope.$parent.exec();
-				}
+				$scope.$watch(function() {
+					return $scope.data.module_name;
+				}, function(n, o) {
+					if (n && n!=o) {
+						$scope.data.controller_name = null;
+						$scope.data.action_name = null;
+						$http.get('admin/api-cms-admin/module-controllers?module=' + n).then(function(response) {
+							$scope.controllers = response.data;
+							$scope.actions = [];
+						});
+					}
+				});
+
+				$scope.$watch(function() {
+					return $scope.data.controller_name;
+				}, function(n, o) {
+					if (n && n!=o) {
+						$scope.data.action_name = null;
+						$http.get('admin/api-cms-admin/controller-actions?module='+$scope.data.module_name+'&controller=' + n).then(function(response) {
+							$scope.actions = response.data;
+						});
+					}
+				});
 			}]
 		}
 	});
 
-	zaa.directive("createFormRedirect", function() {
+	/**
+	 * This is mainly keepet for legacy purpsoes as the admin requires this.
+	 * 
+	 * > The template updateformredirect.html is stored in the luya admin module!
+	 * 
+	 * @deprecated Will be removed in 3.0 and moved to luya admin moudle.
+	 * @see https://github.com/luyadev/luya-module-admin/blob/master/src/views/layouts/_angulardirectives.php
+	 */
+	zaa.directive("updateFormRedirect", function() {
 		return {
 			restrict : 'EA',
 			scope : {
 				data : '='
 			},
-			templateUrl : 'createformredirect.html',
+			templateUrl : 'updateformredirect.html',
 			controller : ['$scope', function($scope) {
-				$scope.save = function() {
-					$scope.$parent.exec();
-				};
+				$scope.$watch(function() { return $scope.data }, function(n, o) {
+					if (angular.isArray(n)) {
+						$scope.data = {};
+					}
+				});
 			}]
 		}
 	});

@@ -18,7 +18,7 @@ use luya\cms\admin\Module;
             </ul>
         </div>
         <div  class="card-body">
-            <form ng-switch on="data.nav_item_type">
+            <form ng-switch on="data.nav_item_type" ng-submit="exec()">
                 <div class="form-group" ng-show="data.nav_item_type == 1 && !data.isInline">
                     <label for="exampleInputEmail1"><?= Module::t('view_index_as_draft'); ?></label>
                     <div class="form-check">
@@ -62,11 +62,12 @@ use luya\cms\admin\Module;
                     <create-form-page data="data"></create-form-page>
                 </div>
                 <div ng-switch-when="2">
-                    <create-form-module data="data"></create-form-module>
+                    <form-module data="data"></form-module>
                 </div>
                 <div ng-switch-when="3">
-                    <create-form-redirect data="data"></create-form-redirect>
+                    <zaa-link model="data.redirect" />
                 </div>
+                <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
                 <div class="alert alert-success mt-3 mb-0" ng-show="success">
                     <i class="material-icons">check_circle</i> <?= Module::t('view_index_page_success'); ?>
                 </div>
@@ -107,26 +108,7 @@ use luya\cms\admin\Module;
             <option ng-repeat="item in layouts" value="{{item.id}}">{{item.name}}</option>
         </select>
     </div>
-    <button type="button" class="btn btn-success" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
 </script>
-
-<!-- CREATE MODULE FORM -->
-<script type="text/ng-template" id="createformmodule.html">
-    <zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
-    <button type="button" class="btn btn-save btn-icon" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
-</script>
-
-<!-- CREATE REDIRECT FORM -->
-<script type="text/ng-template" id="createformredirect.html">
-<zaa-link model="data.redirect" />
-<button type="button" class="btn btn-save btn-icon" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
-</script>
-
-<!-- CREATE DRAFT FORM -->
-<script type="text/ng-template" id="createformdraft.html">
-    <button type="button" class="btn btn-save btn-icon" ng-click="save()"><?= Module::t('view_index_page_btn_save'); ?></button>
-</script>
-
 <!-- PAGE UPDATE FORM -->
 <script type="text/ng-template" id="updateformpage.html">
 <div class="form-group form-side-by-side" ng-show="!isEditAvailable()">
@@ -153,7 +135,10 @@ use luya\cms\admin\Module;
 </div>
 </script>
 
-<!-- UPDATE MODULE FORM -->
-<script type="text/ng-template" id="updateformmodule.html">
+<!-- MODULE -->
+<script type="text/ng-template" id="formmodule.html">
     <zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
+    <zaa-select model="data.controller_name" label="Controllers" options="controllers" />
+    <zaa-select model="data.action_name" label="Actions" options="actions" />
 </script>
+<!-- // MODULE -->

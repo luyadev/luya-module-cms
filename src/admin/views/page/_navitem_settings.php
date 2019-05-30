@@ -44,7 +44,7 @@ use luya\admin\helpers\Angular;
                     <update-form-page data="typeDataCopy"></update-form-page>
                 </div>
                 <div ng-switch-when="2">
-                    <update-form-module data="typeDataCopy"></update-form-module>
+                    <form-module data="typeDataCopy"></form-module>
                 </div>
                 <div ng-switch-when="3">
                     <zaa-link model="typeDataCopy" />
