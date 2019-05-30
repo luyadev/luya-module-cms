@@ -639,7 +639,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         $imageName = $this->getViewFileName('jpg');
     
         $reflector = new \ReflectionClass($this);
-        $dirPath = dirname($reflector->getFileName(), 2);
+        $dirPath = dirname(dirname($reflector->getFileName()));
         $imagePath = $dirPath . '/images/blocks/' . $imageName;
         // file get content resolved Yii aliases.
         $data = FileHelper::getFileContent($imagePath);
