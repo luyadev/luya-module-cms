@@ -9,6 +9,7 @@ use yii\helpers\ArrayHelper;
 use luya\admin\models\Group;
 use luya\cms\models\Property as CmsProperty;
 use luya\cms\admin\Module;
+use luya\helpers\Json;
 
 /**
  * CMS Nav Model ActiveRecord
@@ -784,7 +785,7 @@ class Nav extends ActiveRecord
      * @param string $description
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
-    public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName, $description)
+    public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName, $description, $controllerName, $actionName, array $actionParams)
     {
         $_errors = [];
 
@@ -808,7 +809,7 @@ class Nav extends ActiveRecord
             'nav_item_type' => 2
         ];
         
-        $navItemModule->attributes = ['module_name' => $moduleName];
+        $navItemModule->attributes = ['module_name' => $moduleName, 'controller_name' => $controllerName, 'action_name' => $actionName, 'action_params' => Json::encode($actionParams)];
 
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
@@ -906,7 +907,7 @@ class Nav extends ActiveRecord
      * @param string $description
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
      */
-    public function createModuleItem($navId, $langId, $title, $alias, $moduleName, $description)
+    public function createModuleItem($navId, $langId, $title, $alias, $moduleName, $description, $controllerName, $actionName, array $actionParams)
     {
         $_errors = [];
 
@@ -922,7 +923,7 @@ class Nav extends ActiveRecord
             'description' => $description,
             'nav_item_type' => 2
         ];
-        $navItemModule->attributes = ['module_name' => $moduleName];
+        $navItemModule->attributes = ['module_name' => $moduleName, 'controller_name' => $controllerName, 'action_name' => $actionName, 'action_params' => Json::encode($actionParams)];
 
         if (!$navItem->validate()) {
             $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);

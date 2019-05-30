@@ -5,12 +5,13 @@ namespace luya\cms\admin\apis;
 use luya\cms\base\BlockInterface;
 use Yii;
 use luya\cms\models\Layout;
-use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\helpers\ArrayHelper;
-use luya\cms\frontend\Module;
 use luya\cms\models\Config;
 use luya\cms\models\Log;
+use luya\admin\helpers\Angular;
+use yii\base\InvalidArgumentException;
+use luya\helpers\Inflector;
 
 /**
  * Admin Api delievers common api tasks like blocks and layouts.
@@ -158,5 +159,66 @@ class AdminController extends \luya\admin\base\RestController
     public function actionDataLayouts()
     {
         return ArrayHelper::typeCast(Layout::find()->asArray()->all());
+    }
+
+    /**
+     * Get the controllers for a given module
+     *
+     * @param string $module
+     * @return array
+     * @since 2.0.0
+     */
+    public function actionModuleControllers($module)
+    {
+        $module = Yii::$app->getModule($module);
+
+        if (!$module) {
+            throw new InvalidArgumentException("The given module name is not valid.");
+        }
+
+        return Angular::optionsArrayInput($module->getControllerFiles());
+    }
+
+    /**
+     * Get the actions for a given controller.
+     *
+     * @param string $module
+     * @param string $controller
+     * @return array
+     * @since 2.0.0
+     */
+    public function actionControllerActions($module, $controller)
+    {
+        $module = Yii::$app->getModule($module);
+
+        if (!$module) {
+            throw new InvalidArgumentException("The given module name is not valid.");
+        }
+
+        $controller = $module->createControllerByID($controller);
+
+        $actions = $this->getActions($controller);
+        return Angular::optionsArrayInput(array_combine($actions, $actions));
+    }
+
+    /**
+     * Get actions for a given controller.
+     * 
+     * @param object $controller
+     * @since 2.0.0
+     * @see Replace with luya core object helper
+     */
+    private function getActions($controller)
+    {
+        $actions = array_keys($controller->actions());
+        $class = new \ReflectionClass($controller);
+        foreach ($class->getMethods() as $method) {
+            $name = $method->getName();
+            if ($name !== 'actions' && $method->isPublic() && !$method->isStatic() && strncmp($name, 'action', 6) === 0) {
+                $actions[] = Inflector::camel2id(substr($name, 6), '-', true);
+            }
+        }
+        sort($actions);
+        return array_unique($actions);
     }
 }

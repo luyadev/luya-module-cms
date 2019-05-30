@@ -310,17 +310,19 @@ class NavItemController extends \luya\admin\base\RestController
             $typeModel = $model->getType();
             // lets just update the type data
             switch ($navItemType) {
-                case 1:
+                case NavItem::TYPE_PAGE:
                     $this->setPostAttribute($model, 'nav_item_type_id');
                     break;
-                case 2:
+                case NavItem::TYPE_MODULE:
                     $this->setPostAttribute($typeModel, 'module_name');
+                    $this->setPostAttribute($typeModel, 'controller_name');
+                    $this->setPostAttribute($typeModel, 'action_name');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
                     $typeModel->update();
                     break;
-                case 3:
+                case NavItem::TYPE_REDIRECT:
                     $this->setPostAttribute($typeModel, 'type');
                     $this->setPostAttribute($typeModel, 'value');
                     $this->setPostAttribute($typeModel, 'target');
@@ -337,7 +339,7 @@ class NavItemController extends \luya\admin\base\RestController
             // set the new type
             $model->nav_item_type = $navItemType;
             switch ($navItemType) {
-                case 1:
+                case NavItem::TYPE_PAGE:
                     // check for existent version, if not available create "First version"
                     if (!NavItemPage::find()->where(['nav_item_id' => $navItemId])->exists()) {
                         $pageModel = new NavItemPage();
@@ -356,16 +358,18 @@ class NavItemController extends \luya\admin\base\RestController
                         $this->setPostAttribute($model, 'nav_item_type_id');
                     }
                     break;
-                case 2:
+                case NavItem::TYPE_MODULE:
                     $typeModel = new NavItemModule();
                     $this->setPostAttribute($typeModel, 'module_name');
+                    $this->setPostAttribute($typeModel, 'controller_name');
+                    $this->setPostAttribute($typeModel, 'action_name');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
                     break;
-                case 3:
+                case NavItem::TYPE_REDIRECT:
                     $typeModel = new NavItemRedirect();
                     $this->setPostAttribute($typeModel, 'type');
                     $this->setPostAttribute($typeModel, 'value');

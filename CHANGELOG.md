@@ -7,6 +7,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ### Changed
 
++ [#81](https://github.com/luyadev/luya-module-cms/issues/81) Added new migrations for module pages in order to allow controller and action definitions.
 + [#182](https://github.com/luyadev/luya-module-cms/issues/182) Moved to SemVer. Use ^2.0 instead ~2.0.0 constraint in your project! 
 + [#51](https://github.com/luyadev/luya-module-cms/issues/51) Enable strict url parsing as long as the previous page is a module or strict parsing is disabled.
 

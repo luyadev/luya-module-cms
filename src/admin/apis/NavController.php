@@ -27,9 +27,9 @@ use yii\web\ForbiddenHttpException;
  */
 class NavController extends \luya\admin\base\RestController
 {
-    private function postArg($name)
+    private function postArg($name, $defautValue = null)
     {
-        return Yii::$app->request->post($name, null);
+        return Yii::$app->request->post($name, $defautValue);
     }
     
     public function actionUpdate($id)
@@ -342,7 +342,18 @@ class NavController extends \luya\admin\base\RestController
             $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
         
-        $create = $model->createModule($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
+        $create = $model->createModule(
+            $parentNavId, 
+            $navContainerId, 
+            $this->postArg('lang_id'), 
+            $this->postArg('title'), 
+            $this->postArg('alias'), 
+            $this->postArg('module_name'), 
+            $this->postArg('description'),
+            $this->postArg('controller_name'), 
+            $this->postArg('action_name'), 
+            $this->postArg('action_params', []) 
+        );
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
@@ -354,7 +365,17 @@ class NavController extends \luya\admin\base\RestController
     {
         $this->menuFlush();
         $model = new Nav();
-        $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
+        $create = $model->createModuleItem(
+            $this->postArg('nav_id'),
+            $this->postArg('lang_id'),
+            $this->postArg('title'), 
+            $this->postArg('alias'), 
+            $this->postArg('module_name'),
+            $this->postArg('description'),
+            $this->postArg('controller_name'), 
+            $this->postArg('action_name'), 
+            $this->postArg('action_params', [])
+        );
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }

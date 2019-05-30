@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0655c8455bbd512294a9fa119c1cc7ef",
+    "content-hash": "5fbfe3aaea13b8267ec06708cf1ae2a1",
     "packages": [],
     "packages-dev": [
         {
@@ -18,7 +18,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/5e670ad62f50c738388d4dcec78d2888505ad77b",
-                "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
+                "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b",
+                "shasum": null
             },
             "require": {
                 "bower-asset/jquery": ">=1.7"
@@ -30,16 +31,17 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.3.1",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "9e8ec3d10fad04748176144f108d7355662ae75e"
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/9e8ec3d10fad04748176144f108d7355662ae75e",
-                "reference": "9e8ec3d10fad04748176144f108d7355662ae75e"
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
+                "shasum": null
             },
             "type": "bower-asset",
             "license": [
@@ -57,7 +59,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
+                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
+                "shasum": null
             },
             "type": "bower-asset"
         },
@@ -72,7 +75,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/aef7b953107264f00234902a3880eb50dafc48be",
-                "reference": "aef7b953107264f00234902a3880eb50dafc48be"
+                "reference": "aef7b953107264f00234902a3880eb50dafc48be",
+                "shasum": null
             },
             "require": {
                 "bower-asset/jquery": ">=1.8"
@@ -556,16 +560,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.17",
+            "version": "1.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "cb60abb6a65912088feeabfd7bd9e3a472be2f72"
+                "reference": "8aec9d5dc32f5c9363989e55dcef825214b783e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/cb60abb6a65912088feeabfd7bd9e3a472be2f72",
-                "reference": "cb60abb6a65912088feeabfd7bd9e3a472be2f72",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/8aec9d5dc32f5c9363989e55dcef825214b783e5",
+                "reference": "8aec9d5dc32f5c9363989e55dcef825214b783e5",
                 "shasum": ""
             },
             "require": {
@@ -609,20 +613,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2019-04-23T08:27:34+00:00"
+            "time": "2019-05-27T10:05:39+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "dev-master",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "6059ac994e078dd4046bbf65f9cdd3da89d46f23"
+                "reference": "8d332f982bf75bdb3d5774e394f7c929c8285eb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/6059ac994e078dd4046bbf65f9cdd3da89d46f23",
-                "reference": "6059ac994e078dd4046bbf65f9cdd3da89d46f23",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/8d332f982bf75bdb3d5774e394f7c929c8285eb7",
+                "reference": "8d332f982bf75bdb3d5774e394f7c929c8285eb7",
                 "shasum": ""
             },
             "require": {
@@ -650,7 +654,7 @@
             "type": "luya-core",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "2.0.x-dev"
                 },
                 "luya": {
                     "bootstrap": [
@@ -689,26 +693,26 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2019-05-15T13:03:08+00:00"
+            "time": "2019-05-29T12:54:39+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.16",
+            "version": "1.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "6cd02a52c053a4ee3f843488aba65a29e3be3fc3"
+                "reference": "a509ada5495cce4b249ba8485b762164e30c533c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/6cd02a52c053a4ee3f843488aba65a29e3be3fc3",
-                "reference": "6cd02a52c053a4ee3f843488aba65a29e3be3fc3",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/a509ada5495cce4b249ba8485b762164e30c533c",
+                "reference": "a509ada5495cce4b249ba8485b762164e30c533c",
                 "shasum": ""
             },
             "require": {
                 "curl/curl": "^2.0 || ^1.0",
                 "luyadev/luya-core": "^1.0",
-                "luyadev/luya-module-admin": "^1.0",
+                "luyadev/luya-module-admin": "^1.0|^2.0",
                 "luyadev/luya-module-cms": "^1.0",
                 "phpunit/phpunit": "^6.0",
                 "twig/twig": "^1.0"
@@ -737,7 +741,7 @@
                 "module",
                 "php"
             ],
-            "time": "2019-04-16T09:19:28+00:00"
+            "time": "2019-05-27T09:47:28+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3050,21 +3054,21 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.18",
+            "version": "2.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "be563f0211bd5d4424680d0fcdef578090f08e41"
+                "reference": "3e74c7338dd83cea6ffc6f5c25202b9f2f271f89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/be563f0211bd5d4424680d0fcdef578090f08e41",
-                "reference": "be563f0211bd5d4424680d0fcdef578090f08e41",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/3e74c7338dd83cea6ffc6f5c25202b9f2f271f89",
+                "reference": "3e74c7338dd83cea6ffc6f5c25202b9f2f271f89",
                 "shasum": ""
             },
             "require": {
                 "bower-asset/inputmask": "~3.2.2 | ~3.3.5",
-                "bower-asset/jquery": "3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
+                "bower-asset/jquery": "3.4.*@stable | 3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
                 "bower-asset/punycode": "1.3.*",
                 "bower-asset/yii2-pjax": "~2.0.1",
                 "cebe/markdown": "~1.0.0 | ~1.1.0 | ~1.2.0",
@@ -3146,7 +3150,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2019-04-16T14:27:26+00:00"
+            "time": "2019-05-21T16:01:16+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -3333,9 +3337,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "luyadev/luya-module-admin": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

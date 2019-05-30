@@ -12,6 +12,12 @@ use luya\base\ModuleReflection;
 /**
  * Represents the type MODULE for a NavItem.
  *
+ * @property int $id
+ * @property string $module_name
+ * @property string $controller_name
+ * @property string $action_name
+ * @property string $action_params
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -40,6 +46,8 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     {
         return [
             [['module_name'], 'required'],
+            [['action_params'], 'string'],
+            [['module_name', 'controller_name', 'action_name'], 'string', 'max' => 255],
         ];
     }
 
@@ -54,15 +62,12 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         $module = $this->module_name;
 
         if (!Yii::$app->hasModule($module)) {
-            throw new Exception("The module '$module' does not exist in your module configuration list.");
+            throw new Exception("The module '$module' does not exist in your modules configuration list.");
         }
         
         $this->_module = Yii::$app->getModule($module);
         $this->_module->context = 'cms';
-        /*
-        $this->_module->setContext('cms');
-        $this->_module->setContextOptions($this->getOptions());
-        */
+        
         return $this->_module;
     }
 
@@ -73,6 +78,9 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     {
         return [
             'module_name' => Module::t('model_navitemmodule_module_name_label'),
+            'controller_name' => 'Controller Name',
+            'action_name' => 'Action Name',
+            'action_params' => 'Action Params',
         ];
     }
 
@@ -87,7 +95,7 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
             $module = $this->getModule();
             
             /** @var \luya\base\ModuleReflection $reflection */
-            $reflection = Yii::createObject(['class' => ModuleReflection::className(), 'module' => $module]);
+            $reflection = Yii::createObject(['class' => ModuleReflection::class, 'module' => $module]);
             $reflection->suffix = $this->getOption('restString');
             
             $this->_content = $reflection->run();
