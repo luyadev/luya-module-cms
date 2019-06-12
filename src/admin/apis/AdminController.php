@@ -173,7 +173,7 @@ class AdminController extends \luya\admin\base\RestController
         $module = Yii::$app->getModule($module);
 
         if (!$module) {
-            throw new InvalidArgumentException("The given module name is not valid.");
+            throw new InvalidArgumentException("The given module name is not valid pr not found.");
         }
 
         return Angular::optionsArrayInput($module->getControllerFiles());
@@ -192,12 +192,12 @@ class AdminController extends \luya\admin\base\RestController
         $module = Yii::$app->getModule($module);
 
         if (!$module) {
-            throw new InvalidArgumentException("The given module name is not valid.");
+            throw new InvalidArgumentException("The given module name is not valid or not found.");
         }
 
         $controller = $module->createControllerByID($controller);
-
         $actions = $this->getActions($controller);
+
         return Angular::optionsArrayInput(array_combine($actions, $actions));
     }
 

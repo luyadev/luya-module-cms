@@ -269,9 +269,7 @@ class NavItemController extends \luya\admin\base\RestController
      */
     public function setPostAttribute($model, $attribute)
     {
-        if ($attributeValue = Yii::$app->request->post($attribute, null)) {
-            $model->setAttribute($attribute, $attributeValue);
-        }
+        $model->{$attribute} = Yii::$app->request->getBodyParam($attribute, null);
     }
 
     /**
@@ -307,6 +305,7 @@ class NavItemController extends \luya\admin\base\RestController
       
         $this->menuFlush();
         
+        // its the same type, update values
         if ($model->nav_item_type == $navItemType) {
             $typeModel = $model->getType();
             // lets just update the type data
@@ -318,6 +317,8 @@ class NavItemController extends \luya\admin\base\RestController
                     $this->setPostAttribute($typeModel, 'module_name');
                     $this->setPostAttribute($typeModel, 'controller_name');
                     $this->setPostAttribute($typeModel, 'action_name');
+                    $this->setPostAttribute($typeModel, 'action_params');
+
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
@@ -337,7 +338,7 @@ class NavItemController extends \luya\admin\base\RestController
                     break;
             }
         } else {
-            // set the new type
+            // the page type has changed, create new type
             $model->nav_item_type = $navItemType;
             switch ($navItemType) {
                 case NavItem::TYPE_PAGE:
@@ -364,6 +365,7 @@ class NavItemController extends \luya\admin\base\RestController
                     $this->setPostAttribute($typeModel, 'module_name');
                     $this->setPostAttribute($typeModel, 'controller_name');
                     $this->setPostAttribute($typeModel, 'action_name');
+                    $this->setPostAttribute($typeModel, 'action_params');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
