@@ -1130,7 +1130,7 @@
 
 		$scope.trashItem = function() {
 			if ($scope.lang.is_default == 0) {
-				AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], ['$toast', function() {
+				AdminToastService.confirm(i18n['js_page_confirm_delete'], i18n['cmsadmin_settings_trashpage_title'], ['$toast', function($toast) {
 					$http.delete('admin/api-cms-navitem/delete?navItemId=' + $scope.item.id).then(function(response) {
 						$scope.menuDataReload().then(function() {
 							$scope.isTranslated = false;
