@@ -38,9 +38,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         parent::init();
         
         $this->on(self::EVENT_AFTER_DELETE, function ($event) {
-            foreach ($event->sender->navItemPageBlockItems as $item) {
-                $item->delete();
-            }
+            $columns = $event->sender->getNavItemPageBlockItems()->select(['id'])->column();
+            NavItemPageBlockItem::deleteAll(['in', 'id', $columns]);
             
             if ($event->sender->forceNavItem) {
                 $event->sender->forceNavItem->updateTimestamp();

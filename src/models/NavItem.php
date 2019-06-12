@@ -369,12 +369,12 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * Copy content of type cms_nav_item_page to a target nav item. This will create a new entry in cms_nav_item_page and for every used block a new entry in cms_nav_item_page_block_item
      *
-     * @param $targetNavItem nav item object
+     * @param NavItem $targetNavItem nav item object
      * @return bool
      */
-    public function copyPageItem($targetNavItem)
+    public function copyPageItem(NavItem $targetNavItem)
     {
-        if ($this->nav_item_type !== 1) {
+        if ($this->nav_item_type !== self::TYPE_PAGE) {
             return false;
         }
 
@@ -396,21 +396,38 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             return false;
         }
 
-        $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $sourcePageItem->id]);
+        $batch = NavItemPageBlockItem::find()
+            ->where(['nav_item_page_id' => $sourcePageItem->id])
+            ->asArray()
+            ->batch();
 
         $idLink = [];
-        foreach ($pageBlocks as $block) {
-            $blockItem = new NavItemPageBlockItem();
-            $blockItem->attributes = $block->toArray();
-            $blockItem->nav_item_page_id = $pageItem->id;
-            $blockItem->insert();
-            $idLink[$block->id] = $blockItem->id;
+        foreach ($batch as $pageBlocks) {
+            foreach ($pageBlocks as $block) {
+                $blockItem = new NavItemPageBlockItem();
+                $blockItem->attributes = $block;
+                $blockItem->nav_item_page_id = $pageItem->id;
+                if ($blockItem->save()) {
+                    // store the old block id with the new block id
+                    $idLink[$block['id']] = $blockItem->id;
+                } 
+
+                unset($blockItem);
+            }
         }
         // check if prev_id is used, check if id is in set - get new id and set new prev_ids in copied items
-        $newPageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $pageItem->id]);
-        foreach ($newPageBlocks as $block) {
-            if ($block->prev_id && isset($idLink[$block->prev_id])) {
-                $block->updateAttributes(['prev_id' => $idLink[$block->prev_id]]);
+        $batch = NavItemPageBlockItem::find()
+            ->select(['id', 'prev_id'])
+            ->where(['nav_item_page_id' => $pageItem->id])
+            ->asArray()
+            ->batch();
+
+        foreach ($batch as $newPageBlocks) {
+            foreach ($newPageBlocks as $block) {
+                $prevId = $block['prev_id'];
+                if ($block['prev_id'] && isset($idLink[$prevId])) {
+                    NavItemPageBlockItem::updateAll(['prev_id' => $idLink[$prevId]], ['id' => $block['id']]);
+                }
             }
         }
 
@@ -421,12 +438,12 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * Copy content of type cms_nav_item_module to a target nav item. This will create a new entry in cms_nav_item_module.
      *
-     * @param $targetNavItem
+     * @param NavItem $targetNavItem
      * @return bool
      */
-    public function copyModuleItem($targetNavItem)
+    public function copyModuleItem(NavItem $targetNavItem)
     {
-        if ($this->nav_item_type !== 2) {
+        if ($this->nav_item_type !== self::TYPE_MODULE) {
             return false;
         }
 
@@ -449,12 +466,12 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * Copy content of type cms_nav_item_redirect to a target nav item. This will create a new entry in cms_nav_item_redirect.
      *
-     * @param $targetNavItem
+     * @param NavItem $targetNavItem
      * @return bool
      */
-    public function copyRedirectItem($targetNavItem)
+    public function copyRedirectItem(NavItem $targetNavItem)
     {
-        if ($this->nav_item_type !== 3) {
+        if ($this->nav_item_type !== self::TYPE_REDIRECT) {
             return false;
         }
 
@@ -477,18 +494,18 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * Copy nav item type content.
      *
-     * @param $targetNavItem
+     * @param NavItem $targetNavItem
      * @return bool
      * @throws Exception type not recognized (1,2,3)
      */
-    public function copyTypeContent(ActiveRecordInterface $targetNavItem)
+    public function copyTypeContent(NavItem $targetNavItem)
     {
         switch ($this->nav_item_type) {
-            case 1:
+            case self::TYPE_PAGE:
                 return $this->copyPageItem($targetNavItem);
-            case 2:
+            case self::TYPE_MODULE:
                 return $this->copyModuleItem($targetNavItem);
-            case 3:
+            case self::TYPE_REDIRECT:
                 return $this->copyRedirectItem($targetNavItem);
         }
 
