@@ -138,7 +138,17 @@ use luya\cms\admin\Module;
 <!-- MODULE -->
 <script type="text/ng-template" id="formmodule.html">
     <zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
-    <zaa-select model="data.controller_name" label="Controllers" options="controllers" />
-    <zaa-select model="data.action_name" label="Actions" options="actions" />
+    <zaa-select ng-show="data.module_name" model="data.controller_name" label="Controllers" options="controllers" />
+    <zaa-select ng-show="data.controller_name" model="data.action_name" label="Actions" options="actions" />
+    <div ng-show="data.action_name">
+        <p class="text-muted">Action Parameters</p>
+        <div ng-repeat="(key, value) in data.action_params">
+            <zaa-text model="data.action_params[key]" label="{{ key }}" />
+        </div>
+        <div class="float-right">
+            <input type="text" ng-model="paramKey" />
+            <button type="button" class="btn btn-primary btn-icon btn-save" ng-click="addParam(paramKey); paramKey=null">Add Param</button>
+    </div>
+    </div>
 </script>
 <!-- // MODULE -->

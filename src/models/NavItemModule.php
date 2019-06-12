@@ -8,6 +8,7 @@ use luya\cms\base\NavItemTypeInterface;
 use luya\cms\base\NavItemType;
 use luya\cms\admin\Module;
 use luya\base\ModuleReflection;
+use luya\helpers\Json;
 
 /**
  * Represents the type MODULE for a NavItem.
@@ -51,8 +52,78 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         ];
     }
 
-    private $_module;
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
 
+        $this->on(self::EVENT_AFTER_FIND, function() {
+            $this->action_params = $this->getDecodedActionParams();
+        });
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'module_name' => Module::t('model_navitemmodule_module_name_label'),
+            'controller_name' => 'Controller Name',
+            'action_name' => 'Action Name',
+            'action_params' => 'Action Params',
+        ];
+    }
+
+    /**
+     * Return the action params as php array instead of json object
+     *
+     * @return array
+     * @since 2.0.0
+     */
+    public function getDecodedActionParams()
+    {
+        return empty($this->action_params) ? [] : Json::decode($this->action_params);
+    }
+
+    private $_content;
+    
+    /**
+     * @inheritdoc
+     */
+    public function getContent()
+    {
+        if ($this->_content == null) {
+            $module = $this->getModule();
+            
+            /** @var \luya\base\ModuleReflection $reflection */
+            $reflection = Yii::createObject(['class' => ModuleReflection::class, 'module' => $module]);
+            $reflection->suffix = $this->getOption('restString');
+
+            // if a controller s defined change default route
+            if ($this->controller_name) {
+                $reflection->defaultRoute($this->controller_name, $this->action_name, $this->getDecodedActionParams());
+            }
+            
+            $this->_content = $reflection->run();
+            
+            $this->controller = $reflection->controller;
+
+            Yii::$app->menu->setCurrentUrlRule($reflection->getUrlRule());
+        }
+        
+        return $this->_content;
+    }
+
+    private $_module;
+    
+    /**
+     * Get the module object from config
+     *
+     * @return \luya\base\Module
+     */
     private function getModule()
     {
         if ($this->_module !== null) {
@@ -69,42 +140,5 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         $this->_module->context = 'cms';
         
         return $this->_module;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'module_name' => Module::t('model_navitemmodule_module_name_label'),
-            'controller_name' => 'Controller Name',
-            'action_name' => 'Action Name',
-            'action_params' => 'Action Params',
-        ];
-    }
-
-    private $_content;
-    
-    /**
-     * @inheritdoc
-     */
-    public function getContent()
-    {
-        if ($this->_content == null) {
-            $module = $this->getModule();
-            
-            /** @var \luya\base\ModuleReflection $reflection */
-            $reflection = Yii::createObject(['class' => ModuleReflection::class, 'module' => $module]);
-            $reflection->suffix = $this->getOption('restString');
-            
-            $this->_content = $reflection->run();
-            
-            $this->controller = $reflection->controller;
-
-            Yii::$app->menu->setCurrentUrlRule($reflection->getUrlRule());
-        }
-        
-        return $this->_content;
     }
 }

@@ -334,17 +334,23 @@
 				$scope.modules = [];
 				$scope.controllers = [];
 				$scope.actions = [];
+				$scope.params = {};
 
 				$http.get('admin/api-admin-common/data-modules').then(function(response) {
 					$scope.modules = response.data;
 				});
 
+				$scope.addParam = function(key) {
+					if (!$scope.data.hasOwnProperty('action_params')) {
+						$scope.data.action_params = {};
+					}
+					$scope.data.action_params[key] = '';
+				};
+
 				$scope.$watch(function() {
 					return $scope.data.module_name;
-				}, function(n, o) {
-					if (n && n!=o) {
-						$scope.data.controller_name = null;
-						$scope.data.action_name = null;
+				}, function(n) {
+					if (n) {
 						$http.get('admin/api-cms-admin/module-controllers?module=' + n).then(function(response) {
 							$scope.controllers = response.data;
 							$scope.actions = [];
@@ -354,9 +360,8 @@
 
 				$scope.$watch(function() {
 					return $scope.data.controller_name;
-				}, function(n, o) {
-					if (n && n!=o) {
-						$scope.data.action_name = null;
+				}, function(n) {
+					if (n) {
 						$http.get('admin/api-cms-admin/controller-actions?module='+$scope.data.module_name+'&controller=' + n).then(function(response) {
 							$scope.actions = response.data;
 						});
