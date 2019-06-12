@@ -17,6 +17,7 @@ use yii\web\ForbiddenHttpException;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
 use luya\helpers\ArrayHelper;
+use yii\web\NotFoundHttpException;
 
 /**
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
@@ -84,11 +85,11 @@ class NavItemController extends \luya\admin\base\RestController
         
         $model = NavItem::findOne($navItemId);
         
-        if ($model) {
-            return $model->delete();
+        if (!$model) {
+            throw new NotFoundHttpException("Unable to find the given nav item model for id {$navItemId}.");
         }
-        
-        return $this->sendModelError($model);
+
+        return $model->delete();
     }
     
     /**
