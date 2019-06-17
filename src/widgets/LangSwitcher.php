@@ -6,6 +6,8 @@ use Yii;
 use luya\web\Composition;
 use yii\helpers\Html;
 use luya\helpers\ArrayHelper;
+use luya\cms\models\NavItem;
+use luya\helpers\Url;
 
 /**
  * CMS Lang Switcher Widget.
@@ -132,8 +134,8 @@ class LangSwitcher extends \luya\base\Widget
      */
     private function generateHtml($href, $isActive, $lang)
     {
-        if (!isset(static::$registerLinkTags[$href])) {
-            $this->view->registerLinkTag(['rel' => 'alternate', 'hreflang' => $lang['short_code'], 'href' => Yii::$app->urlManager->hostInfo . $href]);
+        if (!array_key_exists($href, static::$registerLinkTags)) {
+            $this->view->registerLinkTag(['rel' => 'alternate', 'hreflang' => $lang['short_code'], 'href' => $href]);
             static::$registerLinkTags[$href] = true;
         }
         $elementOptions = $this->elementOptions;
@@ -184,6 +186,29 @@ class LangSwitcher extends \luya\base\Widget
     }
     
     /**
+     * Prefix the current link with the dedicated host info.
+     * 
+     * Assuming hostInfoMapping is defined in composition component, the correct domain will be taken from the
+     * language information.
+     *
+     * @param string $link The link to prefix.
+     * @param array $lang The language array containing the short code to determine host info.
+     * @return string
+     * @since 2.0.0
+     */
+    private function ensureHostInfo($link, array $lang)
+    {
+        // check if host info mapping is available.
+        $domain = Yii::$app->composition->resolveHostInfo($lang['short_code']);
+        // no domain is defined for this host info, therfore just prepend the current host:
+        if (!$domain) {
+            $domain = Yii::$app->urlManager->hostInfo;
+        }
+
+        return Url::ensureHttp($domain) . '/' . ltrim($link, '/');
+    }
+
+    /**
      * @return string The langnav html
      */
     public function run()
@@ -199,7 +224,7 @@ class LangSwitcher extends \luya\base\Widget
             $lang = $langData['lang'];
             
             if ($item) {
-                if ($item->type == 2  && !empty($rule)) {
+                if ($item->type == NavItem::TYPE_MODULE && !empty($rule)) {
                     $routeParams = [$rule['route']];
                     foreach ($rule['params'] as $key => $value) {
                         $routeParams[$key] = $value;
@@ -212,9 +237,9 @@ class LangSwitcher extends \luya\base\Widget
                 } else {
                     $link = $item->link;
                 }
-                $items[$lang['short_code']] = $this->generateHtml($link, $currentLang == $lang['short_code'], $lang);
+                $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo($link, $lang), $currentLang == $lang['short_code'], $lang);
             } else {
-                $items[$lang['short_code']] = $this->generateHtml(Yii::$app->urlManager->prependBaseUrl($lang['short_code']), $currentLang == $lang['short_code'], $lang);
+                $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo(Yii::$app->urlManager->prependBaseUrl($lang['short_code']), $lang), $currentLang == $lang['short_code'], $lang);
             }
             
             unset($item, $lang);

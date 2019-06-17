@@ -17,6 +17,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ### Fixed
 
++ [#201](https://github.com/luyadev/luya-module-cms/issues/201) Fix issued where language switcher widget does not prefix host info (defined by hostInfoMapping). 
 + [#193](https://github.com/luyadev/luya-module-cms/pull/193) Prefix certain application env folders when running block importer in order to make sure windows system paths work.
 + [#194](https://github.com/luyadev/luya-module-cms/issues/194) Updated CSS to unify spaces between page languages and treenav
 + [#71](https://github.com/luyadev/luya-module-cms/issues/71) If a not found page is defined a 404 is returned instead of redirect to the error page.
