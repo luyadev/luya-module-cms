@@ -13,7 +13,7 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/luyadev/luya/issues"
+		"issues" : "https://github.com/luyadev/luya-module-cms/issues"
 	},
 	"require-dev" : {
 	    "luyadev/luya-testsuite" : "~1.0.0",
