@@ -62,6 +62,10 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         $this->on(self::EVENT_AFTER_FIND, function() {
             $this->action_params = $this->getDecodedActionParams();
         });
+
+        $this->on(self::EVENT_BEFORE_VALIDATE, function() {
+            $this->action_params = $this->getEncodedActionParams();
+        });
     }
 
     /**
@@ -86,6 +90,17 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     public function getDecodedActionParams()
     {
         return empty($this->action_params) ? [] : Json::decode($this->action_params);
+    }
+
+    /**
+     * Get the encoded value from actions params, this is used to store to store the json params.
+     *
+     * @return string
+     * @since 2.0.0
+     */
+    public function getEncodedActionParams()
+    {
+        return is_scalar($this->action_params) ? $this->action_params : Json::encode($this->action_params, JSON_FORCE_OBJECT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 
     private $_content;
