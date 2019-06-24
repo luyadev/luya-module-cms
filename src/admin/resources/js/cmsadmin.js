@@ -320,7 +320,7 @@
 		}
 	});
 
-	/* MODULE */
+	/* Page MODULE */
 
 	zaa.directive("formModule", function() {
 		return {
@@ -372,9 +372,11 @@
 	});
 
 	/**
-	 * This is mainly keepet for legacy purpsoes as the admin requires this.
+	 * This is mainly keept for legacy purposes as the admin requires this directive but the template is stored in the admin module.
 	 * 
 	 * > The template updateformredirect.html is stored in the luya admin module!
+	 * 
+	 * Otherwise the redirect form for create and update is not needed anymore as its handled by zaa-link
 	 * 
 	 * @deprecated Will be removed in 3.0 and moved to luya admin moudle.
 	 * @see https://github.com/luyadev/luya-module-admin/blob/master/src/views/layouts/_angulardirectives.php
@@ -394,6 +396,35 @@
 				});
 			}]
 		}
+	});
+
+	/* filters */
+
+	zaa.filter("menuparentfilter", function() {
+		return function(input, containerId, parentNavId) {
+			var result = [];
+			angular.forEach(input, function(value, key) {
+				if (value.parent_nav_id == parentNavId && value.nav_container_id == containerId) {
+					result.push(value);
+				}
+			});
+			return result;
+		};
+	});
+
+	zaa.filter('menuchildfilter', function() {
+		return function(input, containerId, parentNavId) {
+			var returnValue = false;
+			angular.forEach(input, function(value, key) {
+				if (!returnValue) {
+					if (value.id == parentNavId && value.nav_container_id == containerId) {
+						returnValue = value;
+					}
+				}
+			});
+
+			return returnValue;
+		};
 	});
 
 	/* factory.js */
@@ -428,6 +459,8 @@
 		});
 	}]);
 
+	/* controllers */
+
 	zaa.controller("DraftsController", ['$scope', '$state', 'ServiceMenuData', function($scope, $state, ServiceMenuData) {
 
 		$scope.menuData = ServiceMenuData.data;
@@ -440,8 +473,6 @@
 			$state.go('custom.cmsedit', { navId : navId });
 		};
 	}]);
-
-	/* controllers */
 
 	zaa.controller("CmsDashboard", ['$scope', '$http', function($scope, $http) {
 		$scope.dashboard = [];
@@ -568,33 +599,6 @@
 
 	}]);
 
-	zaa.filter("menuparentfilter", function() {
-		return function(input, containerId, parentNavId) {
-			var result = [];
-			angular.forEach(input, function(value, key) {
-				if (value.parent_nav_id == parentNavId && value.nav_container_id == containerId) {
-					result.push(value);
-				}
-			});
-			return result;
-		};
-	});
-
-	zaa.filter('menuchildfilter', function() {
-		return function(input, containerId, parentNavId) {
-			var returnValue = false;
-			angular.forEach(input, function(value, key) {
-				if (!returnValue) {
-					if (value.id == parentNavId && value.nav_container_id == containerId) {
-						returnValue = value;
-					}
-				}
-			});
-
-			return returnValue;
-		};
-	});
-
 	zaa.controller("CmsMenuTreeController", ['$scope', '$rootScope', '$state', '$http', '$filter', 'ServiceMenuData', 'ServiceLiveEditMode', function($scope, $rootScope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
 
 		// live edit service
@@ -649,7 +653,7 @@
 			$http.get(api, { params : params }).then(function(success) {
 				ServiceMenuData.load(true);
 			}, function(error) {
-				console.log('throw error message errorMessageOnDuplicateAlias');
+				//console.log('throw error message errorMessageOnDuplicateAlias');
 				ServiceMenuData.load(true);
 			});
 		};
@@ -740,8 +744,6 @@
 
 	}]);
 
-	// create.js
-
 	zaa.controller("CmsadminCreateController", ['$scope', '$q', '$http', function($scope, $q, $http) {
 
 		$scope.data = {};
@@ -823,8 +825,6 @@
 		}
 
 	}]);
-
-	// update.js
 
 	zaa.controller("NavController", [
 		'$scope', '$rootScope', '$filter', '$state', '$stateParams', '$http', 'PlaceholderService', 'ServicePropertiesData', 'ServiceMenuData', 'ServiceLanguagesData', 'ServiceLiveEditMode', 'AdminToastService', 'AdminClassService', 'AdminLangService', 'HtmlStorage',
@@ -1421,8 +1421,6 @@
 		$scope.refresh();
 	}]);
 
-
-
 	/**
 	 * @param $scope.block From ng-repeat scope assignment
 	 */
@@ -1730,7 +1728,5 @@
 				$scope.blocksData = angular.copy($scope.blocksDataRestore);
 			}
 		});
-
-
 	}]);
 })();
