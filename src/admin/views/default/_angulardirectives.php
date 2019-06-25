@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+use luya\admin\helpers\Angular;
 
 ?>
 <script type="text/ng-template" id="createform.html">
@@ -137,10 +138,11 @@ use luya\cms\admin\Module;
 
 <!-- MODULE -->
 <script type="text/ng-template" id="formmodule.html">
-    
-    <zaa-select model="data.module_name" label="<?= Module::t('view_index_module_select'); ?>" options="modules" />
-    <zaa-select ng-show="data.module_name" model="data.controller_name" label="Controllers" options="controllers" />
-    <zaa-select ng-show="data.controller_name" model="data.action_name" label="Actions" options="actions" />
-    <zaa-json-object ng-show="data.action_name" model="data.action_params" label="Action Params" />
+    <?= Angular::select('data.module_name', Module::t('view_index_module_select'), 'modules')->hint(Module::t('view_index_module_select_help')); ?>
+    <collapse-container title="<?= Module::t('view_index_module_advanced_settings_button'); ?>" class="mb-3">
+        <?= Angular::select('data.controller_name', Module::t('view_index_module_controller_name'), 'controllers'); ?>
+        <?= Angular::select('data.action_name', Module::t('view_index_module_action_name'), 'actions'); ?>
+        <zaa-json-object ng-show="data.action_name" model="data.action_params" label="<?= Module::t('view_index_module_action_params'); ?>" />
+    </collapse-container>
 </script>
 <!-- // MODULE -->

@@ -239,5 +239,9 @@ return [
     'view_index_page_meta_description_hint' => 'The page description should be a sentence about the purpose of this page. It is often used by search engines as a description for a page in the search results. It is also relevant when sharing a page on social media.',
     'view_index_page_meta_keywords_hint' => 'The keywords are separated by commas (e.g. pizza, burger, pasta). Very few search engines still rely on these keywords. Use only words that are relevant for the page\'s content. The LUYA toolbar of the frontend will help check whether keywords were defined for the current page or not.',
     'model_navitem_image_id_label_hint' => 'The image is important when sharing the page on social media. Usually this image is displayed by social media platforms as a preview image for a page.',
-
+    'view_index_module_controller_name' => 'Controller',
+    'view_index_module_action_name' => 'Action',
+    'view_index_module_action_params' => 'Action parameters',
+    'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
+    'view_index_module_advanced_settings_button' => 'Advanced settings',
 ];

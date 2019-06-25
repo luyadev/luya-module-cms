@@ -240,4 +240,9 @@ return [
     'view_index_page_meta_description_hint' => 'Die Seitenbeschreibung sollte in einem Satz Auskunft über den Zweck der Seite geben. Sie wird von Suchmaschinen oft als Beschreibung für eine Seite in den Suchresultaten verwendet. Sie ist auch relevant beim Teilen der Seite über Social-Media-Kanäle.',
     'view_index_page_meta_keywords_hint' => 'Die Stichworte werden mit Kommas getrennt (z.B. Pizza, Burger, Pasta). Nur noch wenige Suchmaschinen werten diese Stichworte aus. Verwenden Sie nur Stichworte, die für den Inhalt der Seite relevant sind. Die LUYA-Werkzeugleiste des Frontends gibt Auskunft darüber, ob für die aktuelle Seite Stichworte definiert wurden oder nicht.',
     'model_navitem_image_id_label_hint' => 'Das Bild ist wichtig beim Teilen der Seite über Social-Media-Kanäle. In der Regel wird dieses Bild von Social-Media-Plattformen als Vorschaubild verwendet.',
+    'view_index_module_controller_name' => 'Controller',
+    'view_index_module_action_name' => 'Action',
+    'view_index_module_action_params' => 'Action parameters',
+    'view_index_module_select_help' => 'Wählen Sie das anzuzeigende Modul aus der Liste aus (nur Frontend-Module werden aufgeführt). Module werden im Modul-Abschnitt der config konfiguriert.',
+    'view_index_module_advanced_settings_button' => 'Erweiterte Einstellungen',
 ];
