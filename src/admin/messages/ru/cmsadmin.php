@@ -241,5 +241,9 @@ return [
     'view_index_page_meta_description_hint' => 'Описание страницы должно определять назначение страницы. Этот текст часто используется поисковыми системами в качестве описания страницы в результатах поиска. Это также актуально для публикации страницы в социальных сетях.',
     'view_index_page_meta_keywords_hint' => 'Ключевые слова разделяются запятыми (например, пицца, бургер, макароны). Очень немногие поисковые системы все еще полагаются на эти ключевые слова. Используйте только те слова, которые имеют отношение к содержанию страницы. Панель инструментов LUYA внешнего интерфейса поможет проверить, были ли определены ключевые слова для текущей страницы или нет.',
     'model_navitem_image_id_label_hint' => 'Изображение важно, когда вы делитесь страницей в социальных сетях. Обычно это изображение отображается в социальных сетях в качестве предварительного изображения для страницы.',
-
+    'view_index_module_controller_name' => 'Controller',
+    'view_index_module_action_name' => 'Action',
+    'view_index_module_action_params' => 'Action parameters',
+    'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
+    'view_index_module_advanced_settings_button' => 'Advanced settings',
 ];
