@@ -194,7 +194,7 @@ interface BlockInterface
     public function getCacheExpirationTime();
     
     /**
-     * Whether is an container element or not.
+     * Whether this is a container element or not. Container elements usually have defined placeholders.
      *
      * @return boolean
      */
@@ -204,7 +204,7 @@ interface BlockInterface
      * Whether the dirty marker dialog is enable or not.
      *
      * This can be usefull when working with blocks which does not require any input data, so therefore
-     * it does not require a drity marked dialog.
+     * it does not require a dirty marked dialog.
      *
      * @return boolean
      */
