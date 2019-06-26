@@ -4,14 +4,12 @@ namespace luya\cms\frontend;
 
 use Yii;
 use yii\base\BootstrapInterface;
-use yii\web\HttpException;
-use luya\web\ErrorHandlerExceptionRenderEvent;
-use luya\cms\menu\Item;
-use luya\cms\models\Config;
-use luya\web\Application;
-use luya\web\ErrorHandler;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use luya\web\ErrorHandlerExceptionRenderEvent;
+use luya\web\Application;
+use luya\web\ErrorHandler;
+use luya\cms\models\Config;
 
 /**
  * CMS Bootstrap.
@@ -34,6 +32,8 @@ final class Bootstrap implements BootstrapInterface
     public function bootstrap($app)
     {
         if ($app->hasModule('cms')) {
+
+            // load cms url rules
             $app->on(Application::EVENT_BEFORE_REQUEST, function ($event) {
                 if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin) {
                     $event->sender->urlManager->addRules([
@@ -43,18 +43,20 @@ final class Bootstrap implements BootstrapInterface
                 }
             });
 
+            // handle not found exceptions
             $app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) use ($app) {
                 if ($event->exception instanceof NotFoundHttpException) {
 
                     $errorPageNavId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
-                    /** @var $menu Item */
-                    $menu = $app->menu->find()->with(['hidden'])->where(['nav_id' => $errorPageNavId])->one();
-                    if ($menu === null) {
+                    /** @var $item Item */
+                    $item = $app->menu->find()->with(['hidden'])->where(['nav_id' => $errorPageNavId])->one();
+                    // unable to find the item, maybe its offline or does not exists anymore.
+                    if (!$item) {
                         return;
                     }
 
                     // render CMS 404 page
-                    $app->menu->setCurrent($menu);
+                    $app->menu->setCurrent($item);
                     $result = $app->runAction('cms/default/index');
                     if ($result instanceof Response) {
                         $response = $result;
