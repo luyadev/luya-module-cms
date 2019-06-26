@@ -5,6 +5,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 2.0.0 (26. June 2019)
 
+> This release contains new migrations and requires to run the migrate command after updating. Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.
+
 ### Changed
 
 + [#81](https://github.com/luyadev/luya-module-cms/issues/81) Added new migrations for module pages in order to allow controller and action definitions.

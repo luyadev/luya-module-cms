@@ -26,7 +26,7 @@ For installation and usage please check: [LUYA.IO](https://luya.io)
 For the installation of modules Composer is required.
 
 ```sh
-composer require luyadev/luya-module-cms:~1.0.0
+composer require luyadev/luya-module-cms
 ```
 
 ### Configuration 
