@@ -9,6 +9,7 @@ use Exception;
 use luya\cms\frontend\base\Controller;
 use luya\cms\models\Redirect;
 use yii\web\Response;
+use luya\web\filters\ResponseCache;
 
 /**
  * CMS Default Rendering
@@ -34,6 +35,29 @@ class DefaultController extends Controller
         if (!YII_DEBUG && YII_ENV_PROD && $this->module->contentCompression) {
             $this->view->on(View::EVENT_AFTER_RENDER, [$this, 'minify']);
         }
+    }
+
+    private function isFullPageCacheEnabled()
+    {
+        return $this->module->fullPageCache && Yii::$app->menu->current->isStrictParsing && Yii::$app->request->isGet && Yii::$app->menu->current->type == 1;
+    }
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['pageCache'] = [
+            'class' => ResponseCache::class,
+            'variations' => [
+                Yii::$app->request->url,
+            ],
+            'dependency' => [
+                'class' => 'yii\caching\DbDependency',
+                'sql' => 'SELECT max(timestamp_update) FROM cms_nav_item',
+            ],
+            'enabled' => $this->isFullPageCacheEnabled(),
+        ];
+
+        return $behaviors;
     }
 
     /**

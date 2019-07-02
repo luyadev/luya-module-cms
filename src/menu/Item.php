@@ -483,6 +483,11 @@ class Item extends BaseObject implements LinkInterface, Arrayable
         return array_key_exists($this->id, Yii::$app->menu->current->teardown);
     }
 
+    public function getIsStrictParsing()
+    {
+        return !$this->itemArray['is_url_strict_parsing_disabled'];
+    }
+
     /**
      * Returns the depth of the navigation tree start with 1. Also known as menu level.
      *
