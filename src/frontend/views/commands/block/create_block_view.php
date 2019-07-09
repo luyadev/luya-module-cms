@@ -11,6 +11,6 @@ echo "<?php\n";
 
 <?php endforeach; ?>
  *
- * @var $this \luya\cms\base\PhpBlockView
+ * @var \luya\cms\base\PhpBlockView $this
  */
 ?>
