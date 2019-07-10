@@ -324,7 +324,7 @@ EOT;
  * @param $this->varValue('foo');
  * @param $this->varValue('foo');
  *
- * @var \luya\cms\base\PhpBlockView $this 
+ * @var \luya\cms\base\PhpBlockView $this
  */
 ?>
 EOT;
