@@ -327,6 +327,7 @@ EOT;
  * @var \luya\cms\base\PhpBlockView $this
  */
 ?>
+
 EOT;
         $this->assertSame($view, $ctrl->generateViewFile('MySuperBlock'));
     }
