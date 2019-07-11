@@ -9,7 +9,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 + [#210](https://github.com/luyadev/luya-module-cms/pull/210) Added new Active Query Select Injector class.
 
-### Fixed
+### Fixed
 
 + [#209](https://github.com/luyadev/luya-module-cms/pull/209) Fixed phpdoc in view file generator of blocks.
 
