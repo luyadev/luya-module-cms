@@ -50,7 +50,7 @@ return [
     'menu_group_item_env_container' => 'Контейнеры',
     'menu_group_item_env_layouts' => 'Макеты',
     'menu_group_elements' => 'Элементы контента',
-    'menu_group_item_elements_blocks' => 'Блоки', 
+    'menu_group_item_elements_blocks' => 'Блоки',
     'menu_group_item_elements_group' => 'Группы блоков',
     'btn_abort' => 'Отмена',
     'btn_refresh' => 'Обновить',

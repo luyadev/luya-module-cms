@@ -140,7 +140,7 @@ class ItemTest extends CmsFrontendTestCase
         $itemWithParent = (new Query)->where(['nav_id' => 10])->one();
 
         $this->assertSame(2, $itemWithParent->depth);
-        $f = $itemWithParent->down(function(Item $item) {
+        $f = $itemWithParent->down(function (Item $item) {
             if ($item->depth == 1) {
                 return $item;
             }
@@ -148,7 +148,7 @@ class ItemTest extends CmsFrontendTestCase
 
         $this->assertSame(1, $f->depth);
 
-        $this->assertFalse($itemWithParent->down(function(Item $item) {
+        $this->assertFalse($itemWithParent->down(function (Item $item) {
             // just do nothing means pass all elements.
         }));
     }

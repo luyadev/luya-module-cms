@@ -343,16 +343,16 @@ class NavController extends \luya\admin\base\RestController
         }
         
         $create = $model->createModule(
-            $parentNavId, 
-            $navContainerId, 
-            $this->postArg('lang_id'), 
-            $this->postArg('title'), 
-            $this->postArg('alias'), 
-            $this->postArg('module_name'), 
+            $parentNavId,
+            $navContainerId,
+            $this->postArg('lang_id'),
+            $this->postArg('title'),
+            $this->postArg('alias'),
+            $this->postArg('module_name'),
             $this->postArg('description'),
-            $this->postArg('controller_name'), 
-            $this->postArg('action_name'), 
-            $this->postArg('action_params', []) 
+            $this->postArg('controller_name'),
+            $this->postArg('action_name'),
+            $this->postArg('action_params', [])
         );
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
@@ -368,12 +368,12 @@ class NavController extends \luya\admin\base\RestController
         $create = $model->createModuleItem(
             $this->postArg('nav_id'),
             $this->postArg('lang_id'),
-            $this->postArg('title'), 
-            $this->postArg('alias'), 
+            $this->postArg('title'),
+            $this->postArg('alias'),
             $this->postArg('module_name'),
             $this->postArg('description'),
-            $this->postArg('controller_name'), 
-            $this->postArg('action_name'), 
+            $this->postArg('controller_name'),
+            $this->postArg('action_name'),
             $this->postArg('action_params', [])
         );
         if (is_array($create)) {

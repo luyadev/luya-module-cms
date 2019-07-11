@@ -257,7 +257,7 @@ class Nav extends ActiveRecord
      *
      * This method is mainly to find all recursive children of a nav item when moving a page into a container
      * all childrens requires to update its container id as well, so this method contains the data of its children
-     * 
+     *
      * @return array An array where each entry is a Nav object
      */
     public function getRecursiveChildren()

@@ -19,9 +19,9 @@ class RedirectController extends \luya\admin\ngrest\base\Api
 
     /**
      * Find a redirect object for a given path info.
-     * 
+     *
      * An example using path would be: Yii::$app->request->pathInfo
-     * 
+     *
      * url: https://example.com/hello/world
      * path: hello/world
      *

@@ -433,7 +433,8 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
             $this->getExtraVarValues();
             $this->_assignExtraVars = true;
         }
-        return (isset($this->_extraVars[$key])) ? $this->_extraVars[$key] : $default;
+
+        return isset($this->_extraVars[$key]) ? $this->_extraVars[$key] : $default;
     }
     
     /**
@@ -483,7 +484,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public function getConfigPlaceholdersExport()
     {
-        $array =  (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
+        $array = array_key_exists('placeholders', $this->config()) ? $this->config()['placeholders'] : [];
         
         $holders = [];
         
@@ -505,7 +506,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public function getConfigPlaceholdersByRowsExport()
     {
-        $array =  (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
+        $array = array_key_exists('placeholders', $this->config()) ? $this->config()['placeholders'] : [];
         
         $rows = [];
         

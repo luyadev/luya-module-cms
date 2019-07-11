@@ -58,7 +58,7 @@ class ActiveQuerySelectInjectorTest extends ModelTestCase
     {
         $block = new TestBlock();
         $block->setVarValues([
-            'foobar' => 2,
+            'foobar' => 0,
         ]);
 
         $injector = new ActiveQuerySelectInjector([

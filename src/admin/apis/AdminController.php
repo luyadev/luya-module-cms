@@ -203,7 +203,7 @@ class AdminController extends \luya\admin\base\RestController
 
     /**
      * Get actions for a given controller.
-     * 
+     *
      * @param object $controller
      * @since 2.0.0
      * @see Replace with luya core object helper
