@@ -10,8 +10,10 @@ use cmstests\data\blocks\import\TestBlock;
 
 class ActiveQuerySelectInjectorTest extends ModelTestCase
 {
-    public function testVariableResponse()
+    public function afterSetup()
     {
+        parent::afterSetup();
+        
         $fixture = new NgRestModelFixture([
             'modelClass' => Layout::class,
             'fixtureData' => [
@@ -23,9 +25,11 @@ class ActiveQuerySelectInjectorTest extends ModelTestCase
                 ]
             ]
         ]);
+    }
 
+    public function testVariableResponse()
+    {
         $block = new TestBlock();
-
         $block->setVarValues([
             'foobar' => 1,
         ]);
@@ -48,5 +52,24 @@ class ActiveQuerySelectInjectorTest extends ModelTestCase
         $this->assertSame(1, $x);
         $this->assertSame(['node' => 'value'], $f->getJsonConfig());
         $this->assertSame('value', $f->getJsonConfig('node'));
+    }
+
+    public function testVariableNotFoundId()
+    {
+        $block = new TestBlock();
+        $block->setVarValues([
+            'foobar' => 2,
+        ]);
+
+        $injector = new ActiveQuerySelectInjector([
+            'query' => Layout::find(),
+            'varName' => 'foobar',
+            'varLabel' => 'test',
+            'label' => 'name',
+            'context' => $block,
+        ]);
+        $injector->setup();
+
+        $this->assertFalse($block->getExtraValue('foobar'));
     }
 }
