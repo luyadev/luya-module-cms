@@ -169,7 +169,7 @@ class CmslayoutImporter extends Importer
             }
 
             return $layoutItem->id;
-        } 
+        }
 
         // add item into the database table
         $data = new Layout();

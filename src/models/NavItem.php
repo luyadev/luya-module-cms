@@ -410,7 +410,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
                 if ($blockItem->save()) {
                     // store the old block id with the new block id
                     $idLink[$block['id']] = $blockItem->id;
-                } 
+                }
 
                 unset($blockItem);
             }

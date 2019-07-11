@@ -112,6 +112,4 @@ class DefaultController extends Controller
         
         return false;
     }
-
-
 }

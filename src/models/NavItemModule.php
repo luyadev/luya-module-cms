@@ -18,7 +18,7 @@ use luya\helpers\Json;
  * @property string $controller_name
  * @property string $action_name
  * @property string $action_params
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -59,11 +59,11 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     {
         parent::init();
 
-        $this->on(self::EVENT_AFTER_FIND, function() {
+        $this->on(self::EVENT_AFTER_FIND, function () {
             $this->action_params = $this->getDecodedActionParams();
         });
 
-        $this->on(self::EVENT_BEFORE_VALIDATE, function() {
+        $this->on(self::EVENT_BEFORE_VALIDATE, function () {
             $this->action_params = $this->getEncodedActionParams();
         });
     }

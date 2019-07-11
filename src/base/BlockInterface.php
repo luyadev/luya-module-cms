@@ -212,17 +212,17 @@ interface BlockInterface
 
     /**
      * This method is called whenever a block inside a placeholder is rendered.
-     * 
+     *
      * This allows you to change the render behavior of every block inside a placeholder. An example of
      * adding a wrapper div to the iteration:
-     * 
+     *
      * ```php
      * public function placeholderRenderIteration(BlockInterface $block)
      * {
      *      return '<div class="block-wrapper">'.$block->renderFrontend().'</div>';
      * }
      * ```
-     * 
+     *
      * This also allows you to determined whether the block should be rendered or not as the response is the content
      * of the block inside the placholder.
      *

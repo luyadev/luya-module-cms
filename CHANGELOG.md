@@ -3,7 +3,11 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 2.0.1
+## 2.1.0
+
+### Added
+
++ [#210](https://github.com/luyadev/luya-module-cms/pull/210) Added new Active Query Select Injector class.
 
 ### Fixed
 

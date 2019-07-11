@@ -41,13 +41,29 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
      *
      * Define the active query which will be used to retrieve data must be an instance of {{\yii\db\ActiveQueryInterface}}.
      *
-     * @param \yii\db\ActiveQueryInterface $query The query provider for the {{yii\data\ActiveDataProvider}}.
+     * @param ActiveQueryInterface $query The query provider for the {{yii\data\ActiveDataProvider}}.
      */
     public function setQuery(ActiveQueryInterface $query)
     {
         $this->_query = $query;
     }
+
+    /**
+     * Get the Active Query Object.
+     *
+     * @return ActiveQueryInterface
+     * @since 2.1.0
+     */
+    protected function getQuery()
+    {
+        return $this->_query;
+    }
     
+    /**
+     * Get an array with options
+     *
+     * @return array
+     */
     protected function getQueryData()
     {
         $provider = new ActiveDataProvider([
@@ -65,9 +81,15 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
             }
             $data[] = ['value' => $model->primaryKey, 'label' => $label];
         }
+
         return $data;
     }
     
+    /**
+     * Get the Active Record models from the stored block values
+     *
+     * @return \yii\db\ActiveRecord[]
+     */
     protected function getExtraAssignArrayData()
     {
         $ids = ArrayHelper::getColumn($this->getContextConfigValue($this->varName, []), 'value');
@@ -80,12 +102,19 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
         return $provider->getModels();
     }
     
+    /**
+     * Get a single active record based on the stored block value.
+     *
+     * @return \yii\db\ActiveRecord
+     */
     protected function getExtraAssignSingleData()
     {
         $value = $this->getContextConfigValue($this->varName);
         
-        if ($value) {
-            return $this->_query->where(['id' => $value])->one();
+        if (!$value) {
+            return false;
         }
+
+        return $this->getQuery()->where(['id' => $value])->one();
     }
 }

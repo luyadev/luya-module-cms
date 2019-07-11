@@ -187,7 +187,7 @@ class LangSwitcher extends \luya\base\Widget
     
     /**
      * Prefix the current link with the dedicated host info.
-     * 
+     *
      * Assuming hostInfoMapping is defined in composition component, the correct domain will be taken from the
      * language information.
      *
