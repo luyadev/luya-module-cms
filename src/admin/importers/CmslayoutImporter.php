@@ -25,7 +25,7 @@ class CmslayoutImporter extends Importer
      */
     public $ignorePrefix = ['_', '.'];
     
-    public $defaultPath = '@app/views/cmslayouts';
+    public $defaultPath = '@theme/views/cmslayouts';
 
     /**
      * @inheritdoc
@@ -34,7 +34,7 @@ class CmslayoutImporter extends Importer
     {
         $layoutFiles = [];
         
-        // get and import cmslayouts from @app/views/cmslayouts path
+        // get and import cmslayouts from @theme/views/cmslayouts path
         $this->handleLayoutFile($layoutFiles, $this->defaultPath);
         
         // import files from the cmsadmin module $cmsLayouts property.
