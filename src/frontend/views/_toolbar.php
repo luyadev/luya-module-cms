@@ -3,6 +3,9 @@ use luya\helpers\Url;
 use luya\cms\frontend\Module;
 use yii\helpers\VarDumper;
 
+/**
+ * @var \luya\theme\Theme[] $themes
+ */
 ?>
 <div id="luya-cms-toolbar-wrapper">
     <div id="luya-cms-toolbar">
@@ -32,6 +35,11 @@ use yii\helpers\VarDumper;
                 <span class="luya-cms-toolbar__badge"><?= count($composition->get()); ?></span> <span><?= Module::t('tb_composition'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
+	    <div class="luya-cms-toolbar__button">
+		    <a title="<?= Module::t('tb_active_theme'); ?>" class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-themes-container')">
+			    <i class="material-icons">invert_colors</i> <span><?= $themes['active']->name ?></span> <i class="material-icons">keyboard_arrow_down</i>
+		    </a>
+	    </div>
         <?php if (!empty($properties)): ?>
             <div class="luya-cms-toolbar__button">
                 <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-properties-container')">
@@ -127,6 +135,22 @@ use yii\helpers\VarDumper;
             <?php endforeach; ?>
         </div>
     </div>
+	<div id="luya-cms-toolbar-themes-container" class="luya-cms-toolbar__container">
+		<div class="luya-cms-toolbar__list">
+            <?php foreach ($themes['active']->getInfo() as $key => $value): ?>
+				<div class="luya-cms-toolbar__list-entry">
+					<div class="luya-cms-toolbar__list-entry-left">
+						<label><?= $key ?></label>
+					</div>
+					<div class="luya-cms-toolbar__list-entry-right">
+						<p>
+                            <?= $value; ?>
+						</p>
+					</div>
+				</div>
+            <?php endforeach; ?>
+		</div>
+	</div>
     <?php if (!empty($properties)): ?>
         <div id="luya-cms-toolbar-properties-container" class="luya-cms-toolbar__container">
             <div class="luya-cms-toolbar__list">
