@@ -16,7 +16,7 @@ use luya\cms\models\NavItem;
  * Example native call:
  *
  * ```php
- * echo (new \luya\cms\Tags\PageTag())->parse(1); // where 1 is the Nav ID
+ * echo (new \luya\cms\Tags\PageTag())->parse(1, 'placeholderName'); // where 1 is the Nav ID if no placeholder name is given us null to render the whole page.
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
