@@ -12,6 +12,7 @@ use luya\cms\models\Log;
 use luya\admin\helpers\Angular;
 use yii\base\InvalidArgumentException;
 use luya\helpers\Inflector;
+use luya\helpers\ObjectHelper;
 
 /**
  * Admin Api delievers common api tasks like blocks and layouts.
@@ -196,29 +197,8 @@ class AdminController extends \luya\admin\base\RestController
         }
 
         $controller = $module->createControllerByID($controller);
-        $actions = $this->getActions($controller);
+        $actions = ObjectHelper::getActions($controller);
 
         return Angular::optionsArrayInput(array_combine($actions, $actions));
-    }
-
-    /**
-     * Get actions for a given controller.
-     *
-     * @param object $controller
-     * @since 2.0.0
-     * @see Replace with luya core object helper
-     */
-    private function getActions($controller)
-    {
-        $actions = array_keys($controller->actions());
-        $class = new \ReflectionClass($controller);
-        foreach ($class->getMethods() as $method) {
-            $name = $method->getName();
-            if ($name !== 'actions' && $method->isPublic() && !$method->isStatic() && strncmp($name, 'action', 6) === 0) {
-                $actions[] = Inflector::camel2id(substr($name, 6), '-', true);
-            }
-        }
-        sort($actions);
-        return array_unique($actions);
     }
 }
