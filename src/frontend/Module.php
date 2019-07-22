@@ -67,6 +67,24 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * and transformed into links based on the cms.
      */
     public $enableTagParsing = true;
+
+    /**
+     * @var boolean Wheather full page caching should be enabled or not.
+     * 
+     * The following circumstances will lead into a full page cache:
+     * 
+     * + $fullPageCache is enabled.
+     * + its a get request
+     * + strict parsing is enabled
+     * + the type is page (not redirect & not module)
+     * 
+     * > This well speed up the page dramatically but could also lead into huge problems when you are using blocks which needs to collect
+     * > data from dynamic sources likes ActiveRecords. Assuming you have a block with latest news or any other data with where
+     * > condition based on time, random or active/inactive status - the data won't be populatet until any of the blocks or the page is edited.
+     * 
+     * @since 2.0.1
+     */
+    public $fullPageCache = false;
     
     /**
      * @inheritdoc
