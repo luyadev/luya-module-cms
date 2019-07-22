@@ -41,7 +41,7 @@ class DefaultController extends Controller
      * Determines whether the full page cache is enabled or not.
      *
      * @return boolean
-     * @since 2.0.1
+     * @since 2.1.0
      */
     private function isFullPageCacheEnabled()
     {

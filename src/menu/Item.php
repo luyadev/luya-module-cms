@@ -487,7 +487,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * Returns whether the current page has strict parsing mode disabled or not.
      *
      * @return boolean
-     * @since 2.0.1
+     * @since 2.1.0
      */
     public function getIsStrictParsing()
     {

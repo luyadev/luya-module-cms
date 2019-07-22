@@ -82,7 +82,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * > data from dynamic sources likes ActiveRecords. Assuming you have a block with latest news or any other data with where
      * > condition based on time, random or active/inactive status - the data won't be populatet until any of the blocks or the page is edited.
      * 
-     * @since 2.0.1
+     * @since 2.1.0
      */
     public $fullPageCache = false;
     
