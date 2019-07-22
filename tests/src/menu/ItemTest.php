@@ -41,6 +41,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertTrue($obj->isHome);
         $this->assertSame('Homepage', $obj->getSeoTitle());
         $this->assertSame('Homepage', $obj->seoTitle);
+        $this->assertTrue($obj->getIsStrictParsing());
     }
     
     public function testInjectionsWithParentElements()
