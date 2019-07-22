@@ -37,14 +37,25 @@ class DefaultController extends Controller
         }
     }
 
+    /**
+     * Determines whether the full page cache is enabled or not.
+     *
+     * @return boolean
+     * @since 2.0.1
+     */
     private function isFullPageCacheEnabled()
     {
         return $this->module->fullPageCache && Yii::$app->menu->current->isStrictParsing && Yii::$app->request->isGet && Yii::$app->menu->current->type == 1;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+
+        // enable full page cache behavior if supported by page and enabled in module.
         $behaviors['pageCache'] = [
             'class' => ResponseCache::class,
             'variations' => [

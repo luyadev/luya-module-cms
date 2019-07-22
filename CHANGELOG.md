@@ -15,6 +15,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ### Added
 
++ [#208](https://github.com/luyadev/luya-module-cms/pull/208) New $fullPageCache option for the cms frontend module, this can speed uf the page dramatically but can lead into problems with dynamic values inside blocks (like ActiveRecords).
 + [#82](https://github.com/luyadev/luya-module-cms/issues/82) Option to define target (new window or not) for redirect pages.
 + [#159](https://github.com/luyadev/luya-module-cms/issues/159) Added new og:image and twitter:image meta informations. Its possible now to upload an image for a page.
 

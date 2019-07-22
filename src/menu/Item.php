@@ -483,6 +483,12 @@ class Item extends BaseObject implements LinkInterface, Arrayable
         return array_key_exists($this->id, Yii::$app->menu->current->teardown);
     }
 
+    /**
+     * Returns whether the current page has strict parsing mode disabled or not.
+     *
+     * @return boolean
+     * @since 2.0.1
+     */
     public function getIsStrictParsing()
     {
         return !$this->itemArray['is_url_strict_parsing_disabled'];
