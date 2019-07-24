@@ -3,10 +3,10 @@
 namespace cmstests\src\frontend\commands;
 
 use Yii;
-use cmstests\CmsFrontendTestCase;
 use luya\cms\frontend\commands\BlockController;
+use cmstests\CmsConsoleTestCase;
 
-class BlockControllerTest extends CmsFrontendTestCase
+class BlockControllerTest extends CmsConsoleTestCase
 {
     private function getHtml($content)
     {

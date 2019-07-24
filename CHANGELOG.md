@@ -3,11 +3,12 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 2.1.0
+## 2.1.0 (22. July 2019)
 
 ### Added
 
 + [#210](https://github.com/luyadev/luya-module-cms/pull/210) Added new Active Query Select Injector class.
++ [#208](https://github.com/luyadev/luya-module-cms/pull/208) New $fullPageCache option for the cms frontend module, this can speed uf the page dramatically but can lead into problems with dynamic values inside blocks (like ActiveRecords).
 
 ### Fixed
 
