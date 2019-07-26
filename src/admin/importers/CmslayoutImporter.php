@@ -25,7 +25,7 @@ class CmslayoutImporter extends Importer
      */
     public $ignorePrefix = ['_', '.'];
     
-    public $defaultPath = '@theme/views/cmslayouts';
+    public $defaultPath = '@app/views/cmslayouts';
 
     /**
      * @inheritdoc
