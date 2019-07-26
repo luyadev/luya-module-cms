@@ -3,15 +3,9 @@
 namespace luya\cms\admin\importers;
 
 use luya\base\PackageConfig;
-use luya\base\PackageInstaller;
+use luya\console\Importer;
 use luya\theme\ThemeConfig;
 use Yii;
-use luya\Exception;
-use luya\helpers\FileHelper;
-use luya\cms\models\Layout;
-use luya\console\Importer;
-use yii\helpers\Inflector;
-use yii\helpers\Json;
 
 /**
  * Class ThemeImporter
@@ -29,25 +23,26 @@ class ThemeImporter extends Importer
     public function run()
     {
         $exists = [];
-    
+        
         $this->packageInstaller = Yii::$app->getPackageInstaller();
-  
+        
         foreach ($this->getImporter()->getDirectoryFiles('themes') as $file) {
             $exists[] = $this->saveTheme($file['module'] . '/themes/' . $file['file']);
         }
-  
+        
         foreach ($this->packageInstaller->getConfigs() as $config) {
-            /** @var PackageConfig $config*/
+            /** @var PackageConfig $config */
             $exists = array_merge($exists, $this->handleThemeDefinitions($config->themes));
         }
         
-        return $this->addLog("Theme importer finished with ".count($exists) . " themes.");
+        return $this->addLog("Theme importer finished with " . count($exists) . " themes.");
     }
     
     /**
      * Replace {{DS}} separator.
      *
      * @param string $path
+     *
      * @return string
      */
     public function replaceDsSeparator($path)
@@ -59,6 +54,7 @@ class ThemeImporter extends Importer
      * Handle an array with definitions whether they are files or folders.
      *
      * @param array $definitions
+     *
      * @return array
      * @since 1.0.8
      */
@@ -111,7 +107,7 @@ class ThemeImporter extends Importer
         }
         
         if (empty($results)) {
-            $this->addLog("Unable to find '{$themeDefinition}' in any of those paths '".implode(",", $directories)."'");
+            $this->addLog("Unable to find '{$themeDefinition}' in any of those paths '" . implode(",", $directories) . "'");
         }
         
         $return = [];
@@ -126,6 +122,7 @@ class ThemeImporter extends Importer
      * Get an array of ids for a given path.
      *
      * @param string $path
+     *
      * @return array An array with theme ids or an empty array if not found.
      * @since 2.0.0
      */
@@ -154,9 +151,9 @@ class ThemeImporter extends Importer
     {
         $themeConfig = new ThemeConfig($basePath);
         $this->addLog("Loaded theme $basePath");
-    
+        
         // @todo save theme config in db?
-    
+        
         return $themeConfig->basePath;
     }
 }
