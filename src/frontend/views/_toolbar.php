@@ -37,7 +37,7 @@ use yii\helpers\VarDumper;
         </div>
 	    <div class="luya-cms-toolbar__button">
 		    <a title="<?= Module::t('tb_active_theme'); ?>" class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-themes-container')">
-			    <i class="material-icons">invert_colors</i> <span><?= $themes['active']->name ?></span> <i class="material-icons">keyboard_arrow_down</i>
+			    <i class="material-icons">invert_colors</i> <span><?= $themes['active']->getInfo()['name'] ?></span> <i class="material-icons">keyboard_arrow_down</i>
 		    </a>
 	    </div>
         <?php if (!empty($properties)): ?>

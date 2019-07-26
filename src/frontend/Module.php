@@ -44,7 +44,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      *
      * ```php
      * 'cms' => [
-     *     'errorViewFile' => '@theme/views/error/index.php',
+     *     'errorViewFile' => '@app/views/error/index.php',
      * ]
      * ```
      *

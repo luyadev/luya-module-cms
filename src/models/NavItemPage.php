@@ -130,7 +130,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public function getViewPath()
     {
-        return '@theme/views/cmslayouts';
+        return '@app/views/cmslayouts';
     }
     
     /**
