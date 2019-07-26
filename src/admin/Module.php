@@ -2,6 +2,7 @@
 
 namespace luya\cms\admin;
 
+use luya\cms\admin\importers\ThemeImporter;
 use Yii;
 use luya\console\interfaces\ImportControllerInterface;
 use luya\cms\admin\importers\BlockImporter;
@@ -301,6 +302,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             BlockImporter::class,
             CmslayoutImporter::class,
             PropertyConsistencyImporter::class,
+            ThemeImporter::class,
         ];
     }
 
