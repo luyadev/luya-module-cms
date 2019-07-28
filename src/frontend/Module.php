@@ -95,6 +95,9 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             'menu' => [
                 'class' => 'luya\cms\Menu',
             ],
+            'themeManager' => [
+                'class' => 'luya\cms\frontend\ThemeManager'
+            ],
         ];
     }
     

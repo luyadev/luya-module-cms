@@ -35,20 +35,20 @@ class BlockImporter extends Importer
         }
         
         $exists = [];
-        
+
         foreach ($this->getImporter()->getDirectoryFiles('blocks') as $file) {
             $exists[] = $this->saveBlock($file['ns']);
         }
-        
+    
         foreach (Yii::$app->packageInstaller->configs as $config) {
             $exists = array_merge($exists, $this->handleBlockDefinitions($config->blocks));
         }
-        
+    
         // provide backwards compatibility for core 1.0.7 and below
         if ($this->hasProperty('module')) {
             $exists = array_merge($exists, $this->handleBlockDefinitions($this->module->blocks));
         }
-        
+    
         foreach (Block::find()->all() as $block) {
             if (!class_exists($block->class)) {
                 $this->addLog("[!] The block {$block->class} used {$block->usageCount} times, does not exists anymore. You should either use migrate or cleanup command.");

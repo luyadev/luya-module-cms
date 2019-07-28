@@ -3,7 +3,10 @@
 namespace luya\cms\admin\importers;
 
 use luya\base\PackageConfig;
+use luya\cms\models\Theme;
 use luya\console\Importer;
+use luya\helpers\FileHelper;
+use luya\helpers\Json;
 use luya\theme\ThemeConfig;
 use Yii;
 
@@ -22,17 +25,22 @@ class ThemeImporter extends Importer
      */
     public function run()
     {
-        $exists = [];
-        
         $this->packageInstaller = Yii::$app->getPackageInstaller();
-        
+    
+        $exists = [];
         foreach ($this->getImporter()->getDirectoryFiles('themes') as $file) {
-            $exists[] = $this->saveTheme($file['module'] . '/themes/' . $file['file']);
+            $exists[] = $this->saveTheme('@'.$file['module'] . '/themes/' . $file['file']);
         }
         
         foreach ($this->packageInstaller->getConfigs() as $config) {
             /** @var PackageConfig $config */
             $exists = array_merge($exists, $this->handleThemeDefinitions($config->themes));
+        }
+    
+        foreach (Theme::find()->all() as $theme) {
+            if (!in_array($theme->id, $exists) && $theme->delete()) {
+                $this->addLog("[!] The theme {$theme->base_path} does not found anymore and was deleted.");
+            }
         }
         
         return $this->addLog("Theme importer finished with " . count($exists) . " themes.");
@@ -60,20 +68,9 @@ class ThemeImporter extends Importer
      */
     protected function handleThemeDefinitions(array $definitions)
     {
-        // A list of directories which should be prefix to the current theme definition,
-        // as a theme definition can contain an alias with a full path, we need an empty "prefix"
-        // directory, which is represented as `null` value at the end of the array.
-        $directories = array_unique([Yii::getAlias('@app'), getcwd(), null]);
-        
         $ids = [];
         foreach ($definitions as $themeDefinition) {
-            $theme = Yii::getAlias($themeDefinition, false);
-            // if there is no alias, or not found, switch back to original name
-            if ($theme === false) {
-                $theme = $themeDefinition;
-            }
-            
-            $ids = array_merge($ids, $this->handleThemeDefinitionInDirectories($directories, $theme));
+            $ids = array_merge($ids, $this->handleThemeDefinitionInDirectories($themeDefinition));
         }
         
         return $ids;
@@ -82,60 +79,47 @@ class ThemeImporter extends Importer
     /**
      * Handle a theme definition for different folders
      *
-     * @param array  $directories
      * @param string $themeDefinition
      *
      * @return array
      * @since 2.0.0
      */
-    protected function handleThemeDefinitionInDirectories(array $directories, $themeDefinition)
+    protected function handleThemeDefinitionInDirectories($themeDefinition)
     {
         $results = [];
-        foreach ($directories as $directoryPath) {
-            $path = rtrim($directoryPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($themeDefinition, DIRECTORY_SEPARATOR);
-            
-            $path = $this->replaceDsSeparator($path);
-            
-            if (isset($results[$path])) {
-                continue;
-            }
-            
-            $themes = $this->getThemeIdsByPath($path);
-            if (!empty($themes)) {
-                $results[$path] = $themes;
-            }
+    
+        $themeId = $this->saveThemeByPath($themeDefinition);
+        if ($themeId) {
+            $results[$themeDefinition] = $themeId;
+        } else {
+            $this->addLog("Unable to find '{$themeDefinition}'");
         }
         
-        if (empty($results)) {
-            $this->addLog("Unable to find '{$themeDefinition}' in any of those paths '" . implode(",", $directories) . "'");
-        }
-        
-        $return = [];
-        foreach ($results as $path => $ids) {
-            $return = array_merge($return, $ids);
-        }
-        
-        return $return;
+        return $results;
     }
     
-    /**
-     * Get an array of ids for a given path.
-     *
-     * @param string $path
-     *
-     * @return array An array with theme ids or an empty array if not found.
-     * @since 2.0.0
-     */
-    protected function getThemeIdsByPath($path)
+    protected function saveThemesFromFolder($themeDefinition)
     {
-        if (is_dir($path)) {
-            $id = $this->saveTheme($path);
-            if ($id) {
-                return [$id];
+        $ids = [];
+        
+        $folder = Yii::getAlias($themeDefinition);
+        if (is_dir($folder)) {
+            foreach (FileHelper::findDirectories($folder) as $themePath) {
+                $ids[] = $this->saveThemeByPath($themeDefinition . DIRECTORY_SEPARATOR . basename($themePath));
             }
         }
         
-        return [];
+        return $ids;
+    }
+    
+    protected function saveThemeByPath($themeDefinition)
+    {
+        $path = Yii::getAlias($themeDefinition);
+        if (is_dir($path)) {
+            return $this->saveTheme($themeDefinition);
+        }
+        
+        return null;
     }
     
     /**
@@ -150,10 +134,23 @@ class ThemeImporter extends Importer
     protected function saveTheme($basePath)
     {
         $themeConfig = new ThemeConfig($basePath);
-        $this->addLog("Loaded theme $basePath");
         
-        // @todo save theme config in db?
-        
-        return $themeConfig->basePath;
+        $themeModel = Theme::findOne(['base_path' => $basePath]);
+
+        if (!$themeModel) {
+            $themeModel = new Theme();
+            $themeModel->base_path = $basePath;
+            $themeModel->json_config = Json::encode($themeConfig->toArray());
+            
+           $log = "Added theme $basePath to database.";
+        } else {
+            $log = "Update theme $basePath.";
+        }
+    
+        if ($themeModel->save()) {
+            $this->addLog($log);
+        }
+    
+        return $themeModel->id;
     }
 }
