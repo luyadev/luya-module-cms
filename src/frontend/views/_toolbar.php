@@ -37,7 +37,7 @@ use yii\helpers\VarDumper;
         </div>
 	    <div class="luya-cms-toolbar__button">
 		    <a title="<?= Module::t('tb_active_theme'); ?>" class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-themes-container')">
-			    <i class="material-icons">invert_colors</i> <span><?= $themes['active']->getInfo()['name'] ?></span> <i class="material-icons">keyboard_arrow_down</i>
+			    <i class="material-icons">color_lens</i> <span><?= $themes['active']->getConfig()->name ?></span> <i class="material-icons">keyboard_arrow_down</i>
 		    </a>
 	    </div>
         <?php if (!empty($properties)): ?>
@@ -137,7 +137,7 @@ use yii\helpers\VarDumper;
     </div>
 	<div id="luya-cms-toolbar-themes-container" class="luya-cms-toolbar__container">
 		<div class="luya-cms-toolbar__list">
-            <?php foreach ($themes['active']->getInfo() as $key => $value): ?>
+            <?php foreach ($themes['active']->getConfig()->toArray() as $key => $value): ?>
 				<div class="luya-cms-toolbar__list-entry">
 					<div class="luya-cms-toolbar__list-entry-left">
 						<label><?= $key ?></label>
