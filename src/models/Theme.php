@@ -15,7 +15,7 @@ use yii\helpers\Json;
  * @property bool   $is_active
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
- * @since  1.1.0
+ * @since  3.0.0
  */
 class Theme extends NgRestModel
 {
