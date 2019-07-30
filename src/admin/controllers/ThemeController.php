@@ -10,7 +10,7 @@ use luya\admin\ngrest\base\Controller;
  * This module / component allow user to manage actual display themes.
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
- * @since 2.2.0
+ * @since 3.0.0
  */
 class ThemeController extends Controller
 {

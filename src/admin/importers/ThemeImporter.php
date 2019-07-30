@@ -15,6 +15,7 @@ use Yii;
  * Import theme.json files from the folder and analyse config.
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
+ * @since 3.0.0
  */
 class ThemeImporter extends Importer
 {
@@ -47,24 +48,11 @@ class ThemeImporter extends Importer
     }
     
     /**
-     * Replace {{DS}} separator.
-     *
-     * @param string $path
-     *
-     * @return string
-     */
-    public function replaceDsSeparator($path)
-    {
-        return str_replace('{{DS}}', DIRECTORY_SEPARATOR, $path);
-    }
-    
-    /**
      * Handle an array with definitions whether they are files or folders.
      *
      * @param array $definitions
      *
      * @return array
-     * @since 1.0.8
      */
     protected function handleThemeDefinitions(array $definitions)
     {
@@ -82,7 +70,6 @@ class ThemeImporter extends Importer
      * @param string $themeDefinition
      *
      * @return array
-     * @since 2.0.0
      */
     protected function handleThemeDefinitionInDirectories($themeDefinition)
     {
