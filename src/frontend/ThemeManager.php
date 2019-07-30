@@ -3,15 +3,35 @@
 namespace luya\cms\frontend;
 
 use luya\cms\models\Theme;
+use luya\theme\ThemeConfig;
 
 /**
  * Class ThemeManager
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
- * @since 1.1.0
+ * @since 3.0.0
  */
 class ThemeManager extends \luya\theme\ThemeManager
 {
+    /**
+     * Read the json config from the \luya\cms\models\Theme and create a new \luya\theme\ThemeConfig for the given base path.
+     *
+     * @param string $basePath
+     *
+     * @return ThemeConfig
+     * @throws \yii\base\InvalidConfigException
+     */
+    protected static function loadThemeConfig(string $basePath): ThemeConfig
+    {
+        /** @var Theme $themeModel */
+        $themeModel = Theme::find()->andWhere(['base_path' => $basePath])->one();
+        $config = $themeModel->getJsonConfig();
+        
+        $themeConfig = new ThemeConfig($basePath, $config);
+
+        return $themeConfig;
+    }
+    
     /**
      * Override the core function and load the themes from the database instead to read them from the directory.
      *
@@ -19,7 +39,7 @@ class ThemeManager extends \luya\theme\ThemeManager
      */
     protected function getThemeDefinitions(): array
     {
-        return Theme::find()->indexBy('id')->column('base_path');
+        return Theme::find()->indexBy('id')->select('base_path')->column();
     }
     
     protected function getActiveThemeBasePath()

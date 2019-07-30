@@ -133,7 +133,14 @@ class ThemeImporter extends Importer
      */
     protected function saveTheme($basePath)
     {
-        $themeConfig = new ThemeConfig($basePath);
+        $themeFile = $basePath . '/theme.json';
+        if (file_exists($themeFile)) {
+            $config = Json::decode(file_get_contents($themeFile)) ?: [];
+        } else {
+            $config = [];
+        }
+        
+        $themeConfig = new ThemeConfig($basePath, $config);
         
         $themeModel = Theme::findOne(['base_path' => $basePath]);
 

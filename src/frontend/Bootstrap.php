@@ -77,7 +77,9 @@ final class Bootstrap implements BootstrapInterface
             ]);
     
             // @todo waiting for https://github.com/luyadev/luya/issues/1938
-            $app->themeManager->setup();
+            if (!$app->request->getIsConsoleRequest()) {
+                $app->themeManager->setup();
+            }
         }
     }
 }
