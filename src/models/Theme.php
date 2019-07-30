@@ -2,18 +2,20 @@
 
 namespace luya\cms\models;
 
-use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
+use yii\base\InvalidArgumentException;
+use yii\helpers\Json;
 
 /**
  * Theme Model for LUYA-Theme.
  *
- * @property int $id
+ * @property int    $id
  * @property string $base_path
  * @property string $json_config
+ * @property bool   $is_active
  *
- * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0
+ * @author Bennet Klarhölter <boehsermoe@me.com>
+ * @since  1.1.0
  */
 class Theme extends NgRestModel
 {
@@ -42,6 +44,7 @@ class Theme extends NgRestModel
             [['base_path', 'json_config'], 'required'],
             [['json_config'], 'string'],
             [['base_path'], 'string', 'max' => 255],
+            [['is_active'], 'boolean'],
         ];
     }
     
@@ -53,6 +56,7 @@ class Theme extends NgRestModel
         return [
             'base_path' => 'text',
             'json_config' => ['textarea', 'encoding' => false],
+            'is_active' => ['toggleStatus', 'initValue' => 0],
         ];
     }
     
@@ -62,7 +66,7 @@ class Theme extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['name', 'base_path', 'parentTheme']],
+            ['list', ['name', 'is_active', 'base_path', 'parentTheme']],
         ];
     }
     
@@ -72,6 +76,19 @@ class Theme extends NgRestModel
             'name' => 'text',
             'parentTheme' => 'text',
             'author' => 'text',
+        ];
+    }
+    
+    public function ngRestActiveButtons()
+    {
+        return [
+            [
+                'class' => 'luya\admin\buttons\ToggleStatusActiveButton',
+                'attribute' => 'is_active',
+                'uniqueStatus' => true,
+                'modelNameAttribute' => 'name',
+                'label' => 'Set active',
+            ],
         ];
     }
     
@@ -92,8 +109,12 @@ class Theme extends NgRestModel
     
     public function afterFind()
     {
-        $this->_jsonConfig = Json::decode($this->json_config);
-
+        try {
+            $this->_jsonConfig = Json::decode($this->json_config);
+        } catch (InvalidArgumentException $ex) {
+            $this->_jsonConfig = null;
+        }
+        
         return parent::afterFind();
     }
     
@@ -103,6 +124,7 @@ class Theme extends NgRestModel
      * Get the json config as array.
      *
      * @param string $node Get a given key from the config array.
+     *
      * @return array If the given node is not found an empty array will be returned.
      */
     public function getJsonConfig($node = null)
@@ -110,11 +132,11 @@ class Theme extends NgRestModel
         if (!$node) {
             return $this->_jsonConfig;
         }
-
+        
         if (isset($this->_jsonConfig[$node])) {
             return $this->_jsonConfig[$node];
         }
-
+        
         return null;
     }
 }

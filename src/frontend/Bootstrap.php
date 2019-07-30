@@ -28,6 +28,7 @@ final class Bootstrap implements BootstrapInterface
 {
     /**
      * @inheritdoc
+     * @param Application $app
      */
     public function bootstrap($app)
     {
@@ -69,6 +70,14 @@ final class Bootstrap implements BootstrapInterface
                     exit;
                 }
             });
+            
+            // set cms theme manager
+            $app->setComponents([
+                'themeManager' => ['class' => ThemeManager::class],
+            ]);
+    
+            // @todo waiting for https://github.com/luyadev/luya/issues/1938
+            $app->themeManager->setup();
         }
     }
 }
