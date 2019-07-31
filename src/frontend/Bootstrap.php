@@ -46,37 +46,35 @@ final class Bootstrap implements BootstrapInterface
             });
 
             // handle not found exceptions
-            if (!$app->request->isConsoleRequest && !$app->request->isAdmin) {
-                $app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) use ($app) {
-                    if ($event->exception instanceof NotFoundHttpException) {
-                        $errorPageNavId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0); 
-                        // if not defined abort.
-                        if (empty($errorPageNavId)) {
-                            return;
-                        }
-                        /** @var $item Item */
-                        $item = $app->menu->find()->with(['hidden'])->where(['nav_id' => $errorPageNavId])->one();
-                        // unable to find the item, maybe its offline or does not exists anymore.
-                        if (!$item) {
-                            return;
-                        }
-
-                        // render CMS 404 page
-                        $app->menu->setCurrent($item);
-                        $result = $app->runAction('cms/default/index');
-                        if ($result instanceof Response) {
-                            $response = $result;
-                        } else {
-                            $response = new Response();
-                            $response->data = $result;
-                        }
-
-                        $response->setStatusCodeByException($event->exception);
-                        $app->end(1, $response);
-                        exit;
+            $app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) use ($app) {
+                if ($app instanceof Application && $event->exception instanceof NotFoundHttpException) {
+                    $errorPageNavId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0); 
+                    // if not defined abort.
+                    if (empty($errorPageNavId)) {
+                        return;
                     }
-                });
-            }
+                    /** @var $item Item */
+                    $item = $app->menu->find()->with(['hidden'])->where(['nav_id' => $errorPageNavId])->one();
+                    // unable to find the item, maybe its offline or does not exists anymore.
+                    if (!$item) {
+                        return;
+                    }
+
+                    // render CMS 404 page
+                    $app->menu->setCurrent($item);
+                    $result = $app->runAction('cms/default/index');
+                    if ($result instanceof Response) {
+                        $response = $result;
+                    } else {
+                        $response = new Response();
+                        $response->data = $result;
+                    }
+
+                    $response->setStatusCodeByException($event->exception);
+                    $app->end(1, $response);
+                    exit;
+                }
+            });
         }
     }
 }
