@@ -75,6 +75,8 @@ class ThemeImporter extends Importer
     {
         $results = [];
     
+        $themeDefinition = preg_replace('#^vendor/#', '@vendor/', $themeDefinition);
+    
         $themeId = $this->saveThemeByPath($themeDefinition);
         if ($themeId) {
             $results[$themeDefinition] = $themeId;
@@ -83,20 +85,6 @@ class ThemeImporter extends Importer
         }
         
         return $results;
-    }
-    
-    protected function saveThemesFromFolder($themeDefinition)
-    {
-        $ids = [];
-        
-        $folder = Yii::getAlias($themeDefinition);
-        if (is_dir($folder)) {
-            foreach (FileHelper::findDirectories($folder) as $themePath) {
-                $ids[] = $this->saveThemeByPath($themeDefinition . DIRECTORY_SEPARATOR . basename($themePath));
-            }
-        }
-        
-        return $ids;
     }
     
     protected function saveThemeByPath($themeDefinition)
