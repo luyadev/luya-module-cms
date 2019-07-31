@@ -27,7 +27,9 @@ use luya\cms\models\Config;
 final class Bootstrap implements BootstrapInterface
 {
     /**
-     * @inheritdoc
+     * Bootstrap
+     *
+     * @param \luya\web\Application $app
      */
     public function bootstrap($app)
     {
@@ -45,7 +47,7 @@ final class Bootstrap implements BootstrapInterface
 
             // handle not found exceptions
             $app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) use ($app) {
-                if (!$app->request->isConsoleRequest && !$app->request->isAdmin && $event->exception instanceof NotFoundHttpException) {
+                if (!$app->request->isAdmin && $event->exception instanceof NotFoundHttpException) {
                     $errorPageNavId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
                     /** @var $item Item */
                     $item = $app->menu->find()->with(['hidden'])->where(['nav_id' => $errorPageNavId])->one();
