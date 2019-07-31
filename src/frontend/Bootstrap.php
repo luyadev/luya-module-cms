@@ -47,10 +47,10 @@ final class Bootstrap implements BootstrapInterface
 
             // handle not found exceptions
             $app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) use ($app) {
-                if ($app instanceof Application && $event->exception instanceof NotFoundHttpException) {
+                if ($app instanceof Application && $event->exception instanceof NotFoundHttpException && !$app->request->isAdmin) {
                     $errorPageNavId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0); 
                     // if not defined abort.
-                    if (empty($errorPageNavId)) {
+                    if (!$errorPageNavId) {
                         return;
                     }
                     /** @var $item Item */
