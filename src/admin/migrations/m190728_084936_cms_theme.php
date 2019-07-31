@@ -13,7 +13,7 @@ class m190728_084936_cms_theme extends Migration
             'id' => $this->primaryKey(),
             'base_path' => $this->string(255)->notNull()->unique(),
             'json_config' => $this->text()->notNull(),
-            'is_active' => $this->boolean(),
+            'is_active' => $this->boolean()->notNull()->defaultValue(0),
         ]);
     }
     
