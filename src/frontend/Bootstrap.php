@@ -78,7 +78,7 @@ final class Bootstrap implements BootstrapInterface
             
             // set cms theme manager
             $app->setComponents([
-                'themeManager' => ['class' => ThemeManager::class],
+                'themeManager' => ['class' => CmsThemeManager::class],
             ]);
     
             // @todo waiting for https://github.com/luyadev/luya/issues/1938

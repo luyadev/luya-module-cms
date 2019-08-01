@@ -6,12 +6,14 @@ use luya\cms\models\Theme;
 use luya\theme\ThemeConfig;
 
 /**
- * Class ThemeManager
+ * CMS theme manager for LUYA.
+ *
+ * This component manage the themes via database model.
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
  * @since 3.0.0
  */
-class ThemeManager extends \luya\theme\ThemeManager
+class CmsThemeManager extends \luya\theme\ThemeManager
 {
     /**
      * Read the json config from the \luya\cms\models\Theme and create a new \luya\theme\ThemeConfig for the given base path.
