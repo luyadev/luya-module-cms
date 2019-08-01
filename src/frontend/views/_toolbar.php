@@ -2,6 +2,7 @@
 use luya\helpers\Url;
 use luya\cms\frontend\Module;
 use yii\helpers\VarDumper;
+use luya\helpers\Inflector;
 
 /**
  * @var \luya\theme\Theme[] $themes
@@ -140,11 +141,11 @@ use yii\helpers\VarDumper;
             <?php foreach ($themes['active']->getConfig()->toArray() as $key => $value): ?>
 				<div class="luya-cms-toolbar__list-entry">
 					<div class="luya-cms-toolbar__list-entry-left">
-						<label><?= $key ?></label>
+						<label><?= Inflector::humanize(Inflector::camel2words($key)) ?></label>
 					</div>
 					<div class="luya-cms-toolbar__list-entry-right">
 						<p>
-                            <?= $value; ?>
+                            <?= VarDumper::dumpAsString($value, 1, true); ?>
 						</p>
 					</div>
 				</div>

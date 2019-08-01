@@ -260,7 +260,7 @@ abstract class Controller extends \luya\web\Controller
                 }
             }
         }
-    
+        
         $themes = ['active' => Yii::$app->themeManager->getActiveTheme()];
         
         // As the view path can not evaluated from controller context, we have to force the viewPath trough

@@ -108,25 +108,26 @@ class ThemeImporter extends Importer
      */
     protected function saveTheme($basePath)
     {
-        $themeFile = $basePath . '/theme.json';
+        $themeFile = Yii::getAlias($basePath . '/theme.json');
         if (file_exists($themeFile)) {
             $config = Json::decode(file_get_contents($themeFile)) ?: [];
         } else {
             $config = [];
         }
-        
+
         $themeConfig = new ThemeConfig($basePath, $config);
-        
+
         $themeModel = Theme::findOne(['base_path' => $basePath]);
 
         if (!$themeModel) {
             $themeModel = new Theme();
             $themeModel->base_path = $basePath;
             $themeModel->json_config = Json::encode($themeConfig->toArray());
-            
+          
            $log = "Added theme $basePath to database.";
         } else {
-            $log = "Update theme $basePath.";
+            $themeModel->json_config = Json::encode($themeConfig->toArray());
+            $log = "Updated theme $basePath.";
         }
     
         if ($themeModel->save()) {

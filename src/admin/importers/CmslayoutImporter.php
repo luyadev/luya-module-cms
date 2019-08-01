@@ -41,6 +41,10 @@ class CmslayoutImporter extends Importer
         foreach ((array) $this->module->cmsLayouts as $layoutDefintion) {
             $this->handleLayoutFile($layoutFiles, $layoutDefintion);
         }
+    
+        foreach (Yii::$app->themeManager->getThemes() as $themeConfig) {
+            $this->handleLayoutFile($layoutFiles, $themeConfig->getViewPath() . DIRECTORY_SEPARATOR . 'cmslayouts', $themeConfig->name);
+        }
         
         // remove all view files not found somewhere ...
         foreach (Layout::find()->where(['not in', 'id', $layoutFiles])->all() as $layoutItem) {
@@ -55,21 +59,22 @@ class CmslayoutImporter extends Importer
      *
      * @param array $layoutFiles
      * @param string $path
+     * @param string $themeName
      */
-    protected function handleLayoutFile(&$layoutFiles, $path)
+    protected function handleLayoutFile(&$layoutFiles, $path, string $themeName = null)
     {
         $aliased = Yii::getAlias($path, false);
         $filePath = $aliased ? $aliased : $path;
         
         if (is_dir($filePath)) {
             foreach ($this->getFilesFromFolder($filePath) as $file) {
-                $handler = $this->importLayoutFile($file, $path);
+                $handler = $this->importLayoutFile($file, $path, $themeName);
                 if ($handler) {
                     $layoutFiles[] = $handler;
                 }
             }
         } else {
-            $handler = $this->importLayoutFile($filePath, $path);
+            $handler = $this->importLayoutFile($filePath, $path, $themeName);
             if ($handler) {
                 $layoutFiles[] = $handler;
             }
@@ -99,7 +104,7 @@ class CmslayoutImporter extends Importer
      * @throws Exception
      * @return string
      */
-    protected function importLayoutFile($file, $aliased)
+    protected function importLayoutFile($file, $aliased, string $themeName = null)
     {
         if (!file_exists($file)) {
             return false;
@@ -131,7 +136,11 @@ class CmslayoutImporter extends Importer
         }
         
         $readableFileName = $this->generateReadableName($fileinfo->name);
-        
+    
+        if ($themeName) {
+            $readableFileName = $this->generateReadableName($themeName) . ' - ' . $readableFileName;
+        }
+    
         $content = file_get_contents($file);
         
         preg_match_all("/placeholders\[[\'\"](.*?)[\'\"]\]/", $content, $results);

@@ -11,9 +11,9 @@ class m190728_084936_cms_theme extends Migration
     {
         $this->createTable('cms_theme', [
             'id' => $this->primaryKey(),
+            'is_active' => $this->boolean()->notNull()->defaultValue(0),
             'base_path' => $this->string(255)->notNull()->unique(),
             'json_config' => $this->text()->notNull(),
-            'is_active' => $this->boolean()->notNull()->defaultValue(0),
         ]);
     }
     
