@@ -3,11 +3,14 @@
 namespace cmstests\src\admin\importers;
 
 use cmstests\CmsConsoleTestCase;
-use luya\console\commands\ImportController;
-use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\cms\admin\importers\CmslayoutImporter;
+use luya\cms\admin\importers\ThemeImporter;
 use luya\cms\models\Layout;
+use luya\cms\models\Theme;
+use luya\console\commands\ImportController;
 use luya\helpers\Json;
+use luya\testsuite\fixtures\ActiveRecordFixture;
+use Yii;
 
 class CmslayoutImporterTest extends CmsConsoleTestCase
 {
@@ -44,5 +47,45 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
 
         $this->assertFalse($importer->comparePlaceholders($j1, $j2));
         $this->assertFalse($importer->comparePlaceholders($j2, $j1));
+    }
+    
+    public function testThemeLayoutImporter()
+    {
+        // config fixture
+        $layout = new ActiveRecordFixture([
+            'modelClass' => Layout::class
+        ]);
+    
+        // theme fixture
+        $fixture = new ActiveRecordFixture([
+            'modelClass' => Theme::class,
+        ]);
+        
+        $controller = new ImportController('import-controller', $this->app);
+    
+        // Import theme first
+        Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
+        $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
+        $importer->run();
+
+        $importer = new CmslayoutImporter($controller, $this->app->getModule('cmsadmin'));
+    
+        $this->assertNull($importer->run());
+    
+        $log = $importer->importer->getLog();
+    
+        $this->assertSame([
+            'luya\cms\admin\importers\ThemeImporter' => [
+                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
+                1 => 'Theme importer finished with 1 themes.',
+            ],
+            'luya\cms\admin\importers\CmslayoutImporter' => [
+                0 => 'New file Main found and registered.',
+                1 => 'New file Layoutwithjson found and registered.',
+                2 => 'New file Phplayout found and registered.',
+                3 => 'New file Test Theme - Theme Layout found and registered.',
+                4 => 'cms layout importer finished with 4 layout files.',
+            ]
+        ], $log);
     }
 }

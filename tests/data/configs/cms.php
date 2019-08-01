@@ -35,6 +35,7 @@ return [
         'cache' => \yii\caching\ArrayCache::class,
         'assetManager' => [
             'basePath' => dirname(__DIR__) . '/assets',
-        ]
+        ],
+        'themeManager' => ['class' => '\luya\cms\frontend\ThemeManager'],
     ],
 ];

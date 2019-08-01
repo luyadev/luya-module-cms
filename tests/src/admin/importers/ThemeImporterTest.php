@@ -4,11 +4,22 @@ namespace cmstests\src\admin\importers;
 
 use cmstests\CmsConsoleTestCase;
 use luya\cms\admin\importers\ThemeImporter;
+use luya\cms\models\Theme;
 use luya\console\commands\ImportController;
+use luya\testsuite\fixtures\NgRestModelFixture;
 use Yii;
 
 class ThemeImporterTest extends CmsConsoleTestCase
 {
+    public function afterSetup()
+    {
+        parent::afterSetup();
+        
+        $fixture = new NgRestModelFixture([
+            'modelClass' => Theme::class,
+        ]);
+    }
+    
     public function testBasicThemeImporter()
     {
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
@@ -22,8 +33,8 @@ class ThemeImporterTest extends CmsConsoleTestCase
         
         $this->assertSame([
             'luya\cms\admin\importers\ThemeImporter' => [
-                0 => 'Loaded theme @CmsUnitModule/themes/testTheme',
-                1 => 'Loaded theme @app/themes/appTheme',
+                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
+                1 => 'Added theme @app/themes/appTheme to database.',
                 2 => 'Theme importer finished with 2 themes.',
             ],
         ],
@@ -45,9 +56,9 @@ class ThemeImporterTest extends CmsConsoleTestCase
         
         $this->assertSame([
             'luya\cms\admin\importers\ThemeImporter' => [
-                0 => 'Loaded theme @CmsUnitModule/themes/testTheme',
-                1 => 'Loaded theme @app/themes/appTheme',
-                2 => 'Loaded theme @CmsUnitModule/otherThemes/otherTheme',
+                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
+                1 => 'Added theme @app/themes/appTheme to database.',
+                2 => 'Added theme @CmsUnitModule/otherThemes/otherTheme to database.',
                 3 => 'Theme importer finished with 3 themes.',
             ],
         ],

@@ -18,7 +18,8 @@ class CmsConsoleTestCase extends ConsoleApplicationTestCase
                 'db' => [
                     'class' => 'yii\db\Connection',
                     'dsn' => 'sqlite::memory:',
-                ]
+                ],
+                'themeManager' => ['class' => '\luya\cms\frontend\ThemeManager'],
             ],
             'modules' => [
                 'admin' => 'luya\admin\Module',
