@@ -75,10 +75,11 @@ final class Bootstrap implements BootstrapInterface
                     exit;
                 }
             });
+    
             
             // set cms theme manager
             $app->setComponents([
-                'themeManager' => ['class' => CmsThemeManager::class],
+                'themeManager' => array_merge($app->getComponents()['themeManager'], ['class' => CmsThemeManager::class]),
             ]);
     
             // @todo waiting for https://github.com/luyadev/luya/issues/1938
