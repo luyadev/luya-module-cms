@@ -27,13 +27,14 @@ class MenuHelper
     public static function getItems()
     {
         if (self::$items === null) {
+
             $items = (new Query())
-            ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'layout_file', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title', 'publish_from', 'publish_till'])
-            ->from('cms_nav')
-            ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
-            ->orderBy(['sort_index' => SORT_ASC])
-            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => false])
-            ->all();
+                ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'layout_file', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title', 'publish_from', 'publish_till'])
+                ->from('cms_nav')
+                ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
+                ->orderBy(['sort_index' => SORT_ASC])
+                ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => false])
+                ->all();
             
             self::loadInheritanceData(0);
             
@@ -42,12 +43,11 @@ class MenuHelper
             foreach ($items as $key => $item) {
                 $item['is_editable'] = (int) Yii::$app->adminuser->canRoute('cmsadmin/page/update');
                 $item['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get('tree.'.$item['id']);
-                
                 // the user have "page edit" permission, now we can check if the this group has more fined tuned permisionss from the
                 // cms_nav_permissions table or not
                 if ($item['is_editable']) {
                     $permitted = false;
-                    
+                    // check permissions for all groups, if alreay permited skip
                     foreach (Yii::$app->adminuser->identity->groups as $group) {
                         if ($permitted) {
                             continue;
@@ -56,31 +56,30 @@ class MenuHelper
                         $permitted = self::navGroupPermission($item['id'], $group->id);
                     }
 
+                    // if not yet permitted, check in inheritance table.
                     if (!$permitted) {
-                        $value = (isset(self::$_inheritData[$item['id']])) ? self::$_inheritData[$item['id']] : false;
+                        $value = isset(self::$_inheritData[$item['id']]) ? self::$_inheritData[$item['id']] : false;
                         if ($value === true) {
                             $permitted = true;
                         }
-                    }
-                    
+                    }  
                     $item['is_editable'] = $permitted;
-                }
-            
+                }            
                 $data[$key] = $item;
             }
-            
             self::$items = $data;
         }
         
         return self::$items;
     }
     
-    /* LOAD INHERITANCE CHECK FOR ITEMS AND STORE INT $data*/
-    
-    private static $_inheritData = [];
-    
     private static $_navItems;
     
+    /**
+     * Get an array with all nav items.
+     *
+     * @return array
+     */
     private static function getNavItems()
     {
         if (self::$_navItems === null) {
@@ -90,6 +89,8 @@ class MenuHelper
         
         return self::$_navItems;
     }
+    
+    private static $_inheritData = [];
     
     /**
      * Find nav_id inheritances
@@ -106,7 +107,7 @@ class MenuHelper
     private static function loadInheritanceData($parentNavId = 0, $fromInheritNode = false)
     {
         // get items from singleton object
-        $items = (isset(self::getNavItems()[$parentNavId])) ? self::getNavItems()[$parentNavId] : [];
+        $items = isset(self::getNavItems()[$parentNavId]) ? self::getNavItems()[$parentNavId] : [];
         foreach ($items as $item) {
             $internalCheck = false;
             foreach (Yii::$app->adminuser->identity->groups as $group) {
@@ -127,10 +128,13 @@ class MenuHelper
         }
     }
     
-    /* NAV GROUP INHERITANCE NODE */
-    
     private static $_cmsPermissionData;
     
+    /**
+     * Get an array with all cms permissions data
+     *
+     * @return array
+     */
     private static function getCmsPermissionData()
     {
         if (self::$_cmsPermissionData === null) {
@@ -140,6 +144,13 @@ class MenuHelper
         return self::$_cmsPermissionData;
     }
     
+    /**
+     * Check the inhertiance for a given navigation and group.
+     *
+     * @param integer $navId
+     * @param Group $group
+     * @return boolean
+     */
     public static function navGroupInheritanceNode($navId, Group $group)
     {
         // default defintion is false
@@ -159,10 +170,13 @@ class MenuHelper
         return false;
     }
     
-    /* NAV GROUP PERMISSION */
-    
     private static $_navGroupPermissions;
     
+    /**
+     * An array with permissions
+     *
+     * @return array
+     */
     private static function getNavGroupPermissions()
     {
         if (self::$_navGroupPermissions === null) {
@@ -172,15 +186,24 @@ class MenuHelper
         return self::$_navGroupPermissions;
     }
     
+    /**
+     * Get the permissions for a certain group and navigation.
+     *
+     * @param integer $navId
+     * @param interger $groupId
+     * @return boolean
+     */
     public static function navGroupPermission($navId, $groupId)
     {
-        // get defintions from singleton
-        $definitions = (isset(self::getNavGroupPermissions()[$groupId])) ? self::getNavGroupPermissions()[$groupId] : [];
+        // If the group does not exists, it means no permission restrictions are made for this group.
+        $definitions = isset(self::getNavGroupPermissions()[$groupId]) ? self::getNavGroupPermissions()[$groupId] : [];
+
         // the group has no permission defined, this means he can access ALL cms pages
         if (count($definitions) == 0) {
             return true;
         }
         
+        // check if the nav id is defined in group
         foreach ($definitions as $permission) {
             if ($navId == $permission['nav_id']) {
                 return true;
