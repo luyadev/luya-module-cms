@@ -20,6 +20,11 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
         $layout = new ActiveRecordFixture([
             'modelClass' => Layout::class
         ]);
+    
+        // theme fixture
+        $theme = new ActiveRecordFixture([
+            'modelClass' => Theme::class
+        ]);
         
         $controller = new ImportController('import-controller', $this->app);
         $importer = new CmslayoutImporter($controller, $this->app->getModule('cmsadmin'));
@@ -57,7 +62,7 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
         ]);
     
         // theme fixture
-        $fixture = new ActiveRecordFixture([
+        $theme = new ActiveRecordFixture([
             'modelClass' => Theme::class,
         ]);
         
