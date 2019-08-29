@@ -9,12 +9,21 @@ class BlockHelperTest extends CmsFrontendTestCase
 {
     public function testSelectArrayOption()
     {
-        $this->assertSame([['value' => 'Hello', 'label' => 'World']], BlockHelper::selectArrayOption(['Hello' => 'World']));
+        $this->assertSame([['label' => 'World', 'value' => 'Hello']], BlockHelper::selectArrayOption(['Hello' => 'World']));
+
+        $this->assertSame([
+            ['label' => 'bar', 'value' => 'foo']
+        ], BlockHelper::selectArrayOption(['foo' => 'bar']));
+
+        $this->assertSame([
+            ['label' => 'Prompt!', 'value' => 0],
+            ['label' => 'bar', 'value' => 'foo']
+        ], BlockHelper::selectArrayOption(['foo' => 'bar'], 'Prompt!'));
     }
     
     public function testCheckboxArrayOption()
     {
-        $this->assertSame(['items' => [['value' => 'Hello', 'label' => 'World']]], BlockHelper::checkboxArrayOption(['Hello' => 'World']));
+        $this->assertSame(['items' => [['label' => 'World', 'value' => 'Hello']]], BlockHelper::checkboxArrayOption(['Hello' => 'World']));
     }
     
     public function testImageUpload()
@@ -57,5 +66,17 @@ class BlockHelperTest extends CmsFrontendTestCase
         $this->assertInstanceOf('luya\web\LinkInterface', $url);
     
         $this->assertSame('_blank', $url->getTarget());
+    }
+
+    public function testMarkdown()
+    {
+        $this->assertSameTrimmed('<p><strong>barfoo</strong></p>', BlockHelper::markdown('**barfoo**'));
+    }
+
+    public function testRadioArrayOption()
+    {
+        $this->assertSame([
+            ['label' => 'bar', 'value' => 'foo']
+        ], BlockHelper::radioArrayOption(['foo' => 'bar']));
     }
 }

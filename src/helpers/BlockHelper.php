@@ -15,6 +15,18 @@ use luya\cms\LinkConverter;
  *
  * The helper methods are basically tasks you are using a lot when dealing with block extra
  * value output or configuration of a block element like vars, cfgs.
+ * 
+ * The general setup of using block helper is to assigne the value into extra vars from a given cfg
+ * or var input:
+ * 
+ * ```php
+ * public function extraVars()
+ * {
+ *     return [
+ *         'markdownText' => BlockHelper::markdown($this->getVarValue('text')),
+ *     ];
+ * }
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -51,15 +63,13 @@ class BlockHelper
      */
     public static function selectArrayOption(array $options, $prompt = null)
     {
-        $transform = [];
+        $array = Angular::optionsArrayInput($options);
+
         if ($prompt) {
-            $transform[] = ['value' => 0, 'label' => $prompt];
+            array_unshift($array, ['label' => $prompt, 'value' => 0]);
         }
-        foreach ($options as $key => $value) {
-            $transform[] = ['value' => $key, 'label' => $value];
-        }
-    
-        return $transform;
+
+        return $array;
     }
     
     /**
@@ -80,12 +90,7 @@ class BlockHelper
      */
     public static function checkboxArrayOption(array $options)
     {
-        $transform = [];
-        foreach ($options as $key => $value) {
-            $transform[] = ['value' => $key, 'label' => $value];
-        }
-    
-        return ['items' => $transform];
+        return ['items' => Angular::optionsArrayInput($options)];
     }
     
     /**
@@ -279,6 +284,17 @@ class BlockHelper
     
     /**
      * Wrapper function for Markdown Parsing.
+     * 
+     * An example of assigned a text variable into a parsed extra Variable:
+     * 
+     * ```php
+     * public function extraVars()
+     * {
+     *     return [
+     *         'markdownText' => BlockHelper::markdown($this->getVarValue('text')),
+     *     ];
+     * }
+     * ```
      *
      * @param string $text The text to parse with Markdown.
      * @return string The parsed Markdown text.
