@@ -4,6 +4,7 @@ namespace luya\cms\frontend;
 
 use Yii;
 use yii\base\BootstrapInterface;
+use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use luya\web\ErrorHandlerExceptionRenderEvent;
