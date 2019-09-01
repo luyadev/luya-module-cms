@@ -30,7 +30,10 @@ class ThemeImporter extends Importer
     
         $exists = [];
         foreach ($this->getImporter()->getDirectoryFiles('themes') as $file) {
-            $exists[] = $this->saveTheme('@'.$file['module'] . '/themes/' . $file['file']);
+            $theme = $this->saveTheme('@' . $file['module'] . '/themes/' . $file['file']);
+            if ($theme) {
+                $exists[] = $theme;
+            }
         }
         
         foreach ($this->packageInstaller->getConfigs() as $config) {
@@ -103,18 +106,18 @@ class ThemeImporter extends Importer
      *
      * @param $basePath
      *
-     * @return mixed
+     * @return mixed|bool False if could not exists.
      * @throws \yii\base\InvalidConfigException
      */
     protected function saveTheme($basePath)
     {
         $themeFile = Yii::getAlias($basePath . '/theme.json');
-        if (file_exists($themeFile)) {
-            $config = Json::decode(file_get_contents($themeFile)) ?: [];
-        } else {
-            $config = [];
+        if (!file_exists($themeFile)) {
+            return false;
         }
-
+        
+        $config = Json::decode(file_get_contents($themeFile)) ?: [];
+    
         $themeConfig = new ThemeConfig($basePath, $config);
 
         $themeModel = Theme::findOne(['base_path' => $basePath]);

@@ -2,7 +2,9 @@
 
 namespace luya\cms\frontend;
 
+use Yii;
 use luya\cms\models\Theme;
+use luya\Exception;
 use luya\theme\ThemeConfig;
 
 /**
@@ -28,10 +30,13 @@ class CmsThemeManager extends \luya\theme\ThemeManager
         /** @var Theme $themeModel */
         $themeModel = Theme::find()->andWhere(['base_path' => $basePath])->one();
         $config = $themeModel->getJsonConfig();
+    
+        $dirPath = Yii::getAlias($basePath);
+        if (!is_dir($dirPath) || !is_readable($dirPath)) {
+            throw new Exception('Theme directory not exists or readable: ' . $dirPath);
+        }
         
-        $themeConfig = new ThemeConfig($basePath, $config);
-
-        return $themeConfig;
+        return new ThemeConfig($basePath, $config);
     }
     
     /**
