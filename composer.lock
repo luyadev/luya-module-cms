@@ -51,7 +51,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bestiejs/punycode.js.git",
+                "url": "https://github.com/bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -460,16 +460,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.19",
+            "version": "1.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "bc6083c4001811eec2778008cfeda2e7d18cb9af"
+                "reference": "23d8714ce08deddfb586c4e90ccaf0da2a95b112"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/bc6083c4001811eec2778008cfeda2e7d18cb9af",
-                "reference": "bc6083c4001811eec2778008cfeda2e7d18cb9af",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/23d8714ce08deddfb586c4e90ccaf0da2a95b112",
+                "reference": "23d8714ce08deddfb586c4e90ccaf0da2a95b112",
                 "shasum": ""
             },
             "require": {
@@ -513,7 +513,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2019-07-22T10:58:53+00:00"
+            "time": "2019-09-09T12:08:23+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
