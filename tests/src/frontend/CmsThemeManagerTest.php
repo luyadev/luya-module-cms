@@ -77,16 +77,13 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
      */
     public function testNotReadableThemeDir()
     {
+        /** @var Theme $themeModel */
+        $themeModel = $this->fixture->newModel;
+        $themeModel->base_path = '@cmstests/data/themes/not-readable';
+        $themeModel->json_config = json_encode([]);
+        $themeModel->insert();
+
         $themeManager = new CmsThemeManager();
-        $this->fixture = new ActiveRecordFixture([
-            'modelClass' => Theme::class,
-            'fixtureData' => [
-                'model1' => [
-                    'base_path' => '@cmstests/data/themes/not-readable',
-                    'json_config' => json_encode([]),
-                ],
-            ],
-        ]);
         
         // only writable dir
         mkdir(Yii::getAlias('@cmstests/data/themes/not-readable'), 0200);
