@@ -20,13 +20,6 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
         // theme fixture
         $this->fixture = new ActiveRecordFixture([
             'modelClass' => Theme::class,
-            'fixtureData' => [
-                'model1' => [
-                    'base_path' => '@cmstests/data/themes/testTheme',
-                    'json_config' => json_encode([]),
-                    'is_active' => 1,
-                ],
-            ],
         ]);
     }
     
@@ -39,8 +32,6 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
 
     public function testSetupWithoutActiveTheme()
     {
-        $this->fixture->getModel('model1')->delete();
-
         $themeManager = new CmsThemeManager();
         $themeManager->setup();
 
@@ -51,6 +42,13 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
 
     public function testSetup()
     {
+        /** @var Theme $themeModel */
+        $themeModel = $this->fixture->newModel;
+        $themeModel->base_path = '@cmstests/data/themes/testTheme';
+        $themeModel->json_config = json_encode([]);
+        $themeModel->is_active = 1;
+        $themeModel->insert();
+
         $themeManager = new CmsThemeManager();
         $themeManager->activeThemeName = '@cmstests/data/themes/testTheme';
         $themeManager->setup();
