@@ -37,36 +37,32 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
         parent::beforeTearDown();
     }
 
-    /**
-     * @runInSeparateProcess Must be isolated from other tests to check the path aliases.
-     */
+    public function testSetupWithoutActiveTheme()
+    {
+        $this->fixture->getModel('model1')->delete();
+
+        $themeManager = new CmsThemeManager();
+        $themeManager->setup();
+
+        $this->assertNull(Yii::$app->view->theme, 'Theme must be null set.');
+        $this->assertNull($themeManager->activeTheme);
+        $this->assertFalse(Yii::getAlias('@activeTheme', false), 'Alias path must not set.');
+    }
+
     public function testSetup()
     {
         $themeManager = new CmsThemeManager();
         $themeManager->activeThemeName = '@cmstests/data/themes/testTheme';
         $themeManager->setup();
-        
+
         $this->assertNotNull(Yii::$app->view->theme, 'Theme must be set.');
         $expectedPath = (Yii::getAlias('@cmstests/data/themes/testTheme'));
         $this->assertEquals($expectedPath, Yii::$app->view->theme->basePath, 'Theme base path not correct.');
         $this->assertEquals($expectedPath, Yii::getAlias('@activeTheme'), 'Alias path is not correct.');
-        
+
         $this->assertInstanceOf(\luya\theme\Theme::class, $themeManager->activeTheme);
     }
 
-    /**
-     * @runInSeparateProcess Must be isolated from other tests to check the path aliases.
-     */
-    public function testSetupWithoutActiveTheme()
-    {
-        $themeManager = new CmsThemeManager();
-        $themeManager->setup();
-        
-        $this->assertNull(Yii::$app->view->theme, 'Theme must be null set.');
-        $this->assertNull($themeManager->activeTheme);
-        $this->assertFalse(Yii::getAlias('@activeTheme', false), 'Alias path must not set.');
-    }
-    
     /**
      * @expectedException \yii\base\InvalidArgumentException
      * @expectedExceptionMessage Theme @theme/not/exists could not loaded.
