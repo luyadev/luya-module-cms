@@ -39,6 +39,7 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
 
     /**
      * @runInSeparateProcess Must be isolated from other tests to check the path aliases.
+     * @preserveGlobalState disabled
      */
     public function testSetup()
     {
@@ -56,6 +57,7 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
 
     /**
      * @runInSeparateProcess Must be isolated from other tests to check the path aliases.
+     * @preserveGlobalState disabled
      */
     public function testSetupWithoutActiveTheme()
     {
