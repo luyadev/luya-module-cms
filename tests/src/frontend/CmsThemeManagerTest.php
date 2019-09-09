@@ -36,7 +36,10 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
         
         parent::beforeTearDown();
     }
-    
+
+    /**
+     * @runInSeparateProcess Must be isolated from other tests to check the path aliases.
+     */
     public function testSetup()
     {
         $themeManager = new CmsThemeManager();
@@ -50,7 +53,7 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
         
         $this->assertInstanceOf(\luya\theme\Theme::class, $themeManager->activeTheme);
     }
-    
+
     /**
      * @runInSeparateProcess Must be isolated from other tests to check the path aliases.
      */

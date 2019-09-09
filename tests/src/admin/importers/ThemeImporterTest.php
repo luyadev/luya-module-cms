@@ -35,7 +35,8 @@ class ThemeImporterTest extends CmsConsoleTestCase
             'luya\cms\admin\importers\ThemeImporter' => [
                 0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
                 1 => 'Added theme @app/themes/appTheme to database.',
-                2 => 'Theme importer finished with 2 themes.',
+                2 => 'Added theme @app/themes/testTheme to database.',
+                3 => 'Theme importer finished with 3 themes.',
             ],
         ],
             $log);
@@ -53,13 +54,14 @@ class ThemeImporterTest extends CmsConsoleTestCase
         $this->assertNull($importer->run());
         
         $log = $importer->importer->getLog();
-        
+
         $this->assertSame([
             'luya\cms\admin\importers\ThemeImporter' => [
                 0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
                 1 => 'Added theme @app/themes/appTheme to database.',
-                2 => 'Added theme @CmsUnitModule/otherThemes/otherTheme to database.',
-                3 => 'Theme importer finished with 3 themes.',
+                2 => 'Added theme @app/themes/testTheme to database.',
+                3 => 'Added theme @CmsUnitModule/otherThemes/otherTheme to database.',
+                4 => 'Theme importer finished with 4 themes.',
             ],
         ],
             $log);
