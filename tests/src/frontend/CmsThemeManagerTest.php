@@ -73,7 +73,7 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
     
     /**
      * @expectedException \luya\Exception
-     * @expectedExceptionMessageRegExp #^Theme directory not exists or readable: [\w-/\.]+/themes/not-readable$#
+     * @expectedExceptionMessageRegExp #^Theme directory not exists or readable\: [\w\-/\.]+/themes/not-readable$#
      */
     public function testNotReadableThemeDir()
     {
@@ -82,7 +82,7 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
         $themeModel->base_path = '@cmstests/data/themes/not-readable';
         $themeModel->json_config = json_encode([]);
         $themeModel->insert();
-
+preg_match('#^Theme directory not exists or readable: [\w-/\.]+/themes/not-readable$#', )
         $themeManager = new CmsThemeManager();
         
         // only writable dir
