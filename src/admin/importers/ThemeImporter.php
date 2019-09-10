@@ -20,14 +20,14 @@ use Yii;
 class ThemeImporter extends Importer
 {
     private $packageInstaller;
-    
+
     /**
      * @inheritdoc
      */
     public function run()
     {
         $this->packageInstaller = Yii::$app->getPackageInstaller();
-    
+
         $exists = [];
         foreach ($this->getImporter()->getDirectoryFiles('themes') as $file) {
             $theme = $this->saveTheme('@' . $file['module'] . '/themes/' . $file['file']);
@@ -35,21 +35,21 @@ class ThemeImporter extends Importer
                 $exists[] = $theme;
             }
         }
-        
+
         foreach ($this->packageInstaller->getConfigs() as $config) {
             /** @var PackageConfig $config */
             $exists = array_merge($exists, $this->handleThemeDefinitions($config->themes));
         }
-    
+
         foreach (Theme::find()->all() as $theme) {
             if (!in_array($theme->id, $exists) && $theme->delete()) {
                 $this->addLog("[!] The theme {$theme->base_path} does not found anymore and was deleted.");
             }
         }
-        
+
         return $this->addLog("Theme importer finished with " . count($exists) . " themes.");
     }
-    
+
     /**
      * Handle an array with definitions whether they are files or folders.
      *
@@ -63,10 +63,10 @@ class ThemeImporter extends Importer
         foreach ($definitions as $themeDefinition) {
             $ids = array_merge($ids, $this->handleThemeDefinitionInDirectories($themeDefinition));
         }
-        
+
         return $ids;
     }
-    
+
     /**
      * Handle a theme definition for different folders
      *
@@ -77,29 +77,29 @@ class ThemeImporter extends Importer
     protected function handleThemeDefinitionInDirectories($themeDefinition)
     {
         $results = [];
-    
+
         $themeDefinition = preg_replace('#^vendor/#', '@vendor/', $themeDefinition);
-    
+
         $themeId = $this->saveThemeByPath($themeDefinition);
         if ($themeId) {
             $results[$themeDefinition] = $themeId;
         } else {
             $this->addLog("Unable to find '{$themeDefinition}'");
         }
-        
+
         return $results;
     }
-    
+
     protected function saveThemeByPath($themeDefinition)
     {
         $path = Yii::getAlias($themeDefinition);
         if (is_dir($path)) {
             return $this->saveTheme($themeDefinition);
         }
-        
+
         return null;
     }
-    
+
     /**
      * Save a theme by its base path.
      * Example path: @app/themes/blank
@@ -115,9 +115,9 @@ class ThemeImporter extends Importer
         if (!file_exists($themeFile)) {
             return false;
         }
-        
+
         $config = Json::decode(file_get_contents($themeFile)) ?: [];
-    
+
         $themeConfig = new ThemeConfig($basePath, $config);
 
         $themeModel = Theme::findOne(['base_path' => $basePath]);
@@ -126,17 +126,17 @@ class ThemeImporter extends Importer
             $themeModel = new Theme();
             $themeModel->base_path = $basePath;
             $themeModel->json_config = Json::encode($themeConfig->toArray());
-          
+
            $log = "Added theme $basePath to database.";
         } else {
             $themeModel->json_config = Json::encode($themeConfig->toArray());
             $log = "Updated theme $basePath.";
         }
-    
+
         if ($themeModel->save()) {
             $this->addLog($log);
         }
-    
+
         return $themeModel->id;
     }
 }

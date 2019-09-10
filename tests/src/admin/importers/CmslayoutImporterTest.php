@@ -88,7 +88,7 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
                 0 => 'New file Main found and registered.',
                 1 => 'New file Layoutwithjson found and registered.',
                 2 => 'New file Phplayout found and registered.',
-                3 => 'New file Test Theme - Theme Layout found and registered.',
+                3 => 'New file New Name - Theme Layout found and registered.',
                 4 => 'cms layout importer finished with 4 layout files.',
             ]
         ], $log);

@@ -6,16 +6,22 @@ use cmstests\CmsConsoleTestCase;
 use luya\cms\admin\importers\ThemeImporter;
 use luya\cms\models\Theme;
 use luya\console\commands\ImportController;
+use luya\helpers\FileHelper;
 use luya\testsuite\fixtures\NgRestModelFixture;
 use Yii;
 
 class ThemeImporterTest extends CmsConsoleTestCase
 {
+    /**
+     * @var NgRestModelFixture
+     */
+    private $fixture;
+
     public function afterSetup()
     {
         parent::afterSetup();
         
-        $fixture = new NgRestModelFixture([
+        $this->fixture = new NgRestModelFixture([
             'modelClass' => Theme::class,
         ]);
     }
@@ -65,5 +71,95 @@ class ThemeImporterTest extends CmsConsoleTestCase
             ],
         ],
             $log);
+    }
+
+    public function testEmptyThemeDirectory()
+    {
+        Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
+
+        FileHelper::removeDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
+        FileHelper::createDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
+
+        $controller = new ImportController('import-controller', $this->app);
+        $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
+
+        $this->assertNull($importer->run());
+
+        $log = $importer->importer->getLog();
+
+        $this->assertSame([
+            'luya\cms\admin\importers\ThemeImporter' => [
+                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
+                1 => 'Added theme @app/themes/appTheme to database.',
+                2 => 'Added theme @app/themes/testTheme to database.',
+                3 => 'Theme importer finished with 3 themes.',
+            ],
+        ],
+            $log);
+    }
+
+    public function testNotExistsThemePackage()
+    {
+        Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
+
+        $this->app->getPackageInstaller()->setConfigs([['themes' => ['@CmsUnitModule/not/exists']]]);
+
+        $controller = new ImportController('import-controller', $this->app);
+        $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
+
+        $this->assertNull($importer->run());
+
+        $log = $importer->importer->getLog();
+
+        $this->assertSame([
+            'luya\cms\admin\importers\ThemeImporter' => [
+                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
+                1 => 'Added theme @app/themes/appTheme to database.',
+                2 => 'Added theme @app/themes/testTheme to database.',
+                3 => 'Unable to find \'@CmsUnitModule/not/exists\'',
+                4 => 'Theme importer finished with 3 themes.',
+            ],
+        ],
+            $log);
+    }
+
+    public function testUpdateThemeConfig()
+    {
+        $controller = new ImportController('import-controller', $this->app);
+        $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
+
+        $importer->run();
+
+        $this->assertSame(
+            [
+                'luya\cms\admin\importers\ThemeImporter' => [
+                    0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
+                    1 => 'Theme importer finished with 1 themes.',
+                ],
+            ],
+            $importer->importer->getLog()
+        );
+
+        $this->assertSame('{"name":"newName","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@CmsUnitModule/themes/testTheme'])->json_config);
+
+        Theme::updateAll(['json_config' => '{}']);
+
+        // re-run after changes
+        $controller = new ImportController('import-controller', $this->app);
+        $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
+
+        $importer->run();
+
+        $this->assertSame(
+            [
+                'luya\cms\admin\importers\ThemeImporter' => [
+                    0 => 'Updated theme @CmsUnitModule/themes/testTheme.',
+                    1 => 'Theme importer finished with 1 themes.',
+                ],
+            ],
+            $importer->importer->getLog()
+        );
+
+        $this->assertSame('{"name":"newName","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@CmsUnitModule/themes/testTheme'])->json_config);
     }
 }
