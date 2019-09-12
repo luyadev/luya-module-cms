@@ -31,4 +31,18 @@ class ThemeTest extends ModelTestCase
         $this->assertSame($values, $theme->getJsonConfig());
         $this->assertNull($theme->getJsonConfig('foo'));
     }
+
+    public function testInvalidJsonConfig()
+    {
+        $fixture = new NgRestModelFixture([
+            'modelClass' => Theme::class
+        ]);
+
+        $theme = new Theme();
+        $theme->json_config = '}[';
+
+        $theme->afterFind();
+
+        $this->assertNull($theme->getJsonConfig());
+    }
 }
