@@ -9,7 +9,7 @@ class ModelTestCase extends ConsoleApplicationTestCase
     public function getConfigArray()
     {
         return [
-           'id' => 'basetestcase',
+            'id' => 'basetestcase',
             'basePath' => dirname(__DIR__),
             'components' => [
                 'db' => [

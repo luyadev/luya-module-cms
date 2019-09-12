@@ -18,16 +18,18 @@
   <th>Created</th>
 </tr>
 </thead>
-<?php foreach ($blocks as $block): ?>
-  <tr ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})" style="cursor:pointer;">
-    <td>
-      <a ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})"><?= $block->navItemPage->forceNavItem->title; ?></a>
-    </td>
-    <td><?= $block->navItemPage->forceNavItem->lang->name; ?></td>
-    <td><?= $block->navItemPage->version_alias; ?></td>
-    <td><?= Yii::$app->formatter->asBoolean(!$block->is_hidden); ?></td>
-    <td><?= Yii::$app->formatter->asDate($block->navItemPage->forceNavItem->timestamp_update); ?></td>
-    <td><?= Yii::$app->formatter->asDate($block->navItemPage->forceNavItem->timestamp_create); ?></td>
-  </tr>
-<?php endforeach; ?>
+<?php if (isset($blocks)) : ?>
+    <?php foreach ($blocks as $block): ?>
+        <tr ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})" style="cursor:pointer;">
+            <td>
+                <a ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})"><?= $block->navItemPage->forceNavItem->title; ?></a>
+            </td>
+            <td><?= $block->navItemPage->forceNavItem->lang->name; ?></td>
+            <td><?= $block->navItemPage->version_alias; ?></td>
+            <td><?= Yii::$app->formatter->asBoolean(!$block->is_hidden); ?></td>
+            <td><?= Yii::$app->formatter->asDate($block->navItemPage->forceNavItem->timestamp_update); ?></td>
+            <td><?= Yii::$app->formatter->asDate($block->navItemPage->forceNavItem->timestamp_create); ?></td>
+        </tr>
+    <?php endforeach; ?>
+<?php endif ?>
 </table>
