@@ -234,5 +234,4 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
-	'menu_group_item_env_themes' => 'Themes',
 ];
