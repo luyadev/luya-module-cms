@@ -3,6 +3,7 @@
 namespace cmstests\src\frontend;
 
 use cmstests\CmsFrontendTestCase;
+use luya\cms\frontend\Bootstrap;
 use luya\cms\frontend\CmsThemeManager;
 use luya\cms\models\Theme;
 use luya\testsuite\fixtures\ActiveRecordFixture;
@@ -93,5 +94,38 @@ class CmsThemeManagerTest extends CmsFrontendTestCase
         } finally {
             rmdir(Yii::getAlias('@cmstests/data/themes/not-readable'));
         }
+    }
+
+
+    public function testBootstrapThemeManager()
+    {
+        $called = false;
+
+        $this->app->setComponents([
+            'themeManager' => [
+                'class' => CmsThemeManager::class,
+//                'activeThemeName' => '@app/themes/appTheme',
+                'on eventBeforeSetup' => function () use(&$called) {
+                    $called = true;
+                },
+            ],
+        ]);
+
+        $this->fixture->rebuild();
+
+        /** @var Theme $themeModel */
+        $themeModel = $this->fixture->newModel;
+        $themeModel->base_path = '@app/themes/appTheme';
+        $themeModel->json_config = json_encode([]);
+        $themeModel->is_active = 1;
+        $themeModel->insert();
+
+        $this->app->request->isConsoleRequest = false;
+
+        $bs = new Bootstrap();
+        $bs->bootstrap($this->app);
+
+        $this->assertTrue($called);
+        $this->assertEquals(Yii::getAlias('@app/themes/appTheme'), $this->app->themeManager->activeTheme->basePath);
     }
 }
