@@ -34,6 +34,10 @@ class PhpBlockView extends View
     
     public function init()
     {
+        if (!$this->theme) {
+            $this->theme = Yii::$app->view->theme;
+        }
+
         parent::init();
         
         $this->on(self::EVENT_AFTER_RENDER, function () {

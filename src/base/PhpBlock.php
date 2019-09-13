@@ -26,7 +26,6 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     {
         if ($this->_view === null) {
             $this->_view = Yii::createObject(PhpBlockView::class);
-            $this->_view->theme = Yii::$app->view->theme;
         }
         
         return $this->_view;
