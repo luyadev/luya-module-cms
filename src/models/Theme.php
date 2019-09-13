@@ -119,7 +119,11 @@ class Theme extends NgRestModel
     public function getJsonConfig($node = null)
     {
         if ($this->_jsonConfig === null) {
-            $this->_jsonConfig = Json::decode($this->json_config);
+            try {
+                $this->_jsonConfig = Json::decode($this->json_config);
+            } catch (InvalidArgumentException $ex) {
+                $this->_jsonConfig = [];
+            }
         }
         
         if (!$node) {
