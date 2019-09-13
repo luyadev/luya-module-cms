@@ -107,18 +107,7 @@ class Theme extends NgRestModel
         return $this->getJsonConfig('author');
     }
     
-    public function afterFind()
-    {
-        try {
-            $this->_jsonConfig = Json::decode($this->json_config);
-        } catch (InvalidArgumentException $ex) {
-            $this->_jsonConfig = null;
-        }
-        
-        return parent::afterFind();
-    }
-    
-    private $_jsonConfig = [];
+    private $_jsonConfig = null;
     
     /**
      * Get the json config as array.
@@ -129,6 +118,10 @@ class Theme extends NgRestModel
      */
     public function getJsonConfig($node = null)
     {
+        if ($this->_jsonConfig === null) {
+            $this->_jsonConfig = Json::decode($this->json_config);
+        }
+        
         if (!$node) {
             return $this->_jsonConfig;
         }
