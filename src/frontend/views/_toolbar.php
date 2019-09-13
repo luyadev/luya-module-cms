@@ -5,7 +5,7 @@ use yii\helpers\VarDumper;
 use luya\helpers\Inflector;
 
 /**
- * @var \luya\theme\Theme[] $themes
+ * @var \luya\theme\Theme $theme
  */
 ?>
 <div id="luya-cms-toolbar-wrapper">
@@ -36,10 +36,10 @@ use luya\helpers\Inflector;
                 <span class="luya-cms-toolbar__badge"><?= count($composition->get()); ?></span> <span><?= Module::t('tb_composition'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
-        <?php if (isset($themes['active'])) : ?>
+        <?php if (isset($theme)) : ?>
 		    <div class="luya-cms-toolbar__button">
 			    <a title="<?= Module::t('tb_active_theme'); ?>" class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-themes-container')">
-				    <i class="material-icons">color_lens</i> <span><?= $themes['active']->getConfig()->name ?></span> <i class="material-icons">keyboard_arrow_down</i>
+				    <i class="material-icons">color_lens</i> <span><?= $theme->getConfig()->name ?></span> <i class="material-icons">keyboard_arrow_down</i>
 			    </a>
 		    </div>
         <?php endif ?>
@@ -139,10 +139,10 @@ use luya\helpers\Inflector;
             <?php endforeach; ?>
         </div>
     </div>
-    <?php if (isset($themes['active'])) : ?>
+    <?php if (isset($theme)) : ?>
 		<div id="luya-cms-toolbar-themes-container" class="luya-cms-toolbar__container">
 			<div class="luya-cms-toolbar__list">
-                <?php foreach ($themes['active']->getConfig()->toArray() as $key => $value): ?>
+                <?php foreach ($theme->getConfig()->toArray() as $key => $value): ?>
 					<div class="luya-cms-toolbar__list-entry">
 						<div class="luya-cms-toolbar__list-entry-left">
 							<label><?= Inflector::humanize(Inflector::camel2words($key)) ?></label>

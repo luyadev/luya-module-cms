@@ -260,9 +260,7 @@ abstract class Controller extends \luya\web\Controller
                 }
             }
         }
-        
-        $themes = ['active' => Yii::$app->themeManager->activeTheme];
-        
+
         // As the view path can not evaluated from controller context, we have to force the viewPath trough
         // the module instance.
         // @see https://github.com/luyadev/luya/issues/1768
@@ -280,7 +278,7 @@ abstract class Controller extends \luya\web\Controller
             'composition' => Yii::$app->composition,
             'luyaTagParsing' => $event->sender->context->module->enableTagParsing,
             'properties' => $props,
-            'themes' => $themes,
+            'theme' => Yii::$app->themeManager->activeTheme,
             'content' => $content,
         ]);
     
