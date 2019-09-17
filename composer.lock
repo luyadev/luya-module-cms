@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81f0a6794d2dc69b1f27fba5f8eacc7c",
+    "content-hash": "8b1755a4ec83a020a40f25556f6a0779",
     "packages": [],
     "packages-dev": [
         {
@@ -656,23 +656,23 @@
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "dev-add-page-scope",
+            "version": "1.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "ac31c7c9cceb640071e04b56713c5d1ded269243"
+                "reference": "371d889d0318323aca0f2291d30766dfe24366bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/ac31c7c9cceb640071e04b56713c5d1ded269243",
-                "reference": "ac31c7c9cceb640071e04b56713c5d1ded269243",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/371d889d0318323aca0f2291d30766dfe24366bd",
+                "reference": "371d889d0318323aca0f2291d30766dfe24366bd",
                 "shasum": ""
             },
             "require": {
                 "curl/curl": "^2.0 || ^1.0",
                 "luyadev/luya-core": "^1.0",
                 "luyadev/luya-module-admin": "^1.0 || ^2.0",
-                "luyadev/luya-module-cms": "dev-master",
+                "luyadev/luya-module-cms": "^1.0 || ^2.0",
                 "phpunit/phpunit": "^6.0",
                 "twig/twig": "^1.0"
             },
@@ -705,7 +705,7 @@
                 "module",
                 "php"
             ],
-            "time": "2019-09-17T13:53:28+00:00"
+            "time": "2019-09-17T15:06:22+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2881,9 +2881,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "luyadev/luya-testsuite": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
