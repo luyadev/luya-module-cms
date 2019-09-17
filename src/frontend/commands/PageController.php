@@ -47,7 +47,7 @@ class PageController extends Command
         
         // get all blocks from those pages
         $navItemPageBlockIds = NavItemPageBlockItem::find()->where(['in', 'nav_item_page_id', $navItemPageIds])->select(['id'])->column();
-        
+
         $table = new Table();
         $table->setHeaders(['Type', 'Items to delete']);
         $table->setRows([
@@ -72,10 +72,32 @@ class PageController extends Command
             $this->printRows(Log::deleteAll(['and', ['in', 'row_id', $navItemIds], ['table_name' => 'cms_nav_item']]), 'Page language log');
             $this->printRows(Log::deleteAll(['and', ['in', 'row_id', $navItemPageBlockIds], ['table_name' => 'cms_nav_item_page_block_item']]), 'Block log');
 
-            return $this->outputSuccess('Done');
+            $this->outputSuccess('Done');
         }
 
-        return $this->outputError('Abort by user.');
+        // remove block content
+        $count = 0;
+
+        $blockItems = NavItemPageBlockItem::find()->with(['block'])->batch();
+        foreach ($blockItems as $rows) {
+            foreach ($rows as $item) {
+                if (!$item->block) {
+                    $count++;
+                }
+            }
+        }
+
+        if ($count > 0 && $this->confirm("Would you like to remove {$count} block contents which has no related block?")) {
+            $blockItems = NavItemPageBlockItem::find()->with(['block'])->batch();
+            foreach ($blockItems as $rows) {
+                foreach ($rows as $item) {
+                    if (!$item->block) {
+                        $item->delete();
+                    }
+                }
+            }
+            $this->outputSuccess("Done");
+        }
     }
     
     private function printRows($count, $describer)

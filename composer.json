@@ -16,7 +16,7 @@
 		"issues" : "https://github.com/luyadev/luya-module-cms/issues"
 	},
 	"require-dev" : {
-	    "luyadev/luya-testsuite" : "^1.0",
+	    "luyadev/luya-testsuite" : "dev-add-page-scope",
 		"twbs/bootstrap": "~4.3.0",
 		"unglue/client": "^1.3"
 	},
