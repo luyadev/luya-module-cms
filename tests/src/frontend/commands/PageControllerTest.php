@@ -16,7 +16,16 @@ class PageControllerTest extends CmsConsoleTestCase
             $scope->createCmsNavFixture([]);
             $scope->createCmsNavItemFixture([]);
             $scope->createCmsNavItemPageFixture([]);
-            $scope->createCmsNavItemPageBlockItemFixture([]);
+            $scope->createCmsNavItemPageBlockItemFixture([
+                'item1' => [
+                    'id' => 1,
+                    'json_config_values' => '',
+                    'json_config_cfg_values' => '',
+                    'block_id' => 0,
+                    'placeholder_var' => 'default',
+                    'nav_item_page_id' => 1,
+                ]
+            ]);
             $scope->createCmsPropertyFixture([]);
             $scope->createCmsNavPermissionFixture([]);
             $ctrl = new PageControllerStub('page', $this->app);
