@@ -4,9 +4,11 @@ namespace luya\cms\models;
 
 use Yii;
 use luya\admin\models\User;
+use luya\admin\traits\TaggableTrait;
 use yii\helpers\Json;
 use luya\cms\admin\Module;
 use yii\base\InvalidParamException;
+use yii\db\ActiveRecord;
 
 /**
  * Eventer-Logger for CMS Activitys
@@ -27,6 +29,9 @@ use yii\base\InvalidParamException;
  */
 class Log extends \yii\db\ActiveRecord
 {
+    const LOG_TYPE_INSERT = 1;
+    const LOG_TYPE_UPDATE = 2;
+    const LOG_TYPE_DELETE = 3;
     /**
      * @inheritdoc
      */
@@ -43,6 +48,11 @@ class Log extends \yii\db\ActiveRecord
         $this->data_json = json_encode($this->data_json);
     }
     
+    /**
+     * Get the message as array
+     *
+     * @return array
+     */
     public function getMessageArray()
     {
         try {
@@ -52,13 +62,18 @@ class Log extends \yii\db\ActiveRecord
         }
     }
     
+    /**
+     * Find informations for a given row, for detailed informations about the data set.
+     *
+     * @return string
+     */
     public function getRowDescriber()
     {
         if (!empty($this->row_id)) {
-            switch ($this->table_name) {
-                case "nav":
+            switch (TaggableTrait::cleanBaseTableName($this->table_name)) {
+                case "cms_nav":
                     return Nav::findOne($this->row_id)->activeLanguageItem->title;
-                case "nav_item":
+                case "cms_nav_item":
                     return NavItem::findOne($this->row_id)->title;
                 case "cms_nav_item_page_block_item":
                     $block = NavItemPageBlockItem::findOne($this->row_id);
@@ -127,13 +142,20 @@ class Log extends \yii\db\ActiveRecord
         ];
     }
     
+    /**
+     * Get the log message as a string
+     *
+     * @return string
+     */
     public function getAction()
     {
+        $tableName = TaggableTrait::cleanBaseTableName($this->table_name);
+
         if ($this->is_insertion) {
-            switch ($this->table_name) {
-                case "nav_item":
+            switch ($tableName) {
+                case "cms_nav_item":
                     return Module::t('log_action_insert_cms_nav_item', ['info' => $this->rowDescriber]);
-                case "nav":
+                case "cms_nav":
                     return Module::t('log_action_insert_cms_nav', ['info' => $this->rowDescriber]);
                 case "cms_nav_item_page_block_item":
                     return Module::t('log_action_insert_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
@@ -143,10 +165,10 @@ class Log extends \yii\db\ActiveRecord
         }
         
         if ($this->is_update) {
-            switch ($this->table_name) {
-                case "nav_item":
+            switch ($tableName) {
+                case "cms_nav_item":
                     return Module::t('log_action_update_cms_nav_item', ['info' => $this->rowDescriber]);
-                case "nav":
+                case "cms_nav":
                     return Module::t('log_action_update_cms_nav', ['info' => $this->rowDescriber]);
                 case "cms_nav_item_page_block_item":
                     return Module::t('log_action_update_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
@@ -156,10 +178,10 @@ class Log extends \yii\db\ActiveRecord
         }
 
         if ($this->is_deletion) {
-            switch ($this->table_name) {
-                case "nav_item":
+            switch ($tableName) {
+                case "cms_nav_item":
                     return Module::t('log_action_delete_cms_nav_item', ['info' => $this->rowDescriber]);
-                case "nav":
+                case "cms_nav":
                     return Module::t('log_action_delete_cms_nav', ['info' => $this->rowDescriber]);
                 case "cms_nav_item_page_block_item":
                     return Module::t('log_action_delete_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
@@ -170,8 +192,9 @@ class Log extends \yii\db\ActiveRecord
     }
     
     /**
-     *
-     * @return \yii\db\ActiveQuery
+     * User relatiion.
+     * 
+     * @return User
      */
     public function getUser()
     {
@@ -203,5 +226,34 @@ class Log extends \yii\db\ActiveRecord
             'data_json' => $additionalData,
         ]);
         return $model->insert(false);
+    }
+
+    /**
+     * Add log entry based on active record models.
+     *
+     * @param integer $type
+     * @param ActiveRecord $model
+     * @return boolean
+     * @since 2.1.1
+     */
+    public static function addModel($type, ActiveRecord $model)
+    {
+        switch ($type) {
+            case self::LOG_TYPE_DELETE:
+                $actionName = 'delete';
+                break;
+            case self::LOG_TYPE_INSERT:
+                $actionName = 'insert';
+                break;
+            case self::LOG_TYPE_UPDATE:
+                $actionName = 'update';
+                break;
+                
+        }
+        return Log::add($type, [
+            'tableName' => $model::tableName(),
+            'action' => $actionName,
+            'row' => $model->getPrimaryKey()
+        ], $model::tableName(), $model->getPrimaryKey(), $model->toArray());
     }
 }
