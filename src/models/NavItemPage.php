@@ -428,8 +428,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage)
     {
+        // if the block relation could be found, return false.
+        if (!$blockItem->block) {
+            return false;
+        }
+
         $blockObject = $blockItem->block->getObject($blockItem->id, 'admin', $navItemPage);
-        //$blockObject = Block::objectId($blockItem['block_id'], $blockItem['id'], 'admin', $navItemPage);
         if ($blockObject === false) {
             return false;
         }
