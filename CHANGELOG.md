@@ -3,8 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 2.1.1 
+## 2.1.1 (17. September 2019)
 
++ [#218](https://github.com/luyadev/luya-module-cms/issues/218) Ensure log system works properly when a page is deleted.
++ [#106](https://github.com/luyadev/luya-module-cms/issues/106) Prevent infinite recursion when storing wrong block data.
 + [#213](https://github.com/luyadev/luya-module-cms/issues/213) If a 404 is thrown in admin context, the cms error page should not render, otherwise this could lead into a 500er server error which will then log out the user.
 
 ## 2.1.0 (22. July 2019)
