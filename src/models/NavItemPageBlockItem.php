@@ -235,6 +235,12 @@ class NavItemPageBlockItem extends ActiveRecord
      */
     public function eventAfterInsert()
     {
+        if ($this->id == $this->prev_id) {
+            // ensurer no infinte requests can happen.
+            // https://github.com/luyadev/luya-module-cms/issues/106
+            $this->updateAttributes(['prev_id' => 0]);
+        }
+
         $this->updateNavItemTimesamp();
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
         Log::add(1, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'insert', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $this->block->getNameForLog()], 'cms_nav_item_page_block_item', $this->id);
