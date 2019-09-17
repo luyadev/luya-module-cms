@@ -32,7 +32,7 @@ class PageControllerTest extends CmsConsoleTestCase
             $ctrl->sendInput('yes');
             $r = $ctrl->actionCleanup();
             
-            $this->assertNull($r);
+            $this->assertSame(0, $r);
         });
     }
 }
