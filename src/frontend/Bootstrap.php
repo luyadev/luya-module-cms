@@ -2,15 +2,13 @@
 
 namespace luya\cms\frontend;
 
-use Yii;
-use yii\base\BootstrapInterface;
-use yii\base\InvalidConfigException;
-use yii\web\NotFoundHttpException;
-use yii\web\Response;
-use luya\web\ErrorHandlerExceptionRenderEvent;
+use luya\cms\models\Config;
 use luya\web\Application;
 use luya\web\ErrorHandler;
-use luya\cms\models\Config;
+use luya\web\ErrorHandlerExceptionRenderEvent;
+use yii\base\BootstrapInterface;
+use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * CMS Bootstrap.
@@ -49,7 +47,7 @@ final class Bootstrap implements BootstrapInterface
             // handle not found exceptions
             $app->errorHandler->on(ErrorHandler::EVENT_BEFORE_EXCEPTION_RENDER, function (ErrorHandlerExceptionRenderEvent $event) use ($app) {
                 if ($app instanceof Application && $event->exception instanceof NotFoundHttpException && !$app->request->isAdmin) {
-                    $errorPageNavId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0); 
+                    $errorPageNavId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
                     // if not defined abort.
                     if (!$errorPageNavId) {
                         return;
@@ -76,17 +74,6 @@ final class Bootstrap implements BootstrapInterface
                     exit;
                 }
             });
-    
-            
-            // set cms theme manager
-            $app->setComponents([
-                'themeManager' => array_merge($app->getComponents()['themeManager'], ['class' => CmsThemeManager::class]),
-            ]);
-    
-            // @todo waiting for https://github.com/luyadev/luya/issues/1938
-            if (!$app->request->getIsConsoleRequest()) {
-                $app->themeManager->setup();
-            }
         }
     }
 }

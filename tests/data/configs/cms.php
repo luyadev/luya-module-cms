@@ -36,6 +36,5 @@ return [
         'assetManager' => [
             'basePath' => dirname(__DIR__) . '/assets',
         ],
-        'themeManager' => ['class' => '\luya\cms\frontend\CmsThemeManager'],
     ],
 ];

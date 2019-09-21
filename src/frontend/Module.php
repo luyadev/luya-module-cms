@@ -3,6 +3,10 @@
 namespace luya\cms\frontend;
 
 use luya\base\CoreModuleInterface;
+use luya\cms\models\Theme;
+use luya\theme\SetupEvent;
+use luya\theme\ThemeManager;
+use yii\base\Application;
 
 /**
  * Cms Module.
@@ -97,7 +101,22 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             ],
         ];
     }
-    
+
+    public function luyaBootstrap(Application $app)
+    {
+        parent::luyaBootstrap($app);
+
+        if (!$app->request->isConsoleRequest && $app->has('themeManager')) {
+            // set active theme from database
+            $app->get('themeManager')->on(ThemeManager::EVENT_BEFORE_SETUP, function (SetupEvent $event) {
+                $activeTheme = Theme::findOne(['is_active' => 1]);
+                if ($activeTheme) {
+                    $event->basePath = $activeTheme->base_path;
+                }
+            });
+        }
+    }
+
     /**
      * @inheritdoc
      */
