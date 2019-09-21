@@ -12,6 +12,7 @@ use yii\base\InvalidCallException;
 use luya\admin\models\UserOnline;
 use yii\web\NotFoundHttpException;
 use luya\cms\admin\Module;
+use luya\cms\models\Log;
 use yii\web\ForbiddenHttpException;
 
 /**
@@ -280,6 +281,8 @@ class NavController extends \luya\admin\base\RestController
                 $navItem->setAttribute('alias', date('Y-m-d-H-i').'-'.$navItem->alias);
                 $navItem->update(false);
             }
+
+            Log::addModel(Log::LOG_TYPE_DELETE, $navItem);
 
             return $model->update(false);
         }
