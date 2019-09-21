@@ -29,16 +29,10 @@ class ThemeImporter extends Importer
         $this->packageInstaller = Yii::$app->getPackageInstaller();
 
         $exists = [];
-        foreach ($this->getImporter()->getDirectoryFiles('themes') as $file) {
-            $theme = $this->saveTheme('@' . $file['module'] . '/themes/' . $file['file']);
-            if ($theme) {
-                $exists[] = $theme;
-            }
-        }
 
-        foreach ($this->packageInstaller->getConfigs() as $config) {
-            /** @var PackageConfig $config */
-            $exists = array_merge($exists, $this->handleThemeDefinitions($config->themes));
+        foreach (Yii::$app->themeManager->getThemes(false) as $theme) {
+            /** @var \luya\theme\Theme $theme */
+            $exists = array_merge($exists, $this->handleThemeDefinitionInDirectories($theme->basePath));
         }
 
         foreach (Theme::find()->all() as $theme) {
