@@ -61,7 +61,7 @@ class CmslayoutImporter extends Importer
      * @param string $path
      * @param string $themeName
      */
-    protected function handleLayoutFile(&$layoutFiles, $path, string $themeName = null)
+    protected function handleLayoutFile(&$layoutFiles, $path, $themeName = null)
     {
         $aliased = Yii::getAlias($path, false);
         $filePath = $aliased ? $aliased : $path;
@@ -104,7 +104,7 @@ class CmslayoutImporter extends Importer
      * @throws Exception
      * @return string
      */
-    protected function importLayoutFile($file, $aliased, string $themeName = null)
+    protected function importLayoutFile($file, $aliased, $themeName = null)
     {
         if (!file_exists($file)) {
             return false;
