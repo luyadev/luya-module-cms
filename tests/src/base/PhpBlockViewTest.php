@@ -4,6 +4,8 @@ namespace cmstests\src\base;
 
 use cmstests\CmsFrontendTestCase;
 use cmstests\data\blocks\ConcretImplementationBlock;
+use cmstests\data\blocks\PhpTestBlock;
+use cmstests\src\blocks\PhpBlockTest;
 use luya\cms\base\PhpBlockView;
 use luya\web\View;
 use Yii;
@@ -131,5 +133,26 @@ class PhpBlockViewTest extends CmsFrontendTestCase
         $view->context = $block;
 
         $this->assertInstanceOf(ConcretImplementationBlock::class, $view->getBlock());
+    }
+
+    public function testGetters()
+    {
+        $block = new PhpTestBlock();
+        $view = new PhpBlockView();
+        $view->context = $block;
+
+        $this->assertSame(false, $view->getIndex());
+        $this->assertSame(false, $view->getIsFirst());
+        $this->assertSame(false, $view->getIsLast());
+        $this->assertSame(false, $view->getItemsCount());
+        $this->assertFalse($view->getIsNextEqual());
+        $this->assertFalse($view->getIsPrevEqual());
+        $this->assertFalse($view->getEqualIndex());
+        $this->assertSame(false, $view->getBlockId());
+        $this->assertSame(false, $view->getPageObject());
+        $this->assertNull($view->env('barfoo'));
+
+        $this->assertSame('<p>content</p>', $view->wrapTemplate('title', 'content', '<p>{{title}}</p>'));
+        $this->assertSame(false, $view->placeholderValue('doesnotexsts'));
     }
 }
