@@ -8,7 +8,8 @@ use Yii;
 /**
  * View context helper of php block view file.
  *
- * @property \luya\cms\base\PhpBlock $context Get the block context.
+ * @property PhpBlock $context Get the block context.
+ * @property PhpBlock $block The block context.
  * @property integer $index Get the current index number of the block inside the current placeholder.
  * @property boolean $isFirst Whether this is the first block element inside this placeholder or not.
  * @property boolean $isLast Whether this is the last block element inside this placeholder or not.
@@ -19,7 +20,7 @@ use Yii;
  * @property integer $id Returns the Unique ID for this block (absolute unique value).
  * @property integer $blockId Returns the block type ID from database, assume two text blocks would have the same ID.
  * @property \luya\cms\models\NavItem $pageObject Returns the NavItem object for the context the block is implemented.
- * @property \luya\web\View $appView The application view object in order to register data to the layout view.
+ * @property View $appView The application view object in order to register data to the layout view.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -27,7 +28,7 @@ use Yii;
 class PhpBlockView extends View
 {
     /**
-     * @var is disabled by default as its already registered by global view and layout files are not used in block views.
+     * @var boolean Is disabled by default as its already registered by global view and layout files are not used in block views.
      * @see https://github.com/luyadev/luya/issues/1807
      */
     public $autoRegisterCsrf = false;
@@ -39,6 +40,17 @@ class PhpBlockView extends View
         $this->on(self::EVENT_AFTER_RENDER, function () {
             self::registerToAppView($this->getBlockAssets(), $this->getAssetBundleNames());
         });
+    }
+
+    /**
+     * Get the block object which is 
+     *
+     * @return PhpBlock
+     * @since 2.2.0
+     */
+    public function getBlock()
+    {
+        return $this->context;
     }
     
     /**
@@ -256,29 +268,7 @@ class PhpBlockView extends View
     }
     
     /**
-     * The Application View Object to Register Data.
-     *
-     * As the PhpBlockView is an own instance, registered assets files would not be available. In order to assign
-     * meta keywords, add essets the application view object is required, therfore this getter method will
-     * give you access.
-     *
-     * Example of registering an asset from the block view:
-     *
-     * ```php
-     * MyBlockAsset::register($this->appView);
-     * ```
-     *
-     * @return \luya\web\View The global application View Object which is also the same as the layout or cmslayout.
-     * @deprecated deprecated since 1.0.5 and will be removed in 1.1.0
-     */
-    public function getAppView()
-    {
-        trigger_error('The getAppView() has been deprecated and will be removed in version 1.1.0. Use the view object to register assets, js and files.', E_USER_DEPRECATED);
-        
-        return $this;
-    }
-    
-    /**
+     * Get an array with extracted informations to register in the view
      * @return array
      * @since 1.0.5
      */
@@ -294,13 +284,18 @@ class PhpBlockView extends View
         ];
     }
     
+    /**
+     * Get an array of alles asset bundle names.
+     *
+     * @return array
+     */
     public function getAssetBundleNames()
     {
         return array_keys($this->assetBundles);
     }
     
     /**
-     *
+     *Register assets to the given app view
      *
      * @param array $blockAssets
      * @param array $assetBundles
@@ -318,7 +313,6 @@ class PhpBlockView extends View
                      * js and jsFiles must keep the array keys as position and have subarray
                      * @see \yii\web\View::POS_HEAD
                      */
-                    
                     $appAssets = &$appView->{$attribute};
                     
                     foreach ($blockAsset as $key => $value) {
