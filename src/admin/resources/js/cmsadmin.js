@@ -929,6 +929,8 @@
 
 		$scope.hasValues = false;
 
+		$scope.pageTags = [];
+
 		$scope.bubbleParents = function(parentNavId, containerId) {
 	    	var item = $filter('menuchildfilter')($scope.menuData.items, containerId, parentNavId);
 	    	if (item) {
@@ -943,6 +945,21 @@
 				AdminToastService.success(i18n['js_page_create_copy_success']);
 				$scope.showActions = 1;
 				$scope.togglePageSettingsOverlay();
+			});
+		};
+
+		$scope.pageTags = [];
+
+		$http.get('admin/api-cms-nav/' + $scope.id + '/tags').then(function(response) {
+			angular.forEach(response.data, function(value) {
+				$scope.pageTags.push(value.id);
+			});
+		});
+
+		$scope.savePageTags = function() {
+			console.log($scope.pageTags);
+			$http.post('admin/api-cms-nav/' + $scope.id + '/tags', $scope.pageTags).then(function(response) {
+				console.log(response);
 			});
 		};
 

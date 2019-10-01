@@ -2,6 +2,7 @@
 
 namespace luya\cms\admin\apis;
 
+use luya\admin\models\TagRelation;
 use luya\cms\models\NavItemRedirect;
 use Yii;
 use luya\cms\models\Property;
@@ -13,6 +14,7 @@ use luya\admin\models\UserOnline;
 use yii\web\NotFoundHttpException;
 use luya\cms\admin\Module;
 use luya\cms\models\Log;
+use yii\data\ActiveDataProvider;
 use yii\web\ForbiddenHttpException;
 
 /**
@@ -251,6 +253,44 @@ class NavController extends \luya\admin\base\RestController
     public function actionDetail($navId)
     {
         return Nav::findOne($navId);
+    }
+
+    /**
+     * Get all tags for a given navigation id.
+     *
+     * @param integer $id
+     * @return ActiveDataProvider
+     * @since 2.2.0
+     */
+    public function actionTags($id)
+    {
+        $model = Nav::findOne($id);
+
+        if (!$model) {
+            throw new NotFoundHttpException("Unable to find the given nav model.");
+        }
+
+        return new ActiveDataProvider([
+            'query' => $model->getTags(),
+            'pagination' => false,
+        ]);
+    }
+
+    public function actionSaveTags($id)
+    {
+        $model = Nav::findOne($id);
+
+        if (!$model) {
+            throw new NotFoundHttpException("Unable to find the given nav model.");
+        }
+
+        foreach (TagRelation::getDataForRelation(Nav::tableName(), $id, false) as $relation) {
+            $relation->delete();
+        }
+
+        foreach (Yii::$app->request->bodyParams as $item) {
+            var_dump($item);
+        }
     }
 
     public function actionDelete($navId)
