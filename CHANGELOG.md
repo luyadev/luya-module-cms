@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 2.2.0
+
 ## 2.1.1 (17. September 2019)
 
 + [#218](https://github.com/luyadev/luya-module-cms/issues/218) Ensure log system works properly when a page is deleted.
