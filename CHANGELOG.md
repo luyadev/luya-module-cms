@@ -5,6 +5,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 2.2.0
 
++ [#224](https://github.com/luyadev/luya-module-cms/pull/224) Add `getBlock()` method in PhpBlockView to access block context.
+
 ## 2.1.1 (17. September 2019)
 
 + [#218](https://github.com/luyadev/luya-module-cms/issues/218) Ensure log system works properly when a page is deleted.

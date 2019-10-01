@@ -9,6 +9,7 @@ use Yii;
  * View context helper of php block view file.
  *
  * @property PhpBlock $context Get the block context.
+ * @property PhpBlock $block The block context.
  * @property integer $index Get the current index number of the block inside the current placeholder.
  * @property boolean $isFirst Whether this is the first block element inside this placeholder or not.
  * @property boolean $isLast Whether this is the last block element inside this placeholder or not.

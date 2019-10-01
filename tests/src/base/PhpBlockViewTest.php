@@ -3,6 +3,7 @@
 namespace cmstests\src\base;
 
 use cmstests\CmsFrontendTestCase;
+use cmstests\data\blocks\ConcretImplementationBlock;
 use luya\cms\base\PhpBlockView;
 use luya\web\View;
 use Yii;
@@ -114,12 +115,21 @@ class PhpBlockViewTest extends CmsFrontendTestCase
     {
         $blockAssetBundles = [
             AssetBundle::class,
-//            JqueryAsset::class,
+            //JqueryAsset::class,
         ];
         
         PhpBlockView::registerToAppView([], $blockAssetBundles);
         
         $this->assertInstanceOf(AssetBundle::class, Yii::$app->view->assetBundles[AssetBundle::class]);
-//        $this->assertInstanceOf(JqueryAsset::class, Yii::$app->view->assetBundles[BootstrapAsset::class]);
+        //$this->assertInstanceOf(JqueryAsset::class, Yii::$app->view->assetBundles[BootstrapAsset::class]);
+    }
+
+    public function testGetBlock()
+    {
+        $block = new ConcretImplementationBlock();
+        $view = new PhpBlockView();
+        $view->context = $block;
+
+        $this->assertInstanceOf(ConcretImplementationBlock::class, $view->getBlock());
     }
 }
