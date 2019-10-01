@@ -63,7 +63,7 @@ return [
     'model_navitempage_layout_label' => 'Layout',
     'model_navitemredirect_type_label' => 'Tipo de redirecionamento',
     'model_navitemredirect_value_label' => 'Alvo do redirecionamento',
-    
+
     'view_index_add_title' => 'Adicionar nova página',
     'view_index_add_page_from_language' => 'Adicionar página do idioma',
     'view_index_add_page_from_language_info' => 'Deseja copiar o conteúdo de outro idioma ao criar esta página?',
@@ -96,12 +96,12 @@ return [
 
 // added translation in 1.0.0-beta5:
 
-    
+
     'view_update_blockholder_clipboard' => 'Área de transferência',
 
 // added translation in 1.0.0-beta6:
 
-    
+
     'js_page_block_delete_confirm' => 'Deletar o bloco «%name%»?',
     'view_index_page_meta_keywords' => 'Palavras-chave',
     'current_version' => 'Versão de trabalho',
@@ -123,10 +123,10 @@ return [
 
 // added translation in 1.0.0-beta7:
 
-    
+
     'view_index_create_page_please_choose' => 'Por favor, escolha',
     'view_index_sidebar_autopreview' => 'Visualização automática',
-    
+
 // added translation in 1.0.0-beta8
 
     'module_permission_add_new_page' => 'Criar nova página',
@@ -151,15 +151,15 @@ return [
     'button_create_version' => 'Criar versão',
     'button_update_version' => 'Atualizar versão',
     'menu_group_item_env_permission' => 'Permissões da página',
-    
+
 // rc1
 
     'page_update_actions_deepcopy_text' => 'Crie uma cópia da página atual com todo o seu conteúdo. Todos os idiomas serão copiados, mas apenas a versão publicada.',
     'page_update_actions_deepcopy_btn' => 'Criar cópia',
-    
+
 // rc2
     'model_navitem_title_tag_label' => 'Título Tag (SEO)',
-    
+
 // rc3
     'model_navitempage_empty_draft_id' => 'Não foi possível criar a página a partir do modelo de rascunho vazio.',
     'view_update_variation_select' => 'Nenhuma variação de bloco selecionada',
@@ -185,7 +185,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configurar',
     'view_update_block_tooltip_delete' => 'Excluir',
     'view_update_block_tooltip_close' => 'Fechar a edição',
-    
+
     // 1.0.0
     'cmsadmin_dashboard_lastupdate' => 'Últimas atualizações da página',
     'cmsadmin_settings_homepage_title' => 'Página Padrão',
@@ -226,24 +226,24 @@ return [
 
 // 2.0
 
-    'model_navitem_image_id_label' => 'Image',
-    'view_index_page_label_subpage' => 'Select parent page',
-    'view_index_page_label_parent_nav_id' => 'Placement in navigation',
-    'view_index_page_label_parent_nav_id_root' => 'On the top level',
-    'view_index_page_label_parent_nav_id_subpage' => 'As a subpage',
-    'cmsadmin_item_settings_titleseo' => 'SEO',
-    'cmsadmin_item_settings_titleexpert' => 'Expert',
-    'model_navitem_is_url_strict_parsing_disabled_label' => 'Strict URL Parsing',
-    'model_navitem_is_url_strict_parsing_disabled_label_enabled' => 'Enabled',
-    'model_navitem_is_url_strict_parsing_disabled_label_disabled' => 'Disabled',
-    'model_navitem_is_url_strict_parsing_disabled_label_hint' => 'Strict URL parsing should be enabled unless you are using a URL-generating module block in the content of this page.',
-    'model_navitem_title_tag_label_hint' => 'The title tag is displayed in many browsers\' title bar and as a page title in the results of search engines.',
-    'view_index_page_meta_description_hint' => 'The page description should be a sentence about the purpose of this page. It is often used by search engines as a description for a page in the search results. It is also relevant when sharing a page on social media.',
-    'view_index_page_meta_keywords_hint' => 'The keywords are separated by commas (e.g. pizza, burger, pasta). Very few search engines still rely on these keywords. Use only words that are relevant for the page\'s content. The LUYA toolbar of the frontend will help check whether keywords were defined for the current page or not.',
-    'model_navitem_image_id_label_hint' => 'The image is important when sharing the page on social media. Usually this image is displayed by social media platforms as a preview image for a page.',
-    'view_index_module_controller_name' => 'Controller',
-    'view_index_module_action_name' => 'Action',
-    'view_index_module_action_params' => 'Action parameters',
-    'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
-    'view_index_module_advanced_settings_button' => 'Advanced settings',
+    'model_navitem_image_id_label' => 'Imagem',
+    'view_index_page_label_subpage' => 'Selecionar página pai',
+    'view_index_page_label_parent_nav_id' => 'Posicionamento na navegação',
+    'view_index_page_label_parent_nav_id_root' => 'No nível mais alto',
+    'view_index_page_label_parent_nav_id_subpage' => 'Como uma subpagina',
+    'cmsadmin_item_settings_titleseo' => 'SEO', // no translated
+    'cmsadmin_item_settings_titleexpert' => 'Expert', // no translated
+    'model_navitem_is_url_strict_parsing_disabled_label' => 'Strict URL Parsing', // no translated
+    'model_navitem_is_url_strict_parsing_disabled_label_enabled' => 'Habilitado',
+    'model_navitem_is_url_strict_parsing_disabled_label_disabled' => 'Desabilitado',
+    'model_navitem_is_url_strict_parsing_disabled_label_hint' => 'Strict URL parsing deve ser ativada, a menos que você esteja usando um bloco de módulo gerador de URL no conteúdo desta página.',
+    'model_navitem_title_tag_label_hint' => 'A tag title é exibida em muitos navegadores\' barras de titulo e como título da página nos resultados dos mecanismos de pesquisa.',
+    'view_index_page_meta_description_hint' => 'A descrição da página deve ser uma frase sobre o objetivo desta página. É frequentemente usado pelos mecanismos de pesquisa como uma descrição para uma página nos resultados da pesquisa. Também é relevante ao compartilhar uma página nas mídias sociais.',
+    'view_index_page_meta_keywords_hint' => 'As palavras-chave são separadas por vírgulas (por exemplo, pizza, hambúrguer, macarrão). Pouquissímos mecanismos de pesquisa ainda dependem dessas palavras-chave. Use apenas palavras relevantes para o conteúdo da página. A barra de ferramentas LUYA do front-end ajudará a verificar se as palavras-chave foram definidas para a página atual ou não.',
+    'model_navitem_image_id_label_hint' => 'A imagem é importante ao compartilhar a página nas mídias sociais. Normalmente, essa imagem é exibida pelas plataformas de mídia social como uma imagem de visualização de uma página.',
+    'view_index_module_controller_name' => 'Controller', // not translated
+    'view_index_module_action_name' => 'Ação',
+    'view_index_module_action_params' => 'Parâmetros da Ação',
+    'view_index_module_select_help' => 'Escolha o módulo a ser exibido na lista (apenas os módulos de front-end estão listados). Os módulos devem ser configurados na seção de configuração dos módulos.',
+    'view_index_module_advanced_settings_button' => 'Configurações avançadas',
 ];
