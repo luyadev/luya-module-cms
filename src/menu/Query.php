@@ -287,7 +287,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * with the limit() function.
      *
      * @param integer $offset Defines the amount of offset start position.
-     * @return \luya\cms\menu\Query
+     * @return Query
      */
     public function offset($offset)
     {
@@ -315,6 +315,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * ```
      *
      * @param array $order An array with fields to sort where key is the field and value the direction.
+     * @return Query
      * @since 1.0.2
      */
     public function orderBy(array $order)
@@ -329,6 +330,27 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         $this->_order = $orderBy;
         
         return $this;
+    }
+
+    /**
+     * Filter by Tag IDS.
+     *
+     * @param string|array $tags This can be either a string with a tag id or an array with tag ids.
+     * @return Query
+     * @since 2.2.0
+     */
+    public function tags($tags)
+    {
+        $ids = TagRelation::find()
+            ->select(['pk_id'])
+            ->where([
+                'and',
+                ['=', 'table_name', Nav::tableName()],
+                ['in', 'tag_id', (array) $tags]   
+            ])
+            ->column();
+
+        return $this->where(['in', self::FIELD_NAVID, $ids]);
     }
     
     /**
@@ -358,36 +380,6 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     public function all()
     {
         return static::createArrayIterator($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with), $this->getLang(), $this->_with, $this->_preloadModels);
-    }
-
-    /**
-     * all models from query but filter the entries based on given tag list afterwards.
-     *
-     * @param array $tags
-     * @return array
-     */
-    public function allByTags(array $tags)
-    {
-        $this->preloadModels(true);
-        $data = $this->all();
-
-        $tags = TagRelation::find()
-            ->select(['pk_id'])
-            ->where([
-                'and',
-                ['=', 'table_name', Nav::tableName()],
-                ['in', 'tag_id', $tags]   
-            ])
-            ->column();
-
-        $results = [];
-        foreach ($data as $key => $item) {
-            if (in_array($item->navId, $tags)) {
-                $results[] = $item;
-            }
-        }
-
-        return $results;
     }
     
     /**

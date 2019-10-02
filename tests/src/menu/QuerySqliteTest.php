@@ -76,9 +76,9 @@ class QuerySqliteTest extends WebApplicationTestCase
 
             // now search only by tags with foo
 
-            $this->assertSame(1, count($this->app->menu->find()->allByTags([1])));
-            $this->assertSame(1, count($this->app->menu->find()->allByTags([1,2,3])));
-            $this->assertSame(0, count($this->app->menu->find()->allByTags([2,3])));
+            $this->assertSame(1, count($this->app->menu->find()->tags([1])->all()));
+            $this->assertSame(1, count($this->app->menu->find()->tags([1,2,3])->all()));
+            $this->assertSame(0, count($this->app->menu->find()->tags([2,3])->all()));
         });
     }
 
