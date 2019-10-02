@@ -2,10 +2,12 @@
 
 namespace luya\cms\menu;
 
+use luya\admin\models\TagRelation;
 use Yii;
 use yii\base\BaseObject;
 use luya\cms\Exception;
 use luya\cms\Menu;
+use luya\cms\models\Nav;
 use luya\helpers\ArrayHelper;
 
 /**
@@ -356,6 +358,36 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     public function all()
     {
         return static::createArrayIterator($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with), $this->getLang(), $this->_with, $this->_preloadModels);
+    }
+
+    /**
+     * all models from query but filter the entries based on given tag list afterwards.
+     *
+     * @param array $tags
+     * @return array
+     */
+    public function allByTags(array $tags)
+    {
+        $this->preloadModels(true);
+        $data = $this->all();
+
+        $tags = TagRelation::find()
+            ->select(['pk_id'])
+            ->where([
+                'and',
+                ['=', 'table_name', Nav::tableName()],
+                ['in', 'tag_id', $tags]   
+            ])
+            ->column();
+
+        $results = [];
+        foreach ($data as $key => $item) {
+            if (in_array($item->navId, $tags)) {
+                $results[] = $item;
+            }
+        }
+
+        return $results;
     }
     
     /**

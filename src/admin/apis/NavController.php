@@ -276,6 +276,15 @@ class NavController extends \luya\admin\base\RestController
         ]);
     }
 
+    /**
+     * Save tags for a given page.
+     * 
+     * Tags are provided by post and contains the id.
+     *
+     * @param integer $id
+     * @return integer The number of relations stored.
+     * @since 2.2.0
+     */
     public function actionSaveTags($id)
     {
         $model = Nav::findOne($id);
@@ -284,13 +293,7 @@ class NavController extends \luya\admin\base\RestController
             throw new NotFoundHttpException("Unable to find the given nav model.");
         }
 
-        foreach (TagRelation::getDataForRelation(Nav::tableName(), $id, false) as $relation) {
-            $relation->delete();
-        }
-
-        foreach (Yii::$app->request->bodyParams as $item) {
-            var_dump($item);
-        }
+        return TagRelation::batchUpdateRelations(Yii::$app->request->bodyParams, Nav::tableName(), $id);
     }
 
     public function actionDelete($navId)

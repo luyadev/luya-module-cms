@@ -957,9 +957,9 @@
 		});
 
 		$scope.savePageTags = function() {
-			console.log($scope.pageTags);
 			$http.post('admin/api-cms-nav/' + $scope.id + '/tags', $scope.pageTags).then(function(response) {
-				console.log(response);
+				$scope.togglePageSettingsOverlay();
+				AdminToastService.success(i18n['js_config_update_success']);
 			});
 		};
 
