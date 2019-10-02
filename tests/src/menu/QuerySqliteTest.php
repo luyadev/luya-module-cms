@@ -32,9 +32,6 @@ class QuerySqliteTest extends WebApplicationTestCase
         ];
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testFindByTags()
     {
         PageScope::run($this->app, function(PageScope $scope) {
@@ -64,7 +61,7 @@ class QuerySqliteTest extends WebApplicationTestCase
                     'short_code' => 'en',
                 ]
             ]);
-            $scope->createPage('title', 'viewfile.php', []);
+            $scope->createPage('title', '@app/data/cmslayoutviewfile.php', []);
 
             $all = $this->app->menu->find()->all();
 
