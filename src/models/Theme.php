@@ -112,11 +112,10 @@ class Theme extends NgRestModel
     /**
      * Get the json config as array.
      *
-     * @param string $node Get a given key from the config array.
-     *
+     * @param string $key Get a given key from the config array.
      * @return array If the given node is not found an empty array will be returned.
      */
-    public function getJsonConfig($node = null)
+    public function getJsonConfig($key = null)
     {
         if ($this->_jsonConfig === null) {
             try {
@@ -125,15 +124,11 @@ class Theme extends NgRestModel
                 $this->_jsonConfig = [];
             }
         }
-        
-        if (!$node) {
+
+        if (!$key) {
             return $this->_jsonConfig;
         }
-        
-        if (isset($this->_jsonConfig[$node])) {
-            return $this->_jsonConfig[$node];
-        }
-        
-        return null;
+    
+        return isset($this->_jsonConfig[$key]) ? $this->_jsonConfig[$key] : null;
     }
 }

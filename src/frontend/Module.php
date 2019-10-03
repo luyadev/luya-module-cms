@@ -104,8 +104,6 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
 
     public function luyaBootstrap(Application $app)
     {
-        parent::luyaBootstrap($app);
-
         if (!$app->request->isConsoleRequest && $app->has('themeManager')) {
             // set active theme from database
             $app->get('themeManager')->on(ThemeManager::EVENT_BEFORE_SETUP, function (SetupEvent $event) {

@@ -99,7 +99,6 @@ class ThemeImporter extends Importer
      * Example path: @app/themes/blank
      *
      * @param $basePath
-     *
      * @return mixed|bool False if could not exists.
      * @throws \yii\base\InvalidConfigException
      */
