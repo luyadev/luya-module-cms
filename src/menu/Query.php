@@ -2,10 +2,12 @@
 
 namespace luya\cms\menu;
 
+use luya\admin\models\TagRelation;
 use Yii;
 use yii\base\BaseObject;
 use luya\cms\Exception;
 use luya\cms\Menu;
+use luya\cms\models\Nav;
 use luya\helpers\ArrayHelper;
 
 /**
@@ -285,7 +287,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * with the limit() function.
      *
      * @param integer $offset Defines the amount of offset start position.
-     * @return \luya\cms\menu\Query
+     * @return Query
      */
     public function offset($offset)
     {
@@ -313,6 +315,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * ```
      *
      * @param array $order An array with fields to sort where key is the field and value the direction.
+     * @return Query
      * @since 1.0.2
      */
     public function orderBy(array $order)
@@ -327,6 +330,37 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         $this->_order = $orderBy;
         
         return $this;
+    }
+
+    /**
+     * Filter by Tag IDs.
+     * 
+     * An example of how to filter a menu based on tag ids:
+     * 
+     * ```php
+     * foreach (Yii::$app->menu->find()->container('default')->tags([1,2])->limit(3)->al() as $item) {
+     *     echo $item->title;
+     * }
+     * ```
+     * 
+     * Returns all pages in the default container with tag ids 1 & 2 limited by 3 entries.
+     *
+     * @param string|array $tags This can be either a string with a tag id or an array with tag ids.
+     * @return Query
+     * @since 2.2.0
+     */
+    public function tags($tags)
+    {
+        $ids = TagRelation::find()
+            ->select(['pk_id'])
+            ->where([
+                'and',
+                ['=', 'table_name', Nav::tableName()],
+                ['in', 'tag_id', (array) $tags]   
+            ])
+            ->column();
+
+        return $this->where(['in', self::FIELD_NAVID, $ids]);
     }
     
     /**

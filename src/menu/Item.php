@@ -11,8 +11,6 @@ use luya\web\LinkTrait;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
 use yii\base\BaseObject;
-use luya\cms\models\NavItemRedirect;
-use luya\web\EmailLink;
 use luya\cms\LinkConverter;
 
 /**
