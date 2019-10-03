@@ -8,7 +8,7 @@ namespace luya\cms\admin\apis;
  * This module / component allow user to manage actual display themes.
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
- * @since  3.0.0
+ * @since 3.0.0
  */
 class ThemeController extends \luya\admin\ngrest\base\Api
 {
