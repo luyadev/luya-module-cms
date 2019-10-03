@@ -11,6 +11,9 @@ class NavControllerTeste extends WebModelTestCase
 {
     use CmsDatabaseTableTrait;
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testActionTags()
     {
         PermissionScope::run($this->app, function(PermissionScope $scope) {
