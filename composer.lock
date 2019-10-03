@@ -579,12 +579,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "3d5749b6ecacc58664875e7c7cd5f22bd9e1bf48"
+                "reference": "39bf8ab6feae3812b291cda52af79368db72b504"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/3d5749b6ecacc58664875e7c7cd5f22bd9e1bf48",
-                "reference": "3d5749b6ecacc58664875e7c7cd5f22bd9e1bf48",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/39bf8ab6feae3812b291cda52af79368db72b504",
+                "reference": "39bf8ab6feae3812b291cda52af79368db72b504",
                 "shasum": ""
             },
             "require": {
@@ -652,20 +652,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2019-10-02T12:12:22+00:00"
+            "time": "2019-10-02T17:55:14+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.21",
+            "version": "1.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "371d889d0318323aca0f2291d30766dfe24366bd"
+                "reference": "933cb91a841786ef697ba279c8de1710e30af325"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/371d889d0318323aca0f2291d30766dfe24366bd",
-                "reference": "371d889d0318323aca0f2291d30766dfe24366bd",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/933cb91a841786ef697ba279c8de1710e30af325",
+                "reference": "933cb91a841786ef697ba279c8de1710e30af325",
                 "shasum": ""
             },
             "require": {
@@ -705,7 +705,7 @@
                 "module",
                 "php"
             ],
-            "time": "2019-09-17T15:06:22+00:00"
+            "time": "2019-10-03T07:41:26+00:00"
         },
         {
             "name": "myclabs/deep-copy",

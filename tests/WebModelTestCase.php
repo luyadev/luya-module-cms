@@ -4,7 +4,7 @@ namespace cmstests;
 
 use luya\testsuite\cases\WebApplicationTestCase;
 
-class WebModelTestCase extends WebApplicationTestCase
+abstract class WebModelTestCase extends WebApplicationTestCase
 {
     public function getConfigArray()
     {
@@ -16,6 +16,11 @@ class WebModelTestCase extends WebApplicationTestCase
                     'class' => 'yii\db\Connection',
                     'dsn' => 'sqlite::memory:',
                 ]
+            ],
+            'modules' => [
+                'admin' => 'luya\admin\Module',
+                'cms' => 'luya\cms\frontend\Module',
+                'cmsadmin' => 'luya\cms\admin\Module',
             ]
         ];
     }

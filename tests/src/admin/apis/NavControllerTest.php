@@ -5,18 +5,30 @@ namespace cmstests\src\admin\apis;
 use cmstests\WebModelTestCase;
 use luya\cms\admin\apis\NavController;
 use luya\testsuite\scopes\PermissionScope;
+use luya\testsuite\traits\CmsDatabaseTableTrait;
 
 class NavControllerTeste extends WebModelTestCase
 {
+    use CmsDatabaseTableTrait;
+
     public function testActionTags()
     {
         PermissionScope::run($this->app, function(PermissionScope $scope) {
             $scope->createAndAllowRoute('webmodel/nav/tags');
-            $ctrl = new NavController($this->app, 'nav');
 
+            $this->createAdminTagFixture();
+            $this->createadminTagRelationFixture();
+
+            $this->createCmsNavFixture([
+                'nav1' => [
+                    'id' => 1,
+                ]
+            ]);
+
+            $ctrl = new NavController('nav', $this->app);
             $r = $scope->runControllerAction($ctrl, 'tags', ['id' => 1]);
 
-            var_dump($r);
+            $this->assertSame([], $r);
         });
     }
 }
