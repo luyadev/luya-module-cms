@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4478bb7127a93b303ac0729c87200df0",
+    "content-hash": "8b1755a4ec83a020a40f25556f6a0779",
     "packages": [],
     "packages-dev": [
         {
@@ -575,16 +575,16 @@
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "dev-master",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "39bf8ab6feae3812b291cda52af79368db72b504"
+                "reference": "64ebffc9d93ca995c9e0ef71efd45936377f9ae6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/39bf8ab6feae3812b291cda52af79368db72b504",
-                "reference": "39bf8ab6feae3812b291cda52af79368db72b504",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/64ebffc9d93ca995c9e0ef71efd45936377f9ae6",
+                "reference": "64ebffc9d93ca995c9e0ef71efd45936377f9ae6",
                 "shasum": ""
             },
             "require": {
@@ -652,7 +652,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2019-10-02T17:55:14+00:00"
+            "time": "2019-10-03T16:53:33+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
@@ -1072,22 +1072,22 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.8.1",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "1927e75f4ed19131ec9bcc3b002e07fb1173ee76"
+                "reference": "f6811d96d97bdf400077a0cc100ae56aa32b9203"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/1927e75f4ed19131ec9bcc3b002e07fb1173ee76",
-                "reference": "1927e75f4ed19131ec9bcc3b002e07fb1173ee76",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/f6811d96d97bdf400077a0cc100ae56aa32b9203",
+                "reference": "f6811d96d97bdf400077a0cc100ae56aa32b9203",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
                 "php": "^5.3|^7.0",
-                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0",
+                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0",
                 "sebastian/comparator": "^1.1|^2.0|^3.0",
                 "sebastian/recursion-context": "^1.0|^2.0|^3.0"
             },
@@ -1131,7 +1131,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2019-06-13T12:50:23+00:00"
+            "time": "2019-10-03T11:07:50+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2881,9 +2881,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "luyadev/luya-module-admin": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
