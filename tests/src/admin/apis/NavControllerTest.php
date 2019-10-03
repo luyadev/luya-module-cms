@@ -15,8 +15,16 @@ class NavControllerTeste extends WebModelTestCase
     {
         PermissionScope::run($this->app, function(PermissionScope $scope) {
             $scope->createAndAllowRoute('webmodel/nav/tags');
+            $scope->createAndAllowRoute('webmodel/nav/save-tags');
 
-            $this->createAdminTagFixture();
+            $this->createAdminLangFixture();
+
+            $this->createAdminTagFixture([
+                'tag1' => [
+                    'id' => 1,
+                    'name' => 'foobar'
+                ]
+            ]);
             $this->createadminTagRelationFixture();
 
             $this->createCmsNavFixture([
@@ -26,9 +34,19 @@ class NavControllerTeste extends WebModelTestCase
             ]);
 
             $ctrl = new NavController('nav', $this->app);
+
+            $this->app->request->setBodyParams([1]);
+            $s = $scope->runControllerAction($ctrl, 'save-tags', ['id' => 1]);
+            $this->assertSame(1, $s);
             $r = $scope->runControllerAction($ctrl, 'tags', ['id' => 1]);
 
-            $this->assertSame([], $r);
+            $this->assertSame([
+                ['id' => '1', 'name' => 'foobar', 'translation' => ''],
+            ], $r);
+
+            $this->expectException('yii\web\NotFoundHttpException');
+            $scope->runControllerAction($ctrl, 'tags', ['id' => 123]);
+            $scope->runControllerAction($ctrl, 'save-tags', ['id' => 123]);
         });
     }
 }
