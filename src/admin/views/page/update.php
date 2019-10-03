@@ -49,7 +49,7 @@ use luya\cms\helpers\Url;
                         <button type="button" class="btn btn-outline-config btn-icon" ng-class="{'btn-active': toggleSettings}"></button>
                         <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(9)">
-                                <i class="material-icons">tags</i> <span><?= AdminModule::t('menu_system_item_tags'); ?></span>
+                                <i class="material-icons">tag</i> <span><?= AdminModule::t('menu_system_item_tags'); ?></span>
                             </a>    
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(2)" ng-if="propertiesData.length > 0">
                                 <i class="material-icons">settings</i> <span><?= Module::t('view_update_properties_title'); ?></span>
