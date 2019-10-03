@@ -333,7 +333,17 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     }
 
     /**
-     * Filter by Tag IDS.
+     * Filter by Tag IDs.
+     * 
+     * An example of how to filter a menu based on tag ids:
+     * 
+     * ```php
+     * foreach (Yii::$app->menu->find()->container('default')->tags([1,2])->limit(3)->al() as $item) {
+     *     echo $item->title;
+     * }
+     * ```
+     * 
+     * Returns all pages in the default container with tag ids 1 & 2 limited by 3 entries.
      *
      * @param string|array $tags This can be either a string with a tag id or an array with tag ids.
      * @return Query
