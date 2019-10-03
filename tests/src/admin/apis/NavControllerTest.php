@@ -28,7 +28,7 @@ class NavControllerTeste extends WebModelTestCase
                     'name' => 'foobar'
                 ]
             ]);
-            $this->createadminTagRelationFixture();
+            $this->createAdminTagRelationFixture();
 
             $this->createCmsNavFixture([
                 'nav1' => [
@@ -49,6 +49,24 @@ class NavControllerTeste extends WebModelTestCase
 
             $this->expectException('yii\web\NotFoundHttpException');
             $scope->runControllerAction($ctrl, 'tags', ['id' => 123]);
+            $scope->runControllerAction($ctrl, 'save-tags', ['id' => 123]);
+        });
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testSaveTagsNotFound()
+    {
+        PermissionScope::run($this->app, function(PermissionScope $scope) {
+            $scope->createAndAllowRoute('webmodel/nav/save-tags');
+            $this->createCmsNavFixture([
+                'nav1' => [
+                    'id' => 1,
+                ]
+            ]);
+            $ctrl = new NavController('nav', $this->app);
+            $this->expectException('yii\web\NotFoundHttpException');
             $scope->runControllerAction($ctrl, 'save-tags', ['id' => 123]);
         });
     }

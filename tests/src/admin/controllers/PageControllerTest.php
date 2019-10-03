@@ -8,6 +8,9 @@ use luya\cms\admin\controllers\PageController;
 
 class PageControllerTest extends WebModelTestCase
 {
+    /**
+     * @runInSeparateProcess
+     */
     public function testActionUpdate()
     {
         PermissionScope::run($this->app, function(PermissionScope $scope) {
