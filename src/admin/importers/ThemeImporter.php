@@ -118,11 +118,11 @@ class ThemeImporter extends Importer
         if (!$themeModel) {
             $themeModel = new Theme();
             $themeModel->base_path = $basePath;
-            $themeModel->json_config = Json::encode($themeConfig->toArray());
+            $themeModel->setThemeConfig($themeConfig);
 
            $log = "Added theme $basePath to database.";
         } else {
-            $themeModel->json_config = Json::encode($themeConfig->toArray());
+            $themeModel->setThemeConfig($themeConfig);
             $log = "Updated theme $basePath.";
         }
 

@@ -131,4 +131,14 @@ class Theme extends NgRestModel
     
         return isset($this->_jsonConfig[$key]) ? $this->_jsonConfig[$key] : null;
     }
+    
+    /**
+     * Set the json config by given theme config.
+     *
+     * @param ThemeConfig $config
+     */
+    public function setThemeConfig(ThemeConfig $config)
+    {
+        $this->json_config = Json::encode($themeConfig->toArray());
+    }
 }
