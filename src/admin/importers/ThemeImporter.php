@@ -119,8 +119,8 @@ class ThemeImporter extends Importer
             $themeModel = new Theme();
             $themeModel->base_path = $basePath;
             $themeModel->setThemeConfig($themeConfig);
-
-           $log = "Added theme $basePath to database.";
+            
+            $log = "Added theme $basePath to database.";
         } else {
             $themeModel->setThemeConfig($themeConfig);
             $log = "Updated theme $basePath.";
