@@ -3,6 +3,7 @@
 namespace luya\cms\models;
 
 use luya\admin\ngrest\base\NgRestModel;
+use luya\theme\ThemeConfig;
 use yii\base\InvalidArgumentException;
 use yii\helpers\Json;
 
@@ -139,6 +140,6 @@ class Theme extends NgRestModel
      */
     public function setThemeConfig(ThemeConfig $config)
     {
-        $this->json_config = Json::encode($themeConfig->toArray());
+        $this->json_config = Json::encode($config->toArray());
     }
 }
