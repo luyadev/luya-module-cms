@@ -209,6 +209,21 @@ class LangSwitcher extends \luya\base\Widget
     }
 
     /**
+     * Add query string of current request to the link
+     *
+     * @param string $link The link without query string.
+     * @return string
+     * @since 2.2.x
+     */
+    private function appendQueryString($link)
+    {
+        $queryString = Yii::$app->request->getQueryString();
+
+        return $link.'?'.$queryString;
+    }
+
+
+    /**
      * @return string The langnav html
      */
     public function run()
@@ -237,7 +252,10 @@ class LangSwitcher extends \luya\base\Widget
                 } else {
                     $link = $item->link;
                 }
-                $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo($link, $lang), $currentLang == $lang['short_code'], $lang);
+                $link = $this->ensureHostInfo($link, $lang);
+                $link = $this->appendQueryString($link);
+
+                $items[$lang['short_code']] = $this->generateHtml($link, $currentLang == $lang['short_code'], $lang);
             } else {
                 $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo(Yii::$app->urlManager->prependBaseUrl($lang['short_code']), $lang), $currentLang == $lang['short_code'], $lang);
             }
