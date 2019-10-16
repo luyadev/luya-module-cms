@@ -56,6 +56,10 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'api-cms-redirect' => 'luya\cms\admin\apis\RedirectController',
     ];
 
+    public $apiRules = [
+        'api-cms-nav' => ['extraPatterns' => ['GET {id}/tags' => 'tags', 'POST {id}/tags' => 'save-tags']]
+    ];
+
     /**
      * @inheritdoc
      */
