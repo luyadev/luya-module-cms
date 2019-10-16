@@ -36,6 +36,10 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
         ];
     }
 
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
     public function testSetUrlRuleParamsForI18nSlugUrlRules()
     {
         $langFixture = $this->createAdminLangFixture([

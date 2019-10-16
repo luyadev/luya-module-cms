@@ -5,13 +5,9 @@ namespace cmstests\src\widgets;
 
 use cmstests\CmsFrontendTestCase;
 use luya\cms\widgets\LangSwitcher;
-use luya\testsuite\scopes\PageScope;
 
 class LangSwitcherTest extends CmsFrontendTestCase
 {
-    /**
-     * @runInSeparateProcess
-     */
     public function testWidgetOutput()
     {
         $this->assertSame('<ul class="list-element">
@@ -20,9 +16,6 @@ class LangSwitcherTest extends CmsFrontendTestCase
 </ul>', LangSwitcher::widget());
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testCallable()
     {
         $out = LangSwitcher::widget(['linkLabel' => function ($lang) {
