@@ -5,6 +5,7 @@ namespace cmstests\src\widgets;
 
 use cmstests\CmsFrontendTestCase;
 use luya\cms\widgets\LangSwitcher;
+use luya\testsuite\scopes\PageScope;
 
 class LangSwitcherTest extends CmsFrontendTestCase
 {

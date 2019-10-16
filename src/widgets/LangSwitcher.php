@@ -273,7 +273,7 @@ class LangSwitcher extends \luya\base\Widget
      * @param string $key
      * @param string $defaultValue
      * @return string
-     * @since 2.0.x
+     * @since 2.2.0
      */
     protected function findUrlRuleParamValue($lang, $key, $defaultValue)
     {
@@ -309,7 +309,7 @@ class LangSwitcher extends \luya\base\Widget
      * @param string $lang The language which the value should be assigned with.
      * @param string $key The url rule param key which should be assigned.
      * @param string $value The value which should be used to generate the url.
-     * @since 2.0.x
+     * @since 2.2.0
      */
     public static function setUrlRuleParam($lang, $key, $value)
     {
@@ -332,7 +332,7 @@ class LangSwitcher extends \luya\base\Widget
      * @param NgRestModel $model The model which contains the content.
      * @param string $attribute The attribute of the model which should be take in order to assign the multi lingual values.
      * @param string $parmName The parameter value in the url which should be stored, by default its equals the attribute name.
-     * @since 2.0.x
+     * @since 2.2.0
      */
     public static function setUrlRuleParamByModel(NgRestModel $model, $attribute, $parmName = null)
     {
