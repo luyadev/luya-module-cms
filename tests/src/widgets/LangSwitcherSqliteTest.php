@@ -122,5 +122,22 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
 
         $this->assertContains('slug=default', $switcher);
         $this->assertContains('slug=enslug', $switcher);
+
+        $tagFixture = $this->createAdminTagFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'test',
+                'translation' => '{"de":"Deutsch","en":"English"}',
+            ]
+        ]);
+
+        LangSwitcher::setUrlRuleParamByModel($tagFixture->getModel(1), 'translation');
+        LangSwitcher::setUrlRuleParamByModel($tagFixture->getModel(1), 'translation', 'slug');
+
+        $w = new LangSwitcher();
+        $switcher = $w->run();
+
+        $this->assertContains('slug=Deutsch', $switcher);
+        $this->assertContains('slug=English', $switcher);
     }
 }
