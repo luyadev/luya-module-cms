@@ -8,9 +8,6 @@ use luya\cms\widgets\LangSwitcher;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
-/**
- * @runTestsInSeparateProcesses
- */
 class LangSwitcherSqliteTest extends WebApplicationTestCase
 {
     use CmsDatabaseTableTrait;
