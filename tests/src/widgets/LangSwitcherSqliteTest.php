@@ -35,7 +35,7 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
             ]
         ];
     }
-    
+
     public function testSetUrlRuleParamsForI18nSlugUrlRules()
     {
         $langFixture = $this->createAdminLangFixture([
@@ -113,7 +113,8 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
 
         LangSwitcher::setUrlRuleParam('en', 'slug', 'enslug');
         
-        $switcher = LangSwitcher::widget();
+        $w = new LangSwitcher();
+        $switcher = $w->run();
 
         $this->assertContains('slug=default', $switcher);
         $this->assertContains('slug=enslug', $switcher);
