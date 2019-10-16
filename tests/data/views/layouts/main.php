@@ -2,6 +2,10 @@
 /* @var $this luya\web\View */
 /* @var $content string */
 
+if (!isset($this)) {
+    exit;
+}
+
 $this->beginPage();
 ?>
 <!DOCTYPE html>
