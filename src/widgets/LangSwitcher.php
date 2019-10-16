@@ -2,6 +2,8 @@
 
 namespace luya\cms\widgets;
 
+use luya\admin\helpers\I18n;
+use luya\admin\ngrest\base\NgRestModel;
 use Yii;
 use luya\web\Composition;
 use yii\helpers\Html;
@@ -142,7 +144,7 @@ class LangSwitcher extends \luya\base\Widget
         $linkOptions = $this->linkOptions;
         
         if ($isActive) {
-            if (isset($linkOptions['class'])) {
+            if (isset($linkOptions['c lass'])) {
                 $linkOptions['class'] = $linkOptions['class'] . ' ' . $this->linkActiveClass;
             } else {
                 $linkOptions['class'] = $this->linkActiveClass;
@@ -222,12 +224,12 @@ class LangSwitcher extends \luya\base\Widget
         foreach (self::getDataArray() as $langData) {
             $item = $langData['item'];
             $lang = $langData['lang'];
-            
+            $isActive = $currentLang == $lang['short_code'];
             if ($item) {
                 if ($item->type == NavItem::TYPE_MODULE && !empty($rule)) {
                     $routeParams = [$rule['route']];
                     foreach ($rule['params'] as $key => $value) {
-                        $routeParams[$key] = $value;
+                        $routeParams[$key] = $this->findUrlRuleParamValue($lang['short_code'], $key, $value);
                     }
                     $compositionObject = Yii::createObject(Composition::class);
                     // https://github.com/luyadev/luya-module-cms/issues/48
@@ -237,11 +239,11 @@ class LangSwitcher extends \luya\base\Widget
                 } else {
                     $link = $item->link;
                 }
-                $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo($link, $lang), $currentLang == $lang['short_code'], $lang);
             } else {
-                $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo(Yii::$app->urlManager->prependBaseUrl($lang['short_code']), $lang), $currentLang == $lang['short_code'], $lang);
+                $link = Yii::$app->urlManager->prependBaseUrl($lang['short_code']);
             }
             
+            $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo($link, $lang), $isActive, $lang);
             unset($item, $lang);
         }
         
@@ -260,5 +262,30 @@ class LangSwitcher extends \luya\base\Widget
         }
 
         return Html::tag($tag, $separator . implode($separator, $items) . $separator, $options);
+    }
+
+    public function findUrlRuleParamValue($lang, $key, $defaultValue)
+    {
+        if (isset(self::$_i18nUrlRuleParams[$lang])) {
+            return array_key_exists($key, self::$_i18nUrlRuleParams[$lang]) ? self::$_i18nUrlRuleParams[$lang][$key] : $defaultValue;
+        }
+
+        return $defaultValue;
+    }
+
+    private static $_i18nUrlRuleParams = [];
+
+    public static function setUrlRuleParam($lang, $key, $value)
+    {
+        self::$_i18nUrlRuleParams[$lang][$key] = $value;
+    }
+
+    public static function setUrlRuleParamByModel(NgRestModel $model, $attribute, $parmName = null)
+    {
+        $array = I18n::decode($model->getOldAttribute($attribute));
+
+        foreach ($array as $lang => $value) {
+            self::setUrlRuleParam($lang, $parmName ? $parmName : $attribute, $value);
+        }
     }
 }
