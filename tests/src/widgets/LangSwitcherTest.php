@@ -7,6 +7,9 @@ use cmstests\CmsFrontendTestCase;
 use luya\cms\widgets\LangSwitcher;
 use luya\testsuite\scopes\PageScope;
 
+/**
+ * @runTestsInSeparateProcesses
+ */
 class LangSwitcherTest extends CmsFrontendTestCase
 {
     public function testWidgetOutput()
