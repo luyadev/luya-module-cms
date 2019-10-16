@@ -8,6 +8,9 @@ use luya\cms\widgets\LangSwitcher;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
+/**
+ * @runTestsInSeparateProcesses
+ */
 class LangSwitcherSqliteTest extends WebApplicationTestCase
 {
     use CmsDatabaseTableTrait;
@@ -115,9 +118,7 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
         
         $switcher = LangSwitcher::widget();
 
-        $this->assertSameTrimmed('<ul class="list-element">
-        <li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="http:///go/there?slug=default"></a></li>
-        <li class="lang-element-item"><a class="lang-link-item" href="http:///go/there?slug=enslug"></a></li>
-        </ul>', $switcher);
+        $this->assertContains('slug=default', $switcher);
+        $this->assertContains('slug=enslug', $switcher);
     }
 }
