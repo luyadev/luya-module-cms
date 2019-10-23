@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+use luya\admin\Module as AdminModule;
 use luya\admin\helpers\Angular;
 
 ?>
@@ -7,6 +8,9 @@ use luya\admin\helpers\Angular;
     <div ng-if="!pageSettingsOverlayHidden" class="row">
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=9" ng-class="{'active':pageSettingsOverlayTab==9}"><i class="material-icons">tag</i><span><?= AdminModule::t('menu_system_item_tags'); ?></span></a>
+                </li>
                 <li class="nav-item" ng-show="propertiesData.length > 0">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><i class="material-icons">settings</i><span><?= Module::t('view_update_properties_title'); ?></span></a>
                 </li>
@@ -33,6 +37,10 @@ use luya\admin\helpers\Angular;
             </ul>
         </div>
         <div class="col-md-9" ng-switch="pageSettingsOverlayTab">
+            <div ng-switch-when="9">
+                <?= Angular::tagArray('pageTags', AdminModule::t('menu_system_item_tags')); ?>
+                <p><button type="button" class="btn btn-save btn-icon" ng-click="savePageTags()"><?= Module::t('btn_save'); ?></button></p>
+            </div>
             <div ng-switch-when="2">
                 <h1><?= Module::t('view_update_properties_title'); ?></h1>
                 <div ng-show="!hasValues" class="alert alert-info"><?= Module::t('view_update_no_properties_exists'); ?></div>

@@ -58,6 +58,10 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'api-cms-theme' => 'luya\cms\admin\apis\ThemeController',
     ];
 
+    public $apiRules = [
+        'api-cms-nav' => ['extraPatterns' => ['GET {id}/tags' => 'tags', 'POST {id}/tags' => 'save-tags']]
+    ];
+
     /**
      * @inheritdoc
      */

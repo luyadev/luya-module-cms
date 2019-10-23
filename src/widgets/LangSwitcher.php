@@ -2,6 +2,8 @@
 
 namespace luya\cms\widgets;
 
+use luya\admin\helpers\I18n;
+use luya\admin\ngrest\base\NgRestModel;
 use Yii;
 use luya\web\Composition;
 use yii\helpers\Html;
@@ -209,7 +211,9 @@ class LangSwitcher extends \luya\base\Widget
     }
 
     /**
-     * @return string The langnav html
+     * Generate the lang switcher html.
+     *
+     * @return string
      */
     public function run()
     {
@@ -222,12 +226,12 @@ class LangSwitcher extends \luya\base\Widget
         foreach (self::getDataArray() as $langData) {
             $item = $langData['item'];
             $lang = $langData['lang'];
-            
+            $isActive = $currentLang == $lang['short_code'];
             if ($item) {
                 if ($item->type == NavItem::TYPE_MODULE && !empty($rule)) {
                     $routeParams = [$rule['route']];
                     foreach ($rule['params'] as $key => $value) {
-                        $routeParams[$key] = $value;
+                        $routeParams[$key] = $this->findUrlRuleParamValue($lang['short_code'], $key, $value);
                     }
                     $compositionObject = Yii::createObject(Composition::class);
                     // https://github.com/luyadev/luya-module-cms/issues/48
@@ -237,11 +241,11 @@ class LangSwitcher extends \luya\base\Widget
                 } else {
                     $link = $item->link;
                 }
-                $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo($link, $lang), $currentLang == $lang['short_code'], $lang);
             } else {
-                $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo(Yii::$app->urlManager->prependBaseUrl($lang['short_code']), $lang), $currentLang == $lang['short_code'], $lang);
+                $link = Yii::$app->urlManager->prependBaseUrl($lang['short_code']);
             }
             
+            $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo($link, $lang), $isActive, $lang);
             unset($item, $lang);
         }
         
@@ -260,5 +264,82 @@ class LangSwitcher extends \luya\base\Widget
         }
 
         return Html::tag($tag, $separator . implode($separator, $items) . $separator, $options);
+    }
+
+    /**
+     * Find a given url rule param value if defined, otherwise return default.
+     *
+     * @param string $lang
+     * @param string $key
+     * @param string $defaultValue
+     * @return string
+     * @since 2.2.0
+     */
+    protected function findUrlRuleParamValue($lang, $key, $defaultValue)
+    {
+        if (isset(self::$_i18nUrlRuleParams[$lang])) {
+            return array_key_exists($key, self::$_i18nUrlRuleParams[$lang]) ? self::$_i18nUrlRuleParams[$lang][$key] : $defaultValue;
+        }
+
+        return $defaultValue;
+    }
+
+    private static $_i18nUrlRuleParams = [];
+
+    /**
+     * Set a url rule paramter which can be taken when resolve pages for other languages.
+     * 
+     * Used to assign a url param value for another language, this is commonly used when working with slugs or titles.
+     * 
+     * Assuming to have a news detail url rule with a slug:
+     * 
+     * ```php
+     * 'urlRules' => [
+     *     'newsmodule/<id:\d+>/<slug:[a-zA-Z\-]+>' => 'newsmodule/detail/index',
+     * ]
+     * ```
+     * 
+     * When slug is an i18n value, this information must be provided to the LangSwither, so it will take the correct slug for the the given language.
+     * 
+     * ```php
+     * LangSwitcher::setUrlRuleParam('de', 'slug', 'mein-news-slug');
+     * LangSwitcher::setUrlRuleParam('en', 'slug', 'my-news-slug');
+     * ```
+     * 
+     * @param string $lang The language which the value should be assigned with.
+     * @param string $key The url rule param key which should be assigned.
+     * @param string $value The value which should be used to generate the url.
+     * @since 2.2.0
+     */
+    public static function setUrlRuleParam($lang, $key, $value)
+    {
+        self::$_i18nUrlRuleParams[$lang][$key] = $value;
+    }
+
+    /**
+     * Set the url rule param values from a given Model and attribute name.
+     * 
+     * Its very common to have {{luya\admin\ngrest\base\NgRestModel::$i18n}} attributes defined, therefore use this method
+     * to assign attributes:
+     * 
+     * ```php
+     * LangSwitcher::setUrlRuleParamByModel($model, 'title');
+     * ```
+     * 
+     * If $title is defined as $i18n attribute, it will take the values for corresponding languages and set those through the
+     * {{luya\cms\widgets\LangSwitcher::setUrlRuleParam()}} method.
+     *
+     * @param NgRestModel $model The model which contains the content.
+     * @param string $attribute The attribute of the model which should be take in order to assign the multi lingual values.
+     * @param string $parmName The parameter value in the url which should be stored, by default its equals the attribute name.
+     * @since 2.2.0
+     */
+    public static function setUrlRuleParamByModel(NgRestModel $model, $attribute, $parmName = null)
+    {
+        $array = I18n::decode($model->getOldAttribute($attribute));
+
+        foreach ($array as $lang => $value) {
+            self::setUrlRuleParam($lang, $parmName ? $parmName : $attribute, $value);
+        }
     }
 }

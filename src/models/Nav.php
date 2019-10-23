@@ -7,6 +7,7 @@ use yii\db\Query;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use luya\admin\models\Group;
+use luya\admin\traits\TaggableTrait;
 use luya\cms\models\Property as CmsProperty;
 use luya\cms\admin\Module;
 use luya\helpers\Json;
@@ -39,6 +40,8 @@ use luya\helpers\Json;
  */
 class Nav extends ActiveRecord
 {
+    use TaggableTrait;
+    
     /**
      * @inheritdoc
      */
