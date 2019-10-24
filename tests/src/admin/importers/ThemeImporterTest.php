@@ -98,9 +98,6 @@ class ThemeImporterTest extends CmsConsoleTestCase
             $log);
     }
     
-    /**
-     * @runInSeparateProcess
-     */
     public function testNotExistsThemePackage()
     {
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
@@ -124,11 +121,10 @@ class ThemeImporterTest extends CmsConsoleTestCase
             $log);
     }
     
-    /**
-     * @runInSeparateProcess
-     */
     public function testUpdateThemeConfig()
     {
+        $this->fixture->rebuild();
+        
         $controller = new ImportController('import-controller', $this->app);
         $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
 
