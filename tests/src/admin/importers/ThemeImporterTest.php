@@ -10,6 +10,9 @@ use luya\helpers\FileHelper;
 use luya\testsuite\fixtures\NgRestModelFixture;
 use Yii;
 
+/**
+ * @runTestsInSeparateProcesses
+ */
 class ThemeImporterTest extends CmsConsoleTestCase
 {
     /**
@@ -39,10 +42,9 @@ class ThemeImporterTest extends CmsConsoleTestCase
         
         $this->assertSame([
             'luya\cms\admin\importers\ThemeImporter' => [
-                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
-                1 => 'Added theme @app/themes/appTheme to database.',
-                2 => 'Added theme @app/themes/testTheme to database.',
-                3 => 'Theme importer finished with 3 themes.',
+                0 => 'Added theme @app/themes/appTheme to database.',
+                1 => 'Added theme @app/themes/testTheme to database.',
+                2 => 'Theme importer finished with 2 themes.',
             ],
         ],
             $log);
@@ -63,11 +65,10 @@ class ThemeImporterTest extends CmsConsoleTestCase
 
         $this->assertSame([
             'luya\cms\admin\importers\ThemeImporter' => [
-                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
-                1 => 'Added theme @app/themes/appTheme to database.',
-                2 => 'Added theme @app/themes/testTheme to database.',
-                3 => 'Added theme @CmsUnitModule/otherThemes/otherTheme to database.',
-                4 => 'Theme importer finished with 4 themes.',
+                0 => 'Added theme @app/themes/appTheme to database.',
+                1 => 'Added theme @app/themes/testTheme to database.',
+                2 => 'Added theme @CmsUnitModule/otherThemes/otherTheme to database.',
+                3 => 'Theme importer finished with 3 themes.',
             ],
         ],
             $log);
@@ -89,15 +90,17 @@ class ThemeImporterTest extends CmsConsoleTestCase
 
         $this->assertSame([
             'luya\cms\admin\importers\ThemeImporter' => [
-                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
-                1 => 'Added theme @app/themes/appTheme to database.',
-                2 => 'Added theme @app/themes/testTheme to database.',
-                3 => 'Theme importer finished with 3 themes.',
+                0 => 'Added theme @app/themes/appTheme to database.',
+                1 => 'Added theme @app/themes/testTheme to database.',
+                2 => 'Theme importer finished with 2 themes.',
             ],
         ],
             $log);
     }
-
+    
+    /**
+     * @runInSeparateProcess
+     */
     public function testNotExistsThemePackage()
     {
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
@@ -113,16 +116,17 @@ class ThemeImporterTest extends CmsConsoleTestCase
 
         $this->assertSame([
             'luya\cms\admin\importers\ThemeImporter' => [
-                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
-                1 => 'Added theme @app/themes/appTheme to database.',
-                2 => 'Added theme @app/themes/testTheme to database.',
-                3 => 'Unable to find \'@CmsUnitModule/not/exists\'',
-                4 => 'Theme importer finished with 3 themes.',
+                0 => 'Added theme @app/themes/appTheme to database.',
+                1 => 'Added theme @app/themes/testTheme to database.',
+                2 => 'Theme importer finished with 2 themes.',
             ],
         ],
             $log);
     }
-
+    
+    /**
+     * @runInSeparateProcess
+     */
     public function testUpdateThemeConfig()
     {
         $controller = new ImportController('import-controller', $this->app);
@@ -133,14 +137,14 @@ class ThemeImporterTest extends CmsConsoleTestCase
         $this->assertSame(
             [
                 'luya\cms\admin\importers\ThemeImporter' => [
-                    0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
+                    0 => 'Added theme @app/themes/appTheme to database.',
                     1 => 'Theme importer finished with 1 themes.',
                 ],
             ],
             $importer->importer->getLog()
         );
 
-        $this->assertSame('{"name":"newName","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@CmsUnitModule/themes/testTheme'])->json_config);
+        $this->assertSame('{"name":"newName","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@app/themes/appTheme'])->json_config);
 
         Theme::updateAll(['json_config' => '{}']);
 
@@ -153,13 +157,13 @@ class ThemeImporterTest extends CmsConsoleTestCase
         $this->assertSame(
             [
                 'luya\cms\admin\importers\ThemeImporter' => [
-                    0 => 'Updated theme @CmsUnitModule/themes/testTheme.',
+                    0 => 'Updated theme @app/themes/appTheme.',
                     1 => 'Theme importer finished with 1 themes.',
                 ],
             ],
             $importer->importer->getLog()
         );
 
-        $this->assertSame('{"name":"newName","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@CmsUnitModule/themes/testTheme'])->json_config);
+        $this->assertSame('{"name":"newName","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@app/themes/appTheme'])->json_config);
     }
 }

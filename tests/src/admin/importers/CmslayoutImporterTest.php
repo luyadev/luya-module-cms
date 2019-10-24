@@ -81,15 +81,15 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
     
         $this->assertSame([
             'luya\cms\admin\importers\ThemeImporter' => [
-                0 => 'Added theme @CmsUnitModule/themes/testTheme to database.',
-                1 => 'Theme importer finished with 1 themes.',
+                0 => 'Added theme @app/themes/appTheme to database.',
+                1 => 'Added theme @app/themes/testTheme to database.',
+                2 => 'Theme importer finished with 2 themes.',
             ],
             'luya\cms\admin\importers\CmslayoutImporter' => [
                 0 => 'New file Main found and registered.',
                 1 => 'New file Layoutwithjson found and registered.',
                 2 => 'New file Phplayout found and registered.',
-                3 => 'New file New Name - Theme Layout found and registered.',
-                4 => 'cms layout importer finished with 4 layout files.',
+                3 => 'cms layout importer finished with 3 layout files.',
             ]
         ], $log);
     }

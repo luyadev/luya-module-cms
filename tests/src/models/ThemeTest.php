@@ -43,6 +43,6 @@ class ThemeTest extends ModelTestCase
 
         $theme->afterFind();
 
-        $this->assertNull($theme->getJsonConfig());
+        $this->assertEmpty($theme->getJsonConfig());
     }
 }
