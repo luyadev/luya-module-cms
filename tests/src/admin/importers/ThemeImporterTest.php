@@ -128,7 +128,7 @@ class ThemeImporterTest extends CmsConsoleTestCase
         $controller = new ImportController('import-controller', $this->app);
         $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
 
-        var_dump(Yii::$app->themeManager->getThemes(false));
+        var_dump(Yii::$app->themeManager->getThemes());
         $importer->run();
 
         $this->assertSame(
