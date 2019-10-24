@@ -128,7 +128,7 @@ class ThemeImporterTest extends CmsConsoleTestCase
         $controller = new ImportController('import-controller', $this->app);
         $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
 
-        $importer->run(true);
+        $importer->run();
 
         $this->assertSame(
             [
