@@ -134,7 +134,8 @@ class ThemeImporterTest extends CmsConsoleTestCase
             [
                 'luya\cms\admin\importers\ThemeImporter' => [
                     0 => 'Added theme @app/themes/appTheme to database.',
-                    1 => 'Theme importer finished with 1 themes.',
+                    1 => 'Added theme @app/themes/testTheme to database.',
+                    2 => 'Theme importer finished with 2 themes.',
                 ],
             ],
             $importer->importer->getLog()
