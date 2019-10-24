@@ -22,11 +22,11 @@ class ThemeImporter extends Importer
     /**
      * @inheritdoc
      */
-    public function run()
+    public function run($thowException = false)
     {
         $exists = [];
 
-        foreach (Yii::$app->themeManager->getThemes(false) as $theme) {
+        foreach (Yii::$app->themeManager->getThemes($thowException) as $theme) {
             /** @var \luya\theme\Theme $theme */
             $exists = array_merge($exists, $this->handleThemeDefinitionInDirectories($theme->basePath));
         }

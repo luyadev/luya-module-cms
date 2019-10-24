@@ -123,13 +123,12 @@ class ThemeImporterTest extends CmsConsoleTestCase
     
     public function testUpdateThemeConfig()
     {
-        $this->fixture->rebuild();
-        
+        Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
+    
         $controller = new ImportController('import-controller', $this->app);
         $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
 
-        var_dump(Yii::$app->themeManager->getThemes());
-        $importer->run();
+        $importer->run(true);
 
         $this->assertSame(
             [
