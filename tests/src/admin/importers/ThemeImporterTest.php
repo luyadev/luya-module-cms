@@ -8,11 +8,9 @@ use luya\cms\models\Theme;
 use luya\console\commands\ImportController;
 use luya\helpers\FileHelper;
 use luya\testsuite\fixtures\NgRestModelFixture;
+use luya\theme\ThemeManager;
 use Yii;
 
-/**
- * @runTestsInSeparateProcesses
- */
 class ThemeImporterTest extends CmsConsoleTestCase
 {
     /**
@@ -32,7 +30,8 @@ class ThemeImporterTest extends CmsConsoleTestCase
     public function testBasicThemeImporter()
     {
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
-        
+        $this->fixture->rebuild();
+    
         $controller = new ImportController('import-controller', $this->app);
         $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
         
@@ -53,7 +52,8 @@ class ThemeImporterTest extends CmsConsoleTestCase
     public function testThemeImporterFromPackage()
     {
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
-        
+        $this->fixture->rebuild();
+    
         $this->app->getPackageInstaller()->setConfigs([['themes' => ['@CmsUnitModule/otherThemes/otherTheme']]]);
         
         $controller = new ImportController('import-controller', $this->app);
@@ -77,6 +77,7 @@ class ThemeImporterTest extends CmsConsoleTestCase
     public function testEmptyThemeDirectory()
     {
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
+        $this->fixture->rebuild();
 
         FileHelper::removeDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
         FileHelper::createDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
@@ -101,6 +102,7 @@ class ThemeImporterTest extends CmsConsoleTestCase
     public function testNotExistsThemePackage()
     {
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
+        $this->fixture->rebuild();
 
         $this->app->getPackageInstaller()->setConfigs([['themes' => ['@CmsUnitModule/not/exists']]]);
 
@@ -124,6 +126,7 @@ class ThemeImporterTest extends CmsConsoleTestCase
     public function testUpdateThemeConfig()
     {
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
+        $this->fixture->rebuild();
     
         $controller = new ImportController('import-controller', $this->app);
         $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
@@ -140,14 +143,19 @@ class ThemeImporterTest extends CmsConsoleTestCase
             ],
             $importer->importer->getLog()
         );
-
-        $this->assertSame('{"name":"newName","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@app/themes/appTheme'])->json_config);
-
-        Theme::updateAll(['json_config' => '{}']);
+    
+        $themeModel = Theme::findOne(['base_path' => '@app/themes/appTheme']);
+        $this->assertSame('{"name":"appTheme","parentTheme":null,"pathMap":[],"description":null}', $themeModel->json_config);
+    
+        $themeModel->json_config = '{}';
+        $themeModel->update(false);
 
         // re-run after changes
         $controller = new ImportController('import-controller', $this->app);
         $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
+    
+        $themeManager = new ThemeManager();
+        $importer->setThemeManager($themeManager);
 
         $importer->run();
 
@@ -155,12 +163,13 @@ class ThemeImporterTest extends CmsConsoleTestCase
             [
                 'luya\cms\admin\importers\ThemeImporter' => [
                     0 => 'Updated theme @app/themes/appTheme.',
-                    1 => 'Theme importer finished with 1 themes.',
+                    1 => 'Updated theme @app/themes/testTheme.',
+                    2 => 'Theme importer finished with 2 themes.',
                 ],
             ],
             $importer->importer->getLog()
         );
 
-        $this->assertSame('{"name":"newName","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@app/themes/appTheme'])->json_config);
+        $this->assertSame('{"name":"appTheme","parentTheme":null,"pathMap":[],"description":null}', Theme::findOne(['base_path' => '@app/themes/appTheme'])->json_config);
     }
 }

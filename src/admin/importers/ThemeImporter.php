@@ -19,6 +19,8 @@ use Yii;
  */
 class ThemeImporter extends Importer
 {
+    private $_themeManager;
+    
     /**
      * @inheritdoc
      */
@@ -26,7 +28,7 @@ class ThemeImporter extends Importer
     {
         $exists = [];
 
-        foreach (Yii::$app->themeManager->getThemes($thowException) as $theme) {
+        foreach ($this->getThemeManager()->getThemes($thowException) as $theme) {
             /** @var \luya\theme\Theme $theme */
             $exists = array_merge($exists, $this->handleThemeDefinitionInDirectories($theme->basePath));
         }
@@ -127,5 +129,22 @@ class ThemeImporter extends Importer
         }
 
         return $themeModel->id;
+    }
+    
+    /**
+     * @return \luya\theme\ThemeManager|mixed
+     */
+    public function getThemeManager()
+    {
+        if ($this->_themeManager == null) {
+            $this->_themeManager = Yii::$app->themeManager;
+        }
+        
+        return $this->_themeManager;
+    }
+    
+    public function setThemeManager($themeManager)
+    {
+        $this->_themeManager = $themeManager;
     }
 }
