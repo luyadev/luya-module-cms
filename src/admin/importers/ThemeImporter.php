@@ -19,15 +19,11 @@ use Yii;
  */
 class ThemeImporter extends Importer
 {
-    private $packageInstaller;
-
     /**
      * @inheritdoc
      */
     public function run()
     {
-        $this->packageInstaller = Yii::$app->getPackageInstaller();
-
         $exists = [];
 
         foreach (Yii::$app->themeManager->getThemes(false) as $theme) {
