@@ -42,7 +42,7 @@ class CmslayoutImporter extends Importer
             $this->handleLayoutFile($layoutFiles, $layoutDefintion);
         }
     
-        foreach (Yii::$app->themeManager->getThemes(false) as $themeConfig) {
+        foreach (Yii::$app->themeManager->getThemes() as $themeConfig) {
             $this->handleLayoutFile($layoutFiles, $themeConfig->getViewPath() . DIRECTORY_SEPARATOR . 'cmslayouts', $themeConfig->name);
         }
         

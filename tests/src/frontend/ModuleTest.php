@@ -12,6 +12,7 @@ use luya\web\ErrorHandlerExceptionRenderEvent;
 use luya\cms\models\Config;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use cmstests\CmsFrontendTestCase;
+use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use Yii;
 
@@ -48,7 +49,13 @@ class ModuleTest extends CmsFrontendTestCase
         $module->luyaBootstrap(Yii::$app);
     
         Yii::$app->themeManager->activeThemeName = '@app/themes/moduleTest';
-        Yii::$app->themeManager->setup();
+        try {
+            FileHelper::removeDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
+            Yii::$app->themeManager->setup();
+        } finally {
+            FileHelper::createDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
+        }
+        
         $this->assertTrue(Yii::$app->themeManager->hasActiveTheme);
         $this->assertEquals('@app/themes/appTheme', Yii::$app->themeManager->activeTheme->basePath);
     }
