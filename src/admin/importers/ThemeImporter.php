@@ -58,8 +58,6 @@ class ThemeImporter extends Importer
         $themeId = $this->saveTheme($themeDefinition);
         if ($themeId) {
             $results[$themeDefinition] = $themeId;
-        } else {
-            $this->addLog("Unable to find '{$themeDefinition}'");
         }
 
         return $results;
@@ -76,10 +74,6 @@ class ThemeImporter extends Importer
     protected function saveTheme($basePath)
     {
         $themeFile = Yii::getAlias($basePath . '/theme.json');
-        if (!file_exists($themeFile)) {
-            return false;
-        }
-
         $config = Json::decode(file_get_contents($themeFile)) ?: [];
 
         $themeConfig = new ThemeConfig($basePath, $config);
