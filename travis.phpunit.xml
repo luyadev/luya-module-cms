@@ -18,6 +18,7 @@
         <blacklist>
             <directory>./vendor</directory>
             <directory>./tests</directory>
+            <directory>./src/admin/migrations</directory>
         </blacklist>
         <whitelist processUncoveredFilesFromWhitelist="false">
             <directory suffix=".php">./src</directory>

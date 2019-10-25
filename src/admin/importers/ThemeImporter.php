@@ -43,23 +43,6 @@ class ThemeImporter extends Importer
     }
 
     /**
-     * Handle an array with definitions whether they are files or folders.
-     *
-     * @param array $definitions
-     *
-     * @return array
-     */
-    protected function handleThemeDefinitions(array $definitions)
-    {
-        $ids = [];
-        foreach ($definitions as $themeDefinition) {
-            $ids = array_merge($ids, $this->handleThemeDefinitionInDirectories($themeDefinition));
-        }
-
-        return $ids;
-    }
-
-    /**
      * Handle a theme definition for different folders
      *
      * @param string $themeDefinition
@@ -72,7 +55,7 @@ class ThemeImporter extends Importer
 
         $themeDefinition = preg_replace('#^vendor/#', '@vendor/', $themeDefinition);
 
-        $themeId = $this->saveThemeByPath($themeDefinition);
+        $themeId = $this->saveTheme($themeDefinition);
         if ($themeId) {
             $results[$themeDefinition] = $themeId;
         } else {
@@ -80,16 +63,6 @@ class ThemeImporter extends Importer
         }
 
         return $results;
-    }
-
-    protected function saveThemeByPath($themeDefinition)
-    {
-        $path = Yii::getAlias($themeDefinition);
-        if (is_dir($path)) {
-            return $this->saveTheme($themeDefinition);
-        }
-
-        return null;
     }
 
     /**
