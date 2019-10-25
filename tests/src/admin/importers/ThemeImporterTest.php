@@ -79,24 +79,27 @@ class ThemeImporterTest extends CmsConsoleTestCase
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
         $this->fixture->rebuild();
 
-        FileHelper::removeDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
-        FileHelper::createDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
-
-        $controller = new ImportController('import-controller', $this->app);
-        $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
-
-        $this->assertNull($importer->run());
-
-        $log = $importer->importer->getLog();
-
-        $this->assertSame([
-            'luya\cms\admin\importers\ThemeImporter' => [
-                0 => 'Added theme @app/themes/appTheme to database.',
-                1 => 'Added theme @app/themes/testTheme to database.',
-                2 => 'Theme importer finished with 2 themes.',
+        FileHelper::createDirectory(Yii::getAlias('@app/themes/emptyThemeDir'));
+    
+        try {
+            $controller = new ImportController('import-controller', $this->app);
+            $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
+        
+            $this->assertNull($importer->run());
+        
+            $log = $importer->importer->getLog();
+        
+            $this->assertSame([
+                'luya\cms\admin\importers\ThemeImporter' => [
+                    0 => 'Added theme @app/themes/appTheme to database.',
+                    1 => 'Added theme @app/themes/testTheme to database.',
+                    2 => 'Theme importer finished with 2 themes.',
+                ],
             ],
-        ],
-            $log);
+                $log);
+        } finally {
+            FileHelper::removeDirectory(Yii::getAlias('@app/themes/emptyThemeDir'));
+        }
     }
     
     public function testNotExistsThemePackage()

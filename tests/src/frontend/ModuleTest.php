@@ -49,14 +49,9 @@ class ModuleTest extends CmsFrontendTestCase
         $module->luyaBootstrap(Yii::$app);
     
         Yii::$app->themeManager->activeThemeName = '@app/themes/moduleTest';
-        try {
-            FileHelper::removeDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
-            Yii::$app->themeManager->setup();
-        } finally {
-            FileHelper::createDirectory(Yii::getAlias('@cmstests/tests/data/themes/emptyThemeDir'));
-        }
-        
+        Yii::$app->themeManager->setup();
+    
         $this->assertTrue(Yii::$app->themeManager->hasActiveTheme);
-        $this->assertEquals('@app/themes/appTheme', Yii::$app->themeManager->activeTheme->basePath);
+        $this->assertEquals(Yii::getAlias('@app/themes/appTheme'), Yii::$app->themeManager->activeTheme->basePath);
     }
 }
