@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 2.2.0
 
++ [#233](https://github.com/luyadev/luya-module-cms/issues/233) Fix problem with cms nav item model validation rules.
 + [#166](https://github.com/luyadev/luya-module-cms/issues/166) New LanguageSwitcher method `setUrlRuleParam()` to make url rules translatable.
 + [#224](https://github.com/luyadev/luya-module-cms/pull/224) Add `getBlock()` method in PhpBlockView to access block context.
 
