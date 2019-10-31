@@ -253,16 +253,16 @@
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.11.0",
+            "version": "v4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7"
+                "reference": "a617e55bc62a87eec73bd456d146d134ad716f03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7",
-                "reference": "83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/a617e55bc62a87eec73bd456d146d134ad716f03",
+                "reference": "a617e55bc62a87eec73bd456d146d134ad716f03",
                 "shasum": ""
             },
             "require": {
@@ -296,7 +296,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2019-07-14T18:58:38+00:00"
+            "time": "2019-10-28T03:44:26+00:00"
         },
         {
             "name": "flowjs/flow-php-server",
@@ -518,16 +518,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.21",
+            "version": "1.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "23d8714ce08deddfb586c4e90ccaf0da2a95b112"
+                "reference": "c818377491124ca702b7b8bd93dc65759844a03c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/23d8714ce08deddfb586c4e90ccaf0da2a95b112",
-                "reference": "23d8714ce08deddfb586c4e90ccaf0da2a95b112",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/c818377491124ca702b7b8bd93dc65759844a03c",
+                "reference": "c818377491124ca702b7b8bd93dc65759844a03c",
                 "shasum": ""
             },
             "require": {
@@ -571,20 +571,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2019-09-09T12:08:23+00:00"
+            "time": "2019-10-22T11:53:22+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "64ebffc9d93ca995c9e0ef71efd45936377f9ae6"
+                "reference": "b03803f8018c7a19bbad4d6d3e1521cdd78f6e11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/64ebffc9d93ca995c9e0ef71efd45936377f9ae6",
-                "reference": "64ebffc9d93ca995c9e0ef71efd45936377f9ae6",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/b03803f8018c7a19bbad4d6d3e1521cdd78f6e11",
+                "reference": "b03803f8018c7a19bbad4d6d3e1521cdd78f6e11",
                 "shasum": ""
             },
             "require": {
@@ -652,20 +652,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2019-10-03T16:53:33+00:00"
+            "time": "2019-10-23T13:07:16+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.22",
+            "version": "1.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "933cb91a841786ef697ba279c8de1710e30af325"
+                "reference": "9c9823a5b1e1cb71ed379fa865481f58f2e7305f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/933cb91a841786ef697ba279c8de1710e30af325",
-                "reference": "933cb91a841786ef697ba279c8de1710e30af325",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/9c9823a5b1e1cb71ed379fa865481f58f2e7305f",
+                "reference": "9c9823a5b1e1cb71ed379fa865481f58f2e7305f",
                 "shasum": ""
             },
             "require": {
@@ -705,7 +705,7 @@
                 "module",
                 "php"
             ],
-            "time": "2019-10-03T07:41:26+00:00"
+            "time": "2019-10-22T10:13:18+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2597,16 +2597,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.27",
+            "version": "2.0.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "6793f8f9b4cd891dbf475cfbb88cf480f74eaa85"
+                "reference": "f972275551172a4b2e293979d77aa0c795ae36a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/6793f8f9b4cd891dbf475cfbb88cf480f74eaa85",
-                "reference": "6793f8f9b4cd891dbf475cfbb88cf480f74eaa85",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f972275551172a4b2e293979d77aa0c795ae36a2",
+                "reference": "f972275551172a4b2e293979d77aa0c795ae36a2",
                 "shasum": ""
             },
             "require": {
@@ -2693,7 +2693,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2019-09-18T13:04:16+00:00"
+            "time": "2019-10-22T13:47:14+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
