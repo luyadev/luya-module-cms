@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 2.2.0
+## 2.2.0 (12. November 2019)
 
 + [#214](https://github.com/luyadev/luya-module-cms/issues/214) Fixed bug when switch from module page to content page.
 + [#223](https://github.com/luyadev/luya-module-cms/issues/223) CMS Pages (Nav) can have tags and can also be filtered in menu query by tags. (luya\cms\menu\Query::tags()).
