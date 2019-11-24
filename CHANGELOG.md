@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 3.0
+
 ## 2.2.0 (12. November 2019)
 
 + [#214](https://github.com/luyadev/luya-module-cms/issues/214) Fixed bug when switch from module page to content page.
