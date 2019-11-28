@@ -355,7 +355,7 @@ class NavItemController extends \luya\admin\base\RestController
                         if (!$pageModel->save()) {
                             return $this->sendModelError($pageModel);
                         }
-                        $model->nav_item_type_id = $navItemId;
+                        $model->nav_item_type_id = $pageModel->id;
                     } else {
                         $this->setPostAttribute($model, 'nav_item_type_id');
                     }

@@ -1209,7 +1209,7 @@
 					if (itemCopy.nav_item_type == 1 && typeof response.data['typeData'] === 'object') {
 						/* choose given version or choose first available version */
 						var pageVersionKey = response.data['item'].nav_item_type_id;
-						if (response.data['item'].nav_item_type_id == 0) {
+						if (pageVersionKey == 0) {
 							pageVersionKey = Object.keys(response.data['typeData'])[0];
 						}
 						$scope.container = response.data['typeData'][pageVersionKey]['contentAsArray'];

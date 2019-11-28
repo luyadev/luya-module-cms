@@ -109,10 +109,13 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function rules()
     {
         return [
+            [['description', 'keywords'], 'string'],
+            [['title'], 'string', 'max' => 180],
+            [['alias'], 'string', 'max' => 80],
+            [['title_tag'], 'string', 'max' => 255],
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
-            [['nav_id', 'description', 'keywords', 'nav_item_type_id', 'title_tag'], 'safe'],
-            [['timestamp_create', 'timestamp_update', 'image_id', 'is_url_strict_parsing_disabled', 'create_user_id', 'update_user_id'], 'integer'],
-            [['alias'], 'match', 'pattern' => '/\_|\/|\\\/i', 'not' => true]
+            [['nav_id', 'lang_id', 'nav_item_type', 'nav_item_type_id', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'image_id', 'is_url_strict_parsing_disabled'], 'integer'],
+            [['alias'], 'match', 'pattern' => '/\_|\/|\\\/i', 'not' => true],
         ];
     }
 
