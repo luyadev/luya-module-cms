@@ -107,9 +107,10 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
         if (!$app->request->isConsoleRequest && $app->has('themeManager')) {
             // set active theme from database
             $app->get('themeManager')->on(ThemeManager::EVENT_BEFORE_SETUP, function (SetupEvent $event) {
-                $activeTheme = Theme::findOne(['is_active' => 1]);
-                if ($activeTheme) {
-                    $event->basePath = $activeTheme->base_path;
+                // get the base path of the active theme
+                $activeBasePath = Theme::find()->cache()->select('base_path')->where(['is_active' => 1])->scalar();
+                if ($activeBasePath) {
+                    $event->basePath = $activeBasePath;
                 }
             });
         }
