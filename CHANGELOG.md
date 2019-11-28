@@ -5,6 +5,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.0
 
++ [#211](https://github.com/luyadev/luya-module-cms/pull/211) Add the theme loading and management to the cms module based on core theme [luya/issues/1916](https://github.com/luyadev/luya/issues/1916)
+
 ## 2.2.0 (12. November 2019)
 
 + [#214](https://github.com/luyadev/luya-module-cms/issues/214) Fixed bug when switch from module page to content page.
