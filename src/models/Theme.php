@@ -10,13 +10,13 @@ use yii\helpers\Json;
 /**
  * Theme Model for LUYA-Theme.
  *
- * @property int    $id
+ * @property int $id
  * @property string $base_path
  * @property string $json_config
  * @property bool   $is_active
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
- * @since  3.0.0
+ * @since 3.0.0
  */
 class Theme extends NgRestModel
 {
@@ -71,6 +71,9 @@ class Theme extends NgRestModel
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestExtraAttributeTypes()
     {
         return [
@@ -80,6 +83,9 @@ class Theme extends NgRestModel
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
     public function ngRestActiveButtons()
     {
         return [
@@ -93,16 +99,25 @@ class Theme extends NgRestModel
         ];
     }
     
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->getJsonConfig('name');
     }
     
+    /**
+     * @return string
+     */
     public function getParentTheme()
     {
         return $this->getJsonConfig('parentTheme');
     }
     
+    /**
+     * @return string
+     */
     public function getAuthor()
     {
         return $this->getJsonConfig('author');
@@ -114,7 +129,7 @@ class Theme extends NgRestModel
      * Get the json config as array.
      *
      * @param string $key Get a given key from the config array.
-     * @return array If the given node is not found an empty array will be returned.
+     * @return array|mixed If the given node is not found an empty array will be returned.
      */
     public function getJsonConfig($key = null)
     {

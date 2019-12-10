@@ -2,23 +2,28 @@
 
 namespace luya\cms\admin\importers;
 
-use luya\base\PackageConfig;
 use luya\cms\models\Theme;
 use luya\console\Importer;
-use luya\helpers\FileHelper;
 use luya\helpers\Json;
 use luya\theme\ThemeConfig;
+use luya\theme\ThemeManager;
 use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * Class ThemeImporter
  * Import theme.json files from the folder and analyse config.
+ *
+ * @property ThemeManager $themeManager
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
  * @since 3.0.0
  */
 class ThemeImporter extends Importer
 {
+    /**
+     * @var ThemeManager
+     */
     private $_themeManager;
     
     /**
@@ -27,26 +32,25 @@ class ThemeImporter extends Importer
     public function run($thowException = false)
     {
         $exists = [];
-
+        
         foreach ($this->getThemeManager()->getThemes($thowException) as $theme) {
             /** @var \luya\theme\Theme $theme */
             $exists = array_merge($exists, $this->handleThemeDefinitionInDirectories($theme->basePath));
         }
-
+        
         foreach (Theme::find()->all() as $theme) {
             if (!in_array($theme->id, $exists) && $theme->delete()) {
                 $this->addLog("[!] The theme {$theme->base_path} does not found anymore and was deleted.");
             }
         }
-
+        
         return $this->addLog("Theme importer finished with " . count($exists) . " themes.");
     }
-
+    
     /**
      * Handle a theme definition for different folders
      *
      * @param string $themeDefinition
-     *
      * @return array
      */
     protected function handleThemeDefinitionInDirectories($themeDefinition)
@@ -69,7 +73,7 @@ class ThemeImporter extends Importer
      *
      * @param $basePath
      * @return mixed|bool False if could not exists.
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     protected function saveTheme($basePath)
     {
@@ -99,7 +103,7 @@ class ThemeImporter extends Importer
     }
     
     /**
-     * @return \luya\theme\ThemeManager|mixed
+     * @return ThemeManager
      */
     public function getThemeManager()
     {
@@ -110,6 +114,9 @@ class ThemeImporter extends Importer
         return $this->_themeManager;
     }
     
+    /**
+     * @param ThemeManager $themeManager
+     */
     public function setThemeManager($themeManager)
     {
         $this->_themeManager = $themeManager;
