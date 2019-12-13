@@ -5,6 +5,8 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.0
 
++ [#235](https://github.com/luyadev/luya-module-cms/issues/235) Fixed cms toolbar bug in ajax context.
+
 ## 2.2.0 (12. November 2019)
 
 + [#214](https://github.com/luyadev/luya-module-cms/issues/214) Fixed bug when switch from module page to content page.
