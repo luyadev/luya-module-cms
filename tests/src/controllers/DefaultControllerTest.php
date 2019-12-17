@@ -9,10 +9,12 @@ use luya\cms\models\NavContainer;
 use luya\cms\models\NavItem;
 use luya\cms\models\NavItemPage;
 use luya\cms\models\Property;
+use luya\cms\models\Theme;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\testsuite\scopes\PageScope;
 use yii\base\Event;
+use Yii;
 
 class ControllerStub extends \luya\cms\frontend\base\Controller
 {
@@ -120,6 +122,18 @@ class DefaultControllerTest extends WebApplicationTestCase
         $navItemFixture = new ActiveRecordFixture([
             'modelClass' => Property::class,
         ]);
+    
+        $this->fixture = new ActiveRecordFixture([
+            'modelClass' => Theme::class,
+            'fixtureData' => [
+                [
+                    'is_active' => true,
+                    'base_path' => '@app/themes/appTheme',
+                    'json_config' => '{}',
+                ]
+            ]
+        ]);
+        
         //endregion
     
         $this->app->menu->currentUrlRule = [
@@ -137,6 +151,11 @@ class DefaultControllerTest extends WebApplicationTestCase
             'data' => ['content' => 'FOO']
         ]);
     
+        Yii::setAlias('@app', Yii::$app->basePath . '/../data');
+
+        $this->app->themeManager->activeThemeName = '@app/themes/appTheme';
+        $this->app->themeManager->setup();
+        
         ob_start();
         $controller->renderToolbar($event);
         $toolbarHtml = ob_get_clean();
