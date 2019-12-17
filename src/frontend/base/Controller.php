@@ -214,7 +214,7 @@ abstract class Controller extends \luya\web\Controller
             $content = TagParser::convert($content);
         }
         
-        if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {
+        if (Yii::$app->has('adminuser') && !Yii::$app->request->isAjax && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {
             $this->view->registerCssFile('//fonts.googleapis.com/icon?family=Material+Icons');
             $this->view->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar'], ['content' => $content]);
         }
