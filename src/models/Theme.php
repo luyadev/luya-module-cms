@@ -13,7 +13,7 @@ use yii\helpers\Json;
  * @property int $id
  * @property string $base_path
  * @property string $json_config
- * @property bool   $is_active
+ * @property bool $is_active
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since 3.0.0

@@ -101,7 +101,10 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             ],
         ];
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function luyaBootstrap(Application $app)
     {
         if (!$app->request->isConsoleRequest && !$app->request->isAdmin) {
