@@ -246,4 +246,8 @@ return [
     'view_index_module_action_params' => 'Параметры действия',
     'view_index_module_select_help' => 'Выберите модуль для отображения из списка (перечислены только внешние модули). Модули должны быть настроены в конфигурации.',
     'view_index_module_advanced_settings_button' => 'Расширенные настройки',
+// 3.0
+
+    'menu_group_item_env_themes' => 'Themes',
+
 ];

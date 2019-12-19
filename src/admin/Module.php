@@ -2,6 +2,7 @@
 
 namespace luya\cms\admin;
 
+use luya\cms\admin\importers\ThemeImporter;
 use Yii;
 use luya\console\interfaces\ImportControllerInterface;
 use luya\cms\admin\importers\BlockImporter;
@@ -54,6 +55,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'api-cms-navcontainer' => 'luya\cms\admin\apis\NavContainerController',
         'api-cms-navitemblock' => 'luya\cms\admin\apis\NavItemBlockController',
         'api-cms-redirect' => 'luya\cms\admin\apis\RedirectController',
+        'api-cms-theme' => 'luya\cms\admin\apis\ThemeController',
     ];
 
     public $apiRules = [
@@ -264,6 +266,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
                     ->itemRoute('menu_group_item_env_permission', "cmsadmin/permission/index", 'gavel')
                     ->itemApi('menu_group_item_env_container', 'cmsadmin/navcontainer/index', 'label_outline', 'api-cms-navcontainer')
                     ->itemApi('menu_group_item_env_layouts', 'cmsadmin/layout/index', 'view_quilt', 'api-cms-layout')
+                    ->itemApi('menu_group_item_env_themes', 'cmsadmin/theme/index', 'color_lens', 'api-cms-theme')
                     ->itemRoute('menu_group_item_env_config', 'cmsadmin/config/index', 'build')
                     ->itemApi('menu_group_item_env_redirections', 'cmsadmin/redirect/index', 'compare_arrows', 'api-cms-redirect')
                 ->group('menu_group_elements')
@@ -302,6 +305,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     public function import(ImportControllerInterface $importer)
     {
         return [
+            ThemeImporter::class,
             BlockImporter::class,
             CmslayoutImporter::class,
             PropertyConsistencyImporter::class,

@@ -245,4 +245,9 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'Wählen Sie das anzuzeigende Modul aus der Liste aus (nur Frontend-Module werden aufgeführt). Module werden im Modul-Abschnitt der config konfiguriert.',
     'view_index_module_advanced_settings_button' => 'Erweiterte Einstellungen',
+    
+// 3.0
+
+    'menu_group_item_env_themes' => 'Themes',
+
 ];

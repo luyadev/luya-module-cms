@@ -246,4 +246,8 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'เลือกโมดูลที่จะแสดงจากรายการ (เฉพาะโมดูลฟรอนท์เอนด์ถูกแสดง) โมดูลต้องถูกตั้งค่าในส่วนของการตั้งค่าโมดูล',
     'view_index_module_advanced_settings_button' => 'การตั้งค่าเพิ่มเติม',
+// 3.0
+
+    'menu_group_item_env_themes' => 'Themes',
+
 ];
