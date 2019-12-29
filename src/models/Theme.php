@@ -57,7 +57,7 @@ class Theme extends NgRestModel
         return [
             'base_path' => 'text',
             'json_config' => ['textarea', 'encoding' => false],
-            'is_active' => ['toggleStatus', 'initValue' => 0],
+            'is_active' => ['toggleStatus', 'initValue' => 0, 'interactive' => false],
         ];
     }
     
