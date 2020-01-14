@@ -330,6 +330,10 @@ class NavController extends \luya\admin\base\RestController
             $navItem->parent_nav_id = $model->parent_nav_id;
             $navItem->alias = date('Y-m-d-H-i').'-deleted-'.$navItem->alias;
             $navItem->update(true, ['alias']);
+
+            if ($navItem->hasErrors(['alias'])) {
+                return $this->sendModelError($navItem);
+            }
         }
 
         Log::addModel(Log::LOG_TYPE_DELETE, $model);
