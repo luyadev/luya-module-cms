@@ -303,32 +303,38 @@ class NavController extends \luya\admin\base\RestController
         }
         
         $model = Nav::find()->where(['id' => $navId])->one();
-        if ($model) {
-            $this->menuFlush();
-            // check for internal redirects
-            $redirectResult = false;
-            $redirects = NavItemRedirect::find()->where(['value' => $navId])->asArray()->all();
-            foreach ($redirects as $redirect) {
-                $navItem = NavItem::find()->where(['nav_item_type' => 3, 'nav_item_type_id' => $redirect['id']])->one();
-                $redirectResult = empty(Nav::find()->where(['id' => $navItem->nav_id, 'is_deleted' => false])->one()) ? $redirectResult : true;
-            }
 
-            if ($redirectResult) {
-                Yii::$app->response->statusCode = 417;
-                return;
-            }
-
-            $model->is_deleted = true;
-
-            foreach (NavItem::find()->where(['nav_id' => $navId])->all() as $navItem) {
-                $navItem->setAttribute('alias', date('Y-m-d-H-i').'-'.$navItem->alias);
-                $navItem->update(false);
-            }
-
-            Log::addModel(Log::LOG_TYPE_DELETE, $navItem);
-
-            return $model->update(false);
+        if (!$model) {
+            throw new NotFoundHttpException("Unable to find the given model.");
         }
+
+        $this->menuFlush();
+        // check for internal redirects
+        $redirectResult = false;
+        $redirects = NavItemRedirect::find()->where(['value' => $navId])->asArray()->all();
+        foreach ($redirects as $redirect) {
+            $navItem = NavItem::find()->where(['nav_item_type' => NavItem::TYPE_REDIRECT, 'nav_item_type_id' => $redirect['id']])->one();
+            $redirectResult = empty(Nav::find()->where(['id' => $navItem->nav_id, 'is_deleted' => false])->one()) ? $redirectResult : true;
+        }
+
+        // This check allows use to ensure, whether another page is redirect to this page or not. If a page is redirecting to this page
+        // deleting is not allowed as it will make the page "fragile".
+        if ($redirectResult) {
+            Yii::$app->response->statusCode = 417;
+            return;
+        }
+
+        $model->is_deleted = true;
+
+        foreach (NavItem::find()->where(['nav_id' => $navId])->all() as $navItem) {
+            $navItem->parent_nav_id = $model->parent_nav_id;
+            $navItem->alias = date('Y-m-d-H-i').'-deleted-'.$navItem->alias;
+            $navItem->update(true, ['alias']);
+        }
+
+        Log::addModel(Log::LOG_TYPE_DELETE, $model);
+
+        return $model->update(true, ['is_deleted']);
     }
 
     /**
