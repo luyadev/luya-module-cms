@@ -331,7 +331,7 @@ class NavController extends \luya\admin\base\RestController
             $navItem->alias = date('Y-m-d-H-i').'-deleted-'.$navItem->alias;
             $navItem->update(true, ['alias']);
 
-            if ($navItem->hasErrors(['alias'])) {
+            if ($navItem->hasErrors('alias')) {
                 return $this->sendModelError($navItem);
             }
         }
