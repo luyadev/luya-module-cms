@@ -65,7 +65,7 @@
     padding: 15px;
     width: 100%;
     user-select: none;
-    @include overflow-no-scrollbars;
+    overflow-y: auto;
 }
 
 .blockholder-search {

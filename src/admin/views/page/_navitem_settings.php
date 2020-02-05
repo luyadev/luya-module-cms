@@ -78,7 +78,7 @@ use luya\admin\helpers\Angular;
         </div>
         <div ng-switch-when="2">
             <h1><?= Module::t('versions_selector'); ?></h1>
-            <div class="table-responsive-wrapper">
+            <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr>
                         <th><?= Module::t('version_input_name'); ?></th>
