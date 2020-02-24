@@ -5,7 +5,9 @@
 
     @media (min-width: $mobile-nav-breakpoint) {
         margin-right: $blockholder-width;
-        overflow: hidden auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        margin-top: -10px;
     }
 
     > .row {

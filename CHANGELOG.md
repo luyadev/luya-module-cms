@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.0
 
++ [#239](https://github.com/luyadev/luya-module-cms/issues/239) Added negative margin to cancel out default admin padding. Fixed a small overflow issue in Safari ([admin/#461](https://github.com/luyadev/luya-module-admin/issues/461)).
 + [#238](https://github.com/luyadev/luya-module-cms/issues/238) Show vertical scrollbars.
 + [#211](https://github.com/luyadev/luya-module-cms/pull/211) Add the theme loading and management to the cms module based on core theme [luya/issues/1916](https://github.com/luyadev/luya/issues/1916)
 + [#235](https://github.com/luyadev/luya-module-cms/issues/235) Fixed cms toolbar bug in ajax context.
