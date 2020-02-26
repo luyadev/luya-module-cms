@@ -7,6 +7,7 @@ use yii\web\View;
 use yii\web\NotFoundHttpException;
 use Exception;
 use luya\cms\frontend\base\Controller;
+use luya\cms\models\NavItem;
 use luya\cms\models\Redirect;
 use yii\web\Response;
 use luya\web\filters\ResponseCache;
@@ -45,7 +46,10 @@ class DefaultController extends Controller
      */
     private function isFullPageCacheEnabled()
     {
-        return $this->module->fullPageCache && Yii::$app->menu->current->isStrictParsing && Yii::$app->request->isGet && Yii::$app->menu->current->type == 1;
+        return $this->module->fullPageCache 
+            && Yii::$app->menu->current->isStrictParsing 
+            && Yii::$app->request->isGet 
+            && Yii::$app->menu->current->type == NavItem::TYPE_PAGE;
     }
 
     /**
