@@ -34,6 +34,7 @@ use luya\admin\helpers\Angular;
             <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
                 <zaa-text model="itemCopy.title" label="<?= Module::t('view_index_page_title'); ?>" />
                 <zaa-text model="itemCopy.alias" label="<?= Module::t('view_index_page_alias'); ?>" />
+                <?= Angular::checkbox('itemCopy.is_cacheable', Module::t('view_index_page_is_cacheable'))->hint(Module::t('view_index_page_is_cacheable_hint')); ?>
                 <?= Angular::datetime('itemCopy.timestamp_create', Module::t('view_index_page_meta_timestamp_create'), ['resetable' => false]); ?>
                 <?= Angular::radio('itemCopy.nav_item_type', Module::t('view_index_add_type'), [
                     1 => Module::t('view_index_type_page'),

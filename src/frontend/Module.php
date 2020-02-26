@@ -79,7 +79,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * 
      * + $fullPageCache is enabled.
      * + its a get request
-     * + strict parsing is enabled
+     * + nav item is_cacheable is enabled.
      * + the type is page (not redirect & not module)
      * 
      * > This well speed up the page dramatically but could also lead into huge problems when you are using blocks which needs to collect
@@ -88,7 +88,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * 
      * @since 2.1.0
      */
-    public $fullPageCache = false;
+    public $fullPageCache = true;
     
     /**
      * @inheritdoc
