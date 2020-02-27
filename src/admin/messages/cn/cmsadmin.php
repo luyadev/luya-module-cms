@@ -249,5 +249,6 @@ return [
 // 3.0
 
     'menu_group_item_env_themes' => 'Themes',
-
+    'view_index_page_is_cacheable' => 'Caching',
+    'view_index_page_is_cacheable_hint' => 'When enabled the whole page will be cached including all blocks.',
 ];

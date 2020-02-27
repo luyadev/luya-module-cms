@@ -246,8 +246,10 @@ return [
     'view_index_module_action_params' => 'Parâmetros da Ação',
     'view_index_module_select_help' => 'Escolha o módulo a ser exibido na lista (apenas os módulos de front-end estão listados). Os módulos devem ser configurados na seção de configuração dos módulos.',
     'view_index_module_advanced_settings_button' => 'Configurações avançadas',
+
 // 3.0
 
     'menu_group_item_env_themes' => 'Themes',
-
+    'view_index_page_is_cacheable' => 'Caching',
+    'view_index_page_is_cacheable_hint' => 'When enabled the whole page will be cached including all blocks.',
 ];

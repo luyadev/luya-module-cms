@@ -248,6 +248,8 @@ return [
     
 // 3.0
 
-    'menu_group_item_env_themes' => 'Themes',
+    'menu_group_item_env_themes' => 'Themen',
+    'view_index_page_is_cacheable' => 'Caching',
+    'view_index_page_is_cacheable_hint' => 'Wenn dies eingeschlaten ist, wird die gesamt Seite mit allen Blöcken aus dem Cache geladen.',
 
 ];

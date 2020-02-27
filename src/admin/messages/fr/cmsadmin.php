@@ -235,8 +235,10 @@ return [
     'view_index_module_action_params' => 'Action paramètres',
     'view_index_module_select_help' => 'Choisissez le module à afficher depuis la liste (Seuls les modules d\'affichage sont affiché). Les modules doivent être configurés dans la section module de la configuration.',
     'view_index_module_advanced_settings_button' => 'Paramètres avancés',
+
 // 3.0
 
     'menu_group_item_env_themes' => 'Themes',
-
+    'view_index_page_is_cacheable' => 'Caching',
+    'view_index_page_is_cacheable_hint' => 'When enabled the whole page will be cached including all blocks.',
 ];
