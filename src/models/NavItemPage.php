@@ -411,10 +411,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      *
      * @param integer $blockId
      * @return array
-     * @deprecated Deprecated since 1.0.6 use getBlockItem() instead.
+     * @deprecated Deprecated since 1.0.6 use getBlockItem() instead. Will be removed in 4.0
      */
     public static function getBlock($blockId)
     {
+        trigger_error('deprecated, use getBlockItem() instead.', E_USER_DEPRECATED);
         $blockItem = NavItemPageBlockItem::findOne($blockId);
         
         return self::getBlockItem($blockItem, $blockItem->navItemPage);

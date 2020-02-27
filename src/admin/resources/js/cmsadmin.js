@@ -371,33 +371,6 @@
 		}
 	});
 
-	/**
-	 * This is mainly keept for legacy purposes as the admin requires this directive but the template is stored in the admin module.
-	 * 
-	 * > The template updateformredirect.html is stored in the luya admin module!
-	 * 
-	 * Otherwise the redirect form for create and update is not needed anymore as its handled by zaa-link
-	 * 
-	 * @deprecated Will be removed in 3.0 and moved to luya admin moudle.
-	 * @see https://github.com/luyadev/luya-module-admin/blob/master/src/views/layouts/_angulardirectives.php
-	 */
-	zaa.directive("updateFormRedirect", function() {
-		return {
-			restrict : 'EA',
-			scope : {
-				data : '='
-			},
-			templateUrl : 'updateformredirect.html',
-			controller : ['$scope', function($scope) {
-				$scope.$watch(function() { return $scope.data }, function(n, o) {
-					if (angular.isArray(n)) {
-						$scope.data = {};
-					}
-				});
-			}]
-		}
-	});
-
 	/* filters */
 
 	zaa.filter("menuparentfilter", function() {

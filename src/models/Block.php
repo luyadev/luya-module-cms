@@ -302,10 +302,11 @@ class Block extends NgRestModel
      * @param mixed $context
      * @param object $pageObject
      * @return \luya\cms\base\BlockInterface
-     * @deprecated 1.1.0 use createObject() or getObject() instead!
+     * @deprecated 1.1.0 use createObject() or getObject() instead! will be removed in 4.0
      */
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
+        trigger_error('deprecated, use getObject() or createObject() instead.', E_USER_DEPRECATED);
         if (isset(self::$blocks[$blockId])) {
             $block = self::$blocks[$blockId];
         } else {
