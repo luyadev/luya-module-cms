@@ -52,6 +52,7 @@ class DefaultController extends Controller
         return $this->module->fullPageCache 
             && Yii::$app->request->isGet 
             && $current->type == NavItem::TYPE_PAGE
+            && !$current->is404Page
             && $isCacheable;
     }
 
