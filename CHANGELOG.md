@@ -5,6 +5,9 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.0
 
+> This release contains new migrations and requires to run the migrate command after updating. Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.
+
++ [#222](https://github.com/luyadev/luya-module-cms/issues/222) Full page chache is enabled in module settings by default and a new `enable caching` flag for pages can be set to enable the caching of the page.
 + [#239](https://github.com/luyadev/luya-module-cms/issues/239) Added negative margin to cancel out default admin padding. Fixed a small overflow issue in Safari ([admin/#461](https://github.com/luyadev/luya-module-admin/issues/461)).
 + [#238](https://github.com/luyadev/luya-module-cms/issues/238) Show vertical scrollbars.
 + [#211](https://github.com/luyadev/luya-module-cms/pull/211) Add the theme loading and management to the cms module based on core theme [luya/issues/1916](https://github.com/luyadev/luya/issues/1916)

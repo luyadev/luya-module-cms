@@ -114,7 +114,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             [['alias'], 'string', 'max' => 80],
             [['title_tag'], 'string', 'max' => 255],
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
-            [['nav_id', 'lang_id', 'nav_item_type', 'nav_item_type_id', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'image_id', 'is_url_strict_parsing_disabled'], 'integer'],
+            [['nav_id', 'lang_id', 'nav_item_type', 'nav_item_type_id', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'image_id', 'is_url_strict_parsing_disabled', 'is_cacheable'], 'integer'],
             [['alias'], 'match', 'pattern' => '/\_|\/|\\\/i', 'not' => true],
         ];
     }

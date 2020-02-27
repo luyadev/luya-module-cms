@@ -297,6 +297,7 @@ class NavItemController extends \luya\admin\base\RestController
         $model->image_id = Yii::$app->request->post('image_id');
         $model->timestamp_create = Yii::$app->request->post('timestamp_create');
         $model->is_url_strict_parsing_disabled = Yii::$app->request->post('is_url_strict_parsing_disabled');
+        $model->is_cacheable = Yii::$app->request->post('is_cacheable');
 
         // make sure the currently provided informations are valid (like title);
         if (!$model->validate()) {

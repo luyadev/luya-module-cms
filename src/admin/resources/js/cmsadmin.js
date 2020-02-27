@@ -1168,6 +1168,7 @@
 			typeDataCopy.timestamp_create = itemCopy.timestamp_create;
 			typeDataCopy.image_id = itemCopy.image_id;
 			typeDataCopy.is_url_strict_parsing_disabled = itemCopy.is_url_strict_parsing_disabled;
+			typeDataCopy.is_cacheable = itemCopy.is_cacheable;
 			$http.post(
 				'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type,
 				$.param(typeDataCopy),
