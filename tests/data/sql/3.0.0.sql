@@ -1114,7 +1114,7 @@ CREATE TABLE `cms_nav_item` (
 LOCK TABLES `cms_nav_item` WRITE;
 /*!40000 ALTER TABLE `cms_nav_item` DISABLE KEYS */;
 INSERT INTO `cms_nav_item` VALUES 
-(1,1,1,1,1,1,1,1513077719,0,'Homepage','homepage',NULL,NULL,NULL,0,0,0,0),
+(1,1,1,1,1,1,1,1513077719,0,'Homepage','homepage',NULL,NULL,NULL,0,0,0),
 (2,2,1,1,2,1,1,1513077719,0,'Page 1','page1','Description of Page 1',NULL,NULL,0,0,0),
 (3,3,1,1,3,1,1,1513077719,0,'Page 2','page2','Description of Page 2',NULL,NULL,0,0,0),
 (4,4,1,1,4,1,1,1513077719,0,'Page 3','page3','Description of Page 3',NULL,NULL,0,0,0),
