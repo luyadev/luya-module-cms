@@ -250,6 +250,6 @@ return [
 
     'menu_group_item_env_themes' => 'Themen',
     'view_index_page_is_cacheable' => 'Caching',
-    'view_index_page_is_cacheable_hint' => 'Wenn dies eingeschlaten ist, wird die gesamt Seite mit allen Blöcken aus dem Cache geladen.',
+    'view_index_page_is_cacheable_hint' => 'Wenn eingeschalten, wird die gesamt Seite mit allen Blöcken aus dem Cache geladen und dynamische Daten werden nicht mehr geladen.',
 
 ];
