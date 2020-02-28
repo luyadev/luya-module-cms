@@ -209,7 +209,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $blockResponse = $this->getHasCache($cacheKey);
     
             /** @var $blockObject \luya\cms\base\InternalBaseBlock */
-            //$blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
             $blockObject = Block::createObject($placeholder['class'], $placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
     
             if ($blockObject) {
