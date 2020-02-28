@@ -72,7 +72,7 @@ class Url extends \luya\helpers\Url
         $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
         
         if ($item) {
-            return static::toMenuItem($item->id, $route);
+            return static::toMenuNavItem($item->id, $route);
         }
 
         throw new Exception("The module route creation could not find the module '$moduleName'. Have you created a page with this module in this language context?");
