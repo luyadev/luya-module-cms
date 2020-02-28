@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.0.1 (28. February 2020)
 
-+ Fixed a bug with new deprectation warning when using luya\cms\helpers\Url::toModuleRoute
++ Fixed a bug with new deprecation warning when using luya\cms\helpers\Url::toModuleRoute
 
 ## 3.0 (27. February 2020)
 
