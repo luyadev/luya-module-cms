@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 3.0.1 (28. February 2020)
+
++ Fixed a bug with new deprectation warning when using luya\cms\helpers\Url::toModuleRoute
+
 ## 3.0 (27. February 2020)
 
 > This release contains new migrations and requires to run the migrate command after updating. Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.
