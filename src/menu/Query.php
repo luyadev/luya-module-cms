@@ -109,6 +109,20 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     /**
      * Query where similar behavior of filtering items.
      *
+     * **Key Value Filtering**
+     * 
+     * When using key value where condition, the operator `=` will be used by default.
+     * 
+     * ```php
+     * where(['field' => 'value'])
+     * ```
+     * 
+     * which is equals to in operator mode:
+     * 
+     * ```php
+     * where(['=', 'field', 'value']);
+     * ```
+     * 
      * **Operator Filtering**
      *
      * ```php
@@ -164,16 +178,18 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      */
     public function where(array $args)
     {
-        foreach ($args as $key => $value) {
-            if (in_array($value, $this->whereOperators, true)) {
-                if (count($args) !== 3) {
-                    throw new Exception(sprintf("Wrong where(['%s']) condition, see https://luya.io/api/luya-cms-menu-Query#where()-detail for all available conditions.", implode("', '", $args)));
-                }
-                $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
-                break;
-            } else {
-                $this->_where[] = ['op' => '=', 'field' => $key, 'value' => $value];
+        if (ArrayHelper::isAssociative($args, false)) {
+            // key value operator:
+            $this->_where[] = ['op' => '=', 'field' => key($args), 'value' => current($args)];
+        } else {
+            if (count($args) !== 3) {
+                throw new Exception("Where operator format requires at least 3 elements.");
             }
+            if (!in_array($args[0], $this->whereOperators, true)) {
+                throw new Exception(sprintf("The given where operator '%s' does not exists. https://luya.io/api/luya-cms-menu-Query#where()-detail for all available conditions.", $args[0]));
+            }
+
+            $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
         }
 
         return $this;

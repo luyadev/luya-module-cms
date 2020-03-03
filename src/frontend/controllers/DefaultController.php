@@ -46,14 +46,12 @@ class DefaultController extends Controller
      */
     private function isFullPageCacheEnabled()
     {
-        $current = Yii::$app->menu->current;
-        $isCacheable = (int) NavItem::find()->where(['nav_id' => $current->navId, 'lang_id' => Yii::$app->adminLanguage->activeId])->select(['is_cacheable'])->scalar();
-        
         return $this->module->fullPageCache 
             && Yii::$app->request->isGet 
-            && $current->type == NavItem::TYPE_PAGE
-            && !$current->is404Page
-            && $isCacheable;
+            && Yii::$app->menu->current
+            && Yii::$app->menu->current->type == NavItem::TYPE_PAGE
+            && !Yii::$app->menu->current->is404Page
+            && (int) NavItem::find()->where(['nav_id' => Yii::$app->menu->current->navId, 'lang_id' => Yii::$app->adminLanguage->activeId])->select(['is_cacheable'])->scalar();
     }
 
     /**
