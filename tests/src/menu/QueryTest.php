@@ -166,4 +166,11 @@ class QueryTest extends CmsFrontendTestCase
         $all = (new Query())->container('c1')->root()->count();
         $this->assertSame(1, $all);
     }
+
+    public function testInvalidOperator()
+    {
+        $q = new Query();
+        $this->expectException('luya\cms\Exception');
+        $q->where(['invalidoperator', 'attribute', 'value']);
+    }
 }
