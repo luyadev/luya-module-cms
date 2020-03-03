@@ -109,6 +109,26 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     /**
      * Query where similar behavior of filtering items.
      *
+     * **Key Value Filtering**
+     * 
+     * When using key value where condition, the operator equal (`=`) will be used by default.
+     * 
+     * ```php
+     * where(['field' => 'value'])
+     * ```
+     * 
+     * which is equals to in operator mode:
+     * 
+     * ```php
+     * where(['=', 'field', 'value']);
+     * ```
+     * 
+     * Its also possible to have multiple AND where conditions with equal (`=`) operator:
+     * 
+     * ``php
+     * where(['field' => 'value', 'anotherfield' => 'anothervalue']);
+     * ```
+     * 
      * **Operator Filtering**
      *
      * ```php
@@ -164,16 +184,20 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      */
     public function where(array $args)
     {
-        foreach ($args as $key => $value) {
-            if (in_array($value, $this->whereOperators, true)) {
-                if (count($args) !== 3) {
-                    throw new Exception(sprintf("Wrong where(['%s']) condition, see https://luya.io/api/luya-cms-menu-Query#where()-detail for all available conditions.", implode("', '", $args)));
-                }
-                $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
-                break;
-            } else {
+        if (ArrayHelper::isAssociative($args, false)) {
+            // ensure: ['container' => 'default', 'parent_nav_id' => 0] is possible
+            foreach ($args as $key => $value) {
                 $this->_where[] = ['op' => '=', 'field' => $key, 'value' => $value];
             }
+        } else {
+            if (count($args) !== 3) {
+                throw new Exception("Where operator format requires at least 3 elements. [operator, attribute, value]");
+            }
+            if (!in_array($args[0], $this->whereOperators, true)) {
+                throw new Exception(sprintf("The given where operator '%s' does not exists. https://luya.io/api/luya-cms-menu-Query#where()-detail for all available conditions.", $args[0]));
+            }
+
+            $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
         }
 
         return $this;
@@ -183,7 +207,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * Add another where statement to the existing, this is the case when using compare operators, as then only
      * one where definition can bet set.
      *
-     * @see \luya\cms\menu\Query->where()
+     * @see {{Query::where()}}
      * @param array $args
      * @return \luya\cms\menu\Query
      */
@@ -385,7 +409,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * Retrieve all found rows based on the filtering options and returns the the QueryIterator object
      * which is represents an array.
      *
-     * @return \luya\cms\menu\QueryIterator Returns the QueryIterator object.
+     * @return \luya\cms\menu\QueryIteratorFilter Returns the QueryIterator object.
      */
     public function all()
     {
