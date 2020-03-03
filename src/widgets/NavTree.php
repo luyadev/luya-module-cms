@@ -24,9 +24,10 @@ use yii\helpers\Html;
  * Nav::widget(['startItem' => Yii::$app->menu->current]);
  * ```
  *
- * *Example with all options:*
+ * Example with all options:
  *
  * ```php
+ * NavTree::widget([
  *    'findQuery' => Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all(),
  *    'startItem' => Yii::$app->menu->home,
  *    'maxDepth' => 2,
@@ -45,7 +46,7 @@ use yii\helpers\Html;
  *        'tag' => 'a',
  *        'class' => 'link depth-{{depth}} alias-{{alias}}'
  *    ],
- * ]
+ * ]);
  * ```
  *
  * @property \luya\cms\menu\Item $startItem Get the start Item entry.
