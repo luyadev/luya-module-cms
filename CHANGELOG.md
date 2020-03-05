@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.0.3
 
-+ [#242](https://github.com/luyadev/luya-module-cms/issues/242) Ensure there {{luya\cms\menu\Query}} builder works with different where conditions.
++ [#242](https://github.com/luyadev/luya-module-cms/issues/242) Improve stability of {{luya\cms\menu\Query}} where condition builder.
 
 ## 3.0.2 (28. February 2020)
 
