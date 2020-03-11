@@ -152,7 +152,17 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             }
         }
         
-        return Yii::$app->view->renderFile($this->layout->view_file, [
+        // check whether the layout view file should be renderd trough active context or as file.
+        // if the view_file starts with / or @ it can be renderd as renderFile() otherwise using render() with active context.
+        $viewFile = $this->layout->view_file;
+        $start = substr($viewFile, 0, 1);
+        if ($start == '/' || $start == '@') {
+            return Yii::$app->view->renderFile($this->layout->view_file, [
+                'placeholders' => $placholders,
+            ], $this);
+        }
+        
+        return Yii::$app->view->render($this->layout->view_file, [
             'placeholders' => $placholders,
         ], $this);
     }

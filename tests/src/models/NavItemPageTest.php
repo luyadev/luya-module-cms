@@ -30,9 +30,38 @@ class NavItemPageTest extends WebModelTestCase
         
         $model = $pageFixture->getModel(1);
 
-        $this->expectException(ViewNotFoundException::class);
-        $this->expectExceptionMessage('The view file does not exist: /var/www/luya-env-dev/repos/luya-module-cms/testfile');
-        $model->getContent();
+        try {
+            $model->getContent();
+        } catch (\Exception $e) {
+            $this->assertContains('luya-module-cms/testfile', $e->getMessage());
+        }
+    }
+
+    public function testAbsolutePath()
+    {
+        $pageFixture = $this->createCmsNavItemPageFixture([
+            1 => [
+                'id' => 1,
+                'layout_id' => 1,
+                'nav_item_id' => 1,
+            ]
+        ]);
+        $layoutFixture = $this->createCmsLayoutFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'id1',
+                'json_config' => '{}',
+                'view_file' => '/absolute',
+            ]
+        ]);
+        
+        $model = $pageFixture->getModel(1);
+
+        try {
+            $model->getContent();
+        } catch (\Exception $e) {
+            $this->assertContains('/absolute', $e->getMessage());
+        }
     }
 
     public function testRelativeViewPath()
@@ -49,14 +78,16 @@ class NavItemPageTest extends WebModelTestCase
                 'id' => 1,
                 'name' => 'id1',
                 'json_config' => '{}',
-                'view_file' => 'absolute',
+                'view_file' => 'relative',
             ]
         ]);
         
         $model = $pageFixture->getModel(1);
 
-        $this->expectException(ViewNotFoundException::class);
-        $this->expectExceptionMessage('The view file does not exist: absolute');
-        $model->getContent();
+        try {
+            $model->getContent();
+        } catch (\Exception $e) {
+            $this->assertContains('luya-module-cms/views/cmslayouts/relative.php', $e->getMessage());
+        }
     }
 }
