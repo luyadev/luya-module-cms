@@ -54,4 +54,12 @@ class PhpBlockTest extends CmsFrontendTestCase
         $this->assertSame([AssetBundle::class], \Yii::$app->cache->get(['blockassetbundles', $block->getEnvOption('id')]));
 //        $this->assertSame([AssetBundle::class, JqueryAsset::class], \Yii::$app->cache->get(['blockassetbundles', $block->getEnvOption('id')]));
     }
+
+    public function testRelativeViewPath()
+    {
+        $block = new PhpTestBlock();
+        $block->module = null;
+
+        $this->assertContains('tests/data/blocks/views', $block->getViewPath());
+    }
 }

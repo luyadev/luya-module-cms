@@ -2,6 +2,7 @@
 
 namespace luya\cms\base;
 
+use ReflectionClass;
 use Yii;
 use yii\base\ViewContextInterface;
 
@@ -39,6 +40,11 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function getViewPath()
     {
+        if (empty($this->module)) {
+            $class = new ReflectionClass($this);
+            return dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'views';
+        }
+
         return $this->ensureModule() . '/views/blocks';
     }
     

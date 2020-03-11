@@ -102,7 +102,12 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * @var string Containing the name of the environment (used to find the view files to render). The
      * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be
-     * added automatically.
+     * added automatically. Since version 3.1.0 its possible to set `null` or empty string in order to lookup
+     * view files in the same folder where the block is located. With version 4.0 null should be the default value.
+     * 
+     * - `app`: The alias mode allows you to map the view files to a certain alias
+     * - `@app`: Either alias with prefixed @ or not is possible
+     * - `null`: Empty or null will lookup the view files in the same folder where block is located (sub folder views).
      */
     public $module = 'app';
     
