@@ -152,7 +152,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             }
         }
         
-        return Yii::$app->view->render($this->layout->view_file, [
+        return Yii::$app->view->renderFile($this->layout->view_file, [
             'placeholders' => $placholders,
         ], $this);
     }
