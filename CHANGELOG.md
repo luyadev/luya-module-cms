@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.1.0
 
++ [#248](https://github.com/luyadev/luya-module-cms/issues/248) Fixed a bug where cmslayout files where unable to render with absolute paths.
 + [#245](https://github.com/luyadev/luya-module-cms/issues/245) Block can have empty $module property to lookup view file paths in the block location (like Widgets).
 + [#242](https://github.com/luyadev/luya-module-cms/issues/242) Improve stability of {{luya\cms\menu\Query}} where condition builder.
 
