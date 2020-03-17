@@ -49,6 +49,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $this->on(self::EVENT_AFTER_UPDATE, function ($event) {
             $event->sender->forceNavItem->updateTimestamp();
         });
+
+        $this->on(self::EVENT_BEFORE_VALIDATE, function() {
+            if ($this->isNewRecord) {
+                $this->timestamp_create = time();
+            }
+        });
     }
     
     /**
