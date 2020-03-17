@@ -76,6 +76,17 @@ class Nav extends ActiveRecord
     }
 
     /**
+     * Get the parent elements
+     * 
+     * @return Nav[]
+     * @since 3.1.0
+     */
+    public function getParents()
+    {
+        return $this->hasOne(self::class, ['parent_nav_id' => 'id']);
+    }
+
+    /**
      * Get the cms_nav_item for this nav object with the corresponding current active language id (based
      * on the composition component).
      *

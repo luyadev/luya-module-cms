@@ -4,6 +4,7 @@ use \luya\admin\Module as AdminModule;
 
 ?>
 <?= $this->render('_angulardirectives'); ?>
+
 <script type="text/ng-template" id="cmsNavReverse.html">
     <span ng-if="data.is_editable" class="treeview-label treeview-label-page" dnd dnd-model="data" dnd-ondrop="dropItem(dragged,dropped,position)" dnd-isvalid="validItem(hover,dragged)" dnd-css="{onDrag:'drag-dragging',onHover:'drag-hover',onHoverTop:'drag-hover-top',onHoverMiddle:'drag-hover-middle',onHoverBottom:'drag-hover-bottom'}">
         <span class="treeview-icon treeview-icon-collapse" ng-show="(menuData.items | menuparentfilter:catitem.id:data.id).length"  ng-click="toggleItem(data)">
@@ -15,13 +16,6 @@ use \luya\admin\Module as AdminModule;
         <span class="treeview-icon treeview-icon-right" ng-if="isLocked('cms_nav_item', data.id)" tooltip tooltip-text="<?= AdminModule::t('locked_info'); ?> ({{getLockedName('cms_nav_item', data.id)}})">
             <i class="material-icons">warning</i>
         </span>
-        <!--
-        Template for additional icons (max 3 including "homepage"):
-
-        <span class="treeview-icon treeview-icon-right" ng-if="1===1">
-            <i class="material-icons">access_time</i>
-        </span>
-        -->
         <span class="treeview-link" alt="id={{data.id}}" title="id={{data.id}}" ng-click="go(data)">
             <span class="google-chrome-font-offset-fix">{{data.title}}</span>
         </span>
@@ -31,10 +25,11 @@ use \luya\admin\Module as AdminModule;
             <span class="google-chrome-font-offset-fix">{{data.title}}</span>
         </span>
     </span>
-    <ul class="treeview-items">
+    <ul class="treeview-items" ng-if="data.has_children && data.toggle_open">
         <li class="treeview-item" ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'cmsNavReverse.html'" />
     </ul>
 </script>
+
 <div class="luya-main" ng-class="{'luya-mainnav-is-open' : isHover}">
     <div class="luya-subnav" ng-controller="CmsMenuTreeController" ng-class="{'overlaying': liveEditStateToggler}">
         <div class="cmsnav">
@@ -83,8 +78,13 @@ use \luya\admin\Module as AdminModule;
                             <p class="treeview-no-entry"><small><i><?= Module::t('view_index_sidebar_container_no_pages'); ?></i></small></p>
                         </div>
                     </div>
-                    <ul class="treeview-items treeview-items-lvl1" ng-show="!toggleIsHidden(catitem.id)">
-                        <li class="treeview-item treeview-item-lvl1" ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'cmsNavReverse.html'" />
+                    <ul class="treeview-items treeview-items-lvl1" ng-if="!toggleIsHidden(catitem.id)">
+                        <li 
+                            class="treeview-item treeview-item-lvl1" 
+                            ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" 
+                            ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" 
+                            ng-include="'cmsNavReverse.html'"
+                        />
                     </ul>
                 </li>
             </ul>

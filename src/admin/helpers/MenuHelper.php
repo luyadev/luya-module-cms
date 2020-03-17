@@ -28,14 +28,18 @@ class MenuHelper
     {
         if (self::$items === null) {
 
-            $items = (new Query())
+            $items = Nav::find()
                 ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'layout_file', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title', 'publish_from', 'publish_till'])
-                ->from('cms_nav')
                 ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
+                ->with(['parents'])
                 ->orderBy(['sort_index' => SORT_ASC])
-                ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => false])
+                ->where([
+                    'cms_nav_item.lang_id' => Lang::getDefault()['id'],
+                    'cms_nav.is_deleted' => false,
+                    'cms_nav.is_draft' => false,
+                ])
+                ->asArray() 
                 ->all();
-            
             self::loadInheritanceData(0);
             
             $data = [];
@@ -43,6 +47,7 @@ class MenuHelper
             foreach ($items as $key => $item) {
                 $item['is_editable'] = (int) Yii::$app->adminuser->canRoute('cmsadmin/page/update');
                 $item['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get('tree.'.$item['id']);
+                $item['has_children'] = empty($item['parents']) ? 0 : count($item['parents']); //(new Query())->from('cms_nav')->select(['id'])->where(['parent_nav_id' => $item['id']])->count();
                 // the user have "page edit" permission, now we can check if the this group has more fined tuned permisionss from the
                 // cms_nav_permissions table or not
                 if ($item['is_editable']) {

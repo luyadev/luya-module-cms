@@ -21,12 +21,12 @@ use luya\helpers\Html;
                         </button>
                     </div>
 					<?php if ($canBlockUpdate): ?>
-                    <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==0">
+                    <div class="toolbar-item" ng-click="toggleHidden()" ng-if="block.is_hidden==0">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_visible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility</i>
                         </button>
                     </div>
-                    <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==1">
+                    <div class="toolbar-item" ng-click="toggleHidden()" ng-if="block.is_hidden==1">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_invisible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility_off</i>
                         </button>
@@ -40,7 +40,7 @@ use luya\helpers\Html;
                     </div>
 					<?php endif; ?>
 					<?php if ($canBlockUpdate): ?>
-                    <div ng-show="isEditable() || isConfigurable()" ng-click="toggleEdit()" class="toolbar-item">
+                    <div ng-if="isEditable() || isConfigurable()" ng-click="toggleEdit()" class="toolbar-item">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_edit'));?>" tooltip-position="top">
                             <i class="material-icons">edit</i>
                         </button>
@@ -107,6 +107,7 @@ use luya\helpers\Html;
     </div>
 </div>
 </script>
+
 <?= $this->render('_navitem_settings'); ?>
 <div class="cmsadmin-nav-tabs" ng-if="loaded">
     <ul class="nav nav-tabs flex-no-wrap" role="tablist">
@@ -170,18 +171,18 @@ use luya\helpers\Html;
         <div ng-show="typeData.type == 2" class="col-md-12">
             <p><?= Module::t('view_update_page_is_redirect_external'); ?>.</p>
         </div>
-        <div ng-show="typeData.type > 2" class="col-md-12">
+        <div ng-if="typeData.type > 2" class="col-md-12">
             <p><?= Module::t('model_navitemredirect_value_label'); ?>:<link-object-to-string class="ml-2" link="typeData"></link-object-to-string></p>
         </div>
     </div>
 </div>
-<div class="cmsadmin-page" ng-show="!isTranslated && loaded">
+<div class="cmsadmin-page" ng-if="!isTranslated && loaded">
     <div class="alert alert-info"><?= Module::t('view_update_no_translations'); ?></div>
     <div ng-controller="CopyPageController">
         <h3><?= Module::t('view_index_add_page_from_language'); ?></h3>
         <p><?= Module::t('view_index_add_page_from_language_info'); ?></p>
         <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
-        <div ng-show="isOpen">
+        <div ng-if="isOpen">
             <ul class="list-group" style="margin-bottom:25px;">
                 <li ng-repeat="item in items" class="list-group-item"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
             </ul>
