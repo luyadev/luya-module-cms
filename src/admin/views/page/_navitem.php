@@ -40,7 +40,7 @@ use luya\helpers\Html;
                     </div>
 					<?php endif; ?>
 					<?php if ($canBlockUpdate): ?>
-                    <div ng-if="isEditable() || isConfigurable()" ng-click="toggleEdit()" class="toolbar-item">
+                    <div ng-show="isEditable() || isConfigurable()" ng-click="toggleEdit()" class="toolbar-item">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_edit'));?>" tooltip-position="top">
                             <i class="material-icons">edit</i>
                         </button>
@@ -171,7 +171,7 @@ use luya\helpers\Html;
         <div ng-show="typeData.type == 2" class="col-md-12">
             <p><?= Module::t('view_update_page_is_redirect_external'); ?>.</p>
         </div>
-        <div ng-if="typeData.type > 2" class="col-md-12">
+        <div ng-show="typeData.type > 2" class="col-md-12">
             <p><?= Module::t('model_navitemredirect_value_label'); ?>:<link-object-to-string class="ml-2" link="typeData"></link-object-to-string></p>
         </div>
     </div>

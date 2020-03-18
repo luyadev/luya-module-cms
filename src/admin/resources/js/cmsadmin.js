@@ -78,7 +78,7 @@
 						'<div class="input-group-prepend" ng-show="searchQuery" ng-click="searchQuery = \'\'"><div class="input-group-text"><i class="material-icons">clear</i></div></div>'+
 						'<input class="form-control" ng-model="searchQuery" type="text" placeholder="'+i18n['ngrest_crud_search_text']+'">'+
 					'</div>' + 
-					'<div ng-repeat="(key, container) in menuData.containers" ng-if="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
+					'<div ng-repeat="(key, container) in menuData.containers" ng-show="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
 						'<div class="card-header" ng-click="container.isHidden=!container.isHidden">'+
 							'<span class="material-icons card-toggle-indicator">keyboard_arrow_down</span>'+
 							'<span>{{container.name}}</span>'+
