@@ -21,12 +21,12 @@ use luya\helpers\Html;
                         </button>
                     </div>
 					<?php if ($canBlockUpdate): ?>
-                    <div class="toolbar-item" ng-click="toggleHidden()" ng-if="block.is_hidden==0">
+                    <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==0">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_visible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility</i>
                         </button>
                     </div>
-                    <div class="toolbar-item" ng-click="toggleHidden()" ng-if="block.is_hidden==1">
+                    <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==1">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_invisible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility_off</i>
                         </button>
@@ -176,13 +176,13 @@ use luya\helpers\Html;
         </div>
     </div>
 </div>
-<div class="cmsadmin-page" ng-if="!isTranslated && loaded">
+<div class="cmsadmin-page" ng-show="!isTranslated && loaded">
     <div class="alert alert-info"><?= Module::t('view_update_no_translations'); ?></div>
     <div ng-controller="CopyPageController">
         <h3><?= Module::t('view_index_add_page_from_language'); ?></h3>
         <p><?= Module::t('view_index_add_page_from_language_info'); ?></p>
         <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
-        <div ng-if="isOpen">
+        <div ng-show="isOpen">
             <ul class="list-group" style="margin-bottom:25px;">
                 <li ng-repeat="item in items" class="list-group-item"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
             </ul>

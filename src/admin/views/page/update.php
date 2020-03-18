@@ -13,7 +13,7 @@ use luya\cms\helpers\Url;
         </div>
         <div class="col">
             <div class="cmsadmin-toolbar">
-                <div ng-if="!isDraft" class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
+                <div ng-show="!isDraft" class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
                     <label class="switch" for="switch-visibility-status">
                         <span class="switch-label">
                             <i class="material-icons" ng-show="!navData.is_hidden">visibility</i>
@@ -25,7 +25,7 @@ use luya\cms\helpers\Url;
                         </span>
                     </label>
                 </div>
-                <div ng-if="!isDraft" class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_offline_info')?>" tooltip-position="bottom">
+                <div ng-show="!isDraft" class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_offline_info')?>" tooltip-position="bottom">
                     <label class="switch" for="switch-online-status">
                         <span class="switch-label">
                             <i class="material-icons" ng-show="!navData.is_offline">cloud_queue</i>
@@ -126,7 +126,7 @@ use luya\cms\helpers\Url;
                         <span>{{item.group.name}}</span>
                     </span>
                     <ul class="blockholder-list">
-                        <li class="blockholder-item" ng-if="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
+                        <li class="blockholder-item" ng-show="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
                             dnd dnd-model="block" dnd-isvalid="true" dnd-drop-disabled dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
                         >
 	                        <div tooltip tooltip-preview-url="<?= Url::base(true); ?>/cmsadmin/block/preview?blockId={{block.id}}" tooltip-position="left" tooltip-offset-left="-30" tooltip-disabled="!isPreviewEnabled(block)">
