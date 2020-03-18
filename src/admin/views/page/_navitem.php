@@ -176,7 +176,7 @@ use luya\helpers\Html;
         </div>
     </div>
 </div>
-<div class="cmsadmin-page" ng-show="!isTranslated && loaded">
+<div class="cmsadmin-page" ng-if="!isTranslated && loaded">
     <div class="alert alert-info"><?= Module::t('view_update_no_translations'); ?></div>
     <div ng-controller="CopyPageController">
         <h3><?= Module::t('view_index_add_page_from_language'); ?></h3>

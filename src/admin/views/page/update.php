@@ -126,7 +126,7 @@ use luya\cms\helpers\Url;
                         <span>{{item.group.name}}</span>
                     </span>
                     <ul class="blockholder-list">
-                        <li class="blockholder-item" ng-show="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
+                        <li class="blockholder-item" ng-if="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}"
                             dnd dnd-model="block" dnd-isvalid="true" dnd-drop-disabled dnd-css="{onDrag: 'drag-start', onHover: 'red', onHoverTop: 'red-top', onHoverMiddle: 'red-middle', onHoverBottom: 'red-bottom'}"
                         >
 	                        <div tooltip tooltip-preview-url="<?= Url::base(true); ?>/cmsadmin/block/preview?blockId={{block.id}}" tooltip-position="left" tooltip-offset-left="-30" tooltip-disabled="!isPreviewEnabled(block)">
