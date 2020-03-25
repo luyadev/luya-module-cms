@@ -88,8 +88,16 @@ class QueryIterator extends BaseObject implements Iterator
      */
     public function current()
     {
-        $data = current($this->data);
-        return Query::createItemObject($data, $this->lang, $this->getLoadedModel($data['id']));
+        $item = current($this->data);
+
+        // if item is already an object, return the created object.
+        // This allows to pass arrays with luya\cms\menu\Item objects which has been created in
+        // an earlier stage.
+        if (is_object($item)) {
+            return $item;
+        }
+
+        return Query::createItemObject($item, $this->lang, $this->getLoadedModel($item['id']));
     }
 
     /**

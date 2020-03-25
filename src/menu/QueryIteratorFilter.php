@@ -7,6 +7,7 @@ use FilterIterator;
 use Countable;
 use luya\cms\frontend\events\MenuItemEvent;
 use luya\cms\Menu;
+use luya\helpers\ArrayHelper;
 
 /**
  * Iterator filter to verify valid events
@@ -41,5 +42,23 @@ class QueryIteratorFilter extends FilterIterator implements Countable
     public function count()
     {
         return count($this->getInnerIterator()->data);
+    }
+
+    /**
+     * Returns an array with the value of the column name.
+     *
+     * ```php
+     * $ids = Yii::$app->find()->container('root')->all()->column('id');
+     * ```
+     * 
+     * The above example contains an array with all ids matching the given condition.
+     * 
+     * @param string $name
+     * @return array An array with the values of the given column name.
+     * @since 3.1.0
+     */
+    public function column($name)
+    {
+        return ArrayHelper::getColumn($this->getInnerIterator()->data, $name);
     }
 }
