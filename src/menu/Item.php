@@ -35,25 +35,26 @@ use luya\cms\LinkConverter;
  * @property string $alias Returns the alias name of this page.
  * @property integer $dateCreated Returns an unix timestamp when the page was created.
  * @property integer $dateUpdated Returns an unix timestamp when the page was last time updated.
- * @property \luya\admin\models\User $userCreated Returns an active record object for the admin user who created this page.
- * @property \luya\admin\models\User $userUpdated Returns an active record object for the admin user who last time updated this page.
+ * @property User $userCreated Returns an active record object for the admin user who created this page.
+ * @property User $userUpdated Returns an active record object for the admin user who last time updated this page.
  * @property string $link  Returns the current item link relative path with composition (language). The path is always relativ to the host.
  * @property boolean $isActive Returns a boolean value whether the current item is an active link or not, this is also for all parent elements. If a child item is active, the parent element is activ as well.
  * @property integer $depth Returns the depth of the navigation tree start with 1. Also known as menu level.
- * @property object $parent Returns a Item-Object of the parent element, if no parent element exists returns false.
- * @property array $parents Return all parent elements **without** the current item.
- * @property array $sibilings Get all sibilings for the current item, this also includes the current item iteself.
- * @property array $teardown Return all parent elemtns **with** the current item.
- * @property \luya\cms\menu\QueryIteratorFilter $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
+ * @property Item $parent Returns a Item-Object of the parent element, if no parent element exists returns false.
+ * @property QueryIteratorFilter $parents Return all parent elements **without** the current item.
+ * @property QueryIteratorFilter $sibilings Get all sibilings for the current item, this also includes the current item iteself.
+ * @property QueryIteratorFilter $teardown Return all parent elemtns **with** the current item.
+ * @property QueryIteratorFilter $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
+ * @property QueryIteratorFilter $descendants Get all childrens with childrens children.
  * @property boolean $isHome Returns true if the item is the home item, otherwise false.
  * @property string $absoluteLink The link path with prepand website host `http://luya.io/home/about-us`.
  * @property integer $sortIndex Sort index position for the current siblings list.
  * @property boolean $hasChildren Check whether an item has childrens or not returning a boolean value.
  * @property boolean $hasParent Check whether the parent has items or not.
  * @property string $seoTitle Returns the Alternative SEO-Title. If entry is empty, the $title will returned instead.
- * @property \luya\cms\menu\Item|boolean $nextSibling Returns the next sibling based on the current sibling, if not found false is returned.
- * @property \luya\cms\menu\Item|boolean $prevSibling Returns the previous sibling based on the current sibling, if not found false is returned.
- * @property \luya\cms\models\Nav|boolean $model Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
+ * @property Item|boolean $nextSibling Returns the next sibling based on the current sibling, if not found false is returned.
+ * @property Item|boolean $prevSibling Returns the previous sibling based on the current sibling, if not found false is returned.
+ * @property Nav|boolean $model Returns the {{\luya\cms\models\Nav}} object for the current navigation item.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -478,7 +479,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function getIsActive()
     {
-        return array_key_exists($this->id, Yii::$app->menu->current->teardown);
+        return in_array($this->id, Yii::$app->menu->current->teardown->column('id'));
     }
 
     /**
@@ -519,13 +520,17 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function getParent()
     {
-        return (new Query())->where(['nav_id' => $this->parentNavId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->one();
+        return (new Query())
+            ->where(['nav_id' => $this->parentNavId, 'container' => $this->getContainer()])
+            ->with($this->_with)
+            ->lang($this->lang)
+            ->one();
     }
 
     /**
      * Return all parent elements **without** the current item.
      *
-     * @return array An array with Item-Objects.
+     * @return QueryIteratorFilter An array with Item-Objects.
      */
     public function getParents()
     {
@@ -536,7 +541,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             $parent = $parent->with($this->_with)->getParent();
         }
 
-        return array_reverse($data);
+        return Query::createArrayIterator(array_reverse($data), $this->lang, $this->_with, false);
     }
 
     /**
@@ -553,7 +558,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * ```
      *
      * @param callable $fn A function which holds the current iterated item.
-     * @return static|boolean If no item has been picked, false is returned.
+     * @return Item|mixed|boolean If no item has been picked, false is returned otherwise the picked item or any other callable response.
      * @since 1.0.9
      */
     public function down(callable $fn)
@@ -573,11 +578,15 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     /**
      * Get all sibilings for the current item, this also includes the current item iteself.
      *
-     * @return array An array with all item-object siblings
+     * @return QueryIteratorFilter An array with all item-object siblings
      */
     public function getSiblings()
     {
-        return (new Query())->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])->with($this->_with)->lang($this->lang)->all();
+        return (new Query())
+            ->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])
+            ->with($this->_with)
+            ->lang($this->lang)
+            ->all();
     }
     
     /**
@@ -619,7 +628,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     /**
      * Return all parent elements **with** the current item.
      *
-     * @return array An array with Item-Objects.
+     * @return QueryIteratorFilter An array with Item-Objects.
      */
     public function getTeardown()
     {
@@ -631,17 +640,21 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             $parent = $parent->with($this->_with)->getParent();
         }
 
-        return array_reverse($data, true);
+        return Query::createArrayIterator(array_reverse($data, true), $this->lang, $this->_with, false);
     }
     
     /**
      * Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
      *
-     * @return \luya\cms\menu\QueryIteratorFilter Returns all children
+     * @return QueryIteratorFilter Returns all children
      */
     public function getChildren()
     {
-        return (new Query())->where(['parent_nav_id' => $this->navId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
+        return (new Query())
+            ->where(['parent_nav_id' => $this->navId, 'container' => $this->getContainer()])
+            ->with($this->_with)
+            ->lang($this->lang)
+            ->all();
     }
     
     /**
@@ -652,6 +665,33 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     public function getHasChildren()
     {
         return count($this->getChildren()) > 0 ? true : false;
+    }
+
+    /**
+     * Returns all children and childrens-children.
+     *
+     * @return QueryIteratorFilter
+     * @since 3.1.0
+     */
+    public function getDescendants()
+    {
+        return Query::createArrayIterator($this->getInternalDescendants(), $this->lang, $this->_with, false);
+        
+    }
+
+    /**
+     * @return array
+     */
+    protected function getInternalDescendants()
+    {
+        $childrens = $this->with($this->_with)->getChildren();
+        $data = [];
+        foreach ($childrens as $child) {
+            $data[] = $child;
+            $data = array_merge($data, $child->getInternalDescendants());
+        }
+
+        return $data;
     }
     
     private $_model;
@@ -720,11 +760,12 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     /**
      * You can use with() before the following methods:
      *
-     * - getParent()
-     * - getParents()
-     * - getTeardown()
-     * - getChildren()
-     * - hasChildren().
+     * + {{luya\cms\menu\Item::getParent()}}
+     * + {{luya\cms\menu\Item::getParents()}}
+     * + {{luya\cms\menu\Item::getTeardown()}}
+     * + {{luya\cms\menu\Item::getChildren()}}
+     * + {{luya\cms\menu\Item::hasChildren()}}
+     * + {{luya\cms\menu\Item::getDescendants()}}
      *
      * Example use of with in subquery of the current item:
      *
@@ -747,8 +788,11 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     }
     
     /**
-     * Unset a value from the `with()` method. Lets assume you want to to get the children with hidden
-     *
+     * Unset a value from the `with()` method. 
+     * 
+     * Assuming to return the first level with hidden items but the second level
+     * without the hidden elements:
+     * 
      * ```php
      * foreach ($item->with('hidden')->children as $child) {
      *     // but get the sibilings without the hidden state

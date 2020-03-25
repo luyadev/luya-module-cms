@@ -19,6 +19,9 @@ class CmsConsoleTestCase extends ConsoleApplicationTestCase
                     'class' => 'yii\db\Connection',
                     'dsn' => 'sqlite::memory:',
                 ],
+                'urlManager' => [
+                    'cache' => null,
+                ]
             ],
             'modules' => [
                 'admin' => 'luya\admin\Module',

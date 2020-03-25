@@ -25,6 +25,9 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
                 'menu' => 'luya\cms\Menu',
                 'composition' => [
                     'default' => ['langShortCode' => 'de']
+                ],
+                'urlManager' => [
+                    'cache' => null,
                 ]
             ],
             'modules' => [

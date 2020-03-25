@@ -41,6 +41,9 @@ class DefaultControllerTest extends WebApplicationTestCase
                 'menu' => 'luya\cms\Menu',
                 'composition' => [
                     'default' => ['langShortCode' => 'en']
+                ],
+                'urlManager' => [
+                    'cache' => null,
                 ]
             ]
         ];

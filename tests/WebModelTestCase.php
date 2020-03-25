@@ -15,6 +15,9 @@ abstract class WebModelTestCase extends WebApplicationTestCase
                 'db' => [
                     'class' => 'yii\db\Connection',
                     'dsn' => 'sqlite::memory:',
+                ],
+                'urlManager' => [
+                    'cache' => null,
                 ]
             ],
             'modules' => [

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b1755a4ec83a020a40f25556f6a0779",
+    "content-hash": "3f9a939aee58b95cd7d6ce571c7b3378",
     "packages": [],
     "packages-dev": [
         {
@@ -34,7 +34,7 @@
             "version": "3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "dist": {
@@ -697,21 +697,21 @@
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "3.0.3",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "7a8a735479746cc6b4efd1b9c4152b87e935ad9c"
+                "reference": "f82836b196f6bae82b524e33639c4874d0023db8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/7a8a735479746cc6b4efd1b9c4152b87e935ad9c",
-                "reference": "7a8a735479746cc6b4efd1b9c4152b87e935ad9c",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/f82836b196f6bae82b524e33639c4874d0023db8",
+                "reference": "f82836b196f6bae82b524e33639c4874d0023db8",
                 "shasum": ""
             },
             "require": {
                 "flowjs/flow-php-server": "^1.0",
-                "luyadev/luya-core": "^1.0",
+                "luyadev/luya-core": "^1.1",
                 "robthree/twofactorauth": "^1.7",
                 "sizeg/yii2-jwt": "^1.2",
                 "whichbrowser/parser": "^2.0",
@@ -728,8 +728,9 @@
                 "bower-asset/ng-flow": "~2.7.0",
                 "bower-asset/ng-wig": "~3.0.0",
                 "bower-asset/twigjs-bower": "~0.10.5",
+                "bower-asset/ui-cropper": "^1.0",
                 "bower-asset/ui-router": "~0.4.0",
-                "luyadev/luya-testsuite": "dev-master",
+                "luyadev/luya-testsuite": "^1.0",
                 "twbs/bootstrap": "~4.3.0",
                 "unglue/client": "^1.4.1"
             },
@@ -775,20 +776,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2020-03-05T07:48:28+00:00"
+            "time": "2020-03-24T16:22:36+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.28",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "3aee7c2f83994b4c78967645cbb3f0108bc7f745"
+                "reference": "9bc79e5638f0baa65ff5ce85ee261dde7e634609"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/3aee7c2f83994b4c78967645cbb3f0108bc7f745",
-                "reference": "3aee7c2f83994b4c78967645cbb3f0108bc7f745",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/9bc79e5638f0baa65ff5ce85ee261dde7e634609",
+                "reference": "9bc79e5638f0baa65ff5ce85ee261dde7e634609",
                 "shasum": ""
             },
             "require": {
@@ -833,7 +834,7 @@
                 "module",
                 "php"
             ],
-            "time": "2020-03-17T15:29:11+00:00"
+            "time": "2020-03-25T13:24:23+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2782,16 +2783,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.32",
+            "version": "2.0.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a4aca1a2154098844a039d21112cafd31d70b8fd"
+                "reference": "8c0a329b72b11d938e1cb7e4cabf700139206723"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a4aca1a2154098844a039d21112cafd31d70b8fd",
-                "reference": "a4aca1a2154098844a039d21112cafd31d70b8fd",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/8c0a329b72b11d938e1cb7e4cabf700139206723",
+                "reference": "8c0a329b72b11d938e1cb7e4cabf700139206723",
                 "shasum": ""
             },
             "require": {
@@ -2878,7 +2879,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2020-01-21T22:29:38+00:00"
+            "time": "2020-03-24T20:03:06+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -3076,7 +3077,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "luyadev/luya-testsuite": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
