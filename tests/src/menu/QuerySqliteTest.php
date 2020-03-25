@@ -58,12 +58,6 @@ class QuerySqliteTest extends WebApplicationTestCase
             // assign tag
             TagRelation::batchUpdateRelations([1], Nav::tableName(), 1); // assign to nav id 1
 
-            $this->createAdminLangFixture([
-                'lang1' => [
-                    'id' => 1,
-                    'short_code' => 'en',
-                ]
-            ]);
             $scope->createPage('title', '@app/data/cmslayoutviewfile.php', []);
 
             $all = $this->app->menu->find()->all();
