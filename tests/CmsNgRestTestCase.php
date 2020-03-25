@@ -15,6 +15,9 @@ class CmsNgRestTestCase extends NgRestTestCase
                 'db' => [
                     'class' => 'yii\db\Connection',
                     'dsn' => 'sqlite::memory:',
+                ],
+                'urlManager' => [
+                    'cache' => null,
                 ]
             ]
         ];

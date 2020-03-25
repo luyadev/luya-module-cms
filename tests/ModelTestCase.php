@@ -15,6 +15,9 @@ class ModelTestCase extends ConsoleApplicationTestCase
                 'db' => [
                     'class' => 'yii\db\Connection',
                     'dsn' => 'sqlite::memory:',
+                ],
+                'urlManager' => [
+                    'cache' => null,
                 ]
             ]
         ];
