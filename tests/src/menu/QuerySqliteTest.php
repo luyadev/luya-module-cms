@@ -21,6 +21,9 @@ class QuerySqliteTest extends WebApplicationTestCase
             'id' => 'ngresttest',
             'basePath' => dirname(__DIR__),
             'components' => [
+                'urlManager' => [
+                    'cache' => null,
+                ],
                 'db' => [
                     'class' => 'yii\db\Connection',
                     'dsn' => 'sqlite::memory:',
@@ -79,6 +82,17 @@ class QuerySqliteTest extends WebApplicationTestCase
             $this->assertSame(1, count($this->app->menu->find()->tags([1])->all()));
             $this->assertSame(1, count($this->app->menu->find()->tags([1,2,3])->all()));
             $this->assertSame(0, count($this->app->menu->find()->tags([2,3])->all()));
+        });
+    }
+
+    public function testColumn()
+    {
+        PageScope::run($this->app, function(PageScope $scope) {
+            $scope->createPage('test', null, []);
+
+            $column = $this->app->menu->find()->all()->column('id');
+
+            var_dump($column);
         });
     }
 

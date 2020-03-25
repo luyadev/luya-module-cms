@@ -35,6 +35,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count($obj->parents));
         $this->assertEquals(1, count($obj->teardown));
         $this->assertEquals(0, count($obj->children));
+        $this->assertEquals(0, count($obj->descendents));
         $this->assertEquals(11, count($obj->siblings));
         $this->assertSame(1, $obj->sortIndex);
         $this->assertFalse($obj->hasChildren);
