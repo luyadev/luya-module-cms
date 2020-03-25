@@ -479,7 +479,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function getIsActive()
     {
-        return array_key_exists($this->id, Yii::$app->menu->current->teardown);
+        return in_array($this->id, Yii::$app->menu->current->teardown->column('id'));
     }
 
     /**
