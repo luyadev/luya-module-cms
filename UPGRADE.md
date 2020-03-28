@@ -2,6 +2,10 @@
 
 This document will help you upgrading from a LUYA admin module version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+## 3.0 to 3.1
+
++ CMS menu item methods `teardown`, `parents` return now an instance of QueryIteratorFilter, this is the expected behavior as for all the other methods return more then one row. If an array is expected in code logic, use `iterator_to_array` to parse the iterator object into an array.
+
 ## 2.x to 3.0
 
 + This release contains the new migrations which are required for the user and file table. Therefore make sure to run the `./vendor/bin/luya migrate` command after `composer update`.
