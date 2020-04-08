@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f9a939aee58b95cd7d6ce571c7b3378",
+    "content-hash": "8b1755a4ec83a020a40f25556f6a0779",
     "packages": [],
     "packages-dev": [
         {
@@ -12,14 +12,13 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/5e670ad62f50c738388d4dcec78d2888505ad77b",
-                "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b",
-                "shasum": null
+                "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "require": {
                 "bower-asset/jquery": ">=1.7"
@@ -40,8 +39,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
-                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
-                "shasum": null
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "type": "bower-asset",
             "license": [
@@ -59,8 +57,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "shasum": null
+                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "type": "bower-asset"
         },
@@ -69,14 +66,13 @@
             "version": "2.0.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yiisoft/jquery-pjax.git",
+                "url": "git@github.com:yiisoft/jquery-pjax.git",
                 "reference": "aef7b953107264f00234902a3880eb50dafc48be"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/aef7b953107264f00234902a3880eb50dafc48be",
-                "reference": "aef7b953107264f00234902a3880eb50dafc48be",
-                "shasum": null
+                "reference": "aef7b953107264f00234902a3880eb50dafc48be"
             },
             "require": {
                 "bower-asset/jquery": ">=1.8"
@@ -356,16 +352,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.12.0",
+            "version": "8.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "f15a9cdffd6728abb28184a1c45e84a9919f8b40"
+                "reference": "198dffa12831e17320207ce1bd3b121402d2cc8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/f15a9cdffd6728abb28184a1c45e84a9919f8b40",
-                "reference": "f15a9cdffd6728abb28184a1c45e84a9919f8b40",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/198dffa12831e17320207ce1bd3b121402d2cc8d",
+                "reference": "198dffa12831e17320207ce1bd3b121402d2cc8d",
                 "shasum": ""
             },
             "require": {
@@ -420,7 +416,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2020-03-18T21:29:37+00:00"
+            "time": "2020-03-30T08:29:12+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -639,16 +635,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.1.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "8fe0130838801410d0c7fc8d2f80a290ade0f936"
+                "reference": "68fcaf0e19a7750be7be1f216ef5dc87cbcebf7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/8fe0130838801410d0c7fc8d2f80a290ade0f936",
-                "reference": "8fe0130838801410d0c7fc8d2f80a290ade0f936",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/68fcaf0e19a7750be7be1f216ef5dc87cbcebf7b",
+                "reference": "68fcaf0e19a7750be7be1f216ef5dc87cbcebf7b",
                 "shasum": ""
             },
             "require": {
@@ -693,7 +689,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2020-03-12T14:58:42+00:00"
+            "time": "2020-04-07T07:01:56+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -780,16 +776,16 @@
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "dev-master",
+            "version": "1.0.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "9bc79e5638f0baa65ff5ce85ee261dde7e634609"
+                "reference": "a31eca6fb6e078104278bd3b0f8e019d95ea37da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/9bc79e5638f0baa65ff5ce85ee261dde7e634609",
-                "reference": "9bc79e5638f0baa65ff5ce85ee261dde7e634609",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/a31eca6fb6e078104278bd3b0f8e019d95ea37da",
+                "reference": "a31eca6fb6e078104278bd3b0f8e019d95ea37da",
                 "shasum": ""
             },
             "require": {
@@ -834,7 +830,7 @@
                 "module",
                 "php"
             ],
-            "time": "2020-03-25T13:24:23+00:00"
+            "time": "2020-04-07T15:54:20+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2354,16 +2350,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.14.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38"
+                "reference": "4719fa9c18b0464d399f1a63bf624b42b6fa8d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
-                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/4719fa9c18b0464d399f1a63bf624b42b6fa8d14",
+                "reference": "4719fa9c18b0464d399f1a63bf624b42b6fa8d14",
                 "shasum": ""
             },
             "require": {
@@ -2375,7 +2371,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -2408,7 +2404,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-02-27T09:26:54+00:00"
         },
         {
             "name": "symfony/process",
@@ -2616,16 +2612,16 @@
         },
         {
             "name": "unglue/client",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unglue-workflow/client.git",
-                "reference": "733ae73160fc5d5a1fae7f47047fcf3a56fadc8c"
+                "reference": "95bed0f8e07ef3d9141eea11cace01769f569242"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unglue-workflow/client/zipball/733ae73160fc5d5a1fae7f47047fcf3a56fadc8c",
-                "reference": "733ae73160fc5d5a1fae7f47047fcf3a56fadc8c",
+                "url": "https://api.github.com/repos/unglue-workflow/client/zipball/95bed0f8e07ef3d9141eea11cace01769f569242",
+                "reference": "95bed0f8e07ef3d9141eea11cace01769f569242",
                 "shasum": ""
             },
             "require": {
@@ -2672,7 +2668,7 @@
                 }
             ],
             "description": "The client binary which sends the data to the server and creates the output from the API response.",
-            "time": "2019-12-04T13:15:04+00:00"
+            "time": "2020-04-05T08:02:10+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -2783,16 +2779,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.33",
+            "version": "2.0.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "8c0a329b72b11d938e1cb7e4cabf700139206723"
+                "reference": "ef2585379bc387433e150a62451a89a4b1e130d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/8c0a329b72b11d938e1cb7e4cabf700139206723",
-                "reference": "8c0a329b72b11d938e1cb7e4cabf700139206723",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ef2585379bc387433e150a62451a89a4b1e130d7",
+                "reference": "ef2585379bc387433e150a62451a89a4b1e130d7",
                 "shasum": ""
             },
             "require": {
@@ -2879,7 +2875,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2020-03-24T20:03:06+00:00"
+            "time": "2020-03-26T20:42:29+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -3077,9 +3073,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "luyadev/luya-testsuite": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
