@@ -3,7 +3,9 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 3.1.0
+## 3.1.0 (14. April 2020)
+
+> This release contains an API change regarding menu builder, see [UPGRADE document](UPGRADE.md) to read more about changes.
 
 + [#251](https://github.com/luyadev/luya-module-cms/pull/251) New menu\Item getDescendants() and QueryIteratorFilter::column() functions.
 
