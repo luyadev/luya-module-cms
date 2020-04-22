@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 3.1.2 (22. April 2020)
+
++ [#256](https://github.com/luyadev/luya-module-cms/pull/256) Fix issue when creating url for `cms/default/index` route (which is the cms catch all rule).
+
 ## 3.1.1 (21. April 2020)
 
 + [#254](https://github.com/luyadev/luya-module-cms/issues/254) Fixed #254 utf8mb4 charset max key length is 767 bytes.

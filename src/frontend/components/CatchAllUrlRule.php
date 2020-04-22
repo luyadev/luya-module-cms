@@ -2,6 +2,7 @@
 
 namespace luya\cms\frontend\components;
 
+use luya\helpers\ArrayHelper;
 use Yii;
 use luya\web\UrlRule;
 
@@ -54,6 +55,30 @@ class CatchAllUrlRule extends UrlRule
         }
         
         // return the custom route
-        return ['/cms/default/index', ['path' => $request->pathInfo]];
+        return [$this->route, ['path' => $request->pathInfo]];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createUrl($manager, $route, $params)
+    {
+        if (ltrim($route, '/') !== $this->route) {
+            $this->createStatus = self::CREATE_STATUS_ROUTE_MISMATCH;
+            return false;
+        }
+        
+        if (!isset($params['path']) || empty($params['path'])) {
+            $this->createStatus = self::CREATE_STATUS_PARAMS_MISMATCH;
+            return false;
+        }
+
+        $path = ArrayHelper::remove($params, 'path');
+
+        if (empty($params)) {
+            return $path;
+        }
+
+        return $path .'?'.http_build_query($params);
     }
 }
