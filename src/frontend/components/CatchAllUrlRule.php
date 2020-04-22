@@ -56,4 +56,13 @@ class CatchAllUrlRule extends UrlRule
         // return the custom route
         return ['/cms/default/index', ['path' => $request->pathInfo]];
     }
+
+    public function createUrl($manager, $route, $params)
+    {
+        if (!isset($params['path']) || empty($params['path'])) {
+            return false;
+        }
+
+        return '/'.$manager->composition->prependTo($params['path']);
+    }
 }
