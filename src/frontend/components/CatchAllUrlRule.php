@@ -2,6 +2,7 @@
 
 namespace luya\cms\frontend\components;
 
+use luya\helpers\ArrayHelper;
 use Yii;
 use luya\web\UrlRule;
 
@@ -57,12 +58,21 @@ class CatchAllUrlRule extends UrlRule
         return ['/cms/default/index', ['path' => $request->pathInfo]];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function createUrl($manager, $route, $params)
     {
         if (!isset($params['path']) || empty($params['path'])) {
             return false;
         }
 
-        return '/'.$manager->composition->prependTo($params['path']);
+        $path = ArrayHelper::remove($params, 'path');
+
+        if (empty($params)) {
+            return $path;
+        }
+
+        return $path .'?'.http_build_query($params);
     }
 }
