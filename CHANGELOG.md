@@ -6,6 +6,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 3.1.2 (22. April 2020)
 
 + [#256](https://github.com/luyadev/luya-module-cms/pull/256) Fix issue when creating url for `cms/default/index` route (which is the cms catch all rule).
++ [#257](https://github.com/luyadev/luya-module-cms/pull/257) Fix issue with nav properties API action when translation item is not yet available. 
 
 ## 3.1.1 (21. April 2020)
 
