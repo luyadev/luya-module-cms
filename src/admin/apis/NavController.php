@@ -146,8 +146,14 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionGetProperties($navId)
     {
+        $nav = Nav::findOne($navId);
+
+        if (!$nav) {
+            throw new NotFoundHttpException();
+        }
+
         UserOnline::lock(Yii::$app->adminuser->id, NavItem::tableName(), $navId, 'lock_cms_edit_page', [
-            'title' => Nav::findOne($navId)->defaultLanguageItem->title
+            'title' => $nav->defaultLanguageItem ? $nav->defaultLanguageItem->title : '(no translation)',
         ]);
         
         $data = [];

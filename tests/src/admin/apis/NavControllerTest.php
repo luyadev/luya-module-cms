@@ -109,4 +109,64 @@ class NavControllerTeste extends WebModelTestCase
             $this->assertSame("1", Nav::findOne(1)->is_deleted);
         });
     }
+
+    public function testGetProperties()
+    {
+        PermissionScope::run($this->app, function(PermissionScope $scope) {
+
+            $this->createAdminLangFixture();
+            $this->createCmsNavItemRedirectFixture();
+            $this->createCmsNavFixture([
+                'nav1' => [
+                    'id' => 1,
+                    'parent_nav_id' => 0
+                ]
+            ]);
+            $this->createCmsNavItemFixture([
+                'item1' => [
+                    'id' => 1,
+                    'nav_id' => 1,
+                    'alias' => 'foobar',
+                    'lang_id' => 1,
+                ]
+            ]);
+
+            $this->createCmsPropertyFixture();
+            $this->createCmsLog();
+
+            $scope->createAndAllowRoute('webmodel/nav/get-properties');
+            $ctrl = new NavController('nav', $this->app);
+            $r = $scope->runControllerAction($ctrl, 'get-properties', ['navId' => 1]);
+
+            $this->assertSame([], $r);
+        });
+
+        PermissionScope::run($this->app, function(PermissionScope $scope) {
+
+            $this->createAdminLangFixture();
+            $this->createCmsNavItemRedirectFixture();
+            $this->createCmsNavFixture([
+                'nav1' => [
+                    'id' => 1,
+                    'parent_nav_id' => 0
+                ]
+            ]);
+            $this->createCmsNavItemFixture([
+                'item1' => [
+                    'id' => 1,
+                    'nav_id' => 1,
+                    'alias' => 'foobar',
+                ]
+            ]);
+
+            $this->createCmsPropertyFixture();
+            $this->createCmsLog();
+
+            $scope->createAndAllowRoute('webmodel/nav/get-properties');
+            $ctrl = new NavController('nav', $this->app);
+            $r = $scope->runControllerAction($ctrl, 'get-properties', ['navId' => 1]);
+
+            $this->assertSame([], $r);
+        });
+    }
 }
