@@ -20,7 +20,8 @@ use luya\helpers\Json;
  * about the content, title or alias (link) itself, cause those informations are stored in the the [[\cmsadmin\models\NavItem]] to the corresponding
  * language. So basically the Nav contains the structure and state of the menu/navigation put not content, or titles cause those are related to a language.
  *
- * @property \luya\cms\models\NavItem $activeLanguageItem Returns the NavItem for the current active user language with with the context object nav id.
+ * @property avItem $activeLanguageItem Returns the NavItem for the current active user language with with the context object nav id.
+ * @property NavItem $defaultLanguageItem Reutrns the NavItem for the admin default language.
  * @property integer $id
  * @property integer $nav_container_id
  * @property integer $parent_nav_id
@@ -33,7 +34,7 @@ use luya\helpers\Json;
  * @property string $layout_file
  * @property integer $publish_from
  * @property integer $publish_till
- * @property \luya\cms\models\NavContainer $navContainer Returns the nav container model
+ * @property NavContainer $navContainer Returns the nav container model
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -87,6 +88,8 @@ class Nav extends ActiveRecord
     }
 
     /**
+     * Get currenct active language item.
+     * 
      * Get the cms_nav_item for this nav object with the corresponding current active language id (based
      * on the composition component).
      *
@@ -95,6 +98,19 @@ class Nav extends ActiveRecord
     public function getActiveLanguageItem()
     {
         return $this->hasOne(NavItem::className(), ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->activeId]);
+    }
+
+    /**
+     * Get default language item.
+     * 
+     * Get the cms_nav_item for this nav object with the corresponding default admin language id.
+     *
+     * @return \luya\cms\models\NavItem The corresponding nav item object for the active language.
+     * @since 3.1.2
+     */
+    public function getDefaultLanguageItem()
+    {
+        return $this->hasOne(NavItem::className(), ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->defaultLanguage['id']]);
     }
 
     /**

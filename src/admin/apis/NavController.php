@@ -146,7 +146,9 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionGetProperties($navId)
     {
-        UserOnline::lock(Yii::$app->adminuser->id, NavItem::tableName(), $navId, 'lock_cms_edit_page', ['title' => Nav::findOne($navId)->activeLanguageItem->title]);
+        UserOnline::lock(Yii::$app->adminuser->id, NavItem::tableName(), $navId, 'lock_cms_edit_page', [
+            'title' => Nav::findOne($navId)->defaultLanguageItem->title
+        ]);
         
         $data = [];
         foreach (Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
