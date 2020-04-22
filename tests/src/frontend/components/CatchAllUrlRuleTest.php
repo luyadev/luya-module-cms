@@ -25,6 +25,12 @@ class CatchAllUrlRuleTest extends CmsFrontendTestCase
         $rule = new CatchAllUrlRule();
 
         $this->assertFalse($rule->parseRequest($this->app->urlManager, $this->app->request));
+
+        $this->app->request->pathInfo = 'foo/bar';
+        $this->assertSame([
+            'cms/default/index',
+            ['path' => 'foo/bar'],
+        ], $rule->parseRequest($this->app->urlManager, $this->app->request));
     }
 
 }
