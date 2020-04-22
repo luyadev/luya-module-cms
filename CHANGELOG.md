@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.1.2 (22. April 2020)
 
-+ [#]() Fix issue when creating url for `cms/default/index` route (which is the cms catch all rule).
++ [#256](https://github.com/luyadev/luya-module-cms/pull/256) Fix issue when creating url for `cms/default/index` route (which is the cms catch all rule).
 
 ## 3.1.1 (21. April 2020)
 
