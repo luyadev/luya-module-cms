@@ -63,7 +63,13 @@ class CatchAllUrlRule extends UrlRule
      */
     public function createUrl($manager, $route, $params)
     {
+        if (ltrim($route, '/') !== 'cms/default/index') {
+            $this->createStatus = self::CREATE_STATUS_ROUTE_MISMATCH;
+            return false;
+        }
+        
         if (!isset($params['path']) || empty($params['path'])) {
+            $this->createStatus = self::CREATE_STATUS_PARAMS_MISMATCH;
             return false;
         }
 

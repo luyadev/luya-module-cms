@@ -11,7 +11,12 @@ class CatchAllUrlRuleTest extends CmsFrontendTestCase
     {
         $rule = new CatchAllUrlRule();
 
+        $this->assertFalse($rule->createUrl($this->app->urlManager, '/cms/default/index/', ['path' => 'foo/bar']));
+        $this->assertFalse($rule->createUrl($this->app->urlManager, '/wrong/route', ['path' => 'foo/bar']));
+        $this->assertFalse($rule->createUrl($this->app->urlManager, 'cms/default/index', []));
+
         $this->assertSame('foo/bar', $rule->createUrl($this->app->urlManager, 'cms/default/index', ['path' => 'foo/bar']));
+        $this->assertSame('foo/bar', $rule->createUrl($this->app->urlManager, '/cms/default/index', ['path' => 'foo/bar']));
         $this->assertSame('foo/bar?page=1', $rule->createUrl($this->app->urlManager, 'cms/default/index', ['path' => 'foo/bar', 'page' => 1]));
     }
 
