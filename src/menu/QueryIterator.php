@@ -80,6 +80,8 @@ class QueryIterator extends BaseObject implements Iterator
     {
         return isset($this->_loadModels[$id]) ? $this->_loadModels[$id] : null;
     }
+
+    /* Iterator */
     
     /**
      * Iterator get current element, generates a new object for the current item on accessing.s.
@@ -97,6 +99,18 @@ class QueryIterator extends BaseObject implements Iterator
             return $item;
         }
 
+        return $this->generateItem($item);
+    }
+
+    /**
+     * Generate the Item Object based on array input.
+     *
+     * @param array $item The data of the item
+     * @return Item
+     * @since 3.2.0
+     */
+    public function generateItem(array $item)
+    {
         return Query::createItemObject($item, $this->lang, $this->getLoadedModel($item['id']));
     }
 

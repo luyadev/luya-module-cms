@@ -2,6 +2,7 @@
 
 namespace luya\cms\menu;
 
+use ArrayAccess;
 use Yii;
 use FilterIterator;
 use Countable;
@@ -15,7 +16,7 @@ use luya\helpers\ArrayHelper;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class QueryIteratorFilter extends FilterIterator implements Countable
+class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAccess
 {
     /**
      * Verifys if an menu item does have valid event response.
@@ -60,5 +61,43 @@ class QueryIteratorFilter extends FilterIterator implements Countable
     public function column($name)
     {
         return ArrayHelper::getColumn($this->getInnerIterator()->data, $name);
+    }
+
+    /* ArrayAccess */
+
+    /**
+     * {@inheritDoc}
+     * @since 3.2.0
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->getInnerIterator()->data[$offset] = $value;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @since 3.2.0
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->getInnerIterator()->data[$offset]);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @since 3.2.0
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->getInnerIterator()->data[$offset]);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @since 3.2.0
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->getInnerIterator()->data[$offset]) ? $this->getInnerIterator()->generateItem($this->getInnerIterator()->data[$offset]) : null;
     }
 }

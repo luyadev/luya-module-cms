@@ -4,6 +4,7 @@ namespace cmstests\src\menu;
 
 use Yii;
 use cmstests\CmsFrontendTestCase;
+use luya\cms\menu\Item;
 use luya\cms\menu\Query;
 
 class QueryTest extends CmsFrontendTestCase
@@ -129,6 +130,9 @@ class QueryTest extends CmsFrontendTestCase
         Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuContainerArray());
         
         $unOrdered = (new Query())->all();
+
+        $this->assertTrue(isset($unOrdered[0]));
+        $this->assertSame(1, $unOrdered[0]->id);
         
         $array = iterator_to_array($unOrdered);
 
@@ -143,6 +147,11 @@ class QueryTest extends CmsFrontendTestCase
         $this->assertSame(6, $sortedArray[0]->id);
         $last = end($sortedArray)->id;
         $this->assertSame(1, $last);
+
+
+        $unOrdered[9998] = ['id' => 9998];
+        $this->assertInstanceOf(Item::class, $unOrdered[9998]);
+        unset($unOrdered[9999]);
     }
     
     public function testPreloadModels()
