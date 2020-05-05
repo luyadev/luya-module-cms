@@ -129,6 +129,8 @@ class QueryTest extends CmsFrontendTestCase
         Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuContainerArray());
         
         $unOrdered = (new Query())->all();
+
+        $this->assertSame(1, $unOrdered[0]->id);
         
         $array = iterator_to_array($unOrdered);
 
