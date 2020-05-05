@@ -133,9 +133,6 @@ class QueryTest extends CmsFrontendTestCase
 
         $this->assertTrue(isset($unOrdered[0]));
         $this->assertSame(1, $unOrdered[0]->id);
-        $unOrdered[9998] = ['id' => 9998];
-        $this->assertInstanceOf(Item::class, $unOrdered[9998]);
-        unset($unOrdered[9999]);
         
         $array = iterator_to_array($unOrdered);
 
@@ -150,6 +147,11 @@ class QueryTest extends CmsFrontendTestCase
         $this->assertSame(6, $sortedArray[0]->id);
         $last = end($sortedArray)->id;
         $this->assertSame(1, $last);
+
+
+        $unOrdered[9998] = ['id' => 9998];
+        $this->assertInstanceOf(Item::class, $unOrdered[9998]);
+        unset($unOrdered[9999]);
     }
     
     public function testPreloadModels()
