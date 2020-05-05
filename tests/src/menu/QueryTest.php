@@ -4,6 +4,7 @@ namespace cmstests\src\menu;
 
 use Yii;
 use cmstests\CmsFrontendTestCase;
+use luya\cms\menu\Item;
 use luya\cms\menu\Query;
 
 class QueryTest extends CmsFrontendTestCase
@@ -130,7 +131,11 @@ class QueryTest extends CmsFrontendTestCase
         
         $unOrdered = (new Query())->all();
 
+        $this->assertTrue(isset($unOrdered[0]));
         $this->assertSame(1, $unOrdered[0]->id);
+        $unOrdered[9998] = ['id' => 9998];
+        $this->assertInstanceOf(Item::class, $unOrdered[9998]);
+        unset($unOrdered[9999]);
         
         $array = iterator_to_array($unOrdered);
 
