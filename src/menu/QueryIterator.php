@@ -92,13 +92,6 @@ class QueryIterator extends BaseObject implements Iterator
     {
         $item = current($this->data);
 
-        // if item is already an object, return the created object.
-        // This allows to pass arrays with luya\cms\menu\Item objects which has been created in
-        // an earlier stage.
-        if (is_object($item)) {
-            return $item;
-        }
-
         return $this->generateItem($item);
     }
 
@@ -109,8 +102,15 @@ class QueryIterator extends BaseObject implements Iterator
      * @return Item
      * @since 3.2.0
      */
-    public function generateItem(array $item)
+    public function generateItem($item)
     {
+        // if item is already an object, return the created object.
+        // This allows to pass arrays with luya\cms\menu\Item objects which has been created in
+        // an earlier stage.
+        if (is_object($item)) {
+            return $item;
+        }
+
         return Query::createItemObject($item, $this->lang, $this->getLoadedModel($item['id']));
     }
 
