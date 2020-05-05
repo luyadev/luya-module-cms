@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 3.2.0 (5 May 2020)
+
++ [#258](https://github.com/luyadev/luya-module-cms/pull/258) Added ArrayAccess for MenuIterator in order to prevent upgrade issues from 3.0 to 3.1.
+
 ## 3.1.2 (29. April 2020)
 
 + [#256](https://github.com/luyadev/luya-module-cms/pull/256) Fix issue when creating url for `cms/default/index` route (which is the cms catch all rule).
