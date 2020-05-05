@@ -2,12 +2,10 @@
 
 namespace luya\cms\menu;
 
-use ArrayAccess;
 use Iterator;
 use luya\cms\models\Nav;
 use luya\helpers\ArrayHelper;
 use yii\base\BaseObject;
-use yii\base\InvalidCallException;
 
 /**
  * Iterator class for menu items.
@@ -17,7 +15,7 @@ use yii\base\InvalidCallException;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class QueryIterator extends BaseObject implements Iterator, ArrayAccess
+class QueryIterator extends BaseObject implements Iterator
 {
     /**
      * @var array An array containing the data to iterate.
@@ -101,6 +99,18 @@ class QueryIterator extends BaseObject implements Iterator, ArrayAccess
             return $item;
         }
 
+        return $this->generateItem($item);
+    }
+
+    /**
+     * Generate the Item Object based on array input.
+     *
+     * @param array $item The data of the item
+     * @return Item
+     * @since 3.2.0
+     */
+    public function generateItem(array $item)
+    {
         return Query::createItemObject($item, $this->lang, $this->getLoadedModel($item['id']));
     }
 
@@ -142,39 +152,5 @@ class QueryIterator extends BaseObject implements Iterator, ArrayAccess
     public function valid()
     {
         return key($this->data) !== null;
-    }
-
-    /* ArrayAccess */
-
-    /**
-     * {@inheritDoc}
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->data[$offset] = $value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function offsetExists($offset)
-    {
-        return isset($this->data[$offset]);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->data[$offset]);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function offsetGet($offset)
-    {
-        return isset($this->data[$offset]) ? $this->data[$offset] : null;
     }
 }
