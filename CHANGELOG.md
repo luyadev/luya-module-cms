@@ -3,7 +3,11 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 3.2.0 (5 May 2020)
+## 3.2.1 (5. May 2020)
+
++ [#258#7b87d62](https://github.com/luyadev/luya-module-cms/commit/f118249297db7c348ba66c2d6bcadecd7f490db9) Detected a rare case where cms\menu\Item might be already resolved. Thefore ensure if menu item is already an object or not.
+
+## 3.2.0 (5. May 2020)
 
 + [#258](https://github.com/luyadev/luya-module-cms/pull/258) Added ArrayAccess for MenuIterator in order to prevent upgrade issues from 3.0 to 3.1.
 
