@@ -249,7 +249,7 @@ return [
 
 // 3.0
 
-    'menu_group_item_env_themes' => 'Themes',
-    'view_index_page_is_cacheable' => 'Caching',
-    'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
+    'menu_group_item_env_themes' => 'Темы',
+    'view_index_page_is_cacheable' => 'Кеширование',
+    'view_index_page_is_cacheable_hint' => 'При установленном флажке страница будет кешироваться целиком, включая все блоки, поэтому динамически генерируемые данные в блоках не будут обновляться.',
 ];
