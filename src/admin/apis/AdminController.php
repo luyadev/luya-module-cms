@@ -54,10 +54,10 @@ class AdminController extends \luya\admin\base\RestController
         $log = [];
         foreach (Log::find()
         ->orderBy(['timestamp' => SORT_DESC])
-        ->joinWith(['user'])
+        ->with(['user'])
         ->limit(60)
         ->all() as $item) {
-            $log[strtotime('today', $item->timestamp)][] = [
+            $log[strtotime('midnight', $item->timestamp)][] = [
                 'action' => $item->action,
                 'user' => $item->user,
                 'is_insertion' => $item->is_insertion,

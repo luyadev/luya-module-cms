@@ -13,12 +13,23 @@ class AdminControllerTest extends WebModelTestCase
     public function testActionDashboardLog()
     {
         $this->createAdminLangFixture([]);
-        $this->createCmsLog();
+        $this->createCmsLog([
+            1 => [
+                'id' => 1,
+                'user_id' => 1,
+                'is_insertion' => 1,
+                'is_update' => 0,
+                'is_deletion' => 0,
+                'timestamp' => time(),
+                'table_name' => 'xyz',
+                'row_id' => 1,
+            ]
+        ]);
         $this->createAdminUserFixture();
         $ctrl = new AdminController('id', $this->app);
 
         $log = $ctrl->actionDashboardLog();
 
-        $this->assertSame([], $log);
+        $this->assertNotEmpty($log);
     }   
 }
