@@ -51,10 +51,20 @@ class AdminController extends \luya\admin\base\RestController
      */
     public function actionDashboardLog()
     {
-        $data = Log::find()->orderBy(['timestamp' => SORT_DESC])->with(['user'])->limit(60)->all();
-        $log= [];
-        foreach ($data as $item) {
-            $log[strtotime('today', $item->timestamp)][] = $item;
+        $log = [];
+        foreach (Log::find()
+        ->orderBy(['timestamp' => SORT_DESC])
+        ->joinWith(['user'])
+        ->limit(60)
+        ->all() as $item) {
+            $log[strtotime('today', $item->timestamp)][] = [
+                'action' => $item->action,
+                'user' => $item->user,
+                'is_insertion' => $item->is_insertion,
+                'is_update' => $item->is_update,
+                'is_deletion' => $item->is_deletion,
+                'timestamp' => $item->timestamp,
+            ];
         }
         
         $array = [];

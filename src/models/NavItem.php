@@ -87,9 +87,9 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     {
         switch ($event->name) {
             case 'afterInsert':
-                return Log::add(1, ['tableName' => 'cms_nav_item', 'action' => 'insert', 'row' => $this->id], 'cms_nav_item', $this->id, $this->toArray());
+                return Log::addAfterSave(1, ['tableName' => 'cms_nav_item', 'action' => 'insert', 'row' => $this->id], $event);
             case 'afterUpdate':
-                return Log::add(2, ['tableName' => 'cms_nav_item', 'action' => 'update', 'row' => $this->id], 'cms_nav_item', $this->id, $this->toArray());
+                return Log::addAfterSave(2, ['tableName' => 'cms_nav_item', 'action' => 'update', 'row' => $this->id], $event);
             case 'afterDelete':
                 return Log::add(3, ['tableName' => 'cms_nav_item', 'action' => 'delete', 'row' => $this->id], 'cms_nav_item', $this->id, $this->toArray());
         }

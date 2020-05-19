@@ -56,6 +56,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'api-cms-navitemblock' => 'luya\cms\admin\apis\NavItemBlockController',
         'api-cms-redirect' => 'luya\cms\admin\apis\RedirectController',
         'api-cms-theme' => 'luya\cms\admin\apis\ThemeController',
+        'api-cms-log' => 'luya\cms\admin\apis\LogController',
     ];
 
     public $apiRules = [
@@ -269,6 +270,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
                     ->itemApi('menu_group_item_env_themes', 'cmsadmin/theme/index', 'color_lens', 'api-cms-theme')
                     ->itemRoute('menu_group_item_env_config', 'cmsadmin/config/index', 'build')
                     ->itemApi('menu_group_item_env_redirections', 'cmsadmin/redirect/index', 'compare_arrows', 'api-cms-redirect')
+                    ->itemApi('Model Event Log', 'cmsadmin/log/index', 'archive', 'api-cms-log')
                 ->group('menu_group_elements')
                     ->itemApi('menu_group_item_elements_group', 'cmsadmin/blockgroup/index', 'view_module', 'api-cms-blockgroup')
                     ->itemApi('menu_group_item_elements_blocks', 'cmsadmin/block/index', 'format_align_left', 'api-cms-block');
