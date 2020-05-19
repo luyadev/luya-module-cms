@@ -45,7 +45,7 @@ return [
     'view_update_page_is_redirect_internal' => 'Эта страница имеет <b>внутреннюю переадресацию</b> на <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Эта страница имеет <b>внешнюю переадресацию</b> на <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
     'menu_node_cms' => 'Cтраницы',
-    'menu_node_cmssettings' => 'Настройки',
+    'menu_node_cmssettings' => 'CMS Настройки',
     'menu_group_env' => 'Окружение',
     'menu_group_item_env_container' => 'Контейнеры',
     'menu_group_item_env_layouts' => 'Макеты',
@@ -252,4 +252,11 @@ return [
     'menu_group_item_env_themes' => 'Темы',
     'view_index_page_is_cacheable' => 'Кеширование',
     'view_index_page_is_cacheable_hint' => 'При установленном флажке страница будет кешироваться целиком, включая все блоки, поэтому динамически генерируемые данные в блоках не будут обновляться.',
+
+// 3.3
+
+    'menu_group_page_display' => 'Page Display',
+    'menu_group_configuration' => 'Configuration',
+    'menu_group_protocol' => 'Protocol',
+    'menu_group_protocol_model_event_logger' => 'Model Event Log'
 ];

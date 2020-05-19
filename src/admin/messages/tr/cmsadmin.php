@@ -45,7 +45,7 @@ return [
     'view_update_page_is_redirect_internal' => 'Bu sayfa <show-internal-redirection nav-id="typeData.value" /> için bir <strong>iç yönlendirmedir</strong>.',
     'view_update_page_is_redirect_external' => 'Bu sayfa <a ng-href="{{typeData.value}}">{{typeData.value}}</a> için bir <strong>dış yönlendirmedir</strong>.',
     'menu_node_cms' => 'Sayfalar',
-    'menu_node_cmssettings' => 'Ayarlar',
+    'menu_node_cmssettings' => 'CMS Ayarlar',
     'menu_group_env' => 'Ortam',
     'menu_group_item_env_container' => 'Konteynerlar',
     'menu_group_item_env_layouts' => 'Düzenler',
@@ -252,4 +252,11 @@ return [
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
+
+// 3.3
+
+    'menu_group_page_display' => 'Page Display',
+    'menu_group_configuration' => 'Configuration',
+    'menu_group_protocol' => 'Protocol',
+    'menu_group_protocol_model_event_logger' => 'Model Event Log'
 ];

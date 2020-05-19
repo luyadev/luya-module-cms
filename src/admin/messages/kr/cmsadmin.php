@@ -245,4 +245,10 @@ return [
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
+// 3.3
+
+    'menu_group_page_display' => 'Page Display',
+    'menu_group_configuration' => 'Configuration',
+    'menu_group_protocol' => 'Protocol',
+    'menu_group_protocol_model_event_logger' => 'Model Event Log'
 ];

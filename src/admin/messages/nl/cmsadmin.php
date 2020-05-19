@@ -45,7 +45,7 @@ return [
     'view_update_page_is_redirect_internal' => 'Deze pagina is een <strong>interne omleiding</strong> tot <show-internal-redirection nav-id = "typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Deze pagina is een <strong>externe omleiding</strong> om <a ng-href="{{typeData.value}}"> {{typeData.value}} </a>',
     'menu_node_cms' => "Pagina's",
-    'menu_node_cmssettings' => 'Instellingen',
+    'menu_node_cmssettings' => 'CMS Instellingen',
     'menu_group_env' => 'Omgeving',
     'menu_group_item_env_container' => 'Containers',
     'menu_group_item_env_layouts' => 'Layouts',
@@ -250,4 +250,11 @@ return [
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
+
+// 3.3
+
+    'menu_group_page_display' => 'Page Display',
+    'menu_group_configuration' => 'Configuration',
+    'menu_group_protocol' => 'Protocol',
+    'menu_group_protocol_model_event_logger' => 'Model Event Log'
 ];

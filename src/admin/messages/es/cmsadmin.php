@@ -82,19 +82,12 @@ return [
     'js_state_hidden' => '%title% oculto',
     'js_state_visible' => '%title% visible',
     'js_state_is_home' => '%title% es la página raíz',
-    'js_state_is_not_home' => '%title% no es la página raíz',
-    'js_page_item_update_ok' => 'La página de «%title%», ha sido actualizada!',
-    'js_page_block_update_ok' => 'El bloque «%name%», a sido actualizado!',
-    'js_page_block_remove_ok' => 'El bloque «%name%», a sido eliminado!',
-    'js_page_block_visbility_change' => 'La visibilidad de «%name%», se cambió correctamente.',
-// added translation in 1.0.0-beta4:
-// added translation in 1.0.0-beta5:
-    'view_update_blockholder_clipboard' => 'Portapapeles',
-// added translation in 1.0.0-beta6:
-    'js_page_block_delete_confirm' => '¿Desea borrar el bloque «%name%»?',
-    'view_index_page_meta_keywords' => 'Palabra clave',
-    'current_version' => 'Versión actual',
-    'Initial' => 'Versión inicial',
+    'js_state_is_not_home' => '%title% no es la página raíz',// 3.3
+
+    'menu_group_page_display' => 'Page Display',
+    'menu_group_configuration' => 'Configuration',
+    'menu_group_protocol' => 'Protocol',
+    'menu_group_protocol_model_event_logger' => 'Model Event Log'
     'view_index_page_version_chooser' => 'Versión publicada',
     'versions_selector' => 'Versiones',
     'page_has_no_version' => 'Esta página no tiene ninguna versión y ningún diseño todavía. Crear una nueva versión pulsando en el icono de añadir <i class="material-icons green-text">add</i> a la derecha.',
@@ -233,4 +226,10 @@ return [
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
+// 3.3
+
+    'menu_group_page_display' => 'Page Display',
+    'menu_group_configuration' => 'Configuration',
+    'menu_group_protocol' => 'Protocol',
+    'menu_group_protocol_model_event_logger' => 'Model Event Log'
 ];

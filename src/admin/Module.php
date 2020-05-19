@@ -263,17 +263,25 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         return (new AdminMenuBuilder($this))
             ->nodeRoute('menu_node_cms', 'note_add', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
             ->node('menu_node_cmssettings', 'settings')
-                ->group('menu_group_env')
-                    ->itemRoute('menu_group_item_env_permission', "cmsadmin/permission/index", 'gavel')
-                    ->itemApi('menu_group_item_env_container', 'cmsadmin/navcontainer/index', 'label_outline', 'api-cms-navcontainer')
+
+                ->group('menu_group_page_display')
                     ->itemApi('menu_group_item_env_layouts', 'cmsadmin/layout/index', 'view_quilt', 'api-cms-layout')
                     ->itemApi('menu_group_item_env_themes', 'cmsadmin/theme/index', 'color_lens', 'api-cms-theme')
-                    ->itemRoute('menu_group_item_env_config', 'cmsadmin/config/index', 'build')
-                    ->itemApi('menu_group_item_env_redirections', 'cmsadmin/redirect/index', 'compare_arrows', 'api-cms-redirect')
-                    ->itemApi('Model Event Log', 'cmsadmin/log/index', 'archive', 'api-cms-log')
+                    ->itemApi('menu_group_item_env_container', 'cmsadmin/navcontainer/index', 'label_outline', 'api-cms-navcontainer')
+
+                   
                 ->group('menu_group_elements')
                     ->itemApi('menu_group_item_elements_group', 'cmsadmin/blockgroup/index', 'view_module', 'api-cms-blockgroup')
-                    ->itemApi('menu_group_item_elements_blocks', 'cmsadmin/block/index', 'format_align_left', 'api-cms-block');
+                    ->itemApi('menu_group_item_elements_blocks', 'cmsadmin/block/index', 'format_align_left', 'api-cms-block')
+
+                ->group('menu_group_configuration')
+                    ->itemApi('menu_group_item_env_redirections', 'cmsadmin/redirect/index', 'compare_arrows', 'api-cms-redirect')
+                    ->itemRoute('menu_group_item_env_permission', "cmsadmin/permission/index", 'gavel')
+                    ->itemRoute('menu_group_item_env_config', 'cmsadmin/config/index', 'build')
+
+                ->group('menu_group_protocol')
+                    ->itemApi('menu_group_protocol_model_event_logger', 'cmsadmin/log/index', 'archive', 'api-cms-log');
+                
     }
 
     /**

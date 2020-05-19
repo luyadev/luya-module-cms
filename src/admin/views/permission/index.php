@@ -62,7 +62,7 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
     $scope.init();
 }]);
 </script>
-<h1><?= Module::t('menu_group_item_env_permission'); ?></h1>
+<h1 class="crud-title mb-4"><?= Module::t('menu_group_item_env_permission'); ?></h1>
 <div ng-controller="PermissionController" class="card">
     <div class="card-body">
         <table class="table table-hover table-sm">

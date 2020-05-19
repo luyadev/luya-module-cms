@@ -44,7 +44,7 @@ return [
     'view_update_page_is_redirect_internal' => 'Diese Seite ist eine <b>interne Umleitung</b> auf <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Diese Seite ist eine <b>externe Umleitung</b> auf <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
     'menu_node_cms' => 'Seiten',
-    'menu_node_cmssettings' => 'Einstellungen',
+    'menu_node_cmssettings' => 'CMS-Einstellungen',
     'menu_group_env' => 'Umgebung',
     'menu_group_item_env_container' => 'Container',
     'menu_group_item_env_layouts' => 'Layouts',
@@ -252,4 +252,10 @@ return [
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'Wenn eingeschalten, wird die gesamt Seite mit allen Blöcken aus dem Cache geladen und dynamische Daten werden nicht mehr geladen.',
 
+// 3.3
+
+    'menu_group_page_display' => 'Seitendarstellung',
+    'menu_group_configuration' => 'Konfiguration',
+    'menu_group_protocol' => 'Protokoll',
+    'menu_group_protocol_model_event_logger' => 'Model Event Log'
 ];
