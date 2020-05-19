@@ -2,36 +2,170 @@
 
 namespace luya\cms\models;
 
-use Yii;
+use luya\admin\aws\DetailViewActiveWindow;
 use luya\admin\models\User;
+use Yii;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\TaggableTrait;
-use yii\helpers\Json;
 use luya\cms\admin\Module;
-use yii\base\InvalidParamException;
+use luya\helpers\Json;
+use yii\base\InvalidArgumentException;
 use yii\db\ActiveRecord;
+use yii\db\AfterSaveEvent;
+use yii\helpers\VarDumper;
 
 /**
- * Eventer-Logger for CMS Activitys
+ * Log.
+ * 
+ * File has been created with `crud/create` command. 
  *
  * @property integer $id
  * @property integer $user_id
- * @property integer $is_insertion
- * @property integer $is_update
- * @property integer $is_deletion
+ * @property tinyint $is_insertion
+ * @property tinyint $is_update
+ * @property tinyint $is_deletion
  * @property integer $timestamp
  * @property string $message
- * @property string $data_json
+ * @property text $data_json
  * @property string $table_name
  * @property integer $row_id
- *
- * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0
  */
-class Log extends \yii\db\ActiveRecord
+class Log extends NgRestModel
 {
     const LOG_TYPE_INSERT = 1;
     const LOG_TYPE_UPDATE = 2;
     const LOG_TYPE_DELETE = 3;
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%cms_log}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-cms-log';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'user_id' => Yii::t('app', 'User'),
+            'is_insertion' => Yii::t('app', 'Insert'),
+            'is_update' => Yii::t('app', 'Update'),
+            'is_deletion' => Yii::t('app', 'Delete'),
+            'timestamp' => Yii::t('app', 'Timestamp'),
+            'message' => Yii::t('app', 'Message'),
+            'data_json' => Yii::t('app', 'Data Json'),
+            'table_name' => Yii::t('app', 'Table Name'),
+            'row_id' => Yii::t('app', 'Row ID'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['user_id', 'is_insertion', 'is_update', 'is_deletion', 'timestamp', 'row_id'], 'integer'],
+            [['timestamp'], 'required'],
+            [['data_json'], 'string'],
+            [['message'], 'string', 'max' => 255],
+            [['table_name'], 'string', 'max' => 120],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function ngRestAttributeTypes()
+    {
+        return [
+            'user_id' => [
+                'class' => SelectRelationActiveQuery::class,
+                'query' => $this->getUser(),
+                'relation' => 'user',
+                'labelField' => ['email'],
+            ],
+            'is_insertion' => ['toggleStatus', 'interactive' => false],
+            'is_update' => ['toggleStatus', 'interactive' => false],
+            'is_deletion' => ['toggleStatus', 'interactive' => false],
+            'timestamp' => 'datetime',
+            'message' => 'raw',
+            'data_json' => 'raw',
+            'table_name' => 'raw',
+            'row_id' => 'number',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function ngRestScopes()
+    {
+        return [
+            ['list', ['user_id', 'is_insertion', 'is_update', 'is_deletion', 'timestamp', 'table_name']],
+            
+        ];
+    }
+
+    public function ngRestFilters()
+    {
+        return [
+            'Insertion' => self::ngRestFind()->andWhere(['is_insertion' => true]),
+            'Update' => self::ngRestFind()->andWhere(['is_update' => true]),
+            'Delete' => self::ngRestFind()->andWhere(['is_deletion' => true]),
+        ];
+    }
+
+    public function ngRestActiveWindows()
+    {
+        return [
+            [
+                'class' => DetailViewActiveWindow::class,
+                'attributes' => [
+                    'id',
+                    [
+                        'attribute' => 'user_id',
+                        'value' => function($model) {
+                            return $model->user->firstname . ' ' . $model->user->lastname;
+                        }
+                    ],
+                    'is_insertion:boolean',
+                    'is_update:boolean',
+                    'is_deletion:boolean',
+                    [
+                        'attribute' => 'data_json',
+                        'format' => 'raw',
+                        'value' => function($model) {
+                            return VarDumper::dumpAsString(Json::decode($model->data_json), 10, true);
+                        }
+                    ],
+                    [
+                        'attribute' => 'message',
+                        'format' => 'raw',
+                        'value' => function($model) {
+                            return VarDumper::dumpAsString(Json::decode($model->message), 10, true);
+                        }
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    // custom
+
     /**
      * @inheritdoc
      */
@@ -57,7 +191,7 @@ class Log extends \yii\db\ActiveRecord
     {
         try {
             return Json::decode($this->message);
-        } catch (InvalidParamException $err) {
+        } catch (InvalidArgumentException $err) {
             return [];
         }
     }
@@ -88,58 +222,6 @@ class Log extends \yii\db\ActiveRecord
                     return $block->block->getNameForLog() . " (" .$block->droppedPageTitle. ")";
             }
         }
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'cms_log';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'is_insertion' => 'Is Insertion',
-            'is_update' => 'Is Update',
-            'is_deletion' => 'Is Deletion',
-            'timestamp' => 'Timestamp',
-            'message' => 'Message',
-            'data_json' => 'Data Json',
-            'table_name' => 'Table Name',
-            'row_id' => 'Row ID',
-        ];
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['is_insertion', 'is_deletion', 'is_update', 'message', 'data_json', 'row_id', 'table_name', 'timestamp', 'user_id'], 'safe'],
-        ];
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        return [
-            'is_insertion',
-            'is_update',
-            'is_deletion',
-            'timestamp',
-            'action',
-            'user',
-        ];
     }
     
     /**
@@ -198,11 +280,10 @@ class Log extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     /**
-     *
      * @param integer $type Types of message:
      * + 1 = insertion
      * + 2 = update
@@ -226,6 +307,27 @@ class Log extends \yii\db\ActiveRecord
             'data_json' => $additionalData,
         ]);
         return $model->insert(false);
+    }
+
+    /**
+     * Log data using AfterSaveEvent of Active Records.
+     *
+     * @param integer $type
+     * @param array $message
+     * @param AfterSaveEvent $event
+     * @return boolean
+     * @since 3.3.0
+     */
+    public static function addAfterSave($type, array $message, AfterSaveEvent $event)
+    {
+        $data = [
+            'new_values' => $event->sender->getAttributes(),
+            'old_values_diff' => $event->changedAttributes,
+        ];
+        $rowId = implode("-", $event->sender->getPrimaryKey(true));
+        $tableName = $event->sender->tableName();
+
+        return self::add($type, $message, $tableName, $rowId, $data);
     }
 
     /**

@@ -271,10 +271,10 @@ class Nav extends ActiveRecord
 
         switch ($e->name) {
             case 'afterInsert':
-                Log::add(1, ['tableName' => 'cms_nav', 'action' => 'insert', 'row' => $this->id], 'cms_nav', $this->id, $this->toArray());
+                Log::addAfterSave(1, ['tableName' => 'cms_nav', 'action' => 'insert', 'row' => $this->id], $e);
                 break;
             case 'afterUpdate':
-                Log::add(2, ['tableName' => 'cms_nav', 'action' => 'update', 'row' => $this->id], 'cms_nav', $this->id, $this->toArray());
+                Log::addAfterSave(2, ['tableName' => 'cms_nav', 'action' => 'update', 'row' => $this->id], $e);
                 break;
             case 'afterDelete':
                 Log::add(3, ['tableName' => 'cms_nav', 'action' => 'delete', 'row' => $this->id], 'cms_nav', $this->id, $this->toArray());

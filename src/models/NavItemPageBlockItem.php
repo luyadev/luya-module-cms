@@ -190,7 +190,7 @@ class NavItemPageBlockItem extends ActiveRecord
     /**
      * Event after update
      */
-    public function eventAfterUpdate()
+    public function eventAfterUpdate($event)
     {
         $this->updateNavItemTimesamp();
         if (!empty($this->_olds)) {
@@ -200,7 +200,14 @@ class NavItemPageBlockItem extends ActiveRecord
                 $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
             }
             $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
-            Log::add(2, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'update', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $this->block->getNameForLog()], 'cms_nav_item_page_block_item', $this->id);
+            
+            Log::addAfterSave(2, [
+                'tableName' => 'cms_nav_item_page_block_item',
+                'action' => 'update',
+                'row' => $this->id,
+                'pageTitle' => $this->droppedPageTitle,
+                'blockName' => $this->block->getNameForLog()
+            ], $event);
         }
     }
 
@@ -216,7 +223,13 @@ class NavItemPageBlockItem extends ActiveRecord
         // verify if the block exists or not
         $class = ($this->block) ? $this->block->getNameForLog() : '[class has been removed from the filesystem]';
         // log event
-        Log::add(3, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'delete', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $class], 'cms_nav_item_page_block_item', $this->id);
+        Log::add(3, [
+            'tableName' => 'cms_nav_item_page_block_item',
+            'action' => 'delete',
+            'row' => $this->id,
+            'pageTitle' => $this->droppedPageTitle,
+            'blockName' => $class
+        ], 'cms_nav_item_page_block_item', $this->id);
     }
 
     /**
@@ -233,7 +246,7 @@ class NavItemPageBlockItem extends ActiveRecord
     /**
      * Event after insert
      */
-    public function eventAfterInsert()
+    public function eventAfterInsert($event)
     {
         if ($this->id == $this->prev_id) {
             // ensurer no infinte requests can happen.
@@ -243,7 +256,14 @@ class NavItemPageBlockItem extends ActiveRecord
 
         $this->updateNavItemTimesamp();
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
-        Log::add(1, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'insert', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $this->block->getNameForLog()], 'cms_nav_item_page_block_item', $this->id);
+        
+        Log::addAfterSave(1, [
+            'tableName' => 'cms_nav_item_page_block_item',
+            'action' => 'insert', 
+            'row' => $this->id, 
+            'pageTitle' => $this->droppedPageTitle, 
+            'blockName' => $this->block->getNameForLog()
+        ], $event);
     }
 
     /**
