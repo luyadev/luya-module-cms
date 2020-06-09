@@ -50,7 +50,7 @@ class Block extends NgRestModel
         return [
             'group_id' => [
                 'class' => SelectModel::class,
-                'modelClass' => BlockGroup::className(),
+                'modelClass' => BlockGroup::class,
                 'labelField' => function ($model) {
                     return $model->getGroupLabel();
                 }

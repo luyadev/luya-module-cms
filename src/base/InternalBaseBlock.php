@@ -151,7 +151,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public function blockGroup()
     {
-        return MainGroup::className();
+        return MainGroup::class;
     }
     
     /**

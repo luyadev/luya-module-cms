@@ -35,14 +35,14 @@ class NavItemController extends \luya\admin\base\RestController
         $behaviors = parent::behaviors();
         
         $behaviors['responseCache'] = [
-            'class' => ResponseCache::className(),
+            'class' => ResponseCache::class,
             'actions' => ['nav-lang-item'],
             'variations' => [
                 Yii::$app->request->get('navId', 0),
                 Yii::$app->request->get('langId', 0),
             ],
             'dependency' => [
-                'class' => DbDependency::className(),
+                'class' => DbDependency::class,
                 'sql' => 'SELECT timestamp_update FROM cms_nav_item WHERE lang_id=:lang_id AND nav_id=:nav_id',
                 'params' => [':lang_id' => Yii::$app->request->get('langId', 0), ':nav_id' => Yii::$app->request->get('navId', 0)]
             ],

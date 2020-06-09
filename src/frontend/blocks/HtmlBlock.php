@@ -29,7 +29,7 @@ final class HtmlBlock extends PhpBlock
      */
     public function blockGroup()
     {
-        return DevelopmentGroup::className();
+        return DevelopmentGroup::class;
     }
     
     /**
