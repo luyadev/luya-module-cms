@@ -97,7 +97,7 @@ class Nav extends ActiveRecord
      */
     public function getActiveLanguageItem()
     {
-        return $this->hasOne(NavItem::className(), ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->activeId]);
+        return $this->hasOne(NavItem::class, ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->activeId]);
     }
 
     /**
@@ -110,7 +110,7 @@ class Nav extends ActiveRecord
      */
     public function getDefaultLanguageItem()
     {
-        return $this->hasOne(NavItem::className(), ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->defaultLanguage['id']]);
+        return $this->hasOne(NavItem::class, ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->defaultLanguage['id']]);
     }
 
     /**
@@ -120,7 +120,7 @@ class Nav extends ActiveRecord
      */
     public function getNavItems()
     {
-        return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
+        return $this->hasMany(NavItem::class, ['nav_id' => 'id']);
     }
     
     /**

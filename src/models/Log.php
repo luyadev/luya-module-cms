@@ -206,7 +206,17 @@ class Log extends NgRestModel
         if (!empty($this->row_id)) {
             switch (TaggableTrait::cleanBaseTableName($this->table_name)) {
                 case "cms_nav":
-                    return Nav::findOne($this->row_id)->activeLanguageItem->title;
+                    $navModel = Nav::findOne($this->row_id);
+
+                    if ($navModel->activeLanguageItem) {
+                        return $navModel->activeLanguageItem->title;
+                    }
+
+                    if ($navModel->defaultLanguageItem) {
+                        return $navModel->defaultLanguageItem->title;
+                    }
+
+                    return $navModel->id;
                 case "cms_nav_item":
                     return NavItem::findOne($this->row_id)->title;
                 case "cms_nav_item_page_block_item":

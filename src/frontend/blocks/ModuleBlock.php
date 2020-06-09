@@ -42,7 +42,7 @@ final class ModuleBlock extends PhpBlock
      */
     public function blockGroup()
     {
-        return DevelopmentGroup::className();
+        return DevelopmentGroup::class;
     }
     
     /**
