@@ -84,7 +84,7 @@ class NavController extends \luya\admin\base\RestController
             }
         }
         
-        return true;
+        return $this->sendModelError($newItem);
     }
 
     /**
@@ -120,7 +120,7 @@ class NavController extends \luya\admin\base\RestController
             }
         }
 
-        return true;
+        return $this->sendModelError($newItem);
     }
     
     public function actionSaveCatToggle()
