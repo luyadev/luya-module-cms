@@ -3,12 +3,9 @@
 namespace luya\cms\models;
 
 use Yii;
-use luya\cms\Exception;
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
-use luya\web\EmailLink;
-use luya\web\WebsiteLink;
 use luya\cms\LinkConverter;
 use yii\base\InvalidConfigException;
 
