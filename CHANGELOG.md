@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.3.0
 
++ [#266](https://github.com/luyadev/luya-module-cms/issues/266) Fixed a bug where page copy should throw an error but does not.
 + [#267](https://github.com/luyadev/luya-module-cms/pull/267) Fixed bug where dashboard log object try to display a title which does not exist.
 + [#259](https://github.com/luyadev/luya-module-cms/issues/259) Improve the logging of data when working with cms blocks. Added new CMS log listing view to see all logs.
 

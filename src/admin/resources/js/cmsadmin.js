@@ -918,6 +918,8 @@
 				AdminToastService.success(i18n['js_page_create_copy_success']);
 				$scope.showActions = 1;
 				$scope.togglePageSettingsOverlay();
+			}, function(response) {
+				AdminToastService.errorArray(response.data);
 			});
 		};
 
@@ -933,6 +935,8 @@
 			$http.post('admin/api-cms-nav/' + $scope.id + '/tags', $scope.pageTags).then(function(response) {
 				$scope.togglePageSettingsOverlay();
 				AdminToastService.success(i18n['js_config_update_success']);
+			}, function(response) {
+				AdminToastService.errorArray(response.data);
 			});
 		};
 
@@ -943,6 +947,8 @@
 				$scope.showActions = 1;
 				$scope.togglePageSettingsOverlay();
                 $state.go('custom.cmsdraft');
+			}, function(response) {
+				AdminToastService.errorArray(response.data);
 			});
 		};
 
@@ -981,7 +987,11 @@
 	    				$scope.togglePageSettingsOverlay();
 	    			});
 	    		}, function(response) {
-					AdminToastService.error(i18n['js_page_delete_error_cause_redirects']);
+					if (response.status == 417) {
+						AdminToastService.error(i18n['js_page_delete_error_cause_redirects']);
+					} else {
+						AdminToastService.errorArray(response.data);
+					}
 				});
 			}]);
 	    };
