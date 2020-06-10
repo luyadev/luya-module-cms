@@ -65,5 +65,4 @@ After successfully installation and configuration run the migrate, import and se
 
 ## Developers
 
-If you want to contribute, make sure to read the following guidelines: https://luya.io/guide/luya-guideline  
-The guidelines will help you understand our coding standards and how to work with our GULP Workflow to compile SCSS and JS.
+If you want to contribute, make sure to read the [guidelines](https://luya.io/guide/luya-guideline).
