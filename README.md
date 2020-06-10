@@ -6,7 +6,7 @@
 
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
-[![Build Status](https://travis-ci.org/luyadev/luya-module-cms.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-cms)
+![Tests](https://github.com/luyadev/luya-module-cms/workflows/Tests/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/17b07525cbb9d23c7b3d/maintainability)](https://codeclimate.com/github/luyadev/luya-module-cms/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/17b07525cbb9d23c7b3d/test_coverage)](https://codeclimate.com/github/luyadev/luya-module-cms/test_coverage)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-module-cms/v/stable)](https://packagist.org/packages/luyadev/luya-module-cms)
