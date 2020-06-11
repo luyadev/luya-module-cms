@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 3.3.0
+## 3.3.0 (11. June 2020)
 
 + [#266](https://github.com/luyadev/luya-module-cms/issues/266) Fixed a bug where page copy should throw an error but does not.
 + [#267](https://github.com/luyadev/luya-module-cms/pull/267) Fixed bug where dashboard log object try to display a title which does not exist.
