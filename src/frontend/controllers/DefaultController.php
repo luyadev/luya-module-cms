@@ -46,12 +46,18 @@ class DefaultController extends Controller
      */
     private function isFullPageCacheEnabled()
     {
-        return $this->module->fullPageCache 
-            && Yii::$app->request->isGet 
-            && Yii::$app->menu->current
-            && Yii::$app->menu->current->type == NavItem::TYPE_PAGE
-            && !Yii::$app->menu->current->is404Page
-            && (int) NavItem::find()->where(['nav_id' => Yii::$app->menu->current->navId, 'lang_id' => Yii::$app->adminLanguage->activeId])->select(['is_cacheable'])->scalar();
+        // if the page could not be found, caching is disable otherwise the behaviors method would
+        // throw an exception which then would stop execute the "find redirects" task.
+        try {
+            return $this->module->fullPageCache 
+                && Yii::$app->request->isGet 
+                && Yii::$app->menu->current
+                && Yii::$app->menu->current->type == NavItem::TYPE_PAGE
+                && !Yii::$app->menu->current->is404Page
+                && (int) NavItem::find()->where(['nav_id' => Yii::$app->menu->current->navId, 'lang_id' => Yii::$app->adminLanguage->activeId])->select(['is_cacheable'])->scalar();
+        } catch (NotFoundHttpException $notFound) {
+            return false;
+        }
     }
 
     /**
