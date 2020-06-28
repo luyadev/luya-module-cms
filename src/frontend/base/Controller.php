@@ -188,7 +188,6 @@ abstract class Controller extends \luya\web\Controller
         $this->view->registerMetaTag(['name' => 'og:title', 'content' => $this->view->title], self::META_OG_TITLE);
         $this->view->registerMetaTag(['name' => 'twitter:title', 'content' => $this->view->title], self::META_TWITTER_TITLE);
         
-        $this->view->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->absoluteUrl], self::LINK_CANONICAL);
         $this->view->registerMetaTag(['name' => 'og:url', 'content' => Yii::$app->request->absoluteUrl], self::META_OG_URL);
         $this->view->registerMetaTag(['name' => 'twitter:url', 'content' => Yii::$app->request->absoluteUrl], self::META_TWITTER_URL);
 
