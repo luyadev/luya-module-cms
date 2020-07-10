@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.3.2 (28. June 2020)
 
++ [#273](https://github.com/luyadev/luya-module-cms/issues/273) Fixed a bug with `Unknown Model Error` when copy a CMS Page.
 + [#272](https://github.com/luyadev/luya-module-cms/pull/272) Remove canonical url on cms pages
 
 ## 3.3.1 (17. June 2020)
