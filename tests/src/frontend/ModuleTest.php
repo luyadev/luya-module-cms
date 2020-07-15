@@ -36,7 +36,7 @@ class ModuleTest extends CmsFrontendTestCase
     {
         /** @var Theme $themeModel */
         $themeModel = $this->fixture->newModel;
-        $themeModel->is_active = 1;
+        $themeModel->is_default = 1;
         $themeModel->base_path = '@app/themes/appTheme';
         $themeModel->json_config = '{}';
         $this->assertTrue($themeModel->save());

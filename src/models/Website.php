@@ -2,9 +2,11 @@
 
 namespace luya\cms\models;
 
+use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\cms\Exception;
+use luya\helpers\StringHelper;
 
 /**
  * Represents the Website-Containers.
@@ -12,7 +14,7 @@ use luya\cms\Exception;
  * @property NavContainer[] $navContainers
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
- * @since 1.0.0
+ * @since 4.0.0
  */
 class Website extends NgRestModel
 {
@@ -47,8 +49,8 @@ class Website extends NgRestModel
     public function scenarios()
     {
         return [
-            'restcreate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host'],
-            'restupdate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host'],
+            'restcreate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host', 'theme_id'],
+            'restupdate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host', 'theme_id'],
         ];
     }
     
@@ -64,6 +66,12 @@ class Website extends NgRestModel
             'is_active' => ['toggleStatus', 'initValue' => 0, 'interactive' => true],
             'is_default' => ['toggleStatus', 'initValue' => 0, 'interactive' => false],
             'redirect_to_host' => ['toggleStatus', 'initValue' => 0, 'interactive' => true],
+            'theme_id' => [
+                'class' => SelectRelationActiveQuery::class,
+                'query' => $this->getTheme(),
+                'relation' => 'theme',
+                'labelField' => ['base_path']
+            ],
         ];
     }
     
@@ -73,9 +81,9 @@ class Website extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['name', 'host', 'aliases', 'is_default']],
-            ['create', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host']],
-            ['update', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host']],
+            ['list', ['name', 'host', 'aliases', 'is_default', 'theme_id']],
+            ['create', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id']],
+            ['update', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id']],
             ['delete', true],
         ];
     }
@@ -124,5 +132,50 @@ class Website extends NgRestModel
         $this->updateAttributes(['is_active' => false]);
         
         parent::afterDelete();
+    }
+    
+    private static $_current = null;
+    
+    public static function getCurrent()
+    {
+        if (self::$_current === null) {
+            self::$_current = self::findOneByHostName(\Yii::$app->request->hostName);
+        }
+        
+        return self::$_current;
+    }
+    
+    /**
+     * Get website information by hostname.
+     *
+     * @param string $hostName
+     * @return array|boolean If the website exists an array with informations as returned, otherwise false.
+     */
+    public static function findOneByHostName($hostName)
+    {
+        $defaultWebsite = false;
+    
+        $websites = self::find(['is_active' => true, 'is_delete' => false])->cache()->asArray()->all();
+        foreach ($websites as $website) {
+            if (StringHelper::matchWildcard($website['host'], $hostName)) {
+                return $website;
+            }
+            foreach (explode(',', $website['aliases']) as $alias) {
+                if (StringHelper::matchWildcard(trim($alias), $hostName)) {
+                    return $website;
+                }
+            }
+        
+            if ($website['is_default']) {
+                $defaultWebsite = $website;
+            }
+        }
+    
+        return $defaultWebsite;
+    }
+    
+    public function getTheme()
+    {
+        return $this->hasOne(Theme::class, ['id' => 'theme_id']);
     }
 }

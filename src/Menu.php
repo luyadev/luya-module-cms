@@ -355,50 +355,6 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     }
     
     /**
-     * Get website information by hostname.
-     *
-     * @param string $hostName
-     * @return array|boolean If the website exists an array with informations as returned, otherwise false.
-     */
-    private function getWebsite($hostName)
-    {
-        $defaultWebsite = false;
-        
-        foreach ($this->getWebsites() as $website) {
-            if (StringHelper::matchWildcard($website['host'], $hostName)) {
-                return $website;
-            }
-            foreach (explode(',', $website['aliases']) as $alias) {
-                if (StringHelper::matchWildcard(trim($alias), $hostName)) {
-                    return $website;
-                }
-            }
-    
-            if ($website['is_default']) {
-                $defaultWebsite = $website;
-            }
-        }
-        
-        return $defaultWebsite;
-    }
-    
-    private $_websites;
-    
-    /**
-     * Get an array with all available system website based on the cms_website table.
-     *
-     * @return array An array where the key is the website id and the value an array containing shortcode and id.
-     */
-    public function getWebsites()
-    {
-        if ($this->_websites === null) {
-            $this->_websites = Website::find(['is_active' => true, 'is_delete' => false])->indexBy('host')->asArray()->all();
-        }
-        
-        return $this->_websites;
-    }
-    
-    /**
      * Get an array containing all redirect items from the database table cms_nav_item_redirect.
      *
      * @return array An array where the key is the id and the value an array containing id, type and value.
@@ -743,6 +699,8 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @param string $langShortCode e.g. de
      * @return array
      * @throws NotFoundHttpException
+     *
+     * @since 4.0.0
      */
     private function loadWebsiteLanguageContainer($langShortCode)
     {
@@ -757,7 +715,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
                 throw new NotFoundHttpException(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
             }
     
-            $website = $this->getWebsite($hostName);
+            $website = Website::findOneByHostName($hostName);
             if (!$website) {
                 throw new NotFoundHttpException(sprintf("The requested website '%s' does not exist in website table", $langShortCode));
             }

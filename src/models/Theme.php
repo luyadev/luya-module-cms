@@ -13,7 +13,7 @@ use yii\helpers\Json;
  * @property int $id
  * @property string $base_path
  * @property string $json_config
- * @property bool $is_active
+ * @property bool $is_default
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>
  * @since 3.0.0
@@ -45,7 +45,7 @@ class Theme extends NgRestModel
             [['base_path', 'json_config'], 'required'],
             [['json_config'], 'string'],
             [['base_path'], 'string', 'max' => 255],
-            [['is_active'], 'boolean'],
+            [['is_default'], 'boolean'],
         ];
     }
     
@@ -57,7 +57,7 @@ class Theme extends NgRestModel
         return [
             'base_path' => 'text',
             'json_config' => ['textarea', 'encoding' => false],
-            'is_active' => ['toggleStatus', 'initValue' => 0, 'interactive' => false],
+            'is_default' => ['toggleStatus', 'initValue' => 0, 'interactive' => false],
         ];
     }
     
@@ -67,7 +67,7 @@ class Theme extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['name', 'is_active', 'base_path', 'parentTheme']],
+            ['list', ['name', 'is_default', 'base_path', 'parentTheme']],
         ];
     }
     
@@ -91,10 +91,10 @@ class Theme extends NgRestModel
         return [
             [
                 'class' => 'luya\admin\buttons\ToggleStatusActiveButton',
-                'attribute' => 'is_active',
+                'attribute' => 'is_default',
                 'uniqueStatus' => true,
                 'modelNameAttribute' => 'name',
-                'label' => 'Set active',
+                'label' => 'Toggle default',
             ],
         ];
     }

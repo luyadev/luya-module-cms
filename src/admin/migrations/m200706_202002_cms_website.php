@@ -21,17 +21,21 @@ class m200706_202002_cms_website extends Migration
             'host' => $this->string(255)->unique()->notNull(),
             'aliases' => $this->string(255)->null()->defaultValue(null),
             'redirect_to_host' => $this->boolean()->notNull()->defaultValue(false),
+            'theme_id' => $this->integer()->defaultValue(null),
         ]);
-        
+
         $this->insert('cms_website', [
-            'id' => 1,
+            'id' => 10,
             'name' => 'default',
             'is_default' => true,
             'is_active' => true,
-            'host' => ''
+            'host' => '',
+            'theme_id' => $this->db->createCommand('SELECT id FROM cms_theme WHERE is_active = 1')->queryScalar() ?: null
         ]);
         
         $this->addColumn('cms_nav_container', 'website_id', $this->integer()->notNull()->defaultValue(1)->after('id'));
+        
+        $this->renameColumn('cms_theme', 'is_active', 'is_default');
     }
 
     /**
@@ -41,6 +45,7 @@ class m200706_202002_cms_website extends Migration
     {
         $this->dropColumn('cms_nav_container', 'website_id');
         $this->dropTable('cms_website');
+        $this->renameColumn('cms_theme', 'is_default', 'is_active');
 
         return true;
     }

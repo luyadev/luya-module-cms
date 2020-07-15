@@ -240,6 +240,8 @@ class MenuHelper
      * Get all cms websites
      *
      * @return array
+     *
+     * @since 4.0.0
      */
     public static function getWebsites()
     {

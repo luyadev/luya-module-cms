@@ -248,6 +248,10 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
 //            return false;
 //        }
     
+        /**
+         * Group by website_id
+         * @since 4.0.0
+         */
         $exists = $this->find()
             ->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')
             ->leftJoin('cms_nav_container', 'cms_nav.nav_container_id=cms_nav_container.id')
