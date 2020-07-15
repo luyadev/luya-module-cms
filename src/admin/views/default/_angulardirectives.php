@@ -42,11 +42,11 @@ use luya\admin\helpers\Angular;
                 <div class="form-group" ng-show="data.is_draft==0">
                     <label for="navigationPos"><?= Module::t('view_index_page_label_parent_nav_id'); ?></label>
                     <div class="form-check">
-                        <input class="form-check-input" ng-checked="data.parent_nav_id == 0" type="radio" name="navigationPos" id="nav-pos-root" />
-                        <label class="form-check-label" ng-click="data.parent_nav_id = 0" for="nav-pos-root"><?= Module::t('view_index_page_label_parent_nav_id_root'); ?></label>
+                        <input class="form-check-input" ng-checked="data.parent_nav_id == null" type="radio" name="navigationPos" id="nav-pos-root" />
+                        <label class="form-check-label" ng-click="data.parent_nav_id = null" for="nav-pos-root"><?= Module::t('view_index_page_label_parent_nav_id_root'); ?></label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" ng-checked="data.parent_nav_id != 0" type="radio" name="navigationPos" id="nav-pos-subpage" />
+                        <input class="form-check-input" ng-checked="data.parent_nav_id != null" type="radio" name="navigationPos" id="nav-pos-subpage" />
                         <label class="form-check-label" ng-click="data.parent_nav_id = 1" for="nav-pos-subpage"><?= Module::t('view_index_page_label_parent_nav_id_subpage'); ?></label>
                     </div>
                 </div>
@@ -54,7 +54,7 @@ use luya\admin\helpers\Angular;
                     <label><?= Module::t('view_index_page_nav_container'); ?></label>
                     <select class="form-control" ng-model="data.nav_container_id" ng-options="item.id as item.name for item in navcontainers"></select>
                 </div>
-                <div class="form-group" ng-show="data.is_draft==0 && !data.isInline && data.parent_nav_id != 0">
+                <div class="form-group" ng-show="data.is_draft==0 && !data.isInline && data.parent_nav_id != null">
                     <label><?= Module::t('view_index_page_label_subpage'); ?></label>
                     <menu-dropdown style="margin:0px; padding:0px;" class="menu-dropdown" nav-id="data.parent_nav_id" />
                 </div>

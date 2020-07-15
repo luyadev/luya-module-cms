@@ -69,10 +69,11 @@ class Nav extends ActiveRecord
     public function rules()
     {
         return [
-            [['nav_container_id', 'parent_nav_id'], 'required'],
+            [['nav_container_id'], 'required'],
             [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft', 'layout_file'], 'safe'],
             [['layout_file'], 'match', 'pattern' => '/^[a-zA-Z0-9\.\-\_]+$/'],
-            [['publish_from', 'publish_till'], 'integer'],
+            [['parent_nav_id', 'publish_from', 'publish_till'], 'integer'],
+            ['parent_nav_id', 'exist', 'targetRelation' => 'parents']
         ];
     }
 
@@ -716,7 +717,7 @@ class Nav extends ActiveRecord
             'nav_item_type' => 1
         ];
         
-        $navItemPage->attributes = ['nav_item_id' => 0, 'layout_id' => $layoutId, 'create_user_id' => Module::getAuthorUserId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
+        $navItemPage->attributes = ['nav_item_id' => null, 'layout_id' => $layoutId, 'create_user_id' => Module::getAuthorUserId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
 
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);

@@ -228,10 +228,31 @@ class MenuHelper
     public static function getContainers()
     {
         if (self::$containers === null) {
-            self::$containers = (new Query())->select(['id', 'name', 'alias'])->from('cms_nav_container')->where(['is_deleted' => false])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
+            self::$containers = (new Query())->select(['id', 'name', 'alias', 'website_id'])->from('cms_nav_container')->where(['is_deleted' => false])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
         }
         
         return self::$containers;
+    }
+    
+    private static $websites;
+    
+    /**
+     * Get all cms websites
+     *
+     * @return array
+     */
+    public static function getWebsites()
+    {
+        if (self::$websites === null) {
+            self::$websites = (new Query())
+                ->select(['cms_website.id', 'cms_website.name', 'cms_website.host', 'cms_website.is_default', 'default_container_id' => 'cms_nav_container.id'])
+                ->from('cms_website')
+                ->leftJoin('cms_nav_container', 'website_id = cms_website.id')
+                ->where(['cms_website.is_active' => true, 'cms_website.is_deleted' => false])
+                ->all();
+        }
+        
+        return self::$websites;
     }
     
     private static $drafts;

@@ -8,6 +8,10 @@ use luya\admin\ngrest\base\NgRestModel;
 /**
  * Represents the Navigation-Containers.
  *
+ * @property string $name
+ * @property string $alias
+ * @property integer $website_id
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -28,7 +32,7 @@ class NavContainer extends NgRestModel
     public function rules()
     {
         return [
-            [['name', 'alias'], 'required'],
+            [['name', 'alias', 'website_id'], 'required'],
         ];
     }
     
@@ -43,7 +47,8 @@ class NavContainer extends NgRestModel
     public function ngRestConfig($config)
     {
         $config->delete = true;
-
+    
+        $config->list->field('website_id', 'Website')->text();
         $config->list->field('name', 'Name')->text();
         $config->list->field('alias', 'Alias')->text();
 

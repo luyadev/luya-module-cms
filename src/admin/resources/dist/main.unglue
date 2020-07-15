@@ -5,5 +5,9 @@
     ],
     "css": [
         "../scss/cmsadmin.scss"
-    ]
+    ],
+    "options": {
+        "compress" : false,
+        "maps" : true
+    }
 }

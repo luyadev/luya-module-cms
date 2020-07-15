@@ -32,7 +32,7 @@ use \luya\admin\Module as AdminModule;
 
 <div class="luya-main" ng-class="{'luya-mainnav-is-open' : isHover}">
     <div class="luya-subnav" ng-controller="CmsMenuTreeController" ng-class="{'overlaying': liveEditStateToggler}">
-        <div class="cmsnav">
+        <ul class="cmsnav">
             <ul class="cmsnav-list cmsnav-list-buttons">
                 <?php if (Yii::$app->adminuser->canRoute('cmsadmin/page/create')): ?>
                 <li class="cmsnav-button" ui-sref="custom.cmsadd">
@@ -64,8 +64,13 @@ use \luya\admin\Module as AdminModule;
                     </label>
                 </li>
             </ul>
+            <ul class="cmsnav-list cmsnav-list-selects">
+                <li class="cmsnav-select">
+                    <zaa-select model="currentWebsiteToggler" options="menuData.websites" optionsvalue="id" optionslabel="name" initvalue="currentWebsite.id"/>
+                </li>
+            </ul>
             <ul class="cmsnav-list cmsnav-list-treeview treeview">
-                <li class="treeview-container" ng-repeat="catitem in menuData.containers" >
+                <li class="treeview-container" ng-repeat="catitem in menuData.containers|menuwebsitefilter:currentWebsite.id" >
                     <div class="treeview-label treeview-label-container" ng-click="toggleCat(catitem.id)">
                         <span class="treeview-icon treeview-icon-collapse">
                             <i class="material-icons" ng-show="!toggleIsHidden(catitem.id)">keyboard_arrow_down</i>
@@ -73,7 +78,7 @@ use \luya\admin\Module as AdminModule;
                         </span>
                         <span class="treeview-link"><span class="google-chrome-font-offset-fix">{{catitem.name}}</span></span>
                     </div>
-                    <div ng-show="(menuData.items|menuparentfilter:catitem.id:0).length == 0 && !toggleIsHidden(catitem.id)">
+                    <div ng-show="(menuData.items|menuparentfilter:catitem.id:null).length == 0 && !toggleIsHidden(catitem.id)">
                         <div dnd dnd-drag-disabled dnd-isvalid="true" dnd-ondrop="dropEmptyContainer(dragged,dropped,position, catitem.id)" dnd-css="{onHover: 'drag-hover', onHoverTop: 'drag-hover-top', onHoverMiddle: 'drag-hover-top', onHoverBottom: 'drag-hover-top'}">
                             <p class="treeview-no-entry"><small><i><?= Module::t('view_index_sidebar_container_no_pages'); ?></i></small></p>
                         </div>
@@ -81,8 +86,8 @@ use \luya\admin\Module as AdminModule;
                     <ul class="treeview-items treeview-items-lvl1" ng-if="!toggleIsHidden(catitem.id)">
                         <li 
                             class="treeview-item treeview-item-lvl1" 
-                            ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" 
-                            ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" 
+                            ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}"
+                            ng-repeat="data in menuData.items | menuparentfilter:catitem.id:null"
                             ng-include="'cmsNavReverse.html'"
                         />
                     </ul>

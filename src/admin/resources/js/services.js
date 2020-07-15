@@ -25,11 +25,12 @@
  */
 	
 zaa.config(['resolverProvider', function(resolverProvider) {
-	resolverProvider.addCallback(['ServiceMenuData', 'ServiceBlocksData', 'ServiceLayoutsData', 'LuyaLoading', function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, LuyaLoading) {
+	resolverProvider.addCallback(['ServiceMenuData', 'ServiceBlocksData', 'ServiceLayoutsData', 'ServiceCurrentWebsite', 'LuyaLoading', function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, ServiceCurrentWebsite, LuyaLoading) {
 		LuyaLoading.start();
 		ServiceBlocksData.load();
 		ServiceLayoutsData.load();
 		ServiceMenuData.load().then(function(r) {
+			ServiceCurrentWebsite.load();
 			LuyaLoading.stop();
 		});
 	}]);
@@ -199,6 +200,33 @@ zaa.factory("ServiceLiveEditMode", ['$rootScope', function($rootScope) {
 		$rootScope.$broadcast('service:LiveEditModeUrlChange', service.url);
 	};
 	
+	return service;
+}]);
+
+/**
+ * CMS Current Website SERIVCE
+ *
+ * $scope.currentWebsiteId = ServiceCurrentWebsite.state
+ */
+zaa.factory("ServiceCurrentWebsite", ['$rootScope', 'ServiceMenuData', function($rootScope, ServiceMenuData) {
+
+	var service = {
+		currentWebsite: null,
+		defaultWebsite: null
+	};
+
+	service.load = function(event, data) {
+		service.defaultWebsite = ServiceMenuData.data.websites.find(w => w.is_default);
+		service.toggle(service.defaultWebsite.id);
+	}
+
+	service.toggle = function(websiteId) {
+		if (websiteId && (!service.currentWebsite || service.currentWebsite.id !== websiteId)) {
+			service.currentWebsite = ServiceMenuData.data.websites.find(w => w.id === websiteId);
+			$rootScope.$broadcast('service:CurrentWebsiteChanged', service.currentWebsite);
+		}
+	};
+
 	return service;
 }]);
 
