@@ -32,8 +32,8 @@ use luya\admin\helpers\Angular;
         <div ng-switch-when="1">
             <h1><?= Module::t('cmsadmin_item_settings_titleslug'); ?></h1>
             <form ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
-                <zaa-text model="itemCopy.title" label="<?= Module::t('view_index_page_title'); ?>" />
-                <zaa-text model="itemCopy.alias" label="<?= Module::t('view_index_page_alias'); ?>" />
+                <?= Angular::text('itemCopy.title', Module::t('view_index_page_title')); ?>
+                <?= Angular::text('itemCopy.alias', Module::t('view_index_page_alias')); ?>
                 <?= Angular::checkbox('itemCopy.is_cacheable', Module::t('view_index_page_is_cacheable'))->hint(Module::t('view_index_page_is_cacheable_hint')); ?>
                 <?= Angular::datetime('itemCopy.timestamp_create', Module::t('view_index_page_meta_timestamp_create'), ['resetable' => false]); ?>
                 <?= Angular::radio('itemCopy.nav_item_type', Module::t('view_index_add_type'), [
@@ -100,7 +100,7 @@ use luya\admin\helpers\Angular;
         </div>
         <div ng-switch-when="4">
             <h1><?= Module::t('version_edit_title'); ?> <span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=editVersionItem.id, 'badge-primary': item.nav_item_type_id==editVersionItem.id}">{{editVersionItem.version_alias}}</span></h1>
-            <zaa-text model="editVersionItem.version_alias" label="<?= Module::t('version_input_name'); ?>" />
+            <?= Angular::text('editVersionItem.version_alias', Module::t('version_input_name')); ?>
             <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name" />
             <button type="button" class="btn btn-save btn-icon" ng-click="editVersionUpdate(editVersionItem)"><?= Module::t('btn_save'); ?></button>
         </div>
