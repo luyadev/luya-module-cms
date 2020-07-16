@@ -4,7 +4,6 @@ namespace luya\cms\frontend;
 
 use luya\base\CoreModuleInterface;
 use luya\cms\models\Theme;
-use luya\cms\models\Website;
 use luya\theme\SetupEvent;
 use luya\theme\ThemeManager;
 use yii\base\Application;
@@ -100,6 +99,9 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             'menu' => [
                 'class' => 'luya\cms\Menu',
             ],
+            'website' => [
+                'class' => 'luya\cms\Website',
+            ],
         ];
     }
     
@@ -116,7 +118,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
                      * get the base path of the website theme
                      * @since 4.0.0
                      */
-                    $activeBasePath = Theme::find()->cache()->select('base_path')->where(['id' => Website::getCurrent()['theme_id']])->scalar();
+                    $activeBasePath = Theme::find()->cache()->select('base_path')->where(['id' => \Yii::$app->website->current['theme_id']])->scalar();
                     if (!$activeBasePath) {
                         // get the base path of the default theme
                         $activeBasePath = Theme::find()->cache()->select('base_path')->where(['is_default' => 1])->scalar();

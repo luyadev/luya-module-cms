@@ -715,7 +715,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
                 throw new NotFoundHttpException(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
             }
     
-            $website = Website::findOneByHostName($hostName);
+            $website = Yii::$app->website->findOneByHostName($hostName);
             if (!$website) {
                 throw new NotFoundHttpException(sprintf("The requested website '%s' does not exist in website table", $langShortCode));
             }

@@ -134,46 +134,6 @@ class Website extends NgRestModel
         parent::afterDelete();
     }
     
-    private static $_current = null;
-    
-    public static function getCurrent()
-    {
-        if (self::$_current === null) {
-            self::$_current = self::findOneByHostName(\Yii::$app->request->hostName);
-        }
-        
-        return self::$_current;
-    }
-    
-    /**
-     * Get website information by hostname.
-     *
-     * @param string $hostName
-     * @return array|boolean If the website exists an array with informations as returned, otherwise false.
-     */
-    public static function findOneByHostName($hostName)
-    {
-        $defaultWebsite = false;
-    
-        $websites = self::find(['is_active' => true, 'is_delete' => false])->cache()->asArray()->all();
-        foreach ($websites as $website) {
-            if (StringHelper::matchWildcard($website['host'], $hostName)) {
-                return $website;
-            }
-            foreach (explode(',', $website['aliases']) as $alias) {
-                if (StringHelper::matchWildcard(trim($alias), $hostName)) {
-                    return $website;
-                }
-            }
-        
-            if ($website['is_default']) {
-                $defaultWebsite = $website;
-            }
-        }
-    
-        return $defaultWebsite;
-    }
-    
     public function getTheme()
     {
         return $this->hasOne(Theme::class, ['id' => 'theme_id']);
