@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 3.3.3
+
++ [#275](https://github.com/luyadev/luya-module-cms/issues/275) Fixed a bug where cms page fields disappear due to missing id informations. 
+
 ## 3.3.2 (28. June 2020)
 
 + [#273](https://github.com/luyadev/luya-module-cms/issues/273) Fixed a bug with `Unknown Model Error` when copy a CMS Page.
