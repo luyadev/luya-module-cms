@@ -3,10 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 3.3.3
+## 3.3.3 (16. July 2020)
 
-+ [#276](https://github.com/luyadev/luya-module-cms/issues/276) Fixed a bug with wrong nested ng-show condition which made form inputs disappearing.
-+ [#275](https://github.com/luyadev/luya-module-cms/issues/275) Fixed a bug where cms page fields disappear due to missing id informations. 
++ [#276](https://github.com/luyadev/luya-module-cms/issues/276) Fixed a bug with wrong nested ng-show conditions who made form inputs disappearing.
++ [#275](https://github.com/luyadev/luya-module-cms/issues/275) Fixed a bug where cms page fields disappear due to missing id informations. Replaced by Angular Helper input field generator.
 
 ## 3.3.2 (28. June 2020)
 
