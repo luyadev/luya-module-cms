@@ -108,7 +108,7 @@ use luya\admin\helpers\Angular;
             <form ng-submit="createNewVersionSubmit(create)">
                 <h1><?= Module::t('version_create_title'); ?></h1>
                 <div class="alert alert-info"><?= Module::t('version_create_info'); ?></div>
-                <zaa-text model="create.versionName" label="<?= Module::t('version_input_name'); ?>" />
+                <?= Angular::text('create.versionName', Module::t('version_input_name')); ?>
                 <div class="form-group">
                     <div class="form-check">
                         <input id="copyExistingVersion" name="radio" type="radio" ng-checked="create.copyExistingVersion" />
@@ -119,11 +119,17 @@ use luya\admin\helpers\Angular;
                         <label for="createNewVersion" ng-click="create.copyExistingVersion=false"><?= Module::t('version_create_new'); ?></label>
                     </div>
                 </div>
-                <div ng-show="create.copyExistingVersion" class="form-group">
-                    <label><?= Module::t('version_input_copy_chooser'); ?></label>
-                    <select class="form-control" ng-model="create.fromVersionPageId" ng-options="versionItem.id as versionItem.version_alias for versionItem in typeData"></select>
+                <div ng-show="create.copyExistingVersion" class="form-group form-side-by-side">
+                    <div class="form-side form-side-label">
+                        <label><?= Module::t('version_input_copy_chooser'); ?></label>
+                    </div>
+                    <div class="form-side">
+                        <select class="form-control" ng-model="create.fromVersionPageId" ng-options="versionItem.id as versionItem.version_alias for versionItem in typeData"></select>
+                    </div>
                 </div>
-                <zaa-select ng-show="!create.copyExistingVersion" model="create.versionLayoutId" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionslabel="name" optionsvalue="id" />
+                <div ng-show="!create.copyExistingVersion">
+                    <zaa-select model="create.versionLayoutId" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionslabel="name" optionsvalue="id" />
+                </div>
                 <button class="btn btn-save btn-icon" type="submit"><?= Module::t('button_create_version'); ?></button>
             </form>
         </div>

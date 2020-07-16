@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.3.3
 
++ [#276](https://github.com/luyadev/luya-module-cms/issues/276) Fixed a bug with wrong nested ng-show condition which made form inputs disappearing.
 + [#275](https://github.com/luyadev/luya-module-cms/issues/275) Fixed a bug where cms page fields disappear due to missing id informations. 
 
 ## 3.3.2 (28. June 2020)
