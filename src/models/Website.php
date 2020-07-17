@@ -5,6 +5,7 @@ namespace luya\cms\models;
 use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\cms\admin\Module;
 use luya\cms\Exception;
 use luya\helpers\StringHelper;
 
@@ -57,6 +58,17 @@ class Website extends NgRestModel
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        return [
+            'theme_id' => 'Theme',
+        ];
+    }
+    
+    
+    /**
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -70,11 +82,11 @@ class Website extends NgRestModel
                 'class' => SelectRelationActiveQuery::class,
                 'query' => $this->getTheme(),
                 'relation' => 'theme',
+                'emptyListValue' => Module::t('model_website_use_default_website'),
                 'labelField' => ['base_path']
             ],
         ];
     }
-    
     /**
      * @inheritdoc
      */

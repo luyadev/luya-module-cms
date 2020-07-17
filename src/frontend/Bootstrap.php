@@ -38,6 +38,7 @@ final class Bootstrap implements BootstrapInterface
             $app->on(Application::EVENT_BEFORE_REQUEST, function ($event) {
                 if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin) {
                     $event->sender->urlManager->addRules([
+                        ['class' => 'luya\cms\frontend\components\WebsiteBehaviorUrlRule'],
                         ['class' => 'luya\cms\frontend\components\RouteBehaviorUrlRule'],
                         ['class' => 'luya\cms\frontend\components\CatchAllUrlRule'],
                     ]);

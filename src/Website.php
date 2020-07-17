@@ -45,11 +45,12 @@ class Website extends Component
         $defaultWebsite = false;
     
         $websites = $this->loadAllWebsiteData();
+        if (isset($websites[$hostName])) {
+            $this->setHasCache($hostName, $websites[$hostName]);
+            return $websites[$hostName];
+        }
+        
         foreach ($websites as $website) {
-            if (StringHelper::matchWildcard($website['host'], $hostName)) {
-                $this->setHasCache($hostName, $website);
-                return $website;
-            }
             foreach (explode(',', $website['aliases']) as $alias) {
                 if (StringHelper::matchWildcard(trim($alias), $hostName)) {
                     $this->setHasCache($hostName, $website);
@@ -74,7 +75,7 @@ class Website extends Component
     private function loadAllWebsiteData()
     {
         if ($this->_allWebsiteData === null) {
-            $this->_allWebsiteData = WebsiteModel::find(['is_active' => true, 'is_delete' => false])->cache()->asArray()->all();
+            $this->_allWebsiteData = WebsiteModel::find(['is_active' => true, 'is_delete' => false])->cache()->indexBy('host')->asArray()->all();
         }
         return $this->_allWebsiteData;
     }

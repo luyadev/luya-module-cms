@@ -250,5 +250,10 @@ return [
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
-    'menu_group_protocol_model_event_logger' => 'Model Event Log'
+    'menu_group_protocol_model_event_logger' => 'Model Event Log',
+    
+// 4.0
+
+    'menu_group_item_env_websites' => 'Websites',
+    'model_website_use_default_website' => 'Use default website',
 ];

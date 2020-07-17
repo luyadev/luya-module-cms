@@ -259,4 +259,8 @@ return [
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log'
+    
+// 4.0
+\n    'menu_group_item_env_websites' => 'Websites',
+    'model_website_use_default_website' => 'Use default website',
 ];
