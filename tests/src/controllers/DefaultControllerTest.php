@@ -130,7 +130,7 @@ class DefaultControllerTest extends WebApplicationTestCase
             'modelClass' => Theme::class,
             'fixtureData' => [
                 [
-                    'is_active' => true,
+                    'is_default' => true,
                     'base_path' => '@app/themes/appTheme',
                     'json_config' => '{}',
                 ]

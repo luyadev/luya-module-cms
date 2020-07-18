@@ -3,6 +3,7 @@
 namespace cmstests\src\menu;
 
 use luya\cms\Menu;
+use luya\cms\Website;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\scopes\PageScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
@@ -26,6 +27,9 @@ class ItemSqliteTest extends WebApplicationTestCase
                 ],
                 'menu' => [
                     'class' => Menu::class,
+                ],
+                'website' => [
+                    'class' => Website::class,
                 ]
             ]
         ];

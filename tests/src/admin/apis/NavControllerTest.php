@@ -11,7 +11,7 @@ use luya\testsuite\scopes\PermissionScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 use yii\web\NotFoundHttpException;
 
-class NavControllerTeste extends WebModelTestCase
+class NavControllerTest extends WebModelTestCase
 {
     use CmsDatabaseTableTrait;
 
