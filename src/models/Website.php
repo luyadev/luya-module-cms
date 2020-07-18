@@ -83,7 +83,7 @@ class Website extends NgRestModel
                 'class' => SelectRelationActiveQuery::class,
                 'query' => $this->getTheme(),
                 'relation' => 'theme',
-                'emptyListValue' => Module::t('model_website_use_default_website'),
+                'emptyListValue' => Module::t('model_website_use_default_theme'),
                 'labelField' => ['base_path']
             ],
             'default_lang' => [

@@ -252,5 +252,5 @@ return [
 // 4.0
 
     'menu_group_item_env_websites' => 'Websites',
-    'model_website_use_default_website' => 'Use default website',
+    'model_website_use_default_theme' => 'Use default theme',
 ];
