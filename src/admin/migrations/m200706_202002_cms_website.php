@@ -26,7 +26,7 @@ class m200706_202002_cms_website extends Migration
         ]);
 
         $this->insert('cms_website', [
-            'id' => 10,
+            'id' => 1,
             'name' => 'default',
             'is_default' => true,
             'is_active' => true,

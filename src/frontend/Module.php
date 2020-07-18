@@ -111,6 +111,13 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
     public function luyaBootstrap(Application $app)
     {
         if (!$app->request->isConsoleRequest && !$app->request->isAdmin) {
+    
+            if ($app->has('composition') && $app->has('website')) {
+                if (empty($app->composition->hostInfoMapping)) {
+                    $app->composition->hostInfoMapping = $app->website->createHostInfoMapping();
+                }
+            }
+            
             if ($app->has('themeManager')) {
                 // set active theme from database
                 $app->get('themeManager')->on(ThemeManager::EVENT_BEFORE_SETUP, function (SetupEvent $event) {
