@@ -10,6 +10,7 @@ use luya\cms\models\NavItem;
 use luya\cms\models\NavItemPage;
 use luya\cms\models\Property;
 use luya\cms\models\Theme;
+use luya\cms\Website;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\testsuite\scopes\PageScope;
@@ -39,6 +40,9 @@ class DefaultControllerTest extends WebApplicationTestCase
                     'dsn' => 'sqlite::memory:',
                 ],
                 'menu' => 'luya\cms\Menu',
+                'website' => [
+                    'class' => Website::class,
+                ],
                 'composition' => [
                     'default' => ['langShortCode' => 'en']
                 ],
