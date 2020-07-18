@@ -2,12 +2,13 @@
 
 namespace luya\cms\models;
 
+use luya\admin\models\Lang;
+use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\SoftDeleteTrait;
-use luya\admin\ngrest\base\NgRestModel;
 use luya\cms\admin\Module;
+use luya\cms\behaviours\WebsiteScopeBehavior;
 use luya\cms\Exception;
-use luya\helpers\StringHelper;
 
 /**
  * Represents the Website-Containers.
@@ -50,8 +51,8 @@ class Website extends NgRestModel
     public function scenarios()
     {
         return [
-            'restcreate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host', 'theme_id'],
-            'restupdate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host', 'theme_id'],
+            'restcreate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host', 'theme_id', 'default_lang'],
+            'restupdate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host', 'theme_id', 'default_lang'],
         ];
     }
     
@@ -85,8 +86,15 @@ class Website extends NgRestModel
                 'emptyListValue' => Module::t('model_website_use_default_website'),
                 'labelField' => ['base_path']
             ],
+            'default_lang' => [
+                'class' => SelectRelationActiveQuery::class,
+                'query' => $this->getLang(),
+                'relation' => 'lang',
+                'labelField' => ['name']
+            ]
         ];
     }
+    
     /**
      * @inheritdoc
      */
@@ -149,5 +157,10 @@ class Website extends NgRestModel
     public function getTheme()
     {
         return $this->hasOne(Theme::class, ['id' => 'theme_id']);
+    }
+    
+    public function getLang()
+    {
+        return $this->hasOne(Lang::class, ['short_code' => 'default_lang']);
     }
 }

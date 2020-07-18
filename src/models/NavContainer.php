@@ -3,6 +3,8 @@
 namespace luya\cms\models;
 
 use luya\admin\traits\SoftDeleteTrait;
+use luya\cms\behaviours\WebsiteScopeBehavior;
+use \luya\cms\traits\WebsiteScopeTrait;
 use luya\admin\ngrest\base\NgRestModel;
 
 /**
@@ -18,7 +20,7 @@ use luya\admin\ngrest\base\NgRestModel;
 class NavContainer extends NgRestModel
 {
     use SoftDeleteTrait;
-
+    
     public static function tableName()
     {
         return 'cms_nav_container';
@@ -28,7 +30,14 @@ class NavContainer extends NgRestModel
     {
         return 'api-cms-navcontainer';
     }
-
+    
+    public static function findBehaviors()
+    {
+        return [
+            'websiteScope' => WebsiteScopeBehavior::class
+        ];
+    }
+    
     public function rules()
     {
         return [

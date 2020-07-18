@@ -625,8 +625,10 @@
 		});
 
 		$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
-			$scope.currentWebsite = data;
-			$scope.currentWebsiteToggler = data.id;
+			if (data) {
+				$scope.currentWebsite = data;
+				$scope.currentWebsiteToggler = data.id;
+			}
 		});
 
 		// controller logic

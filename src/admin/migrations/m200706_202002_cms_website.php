@@ -22,6 +22,7 @@ class m200706_202002_cms_website extends Migration
             'aliases' => $this->string(255)->null()->defaultValue(null),
             'redirect_to_host' => $this->boolean()->notNull()->defaultValue(false),
             'theme_id' => $this->integer()->defaultValue(null),
+            'default_lang' => $this->string(2)->defaultValue(null),
         ]);
 
         $this->insert('cms_website', [

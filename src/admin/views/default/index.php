@@ -32,7 +32,7 @@ use \luya\admin\Module as AdminModule;
 
 <div class="luya-main" ng-class="{'luya-mainnav-is-open' : isHover}">
     <div class="luya-subnav" ng-controller="CmsMenuTreeController" ng-class="{'overlaying': liveEditStateToggler}">
-        <ul class="cmsnav">
+        <div class="cmsnav">
             <ul class="cmsnav-list cmsnav-list-buttons">
                 <?php if (Yii::$app->adminuser->canRoute('cmsadmin/page/create')): ?>
                 <li class="cmsnav-button" ui-sref="custom.cmsadd">

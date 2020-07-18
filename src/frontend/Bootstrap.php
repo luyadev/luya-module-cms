@@ -34,6 +34,10 @@ final class Bootstrap implements BootstrapInterface
     {
         if ($app->hasModule('cms')) {
 
+            if (empty($app->composition->hostInfoMapping)) {
+                $app->composition->hostInfoMapping = $app->website->createHostInfoMapping();
+            }
+            
             // load cms url rules
             $app->on(Application::EVENT_BEFORE_REQUEST, function ($event) {
                 if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin) {

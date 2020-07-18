@@ -738,7 +738,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
                 $languageContainer[$key] = [
                     'id' => $item['id'],
                     'nav_id' => $item['nav_id'],
-                    'website_id' => $lang['short_code'],
+                    'website_id' => $website['id'],
                     'lang' => $lang['short_code'],
                     'link' => $this->buildItemLink($alias, $langShortCode),
                     'title' => $this->encodeValue($item['title']),

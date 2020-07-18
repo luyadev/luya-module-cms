@@ -4,6 +4,7 @@ namespace luya\cms;
 
 use luya\helpers\StringHelper;
 use luya\traits\CacheableTrait;
+use luya\web\Composition;
 use yii\base\Component;
 use \luya\cms\models\Website as WebsiteModel;
 
@@ -51,8 +52,8 @@ class Website extends Component
         }
         
         foreach ($websites as $website) {
-            foreach (explode(',', $website['aliases']) as $alias) {
-                if (StringHelper::matchWildcard(trim($alias), $hostName)) {
+            foreach ($website['aliases'] as $alias) {
+                if (StringHelper::matchWildcard($alias, $hostName)) {
                     $this->setHasCache($hostName, $website);
                     return $website;
                 }
@@ -76,7 +77,31 @@ class Website extends Component
     {
         if ($this->_allWebsiteData === null) {
             $this->_allWebsiteData = WebsiteModel::find(['is_active' => true, 'is_delete' => false])->cache()->indexBy('host')->asArray()->all();
+            foreach ($this->_allWebsiteData as &$website) {
+                $aliases = array_map('trim', explode(',', $website['aliases']));
+                $website['aliases'] = array_filter($aliases);
+            }
         }
         return $this->_allWebsiteData;
+    }
+    
+    /**
+     * Create a host mapping with default languages for {\luya\web\Composition::$hostInfoMapping}
+     * @return array
+     */
+    public function createHostInfoMapping()
+    {
+        $hostInfoMapping = [];
+    
+        foreach ($this->loadAllWebsiteData() as $website) {
+            if ($website['default_lang']) {
+                $hostInfoMapping[$website['host']] = [Composition::VAR_LANG_SHORT_CODE => $website['default_lang']];
+                foreach ($website['aliases'] as $alias) {
+                    $hostInfoMapping[trim($alias)] = [Composition::VAR_LANG_SHORT_CODE => $website['default_lang']];
+                }
+            }
+        }
+        
+        return $hostInfoMapping;
     }
 }
