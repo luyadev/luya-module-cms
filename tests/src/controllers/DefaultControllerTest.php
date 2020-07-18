@@ -11,6 +11,7 @@ use luya\cms\models\NavItemPage;
 use luya\cms\models\Property;
 use luya\cms\models\Theme;
 use luya\cms\Website;
+use luya\cms\models\Website as WebsiteModel;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\testsuite\scopes\PageScope;
@@ -80,6 +81,18 @@ class DefaultControllerTest extends WebApplicationTestCase
                     'id' => 1,
                     'short_code' => 'en',
                     'is_default' => 1,
+                ],
+            ]
+        ]);
+    
+        $websiteFixture = new ActiveRecordFixture([
+            'modelClass' => WebsiteModel::class,
+            'fixtureData' => [
+                'en' => [
+                    'id' => 1,
+                    'name' => 'default',
+                    'is_default' => 1,
+                    'is_active' => 1,
                 ],
             ]
         ]);
