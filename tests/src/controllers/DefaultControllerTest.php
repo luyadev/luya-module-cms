@@ -93,6 +93,7 @@ class DefaultControllerTest extends WebApplicationTestCase
                     'name' => 'default',
                     'is_default' => 1,
                     'is_active' => 1,
+                    'is_deleted' => 0,
                 ],
             ]
         ]);
