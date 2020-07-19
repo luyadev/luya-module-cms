@@ -5,7 +5,6 @@ namespace cmstests\src\menu;
 use luya\cms\Menu;
 use luya\cms\Website;
 use luya\testsuite\cases\WebApplicationTestCase;
-use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\scopes\PageScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
@@ -41,8 +40,8 @@ class ItemSqliteTest extends WebApplicationTestCase
     public function afterSetup()
     {
         parent::afterSetup();
-        $this->websiteFixture = new NgRestModelFixture([
-            'modelClass' => Website::class,
+        $this->websiteFixture = new \luya\testsuite\fixtures\NgRestModelFixture([
+            'modelClass' => \luya\cms\models\Website::class,
             'fixtureData' => [
                 'website1' => [
                     'id' => 1,
