@@ -47,7 +47,10 @@ class ItemSqliteTest extends WebApplicationTestCase
                     'id' => 1,
                     'name' => 'default',
                     'host' => '',
+                    'aliases' => '',
                     'is_default' => 1,
+                    'is_active' => 1,
+                    'is_deleted' => 0,
                 ],
             ],
         ]);
