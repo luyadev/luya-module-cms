@@ -88,9 +88,11 @@ class DefaultControllerTest extends WebApplicationTestCase
         $websiteFixture = new ActiveRecordFixture([
             'modelClass' => WebsiteModel::class,
             'fixtureData' => [
-                'en' => [
+                'website1' => [
                     'id' => 1,
                     'name' => 'default',
+                    'host' => '',
+                    'aliases' => '',
                     'is_default' => 1,
                     'is_active' => 1,
                     'is_deleted' => 0,
