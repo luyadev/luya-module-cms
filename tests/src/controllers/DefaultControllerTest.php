@@ -107,6 +107,7 @@ class DefaultControllerTest extends WebApplicationTestCase
                     'id' => 1,
                     'name' => 'default',
                     'alias' => 'default',
+                    'website_id' => 1,
                 ],
             ]
         ]);

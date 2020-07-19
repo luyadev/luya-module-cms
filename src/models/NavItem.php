@@ -242,11 +242,11 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             return false;
         }
 
-        if ($this->parent_nav_id === null) {
-            $this->addError('parent_nav_id', Module::t('nav_item_model_error_parentnavidcannotnull'));
-
-            return false;
-        }
+//        if ($this->parent_nav_id === null) {
+//            $this->addError('parent_nav_id', Module::t('nav_item_model_error_parentnavidcannotnull'));
+//
+//            return false;
+//        }
     
         /**
          * Group by website_id
