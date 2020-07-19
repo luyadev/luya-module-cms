@@ -6,15 +6,41 @@ use luya\admin\models\Tag;
 use luya\admin\models\TagRelation;
 use luya\cms\Menu;
 use luya\cms\models\Nav;
+use luya\cms\models\Website;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\fixtures\ActiveRecordFixture;
+use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\scopes\PageScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
 class QuerySqliteTest extends WebApplicationTestCase
 {
     use CmsDatabaseTableTrait;
-
+    
+    private $websiteFixture;
+    
+    public function afterSetup()
+    {
+        parent::afterSetup();
+        $this->websiteFixture = new NgRestModelFixture([
+            'modelClass' => Website::class,
+            'fixtureData' => [
+                'website1' => [
+                    'id' => 1,
+                    'name' => 'default',
+                    'host' => '',
+                    'is_default' => 1,
+                ],
+            ],
+        ]);
+    }
+    
+    protected function tearDown()
+    {
+        $this->websiteFixture->cleanup();
+        parent::tearDown();
+    }
+    
     public function getConfigArray()
     {
         return [
@@ -85,8 +111,6 @@ class QuerySqliteTest extends WebApplicationTestCase
             $scope->createPage('test', null, []);
 
             $column = $this->app->menu->find()->all()->column('id');
-
-            var_dump($column);
         });
     }
 

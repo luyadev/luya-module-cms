@@ -44,7 +44,7 @@ class Website extends NgRestModel
         return [
             [['name', 'host'], 'required'],
             [['name', 'host'], 'unique'],
-            [['is_active', 'is_default', 'redirect_to_host'], 'boolean'],
+            [['is_active', 'is_default', 'is_deleted', 'redirect_to_host'], 'boolean'],
         ];
     }
     

@@ -5,6 +5,7 @@ namespace cmstests\src\menu;
 use luya\cms\Menu;
 use luya\cms\Website;
 use luya\testsuite\cases\WebApplicationTestCase;
+use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\scopes\PageScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
@@ -34,7 +35,31 @@ class ItemSqliteTest extends WebApplicationTestCase
             ]
         ];
     }
-
+    
+    private $websiteFixture;
+    
+    public function afterSetup()
+    {
+        parent::afterSetup();
+        $this->websiteFixture = new NgRestModelFixture([
+            'modelClass' => Website::class,
+            'fixtureData' => [
+                'website1' => [
+                    'id' => 1,
+                    'name' => 'default',
+                    'host' => '',
+                    'is_default' => 1,
+                ],
+            ],
+        ]);
+    }
+    
+    protected function tearDown()
+    {
+        $this->websiteFixture->cleanup();
+        parent::tearDown();
+    }
+    
     public function testColumn()
     {
         PageScope::run($this->app, function(PageScope $scope) {
