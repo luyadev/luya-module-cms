@@ -100,20 +100,20 @@ class NavItemController extends \luya\admin\base\RestController
      * @param integer $navId
      * @param integer $langId
      * @return array
+     * @throws NotFoundHttpException If the page is not found, a NotFoundHttpException is thrown.
      */
     public function actionNavLangItem($navId, $langId)
     {
         $item = NavItem::find()->with('nav')->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
         if ($item) {
             return [
-                'error' => false,
                 'item' => $item->toArray(),
                 'nav' => $item->nav->toArray(),
                 'typeData' => ($item->nav_item_type == 1) ? NavItemPage::getVersionList($item->id) : ArrayHelper::typeCast($item->getType()->toArray()),
             ];
         }
-        
-        return ['error' => true];
+
+        throw new NotFoundHttpException("The requested nav item does not exists.");
     }
 
     /**
