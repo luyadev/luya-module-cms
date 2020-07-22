@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.3.4 (22. July 2020)
 
-+ []() Since latest AngularJs updates in Admin Module a problem appears with pages which are not yet translated. The "translate now" dialog where not showing up
++ [#280](https://github.com/luyadev/luya-module-cms/pull/280) Since latest AngularJs updates in Admin Module, a problem appears with pages which are not yet translated. The "translate now" dialog where not showing up.
 
 ## 3.3.3 (16. July 2020)
 
