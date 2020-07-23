@@ -75,7 +75,6 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
                 'is_deleted' => 0,
             ]
         ]);
-        
         $this->createCmsNavContainerFixture([
             1 => [
                 'id' => 1,
