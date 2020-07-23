@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b1755a4ec83a020a40f25556f6a0779",
+    "content-hash": "13d8ce65e1702937dfc65ada662f9501",
     "packages": [],
     "packages-dev": [
         {
@@ -12,7 +12,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -33,7 +33,7 @@
             "version": "3.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "dist": {
@@ -776,20 +776,14 @@
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.29",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "a31eca6fb6e078104278bd3b0f8e019d95ea37da"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/a31eca6fb6e078104278bd3b0f8e019d95ea37da",
-                "reference": "a31eca6fb6e078104278bd3b0f8e019d95ea37da",
-                "shasum": ""
+                "url": "https://github.com/boehsermoe/luya-testsuite.git",
+                "reference": "b354e251d1e28954ccdbec50f378fd25f3b860d9"
             },
             "require": {
-                "curl/curl": "^2.0 || ^1.0",
+                "curl/curl": "*",
                 "luyadev/luya-core": "*",
                 "luyadev/luya-module-admin": "*",
                 "luyadev/luya-module-cms": "*",
@@ -812,7 +806,11 @@
                     "luya\\testsuite\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "luya\\testsuite\\tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -830,7 +828,10 @@
                 "module",
                 "php"
             ],
-            "time": "2020-04-07T15:54:20+00:00"
+            "support": {
+                "issues": "https://github.com/luyadev/luya/issues"
+            },
+            "time": "2020-07-23T05:56:32+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3073,7 +3074,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "luyadev/luya-testsuite": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
