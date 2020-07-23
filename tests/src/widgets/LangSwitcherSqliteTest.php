@@ -4,6 +4,7 @@ namespace cmstests\src\widgets;
 
 use cmstests\data\modules\CmsUrlRuleModule;
 use luya\cms\models\NavItem;
+use luya\cms\Website;
 use luya\cms\widgets\LangSwitcher;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
@@ -28,6 +29,9 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
                 ],
                 'urlManager' => [
                     'cache' => null,
+                ],
+                'website' => [
+                    'class' => Website::class,
                 ]
             ],
             'modules' => [

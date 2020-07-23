@@ -83,6 +83,14 @@ class NavControllerTest extends WebModelTestCase
         PermissionScope::run($this->app, function(PermissionScope $scope) {
 
             $this->createAdminLangFixture();
+            $this->createCmsNavContainerFixture([
+                1 => [
+                    'id' => 1,
+                    'name' => 'default',
+                    'alias' => 'default',
+                    'website_id' => 1,
+                ]
+            ]);
             $this->createCmsNavItemRedirectFixture();
             $this->createCmsNavFixture([
                 'nav1' => [

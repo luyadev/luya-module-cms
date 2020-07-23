@@ -42,7 +42,7 @@ class ItemSqliteTest extends WebApplicationTestCase
 
             $column = $this->app->menu->find()->all()->column('id');
 
-            $this->assertSame([3 => '3'], $column);
+            $this->assertSame([1003 => '1003'], $column);
         });
     }
 
