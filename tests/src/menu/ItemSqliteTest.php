@@ -35,33 +35,6 @@ class ItemSqliteTest extends WebApplicationTestCase
         ];
     }
     
-    private $websiteFixture;
-    
-    public function afterSetup()
-    {
-        parent::afterSetup();
-        $this->websiteFixture = new \luya\testsuite\fixtures\NgRestModelFixture([
-            'modelClass' => \luya\cms\models\Website::class,
-            'fixtureData' => [
-                'website1' => [
-                    'id' => 1,
-                    'name' => 'default',
-                    'host' => '',
-                    'aliases' => '',
-                    'is_default' => 1,
-                    'is_active' => 1,
-                    'is_deleted' => 0,
-                ],
-            ],
-        ]);
-    }
-    
-    protected function tearDown()
-    {
-        $this->websiteFixture->cleanup();
-        parent::tearDown();
-    }
-    
     public function testColumn()
     {
         PageScope::run($this->app, function(PageScope $scope) {
@@ -69,7 +42,7 @@ class ItemSqliteTest extends WebApplicationTestCase
 
             $column = $this->app->menu->find()->all()->column('id');
 
-            $this->assertSame([1003 => '1003'], $column);
+            $this->assertSame([3 => '3'], $column);
         });
     }
 
@@ -92,11 +65,23 @@ class ItemSqliteTest extends WebApplicationTestCase
                 'is_default' => 1,
             ]
         ]);
+        $this->createCmsWebsiteFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'default',
+                'host' => '',
+                'aliases' => '',
+                'is_default' => 1,
+                'is_active' => 1,
+                'is_deleted' => 0,
+            ]
+        ]);
         $this->createCmsNavContainerFixture([
             1 => [
                 'id' => 1,
                 'name' => 'default',
                 'alias' => 'default',
+                'website_id' => 1,
             ]
         ]);
         $this->createCmsNavFixture([

@@ -7,7 +7,6 @@ use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\admin\Module;
-use luya\cms\behaviours\WebsiteScopeBehavior;
 use luya\cms\Exception;
 
 /**

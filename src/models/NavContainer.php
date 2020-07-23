@@ -31,7 +31,7 @@ class NavContainer extends NgRestModel
         return 'api-cms-navcontainer';
     }
     
-    public static function findBehaviors()
+    public static function findActiveQueryBehaviors()
     {
         return [
             'websiteScope' => WebsiteScopeBehavior::class
