@@ -1281,39 +1281,38 @@
 			    method: "GET",
 			    params: { langId : langId, navId : navId }
 			}).then(function(response) {
-				if (response.data) {
-					if (!response.data.error) {
-						$scope.item = response.data['item'];
-						$scope.typeData = response.data['typeData'];
-						$scope.isTranslated = true;
-						$scope.reset();
-						
-						if (!response.data['nav'].is_draft) {
-							$scope.NavController.bubbleParents($scope.NavController.navData.parent_nav_id, $scope.NavController.navData.nav_container_id);
-							if ($scope.item.nav_item_type == 1) {
+				$scope.item = response.data['item'];
+				$scope.typeData = response.data['typeData'];
+				$scope.isTranslated = true;
+				$scope.reset();
+				
+				if (!response.data['nav'].is_draft) {
+					$scope.NavController.bubbleParents($scope.NavController.navData.parent_nav_id, $scope.NavController.navData.nav_container_id);
+					if ($scope.item.nav_item_type == 1) {
 
-								var lastVersion = ServiceWorkingPageVersion.hasVersion($scope.item.id);
+						var lastVersion = ServiceWorkingPageVersion.hasVersion($scope.item.id);
 
-								if (lastVersion) {
-									$scope.switchVersion(lastVersion);
-								} else {
-									if ($scope.currentPageVersion == 0) {
-										$scope.currentPageVersion = response.data.item.nav_item_type_id;
-									}
-									if (response.data.item.nav_item_type_id in response.data.typeData) {
-										$scope.currentPageVersionAlias = $scope.container = response.data.typeData[$scope.currentPageVersion]['version_alias'];
-										$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
-									}
-								}
-							}
+						if (lastVersion) {
+							$scope.switchVersion(lastVersion);
 						} else {
-							$scope.currentPageVersion = response.data.item.nav_item_type_id;
-							$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
+							if ($scope.currentPageVersion == 0) {
+								$scope.currentPageVersion = response.data.item.nav_item_type_id;
+							}
+							if (response.data.item.nav_item_type_id in response.data.typeData) {
+								$scope.currentPageVersionAlias = $scope.container = response.data.typeData[$scope.currentPageVersion]['version_alias'];
+								$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
+							}
 						}
 					}
-
-					$scope.loaded = true
+				} else {
+					$scope.currentPageVersion = response.data.item.nav_item_type_id;
+					$scope.container = response.data.typeData[$scope.currentPageVersion]['contentAsArray'];
 				}
+
+				$scope.loaded = true
+			}, function(error) {
+				// its loaded, but the data does not exists.
+				$scope.loaded = true;
 			});
 		};
 		

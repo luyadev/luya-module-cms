@@ -157,7 +157,7 @@ use luya\helpers\Html;
 <div ng-if="!loaded">loading...</div>
 <div class="cmsadmin-page" ng-if="isTranslated && loaded">
     <div class="row" ng-if="item.nav_item_type==1" ng-repeat="(key, row) in container.__placeholders track by key">
-        <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'" />
+        <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'"></div>
     </div>
     <div class="row" ng-if="item.nav_item_type==2">
         <div class="col-md-12">
