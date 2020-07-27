@@ -3,9 +3,9 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 3.3.4 (22. July 2020)
+## 3.3.4 (23. July 2020)
 
-+ [#280](https://github.com/luyadev/luya-module-cms/pull/280) Since latest AngularJs updates in Admin Module, a problem appears with pages which are not yet translated. The "translate now" dialog where not showing up.
++ [#280](https://github.com/luyadev/luya-module-cms/pull/280) Since latest AngularJs updates in Admin Module there are DOM problems with `ng-include`. The "translate now" dialog where not showing anymore.
 
 ## 3.3.3 (16. July 2020)
 

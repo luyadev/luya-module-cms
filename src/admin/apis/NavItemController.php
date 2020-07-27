@@ -109,11 +109,11 @@ class NavItemController extends \luya\admin\base\RestController
             return [
                 'item' => $item->toArray(),
                 'nav' => $item->nav->toArray(),
-                'typeData' => ($item->nav_item_type == 1) ? NavItemPage::getVersionList($item->id) : ArrayHelper::typeCast($item->getType()->toArray()),
+                'typeData' => $item->nav_item_type == 1 ? NavItemPage::getVersionList($item->id) : ArrayHelper::typeCast($item->getType()->toArray()),
             ];
         }
 
-        throw new NotFoundHttpException("The requested nav item does not exists.");
+        throw new NotFoundHttpException(Module::t('unable_to_find_item_for_language'));
     }
 
     /**
