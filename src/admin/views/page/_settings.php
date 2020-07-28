@@ -63,7 +63,7 @@ use luya\admin\helpers\Angular;
                 <h1><?= Module::t('page_update_actions_layout_title'); ?></h1>
                 <p><?= Module::t('page_update_actions_layout_text'); ?></p>
                 <form ng-submit="submitNavForm({layout_file: navData.layout_file})">
-                    <zaa-text model="navData.layout_file" label="<?= Module::t('page_update_actions_layout_file_field'); ?>" />
+                    <zaa-text model="navData.layout_file" label="<?= Module::t('page_update_actions_layout_file_field'); ?>"></zaa-text>
                     <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
                 </form>
             </div>

@@ -48,7 +48,7 @@ use luya\admin\helpers\Angular;
                     <form-module data="typeDataCopy"></form-module>
                 </div>
                 <div ng-switch-when="3">
-                    <zaa-link model="typeDataCopy" />
+                    <zaa-link model="typeDataCopy"></zaa-link>
                 </div>
                 <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
             </form>
@@ -101,7 +101,7 @@ use luya\admin\helpers\Angular;
         <div ng-switch-when="4">
             <h1><?= Module::t('version_edit_title'); ?> <span class="badge" ng-class="{'badge-secondary': item.nav_item_type_id!=editVersionItem.id, 'badge-primary': item.nav_item_type_id==editVersionItem.id}">{{editVersionItem.version_alias}}</span></h1>
             <?= Angular::text('editVersionItem.version_alias', Module::t('version_input_name')); ?>
-            <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name" />
+            <zaa-select model="editVersionItem.layout_id" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionsvalue="id" optionslabel="name"></zaa-select>
             <button type="button" class="btn btn-save btn-icon" ng-click="editVersionUpdate(editVersionItem)"><?= Module::t('btn_save'); ?></button>
         </div>
         <div ng-switch-when="3" ng-controller="PageVersionsController">
@@ -128,7 +128,7 @@ use luya\admin\helpers\Angular;
                     </div>
                 </div>
                 <div ng-show="!create.copyExistingVersion">
-                    <zaa-select model="create.versionLayoutId" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionslabel="name" optionsvalue="id" />
+                    <zaa-select model="create.versionLayoutId" label="<?= Module::t('version_input_layout'); ?>" options="layoutsData" optionslabel="name" optionsvalue="id"></zaa-select>
                 </div>
                 <button class="btn btn-save btn-icon" type="submit"><?= Module::t('button_create_version'); ?></button>
             </form>

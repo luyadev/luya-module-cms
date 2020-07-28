@@ -8,7 +8,7 @@ use luya\cms\admin\Module;
         <table class="table table-bordered">
             <tr>
                 <td valign="top"><?= Module::t('config_index_httpexceptionnavid'); ?></td>
-                <td><menu-dropdown class="menu-dropdown" nav-id="data.httpExceptionNavId" /></td>
+                <td><menu-dropdown class="menu-dropdown" nav-id="data.httpExceptionNavId"></menu-dropdown></td>
             </tr>
         </table>
         <button type="button" ng-click="save()" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
