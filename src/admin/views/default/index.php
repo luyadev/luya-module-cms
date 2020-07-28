@@ -26,7 +26,7 @@ use \luya\admin\Module as AdminModule;
         </span>
     </span>
     <ul class="treeview-items" ng-if="data.has_children && data.toggle_open">
-        <li class="treeview-item" ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'cmsNavReverse.html'" />
+        <li class="treeview-item" ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'cmsNavReverse.html'"></li>
     </ul>
 </script>
 
@@ -89,7 +89,7 @@ use \luya\admin\Module as AdminModule;
                             ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}"
                             ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0"
                             ng-include="'cmsNavReverse.html'"
-                        />
+                        ></li>
                     </ul>
                 </li>
             </ul>
