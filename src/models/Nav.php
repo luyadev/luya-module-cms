@@ -20,7 +20,7 @@ use luya\helpers\Json;
  * about the content, title or alias (link) itself, cause those informations are stored in the the [[\cmsadmin\models\NavItem]] to the corresponding
  * language. So basically the Nav contains the structure and state of the menu/navigation put not content, or titles cause those are related to a language.
  *
- * @property avItem $activeLanguageItem Returns the NavItem for the current active user language with with the context object nav id.
+ * @property NavItem $activeLanguageItem Returns the NavItem for the current active user language with with the context object nav id.
  * @property NavItem $defaultLanguageItem Reutrns the NavItem for the admin default language.
  * @property integer $id
  * @property integer $nav_container_id
@@ -73,7 +73,8 @@ class Nav extends ActiveRecord
             [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft', 'layout_file'], 'safe'],
             [['layout_file'], 'match', 'pattern' => '/^[a-zA-Z0-9\.\-\_]+$/'],
             [['parent_nav_id', 'publish_from', 'publish_till'], 'integer'],
-            ['parent_nav_id', 'exist', 'targetRelation' => 'parents']
+            ['parent_nav_id', 'exist', 'targetRelation' => 'parents'],
+            [['parent_nav_id'], 'default', 'value' => 0],
         ];
     }
 

@@ -80,4 +80,9 @@ class NavContainer extends NgRestModel
     {
         return $this->hasMany(Nav::class, ['nav_container_id' => 'id'])->where(['is_deleted' => false, 'is_draft' => false])->orderBy(['sort_index' => SORT_ASC]);
     }
+    
+    public function getWebsite()
+    {
+        return $this->hasOne(Website::class, ['website_id' => 'id']);
+    }
 }

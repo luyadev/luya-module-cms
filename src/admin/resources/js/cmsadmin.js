@@ -43,7 +43,7 @@
 					// find all parent elements of the found elements and re add them to the map in order to 
 					// ensure a correct menu tree.
 					angular.forEach(items, function(value) {
-						if (value['parent_nav_id'] != null) {
+						if (value['parent_nav_id'] > 0) {
 							$scope.bubbleParents(value['parent_nav_id'], value['nav_container_id'], items);
 						}
 					});
@@ -52,7 +52,7 @@
 				});
 
 				$scope.bubbleParents = function(parentNavId, containerId, index) {
-					var item = $filter('menuchildfilter')($scope.currentWebsiteId, $scope.menuDataOriginal.items, containerId, parentNavId);
+					var item = $filter('menuchildfilter')($scope.menuDataOriginal.items, containerId, parentNavId);
 					if (item) {
 						var exists = false;
 						angular.forEach(index, function(i) {
@@ -78,7 +78,7 @@
 						'<div class="input-group-prepend" ng-show="searchQuery" ng-click="searchQuery = \'\'"><div class="input-group-text"><i class="material-icons">clear</i></div></div>'+
 						'<input class="form-control" ng-model="searchQuery" type="text" placeholder="'+i18n['ngrest_crud_search_text']+'">'+
 					'</div>' + 
-					'<div ng-repeat="(key, container) in menuData.containers" ng-if="(menuData.items | menuparentfilter:container.id:null).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
+					'<div ng-repeat="(key, container) in menuData.containers" ng-if="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
 						'<div class="card-header" ng-click="container.isHidden=!container.isHidden">'+
 							'<span class="material-icons card-toggle-indicator">keyboard_arrow_down</span>'+
 							'<span>{{container.name}}</span>'+
@@ -86,7 +86,7 @@
 						'<div class="card-body">'+ 
 							'<div class="treeview treeview-chooser">' +
 								'<ul class="treeview-items treeview-items-lvl1">' +
-									'<li class="treeview-item treeview-item-lvl1" ng-class="{\'treeview-item-has-children\' : (menuData.items | menuparentfilter:container.id:null).length}" ng-repeat="(key, data) in menuData.items | menuparentfilter:container.id:null track by data.id" ng-include="\'menuDropdownReverse\'"></li>' +
+									'<li class="treeview-item treeview-item-lvl1" ng-class="{\'treeview-item-has-children\' : (menuData.items | menuparentfilter:container.id:0).length}" ng-repeat="(key, data) in menuData.items | menuparentfilter:container.id:0 track by data.id" ng-include="\'menuDropdownReverse\'"></li>' +
 								'</ul>' +
 							'</div>' +
 						'</div>' +
@@ -165,10 +165,6 @@
 					$scope.menuData = data;
 				});
 
-				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
-					$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
-				});
-
 				$scope.menuDataReload = function() {
 					return ServiceMenuData.load(true);
 				}
@@ -182,11 +178,13 @@
 
 
 				$scope.data.nav_item_type = 1;
-				$scope.data.parent_nav_id = null;
+				$scope.data.parent_nav_id = 0;
 				$scope.data.is_draft = 0;
 
-				$scope.data.nav_container_id = null;
-
+				$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
+					$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.id;
+				});
 
 				$scope.languagesData = ServiceLanguagesData.data;
 
@@ -201,7 +199,7 @@
 
 				$scope.$watch(function() { return $scope.data.nav_container_id }, function(n, o) {
 					if (n !== undefined && n !== o) {
-						$scope.data.parent_nav_id = null;
+						$scope.data.parent_nav_id = 0;
 						$scope.navitems = $scope.menu[n]['__items'];
 					}
 				});
@@ -621,13 +619,13 @@
 
 		$scope.$watch('currentWebsiteToggler', function(id) {
 			ServiceCurrentWebsite.toggle(id);
-			//ServiceMenuData.load()
 		});
 
 		$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
 			if (data) {
 				$scope.currentWebsite = data;
 				$scope.currentWebsiteToggler = data.id;
+				ServiceMenuData.load();
 			}
 		});
 
@@ -934,7 +932,7 @@
 		$scope.pageTags = [];
 
 		$scope.bubbleParents = function(parentNavId, containerId) {
-	    	var item = $filter('menuchildfilter')($scope.currentWebsiteId, $scope.menuData.items, containerId, parentNavId);
+	    	var item = $filter('menuchildfilter')($scope.menuData.items, containerId, parentNavId);
 	    	if (item) {
 	    		item.toggle_open = 1;
 	    		$scope.bubbleParents(item.parent_nav_id, item.nav_container_id);

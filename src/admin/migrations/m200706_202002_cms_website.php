@@ -36,6 +36,14 @@ class m200706_202002_cms_website extends Migration
         
         $this->addColumn('cms_nav_container', 'website_id', $this->integer()->notNull()->defaultValue(1)->after('id'));
         
+        $this->alterColumn('cms_nav', 'parent_nav_id', $this->integer(11)->notNull()->defaultValue(0));
+        
+        $this->alterColumn('cms_nav_item_page', 'nav_item_id', $this->integer(11)->defaultValue(null));
+        $this->update('cms_nav_item_page', ['nav_item_id' => 0], ['nav_item_id' => null]);
+
+//        $this->alterColumn('cms_nav', 'parent_nav_id', $this->integer(11)->defaultValue(null));
+//        $this->update('cms_nav', ['parent_nav_id' => null], ['parent_nav_id' => 0]);
+        
         $this->renameColumn('cms_theme', 'is_active', 'is_default');
     }
 

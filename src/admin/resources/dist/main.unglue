@@ -7,7 +7,7 @@
         "../scss/cmsadmin.scss"
     ],
     "options": {
-        "compress" : true,
+        "compress" : false,
         "maps" : true
     }
 }
