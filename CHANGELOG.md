@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.3.5 ()
 
-+ [#]() Fix issue with angularjs version 1.8.0 compatibility.
++ [#282](https://github.com/luyadev/luya-module-cms/pull/282) Fix issue with angularjs version 1.8.0 compatibility.
 
 ## 3.3.4 (23. July 2020)
 
