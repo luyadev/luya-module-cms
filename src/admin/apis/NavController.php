@@ -117,6 +117,8 @@ class NavController extends \luya\admin\base\RestController
             $newItem->alias = $item->alias . '-' . time();
             if ($newItem->save() && !empty($newItem->nav_item_type_id)) {
                 $item->copyTypeContent($newItem);
+
+                return $newItem;
             }
         }
 
