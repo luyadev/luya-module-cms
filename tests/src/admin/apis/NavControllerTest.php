@@ -197,4 +197,76 @@ class NavControllerTeste extends WebModelTestCase
             $r = $scope->runControllerAction($ctrl, 'get-properties', ['navId' => 123]);
         });
     }
+
+    public function testActionDeepPageCopyAsTemplateError()
+    {
+        // erroring
+        PermissionScope::run($this->app, function(PermissionScope $scope) {
+
+            $this->createAdminLangFixture();
+            $this->createCmsNavItemRedirectFixture();
+            $this->createCmsNavFixture([
+                'nav1' => [
+                    'id' => 1,
+                    'parent_nav_id' => 0
+                ]
+            ]);
+            $this->createCmsNavItemFixture([
+                'item1' => [
+                    'id' => 1,
+                    'nav_id' => 1,
+                    'alias' => 'foobar',
+                ]
+            ]);
+
+            $this->createCmsPropertyFixture();
+            $this->createCmsLog();
+
+            $scope->createAndAllowRoute('webmodel/nav/deep-page-copy-as-template');
+            $ctrl = new NavController('nav', $this->app);
+            $scope->getApp()->request->setBodyParams(['navId' => 1]);
+            $r = $scope->runControllerAction($ctrl, 'deep-page-copy-as-template');
+            
+            $this->assertSame(422, $scope->getApp()->response->statusCode);
+        });
+
+
+        
+    }
+
+    public function testActionDeepPageCopyAsTemplateSuccess() {
+        // success
+        PermissionScope::run($this->app, function(PermissionScope $scope) {
+
+            $this->createAdminLangFixture();
+            $this->createCmsNavItemRedirectFixture();
+            $this->createCmsNavFixture([
+                'nav1' => [
+                    'id' => 1,
+                    'parent_nav_id' => 0,
+                ]
+            ]);
+            $this->createCmsNavItemFixture([
+                'item1' => [
+                    'id' => 1,
+                    'nav_id' => 1,
+                    'alias' => 'foobar',
+                    'lang_id' => 1,
+                    'nav_item_type' => 1,
+                    'nav_item_type_id' => 1,
+                ]
+            ]);
+            $this->createCmsNavItemPageFixture();
+
+            $this->createCmsPropertyFixture();
+            $this->createCmsLog();
+
+            $scope->createAndAllowRoute('webmodel/nav/deep-page-copy-as-template');
+            $ctrl = new NavController('nav', $this->app);
+            $scope->getApp()->request->setBodyParams(['navId' => 1]);
+            $r = $scope->runControllerAction($ctrl, 'deep-page-copy-as-template');
+            $this->assertSame(200, $scope->getApp()->response->statusCode);
+        });
+    }
+
 }
