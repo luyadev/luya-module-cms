@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.3.6
 
-+ []() Fix a bug when controller action params are already decoded.
++ [#284](https://github.com/luyadev/luya-module-cms/pull/284) Fixed a bug where controller action params are already decoded from json to array.
 + [#283](https://github.com/luyadev/luya-module-cms/pull/283) Fix issue where creating a page copy as template throw an unknown error.
 
 ## 3.3.5 (28. July 2020)
