@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.3.7
 
-+ [#]() Fix error in translation key `nav_item_model_error_modulenameexists`.
++ [#285](https://github.com/luyadev/luya-module-cms/pull/285) Fix error in translation key `nav_item_model_error_modulenameexists`.
 
 ## 3.3.6 (6. August 2020)
 
