@@ -200,7 +200,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'İtibaren',
     'cmsadmin_settings_time_title_till' => 'Kadar',
     'view_index_page_meta_timestamp_create' => 'Sayfa oluşturulma tarihi',
-    'nav_item_model_error_modulenacd /var   meexists' => 'Takma ad "{alias}" zaten modül olarak var. Başka bir takma ad kullanın veya yapılandımanızda bu takma ad ile modül adınızı değiştirin.',
+    'nav_item_model_error_modulenameexists' => 'Takma ad "{alias}" zaten modül olarak var. Başka bir takma ad kullanın veya yapılandımanızda bu takma ad ile modül adınızı değiştirin.',
     'nav_item_model_error_parentnavidcannotnull' =>  'Ebeveyn navigasyon id boş olamaz, ebeveyn sayfadan çıkarken bir şeyler ters gitti.',
     'nav_item_model_error_urlsegementexistsalready' => 'Bu takma ad zaten var, lütfen başka bir ad girin.',
     'menu_group_item_env_redirections' => 'Yönlendirmeler',

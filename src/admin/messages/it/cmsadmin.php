@@ -189,7 +189,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'Dal',
     'cmsadmin_settings_time_title_till' => 'Al',
     'view_index_page_meta_timestamp_create' => 'Data di creazione pagina',
-    'nav_item_model_error_modulenacd /var   meexists' => 'L\'alias "{alias}" esiste già come modulo. Una un altro nome o rinomina il modulo con questo alias nella tua configurazione.',
+    'nav_item_model_error_modulenameexists' => 'L\'alias "{alias}" esiste già come modulo. Una un altro nome o rinomina il modulo con questo alias nella tua configurazione.',
     'nav_item_model_error_parentnavidcannotnull' =>  'La categoria padre non può essere nulla, qualcosa è andato storto mentre si estendenva la pagina padre.',
     'nav_item_model_error_urlsegementexistsalready' => 'Questo alias già esiste, scegli un altro nome.',
     'menu_group_item_env_redirections' => 'Redirects',

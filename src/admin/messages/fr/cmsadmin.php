@@ -189,7 +189,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'De',
     'cmsadmin_settings_time_title_till' => 'Jusqu\'à',
     'view_index_page_meta_timestamp_create' => 'Date de création de la page',
-    'nav_item_model_error_modulenacd /var   meexists' => 'L\'alias "{alias}" existe déjà en tant que module. Utilisez un alias différent ou renommez le module avec cet alias dans votre configuration.',
+    'nav_item_model_error_modulenameexists' => 'L\'alias "{alias}" existe déjà en tant que module. Utilisez un alias différent ou renommez le module avec cet alias dans votre configuration.',
     'nav_item_model_error_parentnavidcannotnull' => 'L\'identifiant du parent ne peut être nul, une erreur s\'est produite lors de l\'extension de la page parente.',
     'nav_item_model_error_urlsegementexistsalready' => 'Cet alias existe déjà, veuillez choisir un autre nom.',
     'menu_group_item_env_redirections' => 'Redirections',
