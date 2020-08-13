@@ -200,7 +200,7 @@ return [
     'cmsadmin_settings_time_title_from' => '开始日期',
     'cmsadmin_settings_time_title_till' => '截止日期',
     'view_index_page_meta_timestamp_create' => '页面创作日期',
-    'nav_item_model_error_modulenacd /var   meexists' => '当前别名"{alias}"已经存在，请使用另外的别名或者重命名配置文件中的模块别名.',
+    'nav_item_model_error_modulenameexists' => '当前别名"{alias}"已经存在，请使用另外的别名或者重命名配置文件中的模块别名.',
     'nav_item_model_error_parentnavidcannotnull' => '父导航id不能为null，从父页面扩展路径时将发生错误。',
     'nav_item_model_error_urlsegementexistsalready' => '此别名已存在，请取另一个名称。',
     'menu_group_item_env_redirections' => '管理转页',
