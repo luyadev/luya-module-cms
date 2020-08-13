@@ -2,16 +2,18 @@
 
 namespace luya\cms;
 
+use Yii;
 use luya\helpers\StringHelper;
 use luya\traits\CacheableTrait;
 use luya\web\Composition;
 use yii\base\Component;
 use \luya\cms\models\Website as WebsiteModel;
+use yii\web\NotFoundHttpException;
 
 /**
  * Class Website
  *
- * @property array|boolean $current
+ * @property array $current = ['name']
  *
  * @author Bennet Klarhoelter <boehsermoe@me.com>
  * @since 4.0.0
@@ -22,10 +24,14 @@ class Website extends Component
     
     private $_current = null;
     
+    /**
+     * @return array|bool
+     * @throws NotFoundHttpException
+     */
     public function getCurrent()
     {
         if ($this->_current === null) {
-            $this->_current = $this->findOneByHostName(\Yii::$app->request->hostName);
+            $this->_current = $this->findOneByHostName(Yii::$app->request->hostName);
         }
         
         return $this->_current;
@@ -63,6 +69,11 @@ class Website extends Component
                 $defaultWebsite = $website;
             }
         }
+    
+        if (!$defaultWebsite) {
+            // should never happen because there is always a default website
+            throw new NotFoundHttpException(sprintf("The requested host '%s' does not exist in website table", $hostName));
+        }
         
         $this->setHasCache($hostName, $defaultWebsite);
         return $defaultWebsite;
@@ -97,7 +108,9 @@ class Website extends Component
             if ($website['default_lang']) {
                 $hostInfoMapping[$website['host']] = [Composition::VAR_LANG_SHORT_CODE => $website['default_lang']];
                 foreach ($website['aliases'] as $alias) {
-                    $hostInfoMapping[trim($alias)] = [Composition::VAR_LANG_SHORT_CODE => $website['default_lang']];
+                    if (!isset($hostInfoMapping[$alias])) {
+                        $hostInfoMapping[$alias] = [Composition::VAR_LANG_SHORT_CODE => $website['default_lang']];
+                    }
                 }
             }
         }

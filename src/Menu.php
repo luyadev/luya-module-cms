@@ -716,10 +716,6 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             }
     
             $website = Yii::$app->website->findOneByHostName($hostName);
-            if (!$website) {
-                // should never happen because there is always a default website
-                throw new NotFoundHttpException(sprintf("The requested host '%s' does not exist in website table", $hostName));
-            }
     
             $data = $this->getNavData($lang['id'], $website['id']);
     
