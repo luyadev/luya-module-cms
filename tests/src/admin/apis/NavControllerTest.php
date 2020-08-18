@@ -48,7 +48,7 @@ class NavControllerTeste extends WebModelTestCase
             $r = $scope->runControllerAction($ctrl, 'tags', ['id' => 1]);
 
             $this->assertSame([
-                ['id' => '1', 'name' => 'foobar', 'translation' => ''],
+                ['id' => 1, 'name' => 'foobar', 'translation' => ''],
             ], $r);
 
             $this->expectException('yii\web\NotFoundHttpException');
