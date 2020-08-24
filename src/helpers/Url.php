@@ -19,13 +19,21 @@ use luya\cms\Menu;
 class Url extends \luya\helpers\Url
 {
     /**
-     * if the module could not be found (not registered in the cms) the method returns the provided module name.
+     * Link to a registered Module.
      *
-     * returns only ONE even if there are more! not good structure inside the cms?
+     * Its important to know that the `moduleName` must be registered in the modules section in your config and also 
+     * that a **module page** is created for this module, the module-block won't work.
      *
-     * @param string $moduleName
+     * If the module could not be found (not registered in the cms) the method returns the provided module name.
      *
-     * @return string The full_url from links component.
+     * If the module is placed several times, it will take the first pick. So ensure to place a module only once and use
+     * the module block for more integration use cases.
+     *
+     * > Read more about [[app-module-urlrules.md]].
+     *
+     * @param string $moduleName The name of module you'd like to link to. 
+     * @return string Returns the full url to the
+     * @see toModuleRoute()
      */
     public static function toModule($moduleName)
     {
@@ -39,33 +47,41 @@ class Url extends \luya\helpers\Url
     }
 
     /**
-     * Helper method to create a route based on the module name and the route and params.
+     * Link to a registered Module with custom Route and Params.
      *
-     * Use the route as defined in the modules' $urlRules array in order to generate the URL according
-     * to the rules' pattern. Example:
+     * > In order to link to a Module with a given route (and params) its recommend to generate an URL rule defintion first.
+     *
+     * Ensure that the $moduleName exists in the modules list of your config and a Module Page has been created for the given Name,
+     * otherwise the CMS does not know where to link.
+     *
+     * Assuming the following url rule defintion defined in {{luya\base\Module::$urlRules}}:
+     *
+     * ```php
+     * public $urlRules = [
+     *     ['blog/<year:\d{4}>/<month:\d{2}>' => 'blog/default/index'],
+     * ];
+     * ```
+     *
+     * Now its possible to generate the link with toModuleRoute:
      *
      * ```php
      * Url::toModuleRoute('blog', ['/blog/default/index', 'year' => 2016, 'month' => '07]);
      * ```
      *
-     * generates the following URL, assuming the blog module is located on the CMS page /my-super-blog:
+     * This generates the following URL, assuming the blog module is located on the CMS page /my-super-blog:
      *
-     * /my-super-blog/2016/07
-     *
-     * according to the following URL rule:
-     *
-     * ```php
-     * public $urlRules = [
-     *     ['pattern' => 'blog/<year:\d{4}>/<month:\d{2}>', 'route' => 'blog/default/index'],
-     * ];
      * ```
+     * /my-super-blog/2016/07
+     * ```
+     *
+     * > Keep in mind that the $urlRule must be prefixed with the module name, read more about [[app-module-urlrules.md]].
      *
      * @param string $moduleName The ID of the module, which should be found inside the nav items.
      * @param string|array $route The route of the module `module/controller/action` or an array like in Url::to with param infos `['/module/controller/action', 'foo' => 'bar']`.
      * @param array  $params The parameters for the url rule. If the route is provided as an array with params the further defined params or overwritten by the array_merge process.
      * @throws Exception
      * @return string
-     * @see \luya\helpers\Url::toModule()
+     * @see toModule()
      */
     public static function toModuleRoute($moduleName, array $route)
     {

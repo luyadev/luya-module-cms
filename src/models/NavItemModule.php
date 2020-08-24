@@ -89,7 +89,15 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
      */
     public function getDecodedActionParams()
     {
-        return empty($this->action_params) ? [] : Json::decode($this->action_params);
+        if (empty($this->action_params)) {
+            return [];
+        }
+
+        if (is_array($this->action_params)) {
+            return $this->action_params;
+        }
+
+        return Json::decode($this->action_params);
     }
 
     /**

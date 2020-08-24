@@ -56,7 +56,7 @@ use luya\admin\helpers\Angular;
                 </div>
                 <div class="form-group" ng-show="data.is_draft==0 && !data.isInline && data.parent_nav_id != null">
                     <label><?= Module::t('view_index_page_label_subpage'); ?></label>
-                    <menu-dropdown style="margin:0px; padding:0px;" class="menu-dropdown" nav-id="data.parent_nav_id" />
+                    <menu-dropdown style="margin:0px; padding:0px;" class="menu-dropdown" nav-id="data.parent_nav_id"></menu-dropdown>
                 </div>
                 <hr />
                 <div ng-switch-when="1">
@@ -66,7 +66,7 @@ use luya\admin\helpers\Angular;
                     <form-module data="data"></form-module>
                 </div>
                 <div ng-switch-when="3">
-                    <zaa-link model="data.redirect" />
+                    <zaa-link model="data.redirect"></zaa-link>
                 </div>
                 <button type="submit" class="btn btn-icon btn-save"><?= Module::t('btn_save'); ?></button>
                 <div class="alert alert-success mt-3 mb-0" ng-show="success">
@@ -142,7 +142,7 @@ use luya\admin\helpers\Angular;
     <collapse-container title="<?= Module::t('view_index_module_advanced_settings_button'); ?>" class="mb-3">
         <?= Angular::select('data.controller_name', Module::t('view_index_module_controller_name'), 'controllers'); ?>
         <?= Angular::select('data.action_name', Module::t('view_index_module_action_name'), 'actions'); ?>
-        <zaa-json-object ng-show="data.action_name" model="data.action_params" label="<?= Module::t('view_index_module_action_params'); ?>" />
+        <zaa-json-object ng-show="data.action_name" model="data.action_params" label="<?= Module::t('view_index_module_action_params'); ?>"></zaa-json-object>
     </collapse-container>
 </script>
 <!-- // MODULE -->

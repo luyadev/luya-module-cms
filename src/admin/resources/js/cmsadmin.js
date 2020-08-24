@@ -113,7 +113,7 @@
                                 '<label>{{label}}</label>' +
                             '</div>' +
                             '<div class="form-side">' +
-                                '<menu-dropdown class="menu-dropdown" nav-id="model" />' +
+                                '<menu-dropdown class="menu-dropdown" nav-id="model"></menu-dropdown>' +
                             '</div>' +
                         '</div>';
             }

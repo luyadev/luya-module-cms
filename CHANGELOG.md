@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 3.3.6 (6. August 2020)
+
++ [#284](https://github.com/luyadev/luya-module-cms/pull/284) Fixed a bug where controller action params are already decoded from json to array.
++ [#283](https://github.com/luyadev/luya-module-cms/pull/283) Fix issue where creating a page copy as template throw an unknown error.
+
+## 3.3.5 (28. July 2020)
+
++ [#282](https://github.com/luyadev/luya-module-cms/pull/282) Fix issue with angularjs version 1.8.0 compatibility.
+
 ## 3.3.4 (23. July 2020)
 
 + [#280](https://github.com/luyadev/luya-module-cms/pull/280) Since latest AngularJs updates in Admin Module there are DOM problems with `ng-include`. The "translate now" dialog where not showing anymore.
