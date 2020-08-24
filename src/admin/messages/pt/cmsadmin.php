@@ -200,7 +200,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'De',
     'cmsadmin_settings_time_title_till' => 'Até',
     'view_index_page_meta_timestamp_create' => 'Data de criação da página',
-    'nav_item_model_error_modulenacd /var   meexists' => 'O alias "{alias}" já existe como módulo. Use outro nome de alias ou renomeie o módulo com esse alias em sua configuração.',
+    'nav_item_model_error_modulenameexists' => 'O alias "{alias}" já existe como módulo. Use outro nome de alias ou renomeie o módulo com esse alias em sua configuração.',
     'nav_item_model_error_parentnavidcannotnull' =>  'O id de navegação pai não pode ser nulo, algo deu errado ao estender da página pai.',
     'nav_item_model_error_urlsegementexistsalready' => 'Este alias já existe, por favor, pegue outro nome.',
     'menu_group_item_env_redirections' => 'Redirecionamentos',

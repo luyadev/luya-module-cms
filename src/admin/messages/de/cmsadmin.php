@@ -199,7 +199,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'Von',
     'cmsadmin_settings_time_title_till' => 'Bis',
     'view_index_page_meta_timestamp_create' => 'Erstellungsdatum',
-    'nav_item_model_error_modulenacd /var   meexists' => 'Der Alias "{alias}" existiert bereits als ein Module. Bitte wähle einen andere Bezeichnung oder benenne den bestehenden Alias in der Konfiguration um.',
+    'nav_item_model_error_modulenameexists' => 'Der Alias "{alias}" existiert bereits als ein Module. Bitte wähle einen andere Bezeichnung oder benenne den bestehenden Alias in der Konfiguration um.',
     'nav_item_model_error_parentnavidcannotnull' =>  'Die übergeordnete Nav-ID darf nicht Null sein.',
     'nav_item_model_error_urlsegementexistsalready' => 'Dieser Alias existiert bereits, bitte wähle einen anderen Namen.',
     'menu_group_item_env_redirections' => 'Weiterleitungen',

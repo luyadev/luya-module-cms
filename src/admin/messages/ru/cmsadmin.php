@@ -200,7 +200,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'Страница доступна с',
     'cmsadmin_settings_time_title_till' => 'по',
     'view_index_page_meta_timestamp_create' => 'Дата создания страницы',
-    'nav_item_model_error_modulenacd /var   meexists' => 'Алиас "{alias}" уже используется модулем. Выберите другой алиас или переименуйте модуль в вашей конфигурации.',
+    'nav_item_model_error_modulenameexists' => 'Алиас "{alias}" уже используется модулем. Выберите другой алиас или переименуйте модуль в вашей конфигурации.',
     'nav_item_model_error_parentnavidcannotnull' =>  'Родительский nav id не может быть null, что-то пошло не так в процессе наследования от родительской страницы.',
     'nav_item_model_error_urlsegementexistsalready' => 'Такой алиас уже существует, пожалуйста, укажите другой.',
     'menu_group_item_env_redirections' => 'Редиректы',

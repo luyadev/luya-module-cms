@@ -192,7 +192,7 @@ return [
     'cmsadmin_settings_time_title_from' => '부터',
     'cmsadmin_settings_time_title_till' => '까지',
     'view_index_page_meta_timestamp_create' => '페이지 생성 날짜',
-    'nav_item_model_error_modulenacd /var   meexists' => '별칭 "{alias}"는 이미 모듈로 존재합니다. 다른 별칭 이름을 사용하거나 구성에서 이 별칭으로 모듈의 이름을 바꿉니다.',
+    'nav_item_model_error_modulenameexists' => '별칭 "{alias}"는 이미 모듈로 존재합니다. 다른 별칭 이름을 사용하거나 구성에서 이 별칭으로 모듈의 이름을 바꿉니다.',
     'nav_item_model_error_parentnavidcannotnull' =>  '부모 탐색 ID는 null 일 수 없으며 부모 페이지에서 확장하는 동안 문제가 발생했습니다.',
     'nav_item_model_error_urlsegementexistsalready' => '이 별칭은 이미 존재합니다. 다른 이름을 사용하십시오.',
     'menu_group_item_env_redirections' => '리다이렉션',

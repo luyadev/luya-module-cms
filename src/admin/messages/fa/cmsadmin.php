@@ -188,7 +188,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'از',
     'cmsadmin_settings_time_title_till' => 'Till',
     'view_index_page_meta_timestamp_create' => 'تاریخ ایجاد صفحه',
-    'nav_item_model_error_modulenacd /var   meexists' => 'The alias "{alias}" exists already as module. Use another alias name or rename the module with this alias in your config.',
+    'nav_item_model_error_modulenameexists' => 'The alias "{alias}" exists already as module. Use another alias name or rename the module with this alias in your config.',
     'nav_item_model_error_parentnavidcannotnull' =>  'The parent nav id can not be null, something went wrong while extending from parent page.',
     'nav_item_model_error_urlsegementexistsalready' => 'This alias exists already, please take another name.',
     'menu_group_item_env_redirections' => 'ریدایرکت ها',

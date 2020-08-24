@@ -198,7 +198,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'Van',
     'cmsadmin_settings_time_title_till' => 'Tot',
     'view_index_page_meta_timestamp_create' => 'Aanmaakdatum van de pagina',
-    'nav_item_model_error_modulenacd /var   meexists' => 'De alias "{alias}" bestaat al als module.  Gebruik een andere aliasnaam of hernoem de module met deze alias in uw config.',
+    'nav_item_model_error_modulenameexists' => 'De alias "{alias}" bestaat al als module.  Gebruik een andere aliasnaam of hernoem de module met deze alias in uw config.',
     'nav_item_model_error_parentnavidcannotnull' => 'De bovenliggende navigatie-id kan niet leeg zijn, er is iets misgegaan bij het uitbreiden vanaf de bovenliggende pagina.',
     'nav_item_model_error_urlsegementexistsalready' => 'Deze alias bestaat al, neem een ​​andere naam aan.',
     'menu_group_item_env_redirections' => 'Omleidingen',

@@ -200,7 +200,7 @@ return [
     'cmsadmin_settings_time_title_from' => 'จาก',
     'cmsadmin_settings_time_title_till' => 'ถึง',
     'view_index_page_meta_timestamp_create' => 'วันที่สร้างเพจ',
-    'nav_item_model_error_modulenacd /var   meexists' => 'ชื่อเรียก "{alias}" มีอยู่แล้วในโมดูล ใช้ชื่อเรียกอื่นหรือเปลี่ยนชื่อโมดูลในหน้าการตั้งค่า',
+    'nav_item_model_error_modulenameexists' => 'ชื่อเรียก "{alias}" มีอยู่แล้วในโมดูล ใช้ชื่อเรียกอื่นหรือเปลี่ยนชื่อโมดูลในหน้าการตั้งค่า',
     'nav_item_model_error_parentnavidcannotnull' =>  'การนำทางหลักไม่สามารถเป็นค่าว่างได้ มีข้อผิดพลาดระหว่างขยายจากหน้าหลัก',
     'nav_item_model_error_urlsegementexistsalready' => 'ชื่อเรียกมีอยู่แล้วกรุณาเลือกชื่ออื่น',
     'menu_group_item_env_redirections' => 'การเชื่อมโยง',
