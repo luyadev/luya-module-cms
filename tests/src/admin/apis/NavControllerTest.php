@@ -224,6 +224,14 @@ class NavControllerTest extends WebModelTestCase
 
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
+            $this->createCmsNavContainerFixture([
+                'container1' => [
+                    'id' => 1,
+                    'name' => 'container',
+                    'alias' => 'container',
+                    'website_id' => 1,
+                ],
+            ]);
             $this->createCmsNavFixture([
                 'nav1' => [
                     'id' => 1,
@@ -259,6 +267,14 @@ class NavControllerTest extends WebModelTestCase
 
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
+            $this->createCmsNavContainerFixture([
+                'container1' => [
+                    'id' => 1,
+                    'name' => 'container',
+                    'alias' => 'container',
+                    'website_id' => 1,
+                ],
+            ]);
             $this->createCmsNavFixture([
                 'nav1' => [
                     'id' => 1,
