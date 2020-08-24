@@ -259,9 +259,4 @@ return [
     'menu_group_protocol' => 'Protokoll',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'Die gesuchte Seite wurde noch nicht übersetzt.',
-    
-// 4.0
-
-    'menu_group_item_env_websites' => 'Websites',
-    'model_website_use_default_theme' => 'Use default theme',
 ];
