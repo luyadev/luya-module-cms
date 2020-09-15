@@ -288,6 +288,8 @@ class Block extends NgRestModel
         $object->setEnvOption('blockId', $blockId);
         $object->setEnvOption('context', $context);
         $object->setEnvOption('pageObject', $pageObject);
+
+        $object->setup();
         
         return $object;
     }
@@ -331,6 +333,8 @@ class Block extends NgRestModel
         $object->setEnvOption('blockId', $blockId);
         $object->setEnvOption('context', $context);
         $object->setEnvOption('pageObject', $pageObject);
+
+        $object->setup();
 
         return $object;
     }

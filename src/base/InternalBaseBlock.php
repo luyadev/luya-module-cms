@@ -73,6 +73,11 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         unset($this->_injectorObjects[$offset]);
     }
     
+    public function setup()
+    {
+        
+    }
+
     /**
      *
      * @param string $offset The name of the registered Injector name.
