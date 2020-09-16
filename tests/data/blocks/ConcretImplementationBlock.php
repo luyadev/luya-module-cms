@@ -14,6 +14,11 @@ class ConcretImplementationBlock implements BlockInterface
     public function onRegisterFromCache()
     {
     }
+
+    public function setup()
+    {
+        
+    }
     
     /**
      * Get the name of the block in order to display in administration context.
