@@ -73,9 +73,11 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         unset($this->_injectorObjects[$offset]);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function setup()
-    {
-        
+    {   
     }
 
     /**

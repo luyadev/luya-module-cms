@@ -4,6 +4,8 @@ namespace tests\web\cmsadmin\models;
 
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use cmstests\CmsNgRestTestCase;
+use luya\cms\models\Block;
+use yii\base\ErrorException;
 
 class BlockTest extends CmsNgRestTestCase
 {
@@ -75,5 +77,11 @@ class BlockTest extends CmsNgRestTestCase
         $this->assertNull($this->api->actionToFav());
         $this->assertNull($this->api->actionRemoveFav());
         $this->assertNull($this->api->actionToggleGroup());
+    }
+
+    public function testObjectId()
+    {
+        $this->expectException(ErrorException::class);
+        Block::objectId(1,1,"foo");
     }
 }
