@@ -9,7 +9,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 + [#288](https://github.com/luyadev/luya-module-cms/pull/288) Introduced a new `setup()` method in `luya\cms\base\BlockInterface`. This method is called when the block object is instantiated in frontend context.
 
-## 3.3.7
+## 3.3.7 (15. September 2020)
 
 + [#285](https://github.com/luyadev/luya-module-cms/pull/285) Fix error in translation key `nav_item_model_error_modulenameexists`.
 
