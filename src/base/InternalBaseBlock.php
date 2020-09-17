@@ -74,6 +74,13 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     }
     
     /**
+     * {@inheritDoc}
+     */
+    public function setup()
+    {   
+    }
+
+    /**
      *
      * @param string $offset The name of the registered Injector name.
      * @return \luya\cms\base\BaseBlockInjector
