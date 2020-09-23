@@ -2,6 +2,19 @@
 
 This document will help you upgrading from a LUYA admin module version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+## 3.3.7 to 3.4.0
+
++ [#288](https://github.com/luyadev/luya-module-cms/pull/288) Introduced a new `setup()` method in `luya\cms\base\BlockInterface`. Its very unlikely to adjust the code, but if there is class which only implements the `luya\cms\base\BlockInterface` this method is now required.
+
+```php
+public function setup()
+{
+
+}
+```
+
+In general all blocks at least extend from `luya\cms\base\InternalBaseBlock` which already includes the new setup() method, therefore ensure all blocks extend from InternalBaseBlock.
+
 ## 3.0 to 3.1
 
 + CMS menu item methods `teardown`, `parents` return now an instance of QueryIteratorFilter, this is the expected behavior as for all the other methods return more then one row. If an array is expected in code logic, use `iterator_to_array` to parse the iterator object into an array.

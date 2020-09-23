@@ -3,7 +3,13 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 3.3.7
+## 3.4.0
+
+> This release contains a very small and unlikely used signature change. Check the [UPGRADE document](UPGRADE.md) to read more about.
+
++ [#288](https://github.com/luyadev/luya-module-cms/pull/288) Introduced a new `setup()` method in `luya\cms\base\BlockInterface`. This method is called when the block object is instantiated in frontend context.
+
+## 3.3.7 (15. September 2020)
 
 + [#285](https://github.com/luyadev/luya-module-cms/pull/285) Fix error in translation key `nav_item_model_error_modulenameexists`.
 

@@ -39,6 +39,13 @@ interface BlockInterface
      * @return string
      */
     public function icon();
+
+    /**
+     * This method is run when the block object is initialized in frontend context.
+     * 
+     * @since 3.4.0
+     */
+    public function setup();
     
     /**
      * Get the output in the frontend context.
