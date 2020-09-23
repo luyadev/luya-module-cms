@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 4.0
+
++ [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support
+
 ## 3.4.0
 
 > This release contains a very small and unlikely used signature change. Check the [UPGRADE document](UPGRADE.md) to read more about.
