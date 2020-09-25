@@ -2,6 +2,7 @@
 
 namespace luya\cms\behaviours;
 
+use Yii;
 use luya\admin\ngrest\base\NgRestActiveQuery;
 use luya\admin\ngrest\base\NgRestModel;
 use yii\base\Event;
@@ -19,6 +20,6 @@ class WebsiteScopeBehavior extends \yii\base\Behavior
     {
         /** @var NgRestActiveQuery $query */
         $query = $event->sender;
-        $query->andWhere(['website_id' => \Yii::$app->website->current['id']]);
+        $query->andWhere(['website_id' => Yii::$app->website->current['id']]);
     }
 }
