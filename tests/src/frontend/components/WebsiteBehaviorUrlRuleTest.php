@@ -79,7 +79,7 @@ class WebsiteBehaviorUrlRuleTest extends CmsFrontendTestCase
             Yii::$app->request->setHostInfo("http://test.de");
     
             $this->expectException(NotFoundHttpException::class);
-            $this->expectExceptionMessage("'The requested host 'test.de' does not exist in website table'");
+            $this->expectExceptionMessage("The requested host 'test.de' does not exist in website table");
             $rule->parseRequest($this->app->urlManager, $this->app->request);
         });
     }
