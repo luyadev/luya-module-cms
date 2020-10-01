@@ -9,6 +9,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 + [#288](https://github.com/luyadev/luya-module-cms/pull/288) Introduced a new `setup()` method in `luya\cms\base\BlockInterface`. This method is called when the block object is instantiated in frontend context.
 + [#290](https://github.com/luyadev/luya-module-cms/issues/290) Add `titleContent` callable function for `luya\cms\widgets\NavTree` widget in order to customize the link content.
++ [#292](https://github.com/luyadev/luya-module-cms/pull/292) Improve the CMS Block-Editor styles.
 
 ## 3.3.7 (15. September 2020)
 
