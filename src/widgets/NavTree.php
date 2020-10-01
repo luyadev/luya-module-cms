@@ -135,6 +135,21 @@ class NavTree extends Widget
     ];
 
     /**
+     * @var callable A callable which can be used to generate the link content, the first argument of the function
+     * is the {{luya\cms\menu\Item}}:
+     * 
+     * ```php
+     * 'titleContent' => function(luya\cms\menu\Item $item) {
+     *     return '<i class="fa fa-edit">'. $item->title;
+     * }
+     * ```
+     * 
+     * If no callable is defined, which is default, then the {{luya\cms\menu\Item::$title}} is returned.
+     * @since 3.4.0
+     */
+    public $titleContent;
+
+    /**
      * @var null|string The list tag will be set during init
      */
     private $_listTag;
@@ -230,7 +245,7 @@ class NavTree extends Widget
             $html .= Html::beginTag($this->_itemTag, $this->compileOption($item, $itemOptions));
 
             // <a></a>
-            $html .= Html::tag($this->_linkTag, $item->title, $this->compileOption($item, $linkOptions));
+            $html .= Html::tag($this->_linkTag, $this->titleContent ? call_user_func($this->titleContent, $item) : $item->title, $this->compileOption($item, $linkOptions));
 
             // Recursive iterate if item has Children
             if ($item->hasChildren) {
