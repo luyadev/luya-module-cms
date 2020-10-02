@@ -13,7 +13,9 @@ class DefaultControllerTest extends WebModelTestCase
      */
     public function testActions()
     {
-        $ctrl = new DefaultController('default', $this->app->getModule('cmsadmin'));
-        $this->assertNotEmpty($ctrl->actionIndex());
+        PermissionScope::run($this->app, function(PermissionScope $scope) {
+            $ctrl = new DefaultController('default', $this->app->getModule('cmsadmin'));
+            $this->assertNotEmpty($ctrl->actionIndex());
+        });
     }
 }
