@@ -4,7 +4,7 @@ use luya\helpers\Html;
 
 ?>
 <script type="text/ng-template" id="recursion.html">
-<h4 class="cmsadmin-container-title" ng-show="placeholder.label">{{placeholder.label}}</h4>
+<div class="text-muted py-3" ng-show="placeholder.label">{{placeholder.label}}</div>
 <div class="card" ng-class="{'card-no-container-title': !placeholder.label}">
     <div class="card-body">
         <div class="empty-placeholder" ng-if="placeholder.__nav_item_page_block_items.length == 0" dnd dnd-drag-disabled dnd-model="placeholder" dnd-isvalid="true" dnd-ondrop="dropItemPlaceholder(dragged,dropped,position, element)" dnd-css="{onDrag: 'empty-placeholder--is-dragging', onHover: 'empty-placeholder--drag-hover', onHoverTop: 'empty-placeholder--drag-top', onHoverMiddle: 'empty-placeholder--drag-middle', onHoverBottom: 'empty-placeholder--drag-bottom'}"><?= Module::t('view_update_drop_blocks'); ?></div>

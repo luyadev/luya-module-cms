@@ -151,7 +151,7 @@
 }
 
 .blockholder-item {
-    border: 1px dashed transparent;
+    border: 1px solid transparent;
     padding: 4px 2px 3px 30px;
     position: relative;
     transition: .2s ease-in-out border;
@@ -161,8 +161,9 @@
     }
 
     &:hover {
-        border-color: $white;
+        border-color: map-get($grays, 600);
         cursor: move;
+        border-radius: $border-radius;
     }
 
     .blockholder-icon {

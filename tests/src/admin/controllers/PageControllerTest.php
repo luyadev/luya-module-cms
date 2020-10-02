@@ -19,7 +19,5 @@ class PageControllerTest extends WebModelTestCase
             $this->assertNotEmpty($ctrl->actionDrafts());
             $this->assertNotEmpty($ctrl->actionCreate());
         });
-
-        
     }
 }
