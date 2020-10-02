@@ -8,6 +8,9 @@ use luya\cms\admin\controllers\DefaultController;
 
 class DefaultControllerTest extends WebModelTestCase
 {
+    /**
+     * @runInSeparateProcess
+     */
     public function testActions()
     {
         $ctrl = new DefaultController('default', $this->app->getModule('cmsadmin'));
