@@ -541,7 +541,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             $parent = $parent->with($this->_with)->getParent();
         }
 
-        return Query::createArrayIterator(array_reverse($data), $this->lang, $this->_with, false);
+        return Query::createArrayIterator(array_reverse($data), $this->lang, array_flip($this->_with), false);
     }
 
     /**
@@ -640,7 +640,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             $parent = $parent->with($this->_with)->getParent();
         }
 
-        return Query::createArrayIterator(array_reverse($data, true), $this->lang, $this->_with, false);
+        return Query::createArrayIterator(array_reverse($data, true), $this->lang, array_flip($this->_with), false);
     }
     
     /**
@@ -675,7 +675,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function getDescendants()
     {
-        return Query::createArrayIterator($this->getInternalDescendants(), $this->lang, $this->_with, false);
+        return Query::createArrayIterator($this->getInternalDescendants(), $this->lang, array_flip($this->_with), false);
         
     }
 
