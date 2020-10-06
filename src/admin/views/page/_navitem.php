@@ -156,6 +156,7 @@ use luya\helpers\Html;
 </div>
 <div ng-if="!loaded">loading...</div>
 <div class="cmsadmin-page" ng-if="isTranslated && loaded">
+    
     <div class="row" ng-if="item.nav_item_type==1" ng-repeat="(key, row) in container.__placeholders track by key">
         <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'"></div>
     </div>
@@ -177,23 +178,25 @@ use luya\helpers\Html;
     </div>
 </div>
 <div class="cmsadmin-page" ng-if="!isTranslated && loaded">
-    <div ng-controller="CopyPageController">
-        <h3><?= Module::t('view_index_add_page_from_language'); ?></h3>
-        <p><?= Module::t('view_index_add_page_from_language_info'); ?></p>
-        <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
-        <div ng-show="isOpen">
-            <ul class="list-group" style="margin-bottom:25px;">
-                <li ng-repeat="item in items" class="list-group-item"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
-            </ul>
-            <div ng-show="itemSelection" style=" margin-bottom:25px;">
-                <zaa-text label="<?= Module::t('view_index_page_title'); ?>" model="itemSelection.title"></zaa-text>
-                <zaa-text label="<?= Module::t('view_index_page_alias'); ?>" model="itemSelection.alias"></zaa-text>
-                <button ng-click="save()" class="btn btn-save btn-icon" type="button"><?= Module::t('view_index_page_btn_save'); ?></button>
+    <div class="shadow bg-white rounded p-3 m-3">
+        <div ng-controller="CopyPageController">
+            <p class="lead font-weight-bold"><?= Module::t('view_index_add_page_from_language'); ?></p>
+            <p><?= Module::t('view_index_add_page_from_language_info'); ?></p>
+            <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
+            <div ng-show="isOpen">
+                <ul class="list-group" style="margin-bottom:25px;">
+                    <li ng-repeat="item in items" class="list-group-item"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
+                </ul>
+                <div ng-show="itemSelection" style=" margin-bottom:25px;">
+                    <zaa-text label="<?= Module::t('view_index_page_title'); ?>" model="itemSelection.title"></zaa-text>
+                    <zaa-text label="<?= Module::t('view_index_page_alias'); ?>" model="itemSelection.alias"></zaa-text>
+                    <button ng-click="save()" class="btn btn-save btn-icon" type="button"><?= Module::t('view_index_page_btn_save'); ?></button>
+                </div>
             </div>
         </div>
-    </div>
-    <div ng-controller="CmsadminCreateInlineController">
-        <h3><?= Module::t('view_index_add_page_empty'); ?></h3>
-        <create-form data="data"></create-form>
+        <div ng-controller="CmsadminCreateInlineController">
+             <p class="lead font-weight-bold mt-5"><?= Module::t('view_index_add_page_empty'); ?></p>
+            <create-form data="data"></create-form>
+        </div>
     </div>
 </div>
