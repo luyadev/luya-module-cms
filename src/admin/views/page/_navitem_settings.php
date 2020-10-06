@@ -107,7 +107,7 @@ use luya\admin\helpers\Angular;
         <div ng-switch-when="3" ng-controller="PageVersionsController">
             <form ng-submit="createNewVersionSubmit(create)">
                 <h1><?= Module::t('version_create_title'); ?></h1>
-                <div class="alert alert-info"><?= Module::t('version_create_info'); ?></div>
+                <p><?= Module::t('version_create_info'); ?></p>
                 <?= Angular::text('create.versionName', Module::t('version_input_name')); ?>
                 <div class="form-group">
                     <div class="form-check">
