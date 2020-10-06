@@ -43,7 +43,7 @@ use luya\admin\helpers\Angular;
             </div>
             <div ng-switch-when="2">
                 <h1><?= Module::t('view_update_properties_title'); ?></h1>
-                <div ng-show="!hasValues" class="alert alert-info"><?= Module::t('view_update_no_properties_exists'); ?></div>
+                <p ng-show="!hasValues" ><?= Module::t('view_update_no_properties_exists'); ?></p>
                 <div class="row" ng-repeat="prop in propertiesData">
                     <div ng-if="prop.i18n" class="col">
                         <ul>
