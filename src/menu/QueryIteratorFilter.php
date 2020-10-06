@@ -37,12 +37,14 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
     
     /**
      * Callculate to number of items when using count() function against the QueryIterator object.
+     * 
+     * > Use iterator_count in order to ensure the filtered items are counted as well.
      *
-     * @return int The number of elements in the object.
+     * @return int The number of elements in the iterator.
      */
     public function count()
     {
-        return count($this->getInnerIterator()->data);
+        return iterator_count($this);
     }
 
     /**
