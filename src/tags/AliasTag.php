@@ -2,6 +2,7 @@
 
 namespace luya\cms\tags;
 
+use luya\cms\frontend\Module;
 use Yii;
 use luya\tag\BaseTag;
 
@@ -24,7 +25,7 @@ class AliasTag extends BaseTag
     
     public function readme()
     {
-        return 'The alias tag allows you to use aliaes defined in your application and predefined. Image link to public html folder <img src=\"alias[@web]/image.jpg\">';
+        return Module::t('tag_alias_readme');
     }
     
     public function parse($value, $sub)
