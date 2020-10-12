@@ -38,7 +38,7 @@ return [
     'block_html_cfg_raw_label' => 'Render HTML in Admin',
 
     // 3.4.0
-    'tag_alias_readme' => 'The alias tag allows you to use aliaes defined in your application and predefined. Image link to public html folder <img src=\"alias[@web]/image.jpg\">',
-    'tag_menu_readme' => 'Generate a link to a menu point where the key is the id of the navigation item (you can see the page id when hover over the main in the administration area).',
-    'tag_page_readme' => 'Get the content of a full page or just a placeholder of the page. The first param is the page it (which you get by hovering over the menu tree in the administration area) `page[1]` if you just want to get the content of a placeholder of the cmslayout used the second parameter `page[1](placeholderName)`.',
+    'tag_alias_readme' => 'The alias tag allows you to use aliases defined in your application as well as predefined aliases. As an example, you can use `alias[@web]` to link to images in the public html folder: <img src=\"alias[@web]/image.jpg\">',
+    'tag_menu_readme' => 'Generate a link to a menu item where the key is the page id (you can see the page ids when hovering over the site navigation in the administration).',
+    'tag_page_readme' => 'Get the content of a full page or of a placeholder of a page. The first parameter is the page id (which you get by hovering over the site navigation in the administration): `page[1]`. If you only want to get the content of a placeholder of the cmslayout, use the second parameter: `page[1](placeholderName)`.',
 ];
