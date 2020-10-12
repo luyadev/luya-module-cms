@@ -2,6 +2,7 @@
 
 namespace luya\cms\tags;
 
+use luya\cms\frontend\Module;
 use Yii;
 use luya\tag\BaseTag;
 use yii\helpers\Html;
@@ -21,9 +22,7 @@ class MenuTag extends BaseTag
     
     public function readme()
     {
-        return <<<EOT
-Generate a link to a menu point where the key is the id of the navigation item (you can see the page id when hover over the main in the administration area).
-EOT;
+        return Module::t('tag_menu_readme');
     }
 
     public function parse($value, $sub)
