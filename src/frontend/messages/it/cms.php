@@ -36,4 +36,9 @@ return [
     'block_module_strictrender' => 'Rendering stretto',
     'block_module_strictrender_help' => 'Quando il rendering stretto è abilitato, il modulo eseguirà solo le rott previste (module, controller, action, params) senza elaborare azioni e rotte del controller.',
     'block_html_cfg_raw_label' => 'Rendering HTML nell\'Admin',
+
+    // 3.4.0
+    'tag_alias_readme' => 'The alias tag allows you to use aliases defined in your application as well as predefined aliases. As an example, you can use `alias[@web]` to link to images in the public html folder: <img src=\"alias[@web]/image.jpg\">',
+    'tag_menu_readme' => 'Generate a link to a menu item where the key is the page id (you can see the page ids when hovering over the site navigation in the administration).',
+    'tag_page_readme' => 'Get the content of a full page or of a placeholder of a page. The first parameter is the page id (which you get by hovering over the site navigation in the administration): `page[1]`. If you only want to get the content of a placeholder of the cmslayout, use the second parameter: `page[1](placeholderName)`.',
 ];
