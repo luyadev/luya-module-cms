@@ -60,12 +60,11 @@ class MirrorContentBlock extends PhpBlock
     */
     public function admin()
     {
-        return '<h5 class="mb-3">Page Copy Block</h5>' .
-            '<table class="table table-bordered">' .
-            '{% if vars.language is not empty %}' .
-            '<tr><td><b>Language</b></td><td>{{vars.language}}</td></tr>' .
-            '{% endif %}'.
-            '</table>';
+        if (empty($this->getVarValue('language'))) {
+            return '<div>Configure a <b><span class="material-icons">edit</span> language</b> to mirror its content for the current placeholder.</div>';
+        }
+
+        return '<div>Mirroring this placeholder from <span class="material-icons">arrow_right_alt</span> <b>'.Lang::find()->where(['id' => $this->getVarValue('language')])->select(['name'])->scalar().'</b>.';
     }
 
     public function frontend()
