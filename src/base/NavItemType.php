@@ -8,8 +8,9 @@ use yii\base\Controller;
 /**
  * Abstract class for all Item Types.
  *
- * @property \yii\base\Controller $controller The controller object.
+ * @property Controller $controller The controller object.
  * @property array $options Optional settings for the nav item type.
+ * @property NavItem $navItem
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -26,7 +27,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     /**
      * Get the corresponding nav item type for this type object
      *
-     * @return \yii\db\ActiveRecordInterface An active record type.
+     * @return NavItem An active record type.
      */
     public function getNavItem()
     {
@@ -47,7 +48,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     
     /**
      * Setter method to store the current controller Object
-     * @param \yii\base\Controller $controller The controller object.
+     * @param Controller $controller The controller object.
      */
     public function setController(Controller $controller)
     {
@@ -57,7 +58,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     /**
      * Getter method for the controller object.
      *
-     * @return \yii\base\Controller
+     * @return Controller
      */
     public function getController()
     {
@@ -93,6 +94,6 @@ abstract class NavItemType extends \yii\db\ActiveRecord
      */
     public function getOption($key)
     {
-        return (isset($this->_options[$key])) ? $this->_options[$key] : false;
+        return isset($this->_options[$key]) ? $this->_options[$key] : false;
     }
 }

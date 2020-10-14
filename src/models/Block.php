@@ -269,7 +269,7 @@ class Block extends NgRestModel
      *
      * @param string $class
      * @param integer $blockId The id of the cms_block table
-     * @param integer $id The context id, for example the id of the text block element
+     * @param integer $id The context id, the cms_nav_item_page_block_item unique id
      * @param string $context admin or frontend
      * @param mixed $pageObject
      * @return \luya\cms\base\BlockInterface

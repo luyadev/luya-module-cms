@@ -275,10 +275,10 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * Returns all environment/context informations where the block have been placed. Example Data.
      *
-     * + id (unique identifier for the block in cms context)
-     * + blockId (id in the block list database, which is not unique)
+     * + id: unique identifier for the block in cms context (luya\cms\models\NavItemPageBlock->id)
+     * + blockId: (id in the block list database, which is not unique)
      * + context
-     * + pageObject
+     * + pageObject (luya\cms\models\NavItem)
      *
      * @return array Returns an array with key value parings.
      */

@@ -109,7 +109,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * Get the list of version/pages for a specific nav item id
      *
      * @param integer $navItemId
-     * @return \yii\db\ActiveRecord
+     * @return NavItemPage[]
      */
     public static function getVersionList($navItemId)
     {
@@ -402,6 +402,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public static function getPlaceholder($placeholderVar, $prevId, NavItemPage $navItemPage)
     {
+        var_dump($placeholderVar);
+        exit;
         $nav_item_page_block_item_data = NavItemPageBlockItem::find()
             ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPage->id, 'placeholder_var' => $placeholderVar])
             ->orderBy(['sort_index' => SORT_ASC])
