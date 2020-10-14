@@ -109,7 +109,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * Get the list of version/pages for a specific nav item id
      *
      * @param integer $navItemId
-     * @return \yii\db\ActiveRecord
+     * @return NavItemPage[]
      */
     public static function getVersionList($navItemId)
     {

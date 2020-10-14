@@ -171,10 +171,10 @@ class PhpBlockView extends View
     /**
      * Get a block environment value.
      *
-     * + **id**: Return the unique identifier for this block, each blocks has its id from the database, this is absolute unique.
-     * + **blockId**: Returns the id of the block in the database. Two blocks of the same type would have the same blockId.
+     * + **id**: Return the unique identifier for this block, each blocks has its id from the database, this is absolute unique. {{luya\cms\models\NavItemPageBlockItem}} -> id
+     * + **blockId**: Returns the id of the block in the database. Two blocks of the same type would have the same blockId. {{luya\cms\models\Block}} -> id
      * + **context**: Returns frontend or backend to find out in which context you are.
-     * + **pageObject**: Returns the `luya\cms\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
+     * + **pageObject**: Returns the {{luya\cms\models\NavItem}} Object where you can run `getNav()` to retrievew the Nav Object.
      * + **isFirst**: Returns whether this block is the first in its placeholder or not.
      * + **isLast**: Return whether his block is the last in its placeholder or not.
      * + **index**: Returns the number of the index/position within this placheholder.

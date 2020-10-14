@@ -3,6 +3,8 @@
 namespace NavItemPageTest;
 
 use cmstests\WebModelTestCase;
+use luya\cms\models\NavItemPage;
+use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 use yii\base\ViewNotFoundException;
 
@@ -35,6 +37,21 @@ class NavItemPageTest extends WebModelTestCase
         } catch (\Exception $e) {
             $this->assertContains('luya-module-cms/testfile', $e->getMessage());
         }
+    }
+
+    public function testGetOption()
+    {
+        $fixtures = new NgRestModelFixture([
+            'modelClass' => NavItemPage::class,
+        ]);
+
+        $model = $fixtures->newModel;
+
+        $this->assertFalse($model->getOption('foobar'));
+
+        $model->setOptions(['bar' => 'foo']);
+
+        $this->assertSame('foo', $model->getOption('bar'));
     }
 
     public function testAbsolutePath()

@@ -273,13 +273,9 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     }
     
     /**
-     * Returns all environment/context informations where the block have been placed. Example Data.
-     *
-     * + id (unique identifier for the block in cms context)
-     * + blockId (id in the block list database, which is not unique)
-     * + context
-     * + pageObject
-     *
+     * Returns all environment/context informations where the block have been placed.
+     * 
+     * @see {{PhpBlockView::env()}} for all possible values.
      * @return array Returns an array with key value parings.
      */
     public function getEnvOptions()
