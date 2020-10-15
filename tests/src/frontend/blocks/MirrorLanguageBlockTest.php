@@ -47,21 +47,29 @@ class MirrorLanguageBlockTest extends ModelTestCase
             1 => [
                 'id' => 1,
                 'lang_id' => 1,
+                'nav_item_type' => 1,
             ],
             2 => [
                 'id' => 2,
                 'lang_id' => 2,
+                'nav_item_type' => 1,
             ]
         ]);
 
         $block = new MirrorLanguageBlock();
 
         $this->assertEmpty($block->frontend());
+        $this->assertNotEmpty($block->name());
+        $this->assertNotEmpty($block->icon());
+        $this->assertNotEmpty($block->config());
+        $this->assertNotEmpty($block->admin());
+
+        $block->setVarValues(['language' => 2]);
+
+        $r = $block->frontend();
 
         $block->setVarValues(['language' => 1]);
 
         $r = $block->frontend();
-
-        var_dump($r);
     }
 }
