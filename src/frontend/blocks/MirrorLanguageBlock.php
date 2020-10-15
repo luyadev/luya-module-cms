@@ -80,6 +80,11 @@ class MirrorLanguageBlock extends PhpBlock
     {
         $langId = $this->getVarValue('language');
         
+        // if no language is selected, just do nothing
+        if (empty($langId)) {
+            return;
+        }
+
         if ($langId == Yii::$app->adminLanguage->activeId) {
             return Yii::debug('Circular content mirroring detected.', __METHOD__);
         }
