@@ -95,6 +95,11 @@ class MirrorLanguageBlock extends PhpBlock
             ->asArray()
             ->one();
 
+        // unabel to find item, just do nothing
+        if (!$item) {
+            return;
+        }
+
         $navItemId = NavItemPage::find()->where(['id' => $item['nav_item_page_id']])->select(['nav_item_id'])->scalar();
         
         $navId = NavItem::find()->where(['id' => $navItemId])->select(['nav_id'])->scalar();
