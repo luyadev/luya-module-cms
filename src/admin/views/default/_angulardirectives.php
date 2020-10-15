@@ -39,7 +39,7 @@ use luya\admin\helpers\Angular;
                     <label><?= Module::t('view_index_page_alias'); ?></label>
                     <input name="text" type="text" class="form-control" ng-model="data.alias" />
                 </div>
-                <div class="form-group" ng-show="data.is_draft==0">
+                <div class="form-group" ng-show="data.is_draft==0 && !data.isInline">
                     <label for="navigationPos"><?= Module::t('view_index_page_label_parent_nav_id'); ?></label>
                     <div class="form-check">
                         <input class="form-check-input" ng-checked="data.parent_nav_id == 0" type="radio" name="navigationPos" id="nav-pos-root" />
@@ -87,47 +87,25 @@ use luya\admin\helpers\Angular;
             <label class="form-check-label" ng-click="data.use_draft = 0; data.from_draft_id = 0" for="create-as-draft-no"><?= Module::t('view_index_no'); ?></label>
         </div>
     </div>
-    <div class="form-group" ng-show="data.use_draft==1">
-        <label class="input__label"><?= Module::t('view_index_page_select_draft'); ?></label>
-        <select class="form-control" ng-model="data.from_draft_id" convert-to-number>
-            <option value="0"><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
-            <option value="">-----</option>
-            <option ng-repeat="draft in drafts" value="{{draft.id}}">{{draft.title}}</option>
-        </select>
+    <div class="form-group" ng-if="data.use_draft==1">
+        <label><?= Module::t('view_index_page_select_draft'); ?></label>
+        <luya-select ng-model="data.from_draft_id" options="drafts"></luya-select>
     </div>
-    <div class="form-group" ng-show="data.use_draft==0">
-        <label class="input__label"><?= Module::t('view_index_page_layout'); ?></label>
-        <select class="form-control" ng-model="data.layout_id" convert-to-number>
-            <option value="0"><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
-            <option value="">-----</option>
-            <option ng-repeat="item in layouts" value="{{item.id}}">{{item.name}}</option>
-        </select>
+    <div class="form-group" ng-if="data.use_draft==0">
+        <label><?= Module::t('view_index_page_layout'); ?></label>
+        <luya-select ng-model="data.layout_id" options="layouts"></luya-select>
     </div>
 </script>
 <!-- PAGE UPDATE FORM -->
 <script type="text/ng-template" id="updateformpage.html">
-<div class="form-group form-side-by-side" ng-show="!isEditAvailable()">
-    <div class="form-side form-side-label">
-        <label class="input__label"><?= Module::t('view_index_page_layout'); ?></label>
+    <div class="form-group" ng-show="!isEditAvailable()">
+        <label><?= Module::t('view_index_page_layout'); ?></label>
+        <luya-select ng-model="data.layout_id" options="layoutsData"></luya-select>
     </div>
-    <div class="form-side">
-        <select class="form-control" ng-model="data.layout_id" convert-to-number>
-            <option value="0"><?= \luya\cms\admin\Module::t('view_index_create_page_please_choose'); ?></option>
-            <option value="">-----</option>
-            <option ng-repeat="item in layoutsData" value="{{item.id}}">{{item.name}}</option>
-        </select>
+    <div class="form-group" ng-show="isEditAvailable()">
+        <label><?= Module::t('view_index_page_version_chooser'); ?></label>
+        <luya-select ng-model="data.nav_item_type_id" options="versionsData"></luya-select>
     </div>
-</div>
-<div class="form-group form-side-by-side" ng-show="isEditAvailable()">
-	<div class="form-side form-side-label">
-    	<label><?= Module::t('view_index_page_version_chooser'); ?></label>
-    </div>
-	<div class="form-side">
-        <select class="form-control" ng-model="data.nav_item_type_id" convert-to-number>
-            <option ng-repeat="item in versionsData" value="{{item.id}}">{{item.version_alias}}</option>
-        </select>
-	</div>
-</div>
 </script>
 
 <!-- MODULE -->
