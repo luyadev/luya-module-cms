@@ -12,6 +12,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#292](https://github.com/luyadev/luya-module-cms/pull/292) Improve the CMS Block-Editor styles.
 + [#297](https://github.com/luyadev/luya-module-cms/issues/297) Fixed a bug where menu queries with hidden informations won't retrieve correct data and count (hidden information was not passed correctly to the ArrayIterator from inside an luya\menu\Item).
 + [#138](https://github.com/luyadev/luya-module-cms/pull/299) Added missing translations for all CMS tags.
++ [#302](https://github.com/luyadev/luya-module-cms/pull/302) Added new "Language Mirroring" block for the developer group, in order to mirror content from a language placeholder into another.
 
 ## 3.3.7 (15. September 2020)
 

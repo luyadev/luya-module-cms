@@ -41,4 +41,8 @@ return [
     'tag_alias_readme' => 'Das alias-Tag ermöglicht es, applikations-spezifische sowie vordefinierte Aliasse zu verwenden. Mit `alias[@web]` können zum Beispiel Bilder im Public-HTML-Verzeichnis verlinkt werden: <img src=\"alias[@web]/image.jpg\">',
     'tag_menu_readme' => 'Erstelle einen Link zu einem Menü-Eintrag, wobei die Seiten-ID als Key anzugeben ist (Seiten-IDs werden beim Überfahren der Website-Navigation in der Administration angezeigt).',
     'tag_page_readme' => 'Lade den Inhalt einer kompletten Seite oder eines Platzhalters einer Seite. Der erste Parameter ist die Seiten-ID (die beim Überfahren der Website-Navigation in der Administration angezeigt wird): `page[1]`. Wenn nur der Inhalt eines Platzhalters des CMS-Layouts geladen werden soll, verwenden Sie den zweiten Parameter: `page[1](placeholderName)`.',
+    'block_mirror_language_name' => 'Sprache spiegeln',
+    'block_mirror_config_language_label' => 'Quellsprache',
+    'block_mirror_admin_empty_language' => 'Geben Sie eine <b><span class="material-icons">edit</span> Quellsprache</b> an, um deren Inhalte für diesen Platzhalter zu spiegeln.',
+    'block_mirror_admin_configured_language' => 'Platzhalter wird gespiegelt von <span class="material-icons">arrow_right_alt</span> <b>{name}</b>.',
 ];
