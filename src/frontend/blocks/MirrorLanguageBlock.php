@@ -12,6 +12,12 @@ use luya\cms\models\NavItemPage;
 use luya\cms\models\NavItemPageBlockItem;
 use Yii;
 
+/**
+ * Mirror Language Content.
+ * 
+ * @author Basil Suter <git@nadar.io>
+ * @since 3.4.0
+ */
 class MirrorLanguageBlock extends PhpBlock
 {
     /**
