@@ -47,7 +47,7 @@ class BlockImporterTest extends CmsConsoleTestCase
                 5 => 'block \luya\cms\frontend\blocks\ModuleBlock: Added to database',
                 6 => 'Insert new block group block_group_basic_elements.',
                 7 => 'block \cmstests\data\blocks\import\TestBlock: Added to database',
-                8 => 'Block importer finished with 3 blocks.',
+                8 => 'Block importer finished with 4 blocks.',
             ]
         ], $log);
     }
