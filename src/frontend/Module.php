@@ -90,7 +90,12 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      */
     public $fullPageCache = true;
 
-    public $fullPageCacheDuration = 21600; // 6 hours
+    /**
+     * @var integer The number of seconds the full page should be cached, 0 means as long as the cache dependencie does not change. The default
+     * value is for 2 hours.
+     * @since 3.4.0
+     */
+    public $fullPageCacheDuration = 7200; // 2 hours
     
     /**
      * @inheritdoc
