@@ -73,6 +73,7 @@ class DefaultController extends Controller
             'variations' => [
                 Yii::$app->request->url,
             ],
+            'duration' => $this->module->fullPageCacheDuration,
             'dependency' => [
                 'class' => 'yii\caching\DbDependency',
                 'sql' => 'SELECT max(timestamp_update) FROM cms_nav_item',

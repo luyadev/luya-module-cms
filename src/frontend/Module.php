@@ -89,6 +89,8 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * @since 2.1.0
      */
     public $fullPageCache = true;
+
+    public $fullPageCacheDuration = 21600; // 6 hours
     
     /**
      * @inheritdoc
