@@ -27,7 +27,7 @@
    },
    "require-dev":{
       "luyadev/luya-testsuite":"^1.0",
-      "twbs/bootstrap":"~4.3.0",
+      "twbs/bootstrap":"^4.3.0",
       "unglue/client":"^1.3"
    },
    "autoload":{

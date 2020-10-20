@@ -17,6 +17,7 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
         return [
             'id' => 'ngresttest',
             'basePath' => dirname(__DIR__),
+            'language' => 'de',
             'components' => [
                 'db' => [
                     'class' => 'yii\db\Connection',
