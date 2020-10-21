@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b1755a4ec83a020a40f25556f6a0779",
+    "content-hash": "a8de07fbe47e6d79778e282b69a2a745",
     "packages": [],
     "packages-dev": [
         {
@@ -355,16 +355,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.12.8",
+            "version": "8.12.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "5a6e4e730de52f55882d2db27016e2916f8791e9"
+                "reference": "a3e8c9c832b3c40d69b477b2a96b252d03fbf274"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/5a6e4e730de52f55882d2db27016e2916f8791e9",
-                "reference": "5a6e4e730de52f55882d2db27016e2916f8791e9",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/a3e8c9c832b3c40d69b477b2a96b252d03fbf274",
+                "reference": "a3e8c9c832b3c40d69b477b2a96b252d03fbf274",
                 "shasum": ""
             },
             "require": {
@@ -419,7 +419,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2020-08-13T17:48:08+00:00"
+            "time": "2020-10-09T15:01:50+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -638,16 +638,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.6.2",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "266ac375cf58c7deffe60581beb55fbb476810a6"
+                "reference": "b6aadae17b4aacfc9618658740957fdea79aaa8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/266ac375cf58c7deffe60581beb55fbb476810a6",
-                "reference": "266ac375cf58c7deffe60581beb55fbb476810a6",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/b6aadae17b4aacfc9618658740957fdea79aaa8c",
+                "reference": "b6aadae17b4aacfc9618658740957fdea79aaa8c",
                 "shasum": ""
             },
             "require": {
@@ -692,25 +692,25 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2020-08-06T15:25:39+00:00"
+            "time": "2020-09-23T14:45:00+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "3.5.1",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "0d1fe26af257234b9de524091d0fffaea9d8f0d3"
+                "reference": "4c3b4b72fe7b58f2303b322898b7611f3b8de8c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/0d1fe26af257234b9de524091d0fffaea9d8f0d3",
-                "reference": "0d1fe26af257234b9de524091d0fffaea9d8f0d3",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/4c3b4b72fe7b58f2303b322898b7611f3b8de8c6",
+                "reference": "4c3b4b72fe7b58f2303b322898b7611f3b8de8c6",
                 "shasum": ""
             },
             "require": {
                 "flowjs/flow-php-server": "^1.0",
-                "luyadev/luya-core": "^1.3",
+                "luyadev/luya-core": "^1.7",
                 "robthree/twofactorauth": "^1.7",
                 "sizeg/yii2-jwt": "^1.2",
                 "whichbrowser/parser": "^2.0",
@@ -730,8 +730,8 @@
                 "bower-asset/ui-cropper": "^1.0",
                 "bower-asset/ui-router": "~0.4.0",
                 "cebe/php-openapi": "^1.4",
-                "luyadev/luya-testsuite": "^1.0",
-                "twbs/bootstrap": "~4.3.0",
+                "luyadev/luya-testsuite": "^1.2",
+                "twbs/bootstrap": "^4.5",
                 "unglue/client": "^1.4.1"
             },
             "suggest": {
@@ -779,20 +779,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2020-08-12T08:09:09+00:00"
+            "time": "2020-10-01T08:23:35+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "b4327865b2059f8dc7a11847b118a3af2d9beb3f"
+                "reference": "2f7d50d7788c4ce0b50ab26b5745e7d2ba4cf898"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/b4327865b2059f8dc7a11847b118a3af2d9beb3f",
-                "reference": "b4327865b2059f8dc7a11847b118a3af2d9beb3f",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/2f7d50d7788c4ce0b50ab26b5745e7d2ba4cf898",
+                "reference": "2f7d50d7788c4ce0b50ab26b5745e7d2ba4cf898",
                 "shasum": ""
             },
             "require": {
@@ -837,7 +837,7 @@
                 "module",
                 "php"
             ],
-            "time": "2020-06-10T11:08:00+00:00"
+            "time": "2020-09-22T16:12:09+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1139,21 +1139,22 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.1.7",
+            "version": "v6.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0"
+                "reference": "917ab212fa00dc6eacbb26e8bc387ebe40993bc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
-                "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/917ab212fa00dc6eacbb26e8bc387ebe40993bc1",
+                "reference": "917ab212fa00dc6eacbb26e8bc387ebe40993bc1",
                 "shasum": ""
             },
             "require": {
                 "ext-ctype": "*",
                 "ext-filter": "*",
+                "ext-hash": "*",
                 "php": ">=5.5.0"
             },
             "require-dev": {
@@ -1203,7 +1204,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-07-14T18:50:27+00:00"
+            "time": "2020-10-09T14:55:58+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -2606,16 +2607,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v4.3.1",
+            "version": "v4.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "8fa0d3010112dca5dd6dd501173415856001ba8b"
+                "reference": "a716fb03f965dc0846df479e14388b1b4b93d7ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/8fa0d3010112dca5dd6dd501173415856001ba8b",
-                "reference": "8fa0d3010112dca5dd6dd501173415856001ba8b",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a716fb03f965dc0846df479e14388b1b4b93d7ce",
+                "reference": "a716fb03f965dc0846df479e14388b1b4b93d7ce",
                 "shasum": ""
             },
             "replace": {
@@ -2633,12 +2634,12 @@
             ],
             "authors": [
                 {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                },
-                {
                     "name": "Mark Otto",
                     "email": "markdotto@gmail.com"
+                },
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
                 }
             ],
             "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
@@ -2653,7 +2654,13 @@
                 "sass",
                 "web"
             ],
-            "time": "2019-02-13T16:01:40+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/bootstrap",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-10-13T15:38:30+00:00"
         },
         {
             "name": "twig/twig",

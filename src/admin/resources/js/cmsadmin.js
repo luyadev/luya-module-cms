@@ -252,8 +252,16 @@
 				$scope.data.layout_id = 0;
 				$scope.layoutsData = ServiceLayoutsData.data;
 
+				$scope.arrayToSelect = function(input, valueField, labelField) {
+					var output = [];
+					angular.forEach(input, function(value) {
+						output.push({"label": value[labelField], "value": value[valueField]});
+					});
+					return output;
+				};
+
 				$scope.$on('service:LayoutsData', function(event, data) {
-					$scope.layoutsData = data;
+					$scope.layoutsData = []; // $scope.arrayToSelect(data); // @TODO REMOVE IF VERIFIED
 				});
 
 
@@ -261,7 +269,7 @@
 
 				$scope.getVersionList = function() {
 					$http.get('admin/api-cms-navitempage/versions', { params : { navItemId : $scope.navItemId }}).then(function(response) {
-						$scope.versionsData = response.data;
+						$scope.versionsData = $scope.arrayToSelect(response.data, 'id', 'version_alias');
 					});
 				};
 
@@ -306,9 +314,17 @@
 					$scope.menuData = data;
 				});
 
+				$scope.arrayToSelect = function(input, valueField, labelField) {
+					var output = [];
+					angular.forEach(input, function(value) {
+						output.push({"label": value[labelField], "value": value[valueField]});
+					});
+					return output;
+				};
+
             	function init() {
-            		$scope.drafts = $scope.menuData.drafts;
-            		$scope.layouts = $scope.layoutsData;
+            		$scope.drafts = $scope.arrayToSelect($scope.menuData.drafts, 'id', 'title');
+					$scope.layouts = $scope.arrayToSelect($scope.layoutsData, 'id', 'name');
             	}
 
             	init();

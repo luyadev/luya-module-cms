@@ -9,6 +9,7 @@ use luya\web\Composition;
 use yii\helpers\Html;
 use luya\helpers\ArrayHelper;
 use luya\cms\models\NavItem;
+use luya\helpers\Json;
 use luya\helpers\Url;
 
 /**
@@ -336,7 +337,14 @@ class LangSwitcher extends \luya\base\Widget
      */
     public static function setUrlRuleParamByModel(NgRestModel $model, $attribute, $parmName = null)
     {
-        $array = I18n::decode($model->getOldAttribute($attribute));
+        if (method_exists($model, 'getI18nOldValue')) {
+            $array = $model->getI18nOldValue($attribute);
+        } else {
+            // support version before luya admin 3.6.0
+            $array = $model->getOldAttribute($attribute);
+        }
+
+        $array = I18n::decode($array);
 
         foreach ($array as $lang => $value) {
             self::setUrlRuleParam($lang, $parmName ? $parmName : $attribute, $value);
