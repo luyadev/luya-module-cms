@@ -1657,7 +1657,47 @@
 			}]);
 		};
 
+		$scope.isAnyRequiredAttributeEmpty =  function() {
+
+			var response = false;
+			angular.forEach($scope.block.vars, function(varItem) {
+				if (varItem.required && $scope.isEmpty($scope.data, varItem.var)) {
+					AdminToastService.error(varItem.label + ' is required');
+					response = true;
+				}
+			});
+
+			angular.forEach($scope.block.cfgs, function(varItem) {
+
+				if (varItem.required && $scope.isEmpty($scope.cfgdata, varItem.var)) {
+					AdminToastService.error(varItem.label + ' is required');
+					response = true;
+				}
+			});
+
+			return response;
+		};
+
+		$scope.isEmpty = function(values, key) {
+			//console.log(values, key);
+			if (values.hasOwnProperty(key) && values[key]) {
+				if (values[key].length == 0) {
+					return true;
+				}
+				
+				return false;
+			}
+
+			return true;
+		};
+
 		$scope.save = function () {
+
+			if ($scope.isAnyRequiredAttributeEmpty()) {
+				return;
+			}
+
+
 			$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.block.id, {
 				json_config_values: $scope.data,
 				json_config_cfg_values: $scope.cfgdata,
