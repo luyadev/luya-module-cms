@@ -49,8 +49,8 @@ use luya\helpers\Html;
                 </div>
                 <modal is-modal-hidden="modalHidden" modal-title="{{block.name}}">
                     <div ng-if="!modalHidden" class="row" ng-init="initModalMode()">
-                        <div class="col">
-                            <div class="card">
+                        <div class="col-lg">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <ul class="nav nav-tabs card-header-tabs">
                                         <li class="nav-item" ng-click="modalMode=1" ng-show="block.vars.length > 0">
@@ -85,14 +85,16 @@ use luya\helpers\Html;
                                 </div>
                             </div>
                         </div>
-                        <div ng-if="showHelp" class="col">
-                            <ul class="list-group">
-                                <li class="list-group-item" style="cursor:pointer;" click-paste-pusher="{{help.example}}" ng-repeat="help in navCfg.helptags">
-                                    <p><span class="badge badge-primary">{{ help.name }}</span></p>
-                                    <small><span ng-bind-html="help.readme | trustAsUnsafe"></span></small>
-                                    <span class="badge badge-secondary">{{help.example}}</span>
-                                </li>
-                            </ul>
+                        <div ng-if="showHelp" class="col-lg">
+                            <div class="row row-cols-2">
+                                <div style="cursor:pointer;" class="col" click-paste-pusher="{{help.example}}" ng-repeat="help in navCfg.helptags">
+                                    <div class="mb-3 p-2 shadow rounded">
+                                        <p class="lead text-center">{{ help.name }}</p>
+                                        <p class="small text-muted"><span ng-bind-html="help.readme | trustAsUnsafe"></span></p>
+                                        <p class="mb-0 text-center"><span class="badge badge-secondary">{{help.example}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </modal>
