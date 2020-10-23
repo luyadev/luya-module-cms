@@ -249,4 +249,8 @@ return [
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
+
+    // 3.4
+
+    'js_block_attribute_empty' => '«%label%» cannot be empty.',
 ];

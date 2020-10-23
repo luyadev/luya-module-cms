@@ -642,7 +642,6 @@
 			$http.get(api, { params : params }).then(function(success) {
 				ServiceMenuData.load(true);
 			}, function(error) {
-				//console.log('throw error message errorMessageOnDuplicateAlias');
 				ServiceMenuData.load(true);
 			});
 		};
@@ -1662,7 +1661,7 @@
 			var response = false;
 			angular.forEach($scope.block.vars, function(varItem) {
 				if (varItem.required && $scope.isEmpty($scope.data, varItem.var)) {
-					AdminToastService.error(varItem.label + ' is required');
+					AdminToastService.error(i18nParam('js_block_attribute_empty', {label: varItem.label}));
 					response = true;
 				}
 			});
@@ -1670,7 +1669,7 @@
 			angular.forEach($scope.block.cfgs, function(varItem) {
 
 				if (varItem.required && $scope.isEmpty($scope.cfgdata, varItem.var)) {
-					AdminToastService.error(varItem.label + ' is required');
+					AdminToastService.error(i18nParam('js_block_attribute_empty', {label: varItem.label}));
 					response = true;
 				}
 			});
@@ -1679,7 +1678,6 @@
 		};
 
 		$scope.isEmpty = function(values, key) {
-			//console.log(values, key);
 			if (values.hasOwnProperty(key) && values[key]) {
 				if (values[key].length == 0) {
 					return true;

@@ -217,4 +217,8 @@ return [
     'menu_group_protocol' => 'Protokoll',
     'menu_group_protocol_model_event_logger' => 'Modell eseménynapló',
     'unable_to_find_item_for_language' => 'A kért oldal még nem lett lefordítva.',
+
+    // 3.4
+
+    'js_block_attribute_empty' => '«%label%» cannot be empty.',
 ];

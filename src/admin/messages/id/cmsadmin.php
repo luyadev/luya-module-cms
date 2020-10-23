@@ -249,4 +249,8 @@ return [
     'menu_group_protocol' => 'Protokol',
     'menu_group_protocol_model_event_logger' => 'Catatan Model Event',
     'unable_to_find_item_for_language' => 'Halaman yang diminta belum diterjemahkan.',
+
+    // 3.4
+
+    'js_block_attribute_empty' => '«%label%» cannot be empty.',
 ];
