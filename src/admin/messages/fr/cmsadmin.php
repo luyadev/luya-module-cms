@@ -200,9 +200,9 @@ return [
     'redirect_model_atr_redirect_path' => 'Destination',
     'redirect_model_atr_redirect_path_hint' => 'Vous pouvez utiliser soit un chemin absolu commençant par https:// ou http://, soit un chemin relatif à la racine du site commençant par /, soit un chemin relatif au chemin de redirection (par ex. : maintenance à rediriger depuis /shop/start vers /shop/maintenance).',
     'redirect_model_atr_redirect_status_code' => 'Code d\'état HTTP',
-    'redirect_model_atr_redirect_status_code_hint' => 'Type de redirection. Lorsque "301: Moved Permanently" est utilisé, les navigateurs mettent en cache la redirection afin que les modifications apportées à la destination ne soient pas effectives sans effacer le cache du navigateur.',
-    'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
-    'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
+    'redirect_model_atr_redirect_status_code_hint' => 'Type de redirection. Lorsque "301: Déplacé définitivement" est utilisé, les navigateurs mettent en cache la redirection afin que les modifications apportées à la destination ne soient pas effectives sans effacer le cache du navigateur.',
+    'redirect_model_atr_redirect_status_code_opt_301' => '301: Déplacé définitivement',
+    'redirect_model_atr_redirect_status_code_opt_302' => '302: Déplacé temporairement',
 
     // 1.0.1
     'module_permission_page' => 'Contenu de la page',
@@ -211,7 +211,7 @@ return [
     'page_update_actions_deepcopyastemplate_title' => 'Copier comme modèle',
     'page_update_actions_deepcopyastemplate_text' => 'Créer un modèle de la page actuelle avec tout son contenu. Les modèles contiendront toutes les langues dont la version est publiée.',
     'page_update_actions_deepcopyastemplate_btn' => 'Créer un modèle',
-    'js_page_create_copy_as_template_success' => 'Le modèlke a été créé.',
+    'js_page_create_copy_as_template_success' => 'Le modèle a été créé.',
 
 // 2.0
 
@@ -238,19 +238,20 @@ return [
 
 // 3.0
 
-    'menu_group_item_env_themes' => 'Themes',
-    'view_index_page_is_cacheable' => 'Caching',
-    'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
+    'menu_group_item_env_themes' => 'Thèmes',
+    'view_index_page_is_cacheable' => 'Mise en cache',
+    'view_index_page_is_cacheable_hint' => 'Lorsqu\'elle est activée, la page entière sera mise en cache, y compris tous les blocs, par conséquent les données générées dynamiquement dans des blocs ne seront pas mises à jour.
+
+    ',
 
 // 3.3
 
-    'menu_group_page_display' => 'Page Display',
+    'menu_group_page_display' => 'Affichage de la page',
     'menu_group_configuration' => 'Configuration',
-    'menu_group_protocol' => 'Protocol',
-    'menu_group_protocol_model_event_logger' => 'Model Event Log',
-    'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
-
+    'menu_group_protocol' => 'Protocole',
+    'menu_group_protocol_model_event_logger' => 'Journal des événements du modèle',
+    'unable_to_find_item_for_language' => 'La page demandée n\'a pas encore été traduite.',
+  
     // 3.4
-
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
 ];
