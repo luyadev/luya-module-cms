@@ -27,6 +27,23 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * Returns the configuration array.
      *
+     * An array with either `var`, `cfg` or `placeholder`. An example with vars
+     * with a required text input:
+     * 
+     * ```php
+     * return [
+     *     'vars' => [
+     *         [
+     *             'var' => 'userInputText',
+     *             'label' => 'Description of userInputText',
+     *             'type' => self::TYPE_TEXT,
+     *             'required' => true,
+     *         ]
+     *     ]
+     * ];
+     * ```
+     * 
+     * @see [[app-block-types.md]]
      * @return array
      */
     abstract public function config();
