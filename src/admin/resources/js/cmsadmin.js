@@ -642,7 +642,6 @@
 			$http.get(api, { params : params }).then(function(success) {
 				ServiceMenuData.load(true);
 			}, function(error) {
-				//console.log('throw error message errorMessageOnDuplicateAlias');
 				ServiceMenuData.load(true);
 			});
 		};
@@ -1657,7 +1656,46 @@
 			}]);
 		};
 
+		$scope.isAnyRequiredAttributeEmpty =  function() {
+
+			var response = false;
+			angular.forEach($scope.block.vars, function(varItem) {
+				if (varItem.required && $scope.isEmpty($scope.data, varItem.var)) {
+					AdminToastService.error(i18nParam('js_block_attribute_empty', {label: varItem.label}));
+					response = true;
+				}
+			});
+
+			angular.forEach($scope.block.cfgs, function(varItem) {
+
+				if (varItem.required && $scope.isEmpty($scope.cfgdata, varItem.var)) {
+					AdminToastService.error(i18nParam('js_block_attribute_empty', {label: varItem.label}));
+					response = true;
+				}
+			});
+
+			return response;
+		};
+
+		$scope.isEmpty = function(values, key) {
+			if (values.hasOwnProperty(key) && values[key]) {
+				if (values[key].length == 0) {
+					return true;
+				}
+				
+				return false;
+			}
+
+			return true;
+		};
+
 		$scope.save = function () {
+
+			if ($scope.isAnyRequiredAttributeEmpty()) {
+				return;
+			}
+
+
 			$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.block.id, {
 				json_config_values: $scope.data,
 				json_config_cfg_values: $scope.cfgdata,

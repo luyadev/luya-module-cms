@@ -15,6 +15,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#138](https://github.com/luyadev/luya-module-cms/pull/299) Added missing translations for all CMS tags.
 + [#302](https://github.com/luyadev/luya-module-cms/pull/302) Added new "Language Mirroring" block for the developer group, in order to mirror content from a language placeholder into another.
 + [#304](https://github.com/luyadev/luya-module-cms/issues/304) Add new default value for full page cache duration (2 hours instead of 1 minute).
++ [#306](https://github.com/luyadev/luya-module-cms/pull/306) New option for block variable and configuration setup allows to make attributes required using `'required' => true` in block config. 
 
 ## 3.3.7 (15. September 2020)
 
