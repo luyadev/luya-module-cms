@@ -43,16 +43,9 @@ class Website extends NgRestModel
         return [
             [['name', 'host'], 'required'],
             [['name', 'host'], 'unique'],
+            [['theme_id'], 'integer'],
             [['is_active', 'is_default', 'is_deleted', 'redirect_to_host'], 'boolean'],
             [['aliases', 'default_lang'], 'string']
-        ];
-    }
-    
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host', 'theme_id', 'default_lang'],
-            'restupdate' => ['name', 'host', 'aliases', 'is_active', 'is_default', 'redirect_to_host', 'theme_id', 'default_lang'],
         ];
     }
     
