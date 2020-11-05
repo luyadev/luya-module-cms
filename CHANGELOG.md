@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 3.5.0
+
++ [#309](https://github.com/luyadev/luya-module-cms/pull/309) Added new help information for page properties as tooltip.
+
 ## 3.4.0 (24. October 2020)
 
 > This release contains a very small and unlikely used signature change. Check the [UPGRADE document](UPGRADE.md) to read more about.
