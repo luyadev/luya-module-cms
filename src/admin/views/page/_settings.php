@@ -44,15 +44,16 @@ use luya\admin\helpers\Angular;
             <div ng-switch-when="2">
                 <h1><?= Module::t('view_update_properties_title'); ?></h1>
                 <p ng-show="!hasValues" ><?= Module::t('view_update_no_properties_exists'); ?></p>
-                <div class="row" ng-repeat="prop in propertiesData">
-                    <div ng-if="prop.i18n" class="col">
+                <div ng-repeat="prop in propertiesData" ng-class="{'border-top border-light pt-4': !$first}">
+                    <span class="help-button btn btn-icon btn-help" tooltip tooltip-text="{{prop.help}}" ng-show="prop.help" tooltip-position="left"></span>
+                    <div ng-if="prop.i18n">
                         <ul>
                             <li ng-repeat="lang in languagesData">
                                 <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{lang.name}}: {{prop.label}}" model="propValues[prop.id][lang.short_code]"></zaa-injector>
                             </li>
                         </ul>
                     </div>
-                    <div ng-if="!prop.i18n" class="col">
+                    <div ng-if="!prop.i18n">
                         <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                     </div>
                 </div>
