@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.5.0
 
-+ []() Added new help information for page properties as tooltip.
++ [#309](https://github.com/luyadev/luya-module-cms/pull/309) Added new help information for page properties as tooltip.
 
 ## 3.4.0 (24. October 2020)
 
