@@ -89,7 +89,7 @@ use luya\admin\helpers\Angular;
                     <tr ng-repeat="versionItem in typeData">
                         <td>{{versionItem.version_alias}} <span class="badge badge-primary" ng-if="item.nav_item_type_id == versionItem.id"><?= Module::t('view_index_page_version_chooser'); ?></span></td>
                         <td>{{versionItem.contentAsArray.nav_item_page.layout_name}}</td>
-                        <td>{{versionItem.timestamp_create | date :'short'}}</td>
+                        <td>{{versionItem.timestamp_create*1000 | date :'short'}}</td>
                         <td>
                             <button type="button" class="btn btn-symbol btn-sm btn-outline-secondary" ng-click="editVersion(versionItem)"><i class="material-icons">edit</i></button>
                             <button type="button" class="btn btn-delete btn-icon btn-nolabel" ng-if="item.nav_item_type_id != versionItem.id" ng-click="removeVersion(versionItem)"></button>
