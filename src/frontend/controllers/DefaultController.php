@@ -64,7 +64,8 @@ class DefaultController extends Controller
     /**
      * Returns whether admin user is working in frontend context.
      *
-     * @return boolean
+     * @return boolean Whether caching should be enabled or not.
+     * @since 3.5.0
      */
     private function isAdminLoggedIn()
     {
