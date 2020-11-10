@@ -54,10 +54,22 @@ class DefaultController extends Controller
                 && Yii::$app->menu->current
                 && Yii::$app->menu->current->type == NavItem::TYPE_PAGE
                 && !Yii::$app->menu->current->is404Page
+                && $this->isAdminLoggedIn()
                 && (int) NavItem::find()->where(['nav_id' => Yii::$app->menu->current->navId, 'lang_id' => Yii::$app->adminLanguage->activeId])->select(['is_cacheable'])->scalar();
         } catch (NotFoundHttpException $notFound) {
             return false;
         }
+    }
+
+    /**
+     * Returns whether admin user is working in frontend context.
+     *
+     * @return boolean Whether caching should be enabled or not.
+     * @since 3.5.0
+     */
+    private function isAdminLoggedIn()
+    {
+        return Yii::$app->has('adminuser') ? Yii::$app->adminuser->isGuest : true;
     }
 
     /**
