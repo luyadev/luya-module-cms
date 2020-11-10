@@ -6,7 +6,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 3.5.0
 
 + [#309](https://github.com/luyadev/luya-module-cms/pull/309) Added new help information for page properties as tooltip.
-
++ [#310](https://github.com/luyadev/luya-module-cms/issues/310) Fixed a bug where full page cache could cache the content including the LUYA Toolbar.
 ## 3.4.0 (24. October 2020)
 
 > This release contains a very small and unlikely used signature change. Check the [UPGRADE document](UPGRADE.md) to read more about.
