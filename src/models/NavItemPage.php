@@ -199,6 +199,17 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
+     * Returns whether admin user is working in frontend context.
+     *
+     * @return boolean Whether caching should be enabled or not.
+     * @since 3.5.0
+     */
+    private function isGuest()
+    {
+        return Yii::$app->has('adminuser') ? Yii::$app->adminuser->isGuest : true;
+    }
+
+    /**
      * Render a placeholder recursive based on navItemPageId, a placeholder variable and a previous id.
      *
      * @param integer $navItemPageId
@@ -222,12 +233,15 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $next = $key+1;
             $cacheKey = ['blockcache', (int) $placeholder['id']];
 
-            $blockResponse = $this->getHasCache($cacheKey);
-    
             /** @var $blockObject \luya\cms\base\InternalBaseBlock */
             $blockObject = Block::createObject($placeholder['class'], $placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
     
             if ($blockObject) {
+
+                $isCachingEnabled = $blockObject->getIsCacheEnabled() && $this->isGuest();
+
+                $blockResponse = $isCachingEnabled ? $this->getHasCache($cacheKey) : false;
+
                 if ($blockResponse === false) {
                     $className = get_class($blockObject);
                     // insert var and cfg values from database
@@ -298,7 +312,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     }
                     
         
-                    if ($blockObject->getIsCacheEnabled()) {
+                    if ($isCachingEnabled) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
                         $blockObject->onRegister();
                     }
