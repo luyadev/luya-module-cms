@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 3.5.0
 
-+ []() Do not serve the blocks from cache when an user is logged into the admin.
++ [#314](https://github.com/luyadev/luya-module-cms/pull/314) Do not serve the blocks from the cache when an adminuser is logged in.
 + [#309](https://github.com/luyadev/luya-module-cms/pull/309) Added new help information for page properties as tooltip.
 + [#310](https://github.com/luyadev/luya-module-cms/issues/310) Fixed a bug where full page cache could cache the content including the LUYA Toolbar.
 
