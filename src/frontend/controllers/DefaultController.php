@@ -157,15 +157,15 @@ class DefaultController extends Controller
         $path = Yii::$app->request->pathInfo;
         $compositePath = Yii::$app->composition->prependTo($path);
         foreach (Redirect::find()->all() as $redirect) {
-            if ($redirect->matchRequestPath($path)) {
-                return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
+            if ($wildcard = $redirect->matchRequestPath($path)) {
+                return $this->redirect($redirect->getRedirectUrl($wildcard), $redirect->redirect_status_code);
             }
 
             // if its a multi linguage website and the language has not been omited form request path compare this version too.
             // this is requred since the luya UrlManager can change the pathInfo
             if ($path !== $compositePath) {
-                if ($redirect->matchRequestPath($compositePath)) {
-                    return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
+                if ($wildcard = $redirect->matchRequestPath($compositePath)) {
+                    return $this->redirect($redirect->getRedirectUrl($wildcard), $redirect->redirect_status_code);
                 }
             }
         }

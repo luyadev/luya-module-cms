@@ -16,6 +16,12 @@ class RedirectTest extends ModelTestCase
 
         $rule = new Redirect();
 
+        // test new wildcard
+
+        $rule->catch_path = '/storage/*';
+
+        $this->assertSame('mypdf.pdf', $rule->matchRequestPath('/storage/mypdf.pdf'));
+
         // true
         $rule->catch_path = '/foobar';
         $this->assertTrue($rule->matchRequestPath('foobar'));
@@ -28,9 +34,9 @@ class RedirectTest extends ModelTestCase
         $this->assertTrue($rule->matchRequestPath('foo+bar'));
 
         $rule->catch_path = '/foo*';
-        $this->assertTrue($rule->matchRequestPath('foobar'));
+        $this->assertSame('bar', $rule->matchRequestPath('foobar'));
         $this->assertTrue($rule->matchRequestPath('foo'));
-        $this->assertTrue($rule->matchRequestPath('/foobar'));
+        $this->assertSame('bar', $rule->matchRequestPath('/foobar'));
 
         // false
         $rule->catch_path = '/foo*';

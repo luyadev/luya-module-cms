@@ -8,6 +8,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#314](https://github.com/luyadev/luya-module-cms/pull/314) Do not serve the blocks from the cache when an adminuser is logged in.
 + [#309](https://github.com/luyadev/luya-module-cms/pull/309) Added new help information for page properties as tooltip.
 + [#310](https://github.com/luyadev/luya-module-cms/issues/310) Fixed a bug where full page cache could cache the content including the LUYA Toolbar.
++ []() Add the option to use the defined wildcard value in redirects for the target. From path `foo/*` to destionation `luya.io?path=*`. The given example would redirect `foo/hello-world` to `luya.io?path=hello-word`.
 
 ## 3.4.0 (24. October 2020)
 
