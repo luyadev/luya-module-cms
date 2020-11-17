@@ -44,5 +44,17 @@ class RedirectTest extends ModelTestCase
         $this->assertFalse($rule->matchRequestPath('fo'));
         $rule->catch_path = '/page';
         $this->assertFalse($rule->matchRequestPath('/en/page'));
+
+        // test redirect
+
+        $rule->redirect_path = 'foobar';
+
+        $this->assertSame('foobar', $rule->getRedirectUrl());
+        $this->assertSame('foobar', $rule->getRedirectUrl('slug'));
+
+        $rule->redirect_path = 'foobar/*';
+
+        $this->assertSame('foobar/*', $rule->getRedirectUrl());
+        $this->assertSame('foobar/slug', $rule->getRedirectUrl('slug'));
     }
 }
