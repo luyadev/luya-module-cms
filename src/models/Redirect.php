@@ -147,7 +147,7 @@ class Redirect extends NgRestModel
      * `foo/*` catch_path would return `bar` when the request path is `foo/bar`.
      *
      * @param string $requestPath The path from the webserver (the URL which has been opened).
-     * @return boolean|string If the provided $catch_path matches the requestPath it returns true, or if a wild card is used the pattern is returned.
+     * @return boolean|string If the provided $catch_path matches the requestPath it returns true, or if a wild card is used the pattern is returned. {@since 3.5.0}
      */
     public function matchRequestPath($requestPath)
     {
@@ -167,7 +167,7 @@ class Redirect extends NgRestModel
      *
      * @param string $input The input request path
      * @param string $catchPath The path to catch
-     * @return boolean
+     * @return boolean|string Returns either true, false or if a wildcard is used, the value is returned {@since 3.5.0}
      * @since 1.0.8
      */
     private function pathMatcher($input, $catchPath)
@@ -195,7 +195,7 @@ class Redirect extends NgRestModel
     
     /**
      *
-     * @param string $wildcard An optional wildcard string which can be used as with `*` in the redirect_path
+     * @param string $wildcard An optional wildcard string which can be used as with `*` in the redirect_path. {@since 3.5.0}
      * @return string
      */
     public function getRedirectUrl($wildcard = null)
