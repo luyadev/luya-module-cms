@@ -2,6 +2,7 @@
 
 namespace luya\cms\models;
 
+use luya\admin\buttons\DuplicateActiveButton;
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\helpers\StringHelper;
@@ -125,21 +126,35 @@ class Redirect extends NgRestModel
             ['delete', true],
         ];
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function ngRestActiveButtons()
+    {
+        return [
+            [
+                'class' => DuplicateActiveButton::class,
+            ]
+        ];
+    }
     
     /**
      * Match Request Path against catch_path.
      *
      * Several version of the request path will be checked in order to ensure different siutations can be handled.
+     * 
+     * `foo/*` catch_path would return `bar` when the request path is `foo/bar`.
      *
-     * @param string $requestPath
-     * @return boolean
+     * @param string $requestPath The path from the webserver (the URL which has been opened).
+     * @return boolean|string If the provided $catch_path matches the requestPath it returns true, or if a wild card is used the pattern is returned. {@since 3.5.0}
      */
     public function matchRequestPath($requestPath)
     {
         foreach ([$requestPath, urlencode($requestPath), urldecode($requestPath)] as $path) {
             foreach ([$this->catch_path, urlencode($this->catch_path), urldecode($this->catch_path)] as $catch) {
-                if ($this->pathMatcher($path, $catch)) {
-                    return true;
+                if ($response = $this->pathMatcher($path, $catch)) {
+                    return $response;
                 }
             }
         }
@@ -152,7 +167,7 @@ class Redirect extends NgRestModel
      *
      * @param string $input The input request path
      * @param string $catchPath The path to catch
-     * @return boolean
+     * @return boolean|string Returns either true, false or if a wildcard is used, the value is returned {@since 3.5.0}
      * @since 1.0.8
      */
     private function pathMatcher($input, $catchPath)
@@ -161,6 +176,17 @@ class Redirect extends NgRestModel
         $requestPath = '/'.ltrim($input, '/');
         // see if wildcard string matches
         if (StringHelper::startsWithWildcard($requestPath, $catchPath)) {
+
+            $pattern = str_replace('\*', '(.*)', preg_quote($catchPath, '/'));
+
+            if (preg_match('/'.$pattern.'/i', $requestPath, $result) == 1) {
+                if (isset($result[1]) && !empty($result[1])) {
+                    return $result[1];
+                }
+
+                return true;
+            }
+            
             return true;
         }
         // compare strings
@@ -169,10 +195,17 @@ class Redirect extends NgRestModel
     
     /**
      *
+     * @param string $wildcard An optional wildcard string which can be used as with `*` in the redirect_path. {@since 3.5.0}
      * @return string
      */
-    public function getRedirectUrl()
+    public function getRedirectUrl($wildcard = null)
     {
-        return Url::to($this->redirect_path);
+        $redirectPath = $this->redirect_path;
+
+        if ($wildcard) {
+            $redirectPath = str_replace('*', $wildcard, $redirectPath);
+        }
+
+        return Url::to($redirectPath);
     }
 }

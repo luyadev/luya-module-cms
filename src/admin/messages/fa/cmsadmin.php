@@ -197,7 +197,7 @@ return [
     'redirect_model_atr_catch_path_hint' => 'The path which should be redirected from. If you want to match all subpaths of a path, you can use the * wildcard like in /blog*, which will match every subpath of /blog.',
     'redirect_model_atr_catch_path_error' => 'The path must start with a slash.',
     'redirect_model_atr_redirect_path' => 'مقصد',
-    'redirect_model_atr_redirect_path_hint' => 'You can either use an abolute path starting with https:// or http://, a path relative to the website root starting with / or a path relative to the path that is redirected from (e.g. maintenance to redirect from /shop/start to /shop/maintenance).',
+    'redirect_model_atr_redirect_path_hint' => 'You can either use an abolute path starting with https:// or http://, a path relative to the website root starting with / or a path relative to the path that is redirected from (e.g. maintenance to redirect from /shop/start to /shop/maintenance).  Its possible to use the wildcard value from the From path, if defined.',
     'redirect_model_atr_redirect_status_code' => 'HTTP status code',
     'redirect_model_atr_redirect_status_code_hint' => 'Redirection type. When using 301: Moved Permanently, browsers will cache the redirection so that changes to the destination might not take effect without clearing the browser\'s cache.',
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
