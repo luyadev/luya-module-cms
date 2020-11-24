@@ -20,6 +20,17 @@ use luya\helpers\Html;
                             <i class="material-icons">content_copy</i>
                         </button>
                     </div>
+                    <div class="toolbar-item">
+                        <luya-schedule
+                        style="display:inline-block;"
+                        only-icon="1"
+                        value="block.is_hidden"
+                        primary-key-value="block.id"
+                        model-class="luya\cms\models\PageBlockItem"
+                        attribute-name="is_hidden"
+                        title="Visibility"
+                        attribute-values='[{"label":"Hidden","value":0},{"label":"Visible","value":1}]'></luya-schedule>
+                    </div>
 					<?php if ($canBlockUpdate): ?>
                     <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==0">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_visible'));?>" tooltip-position="top">
