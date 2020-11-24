@@ -14,9 +14,6 @@ use luya\admin\helpers\Angular;
                 <li class="nav-item" ng-show="propertiesData.length > 0">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><i class="material-icons">settings</i><span><?= Module::t('view_update_properties_title'); ?></span></a>
                 </li>
-                <li class="nav-item" ng-show="!isDraft">
-                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=7" ng-class="{'active':pageSettingsOverlayTab==7}"><i class="material-icons">timelapse</i><span><?= Module::t('cmsadmin_settings_time_title'); ?></span></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><i class="material-icons">content_copy</i><span><?= Module::t('page_update_actions_deepcopy_title'); ?></span></a>
                 </li>
@@ -88,15 +85,6 @@ use luya\admin\helpers\Angular;
                 <p><a ng-click="trash()" class="btn btn-delete btn-icon"><?= Module::t('cmsadmin_settings_trashpage_title'); ?></a></p>
             </div>
             <?php endif; ?>
-            
-            <div ng-switch-when="7">
-                <h1><?= Module::t('cmsadmin_settings_time_title'); ?></h1>
-                <form ng-submit="submitNavForm({publish_from: navData.publish_from, publish_till: navData.publish_till})">
-                    <?= Angular::datetime('navData.publish_from', Module::t('cmsadmin_settings_time_title_from')); ?>
-                    <?= Angular::datetime('navData.publish_till', Module::t('cmsadmin_settings_time_title_till')); ?>
-                    <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
-                </form>
-            </div>
 
             <div ng-switch-when="8">
                 <h1><?= Module::t('page_update_actions_deepcopyastemplate_title'); ?></h1>

@@ -29,7 +29,7 @@ class MenuHelper
         if (self::$items === null) {
 
             $items = Nav::find()
-                ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'layout_file', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title', 'publish_from', 'publish_till'])
+                ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'layout_file', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title'])
                 ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
                 ->with(['parents'])
                 ->orderBy(['sort_index' => SORT_ASC])
