@@ -9,6 +9,7 @@ use luya\cms\Menu;
 use luya\cms\menu\QueryIteratorFilter;
 use luya\cms\menu\Query;
 use luya\cms\menu\Item;
+use yii\web\NotFoundHttpException;
 
 class MenuTest extends CmsFrontendTestCase
 {
@@ -74,11 +75,9 @@ class MenuTest extends CmsFrontendTestCase
         $this->assertTrue($iterator instanceof QueryIteratorFilter);
     }
     
-    /**
-     * @expectedException yii\web\NotFoundHttpException
-     */
     public function testOffsetLangaugeDoesNotExists()
     {
+        $this->expectException(NotFoundHttpException::class);
         Yii::$app->menu['ru'];
     }
 }
