@@ -20,6 +20,6 @@ class UrlTest extends CmsFrontendTestCase
 
     public function testToMenuItem()
     {
-        $this->assertContains('en/module/controller/action', Url::toMenuNavItem(1, ['/module/controller/action']));
+        $this->assertStringContainsString('en/module/controller/action', Url::toMenuNavItem(1, ['/module/controller/action']));
     }
 }
