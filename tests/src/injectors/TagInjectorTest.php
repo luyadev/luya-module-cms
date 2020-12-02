@@ -55,10 +55,10 @@ class TagInjectorTest extends WebModelTestCase
         
         $vars = $block->getConfigVarsExport();
        
-        $this->assertContains(['items' => [
-            ['value' => 1, 'label' => 'John'],
-            ['value' => 2, 'label' => 'Jane'],
-        ]], $vars[0]);
+        $this->assertSame(['items' => [
+            ['label' => 'John', 'value' => 1],
+            ['label' => 'Jane', 'value' => 2],
+        ]], $vars[0]['options']);
         
     }
 
@@ -68,12 +68,13 @@ class TagInjectorTest extends WebModelTestCase
             'modelClass' => Tag::class,
             'fixtureData' => [
                 'tag1' => [
-                    'id' => '1',
                     'name' => 'John',
+                    'id' => '1',
                 ],
                 'tag2' => [
-                    'id' => '2',
+
                     'name' => 'Jane',
+                    'id' => '2',
                 ],
             ]
         ]);
