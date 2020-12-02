@@ -30,7 +30,15 @@ class TagInjectorTest extends WebModelTestCase
     {
         parent::afterSetup();
 
-        $this->createAdminLangFixture([]);
+        $this->createAdminLangFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'en',
+                'short_code' => 'en',
+                'is_default' => 1,
+                'is_deleted' => 0,
+            ]
+        ]);
     }
 
     public function testTagInjector()
