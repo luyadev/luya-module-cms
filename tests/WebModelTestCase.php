@@ -21,7 +21,10 @@ abstract class WebModelTestCase extends WebApplicationTestCase
                 ]
             ],
             'modules' => [
-                'admin' => 'luya\admin\Module',
+                'admin' => [
+                    'luya\admin\Module',
+                    'queueMutexClass' => 'yii\mutex\FileMutex',
+                ],
                 'cms' => 'luya\cms\frontend\Module',
                 'cmsadmin' => 'luya\cms\admin\Module',
             ]
