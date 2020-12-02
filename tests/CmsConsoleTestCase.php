@@ -25,7 +25,7 @@ class CmsConsoleTestCase extends ConsoleApplicationTestCase
             ],
             'modules' => [
                 'admin' => [
-                    'luya\admin\Module',
+                    'class' => 'luya\admin\Module',
                     'queueMutexClass' => 'yii\mutex\FileMutex',
                 ],
                 'cms' => [
