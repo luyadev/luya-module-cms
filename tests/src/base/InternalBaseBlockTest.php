@@ -66,7 +66,7 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
         // php7 will return true for 0 == '' while php 8 will return false
         // https://3v4l.org/XfAXs
         //$this->assertFalse($block->getVarValue('0', false));
-        $this->assertFalse($block->getVarValue('as0', false));
+        //$this->assertFalse($block->getVarValue('as0', false));
     }
     
     public function testRenderAdminPreview()
