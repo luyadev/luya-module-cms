@@ -48,7 +48,7 @@ class MenuTest extends CmsFrontendTestCase
     
     public function testCurrentAppendix()
     {
-        $this->assertFalse(Yii::$app->menu->currentAppendix);
+        $this->assertEmpty(Yii::$app->menu->currentAppendix);
     }
     
     public function testFind()
