@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.0.0
 
-+ [#323](https://github.com/luyadev/luya-module-cms/pull/323) Add LUYA Test Suite
++ [#323](https://github.com/luyadev/luya-module-cms/pull/323) Add LUYA Test Suite 2.0 with PHP 8 Support.
 
 ## 3.5.1 (24. November 2020)
 
