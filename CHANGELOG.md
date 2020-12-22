@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 3.5.2 (22. December 2020)
+
++ [#324](https://github.com/luyadev/luya-module-cms/pull/324) Changed og meta informations from name to property.
+
 ## 3.5.1 (24. November 2020)
 
 + [#319](https://github.com/luyadev/luya-module-cms/issues/319) Disabled Block injector rows limit.

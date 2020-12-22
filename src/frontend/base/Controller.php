@@ -182,18 +182,18 @@ abstract class Controller extends \luya\web\Controller
             }
         }
 
-        $this->view->registerMetaTag(['name' => 'og:type', 'content' => 'website'], self::META_OG_TYPE);
+        $this->view->registerMetaTag(['property' => 'og:type', 'content' => 'website'], self::META_OG_TYPE);
         $this->view->registerMetaTag(['name' => 'twitter:card', 'content' => 'summary'], self::META_TWITTER_CARD);
         
-        $this->view->registerMetaTag(['name' => 'og:title', 'content' => $this->view->title], self::META_OG_TITLE);
+        $this->view->registerMetaTag(['property' => 'og:title', 'content' => $this->view->title], self::META_OG_TITLE);
         $this->view->registerMetaTag(['name' => 'twitter:title', 'content' => $this->view->title], self::META_TWITTER_TITLE);
         
-        $this->view->registerMetaTag(['name' => 'og:url', 'content' => Yii::$app->request->absoluteUrl], self::META_OG_URL);
+        $this->view->registerMetaTag(['property' => 'og:url', 'content' => Yii::$app->request->absoluteUrl], self::META_OG_URL);
         $this->view->registerMetaTag(['name' => 'twitter:url', 'content' => Yii::$app->request->absoluteUrl], self::META_TWITTER_URL);
 
         if (!empty($model->description)) {
             $this->view->registerMetaTag(['name' => 'description', 'content' => $model->description], self::META_DESCRIPTION);
-            $this->view->registerMetaTag(['name' => 'og:description', 'content' => $model->description], self::META_OG_DESCRIPTION);
+            $this->view->registerMetaTag(['property' => 'og:description', 'content' => $model->description], self::META_OG_DESCRIPTION);
             $this->view->registerMetaTag(['name' => 'twitter:description', 'content' => $model->description], self::META_TWITTER_DESCRIPTION);
         }
         
@@ -204,7 +204,7 @@ abstract class Controller extends \luya\web\Controller
         if (!empty($model->image_id)) {
             $image = Yii::$app->storage->getImage($model->image_id);
             if ($image) {
-                $this->view->registerMetaTag(['name' => 'og:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_OG_IMAGE);
+                $this->view->registerMetaTag(['property' => 'og:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_OG_IMAGE);
                 $this->view->registerMetaTag(['name' => 'twitter:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_TWITTER_IMAGE);
             }
         }
