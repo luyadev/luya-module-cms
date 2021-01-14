@@ -317,10 +317,12 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     {
         $fields = parent::fields();
         $fields['is_cacheable'] = function($model) {
-            return Angular::typeCast($model->is_cacheable);
+            return (int) $model->is_cacheable;
+            // return Angular::typeCast($model->is_cacheable); use for admin@4.0 release
         };
         $fields['is_url_strict_parsing_disabled'] = function($model) {
-            return Angular::typeCast($model->is_url_strict_parsing_disabled);
+            return (int) $model->is_url_strict_parsing_disabled;
+            // return Angular::typeCast($model->is_url_strict_parsing_disabled); use for admin@4.0 release
         };
         return $fields;
     }
