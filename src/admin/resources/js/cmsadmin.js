@@ -190,16 +190,9 @@
 					$scope.languagesData = data;
 				});
 
-
-				$scope.isDefaultItem = $scope.languagesData.find(item => function(value) {
-					var isDefault = parseInt(value.is_default);
-
-					if (isDefault) {
-						return true;
-					}
-
-					return false;
-				})
+				$scope.isDefaultItem = $scope.languagesData.find(item => {
+					return item.is_default;
+				});
 
 				$scope.data.lang_id = $scope.isDefaultItem.id;
 
