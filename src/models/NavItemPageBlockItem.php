@@ -156,6 +156,11 @@ class NavItemPageBlockItem extends ActiveRecord
 
         if (!$this->isNewRecord) {
             $this->_olds = $this->getOldAttributes();
+
+            // ensure circular reference when updating values.
+            if ($this->id == $this->prev_id) {
+                return $this->addError('prev_id', 'Circular references are not allowed. Its not possible to drag a blockinto the placeholder of itself.');
+            }
         }
         // its a negative value, so its a last item, lets find the last index for current config
         if ($this->sort_index < 0) {
