@@ -157,7 +157,7 @@ class NavItemPageBlockItem extends ActiveRecord
         if (!$this->isNewRecord) {
             $this->_olds = $this->getOldAttributes();
 
-            // ensure circular reference when updating values.
+            // ensure circular reference is not possible when updating
             if ($this->id == $this->prev_id) {
                 return $this->addError('prev_id', 'Circular references are not allowed. Its not possible to drag a block into its own placeholder.');
             }
