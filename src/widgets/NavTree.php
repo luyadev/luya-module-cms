@@ -231,9 +231,10 @@ class NavTree extends Widget
             $html = Html::beginTag($this->_listTag, $listOptions);
         }
 
+        /** @var Item $item */
         foreach ($iterator as $item) {
             $itemOptions = $this->itemOptions;
-            $linkOptions = array_merge($this->linkOptions, ['href' => $item->link]);
+            $linkOptions = array_merge($this->linkOptions, ['href' => $item->link, 'target' => $item->getTarget()]);
 
             // Set the active classes if item is active
             if ($item->isActive) {

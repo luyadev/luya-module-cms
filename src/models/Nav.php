@@ -74,6 +74,32 @@ class Nav extends ActiveRecord
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        // ensure boolean values are returned as integer
+        // this is required when working with pgsql
+        $fields['is_hidden'] = function($model) {
+            return (int) $model->is_hidden;
+        };
+        $fields['is_deleted'] = function($model) {
+            return (int) $model->is_deleted;
+        };
+        $fields['is_draft'] = function($model) {
+            return (int) $model->is_draft;
+        };
+        $fields['is_home'] = function($model) {
+            return (int) $model->is_home;
+        };
+        $fields['is_offline'] = function($model) {
+            return (int) $model->is_offline;
+        };
+        return $fields;
+    }
+
+    /**
      * Get the parent elements
      * 
      * @return Nav[]

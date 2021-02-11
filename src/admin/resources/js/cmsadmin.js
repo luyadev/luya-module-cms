@@ -190,8 +190,11 @@
 					$scope.languagesData = data;
 				});
 
+				$scope.isDefaultItem = $scope.languagesData.find(item => {
+					return item.is_default;
+				});
 
-				$scope.data.lang_id = parseInt($filter('filter')($scope.languagesData, {'is_default': '1'}, true)[0].id);
+				$scope.data.lang_id = $scope.isDefaultItem.id;
 
 				$scope.navitems = [];
 

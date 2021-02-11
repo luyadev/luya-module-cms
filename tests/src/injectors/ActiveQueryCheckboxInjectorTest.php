@@ -41,7 +41,7 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
         
         $item1 = $v['options']['items'][0];
         
-        $this->AssertContains('Homepage, homepage,', $item1['label']);
+        $this->assertStringContainsString('Homepage, homepage,', $item1['label']);
     }
     
     public function testFieldSelectionBasicInjector()

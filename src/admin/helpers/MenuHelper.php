@@ -45,6 +45,10 @@ class MenuHelper
             $data = [];
             
             foreach ($items as $key => $item) {
+                $item['is_draft'] = (int) $item['is_draft'];
+                $item['is_hidden'] = (int) $item['is_hidden'];
+                $item['is_home'] = (int) $item['is_home'];
+                $item['is_offline'] = (int) $item['is_offline'];
                 $item['is_editable'] = (int) Yii::$app->adminuser->canRoute('cmsadmin/page/update');
                 $item['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get('tree.'.$item['id']);
                 $item['has_children'] = empty($item['parents']) ? 0 : count($item['parents']); //(new Query())->from('cms_nav')->select(['id'])->where(['parent_nav_id' => $item['id']])->count();
@@ -68,7 +72,7 @@ class MenuHelper
                             $permitted = true;
                         }
                     }  
-                    $item['is_editable'] = $permitted;
+                    $item['is_editable'] = (int) $permitted;
                 }            
                 $data[$key] = $item;
             }

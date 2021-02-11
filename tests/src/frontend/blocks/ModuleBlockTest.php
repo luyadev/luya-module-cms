@@ -44,9 +44,9 @@ class ModuleBlockTest extends BlockTestCase
         $ctrls = $this->block->getControllerClasses();
     
         $this->assertArrayHasKey('default', $ctrls);
-        $this->assertContains('DefaultController.php', $ctrls['default']);
+        $this->assertStringContainsString('DefaultController.php', $ctrls['default']);
         $this->assertArrayHasKey('foo', $ctrls);
-        $this->assertContains('FooController.php', $ctrls['foo']);
+        $this->assertStringContainsString('FooController.php', $ctrls['foo']);
     }
     
     public function testGetModuless()

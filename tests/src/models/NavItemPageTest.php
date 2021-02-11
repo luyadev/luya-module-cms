@@ -35,7 +35,7 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertContains('luya-module-cms/testfile', $e->getMessage());
+            $this->assertStringContainsString('luya-module-cms/testfile', $e->getMessage());
         }
     }
 
@@ -77,7 +77,7 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertContains('/absolute', $e->getMessage());
+            $this->assertStringContainsString('/absolute', $e->getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertContains('luya-module-cms/views/cmslayouts/relative.php', $e->getMessage());
+            $this->assertStringContainsString('luya-module-cms/views/cmslayouts/relative.php', $e->getMessage());
         }
     }
 }

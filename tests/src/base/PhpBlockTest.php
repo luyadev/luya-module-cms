@@ -60,6 +60,6 @@ class PhpBlockTest extends CmsFrontendTestCase
         $block = new PhpTestBlock();
         $block->module = null;
 
-        $this->assertContains('tests/data/blocks/views', $block->getViewPath());
+        $this->assertStringContainsString('tests/data/blocks/views', $block->getViewPath());
     }
 }
