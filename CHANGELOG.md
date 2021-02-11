@@ -9,6 +9,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#325](https://github.com/luyadev/luya-module-cms/issues/325) Added target value into the NavTree widget.
 + [#327](https://github.com/luyadev/luya-module-cms/issues/327) Fix LinkConverter class when using CMS as headless API.
 + [#323](https://github.com/luyadev/luya-module-cms/pull/323) Add LUYA Test Suite 2.0 with PHP 8 Support.
++ [#321](https://github.com/luyadev/luya-module-cms/pull/321) Added scheduler for block item visibility.
 
 ## 3.5.1 (24. November 2020)
 
