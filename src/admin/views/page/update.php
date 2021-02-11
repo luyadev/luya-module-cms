@@ -13,8 +13,8 @@ use luya\cms\helpers\Url;
         </div>
         <div class="col">
             <div class="cmsadmin-toolbar">
-                <div ng-show="!isDraft" class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
-                    <label class="switch" for="switch-visibility-status">
+                <div ng-show="!isDraft" class="toolbar-item" >
+                    <label class="switch" for="switch-visibility-status" tooltip tooltip-text="<?= Module::t('view_update_hidden_info')?>" tooltip-position="bottom">
                         <span class="switch-label">
                             <i class="material-icons" ng-show="!navData.is_hidden">visibility</i>
                             <i class="material-icons" ng-show="navData.is_hidden">visibility_off</i>
@@ -24,9 +24,19 @@ use luya\cms\helpers\Url;
                             <span class="switch-control"></span>
                         </span>
                     </label>
+                    <luya-schedule
+                    style="display:inline-block;"
+                    class="ml-1"
+                    only-icon="1"
+                    value="navData.is_hidden"
+                    primary-key-value="navData.id"
+                    model-class="luya\cms\models\Nav"
+                    attribute-name="is_hidden"
+                    title="Visibility"
+                    attribute-values='[{"label":"Hidden","value":0},{"label":"Visible","value":1}]'></luya-schedule>
                 </div>
-                <div ng-show="!isDraft" class="toolbar-item" tooltip tooltip-text="<?= Module::t('view_update_offline_info')?>" tooltip-position="bottom">
-                    <label class="switch" for="switch-online-status">
+                <div ng-show="!isDraft" class="toolbar-item">
+                    <label class="switch" for="switch-online-status" tooltip tooltip-text="<?= Module::t('view_update_offline_info')?>" tooltip-position="bottom">
                         <span class="switch-label">
                             <i class="material-icons" ng-show="!navData.is_offline">cloud_queue</i>
                             <i class="material-icons" ng-show="navData.is_offline">cloud_off</i>
@@ -36,6 +46,16 @@ use luya\cms\helpers\Url;
                             <span class="switch-control"></span>
                         </span>
                     </label>
+                    <luya-schedule
+                    style="display:inline-block;"
+                    class="ml-1"
+                    only-icon="1"
+                    value="navData.is_offline"
+                    primary-key-value="navData.id"
+                    model-class="luya\cms\models\Nav"
+                    attribute-name="is_offline"
+                    title="Status"
+                    attribute-values='[{"label":"Offline","value":0},{"label":"Online","value":1}]'></luya-schedule>
                 </div>
                 <div class="toolbar-item toolbar-item-lang" ng-class="{'ml-auto':$first}" ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-if="AdminLangService.data.length > 1">
                     <button class="btn-toolbar flag-btn" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" >
