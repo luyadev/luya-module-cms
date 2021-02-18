@@ -73,6 +73,13 @@ class NavTree extends Widget
     private $_findQuery;
 
     /**
+     * @var string If the nav tree widget is used multiple times on the same side (for example for the main navigation and the mobile menu)
+     * then its possible to define a variation which then makes the cache identifier unique.
+     * @since 4.0.0
+     */
+    public $variation;
+
+    /**
      * @var null|integer If set the depth of the menu will be limited
      */
     public $maxDepth;
@@ -190,7 +197,12 @@ class NavTree extends Widget
     public function run()
     {
         $key = [
-            __CLASS__, Yii::$app->composition->langShortCode, 
+            __CLASS__,
+            Yii::$app->composition->langShortCode,
+            $this->variation,
+            $this->linkActiveClass,
+            $this->itemActiveClass,
+            $this->listDepthClassPrefix, 
         ];
 
         if ($this->startItem) {
