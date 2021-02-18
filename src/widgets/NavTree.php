@@ -196,21 +196,7 @@ class NavTree extends Widget
      */
     public function run()
     {
-        $key = [
-            __CLASS__,
-            Yii::$app->composition->langShortCode,
-            $this->variation,
-            $this->linkActiveClass,
-            $this->itemActiveClass,
-            $this->listDepthClassPrefix, 
-        ];
-
-        if ($this->startItem) {
-            $key[] = $this->startItem->id;
-        };
-
-        return $this->getOrSetHasCache($key, function() {
-
+        return $this->getOrSetHasCache($this->generateCacheKey(), function() {
             $this->autoConfigure();
 
             $html = "";
@@ -228,6 +214,29 @@ class NavTree extends Widget
     
             return $html;
         }, 0, new DbDependency(['sql' => 'SELECT max(timestamp_update) FROM cms_nav_item']));
+    }
+
+    /**
+     * Generate a cache key with certain criteriums
+     *
+     * @return array
+     */
+    private function generateCacheKey()
+    {
+        $key = [
+            __CLASS__,
+            Yii::$app->composition->langShortCode,
+            $this->variation,
+            $this->linkActiveClass,
+            $this->itemActiveClass,
+            $this->listDepthClassPrefix, 
+        ];
+
+        if ($this->startItem) {
+            $key[] = $this->startItem->id;
+        };
+
+        return $key;
     }
 
     /**
