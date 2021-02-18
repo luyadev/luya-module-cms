@@ -229,7 +229,8 @@ class NavTree extends Widget
             $this->variation,
             $this->linkActiveClass,
             $this->itemActiveClass,
-            $this->listDepthClassPrefix, 
+            $this->listDepthClassPrefix,
+            Yii::$app->menu->current->id,
         ];
 
         if ($this->startItem) {
