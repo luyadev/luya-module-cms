@@ -11,6 +11,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#327](https://github.com/luyadev/luya-module-cms/issues/327) Fix LinkConverter class when using CMS as headless API.
 + [#323](https://github.com/luyadev/luya-module-cms/pull/323) Add LUYA Test Suite 2.0 with PHP 8 Support.
 + [#321](https://github.com/luyadev/luya-module-cms/pull/321) Added scheduler for block item visibility.
++ [#331](https://github.com/luyadev/luya-module-cms/pull/331) When caching is enabled, the NavTree content will be cached by default.
 
 ## 3.5.1 (24. November 2020)
 

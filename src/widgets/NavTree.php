@@ -7,6 +7,8 @@ use luya\helpers\ArrayHelper;
 use Yii;
 use luya\base\Widget;
 use luya\cms\menu\Item;
+use luya\traits\CacheableTrait;
+use yii\caching\DbDependency;
 use yii\helpers\Html;
 
 /**
@@ -29,7 +31,8 @@ use yii\helpers\Html;
  * ```php
  * NavTree::widget([
  *    'findQuery' => Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all(),
- *    'startItem' => Yii::$app->menu->home,
+ *    // or
+ *    'startItem' => Yii::$app->menu->home, // if defined, startItem will be used, otherwise findQuery
  *    'maxDepth' => 2,
  *    'linkActiveClass' => 'link-active',
  *    'itemActiveClass' => 'item-active',
@@ -49,15 +52,18 @@ use yii\helpers\Html;
  * ]);
  * ```
  *
- * @property \luya\cms\menu\Item $startItem Get the start Item entry.
+ * @property Item $startItem Generate submenus for all children below of this menu Item. If not defined $findQuery will be used.
+ * @property QueryIteratorFilter $findQuery
  *
  * @author Marc Stampfli <kontakt@marcstampfli.guru>
  * @since 1.0.0
  */
 class NavTree extends Widget
 {
+    use CacheableTrait;
+
     /**
-     * @var null|Item Generate submenus for all pages below you this menu Item
+     * @var null|Item
      */
     private $_startItem;
 
@@ -65,6 +71,13 @@ class NavTree extends Widget
      * @var null|QueryIteratorFilter The menu Query
      */
     private $_findQuery;
+
+    /**
+     * @var string If the nav tree widget is used multiple times on the same side (for example for the main navigation and the mobile menu)
+     * then its possible to define a variation which then makes the cache identifier unique.
+     * @since 4.0.0
+     */
+    public $variation;
 
     /**
      * @var null|integer If set the depth of the menu will be limited
@@ -165,17 +178,15 @@ class NavTree extends Widget
     private $_linkTag;
 
     /**
-     * @inheritdoc
+     * Configure not defined properties
      */
-    public function init()
+    private function autoConfigure()
     {
-        parent::init();
-
         $this->_listTag = ArrayHelper::remove($this->listOptions, 'tag', 'ul');
         $this->_itemTag = ArrayHelper::remove($this->itemOptions, 'tag', 'li');
         $this->_linkTag = ArrayHelper::remove($this->linkOptions, 'tag', 'a');
 
-        if ($this->findQuery === null) {
+        if ($this->findQuery === null && $this->startItem === null) {
             $this->findQuery = Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all();
         }
     }
@@ -185,20 +196,47 @@ class NavTree extends Widget
      */
     public function run()
     {
-        $html = "";
+        return $this->getOrSetHasCache($this->generateCacheKey(), function() {
+            $this->autoConfigure();
 
-        if ($this->startItem === null) {
-            $html = $this->buildList($this->findQuery);
-        } elseif ($this->startItem->hasChildren) {
-            $html = $this->buildList($this->startItem->children);
-        }
+            $html = "";
+    
+            if ($this->startItem === null) {
+                $html = $this->buildList($this->findQuery);
+            } elseif ($this->startItem->hasChildren) {
+                $html = $this->buildList($this->startItem->children);
+            }
+    
+            if ($this->wrapperOptions !== null) {
+                $wrapperTag = ArrayHelper::remove($this->wrapperOptions, 'tag', 'nav');
+                $html = Html::tag($wrapperTag, $html, $this->wrapperOptions);
+            }
+    
+            return $html;
+        }, 0, new DbDependency(['sql' => 'SELECT max(timestamp_update) FROM cms_nav_item']));
+    }
 
-        if ($this->wrapperOptions !== null) {
-            $wrapperTag = ArrayHelper::remove($this->wrapperOptions, 'tag', 'nav');
-            $html = Html::tag($wrapperTag, $html, $this->wrapperOptions);
-        }
+    /**
+     * Generate a cache key with certain criteriums
+     *
+     * @return array
+     */
+    private function generateCacheKey()
+    {
+        $key = [
+            __CLASS__,
+            Yii::$app->composition->langShortCode,
+            $this->variation,
+            $this->linkActiveClass,
+            $this->itemActiveClass,
+            $this->listDepthClassPrefix, 
+        ];
 
-        return $html;
+        if ($this->startItem) {
+            $key[] = $this->startItem->id;
+        };
+
+        return $key;
     }
 
     /**
