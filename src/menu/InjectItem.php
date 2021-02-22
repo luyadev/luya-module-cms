@@ -46,7 +46,7 @@ use yii\base\BaseObject;
  * event of the menu component:
  *
  * ```php
- * Yii::$app->menu->on(Container::MENU_AFTER_LOAD, function($event) {
+ * Yii::$app->menu->on(\luya\cms\Menu::EVENT_AFTER_RESOLVE_CURRENT, function($event) {
  *
  *     $newItem = new InjectItem([
  *         'childOf' => 123,
@@ -56,6 +56,18 @@ use yii\base\BaseObject;
  *
  *     $event->sender->injectItem($newItem);
  * });
+ * ```
+ *
+ * Inside a configuration file this could be done as:
+ *
+ * ```php
+ * 'menu' => [
+ *     'class' => 'luya\cms\Menu',
+ *     'on eventAfterLoad' => function($event) {
+ *         // ...
+ *         $event->sender->injectItem($newItem);
+ *     }
+ * ]
  * ```
  *
  * @property $childOf integer The child of id in order read data from this parent item.
