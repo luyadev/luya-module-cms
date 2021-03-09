@@ -163,6 +163,24 @@ class Redirect extends NgRestModel
     }
 
     /**
+     * Turn wildcard into match all regex pattern and return result
+     *
+     * @param string $requestPath
+     * @param string $catchPath
+     * @return boolean|string
+     * @since 4.0.0
+     */
+    private function inputToRegex($requestPath, $catchPath)
+    {
+        $pattern = str_replace('\*', '(.*)', preg_quote($catchPath, '/'));
+        
+        if (preg_match('/'.$pattern.'/i', $requestPath, $result) == 1) {
+            return $result;
+        }
+
+        return false;
+    }
+    /**
      * Internal path matcher
      *
      * @param string $input The input request path
@@ -174,21 +192,26 @@ class Redirect extends NgRestModel
     {
         // ensure request path is prefix with slash
         $requestPath = '/'.ltrim($input, '/');
-        // see if wildcard string matches
+
+        // match wild cards which are end of a string like `/foobar*`
         if (StringHelper::startsWithWildcard($requestPath, $catchPath)) {
-
-            $pattern = str_replace('\*', '(.*)', preg_quote($catchPath, '/'));
-
-            if (preg_match('/'.$pattern.'/i', $requestPath, $result) == 1) {
-                if (isset($result[1]) && !empty($result[1])) {
-                    return $result[1];
-                }
-
-                return true;
+            $result = $this->inputToRegex($requestPath, $catchPath);
+            if ($result && isset($result[1]) && !empty($result[1])) {
+                return $result[1];
             }
-            
+
+            // wildcard pattern match returns true
             return true;
         }
+
+        // match for anywild card like `/*.html`
+        if (StringHelper::contains('*', $catchPath)) {
+            $result = $this->inputToRegex($requestPath, $catchPath);
+            if ($result && isset($result[1]) && !empty($result[1])) {
+                return $result[1];
+            }
+        }
+
         // compare strings
         return ($requestPath == $catchPath);
     }

@@ -57,4 +57,19 @@ class RedirectTest extends ModelTestCase
         $this->assertSame('foobar/*', $rule->getRedirectUrl());
         $this->assertSame('foobar/slug', $rule->getRedirectUrl('slug'));
     }
+
+    public function testWildcardForPageSuffix()
+    {
+        $fixture = new NgRestModelFixture([
+            'modelClass' => Redirect::class
+        ]);
+
+        $rule = new Redirect();
+
+        // test new wildcard
+
+        $rule->catch_path = '/*.html';
+
+        $this->assertSame('hello-world', $rule->matchRequestPath('/hello-world.html'));
+    }
 }
