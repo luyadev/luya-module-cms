@@ -30,7 +30,7 @@ use luya\helpers\Html;
                             model-class="luya\cms\models\NavItemPageBlockItem"
                             attribute-name="is_hidden"
                             title="Visibility"
-                            attribute-values='[{"label":"Hidden","value":0},{"label":"Visible","value":1}]'
+                            attribute-values='[{"label":"Hidden","value":1},{"label":"Visible","value":0}]'
                         >
                         </luya-schedule>
                     </div>
