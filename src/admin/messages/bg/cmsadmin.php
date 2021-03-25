@@ -260,7 +260,7 @@ return [
     'menu_group_configuration' => 'Конфигурация',
     'menu_group_protocol' => 'Протокол',
     'menu_group_protocol_model_event_logger' => 'Дневник на събитията на модела',
-    'disable_to_find_item_for_language' => 'Исканата страница все още не е преведена.',
+    'unable_to_find_item_for_language' => 'Исканата страница все още не е преведена.',
 
 // 3.4
 
