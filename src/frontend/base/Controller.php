@@ -13,6 +13,7 @@ use luya\cms\frontend\events\BeforeRenderEvent;
 use luya\helpers\StringHelper;
 use luya\cms\frontend\Module;
 use luya\admin\filters\LargeThumbnail;
+use yii\base\Event;
 
 /**
  * Abstract Controller for CMS Controllers.
@@ -22,6 +23,12 @@ use luya\admin\filters\LargeThumbnail;
  */
 abstract class Controller extends \luya\web\Controller
 {
+    /**
+     * @var string This event is triggered when the CMS Page output is generated and ready to render into the view file.
+     * @since 4.0.0
+     */
+    const EVENT_RENDER_CMS_PAGE = 'renderCmsPage';
+
     /**
      * @var string
      * @since 1.0.8
@@ -152,6 +159,8 @@ abstract class Controller extends \luya\web\Controller
         ]);
         
         $content = $typeModel->getContent();
+
+        Yii::$app->trigger(self::EVENT_RENDER_CMS_PAGE, new Event(['data' => ['navItemId' => $navItemId]]));
 
         if ($content instanceof Response) {
             return Yii::$app->end(0, $content);

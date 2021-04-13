@@ -7,6 +7,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 + [#320](https://github.com/luyadev/luya-module-cms/pull/320) Replace cms menu item `publish_from` and `publish_till` with sheduler.
 + [#329](https://github.com/luyadev/luya-module-cms/issues/329) Ensure its not possible to drag a placeholder block into itself (this can create circular references)
++ [#336](https://github.com/luyadev/luya-module-cms/pull/336) New event which is triggered when the cms page is composed and ready to render.
 + [#325](https://github.com/luyadev/luya-module-cms/issues/325) Added target value into the NavTree widget.
 + [#327](https://github.com/luyadev/luya-module-cms/issues/327) Fix LinkConverter class when using CMS as headless API.
 + [#323](https://github.com/luyadev/luya-module-cms/pull/323) Add LUYA Test Suite 2.0 with PHP 8 Support.
