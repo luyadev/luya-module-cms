@@ -319,11 +319,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 } else {
                     $blockObject->onRegisterFromCache();
                 }
+                
+                $string.= $blockResponse;
+                unset($blockResponse);
             }
-    
-            $string.= $blockResponse;
-            
-            unset($blockResponse);
         }
 
         unset($variations);
