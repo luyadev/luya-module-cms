@@ -25,6 +25,7 @@ abstract class Controller extends \luya\web\Controller
 {
     /**
      * @var string This event is triggered when the CMS Page output is generated and ready to render into the view file.
+     * @since 4.0.0
      */
     const EVENT_RENDER_CMS_PAGE = 'renderCmsPage';
 
