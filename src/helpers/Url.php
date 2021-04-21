@@ -94,22 +94,6 @@ class Url extends \luya\helpers\Url
         throw new Exception("The module route creation could not find the module '$moduleName'. Have you created a page with this module in this language context?");
     }
 
-    /**
-     * Create an url to a cms page based on the unique nav item id.
-     *
-     * This method uses the UNIQUE CMS NAV ITEM identifier.
-     *
-     * @param integer $navItemId The menu item Id where the url should be created from
-     * @param array $route An array with a route and optional params `['/module/controller/action', 'param' => 'bar]`.
-     * @return string The generate id
-     * @deprecated Deprecated since 1.0.4 use {{luya\cms\helpers\Url::toMenuNavItem()}} instead will be removed in 4.0
-     */
-    public static function toMenuItem($navItemId, array $route)
-    {
-        trigger_error('deprecated, use toMenuNavItem instead.', E_USER_DEPRECATED);
-        return self::toMenuNavItem($navItemId, $route);
-    }
-
     
     /**
      * Create an url to a cms page based on the unique nav item id.
