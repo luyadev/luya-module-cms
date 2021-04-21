@@ -34,7 +34,7 @@ class MenuHelper
                 ->with(['parents'])
                 ->orderBy(['sort_index' => SORT_ASC])
                 ->where([
-                    'cms_nav_item.lang_id' => Lang::getDefault()['id'],
+                    'cms_nav_item.lang_id' => Yii::$app->adminLanguage->defaultLanguage['id'],
                     'cms_nav.is_deleted' => false,
                     'cms_nav.is_draft' => false,
                 ])
