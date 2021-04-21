@@ -8,12 +8,16 @@ use luya\cms\admin\importers\ThemeImporter;
 use luya\cms\models\Layout;
 use luya\cms\models\Theme;
 use luya\console\commands\ImportController;
+use luya\helpers\FileHelper;
 use luya\helpers\Json;
 use luya\testsuite\fixtures\ActiveRecordFixture;
+use luya\testsuite\traits\CmsDatabaseTableTrait;
 use Yii;
 
 class CmslayoutImporterTest extends CmsConsoleTestCase
 {
+    use CmsDatabaseTableTrait;
+
     public function testBasicLayoutImporter()
     {
         // config fixture
@@ -97,5 +101,51 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
             ]
         ], $log);
         */
+    }
+
+    /**
+     * @see https://github.com/luyadev/luya-module-cms/issues/337
+     */
+    public function testImportLayoutAndChangeAfterwardsIssue337()
+    {
+        $this->createCmsLayoutFixture();
+        $controller = new ImportController('import-controller', $this->app);
+        $importer = new CmslayoutImporter($controller, $this->app->getModule('cmsadmin'));
+
+        $jsonOld = '{
+            "rows" : [
+                [
+                {"cols": 8, "var": "content", "label": "X"}
+            ],
+                [
+                {"cols": 4, "var": "content", "label": "Y"}
+            ]
+            ]
+        }';
+        $jsonNew = '{
+            "rows" : [
+                [
+                    {"cols": 12, "var": "content", "label": "X"}
+                ]
+            ]
+        }';
+        $j1 = Json::decode($jsonOld);
+        $j2 = Json::decode($jsonNew);
+
+        $this->assertFalse($importer->comparePlaceholders($j1, $j2));
+
+        
+        $tmpfname = tempnam(sys_get_temp_dir(), "FOO");
+
+        $handle = fopen($tmpfname, "w");
+        fwrite($handle, $jsonOld);
+        fclose($handle);
+
+        $r = $this->invokeMethod($importer, 'importLayoutFile', [$tmpfname, 'foobar']);
+
+        $layout = Layout::findOne(['id' => $r]);
+
+        $this->assertSame('{"placeholders":[[]]}', $layout->json_config);
+        unlink($tmpfname);
     }
 }
