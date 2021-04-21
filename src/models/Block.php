@@ -293,49 +293,4 @@ class Block extends NgRestModel
         
         return $object;
     }
-    
-    private static $blocks = [];
-    
-    /**
-     * Get the block object from the database with context informations.
-     *
-     * @param integer $blockId
-     * @param integer $id
-     * @param mixed $context
-     * @param object $pageObject
-     * @return \luya\cms\base\BlockInterface
-     * @deprecated 1.1.0 use createObject() or getObject() instead! will be removed in 4.0
-     */
-    public static function objectId($blockId, $id, $context, $pageObject = null)
-    {
-        trigger_error('deprecated, use getObject() or createObject() instead.', E_USER_DEPRECATED);
-        if (isset(self::$blocks[$blockId])) {
-            $block = self::$blocks[$blockId];
-        } else {
-            $block = self::find()->select(['class'])->where(['id' => $blockId])->asArray()->one();
-            static::$blocks[$blockId] = $block;
-        }
-        
-        if (!$block) {
-            return false;
-        }
-
-        $class = $block['class'];
-        if (!class_exists($class)) {
-            return false;
-        }
-
-        $object = Yii::createObject([
-            'class' => $class,
-        ]);
-
-        $object->setEnvOption('id', $id);
-        $object->setEnvOption('blockId', $blockId);
-        $object->setEnvOption('context', $context);
-        $object->setEnvOption('pageObject', $pageObject);
-
-        $object->setup();
-
-        return $object;
-    }
 }
