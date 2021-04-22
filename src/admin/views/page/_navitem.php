@@ -4,7 +4,7 @@ use luya\helpers\Html;
 
 ?>
 <script type="text/ng-template" id="recursion.html">
-<h4 class="cmsadmin-container-title" ng-show="placeholder.label">{{placeholder.label}}</h4>
+<div class="text-muted py-3" ng-show="placeholder.label">{{placeholder.label}}</div>
 <div class="card" ng-class="{'card-no-container-title': !placeholder.label}">
     <div class="card-body">
         <div class="empty-placeholder" ng-if="placeholder.__nav_item_page_block_items.length == 0" dnd dnd-drag-disabled dnd-model="placeholder" dnd-isvalid="true" dnd-ondrop="dropItemPlaceholder(dragged,dropped,position, element)" dnd-css="{onDrag: 'empty-placeholder--is-dragging', onHover: 'empty-placeholder--drag-hover', onHoverTop: 'empty-placeholder--drag-top', onHoverMiddle: 'empty-placeholder--drag-middle', onHoverBottom: 'empty-placeholder--drag-bottom'}"><?= Module::t('view_update_drop_blocks'); ?></div>
@@ -21,6 +21,19 @@ use luya\helpers\Html;
                         </button>
                     </div>
 					<?php if ($canBlockUpdate): ?>
+                    <div class="toolbar-item">
+                        <luya-schedule
+                            style="display:inline-block;"
+                            only-icon="1"
+                            value="block.is_hidden"
+                            primary-key-value="block.id"
+                            model-class="luya\cms\models\NavItemPageBlockItem"
+                            attribute-name="is_hidden"
+                            title="Visibility"
+                            attribute-values='[{"label":"Hidden","value":1},{"label":"Visible","value":0}]'
+                        >
+                        </luya-schedule>
+                    </div>
                     <div class="toolbar-item" ng-click="toggleHidden()" ng-show="block.is_hidden==0">
                         <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_visible'));?>" tooltip-position="top">
                             <i class="material-icons">visibility</i>
@@ -49,8 +62,8 @@ use luya\helpers\Html;
                 </div>
                 <modal is-modal-hidden="modalHidden" modal-title="{{block.name}}">
                     <div ng-if="!modalHidden" class="row" ng-init="initModalMode()">
-                        <div class="col">
-                            <div class="card">
+                        <div class="col-lg">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <ul class="nav nav-tabs card-header-tabs">
                                         <li class="nav-item" ng-click="modalMode=1" ng-show="block.vars.length > 0">
@@ -64,16 +77,16 @@ use luya\helpers\Html;
                                 <div class="card-body">
                                     <form class="block__edit" ng-submit="save()">
                                         <div ng-if="modalMode==1" ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
-                                        <div class="col">
+                                            <div class="col" ng-class="{'bold-form-label': field.required}">
                                                 <span ng-if="getInfo(field.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(field.var)" tooltip-position="left"></span>
                                                 <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
                                             </div>
                                         </div>
                                         <div ng-if="modalMode==2" ng-repeat="cfgField in block.cfgs" ng-hide="cfgField.invisible" class="row">
-                                            <div class="col">
+                                            <div class="col" ng-class="{'bold-form-label': cfgField.required}">
                                                 <span ng-if="getInfo(cfgField.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(cfgField.var)" tooltip-position="left"></span>
                                                 <zaa-injector dir="cfgField.type"  options="cfgField.options" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}"  placeholder="{{cfgField.placeholder}}" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
-                                        </div>
+                                            </div>
                                         </div>
                                         <button type="submit" class="btn btn-save btn-icon"><?= Module::t('view_update_btn_save'); ?></button>
                                         <button type="button" class="btn btn-icon btn-help float-right" ng-click="showHelp=!showHelp">{{ showHelp == true ? '<?= Module::t('view_update_btn_hide_help'); ?>' : '<?= Module::t('view_update_btn_show_help'); ?>' }}</button>
@@ -85,14 +98,16 @@ use luya\helpers\Html;
                                 </div>
                             </div>
                         </div>
-                        <div ng-if="showHelp" class="col">
-                            <ul class="list-group">
-                                <li class="list-group-item" style="cursor:pointer;" click-paste-pusher="{{help.example}}" ng-repeat="help in navCfg.helptags">
-                                    <p><span class="badge badge-primary">{{ help.name }}</span></p>
-                                    <small><span ng-bind-html="help.readme | trustAsUnsafe"></span></small>
-                                    <span class="badge badge-secondary">{{help.example}}</span>
-                                </li>
-                            </ul>
+                        <div ng-if="showHelp" class="col-lg">
+                            <div class="row row-cols-2">
+                                <div style="cursor:pointer;" class="col" click-paste-pusher="{{help.example}}" ng-repeat="help in navCfg.helptags">
+                                    <div class="mb-3 p-2 shadow rounded">
+                                        <p class="lead text-center">{{ help.name }}</p>
+                                        <p class="small text-muted"><span ng-bind-html="help.readme | trustAsUnsafe"></span></p>
+                                        <p class="mb-0 text-center"><span class="badge badge-secondary">{{help.example}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </modal>
@@ -156,6 +171,7 @@ use luya\helpers\Html;
 </div>
 <div ng-if="!loaded">loading...</div>
 <div class="cmsadmin-page" ng-if="isTranslated && loaded">
+    
     <div class="row" ng-if="item.nav_item_type==1" ng-repeat="(key, row) in container.__placeholders track by key">
         <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderKey, placeholder) in row track by placeholderKey" ng-include="'recursion.html'"></div>
     </div>
@@ -177,24 +193,25 @@ use luya\helpers\Html;
     </div>
 </div>
 <div class="cmsadmin-page" ng-if="!isTranslated && loaded">
-    <div class="alert alert-info"><?= Module::t('view_update_no_translations'); ?></div>
-    <div ng-controller="CopyPageController">
-        <h3><?= Module::t('view_index_add_page_from_language'); ?></h3>
-        <p><?= Module::t('view_index_add_page_from_language_info'); ?></p>
-        <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
-        <div ng-show="isOpen">
-            <ul class="list-group" style="margin-bottom:25px;">
-                <li ng-repeat="item in items" class="list-group-item"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
-            </ul>
-            <div ng-show="itemSelection" style=" margin-bottom:25px;">
-                <zaa-text label="<?= Module::t('view_index_page_title'); ?>" model="itemSelection.title"></zaa-text>
-                <zaa-text label="<?= Module::t('view_index_page_alias'); ?>" model="itemSelection.alias"></zaa-text>
-                <button ng-click="save()" class="btn btn-save btn-icon" type="button"><?= Module::t('view_index_page_btn_save'); ?></button>
+    <div class="shadow bg-white rounded p-3 m-3">
+        <div ng-controller="CopyPageController">
+            <p class="lead font-weight-bold"><?= Module::t('view_index_add_page_from_language'); ?></p>
+            <p><?= Module::t('view_index_add_page_from_language_info'); ?></p>
+            <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
+            <div ng-show="isOpen">
+                <ul class="list-group" style="margin-bottom:25px;">
+                    <li ng-repeat="item in items" class="list-group-item"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
+                </ul>
+                <div ng-show="itemSelection" style=" margin-bottom:25px;">
+                    <zaa-text label="<?= Module::t('view_index_page_title'); ?>" model="itemSelection.title"></zaa-text>
+                    <zaa-text label="<?= Module::t('view_index_page_alias'); ?>" model="itemSelection.alias"></zaa-text>
+                    <button ng-click="save()" class="btn btn-save btn-icon" type="button"><?= Module::t('view_index_page_btn_save'); ?></button>
+                </div>
             </div>
         </div>
-    </div>
-    <div ng-controller="CmsadminCreateInlineController">
-        <h3><?= Module::t('view_index_add_page_empty'); ?></h3>
-        <create-form data="data"></create-form>
+        <div ng-controller="CmsadminCreateInlineController">
+             <p class="lead font-weight-bold mt-5"><?= Module::t('view_index_add_page_empty'); ?></p>
+            <create-form data="data"></create-form>
+        </div>
     </div>
 </div>

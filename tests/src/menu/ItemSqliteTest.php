@@ -127,6 +127,69 @@ class ItemSqliteTest extends WebApplicationTestCase
         $column = $this->app->menu->home->descendants;
         $this->assertSame(1, count($column));
     }
-    
 
+    public function testTeardownWithHidden()
+    {
+        $this->createAdminLangFixture([
+            1 => [
+                'id' => 1,
+                'short_code' => 'en',
+                'is_default' => 1,
+            ]
+        ]);
+        $this->createCmsNavContainerFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'default',
+                'alias' => 'default',
+            ]
+        ]);
+        $this->createCmsNavFixture([
+            1  => [
+                'id' => 1,
+                'nav_container_id' => 1,
+                'parent_nav_id' => 0,
+                'is_home' => 1,
+                'is_offline' => 0,
+                'is_hidden' => 1,
+                'is_deleted' => 0,
+                'is_draft' => 0,
+                'sort_index' => 1,
+            ],
+            2 => [
+                'id' => 2,
+                'nav_container_id' => 1,
+                'parent_nav_id' => 1,
+                'is_offline' => 0,
+                'is_hidden' => 1,
+                'is_deleted' => 0,
+                'is_draft' => 0,
+            ]
+        ]);
+
+        $this->createCmsNavItemFixture([
+            1 => [
+                'id' => 1,
+                'alias' => 'abc',
+                'title' => 'abc',
+                'nav_id' => 1,
+                'lang_id' => 1,
+            ],
+            2 => [
+                'id' => 2,
+                'alias' => 'def',
+                'title' => 'def',
+                'nav_id' => 2,
+                'lang_id' => 1,
+            ],
+        ]);
+
+        $column = $this->app->menu->home->with(['hidden'])->teardown;
+
+        $this->assertSame(1, count($column));
+
+        $second = $this->app->menu->find()->with(['hidden'])->where(['id' => 2])->one();
+
+        $this->assertSame(2, count($second->with(['hidden'])->teardown));
+    }
 }

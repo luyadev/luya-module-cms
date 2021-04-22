@@ -68,6 +68,7 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
     {
         $provider = new ActiveDataProvider([
             'query' => $this->_query,
+            'pagination' => false,
         ]);
     
         $data = [];

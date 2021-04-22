@@ -9,6 +9,7 @@ use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\admin\models\Config;
 use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
+use luya\helpers\StringHelper;
 
 class BlockImporterTest extends CmsConsoleTestCase
 {
@@ -41,10 +42,12 @@ class BlockImporterTest extends CmsConsoleTestCase
                 0 => 'Insert new block group block_group_dev_elements.',
                 1 => 'block \luya\cms\frontend\blocks\HtmlBlock: Added to database',
                 2 => 'Insert new block group block_group_dev_elements.',
-                3 => 'block \luya\cms\frontend\blocks\ModuleBlock: Added to database',
-                4 => 'Insert new block group block_group_basic_elements.',
-                5 => 'block \cmstests\data\blocks\import\TestBlock: Added to database',
-                6 => 'Block importer finished with 3 blocks.',
+                3 => 'block \luya\cms\frontend\blocks\MirrorLanguageBlock: Added to database',
+                4 => 'Insert new block group block_group_dev_elements.',
+                5 => 'block \luya\cms\frontend\blocks\ModuleBlock: Added to database',
+                6 => 'Insert new block group block_group_basic_elements.',
+                7 => 'block \cmstests\data\blocks\import\TestBlock: Added to database',
+                8 => 'Block importer finished with 4 blocks.',
             ]
         ], $log);
     }
@@ -77,18 +80,16 @@ class BlockImporterTest extends CmsConsoleTestCase
 
         // remove 4 key because of path
 
-        $pathKey = $log['luya\cms\admin\importers\BlockImporter'][4];
-        unset($log['luya\cms\admin\importers\BlockImporter'][4]);
+        $has = false;
+        foreach ($log as $class => $entries) {
+            foreach ($entries as $log) {
+                if (StringHelper::contains('Unable to find', $log)) {
+                    $has = true;
+                }
+            }
+        }
 
-        $this->assertContains('Unable to find', $pathKey);
-        $this->assertSame([
-            'luya\cms\admin\importers\BlockImporter' => [
-                0 => 'Insert new block group block_group_dev_elements.',
-                1 => 'block \luya\cms\frontend\blocks\HtmlBlock: Added to database',
-                2 => 'Insert new block group block_group_dev_elements.',
-                3 => 'block \luya\cms\frontend\blocks\ModuleBlock: Added to database',
-                5 => 'Block importer finished with 2 blocks.',
-            ]
-        ], $log);
+        // the unable to find log entrie must exists
+        $this->assertTrue($has);
     }
 }

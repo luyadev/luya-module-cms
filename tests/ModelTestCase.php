@@ -2,6 +2,7 @@
 
 namespace cmstests;
 
+use luya\admin\components\AdminLanguage;
 use luya\testsuite\cases\ConsoleApplicationTestCase;
 
 class ModelTestCase extends ConsoleApplicationTestCase
@@ -18,6 +19,9 @@ class ModelTestCase extends ConsoleApplicationTestCase
                 ],
                 'urlManager' => [
                     'cache' => null,
+                ],
+                'adminLanguage' => [
+                    'class' => AdminLanguage::class,
                 ]
             ]
         ];

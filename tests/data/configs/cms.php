@@ -11,7 +11,10 @@ return [
     ],
     'language' => 'en',
     'modules' => [
-        'admin' => 'luya\admin\Module',
+        'admin' => [
+            'class' => 'luya\admin\Module',
+            'queueMutexClass' => 'yii\mutex\FileMutex',
+        ],
         'cms' => [
             'class' => '\luya\cms\frontend\Module'
         ],

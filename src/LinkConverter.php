@@ -2,9 +2,9 @@
 
 namespace luya\cms;
 
+use luya\cms\models\Nav;
 use Yii;
 use yii\base\BaseObject;
-use yii\base\InvalidConfigException;
 use luya\helpers\ArrayHelper;
 use luya\web\WebsiteLink;
 use luya\web\EmailLink;
@@ -188,6 +188,16 @@ class LinkConverter extends BaseObject
      */
     public function getPageLink($navId, $target, $lang = null)
     {
+        // in a headless context, the menu component might not exists, therefore just return all 
+        // available informations.
+        if (!Yii::$app->get('menu', false)) {
+            return Nav::find()
+                ->where(['cms_nav.id' => $navId])
+                ->joinWith(['navItems'])
+                ->asArray()
+                ->one();
+        }
+
         $linkQuery = Yii::$app->menu->find();
         $linkQuery->where(['nav_id' => $navId]);
         $linkQuery->with(['hidden']);

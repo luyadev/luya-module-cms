@@ -125,7 +125,7 @@ class NavControllerTest extends WebModelTestCase
 
             $this->assertSame(1, $r);
 
-            $this->assertContains('-deleted', NavItem::findOne(1)->alias);
+            $this->assertStringContainsString('-deleted', NavItem::findOne(1)->alias);
             $this->assertSame("1", Nav::findOne(1)->is_deleted);
         });
     }

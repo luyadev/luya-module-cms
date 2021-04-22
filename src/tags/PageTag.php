@@ -2,6 +2,7 @@
 
 namespace luya\cms\tags;
 
+use luya\cms\frontend\Module;
 use luya\tag\BaseTag;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
@@ -37,7 +38,7 @@ class PageTag extends BaseTag
      */
     public function readme()
     {
-        return 'Get the content of a full page or just a placeholder of the page. The first param is the page it (which you get by hovering over the menu tree in the administration area) `page[1]` if you just want to get the content of a placeholder of the cmslayout used the second parameter `page[1](placeholderName)`.';
+        return Module::t('tag_page_readme');
     }
     
     /**

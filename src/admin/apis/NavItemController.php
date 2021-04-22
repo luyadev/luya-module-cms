@@ -36,7 +36,7 @@ class NavItemController extends \luya\admin\base\RestController
         
         $behaviors['responseCache'] = [
             'class' => ResponseCache::class,
-            'actions' => ['nav-lang-item'],
+            'only' => ['nav-lang-item'],
             'variations' => [
                 Yii::$app->request->get('navId', 0),
                 Yii::$app->request->get('langId', 0),
@@ -143,7 +143,8 @@ class NavItemController extends \luya\admin\base\RestController
     /**
      * Change the layout of a page version.
      *
-     * @return number|boolean
+     * @return NavItemPage
+     * @throws NotFoundHttpException
      */
     public function actionChangePageVersionLayout()
     {
@@ -156,10 +157,17 @@ class NavItemController extends \luya\admin\base\RestController
         
         if ($model) {
             $model->forceNavItem->updateTimestamp();
-            return $model->updateAttributes(['layout_id' => $layoutId, 'version_alias' => $alias]);
+            $model->layout_id = $layoutId;
+            $model->version_alias = $alias;
+
+            if ($model->save(true, ['layout_id', 'version_alias'])) {
+                return $model;
+            }
+
+            return $this->sendModelError($model);
         }
         
-        return false;
+        throw new NotFoundHttpException();
     }
     
     /**

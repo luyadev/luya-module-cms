@@ -10,6 +10,7 @@ use yii\base\Exception;
 use luya\cms\admin\Module;
 use luya\admin\models\Lang;
 use luya\admin\base\GenericSearchInterface;
+use luya\admin\helpers\Angular;
 use luya\admin\models\User;
 use luya\helpers\Inflector;
 
@@ -109,6 +110,11 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function rules()
     {
         return [
+            ['nav_item_type_id', 'required', 'isEmpty' => function($value) {
+                return empty($value);
+            }, 'when' => function() {
+                return !$this->isNewRecord;
+            }],
             [['description', 'keywords'], 'string'],
             [['title'], 'string', 'max' => 180],
             [['alias'], 'string', 'max' => 80],
@@ -315,6 +321,20 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             'timestamp_update' => time(),
             'update_user_id' => Module::getAuthorUserId(),
         ]);
+    }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields['is_cacheable'] = function($model) {
+            return (int) $model->is_cacheable;
+            // return Angular::typeCast($model->is_cacheable); use for admin@4.0 release
+        };
+        $fields['is_url_strict_parsing_disabled'] = function($model) {
+            return (int) $model->is_url_strict_parsing_disabled;
+            // return Angular::typeCast($model->is_url_strict_parsing_disabled); use for admin@4.0 release
+        };
+        return $fields;
     }
 
     /* GenericSearchInterface */

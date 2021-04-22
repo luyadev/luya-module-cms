@@ -78,10 +78,4 @@ class BlockTest extends CmsNgRestTestCase
         $this->assertNull($this->api->actionRemoveFav());
         $this->assertNull($this->api->actionToggleGroup());
     }
-
-    public function testObjectId()
-    {
-        $this->expectException(ErrorException::class);
-        Block::objectId(1,1,"foo");
-    }
 }

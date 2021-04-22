@@ -1,9 +1,3 @@
-/vendor
-/.php_cs.cache
-/.buildpath
-/.project
-/.settings/
-/phpunit.xml
-/luya
-node_modules/
 tests/_output/*
+composer.lock
+.phpunit.result.cache

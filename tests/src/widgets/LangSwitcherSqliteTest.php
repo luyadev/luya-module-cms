@@ -18,6 +18,7 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
         return [
             'id' => 'ngresttest',
             'basePath' => dirname(__DIR__),
+            'language' => 'de',
             'components' => [
                 'db' => [
                     'class' => 'yii\db\Connection',
@@ -139,8 +140,8 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
         $w = new LangSwitcher();
         $switcher = $w->run();
 
-        $this->assertContains('slug=default', $switcher);
-        $this->assertContains('slug=enslug', $switcher);
+        $this->assertStringContainsString('slug=default', $switcher);
+        $this->assertStringContainsString('slug=enslug', $switcher);
 
         $tagFixture = $this->createAdminTagFixture([
             1 => [
@@ -156,7 +157,7 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
         $w = new LangSwitcher();
         $switcher = $w->run();
 
-        $this->assertContains('slug=Deutsch', $switcher);
-        $this->assertContains('slug=English', $switcher);
+        $this->assertStringContainsString('slug=Deutsch', $switcher);
+        $this->assertStringContainsString('slug=English', $switcher);
     }
 }

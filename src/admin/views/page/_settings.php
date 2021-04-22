@@ -14,9 +14,6 @@ use luya\admin\helpers\Angular;
                 <li class="nav-item" ng-show="propertiesData.length > 0">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=2" ng-class="{'active':pageSettingsOverlayTab==2}"><i class="material-icons">settings</i><span><?= Module::t('view_update_properties_title'); ?></span></a>
                 </li>
-                <li class="nav-item" ng-show="!isDraft">
-                    <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=7" ng-class="{'active':pageSettingsOverlayTab==7}"><i class="material-icons">timelapse</i><span><?= Module::t('cmsadmin_settings_time_title'); ?></span></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" ng-click="pageSettingsOverlayTab=4" ng-class="{'active':pageSettingsOverlayTab==4}"><i class="material-icons">content_copy</i><span><?= Module::t('page_update_actions_deepcopy_title'); ?></span></a>
                 </li>
@@ -43,16 +40,17 @@ use luya\admin\helpers\Angular;
             </div>
             <div ng-switch-when="2">
                 <h1><?= Module::t('view_update_properties_title'); ?></h1>
-                <div ng-show="!hasValues" class="alert alert-info"><?= Module::t('view_update_no_properties_exists'); ?></div>
-                <div class="row" ng-repeat="prop in propertiesData">
-                    <div ng-if="prop.i18n" class="col">
+                <p ng-show="!hasValues" ><?= Module::t('view_update_no_properties_exists'); ?></p>
+                <div ng-repeat="prop in propertiesData" ng-class="{'border-top border-light pt-4': !$first}">
+                    <span class="help-button btn btn-icon btn-help" tooltip tooltip-text="{{prop.help}}" ng-show="prop.help" tooltip-position="left"></span>
+                    <div ng-if="prop.i18n">
                         <ul>
                             <li ng-repeat="lang in languagesData">
                                 <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{lang.name}}: {{prop.label}}" model="propValues[prop.id][lang.short_code]"></zaa-injector>
                             </li>
                         </ul>
                     </div>
-                    <div ng-if="!prop.i18n" class="col">
+                    <div ng-if="!prop.i18n">
                         <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                     </div>
                 </div>
@@ -87,15 +85,6 @@ use luya\admin\helpers\Angular;
                 <p><a ng-click="trash()" class="btn btn-delete btn-icon"><?= Module::t('cmsadmin_settings_trashpage_title'); ?></a></p>
             </div>
             <?php endif; ?>
-            
-            <div ng-switch-when="7">
-                <h1><?= Module::t('cmsadmin_settings_time_title'); ?></h1>
-                <form ng-submit="submitNavForm({publish_from: navData.publish_from, publish_till: navData.publish_till})">
-                    <?= Angular::datetime('navData.publish_from', Module::t('cmsadmin_settings_time_title_from')); ?>
-                    <?= Angular::datetime('navData.publish_till', Module::t('cmsadmin_settings_time_title_till')); ?>
-                    <button class="btn btn-save btn-icon" type="submit"><?= Module::t('btn_save'); ?></button>
-                </form>
-            </div>
 
             <div ng-switch-when="8">
                 <h1><?= Module::t('page_update_actions_deepcopyastemplate_title'); ?></h1>

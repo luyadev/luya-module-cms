@@ -1,7 +1,6 @@
 .block {
-    background-color: $white;
-    border: $block-border-width dashed $block-border-color;
-    border-radius: $nav-tabs-border-radius;
+    border: 1px solid #f0f0f0;
+    border-radius: $border-radius;
     margin-top: 5px;
     padding: 0;
     position: relative;
@@ -13,7 +12,7 @@
 
     &:hover {
         border-color: $block-border-color;
-        border-radius: 0 0 $nav-tabs-border-radius $nav-tabs-border-radius;
+        border-radius: $border-radius;
         cursor: move;
         transition: .2s ease-in-out border-color;
         z-index: 1;
@@ -52,7 +51,8 @@
         opacity: .3;
     }
     &-is-virgin .block-front {
-        background-color: lighten(color(blue), 30);
+        background-color: lighten(color(blue), 40);
+        border-radius: $border-radius;
     }
     &-first {
         margin-top: 0;
@@ -63,9 +63,16 @@
     }
 }
 
+.empty-placeholder {
+    color:#333;
+    font-weight: 200;
+    font-size: 14px;
+}
+
 .block-toolbar {
     background-color: map-get($grays, 900);
-    border-radius: $nav-tabs-border-radius $nav-tabs-border-radius 0 0;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
     color: $white;
     display: flex;
     flex-wrap: wrap;
@@ -75,7 +82,8 @@
     pointer-events: none;
     position: absolute;
     right: -$block-border-width;
-    transform: translateY(-100%);
+    height: 36px;
+    margin-top: -36px;
     transition: .2s ease-in-out opacity;
     z-index: z-index(block-toolbar);
 
@@ -100,6 +108,11 @@
         opacity: 1;
         pointer-events: all;
     }
+
+    .inlinemodal {
+        color: $black;
+        font-size: 1rem;
+    }
 }
 
 .block-front,
@@ -120,19 +133,27 @@
     }
     .block-is-layout > .block-is-container > & {
         padding: 0;
+    }   
+}
+
+.block-is-container {
+    &:hover {
+        background-color: #f0f0f0;
     }
 }
 
+.block-toolbar .scheduler-btn,
 .block-toolbar-button {
     background: none;
     background-color: transparent;
     border: none;
-    border-radius: 0;
+    border-radius: $border-radius;
     color: $white;
     cursor: pointer;
     display: block;
     margin-left: 5px;
     transition: .25s ease-in-out background-color;
+    padding: 1px 6px;
 
     &:hover {
         background-color: rgba(255, 255, 255, .2);
@@ -140,5 +161,16 @@
 
     .block--is-dragging & {
         display: none;
+    }
+}
+
+.block-toolbar .btn {
+    font-size: inherit;
+    line-height: inherit;
+    color: $white;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
     }
 }

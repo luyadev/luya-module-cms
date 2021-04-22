@@ -9,7 +9,7 @@ use luya\admin\models\Property as AdminProperty;
  *
  * Each CMS property is attached to an ADMIN PROPERTY with the current navigation (nav_id) context.
  *
- * > Rename to NavProperty in 1.1.x
+ * @property \luya\admin\base\Property $object
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

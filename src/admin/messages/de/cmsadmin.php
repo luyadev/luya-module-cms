@@ -208,7 +208,7 @@ return [
     'redirect_model_atr_catch_path_hint' => 'Der Pfad, von dem weitergeleitet werden soll. Sollen auch alle Unterpfade weitergeleitet werden, kannst du die Wildcard * verwenden, z.B. /blog*, um alle Unterpfade von /blog weiterzuleiten.',
     'redirect_model_atr_catch_path_error' => 'Der Pfad muss mit einem Slash / beginnen.',
     'redirect_model_atr_redirect_path' => 'Ziel',
-    'redirect_model_atr_redirect_path_hint' => 'Du kannst entweder einen absoluten Pfad verwenden, der mit https:// oder http:// beginnt, einen relativen Pfad zum Startverzeichnis der Website, der mit / beginnt, oder einen relativen Pfad zum Pfad, von dem weitergeleitet wird (z.B. wartung, um von /shop/start nach /shop/wartung weiterzuleiten).',
+    'redirect_model_atr_redirect_path_hint' => 'Du kannst entweder einen absoluten Pfad verwenden, der mit https:// oder http:// beginnt, einen relativen Pfad zum Startverzeichnis der Website, der mit / beginnt, oder einen relativen Pfad zum Pfad, von dem weitergeleitet wird (z.B. wartung, um von /shop/start nach /shop/wartung weiterzuleiten). Wenn eine Wildcard * verwendet wird im Ausgangspfad kann dieser auch als Ziel verwendet werden.',
     'redirect_model_atr_redirect_status_code' => 'HTTP-Status-Code',
     'redirect_model_atr_redirect_status_code_hint' => 'Art der Weiterleitung. Bei der Verwendung von 301: Moved Permanently werden Browser die Weiterleitung im Cache speichern, so dass Änderungen des Ziels erst nach dem Löschen des Browser-Caches wirksam werden.',
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
@@ -259,6 +259,10 @@ return [
     'menu_group_protocol' => 'Protokoll',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'Die gesuchte Seite wurde noch nicht übersetzt.',
+    
+// 3.4
+
+    'js_block_attribute_empty' => '«%label%» darf nicht leer sein.',
     
 // 4.0
 

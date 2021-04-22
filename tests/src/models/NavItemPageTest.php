@@ -3,6 +3,8 @@
 namespace NavItemPageTest;
 
 use cmstests\WebModelTestCase;
+use luya\cms\models\NavItemPage;
+use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 use yii\base\ViewNotFoundException;
 
@@ -33,8 +35,23 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertContains('luya-module-cms/testfile', $e->getMessage());
+            $this->assertStringContainsString('luya-module-cms/testfile', $e->getMessage());
         }
+    }
+
+    public function testGetOption()
+    {
+        $fixtures = new NgRestModelFixture([
+            'modelClass' => NavItemPage::class,
+        ]);
+
+        $model = $fixtures->newModel;
+
+        $this->assertFalse($model->getOption('foobar'));
+
+        $model->setOptions(['bar' => 'foo']);
+
+        $this->assertSame('foo', $model->getOption('bar'));
     }
 
     public function testAbsolutePath()
@@ -60,7 +77,7 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertContains('/absolute', $e->getMessage());
+            $this->assertStringContainsString('/absolute', $e->getMessage());
         }
     }
 
@@ -87,7 +104,7 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertContains('luya-module-cms/views/cmslayouts/relative.php', $e->getMessage());
+            $this->assertStringContainsString('luya-module-cms/views/cmslayouts/relative.php', $e->getMessage());
         }
     }
 }

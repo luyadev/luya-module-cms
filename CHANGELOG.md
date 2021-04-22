@@ -3,15 +3,49 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 4.0
+## 5.0
 
 + [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support
 
-## 3.4.0
+## 4.0.0
+
+* [#341](https://github.com/luyadev/luya-module-cms/pull/341) All deprecated methods has been removed `Url::toMenuItem`, `Block::objectId`, `NavItemPage::getBlock`.
++ [#320](https://github.com/luyadev/luya-module-cms/pull/320) Replace cms menu item `publish_from` and `publish_till` with sheduler.
++ [#329](https://github.com/luyadev/luya-module-cms/issues/329) Ensure its not possible to drag a placeholder block into itself (this can create circular references)
++ [#336](https://github.com/luyadev/luya-module-cms/pull/336) New event which is triggered when the cms page is composed and ready to render.
++ [#325](https://github.com/luyadev/luya-module-cms/issues/325) Added target value into the NavTree widget.
++ [#327](https://github.com/luyadev/luya-module-cms/issues/327) Fix LinkConverter class when using CMS as headless API.
++ [#323](https://github.com/luyadev/luya-module-cms/pull/323) Add LUYA Test Suite 2.0 with PHP 8 Support.
++ [#321](https://github.com/luyadev/luya-module-cms/pull/321) Added scheduler for block item visibility.
++ [#331](https://github.com/luyadev/luya-module-cms/pull/331) When caching is enabled, the NavTree content will be cached by default.
++ [#325](https://github.com/luyadev/luya-module-cms/issues/326) Updates for compatibility with PostgreSQL
++ [#332](https://github.com/luyadev/luya-module-cms/pull/332) Added option to match wildcards in catch path for cms redirects, this allows you to use `/de/*.html` which could be redirect to `/de/*.
++ [#339](https://github.com/luyadev/luya-module-cms/issues/339) Fixed a bug in CMS page permission system, unable to access to subpage without enabling parent page permissions.
+
+## 3.5.1 (24. November 2020)
+
++ [#319](https://github.com/luyadev/luya-module-cms/issues/319) Disabled Block injector rows limit.
+
+## 3.5.0 (17. November 2020)
+
++ [#314](https://github.com/luyadev/luya-module-cms/pull/314) Do not serve the blocks from the cache when an adminuser is logged in.
++ [#309](https://github.com/luyadev/luya-module-cms/pull/309) Added new help information for page properties as tooltip.
++ [#310](https://github.com/luyadev/luya-module-cms/issues/310) Fixed a bug where full page cache could cache the content including the LUYA Toolbar.
++ [#317](https://github.com/luyadev/luya-module-cms/pull/317) Add the option to use the defined wildcard value in redirects for the target. From path `foo/*` to destination `luya.io?path=*`. The given example would redirect `foo/hello-world` to `luya.io?path=hello-word`.
+
+## 3.4.0 (24. October 2020)
 
 > This release contains a very small and unlikely used signature change. Check the [UPGRADE document](UPGRADE.md) to read more about.
 
 + [#288](https://github.com/luyadev/luya-module-cms/pull/288) Introduced a new `setup()` method in `luya\cms\base\BlockInterface`. This method is called when the block object is instantiated in frontend context.
++ [#300](https://github.com/luyadev/luya-module-cms/issues/300) Hide navigation informations when creating a translation from an existing page (inline translating).
++ [#290](https://github.com/luyadev/luya-module-cms/issues/290) Add `titleContent` callable function for `luya\cms\widgets\NavTree` widget in order to customize the link content.
++ [#292](https://github.com/luyadev/luya-module-cms/pull/292) Improve the CMS Block-Editor styles.
++ [#297](https://github.com/luyadev/luya-module-cms/issues/297) Fixed a bug where menu queries with hidden informations won't retrieve correct data and count (hidden information was not passed correctly to the ArrayIterator from inside an luya\menu\Item).
++ [#138](https://github.com/luyadev/luya-module-cms/pull/299) Added missing translations for all CMS tags.
++ [#302](https://github.com/luyadev/luya-module-cms/pull/302) Added new "Language Mirroring" block for the developer group, in order to mirror content from a language placeholder into another.
++ [#304](https://github.com/luyadev/luya-module-cms/issues/304) Add new default value for full page cache duration (2 hours instead of 1 minute).
++ [#306](https://github.com/luyadev/luya-module-cms/pull/306) New option for block variable and configuration setup allows to make attributes required using `'required' => true` in block config. 
 
 ## 3.3.7 (15. September 2020)
 

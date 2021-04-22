@@ -20,6 +20,7 @@ class BlockCfg extends BlockConfigElement
             'placeholder' => $this->get('placeholder'),
             'options' => $this->get('options'),
             'initvalue' => $this->get('initvalue'),
+            'required' => $this->get('required', 0),
         ];
     }
 }

@@ -21,8 +21,11 @@ use \luya\admin\Module as AdminModule;
         </span>
     </span>
     <span ng-if="!data.is_editable" class="treeview-label treeview-label-page">
+        <span class="treeview-icon treeview-icon-collapse" ng-show="(menuData.items | menuparentfilter:catitem.id:data.id).length"  ng-click="toggleItem(data)">
+            <i class="material-icons">arrow_drop_down</i>
+        </span>
         <span class="treeview-link" alt="id={{data.id}}" title="id={{data.id}}" style="cursor: not-allowed;">
-            <span class="google-chrome-font-offset-fix">{{data.title}}</span>
+            <span class="google-chrome-font-offset-fix text-muted"><span class="material-icons" style="font-size:8px; padding-right:2px; padding-bottom:2px;">lock</span>{{data.title}}</span>
         </span>
     </span>
     <ul class="treeview-items" ng-if="data.has_children && data.toggle_open">
@@ -95,7 +98,7 @@ use \luya\admin\Module as AdminModule;
             </ul>
         </div>
     </div>
-    <div class="luya-content luya-content-cmsadmin" ui-view>
+    <div class="luya-content luya-content-cmsadmin mt-0" ui-view>
         <div ng-controller="CmsDashboard">
             <div class="card mb-2" ng-repeat="item in dashboard" ng-init="item.isToggled = ($index < 3)">
 	            <div class="card-header" ng-click="item.isToggled = !item.isToggled">

@@ -54,10 +54,22 @@ class DefaultController extends Controller
                 && Yii::$app->menu->current
                 && Yii::$app->menu->current->type == NavItem::TYPE_PAGE
                 && !Yii::$app->menu->current->is404Page
+                && $this->isAdminLoggedIn()
                 && (int) NavItem::find()->where(['nav_id' => Yii::$app->menu->current->navId, 'lang_id' => Yii::$app->adminLanguage->activeId])->select(['is_cacheable'])->scalar();
         } catch (NotFoundHttpException $notFound) {
             return false;
         }
+    }
+
+    /**
+     * Returns whether admin user is working in frontend context.
+     *
+     * @return boolean Whether caching should be enabled or not.
+     * @since 3.5.0
+     */
+    private function isAdminLoggedIn()
+    {
+        return Yii::$app->has('adminuser') ? Yii::$app->adminuser->isGuest : true;
     }
 
     /**
@@ -73,6 +85,7 @@ class DefaultController extends Controller
             'variations' => [
                 Yii::$app->request->url,
             ],
+            'duration' => $this->module->fullPageCacheDuration,
             'dependency' => [
                 'class' => 'yii\caching\DbDependency',
                 'sql' => 'SELECT max(timestamp_update) FROM cms_nav_item',
@@ -144,15 +157,15 @@ class DefaultController extends Controller
         $path = Yii::$app->request->pathInfo;
         $compositePath = Yii::$app->composition->prependTo($path);
         foreach (Redirect::find()->all() as $redirect) {
-            if ($redirect->matchRequestPath($path)) {
-                return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
+            if ($wildcard = $redirect->matchRequestPath($path)) {
+                return $this->redirect($redirect->getRedirectUrl($wildcard), $redirect->redirect_status_code);
             }
 
             // if its a multi linguage website and the language has not been omited form request path compare this version too.
             // this is requred since the luya UrlManager can change the pathInfo
             if ($path !== $compositePath) {
-                if ($redirect->matchRequestPath($compositePath)) {
-                    return $this->redirect($redirect->getRedirectUrl(), $redirect->redirect_status_code);
+                if ($wildcard = $redirect->matchRequestPath($compositePath)) {
+                    return $this->redirect($redirect->getRedirectUrl($wildcard), $redirect->redirect_status_code);
                 }
             }
         }

@@ -29,8 +29,8 @@ return [
     'view_update_settings' => 'Ajustes',
     'view_update_btn_save' => 'Guardar',
     'view_update_btn_cancel' => 'Cancelar',
-    'view_update_btn_hide_help' => 'Hide help',
-    'view_update_btn_show_help' => 'Show help',
+    'view_update_btn_hide_help' => 'Ocultar ayuda',
+    'view_update_btn_show_help' => 'Mostrar ayuda',
     'view_update_holder_state_on' => 'Ocultar',
     'view_update_holder_state_off' => 'Desplegar',
     'view_update_is_draft_mode' => 'Editarlo como un proyecto.',
@@ -174,35 +174,35 @@ return [
     'cmsadmin_item_settings_titleslug' => 'Información de la página',
     'cmsadmin_created_at' => 'Creado en',
     'cmsadmin_version_remove' => 'Eliminar versión',
-    'view_index_sidebar_container_no_pages' => 'Empty container',
-    'view_update_set_as_homepage_btn' => 'Set as homepage',
-    'cmsadmin_settings_time_title' => 'Scheduler',
-    'cmsadmin_settings_time_title_from' => 'From',
-    'cmsadmin_settings_time_title_till' => 'Till',
-    'view_index_page_meta_timestamp_create' => 'Page creation date',
-    'nav_item_model_error_modulenameexists' => 'The alias "{alias}" exists already as module. Use another alias name or rename the module with this alias in your config.',
-    'nav_item_model_error_parentnavidcannotnull' =>  'The parent nav id can not be null, something went wrong while extending from parent page.',
-    'nav_item_model_error_urlsegementexistsalready' => 'This alias exists already, please take another name.',
-    'menu_group_item_env_redirections' => 'Redirects',
-    'redirect_model_atr_timestamp_create' => 'Create timestamp',
-    'redirect_model_atr_catch_path' => 'From path',
-    'redirect_model_atr_catch_path_hint' => 'The path which should be redirected from. If you want to match all subpaths of a path, you can use the * wildcard like in /blog*, which will match every subpath of /blog.',
-    'redirect_model_atr_catch_path_error' => 'The path must start with a slash.',
-    'redirect_model_atr_redirect_path' => 'Destination',
-    'redirect_model_atr_redirect_path_hint' => 'You can either use an abolute path starting with https:// or http://, a path relative to the website root starting with / or a path relative to the path that is redirected from (e.g. maintenance to redirect from /shop/start to /shop/maintenance).',
-    'redirect_model_atr_redirect_status_code' => 'HTTP status code',
-    'redirect_model_atr_redirect_status_code_hint' => 'Redirection type. When using 301: Moved Permanently, browsers will cache the redirection so that changes to the destination might not take effect without clearing the browser\'s cache.',
+    'view_index_sidebar_container_no_pages' => 'Contenedor vacío',
+    'view_update_set_as_homepage_btn' => 'Establecer como pagina de inicio',
+    'cmsadmin_settings_time_title' => 'Planificador',
+    'cmsadmin_settings_time_title_from' => 'Desde',
+    'cmsadmin_settings_time_title_till' => 'Hasta',
+    'view_index_page_meta_timestamp_create' => 'Fecha de creación de página',
+    'nav_item_model_error_modulenameexists' => 'El alias "{alias}" ya existe como módulo. Utiliza otro nombre de alias o renombra el módulo con dicho alias en tu configuración.',
+    'nav_item_model_error_parentnavidcannotnull' =>  'El identificador del nav padre no puede ser null, algo ha ido mal mientras se extendia desde la página padre.',
+    'nav_item_model_error_urlsegementexistsalready' => 'Este alias ya existe, por favor elige otro nombre.',
+    'menu_group_item_env_redirections' => 'Redirecciones',
+    'redirect_model_atr_timestamp_create' => 'Crear marca de tiempo',
+    'redirect_model_atr_catch_path' => 'Desde ruta',
+    'redirect_model_atr_catch_path_hint' => 'La ruta desde la que se debe redireccionar. Si desea hacer coincidir todas las subrutas de una ruta, puede usar el * comodín como en /blog*, que coincidirá con todas las subrutas de /blog.',
+    'redirect_model_atr_catch_path_error' => 'La ruta debe empezar con una barra oblicua.',
+    'redirect_model_atr_redirect_path' => 'Destino',
+    'redirect_model_atr_redirect_path_hint' => 'Puedes utilizar tanto una ruta abosoluta, empezando con https:// or http://, como una rula relativa a la página web empezando con /, o una ruta relativa a la ruta desde la que es redirecionada (por ejemplo, durante mantinimiento redireccionar desde /shop/start a /shop/maintenance).',
+    'redirect_model_atr_redirect_status_code' => 'Código de estado HTTP',
+    'redirect_model_atr_redirect_status_code_hint' => 'Tipo de Redirección. Cuando se usa 301: Moved Permanently, los navegadores almacenarán en cache la redirección por consiguiente los cambios al destino pueden no tener efecto sin limpiar la cache del navegador.',
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
 
 // 1.0.1
-    'module_permission_page' => 'Page Content',
+    'module_permission_page' => 'Contenido de Página',
 
 // 1.0.6
-    'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
-    'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
-    'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
-    'js_page_create_copy_as_template_success' => 'The template has been created.',
+    'page_update_actions_deepcopyastemplate_title' => 'Copiar como Plantilla',
+    'page_update_actions_deepcopyastemplate_text' => 'Crear una plantilla de la página actual con todo su contenido. La plantilla incluirá todos los lenguages pero solo la versión publicada.',
+    'page_update_actions_deepcopyastemplate_btn' => 'Crear Plantilla',
+    'js_page_create_copy_as_template_success' => 'La plantilla ha sido creada.',
 
 // 2.0
 
@@ -240,6 +240,10 @@ return [
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
+
+    // 3.4
+
+    'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
 // 4.0
 

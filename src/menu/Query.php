@@ -239,7 +239,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * With/Without expression to hidde or display data from the Menu Query.
      *
      * @param string|array $types can be a string  containg "hidden" or an array with multiple with statements
-     * for example `['hidden']`. Further with statements upcoming.
+     * for example `['hidden']`.
      * @return \luya\cms\menu\Query
      */
     public function with($types)
@@ -432,10 +432,11 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      *
      * @param array $data The filtere results where the iterator object should be created with
      * @param string $langContext The language short code context, if any.
-     * @param integer $preloadModels Whether the models should be preload or not.
+     * @param array $with An array with keys to include or not, f.e. `['hidden' => true]` means include hidden elements or `['hidden' => false]` means to not include hidden elements which is default.
+     * @param boolean $preloadModels Whether the models should be preload or not.
      * @return \luya\cms\menu\QueryIterator
      */
-    public static function createArrayIterator(array $data, $langContext, $with, $preloadModels = false)
+    public static function createArrayIterator(array $data, $langContext, array $with = [], $preloadModels = false)
     {
         return (new QueryIteratorFilter(new QueryIterator(['data' => $data, 'lang' => $langContext, 'with' => $with, 'preloadModels' => $preloadModels])));
     }

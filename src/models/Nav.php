@@ -32,8 +32,6 @@ use luya\helpers\Json;
  * @property integer $is_home
  * @property integer $is_draft
  * @property string $layout_file
- * @property integer $publish_from
- * @property integer $publish_till
  * @property NavContainer $navContainer Returns the nav container model
  *
  * @author Basil Suter <basil@nadar.io>
@@ -72,10 +70,37 @@ class Nav extends ActiveRecord
             [['nav_container_id'], 'required'],
             [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft', 'layout_file'], 'safe'],
             [['layout_file'], 'match', 'pattern' => '/^[a-zA-Z0-9\.\-\_]+$/'],
-            [['parent_nav_id', 'publish_from', 'publish_till'], 'integer'],
+            [['publish_from', 'publish_till'], 'integer'], // will be removed in 5.0
+            [['parent_nav_id'], 'integer'],
             ['parent_nav_id', 'exist', 'targetRelation' => 'parents'],
             [['parent_nav_id'], 'default', 'value' => 0],
         ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        // ensure boolean values are returned as integer
+        // this is required when working with pgsql
+        $fields['is_hidden'] = function($model) {
+            return (int) $model->is_hidden;
+        };
+        $fields['is_deleted'] = function($model) {
+            return (int) $model->is_deleted;
+        };
+        $fields['is_draft'] = function($model) {
+            return (int) $model->is_draft;
+        };
+        $fields['is_home'] = function($model) {
+            return (int) $model->is_home;
+        };
+        $fields['is_offline'] = function($model) {
+            return (int) $model->is_offline;
+        };
+        return $fields;
     }
 
     /**

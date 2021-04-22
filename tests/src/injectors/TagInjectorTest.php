@@ -2,10 +2,12 @@
 
 namespace cmstests\src\injectors;
 
-use cmstests\CmsFrontendTestCase;
 use cmstests\data\blocks\UnitTestBlock;
 use luya\cms\injectors\TagInjector;
-use cmstests\data\fixtures\TagFixture;
+use cmstests\WebModelTestCase;
+use luya\admin\models\Tag;
+use luya\testsuite\fixtures\ActiveRecordFixture;
+use luya\testsuite\traits\AdminDatabaseTableTrait;
 
 class StubTagBlock extends UnitTestBlock
 {
@@ -20,13 +22,40 @@ class StubTagBlock extends UnitTestBlock
     }
 }
 
-class TagInjectorTest extends CmsFrontendTestCase
+class TagInjectorTest extends WebModelTestCase
 {
+    use AdminDatabaseTableTrait;
+
+    public function afterSetup()
+    {
+        parent::afterSetup();
+
+        $this->createAdminLangFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'en',
+                'short_code' => 'en',
+                'is_default' => 1,
+                'is_deleted' => 0,
+            ]
+        ]);
+    }
+
     public function testTagInjector()
     {
-        $model = new TagFixture();
-        $model->unload();
-        $model->load();
+        new ActiveRecordFixture([
+            'modelClass' => Tag::class,
+            'fixtureData' => [
+                'tag1' => [
+                    'id' => '1',
+                    'name' => 'John',
+                ],
+                'tag2' => [
+                    'id' => '2',
+                    'name' => 'Jane',
+                ],
+            ]
+        ]);
         
         $block = new StubTagBlock();
         $injector = new TagInjector(['context' => $block]);
@@ -34,18 +63,29 @@ class TagInjectorTest extends CmsFrontendTestCase
         
         $vars = $block->getConfigVarsExport();
        
-        $this->assertContains(['items' => [
-            ['value' => 2, 'label' => 'Jane'],
-            ['value' => 1, 'label' => 'John'],
-        ]], $vars[0]);
+        $this->assertSame(['items' => [
+            ['label' => 'John', 'value' => 1],
+            ['label' => 'Jane', 'value' => 2],
+        ]], $vars[0]['options']);
         
-        $model->unload();
     }
 
     public function testEvalTagInjector()
     {
-        $model = new TagFixture();
-        $model->load();
+        new ActiveRecordFixture([
+            'modelClass' => Tag::class,
+            'fixtureData' => [
+                'tag1' => [
+                    'name' => 'John',
+                    'id' => '1',
+                ],
+                'tag2' => [
+
+                    'name' => 'Jane',
+                    'id' => '2',
+                ],
+            ]
+        ]);
         
         $block = new StubTagBlock();
         $block->setVarValues(['tags' => [['value' => 2]]]);
@@ -53,6 +93,5 @@ class TagInjectorTest extends CmsFrontendTestCase
         $injector->setup();
         $this->assertArrayHasKey('Jane', $injector->getAssignedTags());
         
-        $model->unload();
     }
 }

@@ -192,8 +192,11 @@
 					$scope.languagesData = data;
 				});
 
+				$scope.isDefaultItem = $scope.languagesData.find(item => {
+					return item.is_default;
+				});
 
-				$scope.data.lang_id = parseInt($filter('filter')($scope.languagesData, {'is_default': '1'}, true)[0].id);
+				$scope.data.lang_id = $scope.isDefaultItem.id;
 
 				$scope.navitems = [];
 
@@ -254,8 +257,16 @@
 				$scope.data.layout_id = 0;
 				$scope.layoutsData = ServiceLayoutsData.data;
 
+				$scope.arrayToSelect = function(input, valueField, labelField) {
+					var output = [];
+					angular.forEach(input, function(value) {
+						output.push({"label": value[labelField], "value": value[valueField]});
+					});
+					return output;
+				};
+
 				$scope.$on('service:LayoutsData', function(event, data) {
-					$scope.layoutsData = data;
+					$scope.layoutsData = []; // $scope.arrayToSelect(data); // @TODO REMOVE IF VERIFIED
 				});
 
 
@@ -263,7 +274,7 @@
 
 				$scope.getVersionList = function() {
 					$http.get('admin/api-cms-navitempage/versions', { params : { navItemId : $scope.navItemId }}).then(function(response) {
-						$scope.versionsData = response.data;
+						$scope.versionsData = $scope.arrayToSelect(response.data, 'id', 'version_alias');
 					});
 				};
 
@@ -308,9 +319,17 @@
 					$scope.menuData = data;
 				});
 
+				$scope.arrayToSelect = function(input, valueField, labelField) {
+					var output = [];
+					angular.forEach(input, function(value) {
+						output.push({"label": value[labelField], "value": value[valueField]});
+					});
+					return output;
+				};
+
             	function init() {
-            		$scope.drafts = $scope.menuData.drafts;
-            		$scope.layouts = $scope.layoutsData;
+            		$scope.drafts = $scope.arrayToSelect($scope.menuData.drafts, 'id', 'title');
+					$scope.layouts = $scope.arrayToSelect($scope.layoutsData, 'id', 'name');
             	}
 
             	init();
@@ -653,7 +672,6 @@
 			$http.get(api, { params : params }).then(function(success) {
 				ServiceMenuData.load(true);
 			}, function(error) {
-				//console.log('throw error message errorMessageOnDuplicateAlias');
 				ServiceMenuData.load(true);
 			});
 		};
@@ -1668,7 +1686,46 @@
 			}]);
 		};
 
+		$scope.isAnyRequiredAttributeEmpty =  function() {
+
+			var response = false;
+			angular.forEach($scope.block.vars, function(varItem) {
+				if (varItem.required && $scope.isEmpty($scope.data, varItem.var)) {
+					AdminToastService.error(i18nParam('js_block_attribute_empty', {label: varItem.label}));
+					response = true;
+				}
+			});
+
+			angular.forEach($scope.block.cfgs, function(varItem) {
+
+				if (varItem.required && $scope.isEmpty($scope.cfgdata, varItem.var)) {
+					AdminToastService.error(i18nParam('js_block_attribute_empty', {label: varItem.label}));
+					response = true;
+				}
+			});
+
+			return response;
+		};
+
+		$scope.isEmpty = function(values, key) {
+			if (values.hasOwnProperty(key) && values[key]) {
+				if (values[key].length == 0) {
+					return true;
+				}
+				
+				return false;
+			}
+
+			return true;
+		};
+
 		$scope.save = function () {
+
+			if ($scope.isAnyRequiredAttributeEmpty()) {
+				return;
+			}
+
+
 			$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.block.id, {
 				json_config_values: $scope.data,
 				json_config_cfg_values: $scope.cfgdata,

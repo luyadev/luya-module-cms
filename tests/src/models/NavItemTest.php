@@ -5,6 +5,7 @@ namespace tests\web\cmsadmin\models;
 use cmstests\WebModelTestCase;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
+use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
 class NavItemTest extends WebModelTestCase
@@ -60,5 +61,18 @@ class NavItemTest extends WebModelTestCase
         $this->assertSame(1, $nav->id);
         $this->assertSame(1, $nav->defaultLanguageItem->id);
         $this->assertSame(1, $nav->activeLanguageItem->id);
+    }
+
+    public function testEmptyValidatorForNavItemTypeId()
+    {
+        $fixture = new NgRestModelFixture([
+            'modelClass' => NavItem::class,
+        ]);
+
+        $model = $fixture->newModel;
+
+        $model->isNewRecord = false;
+        $model->nav_item_type_id = 0;
+        $this->assertFalse($model->validate(['nav_item_type_id']));
     }
 }
