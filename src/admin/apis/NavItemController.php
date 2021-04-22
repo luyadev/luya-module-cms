@@ -36,7 +36,7 @@ class NavItemController extends \luya\admin\base\RestController
         
         $behaviors['responseCache'] = [
             'class' => ResponseCache::class,
-            'actions' => ['nav-lang-item'],
+            'only' => ['nav-lang-item'],
             'variations' => [
                 Yii::$app->request->get('navId', 0),
                 Yii::$app->request->get('langId', 0),
