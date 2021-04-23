@@ -3,7 +3,7 @@
 	
 	// directive.js
 
-    zaa.directive("menuDropdown", ['ServiceMenuData', '$filter', function(ServiceMenuData, $filter) {
+    zaa.directive("menuDropdown", ['ServiceMenuData', 'ServiceCurrentWebsite', '$filter', function(ServiceMenuData, ServiceCurrentWebsite, $filter) {
         return {
             restrict : 'E',
             scope : {
@@ -14,6 +14,11 @@
                 $scope.changeModel = function(data) {
                     $scope.navId = data.id;
                 }
+
+				$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
+				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
+					$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
+				});
 
 				$scope.menuData = angular.copy(ServiceMenuData.data);
 				$scope.menuDataOriginal = angular.copy(ServiceMenuData.data);
@@ -78,7 +83,7 @@
 						'<div class="input-group-prepend" ng-show="searchQuery" ng-click="searchQuery = \'\'"><div class="input-group-text"><i class="material-icons">clear</i></div></div>'+
 						'<input class="form-control" ng-model="searchQuery" type="text" placeholder="'+i18n['ngrest_crud_search_text']+'">'+
 					'</div>' + 
-					'<div ng-repeat="(key, container) in menuData.containers" ng-if="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
+					'<div ng-repeat="(key, container) in menuData.containers | menuwebsitefilter:currentWebsite.id" ng-if="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
 						'<div class="card-header" ng-click="container.isHidden=!container.isHidden">'+
 							'<span class="material-icons card-toggle-indicator">keyboard_arrow_down</span>'+
 							'<span>{{container.name}}</span>'+
