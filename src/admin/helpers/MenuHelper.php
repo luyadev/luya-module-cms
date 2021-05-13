@@ -276,7 +276,7 @@ class MenuHelper
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy('cms_nav.sort_index ASC')
-            ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => true])
+            ->where(['cms_nav_item.lang_id' => Yii::$app->adminLanguage->defaultLanguage['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => true])
             ->all();
         }
         

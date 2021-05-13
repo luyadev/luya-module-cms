@@ -11,12 +11,13 @@ use yii\helpers\Inflector;
  *
  * ```php
  * textBlock::class => [
- *                   'variation1' => [
- *                       'title' => 'Variation Auswahl für Fetti Font Css Class',
- *                       'cfgs' => ['cssClass' => 'fetti-font-css-class'],
- *                       'vars' => ['textType' => 1],
- *                   ],
- *               ]
+ *     'variation1' => [
+ *         'title' => 'Variation Auswahl für Fetti Font Css Class',
+ *         'cfgs' => ['cssClass' => 'fetti-font-css-class'],
+ *         'vars' => ['textType' => 1],
+ *         'is_default' => 0
+ *     ],
+ * ]
  * ```
  *
  * In order to configure the blockVariations property of the cms admin module:
