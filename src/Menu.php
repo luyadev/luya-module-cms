@@ -712,9 +712,9 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             if (!$lang) {
                 throw new NotFoundHttpException(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
             }
-    
+
             $website = Yii::$app->website->findOneByHostName($hostName);
-    
+
             $data = $this->getNavData($lang['id'], $website['id']);
     
             $index = $this->buildIndexForContainer($data);
@@ -760,7 +760,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             
             $this->setHasCache($cacheKey, $languageContainer);
         }
-        
+
         return $languageContainer;
     }
     

@@ -25,6 +25,9 @@ class ControllerStub extends \luya\cms\frontend\base\Controller
 
 class DefaultControllerTest extends WebApplicationTestCase
 {
+    /** @var ActiveRecordFixture */
+    protected $fixture;
+    
     public function getConfigArray()
     {
         return [
@@ -192,5 +195,7 @@ class DefaultControllerTest extends WebApplicationTestCase
         libxml_use_internal_errors($internalErrors);
     
         $this->assertTrue($loaded);
+    
+        $this->fixture->cleanup();
     }
 }

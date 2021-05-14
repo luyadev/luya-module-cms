@@ -137,11 +137,23 @@ class ItemSqliteTest extends WebApplicationTestCase
                 'is_default' => 1,
             ]
         ]);
+        $this->createCmsWebsiteFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'default',
+                'host' => '',
+                'aliases' => '',
+                'is_default' => 1,
+                'is_active' => 1,
+                'is_deleted' => 0,
+            ]
+        ]);
         $this->createCmsNavContainerFixture([
             1 => [
                 'id' => 1,
                 'name' => 'default',
                 'alias' => 'default',
+                'website_id' => 1,
             ]
         ]);
         $this->createCmsNavFixture([
