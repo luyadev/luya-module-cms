@@ -17,6 +17,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#325](https://github.com/luyadev/luya-module-cms/issues/326) Updates for compatibility with PostgreSQL
 + [#332](https://github.com/luyadev/luya-module-cms/pull/332) Added option to match wildcards in catch path for cms redirects, this allows you to use `/de/*.html` which could be redirect to `/de/*.
 + [#339](https://github.com/luyadev/luya-module-cms/issues/339) Fixed a bug in CMS page permission system, unable to access to subpage without enabling parent page permissions.
++ [#343](https://github.com/luyadev/luya-module-cms/pull/343) Removed deprecated `luya\behaviors\Timestamp` behavior, replaced with `yii\behaviors\TimestampBehavior`.
 
 ## 3.5.1 (24. November 2020)
 
