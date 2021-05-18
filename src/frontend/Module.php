@@ -2,6 +2,7 @@
 
 namespace luya\cms\frontend;
 
+use Yii;
 use luya\base\CoreModuleInterface;
 use luya\cms\models\Theme;
 use luya\theme\SetupEvent;
@@ -132,7 +133,10 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
                      * get the base path of the website theme
                      * @since 4.0.0
                      */
-                    $activeBasePath = Theme::find()->cache()->select('base_path')->where(['id' => \Yii::$app->website->current['theme_id']])->scalar();
+                    $activeBasePath = false;
+                    if (Yii::$app->website->current['theme_id']) {
+                        $activeBasePath = Theme::find()->cache()->select('base_path')->where(['id' => Yii::$app->website->current['theme_id']])->scalar();
+                    }
                     if (!$activeBasePath) {
                         // get the base path of the default theme
                         $activeBasePath = Theme::find()->cache()->select('base_path')->where(['is_default' => 1])->scalar();
