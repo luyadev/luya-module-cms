@@ -8,6 +8,7 @@ use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
+use yii\db\AfterSaveEvent;
 
 /**
  * Represents the Website-Containers.
@@ -20,6 +21,14 @@ use luya\cms\Exception;
 class Website extends NgRestModel
 {
     use SoftDeleteTrait;
+    
+    public function init()
+    {
+        parent::init();
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventAfterInsert']);
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
+        $this->on(self::EVENT_AFTER_DELETE, [$this, 'eventAfterDelete']);
+    }
     
     public static function tableName()
     {
@@ -58,7 +67,6 @@ class Website extends NgRestModel
             'theme_id' => 'Theme',
         ];
     }
-    
     
     /**
      * @inheritdoc
@@ -117,34 +125,28 @@ class Website extends NgRestModel
         ];
     }
     
-    public function afterSave($insert, $changedAttributes)
+    public function eventAfterInsert($event)
     {
-        if ($insert) {
-            $defaultContainer = new NavContainer();
-            $defaultContainer->name = 'Default Container';
-            $defaultContainer->alias = 'default';
-            $defaultContainer->website_id = $this->primaryKey;
-            $defaultContainer->setScenario($this->scenario);
-            if (!$defaultContainer->save()) {
-                throw new Exception($defaultContainer->getErrorSummary(true));
-            }
+        $defaultContainer = new NavContainer();
+        $defaultContainer->name = 'Default Container';
+        $defaultContainer->alias = 'default';
+        $defaultContainer->website_id = $this->primaryKey;
+        $defaultContainer->setScenario($this->scenario);
+        if (!$defaultContainer->save()) {
+            throw new Exception($defaultContainer->getErrorSummary(true));
         }
-        parent::afterSave($insert, $changedAttributes);
     }
     
-    public function beforeDelete()
+    public function eventBeforeDelete()
     {
         if ($this->is_default) {
             throw new Exception('Default website cannot delete.');
         }
-        return parent::beforeDelete();
     }
     
     public function afterDelete()
     {
         $this->updateAttributes(['is_active' => false]);
-        
-        parent::afterDelete();
     }
     
     public function getTheme()
