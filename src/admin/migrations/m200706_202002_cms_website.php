@@ -14,11 +14,11 @@ class m200706_202002_cms_website extends Migration
     {
         $this->createTable('cms_website',[
             'id' => $this->primaryKey(),
-            'name' => $this->string(20)->unique()->notNull(),
+            'name' => $this->string(120)->unique()->notNull(),
             'is_default' => $this->boolean()->notNull()->defaultValue(false),
             'is_active' => $this->boolean()->notNull()->defaultValue(false),
             'is_deleted' => $this->boolean()->notNull()->defaultValue(false),
-            'host' => $this->string(255)->unique()->notNull(),
+            'host' => $this->string(191)->unique()->notNull(),
             'aliases' => $this->string(255)->null()->defaultValue(null),
             'redirect_to_host' => $this->boolean()->notNull()->defaultValue(false),
             'theme_id' => $this->integer()->defaultValue(null),

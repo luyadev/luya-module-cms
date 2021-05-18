@@ -87,7 +87,7 @@ class Website extends Component
     private function loadAllWebsiteData()
     {
         if ($this->_allWebsiteData === null) {
-            $this->_allWebsiteData = WebsiteModel::find(['is_active' => true, 'is_delete' => false])->cache()->indexBy('host')->asArray()->all();
+            $this->_allWebsiteData = WebsiteModel::find()->andWhere(['is_active' => true, 'is_delete' => false])->cache()->indexBy('host')->asArray()->all();
             foreach ($this->_allWebsiteData as &$website) {
                 $aliases = array_map('trim', explode(',', $website['aliases']));
                 $website['aliases'] = array_filter($aliases);

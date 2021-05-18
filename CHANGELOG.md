@@ -3,12 +3,9 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 5.0
-
-+ [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support
-
 ## 4.0.0
 
+* [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support
 * [#341](https://github.com/luyadev/luya-module-cms/pull/341) All deprecated methods has been removed `Url::toMenuItem`, `Block::objectId`, `NavItemPage::getBlock`.
 + [#320](https://github.com/luyadev/luya-module-cms/pull/320) Replace cms menu item `publish_from` and `publish_till` with sheduler.
 + [#329](https://github.com/luyadev/luya-module-cms/issues/329) Ensure its not possible to drag a placeholder block into itself (this can create circular references)
