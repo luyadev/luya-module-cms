@@ -335,13 +335,13 @@ class NavControllerTest extends WebModelTestCase
                     'id' => 1,
                     'parent_nav_id' => 0,
                     'is_home' => 0,
-                    'nav_container_id' => 1,
+                    'nav_container_id' => 99,
                 ],
                 'nav2' => [
                     'id' => 2,
                     'parent_nav_id' => 0,
                     'is_home' => 1,
-                    'nav_container_id' => 1,
+                    'nav_container_id' => 99,
                 ],
             ]);
             $this->createCmsNavItemFixture([
