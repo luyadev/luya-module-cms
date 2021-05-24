@@ -346,6 +346,7 @@ class NavControllerTest extends WebModelTestCase
                 'item1' => [
                     'id' => 1,
                     'nav_id' => 1,
+                    'nav_container_id' => 1,
                     'alias' => 'foobar',
                     'lang_id' => 1,
                     'nav_item_type' => 1,
@@ -354,6 +355,7 @@ class NavControllerTest extends WebModelTestCase
                 'item2' => [
                     'id' => 2,
                     'nav_id' => 2,
+                    'nav_container_id' => 1,
                     'alias' => 'barfoo',
                     'lang_id' => 1,
                     'nav_item_type' => 1,
