@@ -323,25 +323,25 @@ class NavControllerTest extends WebModelTestCase
             ]);
             $this->createCmsNavContainerFixture([
                 'container1' => [
-                    'id' => 99,
+                    'id' => 1,
                     'name' => 'container',
                     'alias' => 'container',
                     'website_id' => 1,
                     'is_deleted' => 0,
                 ],
             ]);
-            $navFixture = $this->createCmsNavFixture([
+            $this->createCmsNavFixture([
                 'nav1' => [
                     'id' => 1,
                     'parent_nav_id' => 0,
                     'is_home' => 0,
-                    'nav_container_id' => 99,
+                    'nav_container_id' => 1,
                 ],
                 'nav2' => [
                     'id' => 2,
                     'parent_nav_id' => 0,
                     'is_home' => 1,
-                    'nav_container_id' => 99,
+                    'nav_container_id' => 1,
                 ],
             ]);
             $this->createCmsNavItemFixture([
