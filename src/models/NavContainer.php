@@ -57,8 +57,8 @@ class NavContainer extends NgRestModel
     public function ngRestConfig($config)
     {
         $config->delete = true;
-    
-        $config->list->field('website_id', 'Website')->text();
+        
+        $config->list->field('website_id', 'Website')->selectModel(['modelClass' => Website::class, 'valueField' => 'id', 'labelField' => 'name']);
         $config->list->field('name', 'Name')->text();
         $config->list->field('alias', 'Alias')->text();
 
