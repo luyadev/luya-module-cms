@@ -125,6 +125,13 @@ class Website extends NgRestModel
         ];
     }
     
+    public function ngRestConfigOptions()
+    {
+        return [
+            'saveCallback' => "['ServiceMenuData', function(ServiceMenuData) { ServiceMenuData.load(true); }]",
+        ];
+    }
+    
     public function eventAfterInsert($event)
     {
         $defaultContainer = new NavContainer();

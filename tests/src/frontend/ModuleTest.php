@@ -53,5 +53,7 @@ class ModuleTest extends CmsFrontendTestCase
     
         $this->assertTrue(Yii::$app->themeManager->hasActiveTheme);
         $this->assertEquals(Yii::getAlias('@app/themes/appTheme'), Yii::$app->themeManager->activeTheme->basePath);
+    
+        $this->fixture->cleanup();
     }
 }
