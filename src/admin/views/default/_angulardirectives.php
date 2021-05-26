@@ -52,7 +52,7 @@ use luya\admin\helpers\Angular;
                 </div>
                 <div class="form-group" ng-show="data.is_draft==0" ng-hide="data.isInline || navcontainer.length == 1 || data.parent_nav_id!=0">
                     <label><?= Module::t('view_index_page_nav_container'); ?></label>
-                    <select class="form-control" ng-model="data.nav_container_id" ng-options="item.id as item.name for item in navcontainers"></select>
+                    <select class="form-control" ng-model="data.nav_container_id" ng-options="item.id as ('(' + item.website_name + ') ' + item.name) for item in navcontainers"></select>
                 </div>
                 <div class="form-group" ng-show="data.is_draft==0 && !data.isInline && data.parent_nav_id != null">
                     <label><?= Module::t('view_index_page_label_subpage'); ?></label>

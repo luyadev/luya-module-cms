@@ -232,12 +232,12 @@ class MenuHelper
     public static function getContainers()
     {
         if (self::$containers === null) {
-            self::$containers = (new Query())->select(['cms_nav_container.id', 'name' => 'CONCAT(cms_website.name, ": ", cms_nav_container.name)', 'alias', 'website_id'])
+            self::$containers = (new Query())->select(['cms_nav_container.id', 'name' => 'cms_nav_container.name', 'website_name' => 'cms_website.name', 'alias', 'website_id'])
                 ->from('cms_nav_container')
                 ->innerJoin('cms_website', 'website_id = cms_website.id')
                 ->where(['cms_nav_container.is_deleted' => false])
                 ->indexBy('id')
-                ->orderBy(['cms_nav_container.id' => 'ASC'])
+                ->orderBy(['cms_website.name' => 'ASC', 'cms_nav_container.name' => 'ASC'])
                 ->all();
         }
         
