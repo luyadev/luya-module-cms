@@ -236,7 +236,6 @@ class MenuHelper
                 ->from('cms_nav_container')
                 ->innerJoin('cms_website', 'website_id = cms_website.id')
                 ->where(['cms_nav_container.is_deleted' => false])
-                ->indexBy('id')
                 ->orderBy(['cms_website.name' => 'ASC', 'cms_nav_container.name' => 'ASC'])
                 ->all();
         }

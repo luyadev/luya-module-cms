@@ -188,7 +188,9 @@
 
 				$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
 				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
-					$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.id;
+					if (ServiceCurrentWebsite.currentWebsite) {
+						$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+					}
 				});
 
 				$scope.languagesData = ServiceLanguagesData.data;
