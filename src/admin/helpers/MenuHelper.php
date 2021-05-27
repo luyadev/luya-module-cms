@@ -257,7 +257,7 @@ class MenuHelper
     {
         if (self::$websites === null) {
             self::$websites = (new Query())
-                ->select(['cms_website.id', 'cms_website.name', 'cms_website.host', 'cms_website.is_default', 'default_container_id' => 'any_value(cms_nav_container.id)'])
+                ->select(['cms_website.id', 'cms_website.name', 'cms_website.host', 'cms_website.is_default', 'default_container_id' => 'MIN(cms_nav_container.id)'])
                 ->from('cms_website')
                 ->innerJoin('cms_nav_container', 'website_id = cms_website.id')
                 ->where(['cms_website.is_active' => true, 'cms_website.is_deleted' => false])
