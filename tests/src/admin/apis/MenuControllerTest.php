@@ -107,7 +107,7 @@ class MenuControllerTest extends WebModelTestCase
         $this->assertEquals('nav is draft', $menu['drafts'][0]['title']);
     
         $this->assertCount(1, $menu['containers']);
-        $this->assertEquals('container', $menu['containers'][99]['name']);
+        $this->assertEquals('container', $menu['containers'][0]['name']);
     
         $this->assertCount(1, $menu['websites']);
         $this->assertEquals('default', $menu['websites'][0]['name']);
