@@ -187,8 +187,11 @@
 				$scope.data.is_draft = 0;
 
 				$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+
+				$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
 				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
 					if (ServiceCurrentWebsite.currentWebsite) {
+						$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
 						$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
 					}
 				});
