@@ -69,7 +69,7 @@ use \luya\admin\Module as AdminModule;
             </ul>
             <ul class="cmsnav-list cmsnav-list-selects" ng-show="menuData.websites.length > 1 && currentWebsite && currentWebsiteToggler">
                 <li class="cmsnav-select">
-                    <zaa-select model="currentWebsiteToggler" options="menuData.websites" optionsvalue="id" optionslabel="name" initvalue="currentWebsite.id"/>
+                    <zaa-select model="currentWebsiteToggler" clearable="false" options="menuData.websites" optionsvalue="id" optionslabel="name" initvalue="currentWebsite.id"/>
                 </li>
             </ul>
             <ul class="cmsnav-list cmsnav-list-treeview treeview">
