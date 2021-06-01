@@ -232,10 +232,39 @@ class MenuHelper
     public static function getContainers()
     {
         if (self::$containers === null) {
-            self::$containers = (new Query())->select(['id', 'name', 'alias'])->from('cms_nav_container')->where(['is_deleted' => false])->indexBy('id')->orderBy(['cms_nav_container.id' => 'ASC'])->all();
+            self::$containers = (new Query())->select(['cms_nav_container.id', 'name' => 'cms_nav_container.name', 'website_name' => 'cms_website.name', 'alias', 'website_id'])
+                ->from('cms_nav_container')
+                ->innerJoin('cms_website', 'website_id = cms_website.id')
+                ->where(['cms_nav_container.is_deleted' => false])
+                ->orderBy(['cms_website.name' => 'ASC', 'cms_nav_container.name' => 'ASC'])
+                ->all();
         }
         
         return self::$containers;
+    }
+    
+    private static $websites;
+    
+    /**
+     * Get all cms websites
+     *
+     * @return array
+     *
+     * @since 4.0.0
+     */
+    public static function getWebsites()
+    {
+        if (self::$websites === null) {
+            self::$websites = (new Query())
+                ->select(['cms_website.id', 'cms_website.name', 'cms_website.host', 'cms_website.is_default', 'default_container_id' => 'MIN(cms_nav_container.id)'])
+                ->from('cms_website')
+                ->innerJoin('cms_nav_container', 'website_id = cms_website.id')
+                ->where(['cms_website.is_active' => true, 'cms_website.is_deleted' => false])
+                ->groupBy('cms_website.id')
+                ->all();
+        }
+        
+        return self::$websites;
     }
     
     private static $drafts;

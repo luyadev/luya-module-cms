@@ -10,6 +10,8 @@ use luya\cms\models\NavItem;
 use luya\cms\models\NavItemPage;
 use luya\cms\models\Property;
 use luya\cms\models\Theme;
+use luya\cms\Website;
+use luya\cms\models\Website as WebsiteModel;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\testsuite\scopes\PageScope;
@@ -23,6 +25,9 @@ class ControllerStub extends \luya\cms\frontend\base\Controller
 
 class DefaultControllerTest extends WebApplicationTestCase
 {
+    /** @var ActiveRecordFixture */
+    protected $fixture;
+    
     public function getConfigArray()
     {
         return [
@@ -39,6 +44,9 @@ class DefaultControllerTest extends WebApplicationTestCase
                     'dsn' => 'sqlite::memory:',
                 ],
                 'menu' => 'luya\cms\Menu',
+                'website' => [
+                    'class' => Website::class,
+                ],
                 'composition' => [
                     'default' => ['langShortCode' => 'en']
                 ],
@@ -79,6 +87,21 @@ class DefaultControllerTest extends WebApplicationTestCase
                 ],
             ]
         ]);
+    
+        $websiteFixture = new ActiveRecordFixture([
+            'modelClass' => WebsiteModel::class,
+            'fixtureData' => [
+                'website1' => [
+                    'id' => 1,
+                    'name' => 'default',
+                    'host' => '',
+                    'aliases' => '',
+                    'is_default' => 1,
+                    'is_active' => 1,
+                    'is_deleted' => 0,
+                ],
+            ]
+        ]);
         
         $langFixture = new ActiveRecordFixture([
             'modelClass' => NavContainer::class,
@@ -87,6 +110,7 @@ class DefaultControllerTest extends WebApplicationTestCase
                     'id' => 1,
                     'name' => 'default',
                     'alias' => 'default',
+                    'website_id' => 1,
                 ],
             ]
         ]);
@@ -130,7 +154,7 @@ class DefaultControllerTest extends WebApplicationTestCase
             'modelClass' => Theme::class,
             'fixtureData' => [
                 [
-                    'is_active' => true,
+                    'is_default' => true,
                     'base_path' => '@app/themes/appTheme',
                     'json_config' => '{}',
                 ]
@@ -171,5 +195,7 @@ class DefaultControllerTest extends WebApplicationTestCase
         libxml_use_internal_errors($internalErrors);
     
         $this->assertTrue($loaded);
+    
+        $this->fixture->cleanup();
     }
 }

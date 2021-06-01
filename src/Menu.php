@@ -2,6 +2,8 @@
 
 namespace luya\cms;
 
+use luya\cms\models\Website;
+use luya\helpers\StringHelper;
 use Yii;
 use yii\base\Component;
 use yii\web\NotFoundHttpException;
@@ -85,6 +87,7 @@ use luya\cms\models\Config;
  * @property array $currentUrlRule Get the url rules for the current menu item.
  * @property \luya\cms\menu\Item $current Get the current active menu item.
  * @property \luya\cms\menu\Item $home Get the home menu item.
+ * @property \luya\web\Composition $composition Get the composition.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -319,7 +322,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     public function getLanguageContainer($langShortCode)
     {
         if (!array_key_exists($langShortCode, $this->_languageContainer)) {
-            $this->_languageContainer[$langShortCode] = $this->loadLanguageContainer($langShortCode);
+            $this->_languageContainer[$langShortCode] = $this->loadWebsiteLanguageContainer($langShortCode);
             $this->trigger(self::EVENT_AFTER_LOAD);
         }
 
@@ -350,7 +353,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
 
         return $this->_languages;
     }
-
+    
     /**
      * Get an array containing all redirect items from the database table cms_nav_item_redirect.
      *
@@ -603,16 +606,17 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * load all navigation items for a specific language id.
      *
      * @param integer $langId
+     * @param integer $websiteId
      * @return array
      */
-    private function getNavData($langId)
+    private function getNavData($langId, $websiteId)
     {
         return (new DbQuery())
             ->from(['cms_nav_item item'])
             ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.image_id', 'item.is_url_strict_parsing_disabled', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
             ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
-            ->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
+            ->where(['nav.is_deleted' => false, 'nav_container.website_id' => $websiteId, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
             ->orderBy(['container' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
             ->indexBy('id')
             ->all();
@@ -688,26 +692,30 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     }
 
     /**
-     * Helper method to load all contaienr data for a specific langauge.
+     * Helper method to load all container data for a specific website and language.
      *
      * @param string $langShortCode e.g. de
      * @return array
      * @throws NotFoundHttpException
+     *
+     * @since 4.0.0
      */
-    private function loadLanguageContainer($langShortCode)
+    private function loadWebsiteLanguageContainer($langShortCode)
     {
-        $cacheKey = $this->_cachePrefix.$langShortCode;
+        $hostName = $this->request->hostName;
+        $cacheKey = $this->_cachePrefix.$hostName.$langShortCode;
         
         $languageContainer = $this->getHasCache($cacheKey);
         
         if ($languageContainer === false) {
             $lang = $this->getLanguage($langShortCode);
-    
             if (!$lang) {
                 throw new NotFoundHttpException(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
             }
-    
-            $data = $this->getNavData($lang['id']);
+
+            $website = Yii::$app->website->findOneByHostName($hostName);
+
+            $data = $this->getNavData($lang['id'], $website['id']);
     
             $index = $this->buildIndexForContainer($data);
     
@@ -724,6 +732,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
                 $languageContainer[$key] = [
                     'id' => $item['id'],
                     'nav_id' => $item['nav_id'],
+                    'website_id' => $website['id'],
                     'lang' => $lang['short_code'],
                     'link' => $this->buildItemLink($alias, $langShortCode),
                     'title' => $this->encodeValue($item['title']),
@@ -751,7 +760,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             
             $this->setHasCache($cacheKey, $languageContainer);
         }
-        
+
         return $languageContainer;
     }
     

@@ -2,6 +2,7 @@
 
 namespace luya\cms\frontend;
 
+use Yii;
 use luya\base\CoreModuleInterface;
 use luya\cms\models\Theme;
 use luya\theme\SetupEvent;
@@ -106,6 +107,9 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             'menu' => [
                 'class' => 'luya\cms\Menu',
             ],
+            'website' => [
+                'class' => 'luya\cms\Website',
+            ],
         ];
     }
     
@@ -115,11 +119,28 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
     public function luyaBootstrap(Application $app)
     {
         if (!$app->request->isConsoleRequest && !$app->request->isAdmin) {
+    
+            if ($app->has('composition') && $app->has('website')) {
+                if (empty($app->composition->hostInfoMapping)) {
+                    $app->composition->hostInfoMapping = $app->website->createHostInfoMapping();
+                }
+            }
+            
             if ($app->has('themeManager')) {
                 // set active theme from database
                 $app->get('themeManager')->on(ThemeManager::EVENT_BEFORE_SETUP, function (SetupEvent $event) {
-                    // get the base path of the active theme
-                    $activeBasePath = Theme::find()->cache()->select('base_path')->where(['is_active' => 1])->scalar();
+                    /**
+                     * get the base path of the website theme
+                     * @since 4.0.0
+                     */
+                    $activeBasePath = false;
+                    if (Yii::$app->website->current['theme_id']) {
+                        $activeBasePath = Theme::find()->cache()->select('base_path')->where(['id' => Yii::$app->website->current['theme_id']])->scalar();
+                    }
+                    if (!$activeBasePath) {
+                        // get the base path of the default theme
+                        $activeBasePath = Theme::find()->cache()->select('base_path')->where(['is_default' => 1])->scalar();
+                    }
                     if ($activeBasePath) {
                         $event->basePath = $activeBasePath;
                     }

@@ -3,10 +3,16 @@
 namespace luya\cms\models;
 
 use luya\admin\traits\SoftDeleteTrait;
+use luya\cms\behaviours\WebsiteScopeBehavior;
 use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Represents the Navigation-Containers.
+ *
+ * @property string $name
+ * @property string $alias
+ * @property integer $website_id
+ * @property bool $is_deleted
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -14,7 +20,7 @@ use luya\admin\ngrest\base\NgRestModel;
 class NavContainer extends NgRestModel
 {
     use SoftDeleteTrait;
-
+    
     public static function tableName()
     {
         return 'cms_nav_container';
@@ -24,11 +30,19 @@ class NavContainer extends NgRestModel
     {
         return 'api-cms-navcontainer';
     }
-
+    
+    public static function findActiveQueryBehaviors()
+    {
+        return [
+            'websiteScope' => WebsiteScopeBehavior::class
+        ];
+    }
+    
     public function rules()
     {
         return [
-            [['name', 'alias'], 'required'],
+            [['name', 'alias', 'website_id'], 'required'],
+            [['website_id', 'is_deleted'], 'integer'],
         ];
     }
     
@@ -43,7 +57,8 @@ class NavContainer extends NgRestModel
     public function ngRestConfig($config)
     {
         $config->delete = true;
-
+        
+        $config->list->field('website_id', 'Website')->selectModel(['modelClass' => Website::class, 'valueField' => 'id', 'labelField' => 'name']);
         $config->list->field('name', 'Name')->text();
         $config->list->field('alias', 'Alias')->text();
 
@@ -65,5 +80,10 @@ class NavContainer extends NgRestModel
     public function getNavs()
     {
         return $this->hasMany(Nav::class, ['nav_container_id' => 'id'])->where(['is_deleted' => false, 'is_draft' => false])->orderBy(['sort_index' => SORT_ASC]);
+    }
+    
+    public function getWebsite()
+    {
+        return $this->hasOne(Website::class, ['website_id' => 'id']);
     }
 }

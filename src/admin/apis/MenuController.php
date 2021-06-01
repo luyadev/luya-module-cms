@@ -35,6 +35,7 @@ class MenuController extends \luya\admin\base\RestController
             'items' => ArrayHelper::typeCast(MenuHelper::getItems()),
             'drafts' => ArrayHelper::typeCast(MenuHelper::getDrafts()),
             'containers' => ArrayHelper::typeCast(MenuHelper::getContainers()),
+            'websites' => ArrayHelper::typeCast(MenuHelper::getWebsites()),
             'hiddenCats' => ArrayHelper::typeCast(Yii::$app->adminuser->identity->setting->get("togglecat", [])),
         ];
     }

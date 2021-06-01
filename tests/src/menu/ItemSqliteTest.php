@@ -3,6 +3,7 @@
 namespace cmstests\src\menu;
 
 use luya\cms\Menu;
+use luya\cms\Website;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\scopes\PageScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
@@ -26,11 +27,14 @@ class ItemSqliteTest extends WebApplicationTestCase
                 ],
                 'menu' => [
                     'class' => Menu::class,
+                ],
+                'website' => [
+                    'class' => Website::class,
                 ]
             ]
         ];
     }
-
+    
     public function testColumn()
     {
         PageScope::run($this->app, function(PageScope $scope) {
@@ -61,11 +65,23 @@ class ItemSqliteTest extends WebApplicationTestCase
                 'is_default' => 1,
             ]
         ]);
+        $this->createCmsWebsiteFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'default',
+                'host' => '',
+                'aliases' => '',
+                'is_default' => 1,
+                'is_active' => 1,
+                'is_deleted' => 0,
+            ]
+        ]);
         $this->createCmsNavContainerFixture([
             1 => [
                 'id' => 1,
                 'name' => 'default',
                 'alias' => 'default',
+                'website_id' => 1,
             ]
         ]);
         $this->createCmsNavFixture([
@@ -121,11 +137,23 @@ class ItemSqliteTest extends WebApplicationTestCase
                 'is_default' => 1,
             ]
         ]);
+        $this->createCmsWebsiteFixture([
+            1 => [
+                'id' => 1,
+                'name' => 'default',
+                'host' => '',
+                'aliases' => '',
+                'is_default' => 1,
+                'is_active' => 1,
+                'is_deleted' => 0,
+            ]
+        ]);
         $this->createCmsNavContainerFixture([
             1 => [
                 'id' => 1,
                 'name' => 'default',
                 'alias' => 'default',
+                'website_id' => 1,
             ]
         ]);
         $this->createCmsNavFixture([

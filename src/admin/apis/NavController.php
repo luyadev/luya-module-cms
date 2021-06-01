@@ -3,11 +3,13 @@
 namespace luya\cms\admin\apis;
 
 use luya\admin\models\TagRelation;
+use luya\cms\models\NavContainer;
 use luya\cms\models\NavItemRedirect;
 use Yii;
 use luya\cms\models\Property;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
+use yii\db\Query;
 use yii\helpers\Json;
 use yii\base\InvalidCallException;
 use luya\admin\models\UserOnline;
@@ -229,10 +231,18 @@ class NavController extends \luya\admin\base\RestController
 
     public function actionToggleHome($navId, $homeState)
     {
-        $item = Nav::find()->where(['id' => $navId])->one();
+        /** @var Nav $item */
+        $item = Nav::find()->with('navContainer')->where(['id' => $navId])->one();
         $this->menuFlush();
         if ($homeState == 1) {
-            Nav::updateAll(['is_home' => false]);
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $item->navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_home' => false], ['id' => $navIds]);
+    
             $item->setAttributes([
                 'is_home' => true,
             ]);
@@ -361,7 +371,7 @@ class NavController extends \luya\admin\base\RestController
         $this->menuFlush();
         $model = new Nav();
         $fromDraft = $this->postArg('use_draft');
-        $parentNavId = $this->postArg('parent_nav_id');
+        $parentNavId = $this->postArg('parent_nav_id') ?: null;
         $navContainerId = $this->postArg('nav_container_id');
         
         if (!empty($parentNavId)) {

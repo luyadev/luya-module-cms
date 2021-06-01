@@ -6,6 +6,7 @@ use luya\admin\models\Tag;
 use luya\admin\models\TagRelation;
 use luya\cms\Menu;
 use luya\cms\models\Nav;
+use luya\cms\Website;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\testsuite\scopes\PageScope;
@@ -14,7 +15,9 @@ use luya\testsuite\traits\CmsDatabaseTableTrait;
 class QuerySqliteTest extends WebApplicationTestCase
 {
     use CmsDatabaseTableTrait;
-
+    
+    private $websiteFixture;
+    
     public function getConfigArray()
     {
         return [
@@ -30,6 +33,9 @@ class QuerySqliteTest extends WebApplicationTestCase
                 ],
                 'menu' => [
                     'class' => Menu::class,
+                ],
+                'website' => [
+                    'class' => Website::class,
                 ]
             ]
         ];
@@ -85,8 +91,6 @@ class QuerySqliteTest extends WebApplicationTestCase
             $scope->createPage('test', null, []);
 
             $column = $this->app->menu->find()->all()->column('id');
-
-            var_dump($column);
         });
     }
 

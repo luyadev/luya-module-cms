@@ -25,11 +25,12 @@
  */
 	
 zaa.config(['resolverProvider', function(resolverProvider) {
-	resolverProvider.addCallback(['ServiceMenuData', 'ServiceBlocksData', 'ServiceLayoutsData', 'LuyaLoading', function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, LuyaLoading) {
+	resolverProvider.addCallback(['ServiceMenuData', 'ServiceBlocksData', 'ServiceLayoutsData', 'ServiceCurrentWebsite', 'LuyaLoading', function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, ServiceCurrentWebsite, LuyaLoading) {
 		LuyaLoading.start();
 		ServiceBlocksData.load();
 		ServiceLayoutsData.load();
-		ServiceMenuData.load().then(function(r) {
+		ServiceMenuData.load().then(function() {
+			ServiceCurrentWebsite.load();
 			LuyaLoading.stop();
 		});
 	}]);
@@ -202,17 +203,45 @@ zaa.factory("ServiceLiveEditMode", ['$rootScope', function($rootScope) {
 	return service;
 }]);
 
-zaa.factory("ServiceWorkingPageVersion", [function() {
+/**
+ * CMS Current Website SERIVCE
+ *
+ * $scope.currentWebsite = ServiceCurrentWebsite.currentWebsite 
+ * 
+ * $scope.$on('service:CurrentWebsiteChanged', function(event, data) {
+ *  	$scope.currentWebsite = data;
+ * });
+ */
+zaa.factory("ServiceCurrentWebsite", ['$rootScope', 'ServiceMenuData', function($rootScope, ServiceMenuData) {
+
 	var service = {
-		page : {}
+		currentWebsite: null,
+		defaultWebsite: null
 	};
 
+	service.load = function() {
+		service.defaultWebsite = ServiceMenuData.data.websites.find(w => w.is_default);
+		service.toggle(service.defaultWebsite.id);
+	}
 
+	service.toggle = function(websiteId) {
+		if (websiteId && (!service.currentWebsite || service.currentWebsite.id !== websiteId)) {
+			service.currentWebsite = ServiceMenuData.data.websites.find(w => w.id === websiteId);
+			$rootScope.$broadcast('service:CurrentWebsiteChanged', service.currentWebsite);
+		}
+	};
+
+	return service;
+}]);
+
+zaa.factory("ServiceWorkingPageVersion", [function() {
+	var service = {
+		page: {}
+	};
 
 	service.store = function(pageId, versionId) {
 		service.page[pageId] = versionId;
 	};
-
 
 	service.hasVersion = function(pageId) {
 		if (service.page.hasOwnProperty(pageId)) {

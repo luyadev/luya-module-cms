@@ -67,8 +67,13 @@ use \luya\admin\Module as AdminModule;
                     </label>
                 </li>
             </ul>
+            <ul class="cmsnav-list cmsnav-list-selects" ng-show="menuData.websites.length > 1 && currentWebsite && currentWebsiteToggler">
+                <li class="cmsnav-select">
+                    <zaa-select model="currentWebsiteToggler" clearable="false" options="menuData.websites" optionsvalue="id" optionslabel="name" initvalue="currentWebsite.id"/>
+                </li>
+            </ul>
             <ul class="cmsnav-list cmsnav-list-treeview treeview">
-                <li class="treeview-container" ng-repeat="catitem in menuData.containers" >
+                <li class="treeview-container" ng-repeat="catitem in menuData.containers | menuwebsitefilter:currentWebsite.id" >
                     <div class="treeview-label treeview-label-container" ng-click="toggleCat(catitem.id)">
                         <span class="treeview-icon treeview-icon-collapse">
                             <i class="material-icons" ng-show="!toggleIsHidden(catitem.id)">keyboard_arrow_down</i>
@@ -84,8 +89,8 @@ use \luya\admin\Module as AdminModule;
                     <ul class="treeview-items treeview-items-lvl1" ng-if="!toggleIsHidden(catitem.id)">
                         <li 
                             class="treeview-item treeview-item-lvl1" 
-                            ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}" 
-                            ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" 
+                            ng-class="{'treeview-item-active' : isCurrentElement(data), 'treeview-item-isoffline' : data.is_offline, 'treeview-item-collapsed': !data.toggle_open, 'treeview-item-ishidden': data.is_hidden, 'treeview-item-has-children' : (menuData.items | menuparentfilter:catitem.id:data.id).length}"
+                            ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0"
                             ng-include="'cmsNavReverse.html'"
                         ></li>
                     </ul>

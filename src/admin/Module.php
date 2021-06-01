@@ -57,6 +57,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         'api-cms-redirect' => 'luya\cms\admin\apis\RedirectController',
         'api-cms-theme' => 'luya\cms\admin\apis\ThemeController',
         'api-cms-log' => 'luya\cms\admin\apis\LogController',
+        'api-cms-website' => 'luya\cms\admin\apis\WebsiteController',
     ];
 
     public $apiRules = [
@@ -265,6 +266,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             ->node('menu_node_cmssettings', 'settings')
 
                 ->group('menu_group_page_display')
+                    ->itemApi('menu_group_item_env_websites', 'cmsadmin/website/index', 'http', 'api-cms-website')
                     ->itemApi('menu_group_item_env_layouts', 'cmsadmin/layout/index', 'view_quilt', 'api-cms-layout')
                     ->itemApi('menu_group_item_env_themes', 'cmsadmin/theme/index', 'color_lens', 'api-cms-theme')
                     ->itemApi('menu_group_item_env_container', 'cmsadmin/navcontainer/index', 'label_outline', 'api-cms-navcontainer')

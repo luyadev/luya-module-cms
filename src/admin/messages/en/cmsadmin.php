@@ -264,4 +264,9 @@ return [
 // 3.4
 
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
+    
+// 4.0
+
+    'menu_group_item_env_websites' => 'Websites',
+    'model_website_use_default_theme' => 'Use default theme',
 ];

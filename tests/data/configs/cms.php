@@ -39,5 +39,8 @@ return [
         'assetManager' => [
             'basePath' => dirname(__DIR__) . '/assets',
         ],
+        'website' => [
+            'class' => \luya\cms\Website::class,
+        ]
     ],
 ];
