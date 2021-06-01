@@ -208,12 +208,9 @@
 
 				$scope.data.lang_id = $scope.isDefaultItem.id;
 
-				$scope.navitems = [];
-
 				$scope.$watch(function() { return $scope.data.nav_container_id }, function(n, o) {
 					if (n !== undefined && n !== o) {
 						$scope.data.parent_nav_id = 0;
-						$scope.navitems = $scope.menu[n]['__items'];
 					}
 				});
 
@@ -646,16 +643,28 @@
 			return ServiceMenuData.load(true);
 		};
 
-		$scope.$watch('currentWebsiteToggler', function(id) {
-			ServiceCurrentWebsite.toggle(id);
+		// Contains the current website id, is initialized with false as value
+		$scope.currentWebsiteToggler = false
+
+		$scope.$watch('currentWebsiteToggler', function(newValue, oldValue) {
+			if (newValue && newValue !== oldValue) {
+				ServiceCurrentWebsite.toggle(newValue);
+			}
 		});
 
+		// initialize the state of the current menu service
+		$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite
+
+		// if the state has recived a value, after the service event has been triggered, this ensures
+		// the current website is displayed. Like a lazy load ensurance
+		if ($scope.currentWebsite) {
+			$scope.currentWebsiteToggler = $scope.currentWebsite.id
+		}
+
 		$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
-			if (data) {
-				$scope.currentWebsite = data;
-				$scope.currentWebsiteToggler = data.id;
-				ServiceMenuData.load();
-			}
+			$scope.currentWebsite = data;
+			$scope.currentWebsiteToggler = data.id;
+			ServiceMenuData.load();
 		});
 
 		// controller logic
