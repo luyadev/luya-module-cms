@@ -114,4 +114,28 @@ class MenuControllerTest extends WebModelTestCase
     
         $this->assertCount(0, $menu['hiddenCats']);
     }
+    
+    public function testActionDataPermissionTree()
+    {
+        $ctrl = new MenuController('id', $this->app);
+    
+        \Yii::$app->adminuser->identity = User::findOne(1);
+        $menu = $ctrl->actionDataPermissionTree();
+    
+    
+        $this->assertCount(1, $menu['websites']);
+        /** @var \luya\cms\models\Website $websiteInfo */
+        $websiteInfo = $menu['websites'][1]['websiteInfo'];
+        $this->assertEquals('default', $websiteInfo->name);
+    
+        $containers = $menu['websites'][1]['containers'];
+        $this->assertCount(1, $containers);
+        
+        $containerInfo = $containers[0]['containerInfo'];
+        $this->assertEquals('container', $containerInfo['name']);
+    
+        $items = $containers[0]['items'];
+        $this->assertCount(1, $items);
+        $this->assertEquals(1, $items[0]['id']);
+    }
 }
