@@ -80,12 +80,6 @@ class MenuController extends \luya\admin\base\RestController
         foreach (NavContainer::ngRestFind()->with('navs')->all() as $container) {
             $this->getItems($container);
 
-            $data['containers'][] = [
-                'containerInfo' => $container,
-                'website' => Website::findOne($container->website_id),
-                'items' => isset(self::$_permissionItemData[$container->id]) ? self::$_permissionItemData[$container->id] : [],
-            ];
-    
             if (!isset($data['websites'][$container->website_id])) {
                 $data['websites'][$container->website_id] = [
                     'websiteInfo' => Website::findOne($container->website_id),
