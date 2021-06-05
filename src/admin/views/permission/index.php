@@ -10,7 +10,7 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 	});
 
     $scope.data = null;
-
+    $scope.hiddenWebsites = [];
     $scope.groupInjection = null;
 
 	$scope.loadPermissions = function() {
@@ -23,6 +23,29 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 	$scope.reloadMenuData = function() {
 		ServiceMenuData.load(true);
 	};
+
+    $scope.toggleWebsite = function(websiteId) {
+        if (websiteId in $scope.hiddenWebsites) {
+            $scope.hiddenWebsites[websiteId] = !$scope.hiddenWebsites[websiteId];
+        } else {
+            $scope.hiddenWebsites[websiteId] = 1;
+        }
+    };
+
+    $scope.isWebsiteHidden = function(websiteId) {
+
+        if ($scope.hiddenWebsites == undefined) {
+            return false;
+        }
+
+        if (websiteId in $scope.hiddenWebsites) {
+            if ($scope.hiddenWebsites[websiteId] == 1) {
+                return true;
+            }
+        }
+
+        return false;
+    };
 
     $scope.deletePermission = function(navId, groupId) {
     	// delete request
@@ -64,8 +87,17 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 </script>
 <h1 class="crud-title mb-4"><?= Module::t('menu_group_item_env_permission'); ?></h1>
 <div ng-controller="PermissionController" class="card">
-    <div class="card-body">
-        <table class="table table-hover table-sm">
+    <div class="card-body" ng-repeat="website in data.websites">
+
+        <div class="treeview-label treeview-label-container" ng-click="toggleWebsite(website.websiteInfo.id)">
+            <span class="treeview-icon treeview-icon-collapse">
+                <i class="material-icons" ng-show="!isWebsiteHidden(website.websiteInfo.id)">keyboard_arrow_down</i>
+                <i class="material-icons" ng-show="isWebsiteHidden(website.websiteInfo.id)">keyboard_arrow_right</i>
+            </span>
+            <span class="treeview-link"><span class="google-chrome-font-offset-fix">{{website.websiteInfo.name}}</span></span>
+        </div>
+        
+        <table class="table table-hover table-sm" ng-show="!isWebsiteHidden(website.websiteInfo.id)">
             <thead>
                 <tr>
                     <th>
@@ -78,7 +110,7 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
                     </th>
                 </tr>
             </thead>
-            <tbody ng-repeat="container in data.containers">
+            <tbody ng-repeat="container in website.containers">
                 <tr class="permissions__container-row">
                     <th colspan="{{data.groups.length + 1}}">{{ container.containerInfo.name }}</th>
                 </tr>
