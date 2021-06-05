@@ -130,6 +130,8 @@ class MenuControllerTest extends WebModelTestCase
     
     public function testActionDataPermissionTree()
     {
+        $this->createCmsNavPermissionFixture([]);
+    
         $ctrl = new MenuController('id', $this->app);
     
         \Yii::$app->adminuser->identity = User::findOne(1);
