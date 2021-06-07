@@ -2,12 +2,14 @@
 
 namespace luya\cms\admin\helpers;
 
+use luya\admin\models\User;
 use Yii;
 use luya\admin\models\Lang;
 use yii\db\Query;
 use luya\cms\models\Nav;
 use luya\admin\models\Group;
 use luya\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * Menu Helper to collect Data used in Administration areas.
@@ -255,16 +257,53 @@ class MenuHelper
     public static function getWebsites()
     {
         if (self::$websites === null) {
-            self::$websites = (new Query())
-                ->select(['cms_website.id', 'cms_website.name', 'cms_website.host', 'cms_website.is_default', 'default_container_id' => 'MIN(cms_nav_container.id)'])
+            $websites = (new Query())
+                ->select([
+                    'cms_website.id',
+                    'cms_website.name',
+                    'cms_website.host',
+                    'cms_website.is_default',
+                    'default_container_id' => 'MIN(cms_nav_container.id)',
+                    'group_ids',
+                    'user_ids'
+                ])
                 ->from('cms_website')
                 ->innerJoin('cms_nav_container', 'website_id = cms_website.id')
                 ->where(['cms_website.is_active' => true, 'cms_website.is_deleted' => false])
                 ->groupBy('cms_website.id')
                 ->all();
+    
+            foreach ($websites as $websiteIndex => $website) {
+                if (!self::checkWebsitePermissions($website)) {
+                    unset($websites[$websiteIndex]);
+                }
+            }
+    
+            self::$websites = array_values($websites);
         }
         
         return self::$websites;
+    }
+    
+    private static function checkWebsitePermissions($website)
+    {
+        /** @var User $user */
+        $user = Yii::$app->adminuser->identity;
+        $userGroupIds = ArrayHelper::getColumn($user->groups, 'id');
+    
+        $users = Json::decode($website['user_ids']) ?? [];
+        foreach ($users as $item) {
+            if ($item['value'] === 0 || $item['value'] == $user->id) {
+                return true;
+            }
+        }
+    
+        $groups = Json::decode($website['group_ids']) ?? [];
+        foreach ($groups as $item) {
+            if ($item['value'] === 0 || in_array($item['value'], $userGroupIds)) {
+                return true;
+            }
+        }
     }
     
     private static $drafts;

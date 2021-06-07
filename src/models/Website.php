@@ -2,9 +2,15 @@
 
 namespace luya\cms\models;
 
+use luya\admin\models\Group;
 use luya\admin\models\Lang;
+use luya\admin\models\User;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\ngrest\plugins\CheckboxList;
+use luya\admin\ngrest\plugins\CheckboxRelation;
+use luya\admin\ngrest\plugins\CheckboxRelationActiveQuery;
 use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
+use luya\admin\ngrest\plugins\SortRelationModel;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
@@ -22,6 +28,8 @@ use yii\db\AfterSaveEvent;
  * @property bool $redirect_to_host
  * @property string $aliases
  * @property string $default_lang
+ * @property string $group_ids
+ * @property string $user_ids
  *
  * @property NavContainer[] $navContainers
  *
@@ -64,7 +72,7 @@ class Website extends NgRestModel
             [['name', 'host'], 'unique'],
             [['theme_id'], 'integer'],
             [['is_active', 'is_default', 'is_deleted', 'redirect_to_host'], 'boolean'],
-            [['aliases', 'default_lang'], 'string']
+            [['aliases', 'default_lang', 'group_ids', 'user_ids'], 'string']
         ];
     }
     
@@ -102,7 +110,27 @@ class Website extends NgRestModel
                 'query' => $this->getLang(),
                 'relation' => 'lang',
                 'labelField' => ['name']
-            ]
+            ],
+            'group_ids' => [
+                'class' => CheckboxList::class,
+                'data' => array_merge(
+                    [0 => Module::t('model_website_all')],
+                    Group::find()
+                        ->indexBy('id')
+                        ->select('name')
+                        ->column()
+                ),
+            ],
+            'user_ids' => [
+                'class' => CheckboxList::class,
+                'data' => array_merge(
+                    [0 => Module::t('model_website_all')],
+                    User::find()
+                        ->indexBy('id')
+                        ->select(['name' => 'CONCAT(firstname, " ", lastname)'])
+                        ->column()
+                ),
+            ],
         ];
     }
     
@@ -113,8 +141,8 @@ class Website extends NgRestModel
     {
         return [
             ['list', ['name', 'host', 'aliases', 'is_default', 'theme_id']],
-            ['create', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id']],
-            ['update', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id']],
+            ['create', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id', 'group_ids', 'user_ids']],
+            ['update', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id', 'group_ids', 'user_ids']],
             ['delete', true],
         ];
     }
