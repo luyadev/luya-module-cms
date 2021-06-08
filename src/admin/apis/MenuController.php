@@ -2,6 +2,7 @@
 
 namespace luya\cms\admin\apis;
 
+use luya\cms\models\Website;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\db\Query;
@@ -76,10 +77,17 @@ class MenuController extends \luya\admin\base\RestController
     {
         $data = [];
         // collect data
-        foreach (NavContainer::find()->with('navs')->all() as $container) {
+        foreach (NavContainer::ngRestFind()->with('navs')->all() as $container) {
             $this->getItems($container);
 
-            $data['containers'][] = [
+            if (!isset($data['websites'][$container->website_id])) {
+                $data['websites'][$container->website_id] = [
+                    'websiteInfo' => Website::findOne($container->website_id),
+                    'containers' => []
+                ];
+            }
+            
+            $data['websites'][$container->website_id]['containers'][] = [
                 'containerInfo' => $container,
                 'items' => isset(self::$_permissionItemData[$container->id]) ? self::$_permissionItemData[$container->id] : [],
             ];

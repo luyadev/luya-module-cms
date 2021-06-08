@@ -13,6 +13,16 @@ use yii\db\AfterSaveEvent;
 /**
  * Represents the Website-Containers.
  *
+ * @property string $name
+ * @property string $host
+ * @property int $theme_id
+ * @property bool $is_active
+ * @property bool $is_default
+ * @property bool $is_deleted
+ * @property bool $redirect_to_host
+ * @property string $aliases
+ * @property string $default_lang
+ *
  * @property NavContainer[] $navContainers
  *
  * @author Bennet Klarhölter <boehsermoe@me.com>

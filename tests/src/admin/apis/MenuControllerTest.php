@@ -3,9 +3,11 @@
 namespace cmstests\src\admin\apis;
 
 use cmstests\WebModelTestCase;
+use luya\admin\models\Group;
 use luya\admin\models\User;
 use luya\cms\admin\apis\MenuController;
 use luya\cms\models\Nav;
+use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
 class MenuControllerTest extends WebModelTestCase
@@ -87,10 +89,21 @@ class MenuControllerTest extends WebModelTestCase
                 'is_api_user' => false,
             ]
         ]);
-    
-        $this->createAdminGroupFixture(1);
+        
         $this->createAdminUserGroupTable();
         $this->createAdminGroupAuthTable();
+    
+        $groupFixture = new NgRestModelFixture([
+            'modelClass' => Group::class,
+            'fixtureData' => [
+                'tester' => [
+                    'id' => 1,
+                    'name' => 'Administrator',
+                    'is_deleted' => 0,
+                ],
+            ],
+        ]);
+        
     }
     
     public function testActionDataMenu()
@@ -113,5 +126,30 @@ class MenuControllerTest extends WebModelTestCase
         $this->assertEquals('default', $menu['websites'][0]['name']);
     
         $this->assertCount(0, $menu['hiddenCats']);
+    }
+    
+    public function testActionDataPermissionTree()
+    {
+        $this->createCmsNavPermissionFixture([]);
+    
+        $ctrl = new MenuController('id', $this->app);
+    
+        \Yii::$app->adminuser->identity = User::findOne(1);
+        $menu = $ctrl->actionDataPermissionTree();
+        
+        $this->assertCount(1, $menu['websites']);
+        /** @var \luya\cms\models\Website $websiteInfo */
+        $websiteInfo = $menu['websites'][1]['websiteInfo'];
+        $this->assertEquals('default', $websiteInfo->name);
+    
+        $containers = $menu['websites'][1]['containers'];
+        $this->assertCount(1, $containers);
+        
+        $containerInfo = $containers[0]['containerInfo'];
+        $this->assertEquals('container', $containerInfo['name']);
+    
+        $items = $containers[0]['items'];
+        $this->assertCount(1, $items);
+        $this->assertEquals(1, $items[0]['id']);
     }
 }
