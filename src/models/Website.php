@@ -126,7 +126,6 @@ class Website extends NgRestModel
                         User::find()
                             ->indexBy('id')
                             ->select(['id', 'firstname',  'lastname'])
-                            ->asArray()
                             ->all(),
                         'id',
                         function ($user) {
