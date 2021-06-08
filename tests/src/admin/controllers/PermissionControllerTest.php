@@ -9,6 +9,9 @@ use luya\cms\admin\controllers\PermissionController;
 
 class PermissionControllerTest extends WebModelTestCase
 {
+    /**
+     * @runInSeparateProcess
+     */
     public function testActions()
     {
         $ctrl = new PermissionController('permission', $this->app->getModule('cmsadmin'));
