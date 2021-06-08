@@ -8,6 +8,7 @@ use luya\admin\ngrest\base\NgRestModel;
 use luya\helpers\StringHelper;
 use luya\helpers\Url;
 use luya\cms\admin\Module;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * Redirect.
@@ -43,13 +44,13 @@ class Redirect extends NgRestModel
      */
     public function behaviors()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['timestamp'] = [
-            'class' => 'luya\behaviors\Timestamp',
-            'insert' => ['timestamp_create'],
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'timestamp_create',
+                'updatedAtAttribute' => false,
+            ]
         ];
-        
-        return $behaviors;
     }
     
     /**

@@ -72,4 +72,19 @@ class RedirectTest extends ModelTestCase
 
         $this->assertSame('hello-world', $rule->matchRequestPath('/hello-world.html'));
     }
+
+    public function testTimeBehavior()
+    {
+        $fixture = new NgRestModelFixture([
+            'modelClass' => Redirect::class,
+        ]);
+        
+        $model = new Redirect();
+        $model->catch_path = 'foo';
+        $model->redirect_path = 'bar';
+        $model->redirect_status_code = 301;
+        if ($model->save()) {
+            $this->assertNotEmpty($model->timestamp_create);
+        }
+    }
 }
