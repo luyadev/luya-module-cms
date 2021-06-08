@@ -10,7 +10,6 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 	});
 
     $scope.data = null;
-    $scope.hiddenWebsites = [];
     $scope.groupInjection = null;
 
 	$scope.loadPermissions = function() {
@@ -23,29 +22,6 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 	$scope.reloadMenuData = function() {
 		ServiceMenuData.load(true);
 	};
-
-    $scope.toggleWebsite = function(websiteId) {
-        if (websiteId in $scope.hiddenWebsites) {
-            $scope.hiddenWebsites[websiteId] = !$scope.hiddenWebsites[websiteId];
-        } else {
-            $scope.hiddenWebsites[websiteId] = 1;
-        }
-    };
-
-    $scope.isWebsiteHidden = function(websiteId) {
-
-        if ($scope.hiddenWebsites == undefined) {
-            return false;
-        }
-
-        if (websiteId in $scope.hiddenWebsites) {
-            if ($scope.hiddenWebsites[websiteId] == 1) {
-                return true;
-            }
-        }
-
-        return false;
-    };
 
     $scope.deletePermission = function(navId, groupId) {
     	// delete request
@@ -89,7 +65,7 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 <div ng-controller="PermissionController">
     <collapse-container title="{{website.websiteInfo.name}}" ng-repeat="website in data.websites" class="mb-3">
     <div class="table-responsive">
-        <table class="table table-borderless" ng-show="!isWebsiteHidden(website.websiteInfo.id)">
+        <table class="table table-borderless">
             <tr>
                 <td>
                     
