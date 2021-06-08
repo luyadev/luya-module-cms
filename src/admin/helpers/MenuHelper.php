@@ -42,7 +42,7 @@ class MenuHelper
                 ->asArray() 
                 ->all();
             self::loadInheritanceData(0);
-            
+
             $data = [];
             
             foreach ($items as $key => $item) {
@@ -267,17 +267,17 @@ class MenuHelper
                     'user_ids'
                 ])
                 ->from('cms_website')
-                ->innerJoin('cms_nav_container', 'website_id = cms_website.id')
+                ->leftJoin('cms_nav_container', 'website_id = cms_website.id')
                 ->where(['cms_website.is_active' => true, 'cms_website.is_deleted' => false])
                 ->groupBy('cms_website.id')
                 ->all();
-    
+
             foreach ($websites as $websiteIndex => $website) {
                 if (!self::checkWebsitePermissions($website)) {
                     unset($websites[$websiteIndex]);
                 }
             }
-    
+
             self::$websites = array_values($websites);
         }
         
@@ -289,7 +289,7 @@ class MenuHelper
         /** @var User $user */
         $user = Yii::$app->adminuser->identity;
         $userGroupIds = ArrayHelper::getColumn($user->groups, 'id');
-    
+
         $users = Json::decode($website['user_ids']) ?? [];
         foreach ($users as $item) {
             if ($item['value'] === 0 || $item['value'] == $user->id) {
