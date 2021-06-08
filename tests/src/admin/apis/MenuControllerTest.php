@@ -18,9 +18,19 @@ class MenuControllerTest extends WebModelTestCase
     {
         parent::afterSetup();
     
+    
         $this->createAdminGroupFixture(1);
-        $this->createAdminUserFixture();
-        
+        $this->createAdminUserFixture([
+            1  => [
+                'id' => 1,
+                'firstname' => 'Foo',
+                'lastname' => 'Bar',
+                'email' => 'foo@example.com',
+                'is_deleted' => false,
+                'is_api_user' => false,
+            ]
+        ]);
+    
         $this->createAdminLangFixture([
             1 => [
                 'id' => 1,
@@ -93,31 +103,9 @@ class MenuControllerTest extends WebModelTestCase
         ]);
         $this->createAdminAuthTable();
         $this->createAdminUserLoginFixture();
-        $this->createAdminUserFixture([
-            1  => [
-                'id' => 1,
-                'firstname' => 'Foo',
-                'lastname' => 'Bar',
-                'email' => 'foo@example.com',
-                'is_deleted' => false,
-                'is_api_user' => false,
-            ]
-        ]);
         
         $this->createAdminUserGroupTable();
         $this->createAdminGroupAuthTable();
-    
-        $groupFixture = new NgRestModelFixture([
-            'modelClass' => Group::class,
-            'fixtureData' => [
-                'tester' => [
-                    'id' => 1,
-                    'name' => 'Administrator',
-                    'is_deleted' => 0,
-                ],
-            ],
-        ]);
-        
     }
     
     public function testActionDataMenu()
