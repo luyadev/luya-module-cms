@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.0.0
 
+* [#344](https://github.com/luyadev/luya-module-cms/pull/344) Added Website user and group permission support
 * [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support
 * [#341](https://github.com/luyadev/luya-module-cms/pull/341) All deprecated methods has been removed `Url::toMenuItem`, `Block::objectId`, `NavItemPage::getBlock`.
 + [#320](https://github.com/luyadev/luya-module-cms/pull/320) Replace cms menu item `publish_from` and `publish_till` with sheduler.

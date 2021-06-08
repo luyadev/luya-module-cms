@@ -258,4 +258,5 @@ return [
     
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
+    'model_website_all' => 'All',
 ];
