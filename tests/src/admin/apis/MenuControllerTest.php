@@ -19,7 +19,17 @@ class MenuControllerTest extends WebModelTestCase
         parent::afterSetup();
     
     
-        $this->createAdminGroupFixture(1);
+        $groupFixture = new NgRestModelFixture([
+            'modelClass' => Group::class,
+            'fixtureData' => [
+                'tester' => [
+                    'id' => 1,
+                    'name' => 'Administrator',
+                    'is_deleted' => 0,
+                ],
+            ],
+        ]);
+    
         $this->createAdminUserFixture([
             1  => [
                 'id' => 1,
