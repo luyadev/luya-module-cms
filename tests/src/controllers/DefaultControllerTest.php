@@ -2,7 +2,9 @@
 
 namespace cmstests\src\controllers;
 
+use luya\admin\models\Group;
 use luya\admin\models\Lang;
+use luya\admin\models\User;
 use luya\cms\frontend\blocks\HtmlBlock;
 use luya\cms\models\Nav;
 use luya\cms\models\NavContainer;
@@ -63,6 +65,8 @@ class DefaultControllerTest extends WebApplicationTestCase
     public function testRenderPageCycle()
     {
         PageScope::run($this->app, function(PageScope $scope) {
+            $scope->createAdminGroupFixture(1);
+            $scope->createAdminUserFixture();
             $scope->createPage('home', '@app/../data/views/cmslayouts/main.php', ['content'])->addBlockAndContent(HtmlBlock::class, 'content', [
                 'html' => '<p>foobar</p>',
             ]);
@@ -76,6 +80,20 @@ class DefaultControllerTest extends WebApplicationTestCase
     public function testRenderToolbar()
     {
         //region Fictures
+    
+        $adminGroupFixture = new ActiveRecordFixture([
+            'modelClass' => Group::class,
+            'fixtureData' => [
+                'tester' => [
+                    'id' => 1,
+                    'name' => 'Test Group',
+                ],
+            ],
+        ]);
+        $adminUserFixture = new ActiveRecordFixture([
+            'modelClass' => User::class,
+            'fixtureData' => [],
+        ]);
         
         $langFixture = new ActiveRecordFixture([
             'modelClass' => Lang::class,

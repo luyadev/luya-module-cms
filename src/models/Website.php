@@ -7,14 +7,11 @@ use luya\admin\models\Lang;
 use luya\admin\models\User;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\ngrest\plugins\CheckboxList;
-use luya\admin\ngrest\plugins\CheckboxRelation;
-use luya\admin\ngrest\plugins\CheckboxRelationActiveQuery;
 use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
-use luya\admin\ngrest\plugins\SortRelationModel;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
-use yii\db\AfterSaveEvent;
+use yii\helpers\ArrayHelper;
 
 /**
  * Represents the Website-Containers.
@@ -125,10 +122,17 @@ class Website extends NgRestModel
                 'class' => CheckboxList::class,
                 'data' => array_merge(
                     [0 => Module::t('model_website_all')],
-                    User::find()
-                        ->indexBy('id')
-                        ->select(['name' => 'CONCAT(firstname, " ", lastname)'])
-                        ->column()
+                    ArrayHelper::map(
+                        User::find()
+                            ->indexBy('id')
+                            ->select(['id', 'firstname',  'lastname'])
+                            ->asArray()
+                            ->all(),
+                        'id',
+                        function ($user) {
+                            return $user->firstname . ' ' . $user->lastname;
+                        }
+                    )
                 ),
             ],
         ];

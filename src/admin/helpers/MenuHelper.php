@@ -4,7 +4,6 @@ namespace luya\cms\admin\helpers;
 
 use luya\admin\models\User;
 use Yii;
-use luya\admin\models\Lang;
 use yii\db\Query;
 use luya\cms\models\Nav;
 use luya\admin\models\Group;

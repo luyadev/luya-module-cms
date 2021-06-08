@@ -38,6 +38,8 @@ class ItemSqliteTest extends WebApplicationTestCase
     public function testColumn()
     {
         PageScope::run($this->app, function(PageScope $scope) {
+            $scope->createAdminGroupFixture(1);
+            $scope->createAdminUserFixture();
             $scope->createPage('test', null, []);
 
             $column = $this->app->menu->find()->all()->column('id');
@@ -49,6 +51,8 @@ class ItemSqliteTest extends WebApplicationTestCase
     public function testDescendents()
     {
         PageScope::run($this->app, function(PageScope $scope) {
+            $scope->createAdminGroupFixture(1);
+            $scope->createAdminUserFixture();
             $scope->createPage('test', null, []);
             $column = $this->app->menu->current->descendants;
             $this->assertSame(0, count($column));
@@ -58,6 +62,9 @@ class ItemSqliteTest extends WebApplicationTestCase
 
     public function testDescendentsMultiple()
     {
+        $this->createAdminGroupFixture(1);
+        $this->createAdminUserFixture();
+        
         $this->createAdminLangFixture([
             1 => [
                 'id' => 1,
@@ -130,6 +137,8 @@ class ItemSqliteTest extends WebApplicationTestCase
 
     public function testTeardownWithHidden()
     {
+        $this->createAdminGroupFixture(1);
+        $this->createAdminUserFixture();
         $this->createAdminLangFixture([
             1 => [
                 'id' => 1,

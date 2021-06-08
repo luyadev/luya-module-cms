@@ -15,6 +15,9 @@ class NavContainerTest extends CmsFrontendTestCase
     public function testFindWebsiteContainer()
     {
         PageScope::run($this->app, function(PageScope $scope) {
+            $this->createAdminGroupFixture(1);
+            $this->createAdminUserFixture();
+            
             $this->createCmsWebsiteFixture([
                 [
                     'id' => 2,

@@ -18,6 +18,9 @@ class MenuControllerTest extends WebModelTestCase
     {
         parent::afterSetup();
     
+        $this->createAdminGroupFixture(1);
+        $this->createAdminUserFixture();
+        
         $this->createAdminLangFixture([
             1 => [
                 'id' => 1,
@@ -35,6 +38,17 @@ class MenuControllerTest extends WebModelTestCase
                 'is_default' => 1,
                 'is_active' => 1,
                 'is_deleted' => 0,
+                'user_ids' => '[{"value":1}]'
+            ],
+            2 => [
+                'id' => 2,
+                'name' => 'other website',
+                'host' => '',
+                'aliases' => '',
+                'is_default' => 0,
+                'is_active' => 1,
+                'is_deleted' => 0,
+                'user_ids' => '[{"value":3}]'
             ]
         ]);
         $this->createCmsNavContainerFixture([

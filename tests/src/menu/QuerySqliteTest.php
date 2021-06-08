@@ -44,7 +44,9 @@ class QuerySqliteTest extends WebApplicationTestCase
     public function testFindByTags()
     {
         PageScope::run($this->app, function(PageScope $scope) {
-
+    
+            $scope->createAdminGroupFixture(1);
+            $scope->createAdminUserFixture();
             $this->createCmsPropertyFixture([]);
 
             $tag = new ActiveRecordFixture([
@@ -88,6 +90,8 @@ class QuerySqliteTest extends WebApplicationTestCase
     public function testColumn()
     {
         PageScope::run($this->app, function(PageScope $scope) {
+            $scope->createAdminGroupFixture(1);
+            $scope->createAdminUserFixture();
             $scope->createPage('test', null, []);
 
             $column = $this->app->menu->find()->all()->column('id');

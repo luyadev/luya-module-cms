@@ -64,6 +64,9 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
                 'is_deleted' => 0,
             ]
         ]);
+        
+        $this->createAdminGroupFixture(1);
+        $this->createAdminUserFixture();
     
         $this->createCmsWebsiteFixture([
             1 => [
