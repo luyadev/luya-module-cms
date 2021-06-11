@@ -12,8 +12,8 @@ class m210605_172811_cms_website_permissions extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn(\luya\cms\models\Website::tableName(), 'group_ids', $this->string());
-        $this->addColumn(\luya\cms\models\Website::tableName(), 'user_ids', $this->string());
+        $this->addColumn(\luya\cms\models\Website::tableName(), 'group_ids', $this->text());
+        $this->addColumn(\luya\cms\models\Website::tableName(), 'user_ids', $this->text());
     }
 
     /**
