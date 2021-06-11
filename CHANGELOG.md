@@ -5,8 +5,9 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.0.0
 
-* [#344](https://github.com/luyadev/luya-module-cms/pull/344) Added Website user and group permission support
-* [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support
+* [#345](https://github.com/luyadev/luya-module-cms/pull/345) Added Website user and group permission support
+* [#344](https://github.com/luyadev/luya-module-cms/pull/344) Added website collapse to page permission.
+* [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support.
 * [#341](https://github.com/luyadev/luya-module-cms/pull/341) All deprecated methods has been removed `Url::toMenuItem`, `Block::objectId`, `NavItemPage::getBlock`.
 + [#320](https://github.com/luyadev/luya-module-cms/pull/320) Replace cms menu item `publish_from` and `publish_till` with sheduler.
 + [#329](https://github.com/luyadev/luya-module-cms/issues/329) Ensure its not possible to drag a placeholder block into itself (this can create circular references)
@@ -19,6 +20,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#325](https://github.com/luyadev/luya-module-cms/issues/326) Updates for compatibility with PostgreSQL
 + [#332](https://github.com/luyadev/luya-module-cms/pull/332) Added option to match wildcards in catch path for cms redirects, this allows you to use `/de/*.html` which could be redirect to `/de/*.
 + [#339](https://github.com/luyadev/luya-module-cms/issues/339) Fixed a bug in CMS page permission system, unable to access to subpage without enabling parent page permissions.
++ [#343](https://github.com/luyadev/luya-module-cms/pull/343) Removed deprecated `luya\behaviors\Timestamp` behavior, replaced with `yii\behaviors\TimestampBehavior`.
 
 ## 3.5.1 (24. November 2020)
 

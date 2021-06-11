@@ -68,7 +68,7 @@ class NavTree extends Widget
     private $_startItem;
 
     /**
-     * @var null|QueryIteratorFilter The menu Query
+     * @var null|QueryIteratorFilter The menu Query. If not defined the following query will be used `Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all()`
      */
     private $_findQuery;
 

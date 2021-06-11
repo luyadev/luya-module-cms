@@ -10,7 +10,6 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 	});
 
     $scope.data = null;
-    $scope.hiddenWebsites = [];
     $scope.groupInjection = null;
 
 	$scope.loadPermissions = function() {
@@ -23,29 +22,6 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 	$scope.reloadMenuData = function() {
 		ServiceMenuData.load(true);
 	};
-
-    $scope.toggleWebsite = function(websiteId) {
-        if (websiteId in $scope.hiddenWebsites) {
-            $scope.hiddenWebsites[websiteId] = !$scope.hiddenWebsites[websiteId];
-        } else {
-            $scope.hiddenWebsites[websiteId] = 1;
-        }
-    };
-
-    $scope.isWebsiteHidden = function(websiteId) {
-
-        if ($scope.hiddenWebsites == undefined) {
-            return false;
-        }
-
-        if (websiteId in $scope.hiddenWebsites) {
-            if ($scope.hiddenWebsites[websiteId] == 1) {
-                return true;
-            }
-        }
-
-        return false;
-    };
 
     $scope.deletePermission = function(navId, groupId) {
     	// delete request
@@ -86,36 +62,25 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
 }]);
 </script>
 <h1 class="crud-title mb-4"><?= Module::t('menu_group_item_env_permission'); ?></h1>
-<div ng-controller="PermissionController" class="card">
-    <div class="card-body" ng-repeat="website in data.websites">
-
-        <div class="treeview-label treeview-label-container" ng-click="toggleWebsite(website.websiteInfo.id)">
-            <span class="treeview-icon treeview-icon-collapse">
-                <i class="material-icons" ng-show="!isWebsiteHidden(website.websiteInfo.id)">keyboard_arrow_down</i>
-                <i class="material-icons" ng-show="isWebsiteHidden(website.websiteInfo.id)">keyboard_arrow_right</i>
-            </span>
-            <span class="treeview-link"><span class="google-chrome-font-offset-fix">{{website.websiteInfo.name}}</span></span>
-        </div>
-        
-        <table class="table table-hover table-sm" ng-show="!isWebsiteHidden(website.websiteInfo.id)">
-            <thead>
-                <tr>
-                    <th>
-                        
-                    </th>
-                    <th ng-repeat="group in data.groups">
-                        <a class="btn btn-outline-success" ng-if="group.fullPermission"><i class="material-icons">check_circle</i></a>
-                        <a class="btn btn-outline-secondary" ng-click="grantFullPermission(group.id)" ng-if="!group.fullPermission"><i class="material-icons">check_circle</i></a>
-                        {{ group.name }}
-                    </th>
-                </tr>
-            </thead>
+<div ng-controller="PermissionController">
+    <collapse-container title="{{website.websiteInfo.name}}" ng-repeat="website in data.websites" class="mb-3">
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    
+                </td>
+                <td ng-repeat="group in data.groups">
+                    <a class="btn btn-outline-success" ng-if="group.fullPermission"><i class="material-icons">check_circle</i> {{ group.name }}</a>
+                    <a class="btn btn-outline-secondary" ng-click="grantFullPermission(group.id)" ng-if="!group.fullPermission"><i class="material-icons">check_circle</i> {{ group.name }}</a>
+                </td>
+            </tr>
             <tbody ng-repeat="container in website.containers">
-                <tr class="permissions__container-row">
+                <tr class="permissions__container-row bg-light">
                     <th colspan="{{data.groups.length + 1}}">{{ container.containerInfo.name }}</th>
                 </tr>
                 <tr ng-repeat="item in container.items" class="permissions__item-row">
-                    <th scope="row" style="padding-left: {{item.nav_level * 20}}px">{{ item.title }}</th>
+                    <td  class="align-middle" style="padding-left: {{item.nav_level * 20}}px; font-weight:normal">{{ item.title }}</td>
                     <td ng-repeat="group in item.groups">
                         <!-- {{ group.name }} -->
                         <div ng-if="group.groupFullPermission">
@@ -129,7 +94,7 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
                         <div ng-if="!group.isInheritedFromParent && !group.groupFullPermission">
                             <a class="btn btn-success" ng-if="group.permissionCheckbox" ng-click="deletePermission(item.id, group.id)"><i class="material-icons">check</i></a>
                             <a class="btn btn-danger" ng-if="!group.permissionCheckbox" ng-click="insertPermission(item.id, group.id)"><i class="material-icons">check</i></a>
-    
+
                             <a class="btn btn-success" ng-if="group.isGroupPermissionInheritNode" ng-click="deleteInheritance(item.id, group.id)"><i class="material-icons">playlist_add_check</i></a>
                             <a class="btn btn-danger" ng-if="!group.isGroupPermissionInheritNode" ng-click="insertInheritance(item.id, group.id)"><i class="material-icons">playlist_add_check</i></a>
                         </div>
@@ -138,4 +103,5 @@ zaa.bootstrap.register('PermissionController', ['$scope', '$http', 'ServiceMenuD
             </tbody>
         </table>
     </div>
+    </collapse-container>
 </div>
