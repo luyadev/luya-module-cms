@@ -273,7 +273,7 @@ class MenuHelper
                 ->all();
 
             foreach ($websites as $websiteIndex => $website) {
-                if (!self::checkWebsitePermissions($website)) {
+                if (!self::checkUserWebsitePermissions($website)) {
                     unset($websites[$websiteIndex]);
                 }
             }
@@ -284,7 +284,14 @@ class MenuHelper
         return self::$websites;
     }
     
-    private static function checkWebsitePermissions($website)
+    /**
+     * Check that the current user is allowed to access to the given website.
+     *
+     * @param array $website
+     *
+     * @return bool
+     */
+    private static function checkUserWebsitePermissions(array $website)
     {
         /** @var User $user */
         $user = Yii::$app->adminuser->identity;
