@@ -11,6 +11,7 @@ use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
+use yii\data\ActiveDataFilter;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -110,29 +111,33 @@ class Website extends NgRestModel
             ],
             'group_ids' => [
                 'class' => CheckboxList::class,
-                'data' => array_merge(
-                    [0 => Module::t('model_website_all')],
-                    Group::find()
-                        ->indexBy('id')
-                        ->select('name')
-                        ->column()
-                ),
+                'data' => function () {
+                    return array_merge(
+                        [0 => Module::t('model_website_all')],
+                        Group::find()
+                            ->indexBy('id')
+                            ->select('name')
+                            ->column()
+                    );
+                },
             ],
             'user_ids' => [
                 'class' => CheckboxList::class,
-                'data' => array_merge(
-                    [0 => Module::t('model_website_all')],
-                    ArrayHelper::map(
-                        User::find()
-                            ->indexBy('id')
-                            ->select(['id', 'firstname',  'lastname'])
-                            ->all(),
-                        'id',
-                        function ($user) {
-                            return $user->firstname . ' ' . $user->lastname;
-                        }
-                    )
-                ),
+                'data' => function () {
+                    return array_merge(
+                        [0 => Module::t('model_website_all')],
+                        ArrayHelper::map(
+                            User::find()
+                                ->indexBy('id')
+                                ->select(['id', 'firstname',  'lastname'])
+                                ->all(),
+                            'id',
+                            function ($user) {
+                                return $user->firstname . ' ' . $user->lastname;
+                            }
+                        )
+                    );
+                },
             ],
         ];
     }
