@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use \luya\cms\models\Website;
 
 /**
  * Class m210605_172811_cms_website_permissions
@@ -12,8 +13,8 @@ class m210605_172811_cms_website_permissions extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn(\luya\cms\models\Website::tableName(), 'group_ids', $this->text());
-        $this->addColumn(\luya\cms\models\Website::tableName(), 'user_ids', $this->text());
+        $this->addColumn(Website::tableName(), 'group_ids', $this->text());
+        $this->addColumn(Website::tableName(), 'user_ids', $this->text());
     }
 
     /**
@@ -21,8 +22,8 @@ class m210605_172811_cms_website_permissions extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn(\luya\cms\models\Website::tableName(), 'group_ids');
-        $this->dropColumn(\luya\cms\models\Website::tableName(), 'user_ids');
+        $this->dropColumn(Website::tableName(), 'group_ids');
+        $this->dropColumn(Website::tableName(), 'user_ids');
 
         return true;
     }

@@ -285,13 +285,13 @@ class MenuHelper
     }
     
     /**
-     * Check that the current user is allowed to access to the given website.
+     * Check that the current user is allowed to access to the given website data.
      *
-     * @param array $website
+     * @param array $website Array with website data. Have to provide `user_ids` and `group_ids` in json string.
      *
      * @return bool
      */
-    private static function checkUserWebsitePermissions(array $website)
+    public static function checkUserWebsitePermissions(array $website)
     {
         /** @var User $user */
         $user = Yii::$app->adminuser->identity;

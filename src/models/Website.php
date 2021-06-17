@@ -11,7 +11,6 @@ use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
-use yii\data\ActiveDataFilter;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -26,8 +25,8 @@ use yii\helpers\ArrayHelper;
  * @property bool $redirect_to_host
  * @property string $aliases
  * @property string $default_lang
- * @property string $group_ids
- * @property string $user_ids
+ * @property string $group_ids Restricts access to the website from the admin area to specific user groups.
+ * @property string $user_ids Restricts access to the website from the admin area to specific users.
  *
  * @property NavContainer[] $navContainers
  *
@@ -111,6 +110,7 @@ class Website extends NgRestModel
             ],
             'group_ids' => [
                 'class' => CheckboxList::class,
+                'alias' => Module::t('model_website_group_ids_label'),
                 'data' => function () {
                     return array_merge(
                         [0 => Module::t('model_website_all')],
@@ -123,6 +123,7 @@ class Website extends NgRestModel
             ],
             'user_ids' => [
                 'class' => CheckboxList::class,
+                'alias' => Module::t('model_website_user_ids_label'),
                 'data' => function () {
                     return array_merge(
                         [0 => Module::t('model_website_all')],
@@ -139,6 +140,13 @@ class Website extends NgRestModel
                     );
                 },
             ],
+        ];
+    }
+    
+    public function ngRestAttributeGroups()
+    {
+        return [
+            [['group_ids', 'user_ids'], Module::t('model_website_access_restrict'), 'collapsed' => false],
         ];
     }
     
