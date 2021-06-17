@@ -8,6 +8,7 @@ use luya\admin\models\User;
 use luya\cms\admin\apis\MenuController;
 use luya\cms\models\Nav;
 use luya\testsuite\fixtures\NgRestModelFixture;
+use luya\testsuite\scopes\PermissionScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
 class MenuControllerTest extends WebModelTestCase
@@ -18,6 +19,17 @@ class MenuControllerTest extends WebModelTestCase
     {
         parent::afterSetup();
     
+        $this->createAdminUserFixture([
+            1  => [
+                'id' => 1,
+                'firstname' => 'Foo',
+                'lastname' => 'Bar',
+                'email' => 'foo@example.com',
+                'is_deleted' => false,
+                'is_api_user' => false,
+            ]
+        ]);
+    
         $this->createAdminLangFixture([
             1 => [
                 'id' => 1,
@@ -26,6 +38,29 @@ class MenuControllerTest extends WebModelTestCase
                 'is_deleted' => 0,
             ]
         ]);
+    
+        new NgRestModelFixture([
+            'modelClass' => Group::class,
+            'fixtureData' => [
+                'tester' => [
+                    'id' => 1,
+                    'name' => 'Test Group',
+                    'is_deleted' => false,
+                ],
+            ],
+        ]);
+        
+        $this->createAdminUserGroupTable();
+        $this->createAdminAuthTable();
+        $this->createAdminGroupAuthTable();
+    
+        $this->insertRow('admin_user_group', [
+            'user_id' => 1,
+            'group_id' => 1,
+        ]);
+    
+        $this->createCmsNavPermissionFixture();
+    
         $this->createCmsWebsiteFixture([
             1 => [
                 'id' => 1,
@@ -35,6 +70,17 @@ class MenuControllerTest extends WebModelTestCase
                 'is_default' => 1,
                 'is_active' => 1,
                 'is_deleted' => 0,
+                'group_ids' => '[{"value":1}]'
+            ],
+            2 => [
+                'id' => 2,
+                'name' => 'other website',
+                'host' => '',
+                'aliases' => '',
+                'is_default' => 0,
+                'is_active' => 1,
+                'is_deleted' => 0,
+                'user_ids' => '[{"value":2}]',
             ]
         ]);
         $this->createCmsNavContainerFixture([
@@ -77,55 +123,29 @@ class MenuControllerTest extends WebModelTestCase
                 'title' => 'nav is draft',
             ]
         ]);
-        $this->createAdminAuthTable();
-        $this->createAdminUserLoginFixture();
-        $this->createAdminUserFixture([
-            1  => [
-                'id' => 1,
-                'firstname' => 'Foo',
-                'lastname' => 'Bar',
-                'email' => 'foo@example.com',
-                'is_deleted' => false,
-                'is_api_user' => false,
-            ]
-        ]);
-        
-        $this->createAdminUserGroupTable();
-        $this->createAdminGroupAuthTable();
     
-        $groupFixture = new NgRestModelFixture([
-            'modelClass' => Group::class,
-            'fixtureData' => [
-                'tester' => [
-                    'id' => 1,
-                    'name' => 'Administrator',
-                    'is_deleted' => 0,
-                ],
-            ],
-        ]);
-        
     }
     
     public function testActionDataMenu()
     {
-        $ctrl = new MenuController('id', $this->app);
-        
-        \Yii::$app->adminuser->identity = User::findOne(1);
-        $menu = $ctrl->actionDataMenu();
+            $ctrl = new MenuController('id', $this->app);
     
-        $this->assertCount(1, $menu['items']);
-        $this->assertEquals(1, $menu['items'][0]['id']);
+            \Yii::$app->adminuser->identity = User::findOne(1);
+            $menu = $ctrl->actionDataMenu();
     
-        $this->assertCount(1, $menu['drafts']);
-        $this->assertEquals('nav is draft', $menu['drafts'][0]['title']);
+            $this->assertCount(1, $menu['items']);
+            $this->assertEquals(1, $menu['items'][0]['id']);
     
-        $this->assertCount(1, $menu['containers']);
-        $this->assertEquals('container', $menu['containers'][0]['name']);
+            $this->assertCount(1, $menu['drafts']);
+            $this->assertEquals('nav is draft', $menu['drafts'][0]['title']);
     
-        $this->assertCount(1, $menu['websites']);
-        $this->assertEquals('default', $menu['websites'][0]['name']);
+            $this->assertCount(1, $menu['containers']);
+            $this->assertEquals('container', $menu['containers'][0]['name']);
     
-        $this->assertCount(0, $menu['hiddenCats']);
+            $this->assertCount(1, $menu['websites']);
+            $this->assertEquals('default', $menu['websites'][0]['name']);
+    
+            $this->assertCount(0, $menu['hiddenCats']);
     }
     
     public function testActionDataPermissionTree()

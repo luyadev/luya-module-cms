@@ -2,13 +2,16 @@
 
 namespace luya\cms\models;
 
+use luya\admin\models\Group;
 use luya\admin\models\Lang;
+use luya\admin\models\User;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\ngrest\plugins\CheckboxList;
 use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
 use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
-use yii\db\AfterSaveEvent;
+use yii\helpers\ArrayHelper;
 
 /**
  * Represents the Website-Containers.
@@ -22,6 +25,8 @@ use yii\db\AfterSaveEvent;
  * @property bool $redirect_to_host
  * @property string $aliases
  * @property string $default_lang
+ * @property string $group_ids Restricts access to the website from the admin area to specific user groups.
+ * @property string $user_ids Restricts access to the website from the admin area to specific users.
  *
  * @property NavContainer[] $navContainers
  *
@@ -64,7 +69,7 @@ class Website extends NgRestModel
             [['name', 'host'], 'unique'],
             [['theme_id'], 'integer'],
             [['is_active', 'is_default', 'is_deleted', 'redirect_to_host'], 'boolean'],
-            [['aliases', 'default_lang'], 'string']
+            [['aliases', 'default_lang', 'group_ids', 'user_ids'], 'string']
         ];
     }
     
@@ -102,7 +107,46 @@ class Website extends NgRestModel
                 'query' => $this->getLang(),
                 'relation' => 'lang',
                 'labelField' => ['name']
-            ]
+            ],
+            'group_ids' => [
+                'class' => CheckboxList::class,
+                'alias' => Module::t('model_website_group_ids_label'),
+                'data' => function () {
+                    return array_merge(
+                        [0 => Module::t('model_website_all')],
+                        Group::find()
+                            ->indexBy('id')
+                            ->select('name')
+                            ->column()
+                    );
+                },
+            ],
+            'user_ids' => [
+                'class' => CheckboxList::class,
+                'alias' => Module::t('model_website_user_ids_label'),
+                'data' => function () {
+                    return array_merge(
+                        [0 => Module::t('model_website_all')],
+                        ArrayHelper::map(
+                            User::find()
+                                ->indexBy('id')
+                                ->select(['id', 'firstname',  'lastname'])
+                                ->all(),
+                            'id',
+                            function ($user) {
+                                return $user->firstname . ' ' . $user->lastname;
+                            }
+                        )
+                    );
+                },
+            ],
+        ];
+    }
+    
+    public function ngRestAttributeGroups()
+    {
+        return [
+            [['group_ids', 'user_ids'], Module::t('model_website_access_restrict'), 'collapsed' => false],
         ];
     }
     
@@ -113,8 +157,8 @@ class Website extends NgRestModel
     {
         return [
             ['list', ['name', 'host', 'aliases', 'is_default', 'theme_id']],
-            ['create', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id']],
-            ['update', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id']],
+            ['create', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id', 'group_ids', 'user_ids']],
+            ['update', ['name', 'host', 'aliases', 'is_active', 'redirect_to_host', 'theme_id', 'group_ids', 'user_ids']],
             ['delete', true],
         ];
     }

@@ -220,12 +220,14 @@ zaa.factory("ServiceCurrentWebsite", ['$rootScope', 'ServiceMenuData', function(
 	};
 
 	service.load = function() {
-		service.defaultWebsite = ServiceMenuData.data.websites.find(w => w.is_default);
-		service.toggle(service.defaultWebsite.id);
+		service.defaultWebsite = ServiceMenuData.data.websites.find(w => w.is_default) || ServiceMenuData.data.websites[0];
+		if (service.defaultWebsite) {
+			service.toggle(service.defaultWebsite.id);
+		}
 	}
 
 	service.toggle = function(websiteId) {
-		if (websiteId && (!service.currentWebsite || service.currentWebsite.id !== websiteId)) {
+		if (websiteId && ServiceMenuData.data.websites && (!service.currentWebsite || service.currentWebsite.id !== websiteId)) {
 			service.currentWebsite = ServiceMenuData.data.websites.find(w => w.id === websiteId);
 			$rootScope.$broadcast('service:CurrentWebsiteChanged', service.currentWebsite);
 		}

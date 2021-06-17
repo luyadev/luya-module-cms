@@ -268,4 +268,8 @@ return [
 
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
+    'model_website_all' => 'Alle',
+    'model_website_group_ids_label' => 'Auf Benutzergruppen beschränken',
+    'model_website_user_ids_label' => 'Auf Benutzer beschränken',
+    'model_website_access_restrict' => 'Zugangsbeschränkung',
 ];

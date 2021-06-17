@@ -17,6 +17,8 @@ class WebsiteBehaviorUrlRuleTest extends CmsFrontendTestCase
     public function testParseRequest()
     {
         PageScope::run($this->app, function(PageScope $scope) {
+            $this->createAdminGroupFixture(1);
+            $this->createAdminUserFixture();
             $this->createCmsWebsiteFixture([
                 [
                     'id' => 1,
@@ -61,6 +63,8 @@ class WebsiteBehaviorUrlRuleTest extends CmsFrontendTestCase
     public function testNoDefaultHost()
     {
         PageScope::run($this->app, function(PageScope $scope) {
+            $this->createAdminGroupFixture(1);
+            $this->createAdminUserFixture();
             $this->createCmsWebsiteFixture([
                 [
                     'id' => 1,
