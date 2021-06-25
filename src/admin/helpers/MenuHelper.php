@@ -310,6 +310,8 @@ class MenuHelper
                 return true;
             }
         }
+        
+        return false;
     }
     
     private static $drafts;
