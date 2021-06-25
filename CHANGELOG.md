@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.0.0
 
+* [#349](https://github.com/luyadev/luya-module-cms/pull/349) Fix default/initial website permissions on first setup for users and groups.
 * [#345](https://github.com/luyadev/luya-module-cms/pull/345) Added Website user and group permission support
 * [#344](https://github.com/luyadev/luya-module-cms/pull/344) Added website collapse to page permission.
 * [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support.
