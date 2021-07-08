@@ -13,8 +13,8 @@ class m210605_172811_cms_website_permissions extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn(Website::tableName(), 'group_ids', $this->text()->defaultValue('[{"value":0}]'));
-        $this->addColumn(Website::tableName(), 'user_ids', $this->text()->defaultValue('[{"value":0}]'));
+        $this->addColumn(Website::tableName(), 'group_ids', $this->text());
+        $this->addColumn(Website::tableName(), 'user_ids', $this->text());
     }
 
     /**
