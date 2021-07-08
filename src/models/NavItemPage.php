@@ -10,6 +10,7 @@ use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
 use luya\traits\CacheableTrait;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -18,6 +19,7 @@ use luya\traits\CacheableTrait;
  * @property integer $layout_id
  * @property integer $nav_item_id
  * @property integer $timestamp_create
+ * @property integer $timestamp_update
  * @property integer $create_user_id
  * @property string $version_alias
  * @property Layout $layout
@@ -49,12 +51,20 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $this->on(self::EVENT_AFTER_UPDATE, function ($event) {
             $event->sender->forceNavItem->updateTimestamp();
         });
+    }
 
-        $this->on(self::EVENT_BEFORE_VALIDATE, function() {
-            if ($this->isNewRecord) {
-                $this->timestamp_create = time();
-            }
-        });
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'timestamp_create',
+                'updatedAtAttribute' => 'timestamp_update'
+            ]
+        ];
     }
     
     /**
@@ -82,7 +92,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             [['layout_id', 'timestamp_create', 'create_user_id'], 'required', 'isEmpty' => function ($value) {
                 return empty($value);
             }],
-            [['layout_id', 'timestamp_create', 'create_user_id', 'nav_item_id'], 'integer'],
+            [['layout_id', 'timestamp_create', 'timestamp_update', 'create_user_id', 'nav_item_id'], 'integer'],
             [['version_alias'], 'string']
         ];
     }

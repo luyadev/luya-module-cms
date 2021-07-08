@@ -5,11 +5,12 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.0.0
 
-* [#349](https://github.com/luyadev/luya-module-cms/pull/349) Fix default/initial website permissions on first setup for users and groups.
-* [#345](https://github.com/luyadev/luya-module-cms/pull/345) Added Website user and group permission support
-* [#344](https://github.com/luyadev/luya-module-cms/pull/344) Added website collapse to page permission.
-* [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support.
-* [#341](https://github.com/luyadev/luya-module-cms/pull/341) All deprecated methods has been removed `Url::toMenuItem`, `Block::objectId`, `NavItemPage::getBlock`.
++ [#350](https://github.com/luyadev/luya-module-cms/pull/350) New migrations for page update timestamp and changed nav item alias max length to 180 chars.
++ [#349](https://github.com/luyadev/luya-module-cms/pull/349) Fix default/initial website permissions on first setup for users and groups.
++ [#345](https://github.com/luyadev/luya-module-cms/pull/345) Added Website user and group permission support
++ [#344](https://github.com/luyadev/luya-module-cms/pull/344) Added website collapse to page permission.
++ [#274](https://github.com/luyadev/luya-module-cms/pull/274) Multiple website support.
++ [#341](https://github.com/luyadev/luya-module-cms/pull/341) All deprecated methods has been removed `Url::toMenuItem`, `Block::objectId`, `NavItemPage::getBlock`.
 + [#320](https://github.com/luyadev/luya-module-cms/pull/320) Replace cms menu item `publish_from` and `publish_till` with sheduler.
 + [#329](https://github.com/luyadev/luya-module-cms/issues/329) Ensure its not possible to drag a placeholder block into itself (this can create circular references)
 + [#336](https://github.com/luyadev/luya-module-cms/pull/336) New event which is triggered when the cms page is composed and ready to render.
