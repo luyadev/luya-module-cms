@@ -177,11 +177,6 @@ use luya\cms\helpers\BlockHelper;
 class MyTestBlock extends PhpBlock
 {
     /**
-     * @var string The module where this block belongs to in order to find the view files.
-     */
-    public $module = 'cms';
-
-    /**
      * @var boolean Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
      * in a different way for a better user experience. Container block will not display isDirty colorizing.
      */
