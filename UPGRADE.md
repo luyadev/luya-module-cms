@@ -5,7 +5,8 @@ This document will help you upgrading from a LUYA admin module version into anot
 ## 3.x to 4.0
 
 + [#320](https://github.com/luyadev/luya-module-cms/pull/320) visibility for menu items has been replaced by the scheduler. this means when you have some active visibility timings, they needs to be replaced by yourself. f.e you have stored a from and to date somewhere and the menu item is now invisible, you can need to manualy change the visibility of that page to "hidden" since those where conditions do not exists in the query of menu items.
-* [#341](https://github.com/luyadev/luya-module-cms/pull/341) All deprecated methods has been removed `Url::toMenuItem`, `Block::objectId`, `NavItemPage::getBlock`.
++ [#341](https://github.com/luyadev/luya-module-cms/pull/341) All deprecated methods has been removed `Url::toMenuItem`, `Block::objectId`, `NavItemPage::getBlock`.
++ [#246](https://github.com/luyadev/luya-module-cms/issues/246) New blocks won't contain the `$module` property by default. Since version 4.0 the view files of blockes are by default looked up in a folder called `views` which is in the same location as block is stored. When your block does not have a `$module` property defined, you can use `$module = 'app'` to restore the old/previous behavior.
 
 ## 3.3.7 to 3.4.0
 
