@@ -65,7 +65,7 @@ class <?= $className; ?> extends PhpBlock
      */
     public function icon()
     {
-        return 'extension'; // see the list of icons on: https://design.google.com/icons/
+        return 'extension'; // see the list of icons on: https://material.io/icons/
     }
  
     /**
