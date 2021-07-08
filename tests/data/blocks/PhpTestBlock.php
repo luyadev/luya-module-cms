@@ -6,6 +6,8 @@ use luya\cms\base\PhpBlock;
 
 class PhpTestBlock extends PhpBlock
 {
+    public $module = 'app';
+    
     public function name()
     {
         return 'PHP Test Block';

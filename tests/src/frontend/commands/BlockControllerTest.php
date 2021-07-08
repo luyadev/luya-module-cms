@@ -71,7 +71,7 @@ class MyTestBlock extends PhpBlock
      */
     public function icon()
     {
-        return 'extension'; // see the list of icons on: https://design.google.com/icons/
+        return 'extension'; // see the list of icons on: https://material.io/icons/
     }
  
     /**
@@ -177,11 +177,6 @@ use luya\cms\helpers\BlockHelper;
 class MyTestBlock extends PhpBlock
 {
     /**
-     * @var string The module where this block belongs to in order to find the view files.
-     */
-    public $module = 'cms';
-
-    /**
      * @var boolean Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
      * in a different way for a better user experience. Container block will not display isDirty colorizing.
      */
@@ -218,7 +213,7 @@ class MyTestBlock extends PhpBlock
      */
     public function icon()
     {
-        return 'extension'; // see the list of icons on: https://design.google.com/icons/
+        return 'extension'; // see the list of icons on: https://material.io/icons/
     }
  
     /**

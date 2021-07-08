@@ -25,6 +25,44 @@ use yii\base\BaseObject;
 abstract class InternalBaseBlock extends BaseObject implements BlockInterface, TypesInterface, \ArrayAccess
 {
     /**
+     * @var string Defines the injector config type `var`.
+     */
+    const INJECTOR_VAR = 'var';
+    
+    /**
+     * @var string Defines the injector config type `cfg`.
+     */
+    const INJECTOR_CFG = 'cfg';
+
+    /**
+     * @var bool Enable or disable the block caching
+     */
+    public $cacheEnabled = false;
+    
+    /**
+     * @var int The cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true. 0 means never expire.
+     */
+    public $cacheExpiration = 3600;
+    
+    /**
+     * @var bool Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
+     * in a different way for a better user experience. Container block will not display isDirty colorizing.
+     */
+    public $isContainer = false;
+
+    /**
+     * @var string Containing the name of the environment (used to find the view files to render). The
+     * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be
+     * added automatically. Since version 3.1.0 its possible to set `null` or empty string in order to lookup
+     * view files in the same folder where the block is located. With version 4.0 null is the default value.
+     * 
+     * - `app`: The alias mode allows you to map the view files to a certain alias
+     * - `@app`: Either alias with prefixed @ or not is possible
+     * - `null`: Empty or null will lookup the view files in the same folder where block is located (sub folder views).
+     */
+    public $module = null;
+
+    /**
      * Returns the configuration array.
      *
      * An array with either `var`, `cfg` or `placeholder`. An example with vars
@@ -47,16 +85,13 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      * @return array
      */
     abstract public function config();
-    
+
     /**
-     * @var string Defines the injector config type `var`.
+     * {@inheritDoc}
      */
-    const INJECTOR_VAR = 'var';
-    
-    /**
-     * @var string Defines the injector config type `cfg`.
-     */
-    const INJECTOR_CFG = 'cfg';
+    public function setup()
+    {   
+    }
 
     private $_injectorObjects;
     
@@ -74,31 +109,34 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
             }
         }
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function offsetSet($offset, $value)
     {
         $this->_injectorObjects[$offset] = $value;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function offsetExists($offset)
     {
         return isset($this->_injectorObjects[$offset]);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function offsetUnset($offset)
     {
         unset($this->_injectorObjects[$offset]);
     }
-    
-    /**
-     * {@inheritDoc}
-     */
-    public function setup()
-    {   
-    }
 
     /**
-     *
+     * Array Access Get
+     * 
      * @param string $offset The name of the registered Injector name.
      * @return \luya\cms\base\BaseBlockInjector
      */
@@ -106,34 +144,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return isset($this->_injectorObjects[$offset]) ? $this->_injectorObjects[$offset] : null;
     }
-    
-    /**
-     * @var bool Enable or disable the block caching
-     */
-    public $cacheEnabled = false;
-    
-    /**
-     * @var int The cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true. 0 means never expire.
-     */
-    public $cacheExpiration = 3600;
-    
-    /**
-     * @var bool Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
-     * in a different way for a better user experience. Container block will not display isDirty colorizing.
-     */
-    public $isContainer = false;
-
-    /**
-     * @var string Containing the name of the environment (used to find the view files to render). The
-     * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be
-     * added automatically. Since version 3.1.0 its possible to set `null` or empty string in order to lookup
-     * view files in the same folder where the block is located. With version 4.0 null should be the default value.
-     * 
-     * - `app`: The alias mode allows you to map the view files to a certain alias
-     * - `@app`: Either alias with prefixed @ or not is possible
-     * - `null`: Empty or null will lookup the view files in the same folder where block is located (sub folder views).
-     */
-    public $module = 'app';
     
     /**
      * @inheritdoc

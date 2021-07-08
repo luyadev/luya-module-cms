@@ -17,13 +17,6 @@ use luya\cms\helpers\BlockHelper;
  */
 class <?= $className; ?> extends PhpBlock
 {
-<?php if ($type == BlockController::TYPE_MODULE): ?>
-    /**
-     * @var string The module where this block belongs to in order to find the view files.
-     */
-    public $module = '<?= $module; ?>';
-
-<?php endif; ?>
 <?php if ($isContainer): ?>
     /**
      * @var boolean Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
@@ -65,7 +58,7 @@ class <?= $className; ?> extends PhpBlock
      */
     public function icon()
     {
-        return 'extension'; // see the list of icons on: https://design.google.com/icons/
+        return 'extension'; // see the list of icons on: https://material.io/icons/
     }
  
     /**

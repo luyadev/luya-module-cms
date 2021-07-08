@@ -5,6 +5,9 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.0.0
 
+> This release contains new migrations and requires to run the migrate command after updating. Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.
+
++ [#246](https://github.com/luyadev/luya-module-cms/issues/246) The `$module` property in blocks is now by default `null`. This means block view files are looked up in a `views` folder which is located in the same location as the block. See [UPGRADE document](UPGRADE.md)
 + [#350](https://github.com/luyadev/luya-module-cms/pull/350) New migrations for page update timestamp and changed nav item alias max length to 180 chars.
 + [#349](https://github.com/luyadev/luya-module-cms/pull/349) Fix default/initial website permissions on first setup for users and groups.
 + [#345](https://github.com/luyadev/luya-module-cms/pull/345) Added Website user and group permission support
