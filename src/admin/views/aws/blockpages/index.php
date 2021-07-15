@@ -22,7 +22,15 @@
     <?php foreach ($blocks as $block): ?>
         <tr ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})" style="cursor:pointer;">
             <td>
-                <a ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})"><?= $block->navItemPage->forceNavItem->title; ?></a>
+                <i class="material-icons <?= $block->navItemPage->forceNavItem->nav->is_hidden ? 'text-danger' : 'text-success'; ?>">
+                    <?= $block->navItemPage->forceNavItem->nav->is_hidden ? 'visibility_off' : 'visibility'; ?>
+                </i>
+
+                <i class="material-icons <?= $block->navItemPage->forceNavItem->nav->is_offline ? 'text-danger' : 'text-success'; ?>">
+                    <?= $block->navItemPage->forceNavItem->nav->is_offline ? 'cloud_off' : 'cloud_queue'; ?>
+                </i>
+
+                <a class="ml-2" ui-sref="custom.cmsedit({ navId : <?= $block->navItemPage->forceNavItem->nav_id; ?>, templateId: 'cmsadmin/default/index'})"><?= $block->navItemPage->forceNavItem->title; ?></a>
             </td>
             <td><?= $block->navItemPage->forceNavItem->lang->name; ?></td>
             <td><?= $block->navItemPage->version_alias; ?></td>
