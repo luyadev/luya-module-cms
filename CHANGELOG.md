@@ -23,7 +23,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 + [#321](https://github.com/luyadev/luya-module-cms/pull/321) Added scheduler for block item visibility.
 + [#331](https://github.com/luyadev/luya-module-cms/pull/331) When caching is enabled, the NavTree content will be cached by default.
 + [#325](https://github.com/luyadev/luya-module-cms/issues/326) Updates for compatibility with PostgreSQL
-+ [#332](https://github.com/luyadev/luya-module-cms/pull/332) Added option to match wildcards in catch path for cms redirects, this allows you to use `/de/*.html` which could be redirect to `/de/*.
++ [#332](https://github.com/luyadev/luya-module-cms/pull/332) Added option to match wildcards in catch path for cms redirects, this allows you to use `/de/*.html` which could be redirect to `/de/*`.
 + [#339](https://github.com/luyadev/luya-module-cms/issues/339) Fixed a bug in CMS page permission system, unable to access to subpage without enabling parent page permissions.
 + [#343](https://github.com/luyadev/luya-module-cms/pull/343) Removed deprecated `luya\behaviors\Timestamp` behavior, replaced with `yii\behaviors\TimestampBehavior`.
 
