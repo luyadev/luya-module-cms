@@ -60,7 +60,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
     /**
      * @var bool If enabled the cms content will be compressed (removing of whitespaces and tabs).
      */
-    public $contentCompression= true;
+    public $contentCompression = true;
 
     /**
      * @var boolean Whether the overlay toolbar of the CMS should be enabled or disabled.
@@ -97,6 +97,12 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * @since 3.4.0
      */
     public $fullPageCacheDuration = 7200; // 2 hours
+    
+    /**
+     * @var boolean Wheather host redirect for multi websites should be enabled or not.
+     * @since 4.1.0
+     */
+    public $enableWebsiteHostRedirect = true;
     
     /**
      * @inheritdoc
