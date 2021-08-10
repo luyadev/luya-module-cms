@@ -5,8 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.1.0 ()
 
-+ [#](https://github.com/luyadev/luya-module-cms/pull/) Added property `$enableWebsiteHostRedirect` to cms module to enable or disable the `WebsiteBehaviorUrlRule`.
-
++ [#354](https://github.com/luyadev/luya-module-cms/pull/354) Added property `$enableWebsiteHostRedirect` to cms module to enable or disable the `WebsiteBehaviorUrlRule`.
 
 ## 4.0.0 (27. July 2021)
 
