@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Adicionar página do idioma',
     'view_index_add_page_from_language_info' => 'Deseja copiar o conteúdo de outro idioma ao criar esta página?',
     'view_index_add_page_empty' => 'Adicionar nova página em branco',
-    'view_index_language_loading' => 'Lendo a página',
+    'view_index_page_loading' => 'Lendo a página',
     'draft_title' => 'Rascunhos',
     'draft_text' => 'Aqui você pode ver e editar rascunhos existentes. Os rascunhos podem ser aplicados ao criar uma nova página.',
     'draft_column_id' => 'ID',

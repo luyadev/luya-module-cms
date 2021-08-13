@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Ajouter la page de la langue',
     'view_index_add_page_from_language_info' => 'Voulez-vous copier le contenu d\'une autre langue lors de la création de cette page ?',
     'view_index_add_page_empty' => 'Ajouter une page vide',
-    'view_index_language_loading' => 'Chargement de la page',
+    'view_index_page_loading' => 'Chargement de la page',
     'draft_title' => 'Modèles',
     'draft_text' => 'Voici la liste des modèles. Les modèles peuvent être appliqués lors de la création d\'une nouvelle page.',
     'draft_column_id' => 'ID',

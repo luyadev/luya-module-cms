@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Add page from language',
     'view_index_add_page_from_language_info' => 'Would you like to copy the contents from another language when creating this page?',
     'view_index_add_page_empty' => 'Add new empty page',
-    'view_index_language_loading' => 'Loading page',
+    'view_index_page_loading' => 'Loading page',
     'draft_title' => 'Templates',
     'draft_text' => 'Edit existing templates. Templates can be applied when creating a new page.',
     'draft_column_id' => 'ID',

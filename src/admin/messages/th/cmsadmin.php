@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'เพิ่มเพจจากภาษา',
     'view_index_add_page_from_language_info' => 'คุณต้องการคัดลอกเนื้อหาจากภาษาอื่นเพื่อสร้างหน้าใหม่?',
     'view_index_add_page_empty' => 'เพิ่มเพจว่างเปล่า',
-    'view_index_language_loading' => 'กำลังโหลดเพจ',
+    'view_index_page_loading' => 'กำลังโหลดเพจ',
     'draft_title' => 'เทมเพลต',
     'draft_text' => 'แก้ไขเทมเพลตที่มีอยู่ จะสามารถปรับใช้กับเพจใหม่',
     'draft_column_id' => 'ID',

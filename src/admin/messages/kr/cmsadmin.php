@@ -67,7 +67,7 @@ return [
     'view_index_add_page_from_language' => '언어로부터 페이지를 추가하세요',
     'view_index_add_page_from_language_info' => '이 페이지를 만들 때 다른 언어의 내용을 복사 하시겠습니까?',
     'view_index_add_page_empty' => '새로운 빈 페이지를 추가하세요',
-    'view_index_language_loading' => '페이지 로딩중',
+    'view_index_page_loading' => '페이지 로딩중',
     'draft_title' => '템플릿',
     'draft_text' => '기존 템플릿을 편집하십시오. 새 페이지를 만들 때 템플릿을 적용할 수 있습니다.',
     'draft_column_id' => 'ID',

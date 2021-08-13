@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Додати сторінку з перекладом',
     'view_index_add_page_from_language_info' => 'Ви хочете, щоб скопіювався вміст с торінки з іншою мовою при створенні цієї сторінки?',
     'view_index_add_page_empty' => 'Створити нову порожню сторінку',
-    'view_index_language_loading' => 'Завантаження сторінки',
+    'view_index_page_loading' => 'Завантаження сторінки',
     'draft_title' => 'Чернетки',
     'draft_text' => 'Тут ви можете переглядати і редагувати існуючі проекти. Чернетки можуть бути застосовані при створенні нової сторінки.',
     'draft_column_id' => 'ID',

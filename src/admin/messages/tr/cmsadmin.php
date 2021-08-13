@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Dilden sayfa ekle',
     'view_index_add_page_from_language_info' => 'Bu sayfa oluşturulurken diğer dilden içiklerin kopyalanmasını istiyor musunuz?',
     'view_index_add_page_empty' => 'Yeni boş sayfa ekle',
-    'view_index_language_loading' => 'Sayfa yükleniyor',
+    'view_index_page_loading' => 'Sayfa yükleniyor',
     'draft_title' => 'Şablonlar',
     'draft_text' => 'Varolan şablonları düzenle. Yeni sayfa oluşturulurken şablonlar uygulanabilir.',
     'draft_column_id' => 'ID',

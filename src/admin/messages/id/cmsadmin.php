@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Tambah halaman dari bahasa',
     'view_index_add_page_from_language_info' => 'Apakah anda ingin menyalin konten dari bahasa lainya ketika membuat halaman ini?',
     'view_index_add_page_empty' => 'Tambah halaman kosong baru',
-    'view_index_language_loading' => 'Halaman tunggu',
+    'view_index_page_loading' => 'Halaman tunggu',
     'draft_title' => 'Template',
     'draft_text' => 'Sunting template yang ada, Template dapat digunakan ketika membuat halaman baru',
     'draft_column_id' => 'ID',

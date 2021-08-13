@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Προσθήκη σελίδας από γλώσσα',
     'view_index_add_page_from_language_info' => 'θέλετε να αντιγράψετε τα περιεχόμενα μιας άλλης γλώσσας κατά την δημιουργία της σελίδας ;',
     'view_index_add_page_empty' => 'Προσθήκη νέας άδειας σελίδας',
-    'view_index_language_loading' => 'Φόρτωση Σελίδας',
+    'view_index_page_loading' => 'Φόρτωση Σελίδας',
     'draft_title' => 'Drafts',
     'draft_text' => 'Εδώ μπορείτε να δείτε και να επεξεργαστήτε drafts. Τα Drafts μπορούν να εφαρμοστούν κατά την δημιουργία μιας νέας σελίδας.',
     'draft_column_id' => 'ID',

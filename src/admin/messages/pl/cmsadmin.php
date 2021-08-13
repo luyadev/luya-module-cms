@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Dodaj stronę z języka',
     'view_index_add_page_from_language_info' => 'Czy chcesz skopiować zawartość z innego języka podczas tworzenia tej strony?',
     'view_index_add_page_empty' => 'Dodaj nową pustą stronę',
-    'view_index_language_loading' => 'Ładowanie strony',
+    'view_index_page_loading' => 'Ładowanie strony',
     'draft_title' => 'Szablony',
     'draft_text' => 'Edytuj istniejące szablony. Szablony można stosować podczas tworzenia nowej strony. ',
     'draft_column_id' => 'ID',

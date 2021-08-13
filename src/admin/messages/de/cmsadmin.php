@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Neue Seite aus Sprache erstellen',
     'view_index_add_page_from_language_info' => 'Soll diese Seite aus einer anderen bereits bestehenden Sprache erstellt werden?',
     'view_index_add_page_empty' => 'Leere Seite erstellen',
-    'view_index_language_loading' => 'Daten der Seite werden geladen.',
+    'view_index_page_loading' => 'Seite wird geladen',
     'draft_title' => 'Vorlagen',
     'draft_text' => 'Hier können alle erstellten Vorlagen eingesehen und bearbeitet werden. Um eine Vorlage zu verwenden, erstelle eine neue Seite.',
     'draft_column_id' => 'ID',

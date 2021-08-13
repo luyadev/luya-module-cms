@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Thêm trang mới từ ngôn ngữ',
     'view_index_add_page_from_language_info' => 'Bạn có muốn copy nội dung tự ngôn ngữ khác khi tạo trang này?',
     'view_index_add_page_empty' => 'Thêm trang rỗng',
-    'view_index_language_loading' => 'Trang loading',
+    'view_index_page_loading' => 'Trang loading',
     'draft_title' => 'Nháp',
     'draft_text' => 'Tại đây bạn có thể xem và chỉnh sửa nháp. Trang nháp có thể áp dụng khi tạo trang mới.',
     'draft_column_id' => 'ID',

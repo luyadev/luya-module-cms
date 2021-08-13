@@ -70,7 +70,7 @@ return [
     'view_index_add_page_from_language' => 'Добавяне на страница от език',
     'view_index_add_page_from_language_info' => 'Искате ли да копирате съдържанието от друг език при създаването на тази страница?',
     'view_index_add_page_empty' => 'Добавяне на нова празна страница',
-    'view_index_language_loading' => 'Зареждане на страница',
+    'view_index_page_loading' => 'Зареждане на страница',
     'draft_title' => 'Шаблони',
     'draft_text' => 'Редактирайте съществуващите шаблони. Шаблоните могат да се прилагат при създаване на нова страница. ',
     'draft_column_id' => 'ID',

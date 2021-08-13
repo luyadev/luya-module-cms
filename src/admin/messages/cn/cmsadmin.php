@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Add page from language',
     'view_index_add_page_from_language_info'=>'您想在创建此页面时从其他语言复制内容吗？',
     'view_index_add_page_empty' => '添加一个空页面',
-    'view_index_language_loading' => '正在加载页面',
+    'view_index_page_loading' => '正在加载页面',
     'draft_title' => '模板',
     'draft_text' => '编辑现有的模板。创建新页面时可以应用模板。',
     'draft_column_id' => 'ID',

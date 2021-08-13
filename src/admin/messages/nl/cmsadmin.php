@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Pagina uit taal toevoegen',
     'view_index_add_page_from_language_info' => 'Wilt u de inhoud van een andere taal kopiëren bij het maken van deze pagina?',
     'view_index_add_page_empty' => 'Nieuwe lege pagina toevoegen',
-    'view_index_language_loading' => 'Pagina laden',
+    'view_index_page_loading' => 'Pagina laden',
     'draft_title' => 'Sjablonen',
     'draft_text' => 'Bewerk bestaande sjablonen.  Sjablonen kunnen worden toegepast bij het maken van een nieuwe pagina.',
     'draft_column_id' => 'ID',

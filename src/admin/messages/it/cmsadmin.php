@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Aggiungi nuova pagina per la lingua',
     'view_index_add_page_from_language_info' => 'Vuoi copiare i contenuti di un\'altra lingua quando crei la nuova pagina?',
     'view_index_add_page_empty' => 'Aggiungi una pagina vuota',
-    'view_index_language_loading' => 'Caricamento pagina',
+    'view_index_page_loading' => 'Caricamento pagina',
     'draft_title' => 'Bozza',
     'draft_text' => 'Qui puoi visualizzare e modificare le bozze esistenti. Le bozze possono essere applicate quando viene creata una nuova pagina.',
     'draft_column_id' => 'ID',

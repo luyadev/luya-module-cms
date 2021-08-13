@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Добавить перевод для страницы',
     'view_index_add_page_from_language_info' => 'Хотите скопировать контент другого языка для создания записи?',
     'view_index_add_page_empty' => 'Добавить пустую страницу',
-    'view_index_language_loading' => 'Загрузка страницы',
+    'view_index_page_loading' => 'Загрузка страницы',
     'draft_title' => 'Шаблоны',
     'draft_text' => 'Здесь вы можете просматривать и редактировать существующие шаблоны. Шаблоны могут быть применены при создании новой страницы.',
     'draft_column_id' => 'ID',

@@ -169,7 +169,7 @@ use luya\helpers\Html;
         </li>
     </ul>
 </div>
-<div ng-if="!loaded">loading...</div>
+<div ng-if="!loaded"><?= Module::t('view_index_page_loading'); ?>...</div>
 <div class="cmsadmin-page" ng-if="isTranslated && loaded">
     
     <div class="row" ng-if="item.nav_item_type==1" ng-repeat="(key, row) in container.__placeholders track by key">

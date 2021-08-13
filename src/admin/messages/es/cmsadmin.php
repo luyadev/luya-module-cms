@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Añadir página de idioma',
     'view_index_add_page_from_language_info' => '¿Le gustaría copiar el contenido de otro idioma al crear esta página?',
     'view_index_add_page_empty' => 'Añadir nueva página en blanco',
-    'view_index_language_loading' => 'Cargando página',
+    'view_index_page_loading' => 'Cargando página',
     'draft_title' => 'Borradores',
     'draft_text' => 'Aquí se puede ver y editar los borradores existentes. Los borradores se pueden aplicar al crear una nueva página.',
     'draft_column_id' => 'ID',

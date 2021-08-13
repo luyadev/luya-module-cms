@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'اضافه صفحه از سمت زبان',
     'view_index_add_page_from_language_info' => 'آیا می خواهید محتویات صفحه را از زبان دیگر کپی نمایید',
     'view_index_add_page_empty' => 'اضافه کردن یک صفحه خالی جدید',
-    'view_index_language_loading' => 'صفحه لود',
+    'view_index_page_loading' => 'صفحه لود',
     'draft_title' => 'قالب ها',
     'draft_text' => 'Edit existing templates. Templates can be applied when creating a new page.',
     'draft_column_id' => 'ID',

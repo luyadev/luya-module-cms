@@ -66,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Oldal hozzáadása a nyelvből',
     'view_index_add_page_from_language_info' => 'Szeretné másolni a tartalmat egy másik nyelvről az oldal létrehozásakor?',
     'view_index_add_page_empty' => 'Új üres oldal hozzáadása',
-    'view_index_language_loading' => 'Oldal betöltése',
+    'view_index_page_loading' => 'Oldal betöltése',
     'draft_title' => 'sablonok',
     'draft_text' => 'Meglévő sablonok szerkesztése. Sablonok alkalmazhatók új oldal létrehozásakor.',
     'draft_column_id' => 'ID',
