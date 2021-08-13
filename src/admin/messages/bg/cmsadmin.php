@@ -5,7 +5,6 @@ Translate by Vl. Vladimirov
 25.03.2021
 */
 return [
-    
 	'view_index_add_type' => 'Тип на страницата',
     'view_index_type_page' => 'Страница',
     'view_index_type_module' => 'Модул',
@@ -60,15 +59,13 @@ return [
     'btn_refresh' => 'Опресняване',
     'btn_save' => 'Запазване',
 
-// added translation in 1.0.0-beta3:
-
-'model_navitemmodule_module_name_label' => 'Име на модула',
+// added translations in version 1.0.0-beta3:
+    'model_navitemmodule_module_name_label' => 'Име на модула',
     'model_navitem_title_label' => 'Заглавие на страницата',
     'model_navitem_alias_label' => 'URL сегмент на пътя',
     'model_navitempage_layout_label' => 'Оформление',
     'model_navitemredirect_type_label' => 'Тип пренасочване',
     'model_navitemredirect_value_label' => 'Цел на пренасочването',
-    
     'view_index_add_title' => 'Добавяне на нова страница',
     'view_index_add_page_from_language' => 'Добавяне на страница от език',
     'view_index_add_page_from_language_info' => 'Искате ли да копирате съдържанието от друг език при създаването на тази страница?',
@@ -97,14 +94,10 @@ return [
     'js_page_block_remove_ok' => 'Блокът  «%name%» беше изтрит.',
     'js_page_block_visbility_change' => 'Видимостта на  «%name%» беше променена успешно.',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-    
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Клипборд',
 
-// added translation in 1.0.0-beta6:
-
+// added translations in version 1.0.0-beta6:
 	'js_page_block_delete_confirm' => 'Наистина ли искате да изтриете блока  «%name%»?',
     'view_index_page_meta_keywords' => 'Ключови думи',
     'current_version' => 'Работна версия',
@@ -124,12 +117,11 @@ return [
     'js_version_error_empty_fields' => 'Едно или повече полета са празни или имат невалидна стойност.',
     'js_version_create_success' => 'Новата версия е създадена успешно.',
 
-// added translation in 1.0.0-beta7:
-
+// added translations in version 1.0.0-beta7:
 	'view_index_create_page_please_choose' => 'Моля, изберете',
 	'view_index_sidebar_autopreview' => 'Автоматичен преглед',
 	
-// added translation in 1.0.0-beta8
+// added translations in version 1.0.0-beta8:
 	'module_permission_add_new_page' => 'Създаване на нова страница',
     'module_permission_update_pages' => 'Редактиране на страница',
     'module_permission_edit_drafts' => 'Редактиране на шаблони',
@@ -153,15 +145,14 @@ return [
     'button_update_version' => 'Актуализиране на версията',
     'menu_group_item_env_permission' => 'Разрешения за страница',
     
-// rc1
-
-'page_update_actions_deepcopy_text' => 'Създайте копие на текущата страница с цялото й съдържание. Те копират, ще включват всички езици, но само публикуваната версия. ',
+// added translations in version 1.0.0-rc1:
+    'page_update_actions_deepcopy_text' => 'Създайте копие на текущата страница с цялото й съдържание. Те копират, ще включват всички езици, но само публикуваната версия. ',
     'page_update_actions_deepcopy_btn' => 'Създаване на копие',
     
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Таг за заглавие (SEO)',
     
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Не може да се създаде страница от празен шаблон.',
     'view_update_variation_select' => 'Нормално',
     'menu_group_item_env_config' => 'Конфигуриране',
@@ -187,7 +178,7 @@ return [
     'view_update_block_tooltip_delete' => 'Изтриване',
     'view_update_block_tooltip_close' => 'Затваряне',
 
-// 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Последни актуализации на страницата',
     'cmsadmin_settings_homepage_title' => 'Страница по подразбиране',
     'cmsadmin_settings_trashpage_title' => 'Изтриване на страницата',
@@ -216,17 +207,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Преместено за постоянно',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Преместено временно',
 
-// 1.0.1
-'module_permission_page' => 'Съдържание на страницата',
+// added translations in version 1.0.1:
+    'module_permission_page' => 'Съдържание на страницата',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Копиране като шаблон',
     'page_update_actions_deepcopyastemplate_text' => 'Създайте шаблон на текущата страница с цялото й съдържание. Те ще включват всички езици, но само публикуваната версия. ',
     'page_update_actions_deepcopyastemplate_btn' => 'Създаване на шаблон',
     'js_page_create_copy_as_template_success' => 'Шаблонът е създаден.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Изображение',
     'view_index_page_label_subpage' => 'Избор на родителска страница',
     'view_index_page_label_parent_nav_id' => 'Разположение в навигацията',
@@ -248,26 +238,22 @@ return [
     'view_index_module_select_help' => 'Изберете модула, който да се показва от списъка (изброени са само модули от интерфейс). Модулите трябва да бъдат конфигурирани в раздела за модули на конфигурацията. ',
     'view_index_module_advanced_settings_button' => 'Разширени настройки',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Теми',
     'view_index_page_is_cacheable' => 'Кеширане',
     'view_index_page_is_cacheable_hint' => 'Когато е активирана, цялата страница ще бъде кеширана, включително всички блокове, поради което динамично генерираните данни в блокове няма да се актуализират.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Показване на страница',
     'menu_group_configuration' => 'Конфигурация',
     'menu_group_protocol' => 'Протокол',
     'menu_group_protocol_model_event_logger' => 'Дневник на събитията на модела',
     'unable_to_find_item_for_language' => 'Исканата страница все още не е преведена.',
 
-// 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => ' «%label%» не може да бъде празно.',
     
-// 4.0
-    
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',

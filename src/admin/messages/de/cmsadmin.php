@@ -55,8 +55,7 @@ return [
     'btn_refresh' => 'Aktualisieren',
     'btn_save' => 'Speichern',
 
-// added translation in 1.0.0-beta3:
-
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Modulname',
     'model_navitem_title_label' => 'Seitentitel',
     'model_navitem_alias_label' => 'Pfadsegment',
@@ -91,16 +90,10 @@ return [
     'js_page_block_remove_ok' => 'Block «%name%» wurde entfernt!',
     'js_page_block_visbility_change' => 'Die Sichtbarkeit von «%name%» wurde erfolgreich geändert.',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-
-
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Zwischenablage',
 
-// added translation in 1.0.0-beta6:
-
-
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Block «%name%» wirklich löschen?',
     'view_index_page_meta_keywords' => 'Keywords',
     'current_version' => 'Arbeitsversion',
@@ -120,14 +113,11 @@ return [
     'js_version_error_empty_fields' => 'Eines oder mehrere Felder sind leer oder haben einen falschen Wert.',
     'js_version_create_success' => 'Die neue Version wurde erfolgreich gespeichert.',
 
-// added translation in 1.0.0-beta7:
-
-
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Bitte wählen',
     'view_index_sidebar_autopreview' => 'Automatische Vorschau',
     
-// added translation in 1.0.0-beta8
-
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Neue Seite erstellen',
     'module_permission_update_pages' => 'Seiten bearbeiten',
     'module_permission_edit_drafts' => 'Vorlagen bearbeiten',
@@ -151,15 +141,14 @@ return [
     'button_update_version' => 'Speichern',
     'menu_group_item_env_permission' => 'Seiten Berechtigungen',
     
-// rc1
-
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Erstelle eine Kopie der aktuellen Seite mit allen dazugehörigen Inhalten. Es werden dabei alle Inhalte in allen angelegten Sprachen von allen veröffentlichten Versionen kopiert.',
     'page_update_actions_deepcopy_btn' => 'Kopie erstellen',
     
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Titel Tag (SEO)',
     
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Die Vorlage darf nicht leer sein.',
     'view_update_variation_select' => 'Keine Blockvariation ausgewählt',
     'menu_group_item_env_config' => 'Konfiguration',
@@ -185,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'Löschen',
     'view_update_block_tooltip_close' => 'Bearbeitung schliessen',
     
-// 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Zuletzt aktualisierte Seiten',
     'cmsadmin_settings_homepage_title' => 'Startseite',
     'cmsadmin_settings_trashpage_title' => 'Seite löschen',
@@ -214,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
 
-// 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'Page Content',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Als Vorlage kopieren',
     'page_update_actions_deepcopyastemplate_text' => 'Erstelle eine Vorlage der aktuellen Seite mit allen dazugehörigen Inhalten. Es werden dabei alle Inhalte in allen angelegten Sprachen von allen veröffentlichten Versionen kopiert.',
     'page_update_actions_deepcopyastemplate_btn' => 'Vorlage erstellen',
     'js_page_create_copy_as_template_success' => 'Die Vorlage wurde erfolgreich erstellt.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Bild',
     'view_index_page_label_subpage' => 'Übergeordnete Seite auswählen',
     'view_index_page_label_parent_nav_id' => 'Platzierung in der Navigation',
@@ -246,26 +234,22 @@ return [
     'view_index_module_select_help' => 'Wählen Sie das anzuzeigende Modul aus der Liste aus (nur Frontend-Module werden aufgeführt). Module werden im Modul-Abschnitt der config konfiguriert.',
     'view_index_module_advanced_settings_button' => 'Erweiterte Einstellungen',
     
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themen',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'Wenn eingeschalten, wird die gesamt Seite mit allen Blöcken aus dem Cache geladen und dynamische Daten werden nicht mehr geladen.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Seitendarstellung',
     'menu_group_configuration' => 'Konfiguration',
     'menu_group_protocol' => 'Protokoll',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'Die gesuchte Seite wurde noch nicht übersetzt.',
     
-// 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» darf nicht leer sein.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'Alle',

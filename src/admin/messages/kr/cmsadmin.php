@@ -1,7 +1,6 @@
 <?php
 
 return [
-     
     'view_index_add_type' => '페이지 유형',
     'view_index_type_page' => '페이지',
     'view_index_type_module' => '모듈',
@@ -56,8 +55,7 @@ return [
     'btn_refresh' => '새로 만들기',
     'btn_save' => '저장',
      
- // added translation in 1.0.0-beta3
- 
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => '모듈 이름',
     'model_navitem_title_label' => '페이지 제목',
     'model_navitem_alias_label' => 'URL 경로 세그먼트',
@@ -92,12 +90,11 @@ return [
     'js_page_block_update_ok' => '그 블록은 «%name%» 업데이트 되었습니다.',
     'js_page_block_remove_ok' => '그 블록은 «%name%» 삭제되었습니다.',
     'js_page_block_visbility_change' => '눈에 보이는 것은 «%name%»성공적으로 바뀌었습니다.',
-// added translation in 1.0.0-beta4:
-// added translation in 1.0.0-beta5:
-    
+
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => '클립보드',
-// added translation in 1.0.0-beta6:
-   
+    
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => '당신은 정말로  «%name%»블록을 삭제하기를 원하십니까?',
     'view_index_page_meta_keywords' => 'SEO분석을 위한 키워드',
     'current_version' => '작업 버전',
@@ -116,12 +113,12 @@ return [
     'js_version_update_success' => '이 버전은 성공적으로 업데이트 되었습니다.',
     'js_version_error_empty_fields' => '하나 이상의 입력란이 비어 있거나 잘못된 값이 있습니다.',
     'js_version_create_success' => '이 새로운 버전은 성공적으로 생성되었습니다.',
-// added translation in 1.0.0-beta7:
     
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => '선택하세요',
     'view_index_sidebar_autopreview' => '자동 미리보기',
     
-// added translation in 1.0.0-beta8
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => '새 페이지 만들기',
     'module_permission_update_pages' => '페이지 편집',
     'module_permission_edit_drafts' => '템플릿 편집',
@@ -145,14 +142,14 @@ return [
     'button_update_version' => '버전 업데이트 하기',
     'menu_group_item_env_permission' => '페이지 수락',
     
-// rc1
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => '모든 내용으로 현재 페이지의 복사본을 만듭니다. 여기에는 모든 언어가 포함되지만 출판 된 버전 만 포함됩니다.',
     'page_update_actions_deepcopy_btn' => '복사본 만들기',
     
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => '제목 태그(SEO)',
     
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => '비어있는 템플릿에서는 페이지를 생성할 수 없습니다.',
     'view_update_variation_select' => '표준',
     'menu_group_item_env_config' => '구성',
@@ -178,7 +175,8 @@ return [
     'view_update_block_tooltip_editcfg' => '구성',
     'view_update_block_tooltip_delete' => '삭제',
     'view_update_block_tooltip_close' => '닫기',
-// 1.0.0
+    
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => '마지막 페이지 업데이트',
     'cmsadmin_settings_homepage_title' => '빈 페이지',
     'cmsadmin_settings_trashpage_title' => '페이지 삭제하기',
@@ -207,17 +205,17 @@ return [
     'redirect_model_atr_redirect_status_code_hint' => '리디렉션 유형. 301 : Moved Permanently을 사용하는 경우 브라우저는 브라우저의 캐시를 지우지 않고 대상에 대한 변경 사항이 적용되지 않도록 리다이렉션을 캐시합니다.',
     'redirect_model_atr_redirect_status_code_opt_301' => '301 : 영구적 작동',
     'redirect_model_atr_redirect_status_code_opt_302' => '302 : 일시적 작동',
-// 1.0.1
+    
+// added translations in version 1.0.1:
     'module_permission_page' => '페이지 내용',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
     'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
     'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
     'js_page_create_copy_as_template_success' => 'The template has been created.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Image',
     'view_index_page_label_subpage' => 'Select parent page',
     'view_index_page_label_parent_nav_id' => 'Placement in navigation',
@@ -239,26 +237,22 @@ return [
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
 
-    // 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',

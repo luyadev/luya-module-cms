@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'view_index_add_type' => 'Тип страницы',
     'view_index_type_page' => 'Страница',
     'view_index_type_module' => 'Модуль',
@@ -56,15 +55,13 @@ return [
     'btn_refresh' => 'Обновить',
     'btn_save' => 'Сохранить',
 
-// added translation in 1.0.0-beta3:
-
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Название модуля',
     'model_navitem_title_label' => 'Название страницы',
     'model_navitem_alias_label' => 'URL путь',
     'model_navitempage_layout_label' => 'Макет',
     'model_navitemredirect_type_label' => 'Тип редиректа',
     'model_navitemredirect_value_label' => 'Цель редиректа',
-
     'view_index_add_title' => 'Добавить новую страницу',
     'view_index_add_page_from_language' => 'Добавить перевод для страницы',
     'view_index_add_page_from_language_info' => 'Хотите скопировать контент другого языка для создания записи?',
@@ -93,16 +90,10 @@ return [
     'js_page_block_remove_ok' => 'Блок «%name%» был удален!',
     'js_page_block_visbility_change' => 'Видимость «%name%» была успешно изменена.',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-
-
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Буфер обмена',
 
-// added translation in 1.0.0-beta6:
-
-
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Удалить блок «%name%»?',
     'view_index_page_meta_keywords' => 'Ключевые слова',
     'current_version' => 'Рабочая версия',
@@ -122,14 +113,11 @@ return [
     'js_version_error_empty_fields' => 'Имеются пустые или невалидные поля.',
     'js_version_create_success' => 'Новая версия успешно сохранена.',
 
-// added translation in 1.0.0-beta7:
-
-
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Пожалуйста, выберите',
     'view_index_sidebar_autopreview' => 'Автоматический предпросмотр',
 
-// added translation in 1.0.0-beta8
-
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Создать новую страницу',
     'module_permission_update_pages' => 'Редактировать страницу ',
     'module_permission_edit_drafts' => 'Редактировать шаблон',
@@ -153,14 +141,14 @@ return [
     'button_update_version' => 'Обновить версию',
     'menu_group_item_env_permission' => 'Страница прав',
 
-// rc1
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Создать копию текущей страницы вместе с контентом. Все языки будут скопированы, но только опубликованные версии.',
     'page_update_actions_deepcopy_btn' => 'Создать копию',
 
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Тег title',
 
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Не удалось создать страницу из пустого шаблона.',
     'view_update_variation_select' => 'Не выбрано ни одного изменения блока',
     'menu_group_item_env_config' => 'Настройки',
@@ -186,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'Удалить',
     'view_update_block_tooltip_close' => 'Закрыть редактирование',
 
-    // 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Последние обновления страниц',
     'cmsadmin_settings_homepage_title' => 'Главная страница',
     'cmsadmin_settings_trashpage_title' => 'Удалить страницу',
@@ -215,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
 
-// 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'Контент страницы',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Сохранить как новый шаблон',
     'page_update_actions_deepcopyastemplate_text' => 'Будет создана копия этой страницы со всем содержимым как шаблон. Контент шаблона будет включать в себя все языки, но только опубликованных версий',
     'page_update_actions_deepcopyastemplate_btn' => 'Создать шаблон',
     'js_page_create_copy_as_template_success' => 'Шаблон создан',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Картинка',
     'view_index_page_label_subpage' => 'Укажите родительскую страницу',
     'view_index_page_label_parent_nav_id' => 'Расположение в навигации',
@@ -247,26 +234,22 @@ return [
     'view_index_module_select_help' => 'Выберите модуль для отображения из списка (перечислены только внешние модули). Модули должны быть настроены в конфигурации.',
     'view_index_module_advanced_settings_button' => 'Расширенные настройки',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Темы',
     'view_index_page_is_cacheable' => 'Кеширование',
     'view_index_page_is_cacheable_hint' => 'При установленном флажке страница будет кешироваться целиком, включая все блоки, поэтому динамически генерируемые данные в блоках не будут обновляться.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
 
-    // 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',

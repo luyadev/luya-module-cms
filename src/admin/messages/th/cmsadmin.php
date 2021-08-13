@@ -1,7 +1,6 @@
 <?php
 
 return [
-    
     'view_index_add_type' => 'ชนิดของหน้า',
     'view_index_type_page' => 'หน้า',
     'view_index_type_module' => 'โมดูล',
@@ -56,15 +55,13 @@ return [
     'btn_refresh' => 'รีเฟรช',
     'btn_save' => 'บันทึก',
 
-// added translation in 1.0.0-beta3:
-
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'ชื่อโมดูล',
     'model_navitem_title_label' => 'ชื่อเพจ',
     'model_navitem_alias_label' => 'URL Path segment',
     'model_navitempage_layout_label' => 'เลย์เอาท์',
     'model_navitemredirect_type_label' => 'ชนิดของการเปลี่ยนทิศทาง',
     'model_navitemredirect_value_label' => 'เป้าหมายของการเปลี่ยนทิศทาง',
-    
     'view_index_add_title' => 'เพิ่มเพจใหม่',
     'view_index_add_page_from_language' => 'เพิ่มเพจจากภาษา',
     'view_index_add_page_from_language_info' => 'คุณต้องการคัดลอกเนื้อหาจากภาษาอื่นเพื่อสร้างหน้าใหม่?',
@@ -93,15 +90,10 @@ return [
     'js_page_block_remove_ok' => 'ส่วน «%name%» ถูกลบ',
     'js_page_block_visbility_change' => 'การมองเห็นของ «%name%» ถูกเปลี่ยนแล้ว',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-    
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'คลิปบอร์ด',
 
-// added translation in 1.0.0-beta6:
-
-   
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'คุณต้องการลบส่วน «%name%» ใช่ไหม?',
     'view_index_page_meta_keywords' => 'คึย์เวิร์ด',
     'current_version' => 'เวอร์ชั่นปัจจุบัน',
@@ -121,14 +113,11 @@ return [
     'js_version_error_empty_fields' => 'มีหนึ่งฟีลด์หรือมากกว่าที่มีค่าว่างหรือค่าที่ไม่ถูกต้อง',
     'js_version_create_success' => 'เวอร์ชั่นใหม่ถูกสร้างเรียบร้อยแล้ว',
 
-// added translation in 1.0.0-beta7:
-
-    
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'กรุณาเลือก',
     'view_index_sidebar_autopreview' => 'พรีวิวอัตโนมัติ',
     
-// added translation in 1.0.0-beta8
-
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'สร้างเพจใหม่',
     'module_permission_update_pages' => 'แก้ไขเพจ',
     'module_permission_edit_drafts' => 'แก้ไขเทมเพลต',
@@ -152,15 +141,14 @@ return [
     'button_update_version' => 'อัพเดทเวอร์ชั่น',
     'menu_group_item_env_permission' => 'การอณุญาตของเพจ',
     
-// rc1
-
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'สร้างการคัดลอกของเพจนี้โดยมีเนื้อหาเดิมทั้งหมด โดยส่วนคัดลอกจะมีภาษาทั้งหมดที่อยู่ในเวอร์ชั่นเผยแพร่เท่านั้น',
     'page_update_actions_deepcopy_btn' => 'สร้างการคัดลอก',
     
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'แท็กหัวเรื่อง (SEO)',
     
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'ไม่สามารถสร้างเพจจากเทมเพลตว่างเปล่าได้',
     'view_update_variation_select' => 'ปกติ',
     'menu_group_item_env_config' => 'ตั้งค่า',
@@ -186,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'ลบ',
     'view_update_block_tooltip_close' => 'ปิด',
 
-// 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'เพจอัพเดทล่าสุด',
     'cmsadmin_settings_homepage_title' => 'เพจเริ่มต้น',
     'cmsadmin_settings_trashpage_title' => 'ลบเพจ',
@@ -215,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: ย้ายตลอดการ',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: ย้ายชั่วคราว',
 
-// 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'เนื้อหาเพจ',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'คัดลอกเป็นเทมเพลต',
     'page_update_actions_deepcopyastemplate_text' => 'คัดลอกเทมเพลตของเพจนี้โดยเทมเพลตจะรวมไปถึงข้อมูลภาษาของเพจแต่เฉพาะเนื้อหาที่ถูกเผยแพร่เท่านั้น',
     'page_update_actions_deepcopyastemplate_btn' => 'สร้างเทมเพลต',
     'js_page_create_copy_as_template_success' => 'เทมเพลตถูกสร้าง',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'รูปภาพ',
     'view_index_page_label_subpage' => 'เลือกเพจหลัก',
     'view_index_page_label_parent_nav_id' => 'ตำแหน่งบนแถบนำทาง',
@@ -247,26 +234,22 @@ return [
     'view_index_module_select_help' => 'เลือกโมดูลที่จะแสดงจากรายการ (เฉพาะโมดูลฟรอนท์เอนด์ถูกแสดง) โมดูลต้องถูกตั้งค่าในส่วนของการตั้งค่าโมดูล',
     'view_index_module_advanced_settings_button' => 'การตั้งค่าเพิ่มเติม',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
 
-    // 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',
