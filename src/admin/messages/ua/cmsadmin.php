@@ -1,7 +1,6 @@
 <?php
 
 return [
-    
     'view_index_add_type' => 'Тип сторінки',
     'view_index_type_page' => 'Сторінка',
     'view_index_type_module' => 'Модуль',
@@ -56,20 +55,18 @@ return [
     'btn_refresh' => 'Оновити',
     'btn_save' => 'Зберегти',
 
-// added translation in 1.0.0-beta3:
-
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Назва модулю',
     'model_navitem_title_label' => 'Назва сторінки',
     'model_navitem_alias_label' => 'URL шлях',
     'model_navitempage_layout_label' => 'Шаблон',
     'model_navitemredirect_type_label' => 'Тип перадресації',
     'model_navitemredirect_value_label' => 'Ціль переадресації',
-    
     'view_index_add_title' => 'Додати нову сторінку',
     'view_index_add_page_from_language' => 'Додати сторінку з перекладом',
     'view_index_add_page_from_language_info' => 'Ви хочете, щоб скопіювався вміст с торінки з іншою мовою при створенні цієї сторінки?',
     'view_index_add_page_empty' => 'Створити нову порожню сторінку',
-    'view_index_language_loading' => 'Завантаження сторінки',
+    'view_index_page_loading' => 'Завантаження сторінки',
     'draft_title' => 'Чернетки',
     'draft_text' => 'Тут ви можете переглядати і редагувати існуючі проекти. Чернетки можуть бути застосовані при створенні нової сторінки.',
     'draft_column_id' => 'ID',
@@ -93,16 +90,10 @@ return [
     'js_page_block_remove_ok' => 'Блок «%name%» був видалений!',
     'js_page_block_visbility_change' => 'Видимість «%name%» була успішно змінена.',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-
-    
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Буфер обміну',
 
-// added translation in 1.0.0-beta6:
-
-    
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Ви дійсно хочете видалити «%name%»?',
     'view_index_page_meta_keywords' => 'Ключові слова',
     'current_version' => 'Робоча версія',
@@ -122,14 +113,11 @@ return [
     'js_version_error_empty_fields' => 'Одне або декілька полів пусті або мають неправильне значення.',
     'js_version_create_success' => 'Нова версія збережена вдало.',
 
-// added translation in 1.0.0-beta7:
-
-    
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Будь ласка виберіть',
     'view_index_sidebar_autopreview' => 'Автоматичний перегляд',
     
-// added translation in 1.0.0-beta8
-
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Створити нову сторінку',
     'module_permission_update_pages' => 'Редагувати сторінку',
     'module_permission_edit_drafts' => 'Редагувати чернетку',
@@ -153,15 +141,14 @@ return [
     'button_update_version' => 'Оновити версію',
     'menu_group_item_env_permission' => 'Сторінка прав',
     
-// rc1
-
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Створення копії поточної сторінки з усім його вмістом. Всі мови будуть скопійовані, але тільки опублікована версія.',
     'page_update_actions_deepcopy_btn' => 'Створити копію',
     
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Назва тегу (SEO)',
     
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Неможливо створити сторінку з порожнього шаблону.',
     'view_update_variation_select' => 'Не вибрано жодного блокованого варіанта',
     'menu_group_item_env_config' => 'Конфігурація',
@@ -187,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'Видалити',
     'view_update_block_tooltip_close' => 'Закрити редагування',
     
-    // 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Останній раз оновлювалась',
     'cmsadmin_settings_homepage_title' => 'Сторінка за замовчуванням',
     'cmsadmin_settings_trashpage_title' => 'Видалити сторінку',
@@ -216,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
 
-// 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'Page Content',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
     'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
     'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
     'js_page_create_copy_as_template_success' => 'The template has been created.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Image',
     'view_index_page_label_subpage' => 'Select parent page',
     'view_index_page_label_parent_nav_id' => 'Placement in navigation',
@@ -248,26 +234,22 @@ return [
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
 
-    // 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',

@@ -55,20 +55,18 @@ return [
     'btn_refresh' => 'Atualizar',
     'btn_save' => 'Gravar',
 
-// added translation in 1.0.0-beta3:
-
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Nome do módulo',
     'model_navitem_title_label' => 'Título da página',
     'model_navitem_alias_label' => 'Segmento do caminho do URL',
     'model_navitempage_layout_label' => 'Layout',
     'model_navitemredirect_type_label' => 'Tipo de redirecionamento',
     'model_navitemredirect_value_label' => 'Alvo do redirecionamento',
-
     'view_index_add_title' => 'Adicionar nova página',
     'view_index_add_page_from_language' => 'Adicionar página do idioma',
     'view_index_add_page_from_language_info' => 'Deseja copiar o conteúdo de outro idioma ao criar esta página?',
     'view_index_add_page_empty' => 'Adicionar nova página em branco',
-    'view_index_language_loading' => 'Lendo a página',
+    'view_index_page_loading' => 'Lendo a página',
     'draft_title' => 'Rascunhos',
     'draft_text' => 'Aqui você pode ver e editar rascunhos existentes. Os rascunhos podem ser aplicados ao criar uma nova página.',
     'draft_column_id' => 'ID',
@@ -92,16 +90,10 @@ return [
     'js_page_block_remove_ok' => 'O bloco «%name%» foi excluído!',
     'js_page_block_visbility_change' => 'A visibilidade de «% name%» foi alterada com êxito.',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-
-
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Área de transferência',
 
-// added translation in 1.0.0-beta6:
-
-
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Deletar o bloco «%name%»?',
     'view_index_page_meta_keywords' => 'Palavras-chave',
     'current_version' => 'Versão de trabalho',
@@ -121,14 +113,11 @@ return [
     'js_version_error_empty_fields' => 'Um ou mais campos estão vazios ou têm um valor inválido.',
     'js_version_create_success' => 'A nova versão foi salva com sucesso.',
 
-// added translation in 1.0.0-beta7:
-
-
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Por favor, escolha',
     'view_index_sidebar_autopreview' => 'Visualização automática',
 
-// added translation in 1.0.0-beta8
-
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Criar nova página',
     'module_permission_update_pages' => 'Editar página',
     'module_permission_edit_drafts' => 'Editar rascunho',
@@ -152,15 +141,14 @@ return [
     'button_update_version' => 'Atualizar versão',
     'menu_group_item_env_permission' => 'Permissões da página',
 
-// rc1
-
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Crie uma cópia da página atual com todo o seu conteúdo. Todos os idiomas serão copiados, mas apenas a versão publicada.',
     'page_update_actions_deepcopy_btn' => 'Criar cópia',
 
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Título Tag (SEO)',
 
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Não foi possível criar a página a partir do modelo de rascunho vazio.',
     'view_update_variation_select' => 'Nenhuma variação de bloco selecionada',
     'menu_group_item_env_config' => 'Configuração',
@@ -186,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'Excluir',
     'view_update_block_tooltip_close' => 'Fechar a edição',
 
-    // 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Últimas atualizações da página',
     'cmsadmin_settings_homepage_title' => 'Página Padrão',
     'cmsadmin_settings_trashpage_title' => 'Excluir Página',
@@ -215,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Movido Permanentemente',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Movido Temporariamente',
 
-// 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'Conteúdo da Página',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Copiar como Modelo',
     'page_update_actions_deepcopyastemplate_text' => 'Crie um modelo da página atual com todo o seu conteúdo. O modelo incluirá todos os idiomas, mas apenas a versão publicada.',
     'page_update_actions_deepcopyastemplate_btn' => 'Criar modelo',
     'js_page_create_copy_as_template_success' => 'O modelo foi criado.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Imagem',
     'view_index_page_label_subpage' => 'Selecionar página pai',
     'view_index_page_label_parent_nav_id' => 'Posicionamento na navegação',
@@ -247,26 +234,22 @@ return [
     'view_index_module_select_help' => 'Escolha o módulo a ser exibido na lista (apenas os módulos de front-end estão listados). Os módulos devem ser configurados na seção de configuração dos módulos.',
     'view_index_module_advanced_settings_button' => 'Configurações avançadas',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
 
-    // 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',

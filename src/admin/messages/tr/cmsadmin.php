@@ -1,7 +1,6 @@
 <?php
 
 return [
-    
     'view_index_add_type' => 'Sayfa Tipi',
     'view_index_type_page' => 'Sayfa',
     'view_index_type_module' => 'Modül',
@@ -56,20 +55,18 @@ return [
     'btn_refresh' => 'Yenile',
     'btn_save' => 'Kaydet',
 
-// added translation in 1.0.0-beta3:
-
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Modül adı',
     'model_navitem_title_label' => 'Sayfa başlığı',
     'model_navitem_alias_label' => 'URL sekmesi yolu',
     'model_navitempage_layout_label' => 'Düzen',
     'model_navitemredirect_type_label' => 'Yönlendirme tipi',
     'model_navitemredirect_value_label' => 'Yönlendirme hedefi',
-    
     'view_index_add_title' => 'Yeni sayfa ekle',
     'view_index_add_page_from_language' => 'Dilden sayfa ekle',
     'view_index_add_page_from_language_info' => 'Bu sayfa oluşturulurken diğer dilden içiklerin kopyalanmasını istiyor musunuz?',
     'view_index_add_page_empty' => 'Yeni boş sayfa ekle',
-    'view_index_language_loading' => 'Sayfa yükleniyor',
+    'view_index_page_loading' => 'Sayfa yükleniyor',
     'draft_title' => 'Şablonlar',
     'draft_text' => 'Varolan şablonları düzenle. Yeni sayfa oluşturulurken şablonlar uygulanabilir.',
     'draft_column_id' => 'ID',
@@ -93,15 +90,10 @@ return [
     'js_page_block_remove_ok' => 'Blok «%name%» silindi.',
     'js_page_block_visbility_change' => '«%name%» görünürlüğü başarıyla değiştirildi.',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-    
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Pano',
 
-// added translation in 1.0.0-beta6:
-
-   
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => '«%name%» bloğunu silmek istediğinizden emin misiniz?',
     'view_index_page_meta_keywords' => 'SEO analizi için Anahtar Kelimeler',
     'current_version' => 'Çalışan sürüm',
@@ -121,14 +113,11 @@ return [
     'js_version_error_empty_fields' => 'Bir veya daha fazla alan boş veya geçersiz bir değere sahip.',
     'js_version_create_success' => 'Yeni sürüm başarıyla oluşturuldu.',
 
-// added translation in 1.0.0-beta7:
-
-    
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Lütfen seçin',
     'view_index_sidebar_autopreview' => 'Otomatik Önizleme',
     
-// added translation in 1.0.0-beta8
-
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Yeni sayfa oluşturma',
     'module_permission_update_pages' => 'Sayfa Düzenleme',
     'module_permission_edit_drafts' => 'Şablon Düzenleme',
@@ -152,15 +141,14 @@ return [
     'button_update_version' => 'Sürüm güncelle',
     'menu_group_item_env_permission' => 'Sayfa izinleri',
     
-// rc1
-
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Mevcut sayfanın tüm içeriğini içeren bir kopyasını oluştur. Kopyalama tüm dilleri içerecek ancak sadece yayınlanan sürümü içerecek.',
     'page_update_actions_deepcopy_btn' => 'Kopya Oluştur',
     
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Başlık etiketi (SEO)',
     
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Boş şablondan sayfa oluşturulamıyor',
     'view_update_variation_select' => 'Normal',
     'menu_group_item_env_config' => 'Yapılandırma',
@@ -186,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'Sil',
     'view_update_block_tooltip_close' => 'Kapat',
 
-// 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Son sayfa güncellemeleri',
     'cmsadmin_settings_homepage_title' => 'Varsayılan sayfa',
     'cmsadmin_settings_trashpage_title' => 'Sayfayı sil',
@@ -215,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Kalıcı Olarak Taşındı',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Geçici Olarak Taşındı',
 
-// 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'Sayfa İçeriği',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
     'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
     'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
     'js_page_create_copy_as_template_success' => 'The template has been created.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Image',
     'view_index_page_label_subpage' => 'Select parent page',
     'view_index_page_label_parent_nav_id' => 'Placement in navigation',
@@ -247,26 +234,22 @@ return [
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
 
-    // 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',
