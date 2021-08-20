@@ -18,7 +18,7 @@ class m141203_143111_cms_nav_item extends Migration
             'timestamp_create' => $this->integer(11)->defaultValue(0),
             'timestamp_update' => $this->integer(11)->defaultValue(0),
             'title' => $this->string(180)->notNull(),
-            'alias' => $this->string(80)->notNull(),
+            'alias' => $this->string(180)->notNull(),
             'description' => $this->text(),
             'keywords' => $this->text(),
             'title_tag' => $this->string(255),
