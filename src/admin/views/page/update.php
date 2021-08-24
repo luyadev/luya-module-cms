@@ -74,9 +74,6 @@ use luya\cms\helpers\Url;
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(2)" ng-if="propertiesData.length > 0">
                                 <i class="material-icons">settings</i> <span><?= Module::t('view_update_properties_title'); ?></span>
                             </a>
-			                <a class="dropdown-item" ng-show="!isDraft" ng-click="togglePageSettingsOverlay(7)">
-                                <i class="material-icons">timelapse</i> <span><?= Module::t('cmsadmin_settings_time_title'); ?></span>
-                            </a>
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(4)">
                                 <i class="material-icons">content_copy</i> <span><?= Module::t('page_update_actions_deepcopy_title'); ?></span>
                             </a>

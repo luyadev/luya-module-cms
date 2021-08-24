@@ -1,7 +1,6 @@
 <?php
 
 return [
-    
     'view_index_add_type' => 'Tipe Halaman',
     'view_index_type_page' => 'Halaman',
     'view_index_type_module' => 'Modul',
@@ -56,7 +55,7 @@ return [
     'btn_refresh' => 'Penyegaran',
     'btn_save' => 'Simpan',
 
-    /* added translation in 1.0.0-beta3: */
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Nama modul',
     'model_navitem_title_label' => 'Judul halaman',
     'model_navitem_alias_label' => 'Segment jalur URL',
@@ -67,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Tambah halaman dari bahasa',
     'view_index_add_page_from_language_info' => 'Apakah anda ingin menyalin konten dari bahasa lainya ketika membuat halaman ini?',
     'view_index_add_page_empty' => 'Tambah halaman kosong baru',
-    'view_index_language_loading' => 'Halaman tunggu',
+    'view_index_page_loading' => 'Halaman tunggu',
     'draft_title' => 'Template',
     'draft_text' => 'Sunting template yang ada, Template dapat digunakan ketika membuat halaman baru',
     'draft_column_id' => 'ID',
@@ -91,10 +90,10 @@ return [
     'js_page_block_remove_ok' => 'blok «%name%» terhapus.',
     'js_page_block_visbility_change' => 'Visibilitas «%name%» berhasil diubah.',
 
-    /* added translation in 1.0.0-beta5: */
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Papan klip',
 
-    /* added translation in 1.0.0-beta6: */
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Apakah anda ingin menghapus blok «%name%» ?',
     'view_index_page_meta_keywords' => 'Kata kunci',
     'current_version' => 'Versi Aktif',
@@ -114,11 +113,11 @@ return [
     'js_version_error_empty_fields' => 'Satu atau lebih  kolom tidak terisi atau memiliki nilai tidak valid.',
     'js_version_create_success' => 'Versi terbaru berhasil dibuat.',
 
-    /* added translation in 1.0.0-beta7: */
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Tolong dipilih',
     'view_index_sidebar_autopreview' => 'Pratinjau Otomatis',
     
-    /* added translation in 1.0.0-beta8 */
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Membuat halaman baru',
     'module_permission_update_pages' => 'Merubah halaman',
     'module_permission_edit_drafts' => 'Merubah template',
@@ -142,14 +141,14 @@ return [
     'button_update_version' => 'Ubah versi',
     'menu_group_item_env_permission' => 'Izin halaman',
     
-    /* rc1 */
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Buat salinan halaman saat ini dengan semua isinya. Salinan mereka akan mencakup semua bahasa tetapi hanya versi yang diterbitkan.',
     'page_update_actions_deepcopy_btn' => 'Buat salinan',
     
-    /* rc2 */
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Judul kata kunci (SEO)',
     
-    /* rc3 */
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Tidak dapat membuat halaman dari template kosong',
     'view_update_variation_select' => 'Normal',
     'menu_group_item_env_config' => 'Konfigurasi',
@@ -175,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'Hapus',
     'view_update_block_tooltip_close' => 'Tutup',
     
-    // 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Update halaman terbaru',
     'cmsadmin_settings_homepage_title' => 'Halaman default',
     'cmsadmin_settings_trashpage_title' => 'Hapus  halaman',
@@ -204,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Dipindahkan Permanent',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Dipindahkan Sementara',
 
-    // 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'Halaman konten',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Salin sebagai template',
     'page_update_actions_deepcopyastemplate_text' => 'Buat template pada halaman ini dengan semua kontennya. Template akan menyertakan semua bahasa yang diterbitkan.',
     'page_update_actions_deepcopyastemplate_btn' => 'Buat template',
     'js_page_create_copy_as_template_success' => 'Template telah dibuat.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Gambar',
     'view_index_page_label_subpage' => 'Tentukan halaman utama',
     'view_index_page_label_parent_nav_id' => 'Penggantian di navigasi',
@@ -236,26 +234,22 @@ return [
     'view_index_module_select_help' => 'Pilih modul yang akan ditampilkan dari daftar (hanya modul antar muka yang terdaftar). Modul harus dikonfigurasi di bagian modul konfigurasi.',
     'view_index_module_advanced_settings_button' => 'Pengaturan Lanjutan',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Tema',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'Saat diaktifkan, seluruh halaman akan di-cache termasuk semua blok, oleh karena itu data yang dibuat secara dinamis dalam blok tidak akan diperbarui.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Tampilan Halaman',
     'menu_group_configuration' => 'Konfigurasi',
     'menu_group_protocol' => 'Protokol',
     'menu_group_protocol_model_event_logger' => 'Catatan Model Event',
     'unable_to_find_item_for_language' => 'Halaman yang diminta belum diterjemahkan.',
 
-    // 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
 
-// 4.0
-    
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',

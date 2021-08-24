@@ -1,7 +1,6 @@
 <?php
 
 return [
-    
     'view_index_add_type' => 'Loại trang',
     'view_index_type_page' => 'Trang',
     'view_index_type_module' => 'Module',
@@ -56,20 +55,18 @@ return [
     'btn_refresh' => 'Làm mới',
     'btn_save' => 'Lưu',
 
-// added translation in 1.0.0-beta3:
-
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Tên Module',
     'model_navitem_title_label' => 'Tiêu đề trang',
     'model_navitem_alias_label' => 'URL thân thiện',
     'model_navitempage_layout_label' => 'Layout',
     'model_navitemredirect_type_label' => 'Loại chuyển hướng',
     'model_navitemredirect_value_label' => 'Đích chuyển hướng',
-    
     'view_index_add_title' => 'Thêm trang mới',
     'view_index_add_page_from_language' => 'Thêm trang mới từ ngôn ngữ',
     'view_index_add_page_from_language_info' => 'Bạn có muốn copy nội dung tự ngôn ngữ khác khi tạo trang này?',
     'view_index_add_page_empty' => 'Thêm trang rỗng',
-    'view_index_language_loading' => 'Trang loading',
+    'view_index_page_loading' => 'Trang loading',
     'draft_title' => 'Nháp',
     'draft_text' => 'Tại đây bạn có thể xem và chỉnh sửa nháp. Trang nháp có thể áp dụng khi tạo trang mới.',
     'draft_column_id' => 'ID',
@@ -93,16 +90,10 @@ return [
     'js_page_block_remove_ok' => 'Block «%name%» đã xóa!',
     'js_page_block_visbility_change' => 'The visibility of «%name%» was changed successfully.',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-
-    
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Clipboard',
 
-// added translation in 1.0.0-beta6:
-
-    
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Xóa block «%name%»?',
     'view_index_page_meta_keywords' => 'Keywords',
     'current_version' => 'Phiên bản đang làm việc',
@@ -122,14 +113,11 @@ return [
     'js_version_error_empty_fields' => 'Một hoặc nhiều trường đang để trống hoặc có giá trị không hợp lệ.',
     'js_version_create_success' => 'Lưu thành công phiên bản mới.',
 
-// added translation in 1.0.0-beta7:
-
-    
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Vui lòng chọn',
     'view_index_sidebar_autopreview' => 'Tự động xem trước',
     
-// added translation in 1.0.0-beta8
-
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Tạo trang mới',
     'module_permission_update_pages' => 'Chỉnh sửa trang',
     'module_permission_edit_drafts' => 'Chỉnh sửa nháp',
@@ -153,15 +141,14 @@ return [
     'button_update_version' => 'Phiên bản cập nhật',
     'menu_group_item_env_permission' => 'Quyền truy cập trang',
     
-// rc1
-
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Tạo bản copy của trang hiện tại với tất cả nội dung của trang. Tất cả ngôn ngữ sẽ được copy, trừ phiên bản công khai.',
     'page_update_actions_deepcopy_btn' => 'Tạo bản copy',
     
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Thẻ tiêu đề (SEO)',
 
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Không thể tạo trang rỗng không có template.',
     'view_update_variation_select' => 'Không có block nào chọn thay đổi',
     'menu_group_item_env_config' => 'Thiết lập',
@@ -187,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'Xóa',
     'view_update_block_tooltip_close' => 'Đóng',
     
-    // 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Last page updates',
     'cmsadmin_settings_homepage_title' => 'Default Page',
     'cmsadmin_settings_trashpage_title' => 'Delete Page',
@@ -216,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
 
-// 1.0.1
-'module_permission_page' => 'Page Content',
+// added translations in version 1.0.1:
+    'module_permission_page' => 'Page Content',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
     'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
     'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
     'js_page_create_copy_as_template_success' => 'The template has been created.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Image',
     'view_index_page_label_subpage' => 'Select parent page',
     'view_index_page_label_parent_nav_id' => 'Placement in navigation',
@@ -248,27 +234,22 @@ return [
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
 
-
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
 
-    // 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',

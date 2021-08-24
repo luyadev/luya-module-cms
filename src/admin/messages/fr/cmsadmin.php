@@ -1,7 +1,6 @@
 <?php
 
 return [
-    
     'view_index_add_type' => 'Type de page',
     'view_index_type_page' => 'Page',
     'view_index_type_module' => 'Module',
@@ -56,7 +55,7 @@ return [
     'btn_refresh' => 'Rafraîchir',
     'btn_save' => 'Enregistrer',
 
-    /* added translation in 1.0.0-beta3: */
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Nom du module',
     'model_navitem_title_label' => 'Titre de la page',
     'model_navitem_alias_label' => 'Segment de l\'URL',
@@ -67,7 +66,7 @@ return [
     'view_index_add_page_from_language' => 'Ajouter la page de la langue',
     'view_index_add_page_from_language_info' => 'Voulez-vous copier le contenu d\'une autre langue lors de la création de cette page ?',
     'view_index_add_page_empty' => 'Ajouter une page vide',
-    'view_index_language_loading' => 'Chargement de la page',
+    'view_index_page_loading' => 'Chargement de la page',
     'draft_title' => 'Modèles',
     'draft_text' => 'Voici la liste des modèles. Les modèles peuvent être appliqués lors de la création d\'une nouvelle page.',
     'draft_column_id' => 'ID',
@@ -91,10 +90,10 @@ return [
     'js_page_block_remove_ok' => 'Le bloc «%name%» a été supprimé.',
     'js_page_block_visbility_change' => 'La visibilité de «%name%» a été modifiée avec succès.',
 
-    /* added translation in 1.0.0-beta5: */
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Presse-papier',
 
-    /* added translation in 1.0.0-beta6: */
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Voulez-vous vraiment supprimer le bloc «%name%» ?',
     'view_index_page_meta_keywords' => 'Mots-clés',
     'current_version' => 'Version actuelle',
@@ -114,11 +113,11 @@ return [
     'js_version_error_empty_fields' => 'Un ou plusieurs champs sont vides ou ont une valeur non valide.',
     'js_version_create_success' => 'La nouvelle version a été enregistrée avec succès.',
 
-    /* added translation in 1.0.0-beta7: */
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Veuillez choisir',
     'view_index_sidebar_autopreview' => 'Aperçu automatique',
     
-    /* added translation in 1.0.0-beta8 */
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Créer une nouvelle page',
     'module_permission_update_pages' => 'Modifier la page',
     'module_permission_edit_drafts' => 'Modifier les modèles',
@@ -142,14 +141,14 @@ return [
     'button_update_version' => 'Modifier une version',
     'menu_group_item_env_permission' => 'Permissions de la page',
     
-    /* rc1 */
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Créer une copie de la page courante avec tout son contenu. La copie inclura toutes les langues, mais seulement pour la version publiée.',
     'page_update_actions_deepcopy_btn' => 'Créer une copie',
     
-    /* rc2 */
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Balise title (SEO)',
     
-    /* rc3 */
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Impossible de créer une page à partir d\'un modèle vide',
     'view_update_variation_select' => 'Normal',
     'menu_group_item_env_config' => 'Configuration',
@@ -175,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => 'Supprimer',
     'view_update_block_tooltip_close' => 'Fermer',
     
-    // 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Dernières mises à jour de pages',
     'cmsadmin_settings_homepage_title' => 'Page par défaut',
     'cmsadmin_settings_trashpage_title' => 'Supprimer la page',
@@ -204,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Déplacé définitivement',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Déplacé temporairement',
 
-    // 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'Contenu de la page',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Copier comme modèle',
     'page_update_actions_deepcopyastemplate_text' => 'Créer un modèle de la page actuelle avec tout son contenu. Les modèles contiendront toutes les langues dont la version est publiée.',
     'page_update_actions_deepcopyastemplate_btn' => 'Créer un modèle',
     'js_page_create_copy_as_template_success' => 'Le modèle a été créé.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Image',
     'view_index_page_label_subpage' => 'Sélectionner la page parente',
     'view_index_page_label_parent_nav_id' => 'Placement dans la navigation',
@@ -236,27 +234,22 @@ return [
     'view_index_module_select_help' => 'Choisissez le module à afficher depuis la liste (Seuls les modules d\'affichage sont affiché). Les modules doivent être configurés dans la section module de la configuration.',
     'view_index_module_advanced_settings_button' => 'Paramètres avancés',
 
-// 3.0
-
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Thèmes',
     'view_index_page_is_cacheable' => 'Mise en cache',
-    'view_index_page_is_cacheable_hint' => 'Lorsqu\'elle est activée, la page entière sera mise en cache, y compris tous les blocs, par conséquent les données générées dynamiquement dans des blocs ne seront pas mises à jour.
+    'view_index_page_is_cacheable_hint' => 'Lorsqu\'elle est activée, la page entière sera mise en cache, y compris tous les blocs, par conséquent les données générées dynamiquement dans des blocs ne seront pas mises à jour.',
 
-    ',
-
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Affichage de la page',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocole',
     'menu_group_protocol_model_event_logger' => 'Journal des événements du modèle',
     'unable_to_find_item_for_language' => 'La page demandée n\'a pas encore été traduite.',
   
-    // 3.4
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
     
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'Toute',

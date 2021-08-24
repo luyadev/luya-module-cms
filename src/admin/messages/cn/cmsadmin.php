@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'view_index_add_type' => '页面类型',
     'view_index_type_page' => '页面',
     'view_index_type_module' => '模块',
@@ -56,20 +55,18 @@ return [
     'btn_refresh' => 'Refresh',
     'btn_save' => '保存',
 
-// added translation in 1.0.0-beta3:
-
+// added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => '模块名称',
     'model_navitem_title_label' => '页面标题',
     'model_navitem_alias_label' => 'URL路径段',
     'model_navitempage_layout_label' => '布局',
     'model_navitemredirect_type_label' => '重定向类型',
     'model_navitemredirect_value_label' => '重定向目标',
-
     'view_index_add_title' => '添加新页面',
     'view_index_add_page_from_language' => 'Add page from language',
     'view_index_add_page_from_language_info'=>'您想在创建此页面时从其他语言复制内容吗？',
     'view_index_add_page_empty' => '添加一个空页面',
-    'view_index_language_loading' => '正在加载页面',
+    'view_index_page_loading' => '正在加载页面',
     'draft_title' => '模板',
     'draft_text' => '编辑现有的模板。创建新页面时可以应用模板。',
     'draft_column_id' => 'ID',
@@ -93,15 +90,10 @@ return [
     'js_page_block_remove_ok' => '«%name%» 块已删除.',
     'js_page_block_visbility_change' => '«%name%»可见性修改成功.',
 
-// added translation in 1.0.0-beta4:
-
-// added translation in 1.0.0-beta5:
-
+// added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => '剪切板',
 
-// added translation in 1.0.0-beta6:
-
-
+// added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => '你真的要删除块 «%name%»?',
     'view_index_page_meta_keywords' => 'SEO关键字',
     'current_version' => '当前版本',
@@ -121,14 +113,11 @@ return [
     'js_version_error_empty_fields'=>'一个或多个字段为空或具有无效值。',
     'js_version_create_success'=>'新版本已经成功创建',
 
-// added translation in 1.0.0-beta7:
-
-
+// added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => '请选择',
     'view_index_sidebar_autopreview' => '自动预览',
 
-// added translation in 1.0.0-beta8
-
+// added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => '创建页面',
     'module_permission_update_pages' => '页面编辑',
     'module_permission_edit_drafts' => '模板编辑',
@@ -152,15 +141,14 @@ return [
     'button_update_version' => '修改版本',
     'menu_group_item_env_permission' => '页面权限',
 
-// rc1
-
+// added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => '创建当前页面的所有内容的副本。 创建的副本将包括所有语言，但只包括发布的版本.',
     'page_update_actions_deepcopy_btn' => '创建副本',
 
-// rc2
+// added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => '标题标签(SEO)',
 
-// rc3
+// added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => '无法从空模板创建页面.',
     'view_update_variation_select' => 'Normal',
     'menu_group_item_env_config' => '配置',
@@ -186,7 +174,7 @@ return [
     'view_update_block_tooltip_delete' => '删除',
     'view_update_block_tooltip_close' => '关闭',
 
-// 1.0.0
+// added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => '最近修改页面',
     'cmsadmin_settings_homepage_title' => '默认页面',
     'cmsadmin_settings_trashpage_title' => '删除页面',
@@ -215,17 +203,16 @@ return [
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Moved Permanently',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Moved Temporarily',
 
-// 1.0.1
+// added translations in version 1.0.1:
     'module_permission_page' => 'Page Content',
 
-// 1.0.6
+// added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Copy as Template',
     'page_update_actions_deepcopyastemplate_text' => 'Create a template of the current page with all its contents. They template will include all languages but only the published version.',
     'page_update_actions_deepcopyastemplate_btn' => 'Create Template',
     'js_page_create_copy_as_template_success' => 'The template has been created.',
 
-// 2.0
-
+// added translations in version 2.0:
     'model_navitem_image_id_label' => 'Image',
     'view_index_page_label_subpage' => 'Select parent page',
     'view_index_page_label_parent_nav_id' => 'Placement in navigation',
@@ -246,26 +233,23 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
-// 3.0
-
+    
+// added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
     'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
 
-// 3.3
-
+// added translations in version 3.3:
     'menu_group_page_display' => 'Page Display',
     'menu_group_configuration' => 'Configuration',
     'menu_group_protocol' => 'Protocol',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
 
-// 3.4
-
+// added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
 
-// 4.0
-
+// added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
     'model_website_all' => 'All',
