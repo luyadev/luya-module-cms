@@ -3,8 +3,9 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 4.0.1
+## 4.1.0 ()
 
++ [#354](https://github.com/luyadev/luya-module-cms/pull/354) Added property `$enableWebsiteHostRedirect` to cms module to enable or disable the `WebsiteBehaviorUrlRule`.
 + [#359](https://github.com/luyadev/luya-module-cms/pull/359) Fix issue with logging cms nav item when deleted.
 
 ## 4.0.0 (27. July 2021)
