@@ -218,7 +218,8 @@ class Log extends NgRestModel
 
                     return $navModel->id;
                 case "cms_nav_item":
-                    return NavItem::findOne($this->row_id)->title;
+                    $item = NavItem::findOne($this->row_id);
+                    return $item ? $item->title : "{$this->row_id} (Deleted)";
                 case "cms_nav_item_page_block_item":
                     $block = NavItemPageBlockItem::findOne($this->row_id);
                     if (!$block || $block->block == null) {
@@ -230,11 +231,12 @@ class Log extends NgRestModel
                         }
                     }
 
-                    $title = $this->getBlockNameForLog();
-                    if ($this->block) {
-                        $title .= " ({$block->droppedPageTitle})";
+                    $title = null;
+                    if ($block->block) {
+                        $title = $block->block->getNameForLog();
                     }
-                    return $title;
+
+                    return "{$title} (" .$block->droppedPageTitle. ")";
             }
         }
     }
