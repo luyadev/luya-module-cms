@@ -211,9 +211,14 @@ class NavItemPageBlockItem extends ActiveRecord
                 'action' => 'update',
                 'row' => $this->id,
                 'pageTitle' => $this->droppedPageTitle,
-                'blockName' => $this->block->getNameForLog()
+                'blockName' => $this->getBlockNameForLog()
             ], $event);
         }
+    }
+
+    private function getBlockNameForLog()
+    {
+        return $this->block ? $this->block->getNameForLog() : '[class has been removed from the filesystem]';
     }
 
     /**
@@ -225,15 +230,13 @@ class NavItemPageBlockItem extends ActiveRecord
         $this->deleteAllSubBlocks($this->id);
         //save block data for afterDeleteEvent
         $this->_olds = $this->getOldAttributes();
-        // verify if the block exists or not
-        $class = ($this->block) ? $this->block->getNameForLog() : '[class has been removed from the filesystem]';
         // log event
         Log::add(3, [
             'tableName' => 'cms_nav_item_page_block_item',
             'action' => 'delete',
             'row' => $this->id,
             'pageTitle' => $this->droppedPageTitle,
-            'blockName' => $class
+            'blockName' => $this->getBlockNameForLog()
         ], 'cms_nav_item_page_block_item', $this->id);
     }
 
@@ -267,7 +270,7 @@ class NavItemPageBlockItem extends ActiveRecord
             'action' => 'insert', 
             'row' => $this->id, 
             'pageTitle' => $this->droppedPageTitle, 
-            'blockName' => $this->block->getNameForLog()
+            'blockName' => $this->getBlockNameForLog()
         ], $event);
     }
 

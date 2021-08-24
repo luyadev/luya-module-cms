@@ -229,7 +229,12 @@ class Log extends NgRestModel
                             return;
                         }
                     }
-                    return $block->block->getNameForLog() . " (" .$block->droppedPageTitle. ")";
+
+                    $title = $this->getBlockNameForLog();
+                    if ($this->block) {
+                        $title .= " ({$block->droppedPageTitle})";
+                    }
+                    return $title;
             }
         }
     }
