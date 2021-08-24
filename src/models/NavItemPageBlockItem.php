@@ -216,6 +216,12 @@ class NavItemPageBlockItem extends ActiveRecord
         }
     }
 
+    /**
+     * Ensures the block name
+     *
+     * @return string
+     * @since 4.0.1
+     */
     private function getBlockNameForLog()
     {
         return $this->block ? $this->block->getNameForLog() : '[class has been removed from the filesystem]';
