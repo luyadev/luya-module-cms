@@ -220,7 +220,7 @@ class NavItemPageBlockItem extends ActiveRecord
      * Ensures the block name
      *
      * @return string
-     * @since 4.0.1
+     * @since 4.1.0
      */
     private function getBlockNameForLog()
     {
