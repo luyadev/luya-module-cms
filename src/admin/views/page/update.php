@@ -72,7 +72,7 @@ use luya\cms\helpers\Url;
                                 <i class="material-icons">tag</i> <span><?= AdminModule::t('menu_system_item_tags'); ?></span>
                             </a>    
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(2)" ng-if="propertiesData.length > 0">
-                                <i class="material-icons">widgets</i> <span><?= Module::t('view_update_properties_title'); ?></span>
+                                <i class="material-icons">menu_open</i> <span><?= Module::t('view_update_properties_title'); ?></span>
                             </a>
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(4)">
                                 <i class="material-icons">content_copy</i> <span><?= Module::t('page_update_actions_deepcopy_title'); ?></span>
