@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 4.1.0 ()
+## 4.1.0 (21. September 2021)
 
 + [#360](https://github.com/luyadev/luya-module-cms/pull/360) Changed misleading icon for page properties in dropdown menu.
 + [#354](https://github.com/luyadev/luya-module-cms/pull/354) Added property `$enableWebsiteHostRedirect` to cms module to enable or disable the `WebsiteBehaviorUrlRule`.
