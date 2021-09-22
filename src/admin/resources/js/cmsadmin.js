@@ -30,7 +30,9 @@
 
                 function init() {
                     if ($scope.menuData.length == 0) {
-                        ServiceMenuData.load();
+                        ServiceMenuData.load().then(function() {
+							ServiceCurrentWebsite.load();
+						})
                     }
                 }
 
