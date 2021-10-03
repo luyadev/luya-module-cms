@@ -38,11 +38,11 @@ return [
     'block_html_cfg_raw_label' => 'Afficher le HTML dans l\'admin',
 
     // 3.4.0
-    'tag_alias_readme' => 'The alias tag allows you to use aliases defined in your application as well as predefined aliases. As an example, you can use `alias[@web]` to link to images in the public html folder: `<img src="alias[@web]/image.jpg">`',
-    'tag_menu_readme' => 'Generate a link to a menu item where the key is the page id (you can see the page ids when hovering over the site navigation in the administration).',
-    'tag_page_readme' => 'Get the content of a full page or of a placeholder of a page. The first parameter is the page id (which you get by hovering over the site navigation in the administration): `page[1]`. If you only want to get the content of a placeholder of the cmslayout, use the second parameter: `page[1](placeholderName)`.',
-    'block_mirror_language_name' => 'Mirror Language',
-    'block_mirror_config_language_label' => 'Source Language',
-    'block_mirror_admin_empty_language' => 'Configure a <b><span class="material-icons">edit</span> source language</b> to mirror its content for the current placeholder.',
-    'block_mirror_admin_configured_language' => 'Mirroring this placeholder from <span class="material-icons">arrow_right_alt</span> <b>{name}</b>.',
+    'tag_alias_readme' => 'La balise alias vous permet d\'utiliser des alias définis dans votre application ainsi que des alias prédéfinis. Par exemple, vous pouvez utiliser `alias[@web]` pour créer un lien vers des images dans le dossier html public : `<img src="alias[@web]/image.jpg">`',
+    'tag_menu_readme' => 'Générez un lien vers un élément de menu où la clé est l\'identifiant de la page (vous pouvez voir les identifiants de page en survolant la navigation du site dans l\'administration).',
+    'tag_page_readme' => 'Obtenez le contenu d\'une page entière ou d\'un espace réservé d\'une page. Le premier paramètre est l\'identifiant de la page (que vous obtenez en survolant la navigation du site dans l\'administration) : `page[1]`. Si vous souhaitez uniquement obtenir le contenu d\'un espace réservé du cmslayout, utilisez le deuxième paramètre : `page[1](placeholderName)`. ',
+    'block_mirror_language_name' => 'Langue miroir',
+    'block_mirror_config_language_label' => 'Langue originelle',
+    'block_mirror_admin_empty_language' => 'Configurez une <b><span class="material-icons">modifier</span> langue source</b> pour refléter son contenu pour l\'espace réservé actuel.',
+    'block_mirror_admin_configured_language' => 'Dupliquer cet espace réservé à partir de <span class="material-icons">arrow_right_alt</span> <b>{name}</b>.',
 ];
