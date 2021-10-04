@@ -40,7 +40,7 @@ use \luya\admin\Module as AdminModule;
                 <?php if (Yii::$app->adminuser->canRoute('cmsadmin/page/create')): ?>
                 <li class="cmsnav-button" ui-sref="custom.cmsadd">
                     <div class="btn btn-block text-left btn-success">
-                        <span class="material-icons">add_box</span>
+                        <span class="material-icons">note_add</span>
                         <span class="btn-symbol-label"><?= Module::t('view_index_sidebar_new_page'); ?></span>
                     </div>
                 </li>
@@ -107,7 +107,7 @@ use \luya\admin\Module as AdminModule;
 	            <div class="card-body" ng-show="item.isToggled">
 	                <div class="timeline timeline-left timeline-compact">
 	                    <div class="timeline-item timeline-item-center-point" ng-repeat="(key, log) in item.items">
-	                        <i class="material-icons" ng-if="log.is_insertion == 1">note_add</i>
+	                        <i class="material-icons" ng-if="log.is_insertion == 1">add_box</i>
 	                        <i class="material-icons" ng-if="log.is_update == 1">create</i>
                             <i class="material-icons" ng-if="log.is_deletion == 1">delete</i>
                             <small class="pr-4"><i>{{log.timestamp * 1000 | date:"HH:mm"}}</i></small>
