@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 4.x.x
+
++ [#362](https://github.com/luyadev/luya-module-cms/issues/362) Fixed misleading use of the note_add icon. Changed icon for cms menu item *Pages* in the admin menu.
+
 ## 4.1.1 (23. September 2021)
 
 + [#361](https://github.com/luyadev/luya-module-cms/issues/361) Fixed an issue where link directive does not load menu data in crud context (without an inital load of the cms view).
