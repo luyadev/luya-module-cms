@@ -247,13 +247,13 @@ return [
     'unable_to_find_item_for_language' => 'La page demandée n\'a pas encore été traduite.',
   
 // added translations in version 3.4:
-    'js_block_attribute_empty' => '«%label%» cannot be empty.',
+    'js_block_attribute_empty' => '«%label%» ne peut être vide.',
     
 // added translations in version 4.0:
-    'menu_group_item_env_websites' => 'Websites',
-    'model_website_use_default_theme' => 'Use default theme',
-    'model_website_all' => 'Toute',
-    'model_website_group_ids_label' => 'Restrict to User Groups',
-    'model_website_user_ids_label' => 'Restrict to Users',
-    'model_website_access_restrict' => 'Access restriction',
+    'menu_group_item_env_websites' => 'Sites web',
+    'model_website_use_default_theme' => 'Utiliser le thème par défaut',
+    'model_website_all' => 'Tous',
+    'model_website_group_ids_label' => 'Restreindre aux groupes d\'utilisateur',
+    'model_website_user_ids_label' => 'Restreindre aux utilisateurs',
+    'model_website_access_restrict' => 'Restrictions d\'accès',
 ];
