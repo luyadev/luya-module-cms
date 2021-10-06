@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.x.x
 
++ [#365](https://github.com/luyadev/luya-module-cms/pull/365) Changed misleading icon for page properties in page settings overlay.
 + [#362](https://github.com/luyadev/luya-module-cms/issues/362) Fixed misleading use of the note_add icon. Changed icon for cms menu item *Pages* in the admin menu.
 
 ## 4.1.1 (23. September 2021)
