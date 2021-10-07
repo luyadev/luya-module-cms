@@ -3,8 +3,9 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 4.x.x
+## 4.2.0
 
++ [#322](https://github.com/luyadev/luya-module-cms/issues/322) Added `save` and `save&close` buttons to blocks.
 + [#365](https://github.com/luyadev/luya-module-cms/pull/365) Changed misleading icon for page properties in page settings overlay.
 + [#362](https://github.com/luyadev/luya-module-cms/issues/362) Fixed misleading use of the note_add icon. Changed icon for cms menu item *Pages* in the admin menu.
 
