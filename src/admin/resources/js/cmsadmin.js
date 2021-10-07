@@ -1740,20 +1740,19 @@
 			return true;
 		};
 
-		$scope.save = function () {
-
+		$scope.save = function(close) {
 			if ($scope.isAnyRequiredAttributeEmpty()) {
 				return;
 			}
-
-
 			$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.block.id, {
 				json_config_values: $scope.data,
 				json_config_cfg_values: $scope.cfgdata,
 				variation: $scope.block.variation
 			}).then(function(response) {
 				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}));
-				$scope.toggleEdit();
+				if (close) {
+					$scope.toggleEdit();
+				}
 				$scope.block.is_dirty = 1;
 				$scope.block = angular.copy(response.data.objectdetail);
 				$scope.NavItemTypePageController.loadLiveUrl();

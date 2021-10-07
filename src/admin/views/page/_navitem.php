@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+use luya\admin\Module as AdminModule;
 use luya\helpers\Html;
 
 ?>
@@ -75,7 +76,7 @@ use luya\helpers\Html;
                                     </ul>
                                 </div>
                                 <div class="card-body">
-                                    <form class="block__edit" ng-submit="save()">
+                                    <form class="block__edit" ng-submit="save(true)">
                                         <div ng-if="modalMode==1" ng-repeat="field in block.vars" ng-hide="field.invisible" class="row">
                                             <div class="col" ng-class="{'bold-form-label': field.required}">
                                                 <span ng-if="getInfo(field.var)" class="help-button btn btn-icon btn-help" tooltip tooltip-expression="getInfo(field.var)" tooltip-position="left"></span>
@@ -88,7 +89,8 @@ use luya\helpers\Html;
                                                 <zaa-injector dir="cfgField.type"  options="cfgField.options" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}"  placeholder="{{cfgField.placeholder}}" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-save btn-icon"><?= Module::t('view_update_btn_save'); ?></button>
+                                        <button type="submit" class="btn btn-save btn-icon"><?= AdminModule::t('button_save_and_close'); ?></button>
+                                        <button type="button" class="btn btn-save btn-icon" ng-click="save(false)"><?= AdminModule::t('button_save'); ?></button>
                                         <button type="button" class="btn btn-icon btn-help float-right" ng-click="showHelp=!showHelp">{{ showHelp == true ? '<?= Module::t('view_update_btn_hide_help'); ?>' : '<?= Module::t('view_update_btn_show_help'); ?>' }}</button>
                                         <select ng-if="block.variations" class="btn float-right" ng-model="block.variation" style="margin-right:10px;">
                                             <option value="0" selected><?= Module::t('view_update_variation_select'); ?></option>
