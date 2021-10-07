@@ -33,14 +33,12 @@ composer require luyadev/luya-module-cms
 Add the frontend and admin module of the cms module to your configuration modules section and bootstrap the cms frontend module:
 
 ```php
-return [
-    'modules' => [
-        // ...
-        'cms' => 'luya\cms\frontend\Module',
-        'cmsadmin' => 'luya\cms\admin\Module',
-        // ...
-    ],
-];
+'modules' => [
+    // ...
+    'cms' => 'luya\cms\frontend\Module',
+    'cmsadmin' => 'luya\cms\admin\Module',
+    // ...
+]
 ```
 
 
