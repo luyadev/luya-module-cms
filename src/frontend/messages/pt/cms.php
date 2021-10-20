@@ -38,11 +38,11 @@ return [
     'block_html_cfg_raw_label' => 'Renderizar HTML no Admin',
 
     // 3.4.0
-    'tag_alias_readme' => 'The alias tag allows you to use aliases defined in your application as well as predefined aliases. As an example, you can use `alias[@web]` to link to images in the public html folder: `<img src="alias[@web]/image.jpg">`',
-    'tag_menu_readme' => 'Generate a link to a menu item where the key is the page id (you can see the page ids when hovering over the site navigation in the administration).',
-    'tag_page_readme' => 'Get the content of a full page or of a placeholder of a page. The first parameter is the page id (which you get by hovering over the site navigation in the administration): `page[1]`. If you only want to get the content of a placeholder of the cmslayout, use the second parameter: `page[1](placeholderName)`.',
-    'block_mirror_language_name' => 'Mirror Language',
-    'block_mirror_config_language_label' => 'Source Language',
-    'block_mirror_admin_empty_language' => 'Configure a <b><span class="material-icons">edit</span> source language</b> to mirror its content for the current placeholder.',
-    'block_mirror_admin_configured_language' => 'Mirroring this placeholder from <span class="material-icons">arrow_right_alt</span> <b>{name}</b>.',
+    'tag_alias_readme' => 'A tag alias (apelido) permite que você use aliases (apelidos) definidos em seu aplicativo, bem como aliases predefinidos. Como exemplo, você pode usar `alias[@web]` para vincular a imagens na pasta html pública: `<img src="alias[@web]/image.jpg">`',
+    'tag_menu_readme' => 'Gere um link para um item de menu onde a chave é o id da página (você pode ver os ids da página ao passar o mouse sobre a navegação do site na administração).',
+    'tag_page_readme' => 'Obtenha o conteúdo de uma página inteira ou de um "placeholder" de uma página. O primeiro parâmetro é o id da página (que você obtém passando o mouse sobre a navegação do site na administração): `page[1]`. Se você deseja apenas obter o conteúdo de um "placeholder" do cmslayout, use o segundo parâmetro: `page[1](placeholderName)`.',
+    'block_mirror_language_name' => 'Espelhar Idioma',
+    'block_mirror_config_language_label' => 'Idioma de Origem',
+    'block_mirror_admin_empty_language' => 'Configure um <b><span class="material-icons">edit</span> idioma de origem</b> para espelhar seu conteúdo para o atual "placeholder".',
+    'block_mirror_admin_configured_language' => 'Espelhando esse "placeholder" de <span class="material-icons">arrow_right_alt</span> <b>{name}</b>.',
 ];

@@ -235,25 +235,25 @@ return [
     'view_index_module_advanced_settings_button' => 'Configurações avançadas',
 
 // added translations in version 3.0:
-    'menu_group_item_env_themes' => 'Themes',
-    'view_index_page_is_cacheable' => 'Caching',
-    'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
+    'menu_group_item_env_themes' => 'Temas',
+    'view_index_page_is_cacheable' => 'Cache',
+    'view_index_page_is_cacheable_hint' => 'Quando habilitado, a página inteira será cacheada incluindo todos os blocos, portanto, os dados gerados dinamicamente em blocos não serão atualizados.',
 
 // added translations in version 3.3:
-    'menu_group_page_display' => 'Page Display',
-    'menu_group_configuration' => 'Configuration',
-    'menu_group_protocol' => 'Protocol',
-    'menu_group_protocol_model_event_logger' => 'Model Event Log',
-    'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
+    'menu_group_page_display' => 'Exibição de página',
+    'menu_group_configuration' => 'Configuração',
+    'menu_group_protocol' => 'Protocolo',
+    'menu_group_protocol_model_event_logger' => 'Modelo de Log de Evento',
+    'unable_to_find_item_for_language' => 'A página solicitada ainda não foi traduzida.',
 
 // added translations in version 3.4:
-    'js_block_attribute_empty' => '«%label%» cannot be empty.',
+    'js_block_attribute_empty' => '«%label%» não pode estar vazio.',
     
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
-    'model_website_use_default_theme' => 'Use default theme',
-    'model_website_all' => 'All',
-    'model_website_group_ids_label' => 'Restrict to User Groups',
-    'model_website_user_ids_label' => 'Restrict to Users',
-    'model_website_access_restrict' => 'Access restriction',
+    'model_website_use_default_theme' => 'Usar tema padrão',
+    'model_website_all' => 'Todos',
+    'model_website_group_ids_label' => 'Restringir a Grupos de Usuários',
+    'model_website_user_ids_label' => 'Restringir a Usuários',
+    'model_website_access_restrict' => 'Restrição de acesso',
 ];
