@@ -3,6 +3,7 @@
 namespace luya\cms\models;
 
 use luya\admin\ngrest\base\NgRestModel;
+use luya\cms\admin\Module;
 use luya\theme\ThemeConfig;
 use yii\base\InvalidArgumentException;
 use yii\helpers\Json;
@@ -46,6 +47,21 @@ class Theme extends NgRestModel
             [['json_config'], 'string'],
             [['base_path'], 'string', 'max' => 255],
             [['is_default'], 'boolean'],
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Module::t('model_theme_name_label'),
+            'is_default' => Module::t('model_theme_is_default_label'),
+            'base_path' => Module::t('model_theme_base_path_label'),
+            'json_config' => Module::t('model_theme_json_config_label'),
+            'parentTheme' => Module::t('model_theme_parent_theme_label'),
+            'author' => Module::t('model_theme_author_label'),
         ];
     }
     

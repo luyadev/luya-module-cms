@@ -3,6 +3,7 @@
 namespace luya\cms\admin\aws;
 
 use luya\admin\ngrest\base\ActiveWindow;
+use luya\cms\admin\Module;
 
 /**
  * Block Pages Active Window.
@@ -23,7 +24,7 @@ class BlockPagesActiveWindow extends ActiveWindow
      */
     public function defaultLabel()
     {
-        return 'Pages';
+        return Module::t('aws_block_pages');
     }
 
     /**

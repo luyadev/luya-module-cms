@@ -59,16 +59,15 @@ class Log extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'User'),
-            'is_insertion' => Yii::t('app', 'Insert'),
-            'is_update' => Yii::t('app', 'Update'),
-            'is_deletion' => Yii::t('app', 'Delete'),
-            'timestamp' => Yii::t('app', 'Timestamp'),
-            'message' => Yii::t('app', 'Message'),
-            'data_json' => Yii::t('app', 'Data Json'),
-            'table_name' => Yii::t('app', 'Table Name'),
-            'row_id' => Yii::t('app', 'Row ID'),
+            'user_id' => Module::t('model_log_user_id_label'),
+            'is_insertion' => Module::t('model_log_is_insertion_label'),
+            'is_update' => Module::t('model_log_is_update_label'),
+            'is_deletion' => Module::t('model_log_is_deletion_label'),
+            'timestamp' => Module::t('model_log_timestamp_label'),
+            'message' => Module::t('model_log_message_label'),
+            'data_json' => Module::t('model_log_data_json_label'),
+            'table_name' => Module::t('model_log_table_name_label'),
+            'row_id' => Module::t('model_log_row_id_label'),
         ];
     }
 

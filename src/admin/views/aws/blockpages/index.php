@@ -6,16 +6,19 @@
  * @var $this \luya\admin\ngrest\base\ActiveWindowView
  * @var $model \luya\admin\ngrest\base\NgRestModel
  */
+    
+use luya\cms\admin\Module;
+
 ?>
 <table class="table table-striped table-hover table-bordered">
 <thead>
 <tr>
-  <th>Title</th>
-  <th>Language</th>
-  <th>Version</th>
-  <th>Block Visible</th>
-  <th>Last Update</th>
-  <th>Created</th>
+    <th><?= Module::t('aws_block_pages_title_label'); ?></th>
+    <th><?= Module::t('aws_block_pages_language_label'); ?></th>
+    <th><?= Module::t('aws_block_pages_version_label'); ?></th>
+    <th><?= Module::t('aws_block_pages_block_visible_label'); ?></th>
+    <th><?= Module::t('aws_block_pages_last_updated_label'); ?></th>
+    <th><?= Module::t('aws_block_pages_created_label'); ?></th>
 </tr>
 </thead>
 <?php if (isset($blocks)) : ?>
