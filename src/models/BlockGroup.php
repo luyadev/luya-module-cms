@@ -60,11 +60,12 @@ class BlockGroup extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
-            'identifer' => 'Identifier',
-            'class' => 'Class Name',
-            'created_timestamp' => 'Created at',
-            'is_deleted' => 'Is deleted',
+            'name' => Module::t('model_blockgroup_name_label'),
+            'identifier' => Module::t('model_blockgroup_identifier_label'),
+            'class' => Module::t('model_blockgroup_class_label'),
+            'created_timestamp' => Module::t('model_blockgroup_created_timestamp_label'),
+            'is_deleted' => Module::t('model_blockgroup_is_deleted_label'),
+            'groupLabel' => Module::t('model_blockgroup_group_label'),
         ];
     }
     

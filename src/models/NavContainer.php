@@ -3,6 +3,7 @@
 namespace luya\cms\models;
 
 use luya\admin\traits\SoftDeleteTrait;
+use luya\cms\admin\Module;
 use luya\cms\behaviours\WebsiteScopeBehavior;
 use luya\admin\ngrest\base\NgRestModel;
 
@@ -58,9 +59,9 @@ class NavContainer extends NgRestModel
     {
         $config->delete = true;
         
-        $config->list->field('website_id', 'Website')->selectModel(['modelClass' => Website::class, 'valueField' => 'id', 'labelField' => 'name']);
-        $config->list->field('name', 'Name')->text();
-        $config->list->field('alias', 'Alias')->text();
+        $config->list->field('website_id', Module::t('model_navcontainer_website_label'))->selectModel(['modelClass' => Website::class, 'valueField' => 'id', 'labelField' => 'name']);
+        $config->list->field('name', Module::t('model_navcontainer_name_label'))->text();
+        $config->list->field('alias', Module::t('model_navcontainer_alias_label'))->text();
 
         $config->create->copyFrom('list');
         $config->update->copyFrom('list');

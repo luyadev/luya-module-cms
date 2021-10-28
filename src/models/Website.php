@@ -79,7 +79,13 @@ class Website extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'theme_id' => 'Theme',
+            'name' => Module::t('model_website_name_label'),
+            'host' => Module::t('model_website_host_label'),
+            'aliases' => Module::t('model_website_aliases_label'),
+            'is_active' => Module::t('model_website_is_active_label'),
+            'is_default' => Module::t('model_website_is_default_label'),
+            'redirect_to_host' => Module::t('model_website_redirect_to_host_label'),
+            'theme_id' => Module::t('model_website_theme_id_label'),
         ];
     }
     

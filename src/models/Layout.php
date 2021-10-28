@@ -4,6 +4,7 @@ namespace luya\cms\models;
 
 use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\cms\admin\Module;
 
 /**
  * Layout Model for CMS-Layouts.
@@ -43,6 +44,18 @@ class Layout extends NgRestModel
             [['name', 'json_config', 'view_file'], 'required'],
             [['json_config'], 'string'],
             [['name', 'view_file'], 'string', 'max' => 255],
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Module::t('model_layout_name_label'),
+            'json_config' => Module::t('model_layout_json_config_label'),
+            'view_file' => Module::t('model_layout_view_file_label'),
         ];
     }
     

@@ -3,12 +3,13 @@
 namespace luya\cms\models;
 
 use Yii;
+use luya\cms\admin\Module;
+use luya\cms\admin\aws\BlockPagesActiveWindow;
 use luya\cms\base\BlockInterface;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
 use luya\admin\ngrest\plugins\SelectModel;
 use luya\admin\ngrest\plugins\ToggleStatus;
-use luya\cms\admin\aws\BlockPagesActiveWindow;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
@@ -78,12 +79,12 @@ class Block extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'translationName' => 'Name',
-            'class' => 'Class',
-            'usageCount' => 'Used in content',
-            'group_id' => 'Group',
-            'is_disabled' => 'Is disabled',
-            'fileExists' => 'File exists',
+            'translationName' => Module::t('model_block_translation_name_label'),
+            'class' => Module::t('model_block_class_label'),
+            'group_id' => Module::t('model_block_group_id_label'),
+            'usageCount' => Module::t('model_block_usage_count_label'),
+            'fileExists' => Module::t('model_block_file_exists_label'),
+            'is_disabled' => Module::t('model_block_is_disable_label'),
         ];
     }
 
@@ -96,10 +97,10 @@ class Block extends NgRestModel
             [
                 'class' => DetailViewActiveWindow::class,
                 'attributes' => [
-                    'id',
+                    'id:integer:ID',
                     'translationName',
                     'class',
-                    'blockGroup.groupLabel:text:Group',
+                    'blockGroup.groupLabel:text:' . Module::t('model_block_group_id_label'),
                     'usageCount',
                     'is_disabled:boolean',
                     'fileExists:boolean',
