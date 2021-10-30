@@ -309,4 +309,5 @@ return [
     'model_website_is_default_label' => 'Is default',
     'model_website_redirect_to_host_label' => 'Redirect to Host',
     'model_website_theme_id_label' => 'Theme',
+    'by_label' => 'by',
 ];
