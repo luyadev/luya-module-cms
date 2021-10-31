@@ -76,9 +76,12 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
 				      <h5 class="mb-1">{{item.title}}</h5>
 				      <small>{{item.timestamp_update * 1000 | date:\'short\'}}</small>
 				    </div>
-				    <small>by {{item.updateUser.firstname}} {{item.updateUser.lastname}}</small>
+				    <small>{{by}} {{item.updateUser.firstname}} {{item.updateUser.lastname}}</small>
 				</a>
 			',
+            'variables' => [
+                'by' => ['cmsadmin', 'by_label'],
+            ],
             'dataApiUrl' => 'admin/api-cms-navitem/last-updates',
             'title' => ['cmsadmin', 'cmsadmin_dashboard_lastupdate'],
         ],
