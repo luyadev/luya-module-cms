@@ -282,7 +282,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * Rendex the current pages.
+     * Re-Index the current pages.
      *
      * @param \yii\base\Event $e
      */
