@@ -4,6 +4,7 @@ namespace luya\cms\models;
 
 use Yii;
 
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecordInterface;
 use yii\db\ActiveRecord;
 use yii\base\Exception;
@@ -13,6 +14,7 @@ use luya\admin\base\GenericSearchInterface;
 use luya\admin\helpers\Angular;
 use luya\admin\models\User;
 use luya\helpers\Inflector;
+use luya\admin\ngrest\base\NgRestActiveQuery;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each
@@ -36,7 +38,12 @@ use luya\helpers\Inflector;
  * @property string $title_tag
  * @property integer $image_id
  * @property integer $is_url_strict_parsing_disabled
+ * @property integer $is_cacheable
+ *
  * @property \luya\cms\models\Nav $nav Nav Model.
+ * @property \luya\admin\models\User $createUser
+ * @property \luya\admin\models\User $updateUser
+ * @property \luya\admin\models\Lang $lang
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -60,17 +67,17 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'validateAlias']);
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
         $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
-        
+
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventLogger']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventLogger']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventLogger']);
-        
+
         $this->on(self::EVENT_AFTER_DELETE, function ($event) {
             $type = $event->sender->getType();
             if ($type) {
                 $type->delete();
             }
-            
+
             foreach (NavItemPage::find()->where(['nav_item_id' => $event->sender->id])->all() as $version) {
                 $version->delete();
             }
@@ -104,7 +111,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     {
         return 'cms_nav_item';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -140,15 +147,25 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     }
 
     /**
+     * Create User relation.
+     *
+     * @return NgRestActiveQuery|ActiveQuery
+     */
+    public function getCreateUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'create_user_id']);
+    }
+
+    /**
      * Update User relation.
      *
-     * @return \luya\admin\models\User
+     * @return NgRestActiveQuery|ActiveQuery
      */
     public function getUpdateUser()
     {
         return $this->hasOne(User::class, ['id' => 'update_user_id']);
     }
-    
+
     /**
      * Slugify the current alias attribute.
      */
@@ -156,9 +173,9 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     {
         $this->alias = Inflector::slug($this->alias, '-', true, false);
     }
-    
+
     private $_type;
-    
+
     /**
      * GET the type object based on the nav_item_type defintion and the nav_item_type_id which is the
      * primary key for the corresponding type table (page, module, redirect). This approach has been choosen
@@ -170,7 +187,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function getType()
     {
         if ($this->_type === null) {
-            
+
             // what kind of item type are we looking for
             if ($this->nav_item_type == self::TYPE_PAGE) {
                 $this->_type = NavItemPage::findOne($this->nav_item_type_id);
@@ -179,23 +196,23 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             } elseif ($this->nav_item_type == self::TYPE_REDIRECT) {
                 $this->_type = NavItemRedirect::findOne($this->nav_item_type_id);
             }
-            
+
             if ($this->_type === null) {
                 $this->_type = false;
             }
-            
+
             // set context for the object
             /// 5.4.2016: Discontinue, as the type model does have getNavItem relation
             //$this->_type->setNavItem($this);
         }
-        
+
         return $this->_type;
     }
 
     /**
      * Get the related nav entry for this nav_item.
      *
-     * @return \luya\cms\models\Nav
+     * @return NgRestActiveQuery|ActiveQuery
      */
     public function getNav()
     {
@@ -203,7 +220,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     }
 
     /**
-     * Get the render content for the specific type, see the defintion of `getContent()` in the available types.
+     * Get the render content for the specific type, see the definition of `getContent()` in the available types.
      *
      * @return mixed
      */
@@ -254,7 +271,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
 //
 //            return false;
 //        }
-    
+
         /**
          * Group by website_id
          * @since 4.0.0
@@ -300,7 +317,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
         $this->update_user_id = Module::getAuthorUserId();
         $this->slugifyAlias();
     }
-    
+
     /**
      * Before update event.
      */
@@ -347,7 +364,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     {
         return ['title', 'container'];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -362,7 +379,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function genericSearch($searchQuery)
     {
         $data = [];
-        
+
         foreach (self::find()->select(['nav_id', 'title'])->orWhere(['like', 'title', $searchQuery])->with('nav')->distinct()->each() as $item) {
             if ($item->nav) {
                 $data[] = [
@@ -372,10 +389,10 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
                 ];
             }
         }
-        
+
         return $data;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -388,11 +405,11 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             ],
         ];
     }
-    
+
     /**
      * Lang Active Query.
      *
-     * @return \luya\admin\models\Lang
+     * @return NgRestActiveQuery|ActiveQuery
      */
     public function getLang()
     {
@@ -545,7 +562,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
 
         throw new Exception("Unable to find nav item type.");
     }
-    
+
     /**
      * Display all pages where the given module name is integrated.
      *
