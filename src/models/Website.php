@@ -211,7 +211,7 @@ class Website extends NgRestModel
         }
     }
     
-    public function afterDelete()
+    public function eventAfterDelete()
     {
         $this->updateAttributes(['is_active' => false]);
     }
