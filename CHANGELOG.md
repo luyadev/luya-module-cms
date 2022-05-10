@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 4.2.1
+
++ [#375](https://github.com/luyadev/luya-module-cms/pull/375) Fixed Website delete event
+
 ## 4.2.0 (9. December 2021)
 
 + [#322](https://github.com/luyadev/luya-module-cms/issues/322) Added `save` and `save&close` buttons to blocks.
