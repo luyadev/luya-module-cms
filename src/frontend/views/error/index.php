@@ -1,3 +1,6 @@
+<?php
+use \luya\helpers\Html;
+?>
 <html>
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -23,7 +26,7 @@
         <div class="span12">
             <div class="hero-unit center">
                 <?php if ($exception !== null): ?>
-                    <h1><?php echo \luya\helpers\Html::encode($exception->getMessage()); ?>
+                    <h1><?php echo Html::encode($exception->getMessage()); ?>
                         <small><br/><br/>
                         <p class="red">Error <?php echo $exception->statusCode; ?></p></small>
                     </h1>
