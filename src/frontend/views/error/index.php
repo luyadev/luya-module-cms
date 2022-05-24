@@ -23,7 +23,7 @@
         <div class="span12">
             <div class="hero-unit center">
                 <?php if ($exception !== null): ?>
-                    <h1><?php echo $exception->getMessage(); ?>
+                    <h1><?php echo \luya\helpers\Html::encode($exception->getMessage()); ?>
                         <small><br/><br/>
                         <p class="red">Error <?php echo $exception->statusCode; ?></p></small>
                     </h1>
