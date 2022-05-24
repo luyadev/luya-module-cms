@@ -6,6 +6,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 4.2.1
 
 + [#375](https://github.com/luyadev/luya-module-cms/pull/375) Fixed Website delete event
++ [#377](https://github.com/luyadev/luya-module-cms/pull/377) Fixed XSS on error page
 
 ## 4.2.0 (9. December 2021)
 
