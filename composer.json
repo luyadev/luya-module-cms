@@ -26,7 +26,7 @@
        "issues": "https://github.com/luyadev/luya-module-cms/issues"
    },
    "require-dev": {
-       "luyadev/luya-module-admin" : "dev-master as 4.4.0",
+       "luyadev/luya-module-admin" : "dev-php-81 as 4.4.0",
        "luyadev/luya-testsuite": "^3.0",
        "twbs/bootstrap": "^4.3.0",
        "unglue/client": "^1.3"
