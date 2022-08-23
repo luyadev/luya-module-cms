@@ -208,7 +208,7 @@ class LangSwitcher extends \luya\base\Widget
             $domain = Yii::$app->urlManager->hostInfo;
         }
 
-        return Url::ensureHttp($domain) . '/' . ltrim($link, '/');
+        return Url::ensureHttp((string) $domain) . '/' . ltrim($link, '/');
     }
 
     /**

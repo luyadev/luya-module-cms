@@ -248,7 +248,7 @@ class Log extends NgRestModel
      */
     public function getAction()
     {
-        $tableName = TaggableTrait::cleanBaseTableName($this->table_name);
+        $tableName = StorageFile::cleanBaseTableName($this->table_name);
 
         if ($this->is_insertion) {
             switch ($tableName) {
