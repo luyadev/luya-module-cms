@@ -88,6 +88,7 @@ class QueryIterator extends BaseObject implements Iterator
      *
      * @return \luya\cms\menu\Item
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $item = current($this->data);
@@ -119,6 +120,7 @@ class QueryIterator extends BaseObject implements Iterator
      *
      * @return string The current key
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->data);
@@ -129,6 +131,7 @@ class QueryIterator extends BaseObject implements Iterator
      *
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->data);
@@ -139,6 +142,7 @@ class QueryIterator extends BaseObject implements Iterator
      *
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         return reset($this->data);
@@ -149,6 +153,7 @@ class QueryIterator extends BaseObject implements Iterator
      *
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return key($this->data) !== null;

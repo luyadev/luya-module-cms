@@ -89,7 +89,7 @@ class Website extends Component
         if ($this->_allWebsiteData === null) {
             $this->_allWebsiteData = WebsiteModel::find()->andWhere(['is_active' => true])->cache()->indexBy('host')->asArray()->all();
             foreach ($this->_allWebsiteData as &$website) {
-                $aliases = array_map('trim', explode(',', $website['aliases']));
+                $aliases = array_map('trim', explode(',', (string) $website['aliases']));
                 $website['aliases'] = array_filter($aliases);
             }
         }

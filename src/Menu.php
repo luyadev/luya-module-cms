@@ -2,8 +2,6 @@
 
 namespace luya\cms;
 
-use luya\cms\models\Website;
-use luya\helpers\StringHelper;
 use Yii;
 use yii\base\Component;
 use yii\web\NotFoundHttpException;
@@ -14,7 +12,6 @@ use luya\traits\CacheableTrait;
 use luya\cms\menu\Item;
 use luya\cms\menu\InjectItemInterface;
 use luya\cms\menu\QueryOperatorFieldInterface;
-use yii\db\Expression;
 use luya\helpers\Html;
 use luya\cms\models\Config;
 
@@ -200,6 +197,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @param string $offset Language short code the verify
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return ($this->getLanguage($offset)) ? true : false;
@@ -211,6 +209,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @param string $offset Language short code to get
      * @return array|mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->getLanguageContainer($offset);
@@ -224,6 +223,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      *
      * @throws Exception Always throws exception as this method is not implemented.
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         throw new Exception('The set method is disabled for this component.');
@@ -235,6 +235,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @param string $offset
      * @throws \luya\cms\Exception Always throws exception as this method is not implemented.
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         throw new Exception('The unset method is disabled for this component.');

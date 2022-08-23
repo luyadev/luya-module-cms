@@ -24,6 +24,7 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
      * {@inheritDoc}
      * @see FilterIterator::accept()
      */
+    #[\ReturnTypeWillChange]
     public function accept()
     {
         $event = new MenuItemEvent();
@@ -42,6 +43,7 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
      *
      * @return int The number of elements in the iterator.
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return iterator_count($this);
@@ -71,6 +73,7 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
      * {@inheritDoc}
      * @since 3.2.0
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->getInnerIterator()->data[$offset] = $value;
@@ -80,6 +83,7 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
      * {@inheritDoc}
      * @since 3.2.0
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->getInnerIterator()->data[$offset]);
@@ -89,6 +93,7 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
      * {@inheritDoc}
      * @since 3.2.0
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->getInnerIterator()->data[$offset]);
@@ -98,6 +103,7 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
      * {@inheritDoc}
      * @since 3.2.0
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->getInnerIterator()->data[$offset]) ? $this->getInnerIterator()->generateItem($this->getInnerIterator()->data[$offset]) : null;

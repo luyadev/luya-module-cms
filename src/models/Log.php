@@ -3,6 +3,7 @@
 namespace luya\cms\models;
 
 use luya\admin\aws\DetailViewActiveWindow;
+use luya\admin\models\StorageFile;
 use luya\admin\models\User;
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
@@ -203,7 +204,7 @@ class Log extends NgRestModel
     public function getRowDescriber()
     {
         if (!empty($this->row_id)) {
-            switch (TaggableTrait::cleanBaseTableName($this->table_name)) {
+            switch (StorageFile::cleanBaseTableName($this->table_name)) {
                 case "cms_nav":
                     $navModel = Nav::findOne($this->row_id);
 
@@ -247,7 +248,7 @@ class Log extends NgRestModel
      */
     public function getAction()
     {
-        $tableName = TaggableTrait::cleanBaseTableName($this->table_name);
+        $tableName = StorageFile::cleanBaseTableName($this->table_name);
 
         if ($this->is_insertion) {
             switch ($tableName) {

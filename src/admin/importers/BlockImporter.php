@@ -119,7 +119,7 @@ class BlockImporter extends Importer
     {
         $results = [];
         foreach ($directories as $directoryPath) {
-            $path = rtrim($directoryPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($blockDefinition, DIRECTORY_SEPARATOR);
+            $path = rtrim((string) $directoryPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim((string) $blockDefinition, DIRECTORY_SEPARATOR);
             
             $path = $this->replaceDsSeparator($path);
 
