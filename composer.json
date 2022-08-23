@@ -27,7 +27,7 @@
    },
    "require-dev": {
        "luyadev/luya-module-admin" : "dev-master as 4.4.0",
-       "luyadev/luya-testsuite": "^3.0",
+       "luyadev/luya-testsuite": "^3.1",
        "twbs/bootstrap": "^4.3.0",
        "unglue/client": "^1.3"
    },
