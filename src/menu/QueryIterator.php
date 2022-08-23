@@ -120,6 +120,7 @@ class QueryIterator extends BaseObject implements Iterator
      *
      * @return string The current key
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->data);
