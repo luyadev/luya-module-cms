@@ -780,7 +780,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     public function flushCache()
     {
         foreach ($this->getLanguages() as $lang) {
-            $this->deleteHasCache($this->_cachePrefix . $lang['short_code']);
+            $this->deleteHasCache($this->_cachePrefix . $this->request->hostName . $lang['short_code']);
         }
     }
 }
