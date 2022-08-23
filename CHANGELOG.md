@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.2.1
 
-+ [#]() Fixed problem with caching of menu (added missing hostname to cache key in menu).
++ [#380](https://github.com/luyadev/luya-module-cms/pull/380) Fixed problem with caching of menu (added missing hostname to cache key in menu).
 + [#375](https://github.com/luyadev/luya-module-cms/pull/375) Fixed Website delete event
 + [#377](https://github.com/luyadev/luya-module-cms/pull/377) Fixed XSS on error page
 
