@@ -113,6 +113,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->_injectorObjects[$offset] = $value;
@@ -121,6 +122,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->_injectorObjects[$offset]);
@@ -129,6 +131,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->_injectorObjects[$offset]);
@@ -140,6 +143,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      * @param string $offset The name of the registered Injector name.
      * @return \luya\cms\base\BaseBlockInjector
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->_injectorObjects[$offset]) ? $this->_injectorObjects[$offset] : null;
