@@ -41,10 +41,19 @@
            "cmstests\\": "tests/"
        }
    },
-   "extra": {
-        "branch-alias": {
-            "dev-master": "4.0.x-dev"
+   "config": {
+        "fxp-asset": {
+            "enabled": false
         },
+        "platform": {
+            "php" : "7.4"
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "luyadev/luya-composer": true
+        }
+    },
+   "extra": {
        "luya": {
            "bootstrap": [
                "\\luya\\cms\\frontend\\Bootstrap"
