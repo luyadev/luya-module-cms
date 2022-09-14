@@ -48,6 +48,7 @@ class CmslayoutImporter extends Importer
         
         // remove all view files not found somewhere ...
         foreach (Layout::find()->where(['not in', 'id', $layoutFiles])->all() as $layoutItem) {
+            $this->addLog('remove cms layout with id #' . $layoutItem->id);
             $layoutItem->delete();
         }
         
@@ -161,8 +162,8 @@ class CmslayoutImporter extends Importer
         $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName], ['view_file' => $baseName]])->one();
         
         if ($layoutItem) {
-            $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
-            $matchRevert = $this->comparePlaceholders(json_decode($layoutItem->json_config, true), $_placeholders);
+            $match = $this->comparePlaceholders($_placeholders, Json::decode($layoutItem->json_config,));
+            $matchRevert = $this->comparePlaceholders(Json::decode($layoutItem->json_config), $_placeholders);
             if ($match && $matchRevert) {
                 $layoutItem->updateAttributes([
                     'name' => $readableFileName,
@@ -172,7 +173,7 @@ class CmslayoutImporter extends Importer
                 $layoutItem->updateAttributes([
                     'name' => $readableFileName,
                     'view_file' => $fileBaseName,
-                    'json_config' => json_encode($_placeholders),
+                    'json_config' => Json::encode($_placeholders),
                 ]);
                 $this->addLog('Existing file '.$readableFileName.' updated.');
             }
@@ -186,9 +187,13 @@ class CmslayoutImporter extends Importer
         $data->setAttributes([
             'name' => $readableFileName,
             'view_file' => $fileBaseName,
-            'json_config' => json_encode($_placeholders),
+            'json_config' => Json::encode($_placeholders),
         ]);
-        $data->save(false);
+        if (!$data->save()) {
+            $this->addLog('Error while adding layout file: ' . var_export($data->getErrors(), true));
+            return;
+        }
+
         $this->addLog('New file '.$readableFileName.' found and registered.');
         return $data->id;
     }
