@@ -43,6 +43,8 @@ class PageTag extends BaseTag
     
     /**
      * Get the content of Nav for the current active language with cmslayout or placeholder.
+     * 
+     * If the page does not have a corresponding activeLanguageItem, null is returned.
      *
      * @param string $value The value of the Nav ID e.g 1 (hover the cms menu to see the ID).
      * @param string|null $sub If null this parameter will be ignored otherwise its the name of the placeholder inside this cmslayout.
@@ -51,11 +53,11 @@ class PageTag extends BaseTag
      */
     public function parse($value, $sub)
     {
-        $page = Nav::findOne($value);
+        $page = Nav::findOne(['id' => $value]);
         
         // verify if the page is of type content
 
-        if ($page) {
+        if ($page && $page->activeLanguageItem) {
             if ($page->activeLanguageItem->nav_item_type !== NavItem::TYPE_PAGE) {
                 return null;
             }
