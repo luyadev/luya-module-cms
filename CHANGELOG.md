@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 4.3.1
+
++ [#381](https://github.com/luyadev/luya-module-cms/pull/381) Add check whether the activeLanguageItem exists in PageTag parser.
+
 ## 4.3.0 (24. August 2022)
 
 + [#378](https://github.com/luyadev/luya-module-cms/pull/378) Dropped PHP 7.0 and 7.1 in order to have PHP 8.1 compatibility.
