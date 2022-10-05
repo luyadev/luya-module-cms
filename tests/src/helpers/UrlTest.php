@@ -10,6 +10,7 @@ class UrlTest extends CmsFrontendTestCase
     public function testToModule()
     {
         $this->assertSame('foobar', Url::toModule('foobar'));
+        $this->assertSame('foobar', Url::toModule('foobar', true));
     }
     
     public function testToModuleRoute()
