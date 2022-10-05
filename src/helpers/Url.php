@@ -5,6 +5,7 @@ namespace luya\cms\helpers;
 use Yii;
 use luya\cms\Exception;
 use luya\cms\Menu;
+use luya\cms\menu\Item;
 
 /**
  * CMS Url Helper class extends luya\helpers\Url by CMS routing methods.
@@ -32,15 +33,17 @@ class Url extends \luya\helpers\Url
      * > Read more about [[app-module-urlrules.md]].
      *
      * @param string $moduleName The name of module you'd like to link to. 
-     * @return string Returns the full url to the
+     * @param boolean $absolute Whether to return an absolute path or not if link is found
+     * @return string Returns the full url to the module, if no module is found, the input $moduleName is retunred.
      * @see toModuleRoute()
      */
-    public static function toModule($moduleName)
+    public static function toModule($moduleName, $absolute = false)
     {
+        /** @var Item $item */
         $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
 
         if ($item) {
-            return $item->link;
+            return $absolute ? $item->absoluteLink : $item->link;
         }
 
         return $moduleName;
@@ -79,16 +82,17 @@ class Url extends \luya\helpers\Url
      * @param string $moduleName The ID of the module, which should be found inside the nav items.
      * @param string|array $route The route of the module `module/controller/action` or an array like in Url::to with param infos `['/module/controller/action', 'foo' => 'bar']`.
      * @param array  $params The parameters for the url rule. If the route is provided as an array with params the further defined params or overwritten by the array_merge process.
+     * @param string $scheme An optional scheme configuration like `http`, `https` or `true`. If `false` no scheme will be added and a relativ path is returned.
      * @throws Exception
      * @return string
      * @see toModule()
      */
-    public static function toModuleRoute($moduleName, array $route)
+    public static function toModuleRoute($moduleName, array $route, $scheme = false)
     {
         $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
         
         if ($item) {
-            return static::toMenuNavItem($item->id, $route);
+            return static::toMenuNavItem($item->id, $route, $scheme);
         }
 
         throw new Exception("The module route creation could not find the module '$moduleName'. Have you created a page with this module in this language context?");
@@ -102,12 +106,13 @@ class Url extends \luya\helpers\Url
      *
      * @param integer $navItemId The nav item id of the given page which is the base path for the generated url.
      * @param array $route An array with a route and optional params `['/module/controller/action', 'param' => 'bar]`.
+     * @param string $scheme An optional scheme configuration like `http`, `https` or `true`. If `false` no scheme will be added and a relativ path is returned.
      * @return string The url with the base path from the nav item id and the appended route.
      * @since 1.0.4
      */
-    public static function toMenuNavItem($navItemId, array $route)
+    public static function toMenuNavItem($navItemId, array $route, $scheme = false)
     {
-        return Yii::$app->urlManager->createMenuItemUrl($route, $navItemId);
+        return Yii::$app->urlManager->createMenuItemUrl($route, $navItemId, null, $scheme);
     }
     
     
@@ -118,13 +123,14 @@ class Url extends \luya\helpers\Url
      *
      * @param integer $navId The nav id of the given page which is the base path for the generated url.
      * @param array $route An array with a route and optional params `['/module/controller/action', 'param' => 'bar]`.
+     * @param string $scheme An optional scheme configuration like `http`, `https` or `true`. If `false` no scheme will be added and a relativ path is returned.
      * @return string The url with the base path from the nav id and the appended route.
      * @since 1.0.4
      */
-    public static function toMenuNav($navId, array $route)
+    public static function toMenuNav($navId, array $route, $scheme = false)
     {
         $menu = Yii::$app->menu->find()->where([Menu::FIELD_NAVID => $navId])->with(['hidden'])->one();
         
-        return static::toMenuNavItem($menu->id, $route);
+        return static::toMenuNavItem($menu->id, $route, $scheme);
     }
 }
