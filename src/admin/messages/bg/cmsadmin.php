@@ -5,7 +5,7 @@ Translate by Vl. Vladimirov
 25.03.2021
 */
 return [
-	'view_index_add_type' => 'Тип на страницата',
+    'view_index_add_type' => 'Тип на страницата',
     'view_index_type_page' => 'Страница',
     'view_index_type_module' => 'Модул',
     'view_index_type_redirect' => 'Препращане',
@@ -98,7 +98,7 @@ return [
     'view_update_blockholder_clipboard' => 'Клипборд',
 
 // added translations in version 1.0.0-beta6:
-	'js_page_block_delete_confirm' => 'Наистина ли искате да изтриете блока  «%name%»?',
+    'js_page_block_delete_confirm' => 'Наистина ли искате да изтриете блока  «%name%»?',
     'view_index_page_meta_keywords' => 'Ключови думи',
     'current_version' => 'Работна версия',
     'Initial' => 'Първа версия',
@@ -118,11 +118,11 @@ return [
     'js_version_create_success' => 'Новата версия е създадена успешно.',
 
 // added translations in version 1.0.0-beta7:
-	'view_index_create_page_please_choose' => 'Моля, изберете',
-	'view_index_sidebar_autopreview' => 'Автоматичен преглед',
-	
+    'view_index_create_page_please_choose' => 'Моля, изберете',
+    'view_index_sidebar_autopreview' => 'Автоматичен преглед',
+
 // added translations in version 1.0.0-beta8:
-	'module_permission_add_new_page' => 'Създаване на нова страница',
+    'module_permission_add_new_page' => 'Създаване на нова страница',
     'module_permission_update_pages' => 'Редактиране на страница',
     'module_permission_edit_drafts' => 'Редактиране на шаблони',
     'module_permission_page_blocks' => 'Блокове на съдържанието на страницата',
@@ -144,14 +144,14 @@ return [
     'button_create_version' => 'Създаване на версия',
     'button_update_version' => 'Актуализиране на версията',
     'menu_group_item_env_permission' => 'Разрешения за страница',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Създайте копие на текущата страница с цялото й съдържание. Те копират, ще включват всички езици, но само публикуваната версия. ',
     'page_update_actions_deepcopy_btn' => 'Създаване на копие',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Таг за заглавие (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Не може да се създаде страница от празен шаблон.',
     'view_update_variation_select' => 'Нормално',
@@ -252,7 +252,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => ' «%label%» не може да бъде празно.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -260,7 +260,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

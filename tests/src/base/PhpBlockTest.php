@@ -13,31 +13,31 @@ class PhpBlockTest extends CmsFrontendTestCase
         $block = new PhpTestBlock();
         return $this->assertSame('admin', $block->renderAdmin());
     }
-    
+
     public function testFrontendResponse()
     {
         $block = new PhpTestBlock();
         return $this->assertSame('frontend', $block->renderFrontend());
     }
-    
+
     public function testExtraVarsGetter()
     {
         $block = new PhpTestBlock();
         $this->assertArrayHasKey('foo', $block->extraVars());
     }
-    
+
     public function testExtraVarsValueGetter()
     {
         $block = new PhpTestBlock();
         $this->assertSame('bar', $block->getExtraValue('foo'));
     }
-    
+
     public function textExtraVarValuesGetter()
     {
         $block = new PhpTestBlock();
         $this->assertArrayHasKey('foo', $block->getExtraVarValues());
     }
-    
+
     /**
      * @todo Test register multiple asset bundles
      */
@@ -45,10 +45,10 @@ class PhpBlockTest extends CmsFrontendTestCase
     {
         $block = new PhpTestBlock();
         $block->cacheEnabled = true;
-    
+
         $block->getView()->registerAssetBundle(AssetBundle::class);
 //        $block->getView()->registerAssetBundle(JqueryAsset::class);
-        
+
         $block->onRegister();
 
         $this->assertSame([AssetBundle::class], \Yii::$app->cache->get(['blockassetbundles', $block->getEnvOption('id')]));

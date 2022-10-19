@@ -2,10 +2,10 @@
 
 namespace luya\cms\helpers;
 
-use Yii;
 use luya\cms\Exception;
 use luya\cms\Menu;
 use luya\cms\menu\Item;
+use Yii;
 
 /**
  * CMS Url Helper class extends luya\helpers\Url by CMS routing methods.
@@ -22,7 +22,7 @@ class Url extends \luya\helpers\Url
     /**
      * Link to a registered Module.
      *
-     * Its important to know that the `moduleName` must be registered in the modules section in your config and also 
+     * Its important to know that the `moduleName` must be registered in the modules section in your config and also
      * that a **module page** is created for this module, the module-block won't work.
      *
      * If the module could not be found (not registered in the cms) the method returns the provided module name.
@@ -32,7 +32,7 @@ class Url extends \luya\helpers\Url
      *
      * > Read more about [[app-module-urlrules.md]].
      *
-     * @param string $moduleName The name of module you'd like to link to. 
+     * @param string $moduleName The name of module you'd like to link to.
      * @param boolean $absolute Whether to return an absolute path or not if link is found
      * @return string Returns the full url to the module, if no module is found, the input $moduleName is retunred.
      * @see toModuleRoute()
@@ -90,7 +90,7 @@ class Url extends \luya\helpers\Url
     public static function toModuleRoute($moduleName, array $route, $scheme = false)
     {
         $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
-        
+
         if ($item) {
             return static::toMenuNavItem($item->id, $route, $scheme);
         }
@@ -98,7 +98,7 @@ class Url extends \luya\helpers\Url
         throw new Exception("The module route creation could not find the module '$moduleName'. Have you created a page with this module in this language context?");
     }
 
-    
+
     /**
      * Create an url to a cms page based on the unique nav item id.
      *
@@ -114,8 +114,8 @@ class Url extends \luya\helpers\Url
     {
         return Yii::$app->urlManager->createMenuItemUrl($route, $navItemId, null, $scheme);
     }
-    
-    
+
+
     /**
      * Create an url to a cms page based on the nav id.
      *
@@ -130,7 +130,7 @@ class Url extends \luya\helpers\Url
     public static function toMenuNav($navId, array $route, $scheme = false)
     {
         $menu = Yii::$app->menu->find()->where([Menu::FIELD_NAVID => $navId])->with(['hidden'])->one();
-        
+
         return static::toMenuNavItem($menu->id, $route, $scheme);
     }
 }

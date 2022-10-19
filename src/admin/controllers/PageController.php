@@ -2,9 +2,9 @@
 
 namespace luya\cms\admin\controllers;
 
-use Yii;
 use luya\admin\base\Controller;
 use luya\admin\components\Auth;
+use Yii;
 
 /**
  * Page Controller.
@@ -29,7 +29,7 @@ class PageController extends Controller
             'canBlockCreate' => Yii::$app->auth->matchApi(Yii::$app->adminuser->id, 'api-cms-navitempageblockitem', Auth::CAN_CREATE),
         ]);
     }
-    
+
     public function actionDrafts()
     {
         return $this->render('drafts');

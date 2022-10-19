@@ -2,9 +2,9 @@
 
 namespace cmstests\src\admin\controllers;
 
-use luya\testsuite\scopes\PermissionScope;
 use cmstests\WebModelTestCase;
 use luya\cms\admin\controllers\DefaultController;
+use luya\testsuite\scopes\PermissionScope;
 
 class DefaultControllerTest extends WebModelTestCase
 {
@@ -13,7 +13,7 @@ class DefaultControllerTest extends WebModelTestCase
      */
     public function testActions()
     {
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $ctrl = new DefaultController('default', $this->app->getModule('cmsadmin'));
             $this->assertNotEmpty($ctrl->actionIndex());
         });

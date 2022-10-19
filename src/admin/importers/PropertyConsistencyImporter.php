@@ -2,9 +2,9 @@
 
 namespace luya\cms\admin\importers;
 
-use luya\console\Importer;
-use luya\cms\models\Property as CmsProperty;
 use luya\admin\models\Property as AdminProperty;
+use luya\cms\models\Property as CmsProperty;
+use luya\console\Importer;
 
 /**
  * Property Consistency Check Importer.

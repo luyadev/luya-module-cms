@@ -3,9 +3,9 @@
 namespace luya\cms\tags;
 
 use luya\cms\frontend\Module;
-use luya\tag\BaseTag;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
+use luya\tag\BaseTag;
 
 /**
  * Get the Content of CMS Page.
@@ -32,7 +32,7 @@ class PageTag extends BaseTag
     {
         return 'page[1](placeholder)';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -40,10 +40,10 @@ class PageTag extends BaseTag
     {
         return Module::t('tag_page_readme');
     }
-    
+
     /**
      * Get the content of Nav for the current active language with cmslayout or placeholder.
-     * 
+     *
      * If the page does not have a corresponding activeLanguageItem, null is returned.
      *
      * @param string $value The value of the Nav ID e.g 1 (hover the cms menu to see the ID).
@@ -54,21 +54,21 @@ class PageTag extends BaseTag
     public function parse($value, $sub)
     {
         $page = Nav::findOne(['id' => $value]);
-        
+
         // verify if the page is of type content
 
         if ($page && $page->activeLanguageItem) {
             if ($page->activeLanguageItem->nav_item_type !== NavItem::TYPE_PAGE) {
                 return null;
             }
-            
+
             if (empty($sub)) {
                 return $page->activeLanguageItem->getContent();
             } else {
                 return $page->activeLanguageItem->type->renderPlaceholder($sub);
             }
         }
-        
+
         return null;
     }
 }

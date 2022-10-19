@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Projeto',
     'block_group_text_elements' => 'Textos',
     'block_group_media_group' => 'Mídia',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Renderização Restrita',
     'block_module_strictrender_help' => 'Quando a renderização restrita é ativada, o módulo só executará a rota fornecida (módulo, controlador, ação, parâmetros) sem ouvir ações e rotas do controlador.',

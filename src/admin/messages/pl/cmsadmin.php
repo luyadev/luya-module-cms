@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

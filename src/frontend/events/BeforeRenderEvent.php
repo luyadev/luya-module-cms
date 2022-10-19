@@ -17,7 +17,7 @@ class BeforeRenderEvent extends \yii\base\Event
      * be thrown while rendering.
      */
     public $isValid = true;
-    
+
     /**
      * @var \luya\cms\menu\Item The current menu item resolved from {{luya\cms\Menu::getCurrent()}}.
      */

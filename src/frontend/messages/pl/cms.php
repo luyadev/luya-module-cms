@@ -1,4 +1,5 @@
 <?php
+
 return [
     'tb_composition' => 'Język',
     'tb_properties' => 'Właściwości',
@@ -30,7 +31,7 @@ return [
     'block_group_project_elements' => 'Projekt',
     'block_group_text_elements' => 'Teksty',
     "block_group_media_group" => "Media",
-        
+
     // 1.0.0
     "block_module_strictrender" => 'Ścisły render',
     'block_module_strictrender_help' => 'Gdy włączone jest ścisłe renderowanie, moduł będzie uruchamiał tylko dostarczoną trasę (moduł, kontroler, działanie, parametry) bez słuchania akcji i tras kontrolera.',

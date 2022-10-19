@@ -2,11 +2,11 @@
 
 namespace cmstests\src\frontend\components;
 
-use Yii;
 use cmstests\CmsFrontendTestCase;
 use luya\cms\frontend\components\WebsiteBehaviorUrlRule;
 use luya\testsuite\scopes\PageScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
+use Yii;
 use yii\web\NotFoundHttpException;
 use yii\web\UrlNormalizerRedirectException;
 
@@ -16,7 +16,7 @@ class WebsiteBehaviorUrlRuleTest extends CmsFrontendTestCase
 
     public function testParseRequest()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $this->createAdminGroupFixture(1);
             $this->createAdminUserFixture();
             $this->createCmsWebsiteFixture([
@@ -41,14 +41,14 @@ class WebsiteBehaviorUrlRuleTest extends CmsFrontendTestCase
                     'is_deleted' => 0,
                 ]
             ]);
-    
+
             $rule = new WebsiteBehaviorUrlRule();
-    
+
             $this->assertFalse($rule->parseRequest($this->app->urlManager, $this->app->request));
-    
+
             Yii::$app->request->setHostInfo("http://test.de");
             $this->assertFalse($rule->parseRequest($this->app->urlManager, $this->app->request));
-    
+
             $redirectUrl = false;
             try {
                 Yii::$app->request->setHostInfo("http://www.test.de");
@@ -59,10 +59,10 @@ class WebsiteBehaviorUrlRuleTest extends CmsFrontendTestCase
             $this->assertStringStartsWith('test.de', $redirectUrl);
         });
     }
-    
+
     public function testNoDefaultHost()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $this->createAdminGroupFixture(1);
             $this->createAdminUserFixture();
             $this->createCmsWebsiteFixture([
@@ -77,11 +77,11 @@ class WebsiteBehaviorUrlRuleTest extends CmsFrontendTestCase
                     'redirect_to_host' => 0
                 ]
             ]);
-            
+
             $rule = new WebsiteBehaviorUrlRule();
-    
+
             Yii::$app->request->setHostInfo("http://test.de");
-    
+
             $this->expectException(NotFoundHttpException::class);
             $this->expectExceptionMessage("The requested host 'test.de' does not exist in website table");
             $rule->parseRequest($this->app->urlManager, $this->app->request);

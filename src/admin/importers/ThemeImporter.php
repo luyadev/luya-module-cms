@@ -25,28 +25,28 @@ class ThemeImporter extends Importer
      * @var ThemeManager
      */
     private $_themeManager;
-    
+
     /**
      * @inheritdoc
      */
     public function run($thowException = false)
     {
         $exists = [];
-        
+
         foreach ($this->getThemeManager()->getThemes($thowException) as $theme) {
             /** @var \luya\theme\Theme $theme */
             $exists = array_merge($exists, $this->handleThemeDefinitionInDirectories($theme->basePath));
         }
-        
+
         foreach (Theme::find()->all() as $theme) {
             if (!in_array($theme->id, $exists) && $theme->delete()) {
                 $this->addLog("[!] The theme {$theme->base_path} does not found anymore and was deleted.");
             }
         }
-        
+
         return $this->addLog("Theme importer finished with " . count($exists) . " themes.");
     }
-    
+
     /**
      * Handle a theme definition for different folders
      *
@@ -88,7 +88,7 @@ class ThemeImporter extends Importer
             $themeModel = new Theme();
             $themeModel->base_path = $basePath;
             $themeModel->setThemeConfig($themeConfig);
-            
+
             $log = "Added theme $basePath to database.";
         } else {
             $themeModel->setThemeConfig($themeConfig);
@@ -101,7 +101,7 @@ class ThemeImporter extends Importer
 
         return $themeModel->id;
     }
-    
+
     /**
      * @return ThemeManager
      */
@@ -110,10 +110,10 @@ class ThemeImporter extends Importer
         if ($this->_themeManager == null) {
             $this->_themeManager = Yii::$app->themeManager;
         }
-        
+
         return $this->_themeManager;
     }
-    
+
     /**
      * @param ThemeManager $themeManager
      */

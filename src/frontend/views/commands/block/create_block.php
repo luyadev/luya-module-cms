@@ -1,5 +1,4 @@
 <?php
-use luya\cms\frontend\commands\BlockController;
 
 echo "<?php\n";
 ?>

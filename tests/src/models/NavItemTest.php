@@ -37,7 +37,7 @@ class NavItemTest extends WebModelTestCase
                 'id' => 1,
             ]
         ]);
-        
+
         $this->createCmsNavItemFixture([
             1 => [
                 'id' => 1,
@@ -55,7 +55,7 @@ class NavItemTest extends WebModelTestCase
                 'is_deleted' => 0,
             ]
         ]);
-        
+
         $nav = Nav::findOne(1);
 
         $this->assertSame(1, $nav->id);

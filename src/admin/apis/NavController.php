@@ -3,21 +3,21 @@
 namespace luya\cms\admin\apis;
 
 use luya\admin\models\TagRelation;
-use luya\cms\models\NavContainer;
-use luya\cms\models\NavItemRedirect;
-use Yii;
-use luya\cms\models\Property;
-use luya\cms\models\Nav;
-use luya\cms\models\NavItem;
-use yii\db\Query;
-use yii\helpers\Json;
-use yii\base\InvalidCallException;
 use luya\admin\models\UserOnline;
-use yii\web\NotFoundHttpException;
 use luya\cms\admin\Module;
 use luya\cms\models\Log;
+use luya\cms\models\Nav;
+use luya\cms\models\NavContainer;
+use luya\cms\models\NavItem;
+use luya\cms\models\NavItemRedirect;
+use luya\cms\models\Property;
+use Yii;
+use yii\base\InvalidCallException;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
+use yii\helpers\Json;
 use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 
 /**
  * Nav Api provides tasks to create, modify and delete navigation items and properties of items.
@@ -36,21 +36,21 @@ class NavController extends \luya\admin\base\RestController
     {
         return Yii::$app->request->post($name, $defautValue);
     }
-    
+
     public function actionUpdate($id)
     {
         $model = Nav::findOne($id);
-        
+
         if (!$model) {
             throw new NotFoundHttpException("Unable to find nav model.");
         }
-        
+
         $model->attributes = Yii::$app->request->bodyParams;
-        
+
         if (!$model->save()) {
             return $this->sendModelError($model);
         }
-        
+
         return true;
     }
 
@@ -62,17 +62,17 @@ class NavController extends \luya\admin\base\RestController
     public function actionDeepPageCopy()
     {
         $navId = (int) Yii::$app->request->getBodyParam('navId');
-        
+
         if (empty($navId)) {
             throw new InvalidCallException("navId can not be empty.");
         }
-        
+
         $nav = Nav::findOne($navId);
-        
+
         if (!$nav) {
             throw new InvalidCallException("Unable to find the requested model.");
         }
-        
+
         $model = $nav->createCopy();
         foreach ($nav->navItems as $item) {
             $newItem = new NavItem();
@@ -85,7 +85,7 @@ class NavController extends \luya\admin\base\RestController
                 return $item->copyTypeContent($newItem);
             }
         }
-        
+
         return $this->sendModelError($newItem);
     }
 
@@ -126,23 +126,23 @@ class NavController extends \luya\admin\base\RestController
 
         return $this->sendModelError($newItem);
     }
-    
+
     public function actionSaveCatToggle()
     {
         $catId = Yii::$app->request->getBodyParam('catId');
         $state = Yii::$app->request->getBodyParam('state');
-        
+
         if ($catId) {
             return Yii::$app->adminuser->identity->setting->set("togglecat.{$catId}", (int) $state);
         }
     }
-    
+
     public function actionTreeHistory()
     {
         $item = Yii::$app->request->getBodyParam('data');
         Yii::$app->adminuser->identity->setting->set('tree.'.$item['id'], (int) $item['toggle_open']);
     }
-    
+
     public function actionFindNavItems($navId)
     {
         return NavItem::find()->where(['nav_id' => $navId])->asArray()->with('lang')->all();
@@ -159,16 +159,16 @@ class NavController extends \luya\admin\base\RestController
         UserOnline::lock(Yii::$app->adminuser->id, NavItem::tableName(), $navId, 'lock_cms_edit_page', [
             'title' => $nav->defaultLanguageItem ? $nav->defaultLanguageItem->title : '(no translation)',
         ]);
-        
+
         $data = [];
         foreach (Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
             $object = \luya\admin\models\Property::findOne($row['admin_prop_id']);
             $blockObject = $object->createObject($row['value']);
-            
+
             $value = $blockObject->getAdminValue();
-            
+
             $row['value'] = (is_numeric($value)) ? (int) $value : $value;
-             
+
             $data[] = $row;
         }
 
@@ -178,9 +178,9 @@ class NavController extends \luya\admin\base\RestController
     public function actionSaveProperties($navId)
     {
         $rows = [];
-        
+
         $doNotDeleteList = [];
-        
+
         foreach (Yii::$app->request->post() as $id => $value) {
             $rows[] = [
                 'nav_id' => $navId,
@@ -208,7 +208,7 @@ class NavController extends \luya\admin\base\RestController
                 $model->insert(false);
             }
         }
-        
+
         foreach (Property::find()->where(['nav_id' => $navId])->andWhere(['not in', 'admin_prop_id', $doNotDeleteList])->all() as $prop) {
             $prop->delete(false);
         }
@@ -242,7 +242,7 @@ class NavController extends \luya\admin\base\RestController
                 ->select('cms_nav.id')
                 ->column();
             Nav::updateAll(['is_home' => false], ['id' => $navIds]);
-    
+
             $item->setAttributes([
                 'is_home' => true,
             ]);
@@ -298,7 +298,7 @@ class NavController extends \luya\admin\base\RestController
 
     /**
      * Save tags for a given page.
-     * 
+     *
      * Tags are provided by post and contains the id.
      *
      * @param integer $id
@@ -321,7 +321,7 @@ class NavController extends \luya\admin\base\RestController
         if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
             throw new ForbiddenHttpException("Unable to remove this page due to permission restrictions.");
         }
-        
+
         $model = Nav::find()->where(['id' => $navId])->one();
 
         if (!$model) {
@@ -373,24 +373,24 @@ class NavController extends \luya\admin\base\RestController
         $fromDraft = $this->postArg('use_draft');
         $parentNavId = $this->postArg('parent_nav_id') ?: null;
         $navContainerId = $this->postArg('nav_container_id');
-        
+
         if (!empty($parentNavId)) {
             $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
-        
+
         if (!empty($fromDraft)) {
             $create = $model->createPageFromDraft($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('description'), $this->postArg('from_draft_id'), $this->postArg('is_draft'));
         } else {
             $create = $model->createPage($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'), $this->postArg('is_draft'));
         }
-        
+
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
-        
+
         return $create;
     }
-    
+
     /**
      * creates a new nav_item entry for the type page (it means nav_id will be delivered).
      */
@@ -410,14 +410,14 @@ class NavController extends \luya\admin\base\RestController
     {
         $this->menuFlush();
         $model = new Nav();
-        
+
         $parentNavId = $this->postArg('parent_nav_id');
         $navContainerId = $this->postArg('nav_container_id');
-        
+
         if (!empty($parentNavId)) {
             $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
-        
+
         $create = $model->createModule(
             $parentNavId,
             $navContainerId,
@@ -465,16 +465,16 @@ class NavController extends \luya\admin\base\RestController
     {
         $this->menuFlush();
         $model = new Nav();
-        
+
         $parentNavId = $this->postArg('parent_nav_id');
         $navContainerId = $this->postArg('nav_container_id');
-        
+
         if (!empty($parentNavId)) {
             $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
 
         $redirect = $this->postArg('redirect');
-        
+
         $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), isset($redirect['target']) ? $redirect['target'] : null);
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
@@ -482,7 +482,7 @@ class NavController extends \luya\admin\base\RestController
 
         return $create;
     }
-    
+
     public function actionCreateRedirectItem()
     {
         $this->menuFlush();
@@ -492,10 +492,10 @@ class NavController extends \luya\admin\base\RestController
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
-    
+
         return $create;
     }
-    
+
     /**
      * Create a new page from another existing Page.
      *
@@ -506,14 +506,14 @@ class NavController extends \luya\admin\base\RestController
         $this->menuFlush();
         $model = new Nav();
         $response = $model->createItemLanguageCopy($this->postArg('id'), $this->postArg('toLangId'), $this->postArg('title'), $this->postArg('alias'));
-        
+
         if (is_array($response)) {
             return $this->sendArrayError($response);
         }
-        
+
         return $response;
     }
-    
+
     /**
      * Flush the menu data if component exits.
      *

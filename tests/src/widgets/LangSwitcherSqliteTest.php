@@ -64,10 +64,10 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
                 'is_deleted' => 0,
             ]
         ]);
-        
+
         $this->createAdminGroupFixture(1);
         $this->createAdminUserFixture();
-    
+
         $this->createCmsWebsiteFixture([
             1 => [
                 'id' => 1,
@@ -139,7 +139,7 @@ class LangSwitcherSqliteTest extends WebApplicationTestCase
         ];
 
         LangSwitcher::setUrlRuleParam('en', 'slug', 'enslug');
-        
+
         $w = new LangSwitcher();
         $switcher = $w->run();
 

@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Projet',
     'block_group_text_elements' => 'Textes',
     'block_group_media_group' => 'Médias',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Rendu strict',
     'block_module_strictrender_help' => 'Lorsque le rendu strict est activé, le module exécutera uniquement les routes fournies (module, contrôleur, action, params) sans tenir compte des actions ni de l\'url des contrôleurs',

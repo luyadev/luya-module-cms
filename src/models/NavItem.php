@@ -2,19 +2,18 @@
 
 namespace luya\cms\models;
 
-use Yii;
-
-use yii\db\ActiveQuery;
-use yii\db\ActiveRecordInterface;
-use yii\db\ActiveRecord;
-use yii\base\Exception;
-use luya\cms\admin\Module;
-use luya\admin\models\Lang;
 use luya\admin\base\GenericSearchInterface;
+
 use luya\admin\helpers\Angular;
+use luya\admin\models\Lang;
 use luya\admin\models\User;
-use luya\helpers\Inflector;
 use luya\admin\ngrest\base\NgRestActiveQuery;
+use luya\cms\admin\Module;
+use luya\helpers\Inflector;
+use Yii;
+use yii\base\Exception;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each
@@ -50,11 +49,11 @@ use luya\admin\ngrest\base\NgRestActiveQuery;
  */
 class NavItem extends ActiveRecord implements GenericSearchInterface
 {
-    const TYPE_PAGE = 1;
+    public const TYPE_PAGE = 1;
 
-    const TYPE_MODULE = 2;
+    public const TYPE_MODULE = 2;
 
-    const TYPE_REDIRECT = 3;
+    public const TYPE_REDIRECT = 3;
 
     public $parent_nav_id;
 
@@ -118,9 +117,9 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function rules()
     {
         return [
-            ['nav_item_type_id', 'required', 'isEmpty' => function($value) {
+            ['nav_item_type_id', 'required', 'isEmpty' => function ($value) {
                 return empty($value);
-            }, 'when' => function() {
+            }, 'when' => function () {
                 return !$this->isNewRecord;
             }],
             [['description', 'keywords'], 'string'],
@@ -187,7 +186,6 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function getType()
     {
         if ($this->_type === null) {
-
             // what kind of item type are we looking for
             if ($this->nav_item_type == self::TYPE_PAGE) {
                 $this->_type = NavItemPage::findOne($this->nav_item_type_id);
@@ -344,11 +342,11 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function fields()
     {
         $fields = parent::fields();
-        $fields['is_cacheable'] = function($model) {
+        $fields['is_cacheable'] = function ($model) {
             return (int) $model->is_cacheable;
             // return Angular::typeCast($model->is_cacheable); use for admin@4.0 release
         };
-        $fields['is_url_strict_parsing_disabled'] = function($model) {
+        $fields['is_url_strict_parsing_disabled'] = function ($model) {
             return (int) $model->is_url_strict_parsing_disabled;
             // return Angular::typeCast($model->is_url_strict_parsing_disabled); use for admin@4.0 release
         };

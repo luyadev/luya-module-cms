@@ -1,8 +1,8 @@
 <?php
-use luya\helpers\Url;
 use luya\cms\frontend\Module;
-use yii\helpers\VarDumper;
 use luya\helpers\Inflector;
+use luya\helpers\Url;
+use yii\helpers\VarDumper;
 
 /**
  * @var \luya\theme\Theme $theme

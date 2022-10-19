@@ -2,15 +2,15 @@
 
 namespace luya\cms\frontend\controllers;
 
-use Yii;
-use yii\web\View;
-use yii\web\NotFoundHttpException;
 use Exception;
 use luya\cms\frontend\base\Controller;
 use luya\cms\models\NavItem;
 use luya\cms\models\Redirect;
-use yii\web\Response;
 use luya\web\filters\ResponseCache;
+use Yii;
+use yii\web\NotFoundHttpException;
+use yii\web\Response;
+use yii\web\View;
 
 /**
  * CMS Default Rendering
@@ -24,14 +24,14 @@ class DefaultController extends Controller
      * @inheritdoc
      */
     public $enableCsrfValidation = false;
-    
+
     /**
      * @inheritdoc
      */
     public function init()
     {
         parent::init();
-        
+
         // enable content compression to remove whitespace
         if (!YII_DEBUG && YII_ENV_PROD && $this->module->contentCompression) {
             $this->view->on(View::EVENT_AFTER_RENDER, [$this, 'minify']);
@@ -49,8 +49,8 @@ class DefaultController extends Controller
         // if the page could not be found, caching is disable otherwise the behaviors method would
         // throw an exception which then would stop execute the "find redirects" task.
         try {
-            return $this->module->fullPageCache 
-                && Yii::$app->request->isGet 
+            return $this->module->fullPageCache
+                && Yii::$app->request->isGet
                 && Yii::$app->menu->current
                 && Yii::$app->menu->current->type == NavItem::TYPE_PAGE
                 && !Yii::$app->menu->current->is404Page
@@ -121,7 +121,7 @@ class DefaultController extends Controller
             if (($redirect = $this->findInternalRedirect())) {
                 return $redirect;
             }
-            
+
             throw new NotFoundHttpException($e->getMessage());
         }
 
@@ -142,16 +142,16 @@ class DefaultController extends Controller
         if (is_array($content)) {
             return $this->asJson($content);
         }
-        
+
         // Default format is FORMAT_HTML, if RAW is used we render the content without layout.
         // @see https://github.com/luyadev/luya-module-cms/issues/35
         if (Yii::$app->response->format == Response::FORMAT_RAW) {
             return $content;
         }
-        
+
         return $this->renderContent($content);
     }
-    
+
     protected function findInternalRedirect()
     {
         $path = Yii::$app->request->pathInfo;
@@ -169,7 +169,7 @@ class DefaultController extends Controller
                 }
             }
         }
-        
+
         return false;
     }
 }

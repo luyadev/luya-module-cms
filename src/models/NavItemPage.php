@@ -2,15 +2,15 @@
 
 namespace luya\cms\models;
 
-use Yii;
-use yii\db\Query;
-use yii\base\InvalidConfigException;
-use yii\base\ViewContextInterface;
+use luya\cms\admin\Module;
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
-use luya\cms\admin\Module;
 use luya\traits\CacheableTrait;
+use Yii;
+use yii\base\InvalidConfigException;
+use yii\base\ViewContextInterface;
 use yii\behaviors\TimestampBehavior;
+use yii\db\Query;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -38,16 +38,16 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     public function init()
     {
         parent::init();
-        
+
         $this->on(self::EVENT_AFTER_DELETE, function ($event) {
             $columns = $event->sender->getNavItemPageBlockItems()->select(['id'])->column();
             NavItemPageBlockItem::deleteAll(['in', 'id', $columns]);
-            
+
             if ($event->sender->forceNavItem) {
                 $event->sender->forceNavItem->updateTimestamp();
             }
         });
-        
+
         $this->on(self::EVENT_AFTER_UPDATE, function ($event) {
             $event->sender->forceNavItem->updateTimestamp();
         });
@@ -66,7 +66,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             ]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -74,7 +74,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         return NavItem::TYPE_PAGE;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -106,7 +106,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'layout_id' => Module::t('model_navitempage_layout_label'),
         ];
     }
-    
+
     /**
      * @return \luya\cms\models\Layout
      */
@@ -138,7 +138,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         };
         return $fields;
     }
-    
+
     /**
      * The folder where all cms layouts are stored in order to enable partial rendering.
      *
@@ -148,7 +148,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         return '@app/views/cmslayouts';
     }
-    
+
     /**
      * Frontend get Content returns the rendered content for this nav item page based on the page logic (placeholders, blocks)
      *
@@ -167,7 +167,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
             }
         }
-        
+
         // check whether the layout view file should be renderd trough active context or as file.
         // if the view_file starts with / or @ it can be renderd as renderFile() otherwise using render() with active context.
         $viewFile = $this->layout->view_file;
@@ -177,7 +177,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 'placeholders' => $placholders,
             ], $this);
         }
-        
+
         return Yii::$app->view->render($this->layout->view_file, [
             'placeholders' => $placholders,
         ], $this);
@@ -207,7 +207,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         return $this->renderPlaceholderRecursive($this->id, $placeholderName, 0);
     }
-    
+
     /**
      * Returns whether admin user is working in frontend context.
      *
@@ -235,7 +235,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         $placeholders = $this->getPlaceholders($navItemPageId, $placeholderVar, $prevId);
         $blocksCount = count($placeholders);
         $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
-        
+
         // foreach all placeholders but preserve varaibles above to make calculations
         foreach ($placeholders as $key => $placeholder) {
             $i++;
@@ -245,9 +245,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
             /** @var $blockObject \luya\cms\base\InternalBaseBlock */
             $blockObject = Block::createObject($placeholder['class'], $placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
-    
-            if ($blockObject) {
 
+            if ($blockObject) {
                 $isCachingEnabled = $blockObject->getIsCacheEnabled() && $this->isGuest();
 
                 $blockResponse = $isCachingEnabled ? $this->getHasCache($cacheKey) : false;
@@ -257,7 +256,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
-        
+
                     // inject variations variables
                     $possibleVariations = isset($variations[$className]) ? $variations[$className] : false;
                     $ensuredVariation = false;
@@ -277,8 +276,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                             if (!empty($typeContent)) {
                                 $type = strtolower($type);
                                 switch ($type) {
-                                    case "vars": $blockObject->setVarValues($typeContent); break;
-                                    case "cfgs": $blockObject->setCfgValues($typeContent); break;
+                                    case "vars": $blockObject->setVarValues($typeContent);
+                                    break;
+                                    case "cfgs": $blockObject->setCfgValues($typeContent);
+                                    break;
                                     case "extras":
                                         foreach ($typeContent as $extraKey => $extraValue) {
                                             $blockObject->addExtraVar($extraKey, $extraValue);
@@ -292,7 +293,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     foreach ($this->getOptions() as $optKey => $optValue) {
                         $blockObject->setEnvOption($optKey, $optValue);
                     }
-        
+
                     $blockObject->setEnvOption('index', $i);
                     $blockObject->setEnvOption('itemsCount', $blocksCount);
                     $blockObject->setEnvOption('isFirst', ($i == 1));
@@ -300,14 +301,14 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $prevIsEqual = array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id'];
                     $blockObject->setEnvOption('isPrevEqual', $prevIsEqual);
                     $blockObject->setEnvOption('isNextEqual', array_key_exists($next, $placeholders) && $placeholder['block_id'] == $placeholders[$next]['block_id']);
-        
+
                     if (!$prevIsEqual) {
                         $equalIndex = 1;
                     } else {
                         $equalIndex++;
                     }
                     $blockObject->setEnvOption('equalIndex', $equalIndex);
-        
+
                     // render sub placeholders and set into object
                     $insertedHolders = [];
                     foreach ($blockObject->getConfigPlaceholdersExport() as $item) {
@@ -320,8 +321,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     } else {
                         $blockResponse = $blockObject->renderFrontend();
                     }
-                    
-        
+
+
                     if ($isCachingEnabled) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
                         $blockObject->onRegister();
@@ -329,7 +330,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 } else {
                     $blockObject->onRegisterFromCache();
                 }
-                
+
                 $string.= $blockResponse;
                 unset($blockResponse);
             }
@@ -337,7 +338,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
         unset($variations);
         unset($placeholders);
-        
+
         return $string;
     }
 
@@ -359,7 +360,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             ->orderBy(['sort_index' => SORT_ASC])
             ->all();
     }
-    
+
     /**
      * Convert a json string to an array.
      *
@@ -369,7 +370,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     private function jsonToArray($json)
     {
         $response = json_decode($json, true);
-    
+
         return (empty($response)) ? [] : $response;
     }
 
@@ -381,18 +382,18 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         //$nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
         $nav_item_page = $this;
-        
+
         if (!$nav_item_page->layout) {
             return [];
         }
-        
+
         $return = [
             'nav_item_page' => ['id' => $nav_item_page->id, 'layout_id' => $nav_item_page->layout_id, 'layout_name' => $nav_item_page->layout->name],
             '__placeholders' => [],
         ];
-        
+
         $config = json_decode($nav_item_page->layout->json_config, true);
-        
+
         if (isset($config['placeholders'])) {
             foreach ($config['placeholders'] as $rowKey => $row) {
                 foreach ($row as $placeholderKey => $placeholder) {
@@ -402,19 +403,19 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     if (!isset($placeholder['cols'])) {
                         $placeholder['cols'] = '12';
                     }
-                    
+
                     $return['__placeholders'][$rowKey][$placeholderKey] = $placeholder;
-                    
+
                     $placeholderVar = $placeholder['var'];
-                    
+
                     $return['__placeholders'][$rowKey][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, 0, $this);
                 }
             }
         }
-        
+
         return $return;
     }
-    
+
     /**
      * Get the blocks for a given placeholder, **without recursion**.
      *
@@ -430,21 +431,21 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             ->orderBy(['sort_index' => SORT_ASC])
             ->with(['block'])
             ->all();
-        
+
         $data = [];
-    
+
         foreach ($nav_item_page_block_item_data as $blockItem) {
             $item = self::getBlockItem($blockItem, $navItemPage);
             if ($item) {
                 $data[] = $item;
             }
-            
+
             unset($item);
         }
-    
+
         return $data;
     }
-    
+
     /**
      * Get the arrayable values from a specific block id.
      *
@@ -462,45 +463,45 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         if ($blockObject === false) {
             return false;
         }
-    
+
         $blockItem['json_config_values'] = json_decode($blockItem['json_config_values'], true);
         $blockItem['json_config_cfg_values'] = json_decode($blockItem['json_config_cfg_values'], true);
-    
+
         $blockValue = $blockItem['json_config_values'];
         $blockCfgValue = $blockItem['json_config_cfg_values'];
-    
+
         $blockObject->setVarValues((empty($blockValue)) ? [] : $blockValue);
         $blockObject->setCfgValues((empty($blockCfgValue)) ? [] : $blockCfgValue);
-    
+
         $placeholders = [];
-    
+
         foreach ($blockObject->getConfigPlaceholdersByRowsExport() as $rowKey => $row) {
             foreach ($row as $pk => $pv) {
                 $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
                 $pv['prev_id'] = $blockItem['id'];
                 $placeholderVar = $pv['var'];
-        
+
                 $pv['__nav_item_page_block_items'] = static::getPlaceholder($placeholderVar, $blockItem['id'], $navItemPage);
-        
+
                 $placeholder = $pv;
-                
+
                 $placeholders[$rowKey][] = $placeholder;
             }
         }
-    
+
         if (empty($blockItem['json_config_values'])) {
             $blockItem['json_config_values'] = ['__e' => '__o'];
         }
-    
+
         if (empty($blockItem['json_config_cfg_values'])) {
             $blockItem['json_config_cfg_values'] = ['__e' => '__o'];
         }
-    
+
         $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
-        
+
         $className = get_class($blockObject);
         $shortName = (new \ReflectionClass($blockObject))->getShortName();
-        
+
         return [
             'is_dirty' => (bool) $blockItem['is_dirty'],
             'is_container' => (int) $blockObject->getIsContainer(),
@@ -521,11 +522,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
             'variations' => isset($variations[$className]) ? $variations[$className] : false,
-            'variation' => empty($blockItem['variation'])? "0" : $blockItem['variation'], // as by angular selection
+            'variation' => empty($blockItem['variation']) ? "0" : $blockItem['variation'], // as by angular selection
             'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
         ];
     }
-    
+
     /**
      * Copy blocks from one page to another.
      *
@@ -536,7 +537,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     public static function copyBlocks($fromPageId, $toPageId)
     {
         $pageBlocks = NavItemPageBlockItem::find()->where(['nav_item_page_id' => $fromPageId])->asArray(true)->all();
-        
+
         $idLink = [];
         foreach ($pageBlocks as $block) {
             $blockItem = new NavItemPageBlockItem();
@@ -546,7 +547,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 $idLink[$block['id']] = $blockItem->id;
             }
         }
-        
+
         // as blocks with subblocks have the previous block id stored in prev_id those values must be replaced from the old prev_id
         // with the new prev_id
         $newPageBlocks = NavItemPageBlockItem::find()->where(['nav_item_page_id' => $toPageId])->asArray(true)->all();
@@ -556,10 +557,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 NavItemPageBlockItem::updateAll(['prev_id' => $idLink[$block['prev_id']]], ['id' => $block['id']]);
             }
         }
-        
+
         return true;
     }
-    
+
     /**
      * This method is used to force the parent nav item for the corresponding page item whether the type matches or not:
      *
@@ -569,7 +570,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         return $this->hasOne(NavItem::class, ['id' => 'nav_item_id']);
     }
-    
+
     /**
      * Return all page block items for the current corresponding page. Not related to any sortings or placeholders.
      *

@@ -116,7 +116,7 @@ return [
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Tolong dipilih',
     'view_index_sidebar_autopreview' => 'Pratinjau Otomatis',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Membuat halaman baru',
     'module_permission_update_pages' => 'Merubah halaman',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Buat versi',
     'button_update_version' => 'Ubah versi',
     'menu_group_item_env_permission' => 'Izin halaman',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Buat salinan halaman saat ini dengan semua isinya. Salinan mereka akan mencakup semua bahasa tetapi hanya versi yang diterbitkan.',
     'page_update_actions_deepcopy_btn' => 'Buat salinan',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Judul kata kunci (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Tidak dapat membuat halaman dari template kosong',
     'view_update_variation_select' => 'Normal',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Konfigurasi',
     'view_update_block_tooltip_delete' => 'Hapus',
     'view_update_block_tooltip_close' => 'Tutup',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Update halaman terbaru',
     'cmsadmin_settings_homepage_title' => 'Halaman default',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Pembatasan grup pengguna',
     'model_website_user_ids_label' => 'Pembatasan ke pengguna',
     'model_website_access_restrict' => 'Pembatasan akses',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Nama',
     'model_block_class_label' => 'Kelas',

@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Project',
     'block_group_text_elements' => 'Texts',
     'block_group_media_group' => 'Media',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Strict Render',
     'block_module_strictrender_help' => 'When strict render is enabled, the module will only run the provided route (module, controller, action, params) without listening to action and controller routes.',

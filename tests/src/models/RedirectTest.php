@@ -3,8 +3,8 @@
 namespace tests\web\cmsadmin\models;
 
 use cmstests\ModelTestCase;
-use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\cms\models\Redirect;
+use luya\testsuite\fixtures\NgRestModelFixture;
 
 class RedirectTest extends ModelTestCase
 {
@@ -78,7 +78,7 @@ class RedirectTest extends ModelTestCase
         $fixture = new NgRestModelFixture([
             'modelClass' => Redirect::class,
         ]);
-        
+
         $model = new Redirect();
         $model->catch_path = 'foo';
         $model->redirect_path = 'bar';

@@ -233,7 +233,7 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
-    
+
 // added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

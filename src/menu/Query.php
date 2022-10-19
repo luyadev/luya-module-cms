@@ -3,12 +3,12 @@
 namespace luya\cms\menu;
 
 use luya\admin\models\TagRelation;
-use Yii;
-use yii\base\BaseObject;
 use luya\cms\Exception;
 use luya\cms\Menu;
 use luya\cms\models\Nav;
 use luya\helpers\ArrayHelper;
+use Yii;
+use yii\base\BaseObject;
 
 /**
  * Menu Query Builder.
@@ -56,9 +56,9 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * @var array An array with all available where operators.
      */
     protected $whereOperators = ['<', '<=', '>', '>=', '=', '!=', '==', 'in'];
-    
+
     private $_menu;
-    
+
     /**
      * Getter method to return menu component
      *
@@ -72,7 +72,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
 
         return $this->_menu;
     }
-    
+
     /**
      * Setter method for menu Container.
      *
@@ -82,7 +82,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     {
         $this->_menu = $menu;
     }
-    
+
     /**
      * Helper method to retrieve only the root elements for a given query.
      *
@@ -92,7 +92,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     {
         return $this->where([self::FIELD_PARENTNAVID => 0]);
     }
-    
+
     /**
      * Helper method to define the container to retrieve all elements from.
      *
@@ -110,25 +110,25 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * Query where similar behavior of filtering items.
      *
      * **Key Value Filtering**
-     * 
+     *
      * When using key value where condition, the operator equal (`=`) will be used by default.
-     * 
+     *
      * ```php
      * where(['field' => 'value'])
      * ```
-     * 
+     *
      * which is equals to in operator mode:
-     * 
+     *
      * ```php
      * where(['=', 'field', 'value']);
      * ```
-     * 
+     *
      * Its also possible to have multiple AND where conditions with equal (`=`) operator:
-     * 
+     *
      * ``php
      * where(['field' => 'value', 'anotherfield' => 'anothervalue']);
      * ```
-     * 
+     *
      * **Operator Filtering**
      *
      * ```php
@@ -217,7 +217,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     }
 
     private $_lang;
-    
+
     /**
      * Changeing the container in where the data should be collection, by default the composition
      * `langShortCode` is the default language code. This represents the current active language,
@@ -234,7 +234,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     }
 
     private $_with = ['hidden' => false];
-    
+
     /**
      * With/Without expression to hidde or display data from the Menu Query.
      *
@@ -250,12 +250,12 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
                 $this->_with[$type] = true;
             }
         }
- 
+
         return $this;
     }
-    
+
     private $_preloadModels = false;
-    
+
     /**
      * Preload models for the given Menu Query.
      *
@@ -268,7 +268,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     public function preloadModels($preloadModels = true)
     {
         $this->_preloadModels = $preloadModels;
-        
+
         return $this;
     }
 
@@ -287,7 +287,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     }
 
     private $_limit;
-    
+
     /**
      * Set a limition for the amount of results.
      *
@@ -299,12 +299,12 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         if (is_numeric($count)) {
             $this->_limit = $count;
         }
-        
+
         return $this;
     }
-    
+
     private $_offset;
-    
+
     /**
      * Define offset start for the rows, if you defined offset to be 5 and you have 11 rows, the
      * first 5 rows will be skiped. This is commonly used to make pagination function in combination
@@ -318,12 +318,12 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         if (is_numeric($offset)) {
             $this->_offset = $offset;
         }
-        
+
         return $this;
     }
 
     private $_order;
-    
+
     /**
      * Order the query by one or multiple fields asc or desc.
      *
@@ -345,28 +345,28 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     public function orderBy(array $order)
     {
         $orderBy = ['keys' => [], 'directions' => []];
-        
+
         foreach ($order as $key => $direction) {
             $orderBy['keys'][] = $key;
             $orderBy['directions'][] = $direction;
         }
-        
+
         $this->_order = $orderBy;
-        
+
         return $this;
     }
 
     /**
      * Filter by Tag IDs.
-     * 
+     *
      * An example of how to filter a menu based on tag ids:
-     * 
+     *
      * ```php
      * foreach (Yii::$app->menu->find()->container('default')->tags([1,2])->limit(3)->al() as $item) {
      *     echo $item->title;
      * }
      * ```
-     * 
+     *
      * Returns all pages in the default container with tag ids 1 & 2 limited by 3 entries.
      *
      * @param string|array $tags This can be either a string with a tag id or an array with tag ids.
@@ -380,13 +380,13 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
             ->where([
                 'and',
                 ['=', 'table_name', Nav::tableName()],
-                ['in', 'tag_id', (array) $tags]   
+                ['in', 'tag_id', (array) $tags]
             ])
             ->column();
 
         return $this->where(['in', self::FIELD_NAVID, $ids]);
     }
-    
+
     /**
      * Retrieve only one result for your query, even if there are more rows then one, it will
      * just pick the first row from the filtered result and return the item object. If the filtering
@@ -415,7 +415,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     {
         return static::createArrayIterator($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with), $this->getLang(), $this->_with, $this->_preloadModels);
     }
-    
+
     /**
      * Returns the count for the provided filter options.
      *
@@ -425,7 +425,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     {
         return count($this->filter($this->menu[$this->getLang()], $this->_where, $this->_with));
     }
-    
+
     /**
      * Static method to create an iterator object based on the provided array data with
      * optional language context.
@@ -440,7 +440,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
     {
         return (new QueryIteratorFilter(new QueryIterator(['data' => $data, 'lang' => $langContext, 'with' => $with, 'preloadModels' => $preloadModels])));
     }
-    
+
     /**
      * Static method to create the item object itself, is used for the one() method and in the current() method
      * of the QueryIterator class.
@@ -471,25 +471,25 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
                     return false;
                 }
             }
-    
+
             return true;
         });
 
         if ($this->_order !== null) {
             ArrayHelper::multisort($data, $this->_order['keys'], $this->_order['directions']);
         }
-    
+
         if ($this->_offset !== null) {
             $data = array_slice($data, $this->_offset, null, true);
         }
-    
+
         if ($this->_limit !== null) {
             $data = array_slice($data, 0, $this->_limit, true);
         }
-        
+
         return $data;
     }
-    
+
     /**
      * Filter an array item based on the where expression.
      *
@@ -504,7 +504,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         if ($field == 'is_hidden' && $with['hidden'] === false && $value == 1) {
             return false;
         }
-    
+
         foreach ($where as $expression) {
             if ($expression['field'] == $field) {
                 switch ($expression['op']) {
@@ -527,7 +527,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
                 }
             }
         }
-    
+
         return true;
     }
 }

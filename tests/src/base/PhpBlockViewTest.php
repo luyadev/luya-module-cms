@@ -5,7 +5,6 @@ namespace cmstests\src\base;
 use cmstests\CmsFrontendTestCase;
 use cmstests\data\blocks\ConcretImplementationBlock;
 use cmstests\data\blocks\PhpTestBlock;
-use cmstests\src\blocks\PhpBlockTest;
 use luya\cms\base\PhpBlockView;
 use luya\web\View;
 use Yii;
@@ -28,7 +27,7 @@ class PhpBlockViewTest extends CmsFrontendTestCase
                 "appJsEnd2" => "alert('body end')"
             ],
         ];
-        
+
         // Registered js from block
         $blockAssets = [
             'js' => [
@@ -40,12 +39,12 @@ class PhpBlockViewTest extends CmsFrontendTestCase
                 ],
             ]
         ];
-        
+
         PhpBlockView::registerToAppView($blockAssets, []);
-        
+
         $expectedJsOrder = [View::POS_READY, View::POS_END, View::POS_BEGIN];
         $this->assertSame($expectedJsOrder, array_keys(Yii::$app->view->js), 'Array keys have to the same order.');
-        
+
         $expectedJsPosReady = [
             "appJsOnReady" => "alert('app ready')",
             // duplicate js will overwrite by block register
@@ -53,20 +52,20 @@ class PhpBlockViewTest extends CmsFrontendTestCase
             "blockJsOnReady" => "alert('block ready')"
         ];
         $this->assertSame($expectedJsPosReady, Yii::$app->view->js[View::POS_READY]);
-        
+
         $expectedJsPosEnd = [
             "appJsEnd1" => "alert('body end')",
             "appJsEnd2" => "alert('body end')",
             "blockJsOnEnd" => "alert('body end')",
         ];
         $this->assertSame($expectedJsPosEnd, Yii::$app->view->js[View::POS_END]);
-        
+
         $expectedJsPosBegin = [
             "blockJsOnBegin" => "alert('body begin')"
         ];
         $this->assertSame($expectedJsPosBegin, Yii::$app->view->js[View::POS_BEGIN]);
     }
-    
+
     public function testRegisterCssAndJs()
     {
         // Simulate already registered js
@@ -75,12 +74,12 @@ class PhpBlockViewTest extends CmsFrontendTestCase
                 "appJsOnReady" => "alert('app ready')",
             ],
         ];
-        
+
         Yii::$app->view->css = [
             "bodyCss" => "this will overwritten by block",
             "appCssH1" => "h1 { background: black; }",
         ];
-        
+
         // Registered js from block
         $blockAssets = [
             'css' => [
@@ -93,15 +92,15 @@ class PhpBlockViewTest extends CmsFrontendTestCase
                 ]
             ],
         ];
-        
+
         PhpBlockView::registerToAppView($blockAssets, []);
-        
+
         $expectedJs = [
             "appJsOnReady" => "alert('app ready')",
             "blockJsOnReady" => "alert('block ready')",
         ];
         $this->assertSame($expectedJs, Yii::$app->view->js[View::POS_READY]);
-        
+
         $expectedCss = [
             "bodyCss" => "body { background: white; }",
             "appCssH1" => "h1 { background: black; }",
@@ -109,7 +108,7 @@ class PhpBlockViewTest extends CmsFrontendTestCase
         ];
         $this->assertSame($expectedCss, Yii::$app->view->css);
     }
-    
+
     /**
      *  @todo Test register multiple asset bundles
      */
@@ -119,9 +118,9 @@ class PhpBlockViewTest extends CmsFrontendTestCase
             AssetBundle::class,
             //JqueryAsset::class,
         ];
-        
+
         PhpBlockView::registerToAppView([], $blockAssetBundles);
-        
+
         $this->assertInstanceOf(AssetBundle::class, Yii::$app->view->assetBundles[AssetBundle::class]);
         //$this->assertInstanceOf(JqueryAsset::class, Yii::$app->view->assetBundles[BootstrapAsset::class]);
     }

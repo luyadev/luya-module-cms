@@ -2,8 +2,8 @@
 
 namespace cmstests;
 
-use yii\helpers\Inflector;
 use luya\testsuite\cases\WebApplicationTestCase;
+use yii\helpers\Inflector;
 
 require 'vendor/autoload.php';
 require 'data/env.php';
@@ -14,7 +14,7 @@ class CmsFrontendTestCase extends WebApplicationTestCase
     {
         return include(__DIR__ .'/data/configs/cms.php');
     }
-    
+
     public function beforeSetup()
     {
         include(__DIR__ .'/data/env.php');
@@ -32,7 +32,7 @@ class CmsFrontendTestCase extends WebApplicationTestCase
         $data[] = self::generateMenuItem(8, 'Page 1.2.3', ['parent_nav_id' => 4, 'depth' => 3]);
         return $data;
     }
-    
+
     public static function mockMenuContainerArray()
     {
         $data[] = self::generateMenuItem(1, 'homepage', ['is_home' => 1]);
@@ -40,7 +40,7 @@ class CmsFrontendTestCase extends WebApplicationTestCase
         $data[] = self::generateMenuItem(3, '(c1) Page 1', ['container' => 'c1']);
         $data[] = self::generateMenuItem(5, '(c2) Page 1', ['container' => 'c2']);
         $data[] = self::generateMenuItem(6, '(c2) Page 2', ['container' => 'c2']);
-        
+
         return $data;
     }
 

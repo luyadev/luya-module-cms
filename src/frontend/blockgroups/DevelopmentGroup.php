@@ -17,12 +17,12 @@ class DevelopmentGroup extends BlockGroup
     {
         return 'development-group';
     }
-    
+
     public function label()
     {
         return Module::t('block_group_dev_elements');
     }
-    
+
     public function getPosition()
     {
         return 90;

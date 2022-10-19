@@ -31,12 +31,12 @@ return [
     'block_group_project_elements' => 'Projekt',
     'block_group_text_elements' => 'Texte',
     'block_group_media_group' => 'Medien',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Striktes rendern',
     'block_module_strictrender_help' => 'Wenn striktes rendern aktiviert ist, wird nur die route ausgeführt welche angegeben ist (module, controller, action, params) ohne auf umgebungs variable zu hören.',
     'block_html_cfg_raw_label' => 'HTML im Admin ausführen.',
-    
+
     // 3.4.0
     'tag_alias_readme' => 'Das alias-Tag ermöglicht es, applikations-spezifische sowie vordefinierte Aliasse zu verwenden. Mit `alias[@web]` können zum Beispiel Bilder im Public-HTML-Verzeichnis verlinkt werden: `<img src="alias[@web]/image.jpg">`',
     'tag_menu_readme' => 'Erstelle einen Link zu einem Menü-Eintrag, wobei die Seiten-ID als Key anzugeben ist (Seiten-IDs werden beim Überfahren der Website-Navigation in der Administration angezeigt).',

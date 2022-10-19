@@ -33,7 +33,7 @@ final class Property extends \yii\db\ActiveRecord
             [['nav_id', 'admin_prop_id', 'value'], 'required'],
         ];
     }
-    
+
     /**
      * Property Active Query.
      *
@@ -43,9 +43,9 @@ final class Property extends \yii\db\ActiveRecord
     {
         return $this->hasOne(AdminProperty::class, ['id' => 'admin_prop_id']);
     }
-    
+
     private $_object;
-    
+
     /**
      * Create the Property object with the given value.
      *
@@ -56,7 +56,7 @@ final class Property extends \yii\db\ActiveRecord
         if ($this->_object === null) {
             $this->_object = $this->adminProperty->createObject($this->value);
         }
-        
+
         return $this->_object;
     }
 }

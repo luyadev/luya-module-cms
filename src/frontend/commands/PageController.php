@@ -2,15 +2,15 @@
 
 namespace luya\cms\frontend\commands;
 
-use luya\console\Command;
+use luya\cms\models\Log;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
 use luya\cms\models\NavItemPage;
 use luya\cms\models\NavItemPageBlockItem;
-use yii\console\widgets\Table;
-use luya\cms\models\Property;
 use luya\cms\models\NavPermission;
-use luya\cms\models\Log;
+use luya\cms\models\Property;
+use luya\console\Command;
+use yii\console\widgets\Table;
 
 /**
  * Page command cms interaction.
@@ -36,15 +36,15 @@ class PageController extends Command
     {
         // return all pages with deleted items
         $navIds = Nav::find()->where(['is_deleted' => true])->select(['id'])->column();
-        
+
         // get all nav items where the page is deleted.
         $navItemIds = NavItem::find()->joinWith(['nav' => function ($q) {
             $q->where(['is_deleted' => true]);
         }])->select(['{{cms_nav_item}}.id'])->column();
-        
+
         // get all nav item pages from the missing navItems list
         $navItemPageIds = NavItemPage::find()->where(['in', 'nav_item_id', $navItemIds])->select(['id'])->column();
-        
+
         // get all blocks from those pages
         $navItemPageBlockIds = NavItemPageBlockItem::find()->where(['in', 'nav_item_page_id', $navItemPageIds])->select(['id'])->column();
 
@@ -71,9 +71,9 @@ class PageController extends Command
             ['Blocks', count($navItemPageBlockIds)],
             ['Block Content wihout Block', $count]
         ]);
-        
+
         echo $table->run();
-        
+
         if ($this->confirm('The delete process can not be undone! Are you sure you want to delete those data?')) {
             $this->printRows(Nav::deleteAll(['in', 'id', $navIds]), 'Page');
             $this->printRows(NavItem::deleteAll(['in', 'id', $navItemIds]), 'Page language');
@@ -82,7 +82,7 @@ class PageController extends Command
             // cleanup depending table data.
             $this->printRows(Property::deleteAll(['in', 'nav_id', $navIds]), 'Property');
             $this->printRows(NavPermission::deleteAll(['in', 'nav_id', $navIds]), 'Permission');
-            
+
             $this->printRows(Log::deleteAll(['and', ['in', 'row_id', $navIds], ['table_name' => 'cms_nav']]), 'Page log');
             $this->printRows(Log::deleteAll(['and', ['in', 'row_id', $navItemIds], ['table_name' => 'cms_nav_item']]), 'Page language log');
             $this->printRows(Log::deleteAll(['and', ['in', 'row_id', $navItemPageBlockIds], ['table_name' => 'cms_nav_item_page_block_item']]), 'Block log');
@@ -101,7 +101,7 @@ class PageController extends Command
 
         return $this->outputError("Abort by User.");
     }
-    
+
     private function printRows($count, $describer)
     {
         $this->outputInfo("{$describer}: {$count} rows deleted");

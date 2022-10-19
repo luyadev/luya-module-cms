@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Проект',
     'block_group_text_elements' => 'Текста',
     'block_group_media_group' => 'Медиа',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Строгое отображение',
     'block_module_strictrender_help' => 'Когда включено строгое отображение, модуль будет выполнять только предоставленный маршрут (модуль, контроллер, действие, параметры) без выполнения действий и маршрутов контроллера.',

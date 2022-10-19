@@ -2,10 +2,10 @@
 
 namespace cmstests\src\menu;
 
-use Yii;
 use cmstests\CmsFrontendTestCase;
 use luya\cms\menu\Item;
 use luya\cms\menu\Query;
+use Yii;
 
 class QueryTest extends CmsFrontendTestCase
 {
@@ -13,13 +13,13 @@ class QueryTest extends CmsFrontendTestCase
     {
         Yii::$app->composition['langShortCode'] = 'fr';
         Yii::$app->menu->setLanguageContainer('fr', include('_dataFrArray.php'));
-        
+
         $containers = ['footer-column-one', 'footer-column-two', 'footer-column-three'];
-        
+
         foreach ($containers as $container) {
             foreach (Yii::$app->menu->find()->where(['container' => $container])->all() as $item) {
                 $link = $item->link;
-                
+
                 if (is_null($link)) {
                     $this->assertNull($link); // internal self redirect
                 } else {
@@ -28,7 +28,7 @@ class QueryTest extends CmsFrontendTestCase
             }
         }
     }
-    
+
     private function generateItems($start, $end, $lang)
     {
         $data = [];
@@ -58,10 +58,10 @@ class QueryTest extends CmsFrontendTestCase
                     'depth' => 1,
             ];
         }
-        
+
         return $data;
     }
-    
+
     public function testWhereOperatorException()
     {
         Yii::$app->composition['langShortCode'] = 'en';
@@ -69,7 +69,7 @@ class QueryTest extends CmsFrontendTestCase
         $this->expectException('luya\cms\Exception');
         $result = Yii::$app->menu->find()->where(['>', 'id', 4, 'error'])->all();
     }
-    
+
     public function testWhereOperatorComperators()
     {
         Yii::$app->composition['langShortCode'] = 'en';
@@ -83,7 +83,7 @@ class QueryTest extends CmsFrontendTestCase
         $this->assertSame(0, Yii::$app->menu->find()->where(['==', 'id', "5"])->count());
         $this->assertSame(9, Yii::$app->menu->find()->where(['!=', 'id', "4"])->count());
     }
-    
+
     public function testAndWhereOperatorComperators()
     {
         Yii::$app->composition['langShortCode'] = 'en';
@@ -91,7 +91,7 @@ class QueryTest extends CmsFrontendTestCase
         $this->assertSame(1, Yii::$app->menu->find()->where(['=', 'id', 5])->andWhere(['is_hidden' => 0])->count());
         $this->assertSame(0, Yii::$app->menu->find()->where(['=', 'id', 5])->andWhere(['lang' => 'another'])->count());
     }
-    
+
     public function testLimitAndOffset()
     {
         Yii::$app->composition['langShortCode'] = 'en';
@@ -108,42 +108,42 @@ class QueryTest extends CmsFrontendTestCase
     public function testInOperatorWithContainers()
     {
         Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuContainerArray());
-        
+
         $default = (new Query())->where(['container' => 'default'])->count();
         $c1 = (new Query())->where(['container' => 'c1'])->count();
         $c2 = (new Query())->where(['container' => 'c2'])->count();
-        
+
         $all = (new Query())->count();
-        
+
         $this->assertSame(2, $default);
         $this->assertSame(2, $c2);
         $this->assertSame(1, $c1);
         $this->assertSame(5, $all);
-        
+
         $in = (new Query())->where(['in', 'container', ['c1', 'c2']])->count();
-        
+
         $this->assertSame(3, $in);
     }
 
     public function testOrderByQuery()
     {
         Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuContainerArray());
-        
+
         $unOrdered = (new Query())->all();
 
         $this->assertTrue(isset($unOrdered[0]));
         $this->assertSame(1, $unOrdered[0]->id);
-        
+
         $array = iterator_to_array($unOrdered);
 
         $this->assertSame(1, $array[0]->id);
         $last = end($array)->id;
         $this->assertSame(6, $last);
-        
+
         $ordered = (new Query())->orderBy(['id' => SORT_DESC])->all();
-        
+
         $sortedArray = iterator_to_array($ordered);
-        
+
         $this->assertSame(6, $sortedArray[0]->id);
         $last = end($sortedArray)->id;
         $this->assertSame(1, $last);
@@ -153,25 +153,25 @@ class QueryTest extends CmsFrontendTestCase
         $this->assertInstanceOf(Item::class, $unOrdered[9998]);
         unset($unOrdered[9999]);
     }
-    
+
     public function testPreloadModels()
     {
         $default = (new Query())->where(['container' => 'default'])->all();
-        
+
         $this->assertNull($default->getInnerIterator()->getLoadedModel(1));
-        
+
         $default = (new Query())->where(['container' => 'default'])->preloadModels()->all();
-        
+
         $this->assertNotNull($default->getInnerIterator()->getLoadedModel(1));
     }
-    
+
     public function testRootQueryHelperMethod()
     {
         Yii::$app->menu->setLanguageContainer('en', CmsFrontendTestCase::mockMenuContainerArray());
-         
+
         $one = (new Query())->container('c1')->one();
         $this->assertSame(3, $one->id);
-        
+
         $all = (new Query())->container('c1')->root()->count();
         $this->assertSame(1, $all);
     }

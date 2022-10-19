@@ -2,17 +2,16 @@
 
 namespace luya\cms\admin\apis;
 
-use luya\cms\base\BlockInterface;
-use Yii;
-use luya\cms\models\Layout;
-use luya\cms\models\BlockGroup;
-use luya\helpers\ArrayHelper;
-use luya\cms\models\Config;
-use luya\cms\models\Log;
 use luya\admin\helpers\Angular;
-use yii\base\InvalidArgumentException;
-use luya\helpers\Inflector;
+use luya\cms\base\BlockInterface;
+use luya\cms\models\BlockGroup;
+use luya\cms\models\Config;
+use luya\cms\models\Layout;
+use luya\cms\models\Log;
+use luya\helpers\ArrayHelper;
 use luya\helpers\ObjectHelper;
+use Yii;
+use yii\base\InvalidArgumentException;
 
 /**
  * Admin Api delievers common api tasks like blocks and layouts.
@@ -31,19 +30,19 @@ class AdminController extends \luya\admin\base\RestController
     {
         // valid keys
         $keys = [Config::HTTP_EXCEPTION_NAV_ID];
-        
+
         foreach (Yii::$app->request->bodyParams as $key => $value) {
             if (in_array($key, $keys)) {
                 Config::set($key, $value);
             }
         }
-        
+
         $data = [];
         $data[Config::HTTP_EXCEPTION_NAV_ID] = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
         $data['previewUrl'] = $this->module->previewUrl;
         return $data;
     }
-    
+
     /**
      * Get all logs for the cms in order to render the dashboard
      *
@@ -66,21 +65,21 @@ class AdminController extends \luya\admin\base\RestController
                 'timestamp' => $item->timestamp,
             ];
         }
-        
+
         $array = [];
-        
+
         krsort($log, SORT_NUMERIC);
-        
+
         foreach ($log as $day => $values) {
             $array[] = [
                 'day' => $day,
                 'items' => $values,
             ];
         }
-        
+
         return $array;
     }
-    
+
     /**
      * Get all blocks which can be dropped into a page grouped by group.
      *
@@ -105,7 +104,7 @@ class AdminController extends \luya\admin\base\RestController
                 if (!$obj || in_array(get_class($obj), $this->module->hiddenBlocks)) {
                     continue;
                 }
-                
+
                 if ($groupPosition == null) {
                     $groupObject = Yii::createObject($obj->blockGroup());
                     $groupPosition = $groupObject->getPosition();
@@ -125,7 +124,7 @@ class AdminController extends \luya\admin\base\RestController
             if (empty($blocks)) {
                 continue;
             }
-            
+
             // extend the group element b
             $group = $blockGroup->toArray([]);
             $group['name'] = $blockGroup->groupLabel;
@@ -144,7 +143,7 @@ class AdminController extends \luya\admin\base\RestController
             foreach ($favs as $fav) {
                 $favblocks[] = $fav;
             }
-            
+
             array_unshift($groups, [
                 'group' => [
                     'toggle_open' => (int) Yii::$app->adminuser->identity->setting->get("togglegroup.99999", 1),
@@ -158,7 +157,7 @@ class AdminController extends \luya\admin\base\RestController
                 'blocks' => $favblocks,
             ]);
         }
-        
+
         return $groups;
     }
 

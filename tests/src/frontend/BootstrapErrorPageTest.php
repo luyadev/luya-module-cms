@@ -1,12 +1,13 @@
 <?php
+
 namespace cmstests\src\frontend;
 
+use cmstests\CmsFrontendTestCase;
 use luya\cms\frontend\Bootstrap;
-use luya\web\ErrorHandler;
-use luya\web\ErrorHandlerExceptionRenderEvent;
 use luya\cms\models\Config;
 use luya\testsuite\fixtures\ActiveRecordFixture;
-use cmstests\CmsFrontendTestCase;
+use luya\web\ErrorHandler;
+use luya\web\ErrorHandlerExceptionRenderEvent;
 use yii\web\NotFoundHttpException;
 
 class BootstrapErrorPageTest extends CmsFrontendTestCase

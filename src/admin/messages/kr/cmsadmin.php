@@ -54,7 +54,7 @@ return [
     'btn_abort' => '중단',
     'btn_refresh' => '새로 만들기',
     'btn_save' => '저장',
-     
+
 // added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => '모듈 이름',
     'model_navitem_title_label' => '페이지 제목',
@@ -62,7 +62,7 @@ return [
     'model_navitempage_layout_label' => '레이아웃',
     'model_navitemredirect_type_label' => '리다이렉션 유형',
     'model_navitemredirect_value_label' => '리다이렉션 대상',
-    
+
     'view_index_add_title' => '새로운 페이지를 추가하세요',
     'view_index_add_page_from_language' => '언어로부터 페이지를 추가하세요',
     'view_index_add_page_from_language_info' => '이 페이지를 만들 때 다른 언어의 내용을 복사 하시겠습니까?',
@@ -93,7 +93,7 @@ return [
 
 // added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => '클립보드',
-    
+
 // added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => '당신은 정말로  «%name%»블록을 삭제하기를 원하십니까?',
     'view_index_page_meta_keywords' => 'SEO분석을 위한 키워드',
@@ -113,11 +113,11 @@ return [
     'js_version_update_success' => '이 버전은 성공적으로 업데이트 되었습니다.',
     'js_version_error_empty_fields' => '하나 이상의 입력란이 비어 있거나 잘못된 값이 있습니다.',
     'js_version_create_success' => '이 새로운 버전은 성공적으로 생성되었습니다.',
-    
+
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => '선택하세요',
     'view_index_sidebar_autopreview' => '자동 미리보기',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => '새 페이지 만들기',
     'module_permission_update_pages' => '페이지 편집',
@@ -141,14 +141,14 @@ return [
     'button_create_version' => '버전 생성하기',
     'button_update_version' => '버전 업데이트 하기',
     'menu_group_item_env_permission' => '페이지 수락',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => '모든 내용으로 현재 페이지의 복사본을 만듭니다. 여기에는 모든 언어가 포함되지만 출판 된 버전 만 포함됩니다.',
     'page_update_actions_deepcopy_btn' => '복사본 만들기',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => '제목 태그(SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => '비어있는 템플릿에서는 페이지를 생성할 수 없습니다.',
     'view_update_variation_select' => '표준',
@@ -175,7 +175,7 @@ return [
     'view_update_block_tooltip_editcfg' => '구성',
     'view_update_block_tooltip_delete' => '삭제',
     'view_update_block_tooltip_close' => '닫기',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => '마지막 페이지 업데이트',
     'cmsadmin_settings_homepage_title' => '빈 페이지',
@@ -205,7 +205,7 @@ return [
     'redirect_model_atr_redirect_status_code_hint' => '리디렉션 유형. 301 : Moved Permanently을 사용하는 경우 브라우저는 브라우저의 캐시를 지우지 않고 대상에 대한 변경 사항이 적용되지 않도록 리다이렉션을 캐시합니다.',
     'redirect_model_atr_redirect_status_code_opt_301' => '301 : 영구적 작동',
     'redirect_model_atr_redirect_status_code_opt_302' => '302 : 일시적 작동',
-    
+
 // added translations in version 1.0.1:
     'module_permission_page' => '페이지 내용',
 
@@ -251,7 +251,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -259,7 +259,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

@@ -2,13 +2,13 @@
 
 namespace luya\cms\models;
 
-use Yii;
 use luya\cms\admin\Module;
-use luya\traits\CacheableTrait;
 use luya\helpers\ArrayHelper;
+use luya\traits\CacheableTrait;
+use Yii;
 use yii\db\ActiveQuery;
-use yii\helpers\Json;
 use yii\db\ActiveRecord;
+use yii\helpers\Json;
 
 /**
  * Represents an ITEM for the type NavItemPage.
@@ -37,10 +37,9 @@ use yii\db\ActiveRecord;
  */
 class NavItemPageBlockItem extends ActiveRecord
 {
+    use CacheableTrait;
     private $_olds = [];
 
-    use CacheableTrait;
-    
     /**
      * @inheritdoc
      */
@@ -61,7 +60,7 @@ class NavItemPageBlockItem extends ActiveRecord
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'eventAfterDelete']);
         $this->on(self::EVENT_AFTER_VALIDATE, [$this, 'ensureInputValues']);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -77,16 +76,16 @@ class NavItemPageBlockItem extends ActiveRecord
                             unset($data[$key]);
                         }
                     }
-                
+
                     if (isset($data['__e']) && count($data) >= 2) {
                         unset($data['__e']);
                     }
-                
+
                     // placeholder in order to make sure an object will be unserailized instead of an array.
                     if (empty($data)) {
                         $data['__e'] = '__v';
                     }
-                
+
                     $this->$attribute = Json::encode($data, JSON_FORCE_OBJECT);
                 }
             }, 'skipOnEmpty' => false],
@@ -98,7 +97,7 @@ class NavItemPageBlockItem extends ActiveRecord
             [['variation'], 'safe'],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -109,7 +108,7 @@ class NavItemPageBlockItem extends ActiveRecord
         $scene['restupdate'] = $scene['default'];
         return $scene;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -133,7 +132,7 @@ class NavItemPageBlockItem extends ActiveRecord
             'variation' => 'Variation',
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -145,7 +144,7 @@ class NavItemPageBlockItem extends ActiveRecord
         };
         return $fields;
     }
-    
+
     /**
      *
      * @param \yii\base\Event $event
@@ -177,7 +176,7 @@ class NavItemPageBlockItem extends ActiveRecord
                 Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $newSortIndex], ['id' => $item->id])->execute();
             }
         }
-        
+
         // manipulate timestamps
         if ($this->isNewRecord) {
             $this->timestamp_create = time();
@@ -205,7 +204,7 @@ class NavItemPageBlockItem extends ActiveRecord
                 $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
             }
             $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
-            
+
             Log::addAfterSave(2, [
                 'tableName' => 'cms_nav_item_page_block_item',
                 'action' => 'update',
@@ -270,12 +269,12 @@ class NavItemPageBlockItem extends ActiveRecord
 
         $this->updateNavItemTimesamp();
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
-        
+
         Log::addAfterSave(1, [
             'tableName' => 'cms_nav_item_page_block_item',
-            'action' => 'insert', 
-            'row' => $this->id, 
-            'pageTitle' => $this->droppedPageTitle, 
+            'action' => 'insert',
+            'row' => $this->id,
+            'pageTitle' => $this->droppedPageTitle,
             'blockName' => $this->getBlockNameForLog()
         ], $event);
     }
@@ -315,7 +314,7 @@ class NavItemPageBlockItem extends ActiveRecord
             ++$index;
         }
     }
-    
+
     private function updateNavItemTimesamp()
     {
         // if state makes sure this does not happend when the nav item page is getting deleted and triggers the child delete process.
@@ -337,12 +336,12 @@ class NavItemPageBlockItem extends ActiveRecord
 
         return;
     }
-    
+
     public static function originalFind()
     {
         return Yii::createObject(ActiveQuery::class, [get_called_class()]);
     }
-    
+
     /**
      * Default sort on find command.
      *
@@ -352,7 +351,7 @@ class NavItemPageBlockItem extends ActiveRecord
     {
         return parent::find()->orderBy(['sort_index' => SORT_ASC]);
     }
-    
+
     /**
      * Get the block for the page block item
      *
@@ -362,7 +361,7 @@ class NavItemPageBlockItem extends ActiveRecord
     {
         return $this->hasOne(Block::class, ['id' => 'block_id']);
     }
-    
+
     /**
      * Get the corresponding page where the block is stored.
      *

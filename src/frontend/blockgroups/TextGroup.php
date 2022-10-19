@@ -19,12 +19,12 @@ class TextGroup extends BlockGroup
     {
         return 'text-group';
     }
-    
+
     public function label()
     {
         return Module::t('block_group_text_elements');
     }
-    
+
     public function getPosition()
     {
         return 60;

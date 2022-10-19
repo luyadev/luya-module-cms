@@ -16,9 +16,9 @@ use luya\traits\RegistryTrait;
 class Config extends \yii\db\ActiveRecord
 {
     use RegistryTrait;
-    
-    const HTTP_EXCEPTION_NAV_ID = 'httpExceptionNavId';
-    
+
+    public const HTTP_EXCEPTION_NAV_ID = 'httpExceptionNavId';
+
     /**
      * @inheritdoc
      */

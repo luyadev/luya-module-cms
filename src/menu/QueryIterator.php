@@ -32,27 +32,27 @@ class QueryIterator extends BaseObject implements Iterator
      * @see \luya\cms\menu\Query::with()
      */
     public $with = [];
-    
+
     /**
      * @var boolean Whether all models for each menu element should be preloaded or not, on large systems with propertie access it
      * can reduce the sql requests but uses more memory instead.
      */
     public $preloadModels = false;
-    
+
     /**
      * @internal
      */
     public function init()
     {
         parent::init();
-        
+
         if ($this->preloadModels) {
             $this->loadModels();
         }
     }
-    
+
     private $_loadModels;
-    
+
     /**
      * Load all models for ghe given Menu Query.
      *
@@ -64,10 +64,10 @@ class QueryIterator extends BaseObject implements Iterator
         if ($this->_loadModels === null) {
             $this->_loadModels = Nav::find()->indexBy('id')->where(['in', 'id', ArrayHelper::getColumn($this->data, 'nav_id')])->with(['properties.adminProperty'])->all();
         }
-        
+
         return $this->_loadModels;
     }
-    
+
     /**
      * Get the model for a given id.
      *
@@ -82,7 +82,7 @@ class QueryIterator extends BaseObject implements Iterator
     }
 
     /* Iterator */
-    
+
     /**
      * Iterator get current element, generates a new object for the current item on accessing.s.
      *

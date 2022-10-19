@@ -14,7 +14,7 @@ use Yii;
 
 /**
  * Mirror Language Content.
- * 
+ *
  * @author Basil Suter <git@nadar.io>
  * @since 3.4.0
  */
@@ -40,7 +40,7 @@ class MirrorLanguageBlock extends PhpBlock
     {
         return Module::t('block_mirror_language_name');
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -48,7 +48,7 @@ class MirrorLanguageBlock extends PhpBlock
     {
         return 'compare';
     }
- 
+
     /**
      * @inheritDoc
      */
@@ -60,7 +60,7 @@ class MirrorLanguageBlock extends PhpBlock
             ],
         ];
     }
-    
+
     /**
      * {@inheritDoc}
     */
@@ -79,7 +79,7 @@ class MirrorLanguageBlock extends PhpBlock
     public function frontend()
     {
         $langId = $this->getVarValue('language');
-        
+
         // if no language is selected, just do nothing
         if (empty($langId)) {
             return;
@@ -101,7 +101,7 @@ class MirrorLanguageBlock extends PhpBlock
         }
 
         $navItemId = NavItemPage::find()->where(['id' => $item['nav_item_page_id']])->select(['nav_item_id'])->scalar();
-        
+
         $navId = NavItem::find()->where(['id' => $navItemId])->select(['nav_id'])->scalar();
 
         $navItem = NavItem::find()->where(['nav_id' => $navId, 'nav_item_type' => NavItem::TYPE_PAGE, 'lang_id' => $langId])->one();

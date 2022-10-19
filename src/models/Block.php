@@ -2,14 +2,14 @@
 
 namespace luya\cms\models;
 
-use Yii;
-use luya\cms\admin\Module;
-use luya\cms\admin\aws\BlockPagesActiveWindow;
-use luya\cms\base\BlockInterface;
-use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\aws\DetailViewActiveWindow;
+use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\ngrest\plugins\SelectModel;
 use luya\admin\ngrest\plugins\ToggleStatus;
+use luya\cms\admin\aws\BlockPagesActiveWindow;
+use luya\cms\admin\Module;
+use luya\cms\base\BlockInterface;
+use Yii;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
@@ -42,7 +42,7 @@ class Block extends NgRestModel
     {
         return 'cms_block';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -60,7 +60,7 @@ class Block extends NgRestModel
             'is_disabled' => 'toggleStatus',
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -72,7 +72,7 @@ class Block extends NgRestModel
             'fileExists' => ['class' => ToggleStatus::class, 'interactive' => false, 'sortField' => false],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -111,7 +111,7 @@ class Block extends NgRestModel
             ]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -132,7 +132,7 @@ class Block extends NgRestModel
     {
         return class_exists($this->class) ? 1 : 0;
     }
-    
+
     /**
      * Returns the amount where the block is used inside the content.
      *
@@ -142,7 +142,7 @@ class Block extends NgRestModel
     {
         return $this->getNavItemPageBlockItems()->count();
     }
-    
+
     /**
      *
      * @return \yii\db\ActiveQuery
@@ -152,7 +152,7 @@ class Block extends NgRestModel
     {
         return $this->hasMany(NavItemPageBlockItem::class, ['block_id' => 'id']);
     }
-    
+
     /**
      * Returns the name from the block label.
      *
@@ -162,7 +162,7 @@ class Block extends NgRestModel
     {
         return $this->getClassObject() ? $this->getClassObject()->name() : $this->class;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -174,7 +174,7 @@ class Block extends NgRestModel
             [['class'], 'string', 'max' => 255],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -217,7 +217,7 @@ class Block extends NgRestModel
     {
         return $this->hasOne(BlockGroup::class, ['id' => 'group_id']);
     }
-    
+
     /**
      * Returns the origin block object based on the current active record entry.
      *
@@ -227,7 +227,7 @@ class Block extends NgRestModel
     {
         return $this->getFileExists() ? Yii::createObject(['class' => $this->class]) : false;
     }
-    
+
     /**
      * Try to get the name of the log.
      */
@@ -236,10 +236,10 @@ class Block extends NgRestModel
         if ($this->getClassObject() && $this->getClassObject() instanceof BlockInterface) {
             return $this->getClassObject()->name();
         }
-        
+
         return $this->class;
     }
-    
+
     /**
      * Find the the class names for a certain amount of block ids.
      *
@@ -280,18 +280,18 @@ class Block extends NgRestModel
         if (!class_exists($class)) {
             return false;
         }
-        
+
         $object = Yii::createObject([
             'class' => $class,
         ]);
-        
+
         $object->setEnvOption('id', $id);
         $object->setEnvOption('blockId', $blockId);
         $object->setEnvOption('context', $context);
         $object->setEnvOption('pageObject', $pageObject);
 
         $object->setup();
-        
+
         return $object;
     }
 }

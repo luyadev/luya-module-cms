@@ -28,7 +28,7 @@ class Theme extends NgRestModel
     {
         return 'cms_theme';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -36,7 +36,7 @@ class Theme extends NgRestModel
     {
         return 'api-cms-theme';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -49,7 +49,7 @@ class Theme extends NgRestModel
             [['is_default'], 'boolean'],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -64,7 +64,7 @@ class Theme extends NgRestModel
             'author' => Module::t('model_theme_author_label'),
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -76,7 +76,7 @@ class Theme extends NgRestModel
             'is_default' => ['toggleStatus', 'initValue' => 0, 'interactive' => false],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -86,7 +86,7 @@ class Theme extends NgRestModel
             ['list', ['name', 'is_default', 'base_path', 'parentTheme']],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -98,7 +98,7 @@ class Theme extends NgRestModel
             'author' => 'text',
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -114,7 +114,7 @@ class Theme extends NgRestModel
             ],
         ];
     }
-    
+
     /**
      * @return string
      */
@@ -122,7 +122,7 @@ class Theme extends NgRestModel
     {
         return $this->getJsonConfig('name');
     }
-    
+
     /**
      * @return string
      */
@@ -130,7 +130,7 @@ class Theme extends NgRestModel
     {
         return $this->getJsonConfig('parentTheme');
     }
-    
+
     /**
      * @return string
      */
@@ -138,9 +138,9 @@ class Theme extends NgRestModel
     {
         return $this->getJsonConfig('author');
     }
-    
+
     private $_jsonConfig = null;
-    
+
     /**
      * Get the json config as array.
      *
@@ -160,10 +160,10 @@ class Theme extends NgRestModel
         if (!$key) {
             return $this->_jsonConfig;
         }
-    
+
         return isset($this->_jsonConfig[$key]) ? $this->_jsonConfig[$key] : null;
     }
-    
+
     /**
      * Set the json config by given theme config.
      *

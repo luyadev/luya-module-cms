@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Progetto',
     'block_group_text_elements' => 'Testi',
     'block_group_media_group' => 'Media',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Rendering stretto',
     'block_module_strictrender_help' => 'Quando il rendering stretto è abilitato, il modulo eseguirà solo le rott previste (module, controller, action, params) senza elaborare azioni e rotte del controller.',

@@ -1,6 +1,6 @@
 <?php
-use \luya\cms\admin\Module;
-use \luya\admin\Module as AdminModule;
+use luya\admin\Module as AdminModule;
+use luya\cms\admin\Module;
 
 ?>
 <?= $this->render('_angulardirectives'); ?>

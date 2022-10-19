@@ -2,21 +2,21 @@
 
 namespace cmstests\src\menu;
 
-use Yii;
 use cmstests\CmsFrontendTestCase;
-use luya\cms\menu\Query;
-use luya\cms\Menu;
-use luya\web\Request;
-use luya\cms\menu\InjectItem;
 use cmstests\data\items\RootItem;
+use luya\cms\Menu;
+use luya\cms\menu\InjectItem;
 use luya\cms\menu\Item;
+use luya\cms\menu\Query;
+use luya\web\Request;
+use Yii;
 
 class ItemTest extends CmsFrontendTestCase
 {
     public function testItemFunctions()
     {
         $obj = Yii::$app->menu->findOne(['id' => 1]);
-        
+
         $this->assertEquals(1, $obj->id);
         $this->assertEquals("default", $obj->container);
         $this->assertEquals(1, $obj->navId);
@@ -44,28 +44,28 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertSame('Homepage', $obj->seoTitle);
         $this->assertTrue($obj->getIsStrictParsing());
     }
-    
+
     public function testInjectionsWithParentElements()
     {
-        $menu = new Menu((new Request));
-    
+        $menu = new Menu((new Request()));
+
         // generate
         $rootItem = new RootItem();
         $menu->injectItem($rootItem);
-        
+
         $inject = new InjectItem(['childOf' => 1, 'title' => 't1', 'id' => 2000]);
         $menu->injectItem($inject);
-        
+
         $rootItemFromMenu = (new Query(['menu' => $menu]))->lang('de')->one();
-        
+
         $inject = new InjectItem(['item' => $rootItemFromMenu, 'title' => 't1', 'id' => 2000]);
         $menu->injectItem($inject);
-        
+
         $injectCount = (new Query(['menu' => $menu]))->lang('de')->count();
-        
+
         $this->assertSame(2, $injectCount);
     }
-    
+
     public function testChildItem()
     {
         $obj = Yii::$app->menu->findOne(['id' => 10]);
@@ -74,39 +74,39 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(6, count($obj->siblings));
         $this->assertFalse($obj->isHome);
     }
-    
+
     public function testAbsoluteLink()
     {
         $menu = (new Query())->where(['id' => 2])->one();
-        
+
         $this->assertSame('http://localhost/luya/envs/dev/public_html/en/page1', $menu->absoluteLink);
     }
-    
+
     public function testNextPevSibling()
     {
         $menu = (new Query())->where(['id' => 2])->one();
-        
+
         $this->assertSame(1, $menu->prevSibling->id);
         $this->assertSame(3, $menu->nextSibling->id);
-        
+
 
         $n = $menu->nextSibling;
         $this->assertSame(2, $n->prevSibling->id);
 
-        
+
         $menu = (new Query())->where(['id' => 1])->one();
-        
+
         $this->assertFalse($menu->prevSibling);
     }
 
     public function testProperty()
     {
         $menu = (new Query())->where(['id' => 2])->one();
-        
+
         $this->assertSame($menu->id, $menu->model->id);
         $this->assertFalse($menu->getProperty(null));
     }
-    
+
     // translation tests
 
     public function testHomeLanguageCompare()
@@ -114,32 +114,32 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals("/luya/envs/dev/public_html/", (new Query())->where(['nav_id' => 1])->lang('en')->one()->link);
         //$this->assertEquals("/luya/envs/dev/public_html/de/startseite", (new Query())->where(['nav_id' => 1])->lang('de')->one()->link);
     }
-    
+
     public function testPage1LanguageCompare()
     {
         $this->assertEquals("/luya/envs/dev/public_html/en/page1", (new Query())->where(['nav_id' => 2])->lang('en')->one()->link);
         //$this->assertEquals("/luya/envs/dev/public_html/de/seite-1", (new Query())->where(['nav_id' => 2])->lang('de')->one()->link);
     }
-    
+
     public function testInternalRedirectLanguageCompare()
     {
         $this->assertEquals("/luya/envs/dev/public_html/en/page4", (new Query())->where(['nav_id' => 5])->lang('en')->one()->link);
         //$this->assertEquals("/luya/envs/dev/public_html/de/seite-1", (new Query())->where(['nav_id' => 5])->lang('de')->one()->link);
     }
-    
+
     public function testParentAndGetHasParent()
     {
-        $itemWithParent = (new Query)->where(['nav_id' => 10])->one();
-        
+        $itemWithParent = (new Query())->where(['nav_id' => 10])->one();
+
         $this->assertTrue(is_object($itemWithParent));
-        
+
         $this->assertTrue($itemWithParent->hasParent);
         $this->assertTrue(is_object($itemWithParent->parent));
     }
-    
+
     public function testGoDown()
     {
-        $itemWithParent = (new Query)->where(['nav_id' => 10])->one();
+        $itemWithParent = (new Query())->where(['nav_id' => 10])->one();
 
         $this->assertSame(2, $itemWithParent->depth);
         $f = $itemWithParent->down(function (Item $item) {
@@ -162,13 +162,13 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals("https://luya.io", (new Query())->where(['nav_id' => 6])->lang('de')->one()->link);
     }
     */
-    
+
     public function testSubLanguageCompare()
     {
         $this->assertEquals("/luya/envs/dev/public_html/en/page1/p1-page3", (new Query())->where(['nav_id' => 10])->lang('en')->one()->link);
         //$this->assertEquals("/luya/envs/dev/public_html/de/seite-2/unterseite-2-von-seite-2", (new Query())->where(['nav_id' => 10])->lang('de')->one()->link);
     }
-    
+
     public function testCountLangaugeCompare()
     {
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->parents));
@@ -183,7 +183,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->children));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->children));
     }
-    
+
     public function testCountLangaugeAsSubCompare()
     {
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 10])->lang('en')->one()->parents));
@@ -198,7 +198,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 10])->lang('en')->one()->children));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 10])->lang('de')->one()->children));
     }
-    
+
     public function testCountLangaugeAsPageWithChildrenCompare()
     {
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->parents));
@@ -213,12 +213,12 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->children));
         //$this->assertEquals(2, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->children));
     }
-    
+
     public function testCountLangaugeCompareAsMenuFindOne()
     {
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->one()->parents));
         $this->assertEquals(0, count(Yii::$app->menu->findOne(['nav_id' => 1])->parents));
-    
+
         $this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
         //$this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
 
@@ -228,7 +228,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->children));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->children));
     }
-    
+
     public function testCountLangaugeAsSubCompareAsMenuFindOne()
     {
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 10])->lang('en')->one()->parents));
@@ -243,7 +243,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 10])->lang('en')->one()->children));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 10])->lang('de')->one()->children));
     }
-    
+
     public function testCountLangaugeAsPageWithChildrenCompareAsMenuFindOne()
     {
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->parents));

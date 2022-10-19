@@ -2,18 +2,18 @@
 
 namespace luya\cms;
 
+use luya\cms\menu\InjectItemInterface;
+use luya\cms\menu\Item;
+use luya\cms\menu\Query as MenuQuery;
+use luya\cms\menu\QueryOperatorFieldInterface;
+use luya\cms\models\Config;
+use luya\cms\models\NavItemModule;
+use luya\helpers\Html;
+use luya\traits\CacheableTrait;
 use Yii;
 use yii\base\Component;
-use yii\web\NotFoundHttpException;
 use yii\db\Query as DbQuery;
-use luya\cms\menu\Query as MenuQuery;
-use luya\cms\models\NavItemModule;
-use luya\traits\CacheableTrait;
-use luya\cms\menu\Item;
-use luya\cms\menu\InjectItemInterface;
-use luya\cms\menu\QueryOperatorFieldInterface;
-use luya\helpers\Html;
-use luya\cms\models\Config;
+use yii\web\NotFoundHttpException;
 
 /**
  * Menu container component by language.
@@ -92,17 +92,17 @@ use luya\cms\models\Config;
 class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterface
 {
     use CacheableTrait;
-    
+
     /**
      * @var string The {{luya\cms\frontend\events\MenuItemEvent}} is triggered when an item is created via {{luya\cms\Menu::find()}} method.
      */
-    const EVENT_ON_ITEM_FIND = 'eventOnItemFind';
-    
+    public const EVENT_ON_ITEM_FIND = 'eventOnItemFind';
+
     /**
      * @var string Event which is triggere after the menu component is loaded and registered.
      */
-    const EVENT_AFTER_LOAD = 'eventAfterLoad';
-    
+    public const EVENT_AFTER_LOAD = 'eventAfterLoad';
+
     /**
      * @var string Event which is triggered after the resolvment of the current item. Sometimes using the
      * EVENT_AFTER_LOAD will add an item into the menu, but the path is also part of the resolvement. This means
@@ -111,22 +111,22 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * into the menu, but they wont be resolved when the request parsing start.
      * @since 1.0.5
      */
-    const EVENT_AFTER_RESOLVE_CURRENT = 'eventAfterResolveCurrent';
-    
+    public const EVENT_AFTER_RESOLVE_CURRENT = 'eventAfterResolveCurrent';
+
     /**
      * @var integer Item type cms page (renders blocks).
      */
-    const ITEM_TYPE_PAGE = 1;
-    
+    public const ITEM_TYPE_PAGE = 1;
+
     /**
      * @var integer Item type cms module (the page is a cms module).
      */
-    const ITEM_TYPE_MODULE = 2;
-    
+    public const ITEM_TYPE_MODULE = 2;
+
     /**
      * @var integer Item type redirect (the page contains a redirect model).
      */
-    const ITEM_TYPE_REDIRECT = 3;
+    public const ITEM_TYPE_REDIRECT = 3;
 
     /**
      * @var boolean Whether all menu item text values should be html encoded or not, since version 1.0.7.2 this is enabled by default in order to
@@ -135,16 +135,16 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @since 1.0.7.2
      */
     public $encoding = true;
-    
+
     /**
      * @var \luya\web\Request Request object
      */
     public $request;
-    
+
     private $_cachePrefix = 'MenuContainerCache';
-    
+
     private $_currentUrlRule;
-    
+
     private $_composition;
 
     private $_current;
@@ -156,9 +156,9 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     private $_languages;
 
     private $_redirectMap;
-    
+
     private $_modulesMap;
-    
+
     /**
      * Class constructor to DI the request object.
      *
@@ -170,7 +170,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
         $this->request = $request;
         parent::__construct($config);
     }
-    
+
     /**
      * Set url rules for the current page item in order to retrieve at another point of the appliation when building language links.
      *
@@ -190,7 +190,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         return $this->_currentUrlRule;
     }
-    
+
     /**
      * ArrayAccess check if the offset key exists in the language array.
      *
@@ -266,7 +266,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         return $this->encoding ? Html::encode($value) : $value;
     }
-    
+
     /**
      * Setter method for the language container.
      *
@@ -354,7 +354,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
 
         return $this->_languages;
     }
-    
+
     /**
      * Get an array containing all redirect items from the database table cms_nav_item_redirect.
      *
@@ -398,7 +398,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         $this->_current = $item;
     }
-    
+
     /**
      * Get the current menu item resolved by active language (from composition).
      *
@@ -413,7 +413,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
 
         return $this->_current;
     }
-    
+
     /**
      * Get all items for a specific level.
      *
@@ -432,11 +432,11 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
         $level--;
         // foreach counter
         $i = 1;
-        
+
         if ($baseItem === null) {
             $baseItem = $this->getCurrent();
         }
-        
+
         // foreach
         foreach ($baseItem->with('hidden')->getTeardown() as $item) {
             // if its the root line an match level 1 get all siblings
@@ -543,9 +543,9 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
         }
 
         $requestPath = rtrim($requestPath, '/');
-        
+
         $urlParts = explode('/', $requestPath);
-        
+
         $item = $this->aliasMatch($urlParts);
 
         if (!$item) {
@@ -566,7 +566,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             $this->_currentAppendix = $requestPath;
             return $this->getHome();
         }
-        
+
         // we could not resolve a page, check if the website has customized 404 error page defined.
         $navId = Config::get(Config::HTTP_EXCEPTION_NAV_ID, 0);
         $menu = Yii::$app->menu->find()->with(['hidden'])->where(['nav_id' => $navId])->one();
@@ -588,7 +588,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($alias, $this->composition->createRouteEnsure(['langShortCode' => $langShortCode])));
     }
-    
+
     /**
      * Return all nav item modules to request data later in items
      *
@@ -599,7 +599,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
         if ($this->_modulesMap === null) {
             $this->_modulesMap = NavItemModule::find()->select(['module_name', 'id'])->indexBy('id')->asArray()->all();
         }
-        
+
         return $this->_modulesMap;
     }
 
@@ -622,11 +622,11 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             ->indexBy('id')
             ->all();
     }
-        
+
     private $_paths = [];
-    
+
     private $_nodes = [];
-    
+
     /**
      * Helper method to build an index with all the alias paths to build the correct links.
      *
@@ -637,27 +637,27 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         $this->_paths = [];
         $this->_nodes = [];
-        
+
         foreach ($data as $item) {
             $this->_nodes[$item['nav_id']] = ['parent_nav_id' => $item['parent_nav_id'], 'alias' => $item['alias'], 'nav_id' => $item['nav_id']];
         }
-        
+
         foreach ($this->_nodes as $node) {
             $this->_paths[$node['nav_id']] = $this->processParent($node['nav_id'], null);
         }
-        
+
         return $this->_paths;
     }
-     
+
     private function processParent($nodeId, $path)
     {
         $parentId = $this->_nodes[$nodeId]['parent_nav_id'];
         $alias = $this->_nodes[$nodeId]['alias'];
-    
+
         if ($parentId > 0 && array_key_exists($parentId, $this->_nodes)) {
             return $this->processParent($parentId, $path) . '/' . $alias;
         }
-    
+
         return $alias;
     }
 
@@ -705,9 +705,9 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         $hostName = $this->request->hostName;
         $cacheKey = $this->_cachePrefix.$hostName.$langShortCode;
-        
+
         $languageContainer = $this->getHasCache($cacheKey);
-        
+
         if ($languageContainer === false) {
             $lang = $this->getLanguage($langShortCode);
             if (!$lang) {
@@ -717,19 +717,19 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             $website = Yii::$app->website->findOneByHostName($hostName);
 
             $data = $this->getNavData($lang['id'], $website['id']);
-    
+
             $index = $this->buildIndexForContainer($data);
-    
+
             $languageContainer = [];
-    
+
             // $key = cms_nav_item.id (as of indexBy('id'))
             foreach ($data as $key => $item) {
                 $alias = $item['alias'];
-    
+
                 if ($item['parent_nav_id'] > 0 && array_key_exists($item['parent_nav_id'], $index)) {
                     $alias = $index[$item['parent_nav_id']].'/'.$item['alias'];
                 }
-    
+
                 $languageContainer[$key] = [
                     'id' => $item['id'],
                     'nav_id' => $item['nav_id'],
@@ -758,13 +758,13 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
                     'is_url_strict_parsing_disabled' => $item['is_url_strict_parsing_disabled'],
                 ];
             }
-            
+
             $this->setHasCache($cacheKey, $languageContainer);
         }
 
         return $languageContainer;
     }
-    
+
     /**
      *
      * @param \luya\cms\menu\InjectItemInterface $item
@@ -773,7 +773,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     {
         $this->_languageContainer[$item->getLang()][$item->getId()] = $item->toArray();
     }
-    
+
     /**
      * Flush all caching data for the menu for each language
      */

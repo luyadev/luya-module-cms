@@ -21,7 +21,7 @@ class NavPermission extends \yii\db\ActiveRecord
     {
         return 'cms_nav_permission';
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -32,7 +32,7 @@ class NavPermission extends \yii\db\ActiveRecord
             [['group_id', 'nav_id', 'inheritance'], 'integer'],
         ];
     }
-    
+
     /**
      * {@inheritdoc}
      */

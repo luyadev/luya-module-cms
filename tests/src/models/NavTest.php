@@ -10,7 +10,7 @@ class NavTest extends CmsFrontendTestCase
     public function testFindContent()
     {
         $nav = Nav::findOne(1);
-        
+
         /* @var $item \luya\cms\models\NavItem */
         $item = $nav->activeLanguageItem;
 

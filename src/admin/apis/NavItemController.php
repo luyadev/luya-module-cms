@@ -2,21 +2,21 @@
 
 namespace luya\cms\admin\apis;
 
-use luya\cms\models\NavContainer;
-use luya\cms\models\NavItemModule;
-use luya\cms\models\NavItemPage;
-use luya\cms\models\NavItemRedirect;
-use Yii;
-use luya\cms\models\Nav;
-use luya\cms\models\NavItem;
-use luya\cms\models\NavItemPageBlockItem;
-use luya\web\filters\ResponseCache;
-use yii\caching\DbDependency;
-use luya\cms\models\Layout;
-use yii\web\ForbiddenHttpException;
 use luya\cms\admin\Module;
 use luya\cms\Exception;
+use luya\cms\models\Layout;
+use luya\cms\models\Nav;
+use luya\cms\models\NavContainer;
+use luya\cms\models\NavItem;
+use luya\cms\models\NavItemModule;
+use luya\cms\models\NavItemPage;
+use luya\cms\models\NavItemPageBlockItem;
+use luya\cms\models\NavItemRedirect;
 use luya\helpers\ArrayHelper;
+use luya\web\filters\ResponseCache;
+use Yii;
+use yii\caching\DbDependency;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -33,7 +33,7 @@ class NavItemController extends \luya\admin\base\RestController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        
+
         $behaviors['responseCache'] = [
             'class' => ResponseCache::class,
             'only' => ['nav-lang-item'],
@@ -47,7 +47,7 @@ class NavItemController extends \luya\admin\base\RestController
                 'params' => [':lang_id' => Yii::$app->request->get('langId', 0), ':nav_id' => Yii::$app->request->get('navId', 0)]
             ],
         ];
-        
+
         return $behaviors;
     }
 
@@ -69,7 +69,7 @@ class NavItemController extends \luya\admin\base\RestController
             ->asArray(true)
             ->all();
     }
-    
+
     /**
      * Delete a nav item based on the id.
      *
@@ -82,16 +82,16 @@ class NavItemController extends \luya\admin\base\RestController
         if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
             throw new ForbiddenHttpException("Unable to perform this action due to permission restrictions");
         }
-        
+
         $model = NavItem::findOne($navItemId);
-        
+
         if (!$model) {
             throw new NotFoundHttpException("Unable to find the given nav item model for id {$navItemId}.");
         }
 
         return $model->delete();
     }
-    
+
     /**
      * The data api for a nav id and correspoding language.
      *
@@ -139,7 +139,7 @@ class NavItemController extends \luya\admin\base\RestController
     {
         return NavItem::findOne($navItemId)->updateType(Yii::$app->request->post());
     }
-    
+
     /**
      * Change the layout of a page version.
      *
@@ -154,7 +154,7 @@ class NavItemController extends \luya\admin\base\RestController
         $alias =  $params['alias'];
 
         $model = NavItemPage::findOne(['id' => $pageItemId]);
-        
+
         if ($model) {
             $model->forceNavItem->updateTimestamp();
             $model->layout_id = $layoutId;
@@ -166,10 +166,10 @@ class NavItemController extends \luya\admin\base\RestController
 
             return $this->sendModelError($model);
         }
-        
+
         throw new NotFoundHttpException();
     }
-    
+
     /**
      * Delete a given page from pageId body param.
      *
@@ -178,17 +178,17 @@ class NavItemController extends \luya\admin\base\RestController
     public function actionRemovePageVersion()
     {
         $pageId = Yii::$app->request->getBodyParam('pageId');
-        
+
         $page = NavItemPage::findOne((int) $pageId);
-        
+
         if ($page) {
             $page->forceNavItem->updateTimestamp();
             return $page->delete();
         }
-        
+
         return false;
     }
-    
+
     /**
      * Create a new cms_nav_item_page for an existing nav_item, this is also known as a "new version" of a page item.
      *
@@ -199,26 +199,26 @@ class NavItemController extends \luya\admin\base\RestController
         $fromPageId = (int) Yii::$app->request->post('fromPageId');
         $navItemId = (int) Yii::$app->request->post('navItemId');
         $layoutId = Yii::$app->request->post('layoutId');
-        
+
         if (empty($name) || empty($navItemId)) {
             return ['error' => true];
         }
-        
+
         if (empty($fromPageId) && empty($layoutId)) {
             return ['error' => true];
         }
-        
+
         $navItemModel = NavItem::findOne($navItemId);
-        
+
         if (!$navItemModel) {
             throw new Exception("Unable to find nav item model");
         }
-        
+
         if (!empty($fromPageId)) {
             $fromPageModel = NavItemPage::findOne($fromPageId);
             $layoutId = $fromPageModel->layout_id;
         }
-        
+
         $model = new NavItemPage();
         $model->attributes = [
             'nav_item_id' => $navItemId,
@@ -227,19 +227,19 @@ class NavItemController extends \luya\admin\base\RestController
             'version_alias' => $name,
             'layout_id' => $layoutId,
         ];
-        
+
         $save = $model->save(false);
-        
+
         if (!empty($fromPageId) && $save) {
             NavItemPage::copyBlocks($fromPageModel->id, $model->id);
         }
-        
+
         if (empty($navItemModel->nav_item_type_id) && $navItemModel->nav_item_type == 1) {
             $navItemModel->updateAttributes(['nav_item_type_id' => $model->id]);
         }
-        
+
         $navItemModel->updateAttributes(['timestamp_update' => time()]);
-        
+
         return ['error' => !$save];
     }
 
@@ -291,11 +291,11 @@ class NavItemController extends \luya\admin\base\RestController
     public function actionUpdatePageItem($navItemId, $navItemType)
     {
         $model = NavItem::findOne($navItemId);
-        
+
         if (!$model) {
             throw new Exception('Unable to find the requested nav item object.');
         }
-        
+
         $model->setParentFromModel();
         $model->title = Yii::$app->request->post('title', false);
         $model->alias = Yii::$app->request->post('alias', false);
@@ -311,9 +311,9 @@ class NavItemController extends \luya\admin\base\RestController
         if (!$model->validate()) {
             return $this->sendModelError($model);
         }
-      
+
         $this->menuFlush();
-        
+
         // its the same type, update values
         if ($model->nav_item_type == $navItemType) {
             $typeModel = $model->getType();
@@ -450,11 +450,11 @@ class NavItemController extends \luya\admin\base\RestController
     public function actionMoveBefore($moveItemId, $droppedBeforeItemId)
     {
         $result = Nav::moveToBefore($moveItemId, $droppedBeforeItemId);
-        
+
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
-        
+
         return ['success' => $result];
     }
 
@@ -468,11 +468,11 @@ class NavItemController extends \luya\admin\base\RestController
     public function actionMoveAfter($moveItemId, $droppedAfterItemId)
     {
         $result = Nav::moveToAfter($moveItemId, $droppedAfterItemId);
-        
+
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
-        
+
         return ['success' => $result];
     }
 
@@ -486,14 +486,14 @@ class NavItemController extends \luya\admin\base\RestController
     public function actionMoveToChild($moveItemId, $droppedOnItemId)
     {
         $result = Nav::moveToChild($moveItemId, $droppedOnItemId);
-        
+
         if ($result !== true) {
             Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
-        
+
         return ['success' => $result];
     }
-    
+
     /**
      * Toggle visibilty of a block.
      *
@@ -508,7 +508,7 @@ class NavItemController extends \luya\admin\base\RestController
             $block->is_hidden = $hiddenState;
             return $block->update(false);
         }
-        
+
         return false;
     }
 
@@ -538,7 +538,7 @@ class NavItemController extends \luya\admin\base\RestController
                 }
             }
         }
-        
+
         return $data;
     }
 
@@ -559,7 +559,7 @@ class NavItemController extends \luya\admin\base\RestController
         }
         return "";
     }
-    
+
     /**
      * Flush the menu data if component exits.
      *

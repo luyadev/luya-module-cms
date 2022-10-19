@@ -1,4 +1,5 @@
 <?php
+
 namespace cmstests\src\frontend\blockgroups;
 
 use luya\testsuite\cases\CmsBlockGroupTestCase;

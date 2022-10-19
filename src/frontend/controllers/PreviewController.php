@@ -2,12 +2,12 @@
 
 namespace luya\cms\frontend\controllers;
 
+use luya\cms\frontend\base\Controller;
+use luya\cms\menu\InjectItem;
+use luya\cms\models\NavItem;
 use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use luya\cms\models\NavItem;
-use luya\cms\menu\InjectItem;
-use luya\cms\frontend\base\Controller;
 
 /**
  * CMS Preview Rendering
@@ -34,11 +34,11 @@ class PreviewController extends Controller
         }
 
         $navItem = NavItem::findOne($itemId);
-        
+
         if (!$navItem) {
             throw new NotFoundHttpException("The requested nav item with id {$itemId} does not exist.");
         }
-        
+
         $langShortCode = $navItem->lang->short_code;
 
         Yii::$app->composition['langShortCode'] = $langShortCode;
@@ -48,7 +48,7 @@ class PreviewController extends Controller
         if ($item && !$date && $navItem->nav_item_type_id == $version) {
             return $this->redirect($item->link);
         }
-        
+
         // this item is still offline so we have to inject and fake it with the inject api
         if (!$item) {
             // create new item to inject
@@ -72,7 +72,7 @@ class PreviewController extends Controller
 
         // set the current item, as it would be resolved wrong from the url manager / request path
         Yii::$app->menu->current = $item;
-        
+
         return $this->renderContent($this->renderItem($itemId, null, $version));
     }
 }

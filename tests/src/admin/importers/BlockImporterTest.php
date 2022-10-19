@@ -3,13 +3,13 @@
 namespace cmstests\src\admin\importers;
 
 use cmstests\CmsConsoleTestCase;
-use luya\cms\admin\importers\BlockImporter;
-use luya\console\commands\ImportController;
-use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\admin\models\Config;
+use luya\cms\admin\importers\BlockImporter;
 use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
+use luya\console\commands\ImportController;
 use luya\helpers\StringHelper;
+use luya\testsuite\fixtures\ActiveRecordFixture;
 
 class BlockImporterTest extends CmsConsoleTestCase
 {
@@ -19,24 +19,24 @@ class BlockImporterTest extends CmsConsoleTestCase
         $configFixture = new ActiveRecordFixture([
             'modelClass' => Config::class
         ]);
-        
+
         // block fixture
         $blockFixture = new ActiveRecordFixture([
             'modelClass' => Block::class,
         ]);
-        
+
         // block group fixture
         $blockGroupFixture = new ActiveRecordFixture([
             'modelClass' => BlockGroup::class,
         ]);
-        
+
         $controller = new ImportController('import-controller', $this->app);
         $importer = new BlockImporter($controller, $this->app->getModule('cmsadmin'));
 
         $this->assertNull($importer->run());
-        
+
         $log = $importer->importer->getLog();
-        
+
         $this->assertSame([
             'luya\cms\admin\importers\BlockImporter' => [
                 0 => 'Insert new block group block_group_dev_elements.',
@@ -58,24 +58,24 @@ class BlockImporterTest extends CmsConsoleTestCase
         $configFixture = new ActiveRecordFixture([
             'modelClass' => Config::class
         ]);
-        
+
         // block fixture
         $blockFixture = new ActiveRecordFixture([
             'modelClass' => Block::class,
         ]);
-        
+
         // block group fixture
         $blockGroupFixture = new ActiveRecordFixture([
             'modelClass' => BlockGroup::class,
         ]);
-        
+
         $controller = new ImportController('import-controller', $this->app);
         $module = $this->app->getModule('cmsadmin');
         $module->blocks = ['notfoundatall'];
         $importer = new BlockImporter($controller, $module);
 
         $this->assertNull($importer->run());
-        
+
         $log = $importer->importer->getLog();
 
         // remove 4 key because of path

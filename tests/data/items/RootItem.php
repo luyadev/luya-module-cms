@@ -10,12 +10,12 @@ class RootItem implements InjectItemInterface
     {
         return 'de';
     }
-    
+
     public function getId()
     {
         return 1;
     }
-    
+
     public function toArray()
     {
         return [

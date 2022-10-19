@@ -54,7 +54,7 @@ return [
     'btn_abort' => 'لغو',
     'btn_refresh' => 'بر روز رسانی',
     'btn_save' => 'ذخیره',
-    
+
 // added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'نام ماژول',
     'model_navitem_title_label' => 'عنوان صفحه',
@@ -92,7 +92,7 @@ return [
 
 // added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'کلیپ برد',
-    
+
 // added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Do you really want to delete the block «%name%»?',
     'view_index_page_meta_keywords' => 'کلمات کلیدی برای موتورهای جستجو',
@@ -112,11 +112,11 @@ return [
     'js_version_update_success' => 'The version has been updated successfully.',
     'js_version_error_empty_fields' => 'One or more fields are empty or have an invalid value.',
     'js_version_create_success' => 'The new version has been created successfully.',
-    
+
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'لطفا  انتخاب کنید',
     'view_index_sidebar_autopreview' => 'پیشنمایش خودکار',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'ایجاد صفحه جدید',
     'module_permission_update_pages' => 'اصلاح صفحه',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'ورژن',
     'button_update_version' => 'آپدیت ورژن',
     'menu_group_item_env_permission' => 'سطح دسترسی های صفحه',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Create a copy of the current page with all its contents. They copy will include all languages but only the published version.',
     'page_update_actions_deepcopy_btn' => 'ایجاد یک کپی',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'عنوان تگ (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'امکا ایجاد صفحه از قالب خالی وجود ندارد',
     'view_update_variation_select' => 'نرمال',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'تنظیم',
     'view_update_block_tooltip_delete' => 'حذف',
     'view_update_block_tooltip_close' => 'بستن',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'اخرین صفحه به روز رسانی شده',
     'cmsadmin_settings_homepage_title' => 'صفحه پیش فرض',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

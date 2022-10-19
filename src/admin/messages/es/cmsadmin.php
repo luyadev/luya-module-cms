@@ -54,7 +54,7 @@ return [
     'btn_abort' => 'Cancelar',
     'btn_refresh' => 'Actualizar',
     'btn_save' => 'Guardar',
-    
+
 // added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Nombre del módulo',
     'model_navitem_title_label' => 'Título de página',
@@ -92,7 +92,7 @@ return [
 
 // added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Portapapeles',
-    
+
 // added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => '¿Desea borrar el bloque «%name%»?',
     'view_index_page_meta_keywords' => 'Palabra clave',
@@ -112,11 +112,11 @@ return [
     'js_version_update_success' => 'La versión se ha actualizado correctamente.',
     'js_version_error_empty_fields' => 'Uno o más campos están vacíos o tienen un valor no válido.',
     'js_version_create_success' => 'La nueva versión ha sido guardada con éxito.',
-    
+
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Por favor seleccione',
     'view_index_sidebar_autopreview' => 'Vista previa',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Crear nueva página',
     'module_permission_update_pages' => 'Editar página',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Crear versión',
     'button_update_version' => 'Actualizar versión',
     'menu_group_item_env_permission' => 'Permisos de página',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Crear una copia de la página actual con todo su contenido. Todos los idiomas se copiarán, pero sólo la versión publicada.',
     'page_update_actions_deepcopy_btn' => 'Crear copia',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Etiqueta de título (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'No se puede crear la página desde la plantilla de borrador vacía.',
     'view_update_variation_select' => 'No se seleccionó ninguna variación de bloque',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configurar',
     'view_update_block_tooltip_delete' => 'Eliminar',
     'view_update_block_tooltip_close' => 'Cerrar edición',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Últimas actualizaciones de la página',
     'cmsadmin_settings_homepage_title' => 'Página por defecto',
@@ -233,7 +233,7 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
-    
+
 // added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

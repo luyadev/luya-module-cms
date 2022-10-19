@@ -2,17 +2,17 @@
 
 namespace luya\cms\models;
 
+use luya\admin\models\Group;
 use luya\admin\ngrest\base\NgRestActiveQuery;
+use luya\admin\traits\TaggableTrait;
+use luya\cms\admin\Module;
+use luya\cms\models\Property as CmsProperty;
+use luya\helpers\Json;
 use Yii;
 use yii\db\ActiveQuery;
-use yii\db\Query;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
-use luya\admin\models\Group;
-use luya\admin\traits\TaggableTrait;
-use luya\cms\models\Property as CmsProperty;
-use luya\cms\admin\Module;
-use luya\helpers\Json;
 
 /**
  * CMS Nav Model ActiveRecord
@@ -91,19 +91,19 @@ class Nav extends ActiveRecord
         $fields = parent::fields();
         // ensure boolean values are returned as integer
         // this is required when working with pgsql
-        $fields['is_hidden'] = function($model) {
+        $fields['is_hidden'] = function ($model) {
             return (int) $model->is_hidden;
         };
-        $fields['is_deleted'] = function($model) {
+        $fields['is_deleted'] = function ($model) {
             return (int) $model->is_deleted;
         };
-        $fields['is_draft'] = function($model) {
+        $fields['is_draft'] = function ($model) {
             return (int) $model->is_draft;
         };
-        $fields['is_home'] = function($model) {
+        $fields['is_home'] = function ($model) {
             return (int) $model->is_home;
         };
-        $fields['is_offline'] = function($model) {
+        $fields['is_offline'] = function ($model) {
             return (int) $model->is_offline;
         };
         return $fields;

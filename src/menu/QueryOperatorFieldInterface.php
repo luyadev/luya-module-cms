@@ -15,95 +15,95 @@ interface QueryOperatorFieldInterface
     /**
      * @var string Operator Field ID, contains the absolute id for a page (nav item id)
      */
-    const FIELD_ID = 'id';
+    public const FIELD_ID = 'id';
     /**
      * @var string Operator Field
      */
-    const FIELD_NAVID = 'nav_id';
+    public const FIELD_NAVID = 'nav_id';
     /**
      * @var string Operator Field
      */
-    const FIELD_LANG = 'lang';
+    public const FIELD_LANG = 'lang';
     /**
      * @var string Operator Field
      */
-    const FIELD_LINK = 'link';
+    public const FIELD_LINK = 'link';
     /**
      * @var string Operator Field
      */
-    const FIELD_TITLE = 'title';
+    public const FIELD_TITLE = 'title';
     /**
      * @var string Operator Field
      */
-    const FIELD_TITLETAG = 'title_tag';
+    public const FIELD_TITLETAG = 'title_tag';
     /**
      * @var string Operator Field
      */
-    const FIELD_ALIAS = 'alias';
+    public const FIELD_ALIAS = 'alias';
     /**
      * @var string Operator Field
      */
-    const FIELD_DESCRIPTION = 'description';
+    public const FIELD_DESCRIPTION = 'description';
     /**
      * @var string Operator Field
      */
-    const FIELD_KEYWORDS = 'keywords';
+    public const FIELD_KEYWORDS = 'keywords';
     /**
      * @var string Operator Field
      */
-    const FIELD_CREATEUSERID = 'create_user_id';
+    public const FIELD_CREATEUSERID = 'create_user_id';
     /**
      * @var string Operator Field
      */
-    const FIELD_UPDATEUSERID = 'update_user_id';
+    public const FIELD_UPDATEUSERID = 'update_user_id';
     /**
      * @var string Operator Field
      */
-    const FIELD_TIMESTAMPCREATE = 'timestamp_create';
+    public const FIELD_TIMESTAMPCREATE = 'timestamp_create';
     /**
      * @var string Operator Field
      */
-    const FIELD_TIMESTAMPUPDATE = 'timestamp_update';
+    public const FIELD_TIMESTAMPUPDATE = 'timestamp_update';
     /**
      * @var string Operator Field
      */
-    const FIELD_ISHOME = 'is_home';
+    public const FIELD_ISHOME = 'is_home';
     /**
      * @var string Operator Field
      */
-    const FIELD_PARENTNAVID = 'parent_nav_id';
+    public const FIELD_PARENTNAVID = 'parent_nav_id';
     /**
      * @var string Operator Field
      */
-    const FIELD_SORTINDEX = 'sort_index';
+    public const FIELD_SORTINDEX = 'sort_index';
     /**
      * @var string Operator Field
      */
-    const FIELD_ISHIDDEN = 'is_hidden';
+    public const FIELD_ISHIDDEN = 'is_hidden';
     /**
      * @var string Operator Field
      */
-    const FIELD_TYPE = 'type';
+    public const FIELD_TYPE = 'type';
     /**
      * @var string Operator Field
      */
-    const FIELD_REDIRECT = 'redirect';
+    public const FIELD_REDIRECT = 'redirect';
     /**
      * @var string Operator Field
      */
-    const FIELD_MODULENAME = 'module_name';
+    public const FIELD_MODULENAME = 'module_name';
     /**
      * @var string Operator Field
      */
-    const FIELD_CONTAINER = 'container';
+    public const FIELD_CONTAINER = 'container';
     /**
      * @var string Operator Field
      */
-    const FIELD_DEPTH = 'depth';
+    public const FIELD_DEPTH = 'depth';
 
     /**
      * @var string Strict Parsing Operator Field
      * @since 2.0.0
      */
-    const FIELD_IS_URL_STRICT_PARSING_DISABLED = 'is_url_strict_parsing_disabled';
+    public const FIELD_IS_URL_STRICT_PARSING_DISABLED = 'is_url_strict_parsing_disabled';
 }

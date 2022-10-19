@@ -116,7 +116,7 @@ return [
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Bitte wählen',
     'view_index_sidebar_autopreview' => 'Automatische Vorschau',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Neue Seite erstellen',
     'module_permission_update_pages' => 'Seiten bearbeiten',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Neue Version speichern',
     'button_update_version' => 'Speichern',
     'menu_group_item_env_permission' => 'Seiten Berechtigungen',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Erstelle eine Kopie der aktuellen Seite mit allen dazugehörigen Inhalten. Es werden dabei alle Inhalte in allen angelegten Sprachen von allen veröffentlichten Versionen kopiert.',
     'page_update_actions_deepcopy_btn' => 'Kopie erstellen',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Titel Tag (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Die Vorlage darf nicht leer sein.',
     'view_update_variation_select' => 'Keine Blockvariation ausgewählt',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Konfigurieren',
     'view_update_block_tooltip_delete' => 'Löschen',
     'view_update_block_tooltip_close' => 'Bearbeitung schliessen',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Zuletzt aktualisierte Seiten',
     'cmsadmin_settings_homepage_title' => 'Startseite',
@@ -233,7 +233,7 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'Wählen Sie das anzuzeigende Modul aus der Liste aus (nur Frontend-Module werden aufgeführt). Module werden im Modul-Abschnitt der config konfiguriert.',
     'view_index_module_advanced_settings_button' => 'Erweiterte Einstellungen',
-    
+
 // added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themen',
     'view_index_page_is_cacheable' => 'Caching',
@@ -245,10 +245,10 @@ return [
     'menu_group_protocol' => 'Protokoll',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'Die gesuchte Seite wurde noch nicht übersetzt.',
-    
+
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» darf nicht leer sein.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Auf Benutzergruppen beschränken',
     'model_website_user_ids_label' => 'Auf Benutzer beschränken',
     'model_website_access_restrict' => 'Zugangsbeschränkung',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

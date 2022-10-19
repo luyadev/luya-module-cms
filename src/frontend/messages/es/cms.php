@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Proyecto',
     'block_group_text_elements' => 'Textos',
     'block_group_media_group' =>  'Media',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Render estricto',
     'block_module_strictrender_help' => 'Cuando se habilita el procesamiento estricto, el módulo sólo ejecutará la ruta proporcionada (módulo, controlador, acción, parámetros) sin escuchar las rutas de acción y controlador.',

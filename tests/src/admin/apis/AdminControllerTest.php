@@ -31,5 +31,5 @@ class AdminControllerTest extends WebModelTestCase
         $log = $ctrl->actionDashboardLog();
 
         $this->assertNotEmpty($log);
-    }   
+    }
 }

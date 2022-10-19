@@ -11,6 +11,6 @@ namespace luya\cms\base;
 interface PhpBlockInterface
 {
     public function frontend();
-    
+
     public function admin();
 }

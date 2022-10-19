@@ -20,7 +20,7 @@ class NavControllerTest extends WebModelTestCase
      */
     public function testActionTags()
     {
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $scope->createAndAllowRoute('webmodel/nav/tags');
             $scope->createAndAllowRoute('webmodel/nav/save-tags');
 
@@ -62,7 +62,7 @@ class NavControllerTest extends WebModelTestCase
      */
     public function testSaveTagsNotFound()
     {
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $scope->createAndAllowRoute('webmodel/nav/save-tags');
             $this->createCmsNavFixture([
                 'nav1' => [
@@ -80,8 +80,7 @@ class NavControllerTest extends WebModelTestCase
      */
     public function testDelete()
     {
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
-
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $this->createAdminLangFixture();
             $this->createCmsWebsiteFixture([
                 1 => [
@@ -132,8 +131,7 @@ class NavControllerTest extends WebModelTestCase
 
     public function testGetProperties()
     {
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
-
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
             $this->createCmsNavFixture([
@@ -161,8 +159,7 @@ class NavControllerTest extends WebModelTestCase
             $this->assertSame([], $r);
         });
 
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
-
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
             $this->createCmsNavFixture([
@@ -189,8 +186,7 @@ class NavControllerTest extends WebModelTestCase
             $this->assertSame([], $r);
         });
 
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
-
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
             $this->createCmsNavFixture([
@@ -220,8 +216,7 @@ class NavControllerTest extends WebModelTestCase
     public function testActionDeepPageCopyAsTemplateError()
     {
         // erroring
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
-
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
             $this->createCmsNavContainerFixture([
@@ -253,18 +248,15 @@ class NavControllerTest extends WebModelTestCase
             $ctrl = new NavController('nav', $this->app);
             $scope->getApp()->request->setBodyParams(['navId' => 1]);
             $r = $scope->runControllerAction($ctrl, 'deep-page-copy-as-template');
-            
+
             $this->assertSame(422, $scope->getApp()->response->statusCode);
         });
-
-
-        
     }
 
-    public function testActionDeepPageCopyAsTemplateSuccess() {
+    public function testActionDeepPageCopyAsTemplateSuccess()
+    {
         // success
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
-
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
             $this->createCmsNavContainerFixture([
@@ -303,11 +295,10 @@ class NavControllerTest extends WebModelTestCase
             $this->assertSame(200, $scope->getApp()->response->statusCode);
         });
     }
-    
+
     public function testActionToggleHome()
     {
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
-        
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
             $this->createCmsWebsiteFixture([
@@ -363,42 +354,40 @@ class NavControllerTest extends WebModelTestCase
                 ]
             ]);
             $this->createCmsNavItemPageFixture();
-        
+
             $this->createCmsPropertyFixture();
             $this->createCmsLog();
-    
+
             /** @var Nav $nav2Model */
             $nav2Model = Nav::findOne(2);
             $this->assertEquals(1, (int)$nav2Model->is_home);
-            
+
             $scope->createAndAllowRoute('webmodel/nav/toggle-home');
             $ctrl = new NavController('nav', $this->app);
-            
+
             // toggle home from nav2 to nav1
             $r = $scope->runControllerAction($ctrl, 'toggle-home', ['navId' => 1, 'homeState' => 1]);
             $this->assertSame(200, $scope->getApp()->response->statusCode);
-    
+
             /** @var Nav $nav1Model */
             $nav1Model = Nav::findOne(1);
             $this->assertEquals(1, $nav1Model->is_home);
-    
+
             /** @var Nav $nav2Model */
             $nav2Model = Nav::findOne(2);
             $this->assertEquals(0, (int)$nav2Model->is_home);
-            
+
             // untoggle nav1 as home
             $r = $scope->runControllerAction($ctrl, 'toggle-home', ['navId' => 1, 'homeState' => 0]);
             $this->assertSame(200, $scope->getApp()->response->statusCode);
-    
+
             /** @var Nav $nav1Model */
             $nav1Model = Nav::findOne(1);
             $this->assertEquals(0, (int)$nav1Model->is_home);
-    
+
             /** @var Nav $nav2Model */
             $nav2Model = Nav::findOne(2);
             $this->assertEquals(0, (int)$nav2Model->is_home);
-    
         });
     }
-
 }

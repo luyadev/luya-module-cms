@@ -17,12 +17,12 @@ class LayoutGroup extends BlockGroup
     {
         return 'layout-group';
     }
-    
+
     public function label()
     {
         return Module::t('block_group_layout_elements');
     }
-    
+
     public function getPosition()
     {
         return 67;

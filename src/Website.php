@@ -2,12 +2,12 @@
 
 namespace luya\cms;
 
-use Yii;
+use luya\cms\models\Website as WebsiteModel;
 use luya\helpers\StringHelper;
 use luya\traits\CacheableTrait;
 use luya\web\Composition;
+use Yii;
 use yii\base\Component;
-use \luya\cms\models\Website as WebsiteModel;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -21,9 +21,9 @@ use yii\web\NotFoundHttpException;
 class Website extends Component
 {
     use CacheableTrait;
-    
+
     private $_current = null;
-    
+
     /**
      * @return array|bool
      * @throws NotFoundHttpException
@@ -33,10 +33,10 @@ class Website extends Component
         if ($this->_current === null) {
             $this->_current = $this->findOneByHostName(Yii::$app->request->hostName);
         }
-        
+
         return $this->_current;
     }
-    
+
     /**
      * Get website information by hostname.
      *
@@ -50,13 +50,13 @@ class Website extends Component
             return $cache;
         }
         $defaultWebsite = false;
-    
+
         $websites = $this->loadAllWebsiteData();
         if (isset($websites[$hostName])) {
             $this->setHasCache($hostName, $websites[$hostName]);
             return $websites[$hostName];
         }
-        
+
         foreach ($websites as $website) {
             foreach ($website['aliases'] as $alias) {
                 if (StringHelper::matchWildcard($alias, $hostName)) {
@@ -64,23 +64,23 @@ class Website extends Component
                     return $website;
                 }
             }
-            
+
             if ($website['is_default']) {
                 $defaultWebsite = $website;
             }
         }
-    
+
         if (!$defaultWebsite) {
             // should never happen because there is always a default website
             throw new NotFoundHttpException(sprintf("The requested host '%s' does not exist in website table", $hostName));
         }
-        
+
         $this->setHasCache($hostName, $defaultWebsite);
         return $defaultWebsite;
     }
-    
+
     private $_allWebsiteData = null;
-    
+
     /**
      * @return array
      */
@@ -95,7 +95,7 @@ class Website extends Component
         }
         return $this->_allWebsiteData;
     }
-    
+
     /**
      * Create a host mapping with default languages for {\luya\web\Composition::$hostInfoMapping}
      * @return array
@@ -103,7 +103,7 @@ class Website extends Component
     public function createHostInfoMapping()
     {
         $hostInfoMapping = [];
-    
+
         foreach ($this->loadAllWebsiteData() as $website) {
             if ($website['default_lang']) {
                 $hostInfoMapping[$website['host']] = [Composition::VAR_LANG_SHORT_CODE => $website['default_lang']];
@@ -114,7 +114,7 @@ class Website extends Component
                 }
             }
         }
-        
+
         return $hostInfoMapping;
     }
 }

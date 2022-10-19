@@ -9,3 +9,5 @@ node_modules/
 composer.lock
 .phpunit.result.cache
 /tests/_output/*
+.php-cs-fixer.cache
+.tmp

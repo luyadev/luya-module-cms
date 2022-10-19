@@ -1,6 +1,5 @@
 <?php
 
-
 namespace cmstests\src\widgets;
 
 use cmstests\CmsFrontendTestCase;
@@ -21,22 +20,22 @@ class LangSwitcherTest extends CmsFrontendTestCase
         $out = LangSwitcher::widget(['linkLabel' => function ($lang) {
             return strtoupper($lang['short_code']);
         }]);
-        
+
         $this->assertSame('<ul class="list-element">
 <li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="http://localhost/luya/envs/dev/public_html/">EN</a></li>
 <li class="lang-element-item"><a class="lang-link-item" href="http://localhost/luya/envs/dev/public_html/de">DE</a></li>
 </ul>', $out);
     }
-    
+
     public function testSortCallable()
     {
         $out = LangSwitcher::widget(['itemsCallback' => function ($items) {
             ksort($items);
-            
+
             return $items;
         }]);
-        
-        
+
+
         $this->assertSame('<ul class="list-element">
 <li class="lang-element-item"><a class="lang-link-item" href="http://localhost/luya/envs/dev/public_html/de">Deutsch</a></li>
 <li class="lang-element-item lang-element-item--active"><a class="lang-link-item lang-link-item--active" href="http://localhost/luya/envs/dev/public_html/">English</a></li>

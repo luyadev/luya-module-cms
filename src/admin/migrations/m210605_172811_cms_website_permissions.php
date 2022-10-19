@@ -1,7 +1,7 @@
 <?php
 
+use luya\cms\models\Website;
 use yii\db\Migration;
-use \luya\cms\models\Website;
 
 /**
  * Class m210605_172811_cms_website_permissions

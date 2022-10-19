@@ -2,16 +2,16 @@
 
 namespace luya\cms\menu;
 
-use Yii;
 use luya\admin\models\User;
 use luya\cms\Exception;
+use luya\cms\LinkConverter;
 use luya\cms\models\Nav;
 use luya\web\LinkInterface;
 use luya\web\LinkTrait;
+use Yii;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
 use yii\base\BaseObject;
-use luya\cms\LinkConverter;
 
 /**
  * Menu item Object.
@@ -61,8 +61,9 @@ use luya\cms\LinkConverter;
  */
 class Item extends BaseObject implements LinkInterface, Arrayable
 {
-    use LinkTrait, ArrayableTrait;
-    
+    use LinkTrait;
+    use ArrayableTrait;
+
     /**
      * @var array The item property containing the informations with key  value parinings. This property will be assigned when creating the
      * Item-Object.
@@ -81,7 +82,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * @since 2.0.0
      */
     public $is404Page = false;
-    
+
     /**
      * @var array Privat property containing with informations for the Query Object.
      */
@@ -94,7 +95,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return ['href', 'target'];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -102,9 +103,9 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return $this->getLink();
     }
-    
+
     private $_target;
-    
+
     /**
      * Setter method for the link target.
      *
@@ -114,7 +115,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         $this->_target = $target;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -122,7 +123,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return empty($this->_target) ? '_self' : $this->_target;
     }
-    
+
     /**
      * Item-Object initiliazer, verify if the itemArray property is empty.
      *
@@ -136,7 +137,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
         // call parent object initializer
         parent::init();
     }
-    
+
     /**
      * Get the Id of the Item, the Id is an unique identifiere an represents the
      * id column in the cms_nav_item table.
@@ -147,7 +148,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return (int) $this->itemArray['id'];
     }
-    
+
     /**
      * Get the sorting index position for the item on the current siblings.
      *
@@ -167,7 +168,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return (bool) $this->itemArray['is_hidden'];
     }
-    
+
     /**
      * Whether current item is home or not.
      *
@@ -177,7 +178,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return (bool) $this->itemArray['is_home'];
     }
-    
+
     /**
      * Override the default hidden state of an item.
      *
@@ -187,7 +188,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         $this->itemArray['is_hidden'] = (int) $value;
     }
-    
+
     /**
      * Return the current container name of this item.
      *
@@ -197,7 +198,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return $this->itemArray['container'];
     }
-    
+
     /**
      * Get the Nav-id of the Item, the Nav-Id is not unique but in case of the language
      * container the nav id is unique. The Nav-Id identifier repersents the id coluumn
@@ -239,7 +240,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return $this->itemArray['title'];
     }
-    
+
     /**
      * Override the current title of item.
      *
@@ -249,7 +250,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         $this->itemArray['title'] = $title;
     }
-    
+
     /**
      * Returns the Alternative SEO-Title.
      *
@@ -261,7 +262,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return empty($this->itemArray['title_tag']) ? $this->title : $this->itemArray['title_tag'];
     }
-    
+
     /**
      * Return the current nav item type by number.
      *
@@ -275,7 +276,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return (int) $this->itemArray['type'];
     }
-    
+
     /**
      * If the type of the item is equals 2 we can detect the module name and returns
      * this information.
@@ -287,10 +288,10 @@ class Item extends BaseObject implements LinkInterface, Arrayable
         if ($this->getType() === 2) {
             return $this->itemArray['module_name'];
         }
-        
+
         return false;
     }
-    
+
     /**
      * Returns the description provided by the cms admin, if any.
      *
@@ -302,9 +303,9 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     }
 
     private $_keywords;
-    
+
     private $_delimiters = [',', ';', '|'];
-    
+
     /**
      * @return array An array with all keywords for this page
      */
@@ -321,10 +322,10 @@ class Item extends BaseObject implements LinkInterface, Arrayable
                 }
             }
         }
-        
+
         return $this->_keywords;
     }
-    
+
     /**
      * Returns the current alias name of the item (identifier for the url)
      * also (& previous) called rewrite.
@@ -335,7 +336,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return $this->itemArray['alias'];
     }
-    
+
     /**
      * Returns an unix timestamp when the page was created.
      *
@@ -345,7 +346,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return $this->itemArray['timestamp_create'];
     }
-    
+
     /**
      * Returns an unix timestamp when the page was last time updated.
      *
@@ -355,7 +356,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return $this->itemArray['timestamp_update'];
     }
-    
+
     /**
      * Returns an active record object for the admin user who created this page.
      *
@@ -366,7 +367,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return User::findOne($this->itemArray['create_user_id']);
     }
-    
+
     /**
      * Returns an active record object for the admin user who last time updated this page.
      *
@@ -388,7 +389,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return Yii::$app->storage->getImage($this->itemArray['image_id']);
     }
-    
+
     /**
      * Internal used to retriev redirect data.
      *
@@ -418,7 +419,6 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         // take care of redirect
         if ($this->getType() === 3 && !empty($this->redirectMapData('value'))) {
-            
             // generate convert object to determine correctn usage.
             $converter = new LinkConverter([
                 'type' => $this->redirectMapData('type'),
@@ -429,7 +429,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             if ($this->redirectMapData('target')) {
                 $this->setTarget($this->redirectMapData('target'));
             }
-            
+
             switch ($converter->type) {
                 case $converter::TYPE_EXTERNAL_URL:
                     return $converter->getWebsiteLink($converter->value, $converter->target)->getHref();
@@ -445,18 +445,17 @@ class Item extends BaseObject implements LinkInterface, Arrayable
                     return $converter->getFileLink($converter->value, $converter->target)->getHref();
                 case $converter::TYPE_LINK_TO_TELEPHONE:
                     return $converter->getTelephoneLink($converter->value)->getHref();
-               
             }
         }
-        
+
         // if its the homepage and the default lang short code is equasl to this lang the link has no path.
         if ($this->itemArray['is_home'] && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) {
             return Yii::$app->urlManager->prependBaseUrl('');
         }
-        
+
         return $this->itemArray['link'];
     }
-    
+
     /**
      * Returns the link with an absolute scheme.
      *
@@ -502,7 +501,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return $this->itemArray['depth'];
     }
-    
+
     /**
      * Check whether the parent has items or not.
      *
@@ -512,7 +511,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         return (bool) $this->getParent();
     }
-    
+
     /**
      * Returns a Item-Object of the parent element, if no parent element exists returns false.
      *
@@ -588,7 +587,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             ->lang($this->lang)
             ->all();
     }
-    
+
     /**
      * Get the next sibling in the current siblings list.
      *
@@ -606,7 +605,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             ->orderBy(['sort_index' => SORT_ASC])
             ->one();
     }
-    
+
     /**
      * Get the previous sibling in the current siblings list.
      *
@@ -624,7 +623,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             ->orderBy(['sort_index' => SORT_DESC])
             ->one();
     }
-    
+
     /**
      * Return all parent elements **with** the current item.
      *
@@ -642,7 +641,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
 
         return Query::createArrayIterator(array_reverse($data, true), $this->lang, array_flip($this->_with), false);
     }
-    
+
     /**
      * Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
      *
@@ -656,7 +655,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             ->lang($this->lang)
             ->all();
     }
-    
+
     /**
      * Check whether an item has childrens or not returning a boolean value.
      *
@@ -676,7 +675,6 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     public function getDescendants()
     {
         return Query::createArrayIterator($this->getInternalDescendants(), $this->lang, array_flip($this->_with), false);
-        
     }
 
     /**
@@ -693,9 +691,9 @@ class Item extends BaseObject implements LinkInterface, Arrayable
 
         return $data;
     }
-    
+
     private $_model;
-    
+
     /**
      * Get the ActiveRecord Model for the current Nav Model.
      *
@@ -706,15 +704,15 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         if ($this->_model === null) {
             $this->_model = Nav::findOne($this->navId);
-            
+
             if (empty($this->_model)) {
                 throw new Exception('The model active record could not be found for the corresponding nav item. Maybe you have inconsistent Database data.');
             }
         }
-        
+
         return $this->_model;
     }
-    
+
     /**
      * Setter method for the Model.
      *
@@ -724,7 +722,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     {
         $this->_model = $model;
     }
-    
+
     /**
      * Get Property Object.
      *
@@ -786,13 +784,13 @@ class Item extends BaseObject implements LinkInterface, Arrayable
 
         return $this;
     }
-    
+
     /**
-     * Unset a value from the `with()` method. 
-     * 
+     * Unset a value from the `with()` method.
+     *
      * Assuming to return the first level with hidden items but the second level
      * without the hidden elements:
-     * 
+     *
      * ```php
      * foreach ($item->with('hidden')->children as $child) {
      *     // but get the sibilings without the hidden state
@@ -806,14 +804,14 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     public function without($without)
     {
         $without = (array) $without;
-        
+
         foreach ($without as $expression) {
             $key = array_search($expression, $this->_with);
             if ($key !== false) {
                 unset($this->_with[$key]);
             }
         }
-        
+
         return $this;
     }
 }

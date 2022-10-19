@@ -2,11 +2,11 @@
 
 namespace luya\cms\menu;
 
-use Yii;
 use luya\cms\Exception;
-use yii\helpers\Inflector;
 use luya\cms\Menu;
+use Yii;
 use yii\base\BaseObject;
+use yii\helpers\Inflector;
 
 /**
  * An item inject gives a module the possibility to add items into the menu Container.
@@ -89,24 +89,24 @@ class InjectItem extends BaseObject implements InjectItemInterface
      * @var integer The user id who created this page.
      */
     public $createUserId = 0;
-    
+
     /**
      * @var integerThe user id who updated this page as last person.
      */
     public $updateUserId = 0;
-    
+
     /**
      * @var integer The number which is used to sort the injected item. Lower is at the top.
      */
     public $sortIndex = 0;
-    
+
     /**
      * @var boolean Whether this page is hidden or not.
      */
     public $isHidden = false;
-    
+
     // Getter & Setter
-    
+
     private $_item;
 
     /**
@@ -118,15 +118,15 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         if ($this->_item === null) {
             $this->_item = Yii::$app->menu->find()->where(['id' => $this->childOf])->with('hidden')->one();
-            
+
             if (!$this->_item) {
                 throw new Exception("Unable to find item with id " . $this->childOf);
             }
         }
-        
+
         return $this->_item;
     }
-    
+
     /**
      * Setter method for the item property.
      *
@@ -137,12 +137,12 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         $this->childOf = $item->id;
         $this->_item = $item;
-        
+
         return $this;
     }
-    
+
     private $_childOf;
-    
+
     /**
      * Setter method for childOf property.
      *
@@ -152,10 +152,10 @@ class InjectItem extends BaseObject implements InjectItemInterface
     public function setChildOf($id)
     {
         $this->_childOf = (int) $id;
-        
+
         return $this;
     }
-    
+
     /**
      * Getter method for the childOf property.
      *
@@ -169,9 +169,9 @@ class InjectItem extends BaseObject implements InjectItemInterface
         }
         return $this->_childOf;
     }
-    
+
     private $_alias;
-    
+
     /**
      * Setter method for the item alias.
      *
@@ -181,7 +181,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     public function setAlias($alias)
     {
         $this->_alias = Inflector::slug($alias);
-        
+
         return $this;
     }
 
@@ -195,12 +195,12 @@ class InjectItem extends BaseObject implements InjectItemInterface
         if ($this->_alias === null) {
             throw new Exception('The $alias property can not be null and must be set.');
         }
-        
+
         return $this->item->alias . '/' . $this->_alias;
     }
-    
+
     private $_link;
-    
+
     /**
      * Setter method fro the link.
      *
@@ -210,10 +210,10 @@ class InjectItem extends BaseObject implements InjectItemInterface
     public function setLink($url)
     {
         $this->_link = $url;
-        
+
         return $this;
     }
-    
+
     /**
      * Getter method for the menu link.
      *
@@ -223,9 +223,9 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return ($this->_link === null) ? Yii::$app->menu->buildItemLink($this->alias, $this->getLang()) : $this->_link;
     }
-    
+
     private $_title;
-    
+
     /**
      * Setter method for the menu title.
      *
@@ -238,12 +238,12 @@ class InjectItem extends BaseObject implements InjectItemInterface
         if ($this->_alias === null) {
             $this->setAlias($title);
         }
-        
+
         $this->_title = $title;
-        
+
         return $this;
     }
-    
+
     /**
      * Getter method for the menu title.
      *
@@ -255,12 +255,12 @@ class InjectItem extends BaseObject implements InjectItemInterface
         if ($this->_title === null) {
             throw new Exception('The $title property can not be null and must be set.');
         }
-        
+
         return $this->_title;
     }
-    
+
     private $_description;
-    
+
     /**
      * Setter method for menu page description.
      *
@@ -270,10 +270,10 @@ class InjectItem extends BaseObject implements InjectItemInterface
     public function setDescription($description)
     {
         $this->_description = $description;
-        
+
         return $this;
     }
-    
+
     /**
      * Getter method for the menu page description.
      *
@@ -283,9 +283,9 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return $this->_description;
     }
-    
+
     // Getters
-    
+
     /**
      * Getter method for the container from the child of item.
      *
@@ -295,7 +295,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return $this->item->container;
     }
-    
+
     /**
      * Returns the depth number based on the alias paths.
      *
@@ -305,9 +305,9 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return count(explode('/', $this->alias));
     }
-    
+
     private $_lang;
-    
+
     /**
      * Returns the language from the childOf item.
      *
@@ -318,10 +318,10 @@ class InjectItem extends BaseObject implements InjectItemInterface
         if ($this->_lang === null) {
             $this->_lang = $this->item->lang;
         }
-        
+
         return $this->_lang;
     }
-    
+
     /**
      * Setter method for language container.
      *
@@ -332,7 +332,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         $this->_lang = $lang;
     }
-    
+
     /**
      * Getter method for the parent nav id from the childOf item.
      *
@@ -342,7 +342,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return $this->item->navId;
     }
-    
+
     /**
      * Getter method for the create item timestamp.
      *
@@ -352,7 +352,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return time();
     }
-    
+
     /**
      * Getter method for the update item timestamp.
      *
@@ -362,7 +362,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return time();
     }
-    
+
     /**
      * Getter method for the isHhome item, which is false by default.
      * @return number
@@ -371,7 +371,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return (int) false;
     }
-    
+
     /**
      * Getter method for the type which is by default a page.
      *
@@ -381,7 +381,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         return Menu::ITEM_TYPE_PAGE;
     }
-    
+
     /**
      * Getter method for the redirect content if its a redirect page, by default 0.
      *
@@ -393,7 +393,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     }
 
     private $_id;
-    
+
     /**
      * Setter method for the id (unique id).
      *
@@ -403,7 +403,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         $this->_id = $id;
     }
-    
+
     /**
      * Getter method for the unique id.
      *
@@ -414,12 +414,12 @@ class InjectItem extends BaseObject implements InjectItemInterface
         if ($this->_id === null) {
             $this->_id = rand(10000, 1000000);
         }
-        
+
         return $this->_id;
     }
-    
+
     private $_navId;
-    
+
     /**
      * Setter method for the navId.
      *
@@ -429,7 +429,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     {
         $this->_navId = $navId;
     }
-    
+
     /**
      * Getter method for the navId.
      *
@@ -442,7 +442,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
         }
         return $this->_navId;
     }
-    
+
     /**
      * Parse the injected item to an array.
      *

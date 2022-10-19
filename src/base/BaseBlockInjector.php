@@ -2,8 +2,8 @@
 
 namespace luya\cms\base;
 
-use yii\base\InvalidConfigException;
 use yii\base\BaseObject;
+use yii\base\InvalidConfigException;
 
 /**
  * The base injector class for all Injectors.
@@ -36,24 +36,24 @@ abstract class BaseBlockInjector extends BaseObject
      * @var string The name of the variable on what the injector should use and listen to.
      */
     public $varName;
-    
+
     /**
      * @var string The label used in the administration area for this injector.
      */
     public $varLabel;
-    
+
     /**
      * @var string The type of variable is used for the inject. can be either var or cfg.
      */
     public $type = InternalBaseBlock::INJECTOR_VAR;
-    
+
     /**
      * @var boolean Whether the variable should be at the start (prepand) or end (append) of the configration.
      */
     public $append = false;
-    
+
     private $_context;
-    
+
     /**
      * Setter for the context value must be typeof BlockInterface.
      *
@@ -63,7 +63,7 @@ abstract class BaseBlockInjector extends BaseObject
     {
         $this->_context = $context;
     }
-    
+
     /**
      * Getter for the context variable on where the block is injected.
      *
@@ -87,14 +87,14 @@ abstract class BaseBlockInjector extends BaseObject
         if ($this->type == InternalBaseBlock::INJECTOR_VAR) {
             return $this->context->getVarValue($varName, $defaultValue);
         }
-        
+
         if ($this->type == InternalBaseBlock::INJECTOR_CFG) {
             return $this->context->getCfgValue($varName, $defaultValue);
         }
-            
+
         throw new InvalidConfigException("The type '{$this->type}' is not supported.");
     }
-    
+
     /**
      * Set a new configuration value for a variable based on its context (cfg or var).
      *
@@ -106,14 +106,14 @@ abstract class BaseBlockInjector extends BaseObject
         if ($this->type == InternalBaseBlock::INJECTOR_VAR) {
             return $this->context->addVar($config, $this->append);
         }
-         
+
         if ($this->type == InternalBaseBlock::INJECTOR_CFG) {
             return $this->context->addCfg($config, $this->append);
         }
-        
+
         throw new InvalidConfigException("The type '{$this->type}' is not supported.");
     }
-    
+
     /**
      * The setup method which all injectors must implement. The setup method is mainly to
      * inject the variable into the configs and setting up the extra vars values.

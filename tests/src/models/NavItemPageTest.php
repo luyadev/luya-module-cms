@@ -6,7 +6,6 @@ use cmstests\WebModelTestCase;
 use luya\cms\models\NavItemPage;
 use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
-use yii\base\ViewNotFoundException;
 
 class NavItemPageTest extends WebModelTestCase
 {
@@ -29,7 +28,7 @@ class NavItemPageTest extends WebModelTestCase
                 'view_file' => '@app/testfile',
             ]
         ]);
-        
+
         $model = $pageFixture->getModel(1);
 
         try {
@@ -71,7 +70,7 @@ class NavItemPageTest extends WebModelTestCase
                 'view_file' => '/absolute',
             ]
         ]);
-        
+
         $model = $pageFixture->getModel(1);
 
         try {
@@ -98,7 +97,7 @@ class NavItemPageTest extends WebModelTestCase
                 'view_file' => 'relative',
             ]
         ]);
-        
+
         $model = $pageFixture->getModel(1);
 
         try {

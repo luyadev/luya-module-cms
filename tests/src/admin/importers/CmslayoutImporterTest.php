@@ -8,7 +8,6 @@ use luya\cms\admin\importers\ThemeImporter;
 use luya\cms\models\Layout;
 use luya\cms\models\Theme;
 use luya\console\commands\ImportController;
-use luya\helpers\FileHelper;
 use luya\helpers\Json;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
@@ -24,19 +23,19 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
         $layout = new ActiveRecordFixture([
             'modelClass' => Layout::class
         ]);
-    
+
         // theme fixture
         $theme = new ActiveRecordFixture([
             'modelClass' => Theme::class
         ]);
-        
+
         $controller = new ImportController('import-controller', $this->app);
         $importer = new CmslayoutImporter($controller, $this->app->getModule('cmsadmin'));
 
         $this->assertNull($importer->run());
-        
+
         $log = $importer->importer->getLog();
-        
+
         $this->assertArrayHasKey('luya\cms\admin\importers\CmslayoutImporter', $log);
 
         $data = $log['luya\cms\admin\importers\CmslayoutImporter'];
@@ -57,32 +56,32 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
         $this->assertFalse($importer->comparePlaceholders($j1, $j2));
         $this->assertFalse($importer->comparePlaceholders($j2, $j1));
     }
-    
+
     public function testThemeLayoutImporter()
     {
         // config fixture
         $layout = new ActiveRecordFixture([
             'modelClass' => Layout::class
         ]);
-    
+
         // theme fixture
         $theme = new ActiveRecordFixture([
             'modelClass' => Theme::class,
         ]);
-        
+
         $controller = new ImportController('import-controller', $this->app);
-    
+
         // Import theme first
         Yii::setAlias('@app', Yii::getAlias('@cmstests/tests/data'));
         $importer = new ThemeImporter($controller, $this->app->getModule('cmsadmin'));
         $importer->run();
 
         $importer = new CmslayoutImporter($controller, $this->app->getModule('cmsadmin'));
-    
+
         $this->assertNull($importer->run());
-    
+
         $log = $importer->importer->getLog();
-    
+
         $this->assertSame(3, count($log['luya\cms\admin\importers\ThemeImporter']));
         $this->assertSame(5, count($log['luya\cms\admin\importers\CmslayoutImporter']));
         /*
@@ -134,7 +133,7 @@ class CmslayoutImporterTest extends CmsConsoleTestCase
 
         $this->assertFalse($importer->comparePlaceholders($j1, $j2));
 
-        
+
         $tmpfname = tempnam(sys_get_temp_dir(), "FOO");
 
         $handle = fopen($tmpfname, "w");

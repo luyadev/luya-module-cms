@@ -1,6 +1,6 @@
 <?php
-use luya\cms\admin\Module;
 use luya\admin\helpers\Angular;
+use luya\cms\admin\Module;
 
 ?>
 <modal is-modal-hidden="settingsOverlayVisibility" modal-title="{{item.title}} <?= Module::t('cmsadmin_settings_modal_title'); ?>">

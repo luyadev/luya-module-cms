@@ -2,9 +2,9 @@
 
 namespace luya\cms\injectors;
 
-use yii\data\ActiveDataProvider;
-use luya\helpers\ArrayHelper;
 use luya\cms\base\BaseBlockInjector;
+use luya\helpers\ArrayHelper;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveQueryInterface;
 
 /**
@@ -28,14 +28,14 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
      * If the label attribute is not defined, just all attribute from the model will be displayed.
      */
     public $label;
-    
+
     /**
      * @var boolean|array Whether the extra assigned data should enable pagination.
      */
     public $pagination = false;
-    
+
     private $_query;
-    
+
     /**
      * Setter method for the active query interface.
      *
@@ -58,7 +58,7 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
     {
         return $this->_query;
     }
-    
+
     /**
      * Get an array with options
      *
@@ -70,7 +70,7 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
             'query' => $this->_query,
             'pagination' => false,
         ]);
-    
+
         $data = [];
         foreach ($provider->getModels() as $model) {
             if (is_callable($this->label)) {
@@ -85,7 +85,7 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
 
         return $data;
     }
-    
+
     /**
      * Get the Active Record models from the stored block values
      *
@@ -94,15 +94,15 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
     protected function getExtraAssignArrayData()
     {
         $ids = ArrayHelper::getColumn($this->getContextConfigValue($this->varName, []), 'value');
-    
+
         $provider = new ActiveDataProvider([
             'query' => $this->_query->andWhere(['in', 'id', $ids]),
             'pagination' => $this->pagination,
         ]);
-    
+
         return $provider->getModels();
     }
-    
+
     /**
      * Get a single active record based on the stored block value.
      *
@@ -111,7 +111,7 @@ abstract class BaseActiveQueryInjector extends BaseBlockInjector
     protected function getExtraAssignSingleData()
     {
         $value = $this->getContextConfigValue($this->varName);
-        
+
         if (!$value) {
             return false;
         }

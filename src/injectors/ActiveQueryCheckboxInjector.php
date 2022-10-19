@@ -2,9 +2,8 @@
 
 namespace luya\cms\injectors;
 
-use yii\db\ActiveQueryInterface;
-use yii\data\ActiveDataProvider;
 use luya\admin\base\TypesInterface;
+use yii\data\ActiveDataProvider;
 
 /**
  * Checkboxes from an ActiveQuery.

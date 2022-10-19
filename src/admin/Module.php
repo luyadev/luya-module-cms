@@ -2,15 +2,15 @@
 
 namespace luya\cms\admin;
 
-use luya\cms\admin\importers\ThemeImporter;
-use Yii;
-use luya\console\interfaces\ImportControllerInterface;
+use luya\admin\components\AdminMenuBuilder;
+use luya\base\CoreModuleInterface;
 use luya\cms\admin\importers\BlockImporter;
 use luya\cms\admin\importers\CmslayoutImporter;
 use luya\cms\admin\importers\PropertyConsistencyImporter;
-use luya\base\CoreModuleInterface;
-use luya\admin\components\AdminMenuBuilder;
+use luya\cms\admin\importers\ThemeImporter;
+use luya\console\interfaces\ImportControllerInterface;
 use luya\helpers\Url;
+use Yii;
 
 /**
  * CMS Admin Module.
@@ -27,17 +27,17 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     /**
      * @var string The version label name of the first version, version alias is running through yii2 messaging system.
      */
-    const VERSION_INIT_LABEL = 'Initial';
-    
-    const ROUTE_PAGE_CREATE = 'cmsadmin/page/create';
-    
-    const ROUTE_PAGE_UDPATE = 'cmsadmin/page/update';
-    
-    const ROUTE_PAGE_DELETE = 'cmsadmin/page/delete';
-    
-    const ROUTE_PAGE_DRAFTS = 'cmsadmin/page/drafts';
-    
-    const ROUTE_CONFIG = 'cmsadmin/config/index';
+    public const VERSION_INIT_LABEL = 'Initial';
+
+    public const ROUTE_PAGE_CREATE = 'cmsadmin/page/create';
+
+    public const ROUTE_PAGE_UDPATE = 'cmsadmin/page/update';
+
+    public const ROUTE_PAGE_DELETE = 'cmsadmin/page/delete';
+
+    public const ROUTE_PAGE_DRAFTS = 'cmsadmin/page/drafts';
+
+    public const ROUTE_CONFIG = 'cmsadmin/config/index';
 
     /**
      * @inheritdoc
@@ -86,7 +86,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             'title' => ['cmsadmin', 'cmsadmin_dashboard_lastupdate'],
         ],
     ];
-    
+
     /**
      * @var array Defined blocks to hidde from the cmsadmin. Those blocks are not listed in the Page Content blocks overview. You can override this
      * variable inside your configuration of the cmsadmin.
@@ -121,7 +121,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      * ```
      */
     public $hiddenBlocks = [];
-    
+
     /**
      * @var array An array with folders where layouts are contained or direct paths to a given layout file.
      *
@@ -135,9 +135,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      * @since 1.0.6
      */
     public $cmsLayouts = [];
-    
+
     private $_blocks = [];
-    
+
     /**
      * Setter method for additional cms blocks.
      *
@@ -163,7 +163,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         $this->_blocks = (array) $definition;
     }
-    
+
     /**
      * Get an array with custom block definitions.
      *
@@ -176,9 +176,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         return $this->_blocks;
     }
-    
+
     private $_previewUrl;
-    
+
     /**
      * Setter method for previewUrl.
      *
@@ -201,7 +201,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         $this->_previewUrl = rtrim($url, '/');
     }
-    
+
     /**
      * Getter method for previewUrl.
      *
@@ -212,11 +212,11 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public function getPreviewUrl()
     {
-        return $this->_previewUrl === null ?  Url::home(true) . 'cms-page-preview' : $this->_previewUrl;
+        return $this->_previewUrl === null ? Url::home(true) . 'cms-page-preview' : $this->_previewUrl;
     }
-    
+
     private $_blockVariations;
-    
+
     /**
      * Set block variations.
      *
@@ -248,7 +248,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         }
         $this->_blockVariations = $_variations;
     }
-    
+
     /**
      * Getter method for blockVarionts.
      *
@@ -258,7 +258,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         return $this->_blockVariations;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -274,7 +274,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
                     ->itemApi('menu_group_item_env_themes', 'cmsadmin/theme/index', 'color_lens', 'api-cms-theme')
                     ->itemApi('menu_group_item_env_container', 'cmsadmin/navcontainer/index', 'label_outline', 'api-cms-navcontainer')
 
-                   
+
                 ->group('menu_group_elements')
                     ->itemApi('menu_group_item_elements_group', 'cmsadmin/blockgroup/index', 'view_module', 'api-cms-blockgroup')
                     ->itemApi('menu_group_item_elements_blocks', 'cmsadmin/block/index', 'format_align_left', 'api-cms-block')
@@ -286,7 +286,6 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
 
                 ->group('menu_group_protocol')
                     ->itemApi('menu_group_protocol_model_event_logger', 'cmsadmin/log/index', 'archive', 'api-cms-log');
-                
     }
 
     /**
@@ -336,7 +335,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             'luya\cms\admin\assets\Main',
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -350,7 +349,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             'cmsadmin_settings_trashpage_title', 'cmsadmin_version_remove', 'js_block_attribute_empty',
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -360,7 +359,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
             'cmsadmin' => 'cmsadmin.php',
         ]);
     }
-    
+
     /**
      * Translations for CMS admin Module.
      *
@@ -372,9 +371,9 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         return parent::baseT('cmsadmin', $message, $params);
     }
-    
+
     private static $_authorUserId = 0;
-    
+
     /**
      * Setter method for author user ID in order ensure phpunit tests.
      *
@@ -384,7 +383,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     {
         self::$_authorUserId = $userId;
     }
-    
+
     /**
      * Get the user id of the logged in user in web appliation context.
      *

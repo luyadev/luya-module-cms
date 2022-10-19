@@ -34,10 +34,10 @@ class ItemSqliteTest extends WebApplicationTestCase
             ]
         ];
     }
-    
+
     public function testColumn()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $scope->createAdminGroupFixture(1);
             $scope->createAdminUserFixture();
             $scope->createPage('test', null, []);
@@ -50,7 +50,7 @@ class ItemSqliteTest extends WebApplicationTestCase
 
     public function testDescendents()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $scope->createAdminGroupFixture(1);
             $scope->createAdminUserFixture();
             $scope->createPage('test', null, []);
@@ -64,7 +64,7 @@ class ItemSqliteTest extends WebApplicationTestCase
     {
         $this->createAdminGroupFixture(1);
         $this->createAdminUserFixture();
-        
+
         $this->createAdminLangFixture([
             1 => [
                 'id' => 1,

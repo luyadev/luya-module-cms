@@ -2,11 +2,11 @@
 
 namespace luya\cms\models;
 
-use Yii;
+use luya\cms\admin\Module;
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
-use luya\cms\admin\Module;
 use luya\cms\LinkConverter;
+use Yii;
 use yii\base\InvalidConfigException;
 
 /**
@@ -37,7 +37,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
     {
         return NavItem::TYPE_REDIRECT;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -82,14 +82,14 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
     public function getContent()
     {
         $link = $this->resolveValue();
-        
+
         if (!$link) {
             throw new InvalidConfigException(sprintf("Unable to redirect to the given page, invalid link object. Make sure the target page with id '%s' is online!", $this->value));
         }
-        
+
         Yii::$app->getResponse()->redirect($link->getHref());
         Yii::$app->end();
-        
+
         return;
     }
 }

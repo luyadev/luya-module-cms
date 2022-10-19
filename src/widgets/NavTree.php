@@ -2,12 +2,12 @@
 
 namespace luya\cms\widgets;
 
-use luya\cms\menu\QueryIteratorFilter;
-use luya\helpers\ArrayHelper;
-use Yii;
 use luya\base\Widget;
 use luya\cms\menu\Item;
+use luya\cms\menu\QueryIteratorFilter;
+use luya\helpers\ArrayHelper;
 use luya\traits\CacheableTrait;
+use Yii;
 use yii\caching\DbDependency;
 use yii\helpers\Html;
 
@@ -150,13 +150,13 @@ class NavTree extends Widget
     /**
      * @var callable A callable which can be used to generate the link content, the first argument of the function
      * is the {{luya\cms\menu\Item}}:
-     * 
+     *
      * ```php
      * 'titleContent' => function(luya\cms\menu\Item $item) {
      *     return '<i class="fa fa-edit">'. $item->title;
      * }
      * ```
-     * 
+     *
      * If no callable is defined, which is default, then the {{luya\cms\menu\Item::$title}} is returned.
      * @since 3.4.0
      */
@@ -196,22 +196,22 @@ class NavTree extends Widget
      */
     public function run()
     {
-        return $this->getOrSetHasCache($this->generateCacheKey(), function() {
+        return $this->getOrSetHasCache($this->generateCacheKey(), function () {
             $this->autoConfigure();
 
             $html = "";
-    
+
             if ($this->startItem === null) {
                 $html = $this->buildList($this->findQuery);
             } elseif ($this->startItem->hasChildren) {
                 $html = $this->buildList($this->startItem->children);
             }
-    
+
             if ($this->wrapperOptions !== null) {
                 $wrapperTag = ArrayHelper::remove($this->wrapperOptions, 'tag', 'nav');
                 $html = Html::tag($wrapperTag, $html, $this->wrapperOptions);
             }
-    
+
             return $html;
         }, 0, new DbDependency(['sql' => 'SELECT max(timestamp_update) FROM cms_nav_item']));
     }

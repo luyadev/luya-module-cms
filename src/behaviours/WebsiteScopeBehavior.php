@@ -2,9 +2,8 @@
 
 namespace luya\cms\behaviours;
 
-use Yii;
 use luya\admin\ngrest\base\NgRestActiveQuery;
-use luya\admin\ngrest\base\NgRestModel;
+use Yii;
 use yii\base\Event;
 
 class WebsiteScopeBehavior extends \yii\base\Behavior
@@ -15,7 +14,7 @@ class WebsiteScopeBehavior extends \yii\base\Behavior
             NgRestActiveQuery::EVENT_INIT => 'initEvent',
         ];
     }
-    
+
     public function initEvent(Event $event)
     {
         /** @var NgRestActiveQuery $query */

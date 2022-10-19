@@ -36,7 +36,7 @@ use yii\helpers\ArrayHelper;
 class Website extends NgRestModel
 {
     use SoftDeleteTrait;
-    
+
     public function init()
     {
         parent::init();
@@ -44,24 +44,24 @@ class Website extends NgRestModel
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'eventAfterDelete']);
     }
-    
+
     public static function tableName()
     {
         return 'cms_website';
     }
-    
+
     public static function ngRestApiEndpoint()
     {
         return 'api-cms-website';
     }
-    
+
     public function transactions()
     {
         return [
             self::SCENARIO_DEFAULT => self::OP_INSERT,
         ];
     }
-    
+
     public function rules()
     {
         return [
@@ -72,7 +72,7 @@ class Website extends NgRestModel
             [['aliases', 'default_lang', 'group_ids', 'user_ids'], 'string']
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -88,7 +88,7 @@ class Website extends NgRestModel
             'theme_id' => Module::t('model_website_theme_id_label'),
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -148,14 +148,14 @@ class Website extends NgRestModel
             ],
         ];
     }
-    
+
     public function ngRestAttributeGroups()
     {
         return [
             [['group_ids', 'user_ids'], Module::t('model_website_access_restrict'), 'collapsed' => false],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -168,7 +168,7 @@ class Website extends NgRestModel
             ['delete', true],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -184,14 +184,14 @@ class Website extends NgRestModel
             ],
         ];
     }
-    
+
     public function ngRestConfigOptions()
     {
         return [
             'saveCallback' => "['ServiceMenuData', function(ServiceMenuData) { ServiceMenuData.load(true); }]",
         ];
     }
-    
+
     public function eventAfterInsert($event)
     {
         $defaultContainer = new NavContainer();
@@ -203,24 +203,24 @@ class Website extends NgRestModel
             throw new Exception($defaultContainer->getErrorSummary(true));
         }
     }
-    
+
     public function eventBeforeDelete()
     {
         if ($this->is_default) {
             throw new Exception('Default website cannot delete.');
         }
     }
-    
+
     public function eventAfterDelete()
     {
         $this->updateAttributes(['is_active' => false]);
     }
-    
+
     public function getTheme()
     {
         return $this->hasOne(Theme::class, ['id' => 'theme_id']);
     }
-    
+
     public function getLang()
     {
         return $this->hasOne(Lang::class, ['short_code' => 'default_lang']);

@@ -2,12 +2,12 @@
 
 namespace luya\cms\admin\helpers;
 
+use luya\admin\models\Group;
 use luya\admin\models\User;
+use luya\cms\models\Nav;
+use luya\helpers\ArrayHelper;
 use Yii;
 use yii\db\Query;
-use luya\cms\models\Nav;
-use luya\admin\models\Group;
-use luya\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -19,7 +19,7 @@ use yii\helpers\Json;
 class MenuHelper
 {
     private static $items;
-    
+
     /**
      * Get all nav data entries with corresponding item content
      *
@@ -28,7 +28,6 @@ class MenuHelper
     public static function getItems()
     {
         if (self::$items === null) {
-
             $items = Nav::find()
                 ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'layout_file', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title'])
                 ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
@@ -39,12 +38,12 @@ class MenuHelper
                     'cms_nav.is_deleted' => false,
                     'cms_nav.is_draft' => false,
                 ])
-                ->asArray() 
+                ->asArray()
                 ->all();
             self::loadInheritanceData(0);
 
             $data = [];
-            
+
             foreach ($items as $key => $item) {
                 $item['is_draft'] = (int) $item['is_draft'];
                 $item['is_hidden'] = (int) $item['is_hidden'];
@@ -62,7 +61,7 @@ class MenuHelper
                         if ($permitted) {
                             continue;
                         }
-                        
+
                         $permitted = self::navGroupPermission($item['id'], $group->id);
                     }
 
@@ -72,19 +71,19 @@ class MenuHelper
                         if ($value === true) {
                             $permitted = true;
                         }
-                    }  
+                    }
                     $item['is_editable'] = (int) $permitted;
-                }            
+                }
                 $data[$key] = $item;
             }
             self::$items = $data;
         }
-        
+
         return self::$items;
     }
-    
+
     private static $_navItems;
-    
+
     /**
      * Get an array with all nav items.
      *
@@ -96,12 +95,12 @@ class MenuHelper
             $items = Nav::find()->select(['sort_index', 'id', 'parent_nav_id', 'is_deleted'])->where(['is_deleted' => false])->orderBy(['sort_index' => SORT_ASC])->asArray()->all();
             return self::$_navItems = ArrayHelper::index($items, null, 'parent_nav_id');
         }
-        
+
         return self::$_navItems;
     }
-    
+
     private static $_inheritData = [];
-    
+
     /**
      * Find nav_id inheritances
      *
@@ -133,13 +132,13 @@ class MenuHelper
                     self::$_inheritData[$item['id']] = false;
                 }
             }
-            
+
             self::loadInheritanceData($item['id'], self::$_inheritData[$item['id']]);
         }
     }
-    
+
     private static $_cmsPermissionData;
-    
+
     /**
      * Get an array with all cms permissions data
      *
@@ -150,10 +149,10 @@ class MenuHelper
         if (self::$_cmsPermissionData === null) {
             self::$_cmsPermissionData = ArrayHelper::index((new Query())->select("*")->from("cms_nav_permission")->all(), null, 'group_id');
         }
-        
+
         return self::$_cmsPermissionData;
     }
-    
+
     /**
      * Check the inhertiance for a given navigation and group.
      *
@@ -176,12 +175,12 @@ class MenuHelper
         if ($definition) {
             return (bool) $definition;
         }
-        
+
         return false;
     }
-    
+
     private static $_navGroupPermissions;
-    
+
     /**
      * An array with permissions
      *
@@ -195,7 +194,7 @@ class MenuHelper
 
         return self::$_navGroupPermissions;
     }
-    
+
     /**
      * Get the permissions for a certain group and navigation.
      *
@@ -212,19 +211,19 @@ class MenuHelper
         if (count($definitions) == 0) {
             return true;
         }
-        
+
         // check if the nav id is defined in group
         foreach ($definitions as $permission) {
             if ($navId == $permission['nav_id']) {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     private static $containers;
-    
+
     /**
      * Get all cms containers
      *
@@ -240,12 +239,12 @@ class MenuHelper
                 ->orderBy(['cms_website.name' => 'ASC', 'cms_nav_container.name' => 'ASC'])
                 ->all();
         }
-        
+
         return self::$containers;
     }
-    
+
     private static $websites;
-    
+
     /**
      * Get all cms websites
      *
@@ -280,10 +279,10 @@ class MenuHelper
 
             self::$websites = array_values($websites);
         }
-        
+
         return self::$websites;
     }
-    
+
     /**
      * Check that the current user is allowed to access to the given website data.
      *
@@ -303,19 +302,19 @@ class MenuHelper
                 return true;
             }
         }
-    
+
         $groups = Json::decode($website['group_ids']) ?? [];
         foreach ($groups as $item) {
             if ($item['value'] === 0 || in_array($item['value'], $userGroupIds)) {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     private static $drafts;
-    
+
     /**
      * Get all drafts nav items
      *
@@ -332,7 +331,7 @@ class MenuHelper
             ->where(['cms_nav_item.lang_id' => Yii::$app->adminLanguage->defaultLanguage['id'], 'cms_nav.is_deleted' => false, 'cms_nav.is_draft' => true])
             ->all();
         }
-        
+
         return self::$drafts;
     }
 }

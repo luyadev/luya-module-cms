@@ -10,7 +10,7 @@ class BlockTestCase extends CmsBlockTestCase
     {
         return include(__DIR__ .'/data/configs/cms.php');
     }
-    
+
     public function beforeSetup()
     {
         include(__DIR__ .'/data/env.php');

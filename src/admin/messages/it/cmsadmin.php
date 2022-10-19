@@ -54,7 +54,7 @@ return [
     'btn_abort' => 'Cancella',
     'btn_refresh' => 'Aggiorna',
     'btn_save' => 'Salva',
-    
+
 // added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Nome del modulo',
     'model_navitem_title_label' => 'Titolo pagina',
@@ -92,7 +92,7 @@ return [
 
 // added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Appunti',
-    
+
 // added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Sei sicuro di cancellare il blocco «%name%»?',
     'view_index_page_meta_keywords' => 'Parole chiave',
@@ -147,7 +147,7 @@ return [
 
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Titolo Tag (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Impossibile creare una pagina da un modello vuoto.',
     'view_update_variation_select' => 'Nessuna versione del blocco selezionata',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configura',
     'view_update_block_tooltip_delete' => 'Cancella',
     'view_update_block_tooltip_close' => 'Chiudi modifica',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Ultime modifiche sulle pagine',
     'cmsadmin_settings_homepage_title' => 'Pagina di default',
@@ -233,7 +233,7 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
-    
+
 // added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

@@ -40,11 +40,11 @@ class BlockVariationRegister
      * @var \luya\cms\base\InternalBaseBlock Internal base block from where the BlockFlavor has been instantiatet.
      */
     protected $block;
-    
+
     private $_variations = [];
-    
+
     private $_tempIdentifier;
-    
+
     /**
      * @param InternalBaseBlock $block
      */
@@ -52,7 +52,7 @@ class BlockVariationRegister
     {
         $this->block = $block;
     }
-    
+
     /**
      * Register a new flavor.
      *
@@ -91,7 +91,7 @@ class BlockVariationRegister
 
         return $this;
     }
-    
+
     /**
      * Flavor CFG variables.
      *
@@ -103,7 +103,7 @@ class BlockVariationRegister
         $this->_variations[$this->_tempIdentifier]['cfgs'] = $config;
         return $this;
     }
-    
+
     /**
      * Flavor VAR variables.
      *
@@ -115,7 +115,7 @@ class BlockVariationRegister
         $this->_variations[$this->_tempIdentifier]['vars'] = $config;
         return $this;
     }
-    
+
     /**
      * Flavor EXTRA variables.
      *
@@ -127,7 +127,7 @@ class BlockVariationRegister
         $this->_variations[$this->_tempIdentifier]['extras'] = $config;
         return $this;
     }
-    
+
     /**
      * @return array
      */

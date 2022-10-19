@@ -2,10 +2,9 @@
 
 namespace tests\web\cmsadmin\models;
 
-use luya\testsuite\fixtures\ActiveRecordFixture;
 use cmstests\CmsNgRestTestCase;
 use luya\cms\models\Block;
-use yii\base\ErrorException;
+use luya\testsuite\fixtures\ActiveRecordFixture;
 
 class BlockTest extends CmsNgRestTestCase
 {
@@ -17,11 +16,11 @@ class BlockTest extends CmsNgRestTestCase
             'is_disabled' => 0,
         ]
     ];
-    
+
     public $modelClass = 'luya\cms\models\Block';
     public $apiClass = 'luya\cms\admin\apis\BlockController';
     public $controllerClass = 'luya\cms\admin\controllers\BlockController';
-    
+
     /*
     public function testFindOne()
     {
@@ -71,7 +70,7 @@ class BlockTest extends CmsNgRestTestCase
 
     }
     */
-    
+
     public function testControllerMethods()
     {
         $this->assertNull($this->api->actionToFav());

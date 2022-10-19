@@ -2,9 +2,9 @@
 
 namespace luya\cms\models;
 
-use yii\helpers\Json;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\cms\admin\Module;
+use yii\helpers\Json;
 
 /**
  * Layout Model for CMS-Layouts.
@@ -26,7 +26,7 @@ class Layout extends NgRestModel
     {
         return 'cms_layout';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -34,7 +34,7 @@ class Layout extends NgRestModel
     {
         return 'api-cms-layout';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -46,7 +46,7 @@ class Layout extends NgRestModel
             [['name', 'view_file'], 'string', 'max' => 255],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -58,7 +58,7 @@ class Layout extends NgRestModel
             'view_file' => Module::t('model_layout_view_file_label'),
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -70,7 +70,7 @@ class Layout extends NgRestModel
             'view_file' => 'text',
         ];
     }
-    
+
     /**
      * @inheritdoc
      */

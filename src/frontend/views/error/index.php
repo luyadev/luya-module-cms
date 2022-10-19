@@ -1,5 +1,6 @@
 <?php
-use \luya\helpers\Html;
+use luya\helpers\Html;
+
 ?>
 <html>
 <head>

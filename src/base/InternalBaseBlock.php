@@ -2,14 +2,14 @@
 
 namespace luya\cms\base;
 
-use luya\helpers\Html;
-use yii\helpers\Inflector;
-use luya\helpers\Url;
-use luya\helpers\ArrayHelper;
-use luya\helpers\FileHelper;
 use luya\admin\base\TypesInterface;
 use luya\cms\frontend\blockgroups\MainGroup;
+use luya\helpers\ArrayHelper;
+use luya\helpers\FileHelper;
+use luya\helpers\Html;
+use luya\helpers\Url;
 use yii\base\BaseObject;
+use yii\helpers\Inflector;
 
 /**
  * Concret Block implementation based on BlockInterface.
@@ -27,23 +27,23 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * @var string Defines the injector config type `var`.
      */
-    const INJECTOR_VAR = 'var';
-    
+    public const INJECTOR_VAR = 'var';
+
     /**
      * @var string Defines the injector config type `cfg`.
      */
-    const INJECTOR_CFG = 'cfg';
+    public const INJECTOR_CFG = 'cfg';
 
     /**
      * @var bool Enable or disable the block caching
      */
     public $cacheEnabled = false;
-    
+
     /**
      * @var int The cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true. 0 means never expire.
      */
     public $cacheExpiration = 3600;
-    
+
     /**
      * @var bool Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
      * in a different way for a better user experience. Container block will not display isDirty colorizing.
@@ -55,7 +55,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be
      * added automatically. Since version 3.1.0 its possible to set `null` or empty string in order to lookup
      * view files in the same folder where the block is located. With version 4.0 null is the default value.
-     * 
+     *
      * - `app`: The alias mode allows you to map the view files to a certain alias
      * - `@app`: Either alias with prefixed @ or not is possible
      * - `null`: Empty or null will lookup the view files in the same folder where block is located (sub folder views).
@@ -67,7 +67,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      *
      * An array with either `var`, `cfg` or `placeholder`. An example with vars
      * with a required text input:
-     * 
+     *
      * ```php
      * return [
      *     'vars' => [
@@ -80,7 +80,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      *     ]
      * ];
      * ```
-     * 
+     *
      * @see [[app-block-types.md]]
      * @return array
      */
@@ -90,11 +90,11 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      * {@inheritDoc}
      */
     public function setup()
-    {   
+    {
     }
 
     private $_injectorObjects;
-    
+
     /**
      * Setup injectors.
      */
@@ -118,7 +118,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         $this->_injectorObjects[$offset] = $value;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -127,7 +127,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return isset($this->_injectorObjects[$offset]);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -139,7 +139,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
 
     /**
      * Array Access Get
-     * 
+     *
      * @param string $offset The name of the registered Injector name.
      * @return \luya\cms\base\BaseBlockInjector
      */
@@ -148,7 +148,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return isset($this->_injectorObjects[$offset]) ? $this->_injectorObjects[$offset] : null;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -156,7 +156,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return $this->cacheEnabled;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -164,7 +164,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return $this->cacheExpiration;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -172,7 +172,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return true;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -180,7 +180,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return $this->isContainer;
     }
-    
+
     /**
      * Contains the class name for the block group class
      *
@@ -191,7 +191,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return MainGroup::class;
     }
-    
+
     /**
      * Injectors are like huge helper objects which are going to automate functions, configs and variable assignement.
      *
@@ -221,7 +221,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return [];
     }
-    
+
     /**
      * Return link for usage in ajax request, the link will call the defined callback inside
      * this block. All callback methods must start with `callback`. An example for a callback method:.
@@ -291,7 +291,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     }
 
     private $_envOptions = [];
-    
+
     /**
      * Sets a key => value pair in env options.
      *
@@ -302,10 +302,10 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         $this->_envOptions[$key] = $value;
     }
-    
+
     /**
      * Returns all environment/context informations where the block have been placed.
-     * 
+     *
      * @see {{PhpBlockView::env()}} for all possible values.
      * @return array Returns an array with key value parings.
      */
@@ -328,7 +328,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     }
 
     private $_placeholderValues = [];
-    
+
     /**
      * @inheritdoc
      */
@@ -336,7 +336,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         $this->_placeholderValues = $placeholders;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -344,7 +344,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return $this->_placeholderValues;
     }
-    
+
     /**
      *
      * @param unknown $placholder
@@ -366,7 +366,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
             $this->_varValues[$key] = $value;
         }
     }
-    
+
     /**
      *
      * @return array
@@ -375,7 +375,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return $this->_varValues;
     }
-    
+
     /**
      * Get var value.
      *
@@ -389,9 +389,9 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return (isset($this->_varValues[$key]) && $this->_varValues[$key] != '') ? $this->_varValues[$key] : $default;
     }
-    
+
     private $_cfgValues = [];
-    
+
     /**
      * @inheritdoc
      */
@@ -424,7 +424,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return (isset($this->_cfgValues[$key]) && $this->_cfgValues[$key] != '') ? $this->_cfgValues[$key] : $default;
     }
-    
+
     /**
      * Define additional variables.
      *
@@ -434,7 +434,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         return [];
     }
-    
+
     /**
      * Add an extra var entry.
      *
@@ -446,9 +446,9 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     {
         $this->_extraVars[$key] = $value;
     }
-    
+
     private $_extraVars = [];
-    
+
     /**
      * @inheritdoc
      */
@@ -457,9 +457,9 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         $this->_extraVars = ArrayHelper::merge($this->extraVars(), $this->_extraVars);
         return $this->_extraVars;
     }
-    
+
     private $_assignExtraVars = false;
-    
+
     /**
      *
      * @param string $key
@@ -475,7 +475,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
 
         return isset($this->_extraVars[$key]) ? $this->_extraVars[$key] : $default;
     }
-    
+
     /**
      * Returns an array with additional help informations for specific field (var or cfg).
      *
@@ -487,14 +487,14 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     }
 
     private $_vars = [];
-    
+
     /**
      * @inheritdoc
      */
     public function getConfigVarsExport()
     {
         $config = $this->config();
-        
+
         if (isset($config['vars'])) {
             foreach ($config['vars'] as $item) {
                 $iteration = count($this->_vars) + 500;
@@ -517,16 +517,16 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         $iteration = $append ? $count + 1000 : $count;
         $this->_vars[$iteration] = (new BlockVar($varConfig))->toArray();
     }
-    
+
     /**
      * @inheritdoc
      */
     public function getConfigPlaceholdersExport()
     {
         $array = array_key_exists('placeholders', $this->config()) ? $this->config()['placeholders'] : [];
-        
+
         $holders = [];
-        
+
         foreach ($array as $holder) {
             if (isset($holder['var'])) {
                 $holders[] = $holder;
@@ -536,19 +536,19 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
                 }
             }
         }
-        
+
         return $holders;
     }
-    
+
     /**
      * @inheritdoc
      */
     public function getConfigPlaceholdersByRowsExport()
     {
         $array = array_key_exists('placeholders', $this->config()) ? $this->config()['placeholders'] : [];
-        
+
         $rows = [];
-        
+
         foreach ($array as $holder) {
             if (isset($holder['var'])) {
                 $holder['cols'] = 12;
@@ -557,10 +557,10 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
                 $rows[] = $holder;
             }
         }
-        
+
         return $rows;
     }
-    
+
     private $_cfgs = [];
 
     /**
@@ -569,7 +569,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     public function getConfigCfgsExport()
     {
         $config = $this->config();
-        
+
         if (isset($config['cfgs'])) {
             foreach ($config['cfgs'] as $item) {
                 $iteration = count($this->_cfgs) + 500;
@@ -579,7 +579,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         ksort($this->_cfgs);
         return array_values($this->_cfgs);
     }
-    
+
     /**
      * Add a cfg variable to the config.
      *
@@ -592,7 +592,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         $iteration = $append ? $count + 1000 : $count;
         $this->_cfgs[$iteration] = (new BlockCfg($cfgConfig))->toArray();
     }
-    
+
     /**
      * Returns the name of the php file to be rendered.
      *
@@ -601,14 +601,14 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     public function getViewFileName($extension)
     {
         $className = get_class($this);
-    
+
         if (preg_match('/\\\\([\w]+)$/', $className, $matches)) {
             $className = $matches[1];
         }
-    
+
         return $className.'.'.$extension;
     }
-    
+
     /**
      * Make sure the module contains its alias prefix @
      *
@@ -620,10 +620,10 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         if (substr($moduleName, 0, 1) !== '@') {
             $moduleName = '@'.$moduleName;
         }
-        
+
         return $moduleName;
     }
-    
+
     /**
      * Configure Variations.
      *
@@ -640,7 +640,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public static function variations()
     {
-        return (new BlockVariationRegister(new static));
+        return (new BlockVariationRegister(new static()));
     }
 
     /**
@@ -656,7 +656,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     public function onRegisterFromCache()
     {
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -666,10 +666,10 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         if ($image) {
             return Html::img($image);
         }
-        
+
         return false;
     }
-    
+
     /**
      * Path to the preview image.
      * @since 1.0.8
@@ -677,7 +677,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     protected function getPreviewImageSource()
     {
         $imageName = $this->getViewFileName('jpg');
-    
+
         $reflector = new \ReflectionClass($this);
         $dirPath = dirname(dirname($reflector->getFileName()));
         $imagePath = $dirPath . '/images/blocks/' . $imageName;
@@ -686,7 +686,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         if ($data) {
             return 'data:image/jpg;base64,' . base64_encode($data);
         }
-        
+
         return false;
     }
 

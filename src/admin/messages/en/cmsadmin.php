@@ -116,7 +116,7 @@ return [
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Please choose',
     'view_index_sidebar_autopreview' => 'Auto Preview',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Create new page',
     'module_permission_update_pages' => 'Page Edit',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Create Version',
     'button_update_version' => 'Update Version',
     'menu_group_item_env_permission' => 'Page Permissions',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Create a copy of the current page with all its contents. They copy will include all languages but only the published version.',
     'page_update_actions_deepcopy_btn' => 'Create Copy',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Title Tag (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Unable to create page from empty template.',
     'view_update_variation_select' => 'Normal',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

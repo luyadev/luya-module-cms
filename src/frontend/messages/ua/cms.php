@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Проект',
     'block_group_text_elements' => 'Тексти',
     'block_group_media_group' => 'Медіа',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Суворе відтворення',
     'block_module_strictrender_help' => 'Коли активовано суворе відтворення, модуль запускатиме лише передбачений маршрут (модуль, контролер, дія, параметри) без прослуховування дій та маршрутів контролера.',

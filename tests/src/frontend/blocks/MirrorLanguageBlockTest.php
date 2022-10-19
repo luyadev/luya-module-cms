@@ -4,7 +4,6 @@ namespace cmstests\src\frontend\blocks;
 
 use cmstests\ModelTestCase;
 use luya\cms\frontend\blocks\MirrorLanguageBlock;
-use luya\testsuite\traits\AdminDatabaseTableTrait;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 
 class MirrorLanguageBlockTest extends ModelTestCase

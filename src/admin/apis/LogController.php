@@ -4,8 +4,8 @@ namespace luya\cms\admin\apis;
 
 /**
  * Log Controller.
- * 
- * File has been created with `crud/create` command. 
+ *
+ * File has been created with `crud/create` command.
  */
 class LogController extends \luya\admin\ngrest\base\Api
 {

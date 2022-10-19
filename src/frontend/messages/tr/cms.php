@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Proje',
     'block_group_text_elements' => 'Metinler',
     'block_group_media_group' => 'Medya',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Sıkı Çıktı',
     'block_module_strictrender_help' => 'Sıkı çıktı etkinleştirildiğinde, modül eylem ve denetleyici rotalarını dinlemeden sadece verilen rotayı çalıştıracaktır (modül, kontrolör, eylem, argümanlar).',

@@ -2,14 +2,14 @@
 
 namespace luya\cms\frontend\controllers;
 
-use Yii;
-use luya\helpers\ObjectHelper;
+use luya\cms\Exception;
+use luya\cms\frontend\base\Controller;
 use luya\cms\models\Block;
 use luya\cms\models\NavItemPageBlockItem;
-use luya\cms\frontend\base\Controller;
-use luya\cms\Exception;
-use luya\helpers\StringHelper;
 use luya\helpers\Inflector;
+use luya\helpers\ObjectHelper;
+use luya\helpers\StringHelper;
+use Yii;
 
 /**
  * CMS Ajax-Block Controller Response.
@@ -23,7 +23,7 @@ class BlockController extends Controller
      * @inheritdoc
      */
     public $enableCsrfValidation = false;
-    
+
     /**
      * Run the callback for a given block.
      *
@@ -35,20 +35,20 @@ class BlockController extends Controller
     public function actionIndex($callback, $id)
     {
         $model = NavItemPageBlockItem::findOne($id);
-        
+
         if (!$model) {
             throw new Exception("Unable to find item id.");
         }
-        
+
         $block = $model->block->getObject($model->id, 'callback');
 
         if (!$block) {
             throw new Exception("Unable to find block object.");
         }
-        
+
         return ObjectHelper::callMethodSanitizeArguments($block, $this->callbackToMethod($callback), Yii::$app->request->get());
     }
-    
+
     /**
      * Ensure the callback method from a given name.
      *
@@ -62,7 +62,7 @@ class BlockController extends Controller
         if (!StringHelper::startsWith($callbackName, 'callback')) {
             return 'callback' . Inflector::id2camel($callbackName);
         }
-        
+
         return lcfirst(Inflector::id2camel($callbackName));
     }
 }

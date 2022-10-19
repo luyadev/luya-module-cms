@@ -116,7 +116,7 @@ return [
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Lütfen seçin',
     'view_index_sidebar_autopreview' => 'Otomatik Önizleme',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Yeni sayfa oluşturma',
     'module_permission_update_pages' => 'Sayfa Düzenleme',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Sürüm oluştur',
     'button_update_version' => 'Sürüm güncelle',
     'menu_group_item_env_permission' => 'Sayfa izinleri',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Mevcut sayfanın tüm içeriğini içeren bir kopyasını oluştur. Kopyalama tüm dilleri içerecek ancak sadece yayınlanan sürümü içerecek.',
     'page_update_actions_deepcopy_btn' => 'Kopya Oluştur',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Başlık etiketi (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Boş şablondan sayfa oluşturulamıyor',
     'view_update_variation_select' => 'Normal',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-        
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

@@ -12,24 +12,23 @@ use luya\cms\models\NavItem;
 use luya\cms\models\NavItemPage;
 use luya\cms\models\Property;
 use luya\cms\models\Theme;
-use luya\cms\Website;
 use luya\cms\models\Website as WebsiteModel;
+use luya\cms\Website;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\testsuite\scopes\PageScope;
-use yii\base\Event;
 use Yii;
+use yii\base\Event;
 
 class ControllerStub extends \luya\cms\frontend\base\Controller
 {
-
 }
 
 class DefaultControllerTest extends WebApplicationTestCase
 {
     /** @var ActiveRecordFixture */
     protected $fixture;
-    
+
     public function getConfigArray()
     {
         return [
@@ -64,7 +63,7 @@ class DefaultControllerTest extends WebApplicationTestCase
      */
     public function testRenderPageCycle()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $scope->createAdminGroupFixture(1);
             $scope->createAdminUserFixture();
             $scope->createPage('home', '@app/../data/views/cmslayouts/main.php', ['content'])->addBlockAndContent(HtmlBlock::class, 'content', [
@@ -76,11 +75,11 @@ class DefaultControllerTest extends WebApplicationTestCase
             $this->assertNotNull($content);
         });
     }
-    
+
     public function testRenderToolbar()
     {
         //region Fictures
-    
+
         $adminGroupFixture = new ActiveRecordFixture([
             'modelClass' => Group::class,
             'fixtureData' => [
@@ -94,7 +93,7 @@ class DefaultControllerTest extends WebApplicationTestCase
             'modelClass' => User::class,
             'fixtureData' => [],
         ]);
-        
+
         $langFixture = new ActiveRecordFixture([
             'modelClass' => Lang::class,
             'fixtureData' => [
@@ -105,7 +104,7 @@ class DefaultControllerTest extends WebApplicationTestCase
                 ],
             ]
         ]);
-    
+
         $websiteFixture = new ActiveRecordFixture([
             'modelClass' => WebsiteModel::class,
             'fixtureData' => [
@@ -120,7 +119,7 @@ class DefaultControllerTest extends WebApplicationTestCase
                 ],
             ]
         ]);
-        
+
         $langFixture = new ActiveRecordFixture([
             'modelClass' => NavContainer::class,
             'fixtureData' => [
@@ -132,7 +131,7 @@ class DefaultControllerTest extends WebApplicationTestCase
                 ],
             ]
         ]);
-        
+
         $navFixture = new ActiveRecordFixture([
             'modelClass' => Nav::class,
             'fixtureData' => [
@@ -148,7 +147,7 @@ class DefaultControllerTest extends WebApplicationTestCase
                 ]
             ]
         ]);
-    
+
         $navItemFixture = new ActiveRecordFixture([
             'modelClass' => NavItem::class,
             'fixtureData' => [
@@ -163,11 +162,11 @@ class DefaultControllerTest extends WebApplicationTestCase
                 ]
             ]
         ]);
-    
+
         $navItemFixture = new ActiveRecordFixture([
             'modelClass' => Property::class,
         ]);
-    
+
         $this->fixture = new ActiveRecordFixture([
             'modelClass' => Theme::class,
             'fixtureData' => [
@@ -178,42 +177,42 @@ class DefaultControllerTest extends WebApplicationTestCase
                 ]
             ]
         ]);
-        
+
         //endregion
-    
+
         $this->app->menu->currentUrlRule = [
             'route' => 'default/default',
             'params' => [
                 'slug' => 'default',
             ],
         ];
-    
+
         $controller = new ControllerStub('default', $this->app->getModule('cms'));
         $controller->view->context = $controller;
-        
+
         $event = new Event([
             'sender' => $controller->view,
             'data' => ['content' => 'FOO']
         ]);
-    
+
         Yii::setAlias('@app', Yii::$app->basePath . '/../data');
 
         $this->app->themeManager->activeThemeName = '@app/themes/appTheme';
         $this->app->themeManager->setup();
-        
+
         ob_start();
         $controller->renderToolbar($event);
         $toolbarHtml = ob_get_clean();
-    
+
         $internalErrors = libxml_use_internal_errors(true);
-    
+
         $doc = new \DOMDocument();
         $loaded = $doc->loadHTML($toolbarHtml);
-    
+
         libxml_use_internal_errors($internalErrors);
-    
+
         $this->assertTrue($loaded);
-    
+
         $this->fixture->cleanup();
     }
 }

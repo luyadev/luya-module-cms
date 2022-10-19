@@ -2,11 +2,11 @@
 
 namespace luya\cms\admin\importers;
 
-use Yii;
-use luya\Exception;
-use luya\helpers\FileHelper;
 use luya\cms\models\Layout;
 use luya\console\Importer;
+use luya\Exception;
+use luya\helpers\FileHelper;
+use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\Json;
 
@@ -24,7 +24,7 @@ class CmslayoutImporter extends Importer
      * @var array A list of prefix keys which will be skipped.
      */
     public $ignorePrefix = ['_', '.'];
-    
+
     public $defaultPath = '@app/views/cmslayouts';
 
     /**
@@ -33,28 +33,28 @@ class CmslayoutImporter extends Importer
     public function run()
     {
         $layoutFiles = [];
-        
+
         // get and import cmslayouts from @app/views/cmslayouts path
         $this->handleLayoutFile($layoutFiles, $this->defaultPath);
-        
+
         // import files from the cmsadmin module $cmsLayouts property.
         foreach ((array) $this->module->cmsLayouts as $layoutDefintion) {
             $this->handleLayoutFile($layoutFiles, $layoutDefintion);
         }
-    
+
         foreach (Yii::$app->themeManager->getThemes() as $themeConfig) {
             $this->handleLayoutFile($layoutFiles, $themeConfig->getViewPath() . DIRECTORY_SEPARATOR . 'cmslayouts', $themeConfig->name);
         }
-        
+
         // remove all view files not found somewhere ...
         foreach (Layout::find()->where(['not in', 'id', $layoutFiles])->all() as $layoutItem) {
             $this->addLog('remove cms layout with id #' . $layoutItem->id);
             $layoutItem->delete();
         }
-        
+
         return $this->addLog("cms layout importer finished with ".count($layoutFiles) . " layout files.");
     }
-    
+
     /**
      * Assigne saved files into the layoutFiles array defintion.
      *
@@ -66,7 +66,7 @@ class CmslayoutImporter extends Importer
     {
         $aliased = Yii::getAlias($path, false);
         $filePath = $aliased ? $aliased : $path;
-        
+
         if (is_dir($filePath)) {
             foreach ($this->getFilesFromFolder($filePath) as $file) {
                 $handler = $this->importLayoutFile($file, $path, $themeName);
@@ -98,7 +98,7 @@ class CmslayoutImporter extends Importer
                 return in_array(substr(basename($path), 0, 1), $this->ignorePrefix) ? false : null;
             }]);
     }
-    
+
     /**
      * Importer the given layout file from a path.
      * @param string $file The path to the layout file.
@@ -110,16 +110,16 @@ class CmslayoutImporter extends Importer
         if (!file_exists($file)) {
             return false;
         }
-        
+
         $fileinfo = FileHelper::getFileInfo($file);
         $baseName = $fileinfo->name . '.' . $fileinfo->extension;
         $fileBaseName = $aliased . DIRECTORY_SEPARATOR . $baseName;
-        
+
         $json = false;
-        
+
         if (file_exists($fileinfo->sourceFilename. '.json')) {
             $json = FileHelper::getFileContent($fileinfo->sourceFilename. '.json');
-            
+
             try {
                 if ($json) {
                     $json = Json::decode($json);
@@ -135,17 +135,17 @@ class CmslayoutImporter extends Importer
                 $json = false;
             }
         }
-        
+
         $readableFileName = $this->generateReadableName($fileinfo->name);
-    
+
         if ($themeName) {
             $readableFileName = $this->generateReadableName($themeName) . ' - ' . $readableFileName;
         }
-    
+
         $content = file_get_contents($file);
-        
+
         preg_match_all("/placeholders\[[\'\"](.*?)[\'\"]\]/", $content, $results);
-        
+
         if (!$json) {
             $placeholder = [];
             foreach (array_unique($results[1]) as $holderName) {
@@ -158,11 +158,11 @@ class CmslayoutImporter extends Importer
         } else {
             $_placeholders = ['placeholders' => $json];
         }
-        
+
         $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName], ['view_file' => $baseName]])->one();
-        
+
         if ($layoutItem) {
-            $match = $this->comparePlaceholders($_placeholders, Json::decode($layoutItem->json_config,));
+            $match = $this->comparePlaceholders($_placeholders, Json::decode($layoutItem->json_config, ));
             $matchRevert = $this->comparePlaceholders(Json::decode($layoutItem->json_config), $_placeholders);
             if ($match && $matchRevert) {
                 $layoutItem->updateAttributes([
@@ -197,7 +197,7 @@ class CmslayoutImporter extends Importer
         $this->addLog('New file '.$readableFileName.' found and registered.');
         return $data->id;
     }
-    
+
     /**
      * Verificy if a given string matches the variable rules.
      *
@@ -209,10 +209,10 @@ class CmslayoutImporter extends Importer
         if (preg_match('/[^a-zA-Z0-9]+/', $chars, $matches) == 1) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * Generate readable name from name.
      *
@@ -223,7 +223,7 @@ class CmslayoutImporter extends Importer
     {
         return Inflector::humanize(Inflector::camel2words($name));
     }
-    
+
     /**
      * Compare two arrays with each in order to determined whether they have differences or not.
      *
@@ -255,7 +255,7 @@ class CmslayoutImporter extends Importer
                 if ($var == "label") {
                     continue;
                 }
-                
+
                 if (!array_key_exists($var, $a2[$key])) {
                     return false;
                 }

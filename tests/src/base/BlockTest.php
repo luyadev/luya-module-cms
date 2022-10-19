@@ -2,8 +2,8 @@
 
 namespace tests\web\cmsadmin\base;
 
-use cmstests\data\blocks\TestBlock;
 use cmstests\CmsFrontendTestCase;
+use cmstests\data\blocks\TestBlock;
 use luya\cms\base\PhpBlock;
 
 class GetterSetter extends PhpBlock
@@ -88,7 +88,7 @@ class BlockTest extends CmsFrontendTestCase
         $d = $gs->admin();
 
         $gs->setPlaceholderValues(['foo' => 'bar']);
-        
+
         $this->assertSame(['foo' => 'bar'], $gs->getPlaceholderValues());
     }
 

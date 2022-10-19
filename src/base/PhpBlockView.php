@@ -32,18 +32,18 @@ class PhpBlockView extends View
      * @see https://github.com/luyadev/luya/issues/1807
      */
     public $autoRegisterCsrf = false;
-    
+
     public function init()
     {
         parent::init();
-        
+
         $this->on(self::EVENT_AFTER_RENDER, function () {
             self::registerToAppView($this->getBlockAssets(), $this->getAssetBundleNames());
         });
     }
 
     /**
-     * Get the block object which is 
+     * Get the block object which is
      *
      * @return PhpBlock
      * @since 2.2.0
@@ -52,7 +52,7 @@ class PhpBlockView extends View
     {
         return $this->context;
     }
-    
+
     /**
      * Get the current index number of the block inside the current placeholder.
      *
@@ -62,7 +62,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('index');
     }
-    
+
     /**
      * Whether this is the first block element inside this placeholder or not.
      *
@@ -72,7 +72,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('isFirst');
     }
-    
+
     /**
      * Whether this is the last block element inside this placeholder or not.
      *
@@ -82,7 +82,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('isLast');
     }
-    
+
     /**
      * Returns the number of items inside this placeholder.
      *
@@ -92,7 +92,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('itemsCount');
     }
-    
+
     /**
      * Whether the next element (the element after the current element) is the same or not.
      *
@@ -104,7 +104,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('isNextEqual');
     }
-    
+
     /**
      * Whether the previous element (the element before the current element) is the same or not.
      *
@@ -116,7 +116,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('isPrevEqual');
     }
-    
+
     /**
      * Get the index number within the equal elements.
      *
@@ -128,7 +128,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('equalIndex');
     }
-    
+
     /**
      * Returns the Unique ID for this block.
      *
@@ -141,7 +141,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('id');
     }
-    
+
     /**
      * Returns the ID for the block type in the database.
      *
@@ -154,7 +154,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('blockId');
     }
-    
+
     /**
      * Returns the {{luya\cms\models\NavItem}} context Page Object.
      *
@@ -167,7 +167,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption('pageObject');
     }
-    
+
     /**
      * Get a block environment value.
      *
@@ -191,7 +191,7 @@ class PhpBlockView extends View
     {
         return $this->context->getEnvOption($key, $defaultvalue);
     }
-    
+
     /**
      * Get the content of a placeholder.
      *
@@ -202,7 +202,7 @@ class PhpBlockView extends View
     {
         return $this->context->getPlaceholderValue($placeholder);
     }
-    
+
     /**
      * Wrap a very basic template arounte the value if value is not `empty()`.
      *
@@ -224,10 +224,10 @@ class PhpBlockView extends View
         if (!$template || empty($value)) {
             return $value;
         }
-        
+
         return str_replace(['{{' . $key . '}}'], $value, $template);
     }
-    
+
     /**
      * The the content value of a var.
      *
@@ -240,7 +240,7 @@ class PhpBlockView extends View
     {
         return $this->wrapTemplate($key, $this->context->getVarValue($key, $defaultValue), $template);
     }
-    
+
     /**
      * Get the content of a cfg.
      *
@@ -253,7 +253,7 @@ class PhpBlockView extends View
     {
         return $this->wrapTemplate($key, $this->context->getCfgValue($key, $defaultValue), $template);
     }
-    
+
     /**
      * Get the value of an extra var.
      *
@@ -266,7 +266,7 @@ class PhpBlockView extends View
     {
         return $this->wrapTemplate($key, $this->context->getExtraValue($key, $defaultValue), $template);
     }
-    
+
     /**
      * Get an array with extracted informations to register in the view
      * @return array
@@ -283,7 +283,7 @@ class PhpBlockView extends View
             'js' => $this->js,
         ];
     }
-    
+
     /**
      * Get an array of alles asset bundle names.
      *
@@ -293,7 +293,7 @@ class PhpBlockView extends View
     {
         return array_keys($this->assetBundles);
     }
-    
+
     /**
      *Register assets to the given app view
      *
@@ -305,7 +305,7 @@ class PhpBlockView extends View
     public static function registerToAppView(array $blockAssets, array $assetBundles)
     {
         $appView = Yii::$app->view;
-        
+
         foreach ($blockAssets as $attribute => $blockAsset) {
             if (!empty($blockAsset)) {
                 if ($attribute == 'js' || $attribute == 'jsFiles') {
@@ -314,7 +314,7 @@ class PhpBlockView extends View
                      * @see \yii\web\View::POS_HEAD
                      */
                     $appAssets = &$appView->{$attribute};
-                    
+
                     foreach ($blockAsset as $key => $value) {
                         if (isset($appAssets[$key])) {
                             $appAssets[$key] = array_merge($appAssets[$key], $value);
@@ -327,7 +327,7 @@ class PhpBlockView extends View
                 }
             }
         }
-    
+
         foreach ($assetBundles as $bundle) {
             $appView->registerAssetBundle($bundle);
         }

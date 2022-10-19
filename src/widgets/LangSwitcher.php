@@ -4,13 +4,12 @@ namespace luya\cms\widgets;
 
 use luya\admin\helpers\I18n;
 use luya\admin\ngrest\base\NgRestModel;
-use Yii;
-use luya\web\Composition;
-use yii\helpers\Html;
-use luya\helpers\ArrayHelper;
 use luya\cms\models\NavItem;
-use luya\helpers\Json;
+use luya\helpers\ArrayHelper;
 use luya\helpers\Url;
+use luya\web\Composition;
+use Yii;
+use yii\helpers\Html;
 
 /**
  * CMS Lang Switcher Widget.
@@ -63,7 +62,7 @@ class LangSwitcher extends \luya\base\Widget
      * @var null|array Singleton container when used for mobile and desktop in order to reduce db requests.
      */
     private static $_dataArray;
-    
+
     /**
      * @var array The Wrapping list element (ul tag) Options to pass.
      *  - tag: Default is ul
@@ -76,7 +75,7 @@ class LangSwitcher extends \luya\base\Widget
      * @var boolean Decides whether the <ul> tag will be outputted or not
      */
     public $noListTag = false;
-    
+
     /**
      * @var array Options to pass to the element (li tag):
      *
@@ -84,22 +83,22 @@ class LangSwitcher extends \luya\base\Widget
      * - class: The class for the element.
      */
     public $elementOptions = ['class' => 'lang-element-item'];
-    
+
     /**
      * @var string The class to set when the element item (li tag) is the current language.
      */
     public $elementActiveClass = 'lang-element-item--active';
-    
+
     /**
      * @var string The class to set when the link item (a tag) is the current language.
      */
     public $linkActiveClass = 'lang-link-item--active';
-    
+
     /**
      * @var array Options to pass to the link element (a tag).
      */
     public $linkOptions = ['class' => 'lang-link-item'];
-    
+
     /**
      * @var string Options to pass to the link element (a tag). Can also be a callable in order to specific output.
      *
@@ -108,7 +107,7 @@ class LangSwitcher extends \luya\base\Widget
      * - short_code: The short code, e.g. en
      */
     public $linkLabel = 'name';
-    
+
     /**
      * @var callable A callable function in order to sort the $items (the array key of the items contains the lang short code):
      *
@@ -120,7 +119,7 @@ class LangSwitcher extends \luya\base\Widget
      * ```
      */
     public $itemsCallback;
-    
+
     /**
      * @var array An array with links which the link tag is already registered.
      * @since 1.0.9
@@ -143,25 +142,25 @@ class LangSwitcher extends \luya\base\Widget
         }
         $elementOptions = $this->elementOptions;
         $linkOptions = $this->linkOptions;
-        
+
         if ($isActive) {
             if (isset($linkOptions['class'])) {
                 $linkOptions['class'] = $linkOptions['class'] . ' ' . $this->linkActiveClass;
             } else {
                 $linkOptions['class'] = $this->linkActiveClass;
             }
-         
+
             if (isset($elementOptions['class'])) {
                 $elementOptions['class'] = $elementOptions['class'] . ' ' . $this->elementActiveClass;
             } else {
                 $elementOptions['class'] = $this->elementActiveClass;
             }
         }
-        
+
         $tag = ArrayHelper::remove($elementOptions, 'tag', 'li');
-        
+
         $text = is_callable($this->linkLabel) ? call_user_func($this->linkLabel, $lang) : $lang[$this->linkLabel];
-        
+
         return Html::tag($tag, Html::a($text, $href, $linkOptions), $elementOptions);
     }
 
@@ -181,13 +180,13 @@ class LangSwitcher extends \luya\base\Widget
                     'item' => Yii::$app->menu->find()->where(['nav_id' => $currentMenuItem->navId])->lang($lang['short_code'])->with('hidden')->one(),
                 ];
             }
-            
+
             self::$_dataArray = $array;
         }
-        
+
         return self::$_dataArray;
     }
-    
+
     /**
      * Prefix the current link with the dedicated host info.
      *
@@ -219,7 +218,7 @@ class LangSwitcher extends \luya\base\Widget
     public function run()
     {
         $currentLang = Yii::$app->composition['langShortCode'];
-        
+
         $rule = Yii::$app->menu->currentUrlRule;
 
         $items = [];
@@ -245,18 +244,18 @@ class LangSwitcher extends \luya\base\Widget
             } else {
                 $link = Yii::$app->urlManager->prependBaseUrl($lang['short_code']);
             }
-            
+
             $items[$lang['short_code']] = $this->generateHtml($this->ensureHostInfo($link, $lang), $isActive, $lang);
             unset($item, $lang);
         }
-        
+
         if (is_callable($this->itemsCallback)) {
             $items = call_user_func($this->itemsCallback, $items);
         }
 
         $options = $this->listElementOptions;
         $options['encode'] = false;
-        
+
         $separator = ArrayHelper::remove($options, 'separator', "\n");
         $tag =  ArrayHelper::remove($options, 'tag', "ul");
 
@@ -289,24 +288,24 @@ class LangSwitcher extends \luya\base\Widget
 
     /**
      * Set a url rule paramter which can be taken when resolve pages for other languages.
-     * 
+     *
      * Used to assign a url param value for another language, this is commonly used when working with slugs or titles.
-     * 
+     *
      * Assuming to have a news detail url rule with a slug:
-     * 
+     *
      * ```php
      * 'urlRules' => [
      *     'newsmodule/<id:\d+>/<slug:[a-zA-Z\-]+>' => 'newsmodule/detail/index',
      * ]
      * ```
-     * 
+     *
      * When slug is an i18n value, this information must be provided to the LangSwither, so it will take the correct slug for the the given language.
-     * 
+     *
      * ```php
      * LangSwitcher::setUrlRuleParam('de', 'slug', 'mein-news-slug');
      * LangSwitcher::setUrlRuleParam('en', 'slug', 'my-news-slug');
      * ```
-     * 
+     *
      * @param string $lang The language which the value should be assigned with.
      * @param string $key The url rule param key which should be assigned.
      * @param string $value The value which should be used to generate the url.
@@ -319,14 +318,14 @@ class LangSwitcher extends \luya\base\Widget
 
     /**
      * Set the url rule param values from a given Model and attribute name.
-     * 
+     *
      * Its very common to have {{luya\admin\ngrest\base\NgRestModel::$i18n}} attributes defined, therefore use this method
      * to assign attributes:
-     * 
+     *
      * ```php
      * LangSwitcher::setUrlRuleParamByModel($model, 'title');
      * ```
-     * 
+     *
      * If $title is defined as $i18n attribute, it will take the values for corresponding languages and set those through the
      * {{luya\cms\widgets\LangSwitcher::setUrlRuleParam()}} method.
      *

@@ -23,7 +23,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
      * @return mixed
      */
     abstract public function getContent();
-    
+
     /**
      * Get the corresponding nav item type for this type object
      *
@@ -43,9 +43,9 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     {
         return []; // override
     }
-    
+
     private $_controller;
-    
+
     /**
      * Setter method to store the current controller Object
      * @param Controller $controller The controller object.
@@ -54,7 +54,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     {
         $this->_controller = $controller;
     }
-    
+
     /**
      * Getter method for the controller object.
      *
@@ -64,7 +64,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     {
         return $this->_controller;
     }
-    
+
     private $_options = [];
 
     /**

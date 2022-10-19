@@ -1,7 +1,7 @@
 <?php
 
-use luya\cms\admin\Module;
 use luya\admin\Module as AdminModule;
+use luya\cms\admin\Module;
 use luya\cms\helpers\Url;
 
 ?>

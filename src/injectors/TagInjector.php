@@ -2,10 +2,10 @@
 
 namespace luya\cms\injectors;
 
-use luya\cms\base\BaseBlockInjector;
 use luya\admin\base\TypesInterface;
-use luya\cms\helpers\BlockHelper;
 use luya\admin\models\Tag;
+use luya\cms\base\BaseBlockInjector;
+use luya\cms\helpers\BlockHelper;
 use luya\helpers\ArrayHelper;
 
 /**
@@ -30,9 +30,9 @@ class TagInjector extends BaseBlockInjector
     {
         return Tag::find()->select(['name'])->indexBy('id')->column();
     }
-    
+
     private $_assignedTags;
-    
+
     /**
      * Get assigned models for the current Block.
      *
@@ -44,10 +44,10 @@ class TagInjector extends BaseBlockInjector
             $ids = ArrayHelper::getColumn($this->getContextConfigValue($this->varName, []), 'value');
             $this->_assignedTags = Tag::find()->where(['in','id', $ids])->indexBy('name')->all();
         }
-        
+
         return $this->_assignedTags;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -59,7 +59,7 @@ class TagInjector extends BaseBlockInjector
             'label' => $this->varLabel,
             'options' => BlockHelper::checkboxArrayOption($this->getCheckboxArray()),
         ]);
-        
+
         $this->context->addExtraVar($this->varName, $this->getAssignedTags());
     }
 }

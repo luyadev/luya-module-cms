@@ -15,9 +15,9 @@ use luya\testsuite\traits\CmsDatabaseTableTrait;
 class QuerySqliteTest extends WebApplicationTestCase
 {
     use CmsDatabaseTableTrait;
-    
+
     private $websiteFixture;
-    
+
     public function getConfigArray()
     {
         return [
@@ -43,8 +43,7 @@ class QuerySqliteTest extends WebApplicationTestCase
 
     public function testFindByTags()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
-    
+        PageScope::run($this->app, function (PageScope $scope) {
             $scope->createAdminGroupFixture(1);
             $scope->createAdminUserFixture();
             $this->createCmsPropertyFixture([]);
@@ -58,7 +57,7 @@ class QuerySqliteTest extends WebApplicationTestCase
                     ]
                 ]
             ]);
-    
+
             $rel = new ActiveRecordFixture([
                 'modelClass' => TagRelation::class,
             ]);
@@ -89,7 +88,7 @@ class QuerySqliteTest extends WebApplicationTestCase
 
     public function testColumn()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $scope->createAdminGroupFixture(1);
             $scope->createAdminUserFixture();
             $scope->createPage('test', null, []);
@@ -97,5 +96,4 @@ class QuerySqliteTest extends WebApplicationTestCase
             $column = $this->app->menu->find()->all()->column('id');
         });
     }
-
 }

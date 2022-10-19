@@ -54,7 +54,7 @@ return [
     'btn_abort' => 'megszakítás',
     'btn_refresh' => 'Frissítés',
     'btn_save' => 'Mentés',
-    
+
 // added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Modul neve',
     'model_navitem_title_label' => 'Oldal címe',
@@ -89,10 +89,10 @@ return [
     'js_page_block_update_ok' => 'A (z) „%name%” blokk frissítve lett.',
     'js_page_block_remove_ok' => 'A (z) „%name%” blokkot törölték.',
     'js_page_block_visbility_change' => 'A (z) „%name%” láthatósága sikeresen megváltozott.',
-    
+
 // added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Vágólap',
-    
+
 // added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Biztosan törölni szeretné a (z) „%name%” blokkot?',
     'view_index_page_meta_keywords' => 'Kulcsszavak',
@@ -112,11 +112,11 @@ return [
     'js_version_update_success' => 'A verzió sikeresen frissítve lett.',
     'js_version_error_empty_fields' => 'Egy vagy több mező üres vagy érvénytelen.',
     'js_version_create_success' => 'Az új verzió sikeresen létrejött.',
-    
+
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Kérjük, válasszon',
     'view_index_sidebar_autopreview' => 'Automatikus előnézet',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Új oldal létrehozása',
     'module_permission_update_pages' => 'Oldal szerkesztése',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Verzió létrehozása',
     'button_update_version' => 'Frissítési verzió',
     'menu_group_item_env_permission' => 'Oldal engedélyei',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Hozzon létre egy másolatot az aktuális lapról az összes tartalmával együtt. A másolatok az összes nyelvet tartalmazzák, de csak a közzétett verziót.',
     'page_update_actions_deepcopy_btn' => 'Másolat létrehozása',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Title Tag (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Nem sikerült létrehozni az oldalt üres sablonból.',
     'view_update_variation_select' => 'Normál',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Beállítás',
     'view_update_block_tooltip_delete' => 'Törlés',
     'view_update_block_tooltip_close' => 'Zárja',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Legújabb oldalfrissítések',
     'cmsadmin_settings_homepage_title' => 'Alapértelmezett oldal',
@@ -202,16 +202,16 @@ return [
     'redirect_model_atr_redirect_status_code_hint' => 'Átirányítás típusa. 301 használata esetén: Véglegesen áthelyezve a böngészők gyorsítótárba helyezik az átirányítást, így előfordulhat, hogy a cél módosítása nem lép életbe a böngésző gyorsítótárának törlése nélkül.',
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Véglegesen áthelyezve',
     'redirect_model_atr_redirect_status_code_opt_302' => '302: Ideiglenesen áthelyezve',
-    
+
 // added translations in version 1.0.1:
     'module_permission_page' => 'Oldal tartalma',
-    
+
 // added translations in version 1.0.6:
     'page_update_actions_deepcopyastemplate_title' => 'Másolás sablonként',
     'page_update_actions_deepcopyastemplate_text' => 'Hozzon létre egy sablont az aktuális lapról az összes tartalmával. Ezek sablon tartalmazza az összes nyelvet, de csak a közzétett verzió.',
     'page_update_actions_deepcopyastemplate_btn' => 'Sablon létrehozása',
     'js_page_create_copy_as_template_success' => 'A sablon létrehozásra került.',
-    
+
 // added translations in version 2.0:
     'model_navitem_image_id_label' => 'Kép',
     'view_index_page_label_subpage' => 'Szülőoldal kiválasztása',
@@ -233,12 +233,12 @@ return [
     'view_index_module_action_params' => 'Műveleti paraméterek',
     'view_index_module_select_help' => 'Válassza ki a megjelenítendő modult a listából (csak a frontend modulok szerepelnek a listán). A modulokat a konfiguráció modulrészében kell konfigurálni.',
     'view_index_module_advanced_settings_button' => 'Speciális beállítások',
-    
+
 // added translations in version 3.0:
     'menu_group_item_env_themes' => 'Témák',
     'view_index_page_is_cacheable' => 'Gyorsítótárazás',
     'view_index_page_is_cacheable_hint' => 'Ha engedélyezve van, az egész oldal gyorsítótárazásra kerül, beleértve az összes blokkot is, ezért a blokkokban dinamikusan generált adatok nem frissülnek.',
-    
+
 // added translations in version 3.3:
     'menu_group_page_display' => 'Oldal megjelenítése',
     'menu_group_configuration' => 'konfiguráció',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

@@ -54,7 +54,7 @@ return [
     'btn_abort' => 'Ακύρωση',
     'btn_refresh' => 'Ανανέωση',
     'btn_save' => 'Αποθήκευση',
-    
+
 // added translations in version 1.0.0-beta3:
     'model_navitemmodule_module_name_label' => 'Ονομα Module',
     'model_navitem_title_label' => 'Τίτλος Σελίδας',
@@ -92,7 +92,7 @@ return [
 
 // added translations in version 1.0.0-beta5:
     'view_update_blockholder_clipboard' => 'Clipboard',
-    
+
 // added translations in version 1.0.0-beta6:
     'js_page_block_delete_confirm' => 'Να διαγραφεί το «%name%»?',
     'view_index_page_meta_keywords' => 'Λέξεις κλειδιά',
@@ -112,11 +112,11 @@ return [
     'js_version_update_success' => 'Η έκδοση ενημερώθηκε.',
     'js_version_error_empty_fields' => 'Ενα ή περισσότερα πεδία είναι άδεια ή έχουν μη έγκυρη τιμή.',
     'js_version_create_success' => 'Η νέα έκδοση δημιουργήθηκε επιτυχώς.',
-    
+
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Παρακαλώ επιλέξτε',
     'view_index_sidebar_autopreview' => 'Αυτόματη προεπισκόπηση',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Δημιουργία νέας σελίδας',
     'module_permission_update_pages' => '',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Δημιουργία Εκδοσης',
     'button_update_version' => 'Ενημέρωση Εκδοσης',
     'menu_group_item_env_permission' => 'Αδειες σελίδας',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Δημιουργήστε πλήρες αντίγραφο της σελίδας με περιεχόμενα. Ολες οι γλώσσες θα αντιγραφούν, αλλά μόνο η δημοσιευμένη έκδοση.',
     'page_update_actions_deepcopy_btn' => 'Δημιουργία Αντιγράφου',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Τίτλος Ετικέτας (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Unable to create page from empty draft template.',
     'view_update_variation_select' => 'No block variation selected',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configure',
     'view_update_block_tooltip_delete' => 'Delete',
     'view_update_block_tooltip_close' => 'Close edit',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Last page updates',
     'cmsadmin_settings_homepage_title' => 'Default Page',
@@ -233,7 +233,7 @@ return [
     'view_index_module_action_params' => 'Action parameters',
     'view_index_module_select_help' => 'Choose the module to display from the list (only frontend modules are listed). Modules must be configured in the modules section of the config.',
     'view_index_module_advanced_settings_button' => 'Advanced settings',
-    
+
 // added translations in version 3.0:
     'menu_group_item_env_themes' => 'Themes',
     'view_index_page_is_cacheable' => 'Caching',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

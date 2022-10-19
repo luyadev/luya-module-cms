@@ -26,9 +26,9 @@ class LinkInjectorTest extends CmsFrontendTestCase
         $block = new StubBlock();
         $injector = new LinkInjector(['context' => $block]);
         $injector->setup();
-        
+
         $vars = $block->getConfigVarsExport();
-        
+
         $this->assertArrayHasKey('type', $vars[0]);
         $this->assertSame('zaa-link', $vars[0]['type']);
     }

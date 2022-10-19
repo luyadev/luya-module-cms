@@ -3,12 +3,12 @@
 namespace cmstests\data\blocks;
 
 use cmstests\CmsFrontendTestCase;
-use luya\testsuite\fixtures\ActiveRecordFixture;
-use luya\cms\models\NavItemPage;
-use luya\testsuite\fixtures\NgRestModelFixture;
-use luya\cms\models\NavItemPageBlockItem;
-use luya\cms\models\Block;
 use luya\cms\base\InternalBaseBlock;
+use luya\cms\models\Block;
+use luya\cms\models\NavItemPage;
+use luya\cms\models\NavItemPageBlockItem;
+use luya\testsuite\fixtures\ActiveRecordFixture;
+use luya\testsuite\fixtures\NgRestModelFixture;
 
 class BlockPlaceholderIterationTest extends CmsFrontendTestCase
 {
@@ -51,7 +51,7 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
                 ]
             ]
         ]);
-        
+
         $blockItemFixture = new NgRestModelFixture([
             'modelClass' => NavItemPageBlockItem::class,
             'fixtureData' => [

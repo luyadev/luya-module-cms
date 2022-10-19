@@ -2,9 +2,9 @@
 
 namespace luya\cms\frontend\blocks;
 
-use luya\cms\frontend\Module;
-use luya\cms\frontend\blockgroups\DevelopmentGroup;
 use luya\cms\base\PhpBlock;
+use luya\cms\frontend\blockgroups\DevelopmentGroup;
+use luya\cms\frontend\Module;
 
 /**
  * HTML Block
@@ -31,7 +31,7 @@ final class HtmlBlock extends PhpBlock
     {
         return DevelopmentGroup::class;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -39,7 +39,7 @@ final class HtmlBlock extends PhpBlock
     {
         return Module::t('block_html_name');
     }
-    
+
     /**
      * @inheritdoc
      */

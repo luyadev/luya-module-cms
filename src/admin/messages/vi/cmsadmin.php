@@ -116,7 +116,7 @@ return [
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Vui lòng chọn',
     'view_index_sidebar_autopreview' => 'Tự động xem trước',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Tạo trang mới',
     'module_permission_update_pages' => 'Chỉnh sửa trang',
@@ -140,11 +140,11 @@ return [
     'button_create_version' => 'Tạo phiên bản',
     'button_update_version' => 'Phiên bản cập nhật',
     'menu_group_item_env_permission' => 'Quyền truy cập trang',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Tạo bản copy của trang hiện tại với tất cả nội dung của trang. Tất cả ngôn ngữ sẽ được copy, trừ phiên bản công khai.',
     'page_update_actions_deepcopy_btn' => 'Tạo bản copy',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Thẻ tiêu đề (SEO)',
 
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Thiết lập',
     'view_update_block_tooltip_delete' => 'Xóa',
     'view_update_block_tooltip_close' => 'Đóng',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Last page updates',
     'cmsadmin_settings_homepage_title' => 'Default Page',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

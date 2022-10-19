@@ -17,7 +17,7 @@ use yii\base\ViewContextInterface;
 abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, ViewContextInterface
 {
     private $_view;
-    
+
     /**
      * View Object getter.
      *
@@ -28,10 +28,10 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
         if ($this->_view === null) {
             $this->_view = Yii::createObject(PhpBlockView::class);
         }
-        
+
         return $this->_view;
     }
-    
+
     /**
      * Get relative view path ofr rendering view files.
      *
@@ -47,7 +47,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
 
         return $this->ensureModule() . '/views/blocks';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -83,22 +83,22 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     {
         if ($this->isCachingEnabled()) {
             $phpBlockView = $this->getView();
-    
+
             $blockId = $this->getEnvOption('id');
-    
+
             $cacheKeyAssets = ['blockassets', $blockId];
             $cacheKeyAssetBundles = ['blockassetbundles', $blockId];
-            
+
             $assets = Yii::$app->cache->getOrSet($cacheKeyAssets, [$phpBlockView, 'getBlockAssets'], $this->getCacheExpirationTime());
             $assetBundles = Yii::$app->cache->getOrSet($cacheKeyAssetBundles, [$phpBlockView, 'getAssetBundleNames'], $this->getCacheExpirationTime());
-    
+
             /**
              * @todo i think this is not need because in PhpBlockView::init() the EVENT_AFTER_RENDER is listen also.
              */
             PhpBlockView::registerToAppView($assets, $assetBundles);
         }
     }
-    
+
     /**
      * Load the block assets from cache and register to the app view.
      *
@@ -108,18 +108,18 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     {
         if ($this->isCachingEnabled()) {
             $blockId = $this->getEnvOption('id');
-        
+
             $cacheKeyAssets = ['blockassets', $blockId];
             $cacheKeyAssetBundles = ['blockassetbundles', $blockId];
-        
+
             $assets = Yii::$app->cache->get($cacheKeyAssets) ?: [];
             $assetBundles = Yii::$app->cache->get($cacheKeyAssetBundles) ?: [];
-        
+
             PhpBlockView::registerToAppView($assets, $assetBundles);
         }
     }
-    
-    
+
+
     /**
      * Will be replaced with cachable trait in future.
      *

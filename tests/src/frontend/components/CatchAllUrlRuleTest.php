@@ -32,5 +32,4 @@ class CatchAllUrlRuleTest extends CmsFrontendTestCase
             ['path' => 'foo/bar'],
         ], $rule->parseRequest($this->app->urlManager, $this->app->request));
     }
-
 }

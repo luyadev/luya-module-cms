@@ -2,22 +2,22 @@
 
 namespace tests\web\cmsadmin\models;
 
+use cmstests\CmsFrontendTestCase;
+use luya\cms\models\NavContainer;
 use luya\testsuite\scopes\PageScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 use Yii;
-use cmstests\CmsFrontendTestCase;
-use luya\cms\models\NavContainer;
 
 class NavContainerTest extends CmsFrontendTestCase
 {
     use CmsDatabaseTableTrait;
-    
+
     public function testFindWebsiteContainer()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $this->createAdminGroupFixture(1);
             $this->createAdminUserFixture();
-            
+
             $this->createCmsWebsiteFixture([
                 [
                     'id' => 2,
@@ -39,9 +39,9 @@ class NavContainerTest extends CmsFrontendTestCase
                 ]
             ]);
             Yii::$app->request->setHostInfo("http://test");
-    
+
             $this->assertFalse(NavContainer::find()->andWhere(['id' => 1])->exists());
-    
+
             $navContainer = NavContainer::findOne(2);
 
             $this->assertEquals(2, $navContainer->website_id);

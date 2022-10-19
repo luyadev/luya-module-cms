@@ -16,7 +16,7 @@ class m190728_084936_cms_theme extends Migration
             'json_config' => $this->text()->notNull(),
         ]);
     }
-    
+
     public function safeDown()
     {
         $this->dropTable('cms_theme');

@@ -2,8 +2,8 @@
 
 namespace luya\cms\admin\apis;
 
-use Yii;
 use luya\cms\models\Redirect;
+use Yii;
 
 /**
  * Redirect Controller.

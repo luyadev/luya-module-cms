@@ -2,13 +2,13 @@
 
 namespace luya\cms\models;
 
-use Yii;
-use luya\cms\Exception;
-use luya\cms\base\NavItemTypeInterface;
-use luya\cms\base\NavItemType;
-use luya\cms\admin\Module;
 use luya\base\ModuleReflection;
+use luya\cms\admin\Module;
+use luya\cms\base\NavItemType;
+use luya\cms\base\NavItemTypeInterface;
+use luya\cms\Exception;
 use luya\helpers\Json;
+use Yii;
 
 /**
  * Represents the type MODULE for a NavItem.
@@ -31,7 +31,7 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     {
         return NavItem::TYPE_MODULE;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -112,7 +112,7 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     }
 
     private $_content;
-    
+
     /**
      * @inheritdoc
      */
@@ -120,7 +120,7 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     {
         if ($this->_content == null) {
             $module = $this->getModule();
-            
+
             /** @var \luya\base\ModuleReflection $reflection */
             $reflection = Yii::createObject(['class' => ModuleReflection::class, 'module' => $module]);
             $reflection->suffix = $this->getOption('restString');
@@ -129,19 +129,19 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
             if ($this->controller_name) {
                 $reflection->defaultRoute($this->controller_name, $this->action_name, $this->getDecodedActionParams());
             }
-            
+
             $this->_content = $reflection->run();
-            
+
             $this->controller = $reflection->controller;
 
             Yii::$app->menu->setCurrentUrlRule($reflection->getUrlRule());
         }
-        
+
         return $this->_content;
     }
 
     private $_module;
-    
+
     /**
      * Get the module object from config
      *
@@ -158,10 +158,10 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         if (!Yii::$app->hasModule($module)) {
             throw new Exception("The module '$module' does not exist in your modules configuration list.");
         }
-        
+
         $this->_module = Yii::$app->getModule($module);
         $this->_module->context = 'cms';
-        
+
         return $this->_module;
     }
 }

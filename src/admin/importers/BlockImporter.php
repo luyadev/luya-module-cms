@@ -2,14 +2,14 @@
 
 namespace luya\cms\admin\importers;
 
-use Yii;
+use luya\admin\models\Config;
+use luya\cms\base\BlockInterface;
+use luya\cms\Exception;
 use luya\cms\models\Block;
 use luya\cms\models\BlockGroup;
 use luya\console\Importer;
 use luya\helpers\FileHelper;
-use luya\cms\base\BlockInterface;
-use luya\admin\models\Config;
-use luya\cms\Exception;
+use Yii;
 
 /**
  * CMS Blocks Importer.
@@ -29,42 +29,42 @@ class BlockImporter extends Importer
         if (!Config::has(Config::CONFIG_SETUP_COMMAND_TIMESTAMP)) {
             Config::set('100genericBlockUpdate', true);
         }
-        
+
         if (!Config::has('100genericBlockUpdate')) {
             throw new Exception("You have to run the generic block updater. ./vendor/bin/luya cms/updater/generic");
         }
-        
+
         $exists = [];
 
         foreach ($this->getImporter()->getDirectoryFiles('blocks') as $file) {
             $exists[] = $this->saveBlock($file['ns']);
         }
-    
+
         foreach (Yii::$app->packageInstaller->configs as $config) {
             $exists = array_merge($exists, $this->handleBlockDefinitions($config->blocks));
         }
-    
+
         // provide backwards compatibility for core 1.0.7 and below
         if ($this->hasProperty('module')) {
             $exists = array_merge($exists, $this->handleBlockDefinitions($this->module->blocks));
         }
-    
+
         foreach (Block::find()->all() as $block) {
             if (!class_exists($block->class)) {
                 $this->addLog("[!] The block {$block->class} used {$block->usageCount} times, does not exists anymore. You should either use migrate or cleanup command.");
             }
         }
-        
+
         // remove unused block groups
         foreach (BlockGroup::find()->andWhere(['not in', 'id', $this->blockGroupIds])->all() as $oldBlockGroup) {
             if ($oldBlockGroup->delete()) {
                 $this->addLog('Old blockgroup has been deleted: ' . $oldBlockGroup->name);
             }
         }
-        
+
         return $this->addLog("Block importer finished with ".count($exists) . " blocks.");
     }
-    
+
     private $blockGroupIds = [];
 
     /**
@@ -77,7 +77,7 @@ class BlockImporter extends Importer
     {
         return str_replace('{{DS}}', DIRECTORY_SEPARATOR, $path);
     }
-    
+
     /**
      * Handle an array with definitions whether they are files or folders.
      *
@@ -103,7 +103,7 @@ class BlockImporter extends Importer
 
             $ids = array_merge($ids, $this->handleBlockDefintionInDirectories($directories, $block));
         }
-        
+
         return $ids;
     }
 
@@ -120,7 +120,7 @@ class BlockImporter extends Importer
         $results = [];
         foreach ($directories as $directoryPath) {
             $path = rtrim((string) $directoryPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim((string) $blockDefinition, DIRECTORY_SEPARATOR);
-            
+
             $path = $this->replaceDsSeparator($path);
 
             if (isset($results[$path])) {
@@ -165,7 +165,7 @@ class BlockImporter extends Importer
 
         return [];
     }
-    
+
     /**
      * Save all blocks from a given folder.
      *
@@ -181,10 +181,10 @@ class BlockImporter extends Importer
                 $ids[] = $this->saveBlockByPath($blockItem);
             }
         }
-        
+
         return $ids;
     }
-    
+
     /**
      * Save a block by its given full class name.
      *
@@ -198,15 +198,15 @@ class BlockImporter extends Importer
         // ensure all classes start with trailing slash class name definition like `\foo\bar\Class`
         $fullClassName = '\\'  . ltrim($fullClassName, '\\');
         $model = Block::find()->where(['class' => $fullClassName])->one();
-        
+
         $blockObject = $this->createBlockObject($fullClassName);
-        
+
         $blockGroupId = $this->getBlockGroupId($blockObject);
-        
+
         if (!in_array($blockGroupId, $this->blockGroupIds)) {
             $this->blockGroupIds[] = $blockGroupId;
         }
-        
+
         $log = "block {$fullClassName}: ";
         if (!$model) {
             $model = new Block();
@@ -224,10 +224,10 @@ class BlockImporter extends Importer
             $log .= 'remains the same, nothing to update';
         }
         $this->addLog($log);
-        
+
         return $model->id;
     }
-    
+
     /**
      * Save a block by its path, this will extract the namespace of the block in order to save it.
      *
@@ -240,18 +240,18 @@ class BlockImporter extends Importer
     protected function saveBlockByPath($path)
     {
         $info = FileHelper::classInfo($path);
-        
+
         if ($info) {
             $className = $info['namespace'] . '\\' . $info['class'];
-            
+
             return $this->saveBlock($className);
         }
-        
+
         $this->addLog("Unable to find block namespace for file '{$path}'.");
-        
+
         return false;
     }
-    
+
     /**
      * Create a block object based from the class name.
      *
@@ -262,7 +262,7 @@ class BlockImporter extends Importer
     {
         return Yii::createObject(['class' => $className]);
     }
-    
+
     /**
      * The the group of a block based on the block object.
      *
@@ -272,20 +272,20 @@ class BlockImporter extends Importer
     protected function getBlockGroupId(BlockInterface $blockObject)
     {
         $groupClassName = $blockObject->blockGroup();
-        
+
         $groupClassName = '\\'  . ltrim($groupClassName, '\\');
-        
+
         $groupObject = Yii::createObject(['class' => $groupClassName]);
-        
+
         $group = BlockGroup::findOne(['identifier' => $groupObject->identifier()]);
-        
+
         if ($group) {
             $group->updateAttributes([
                 'name' => $groupObject->label(),
                 'class' => $groupClassName,
                 'is_deleted' => false,
             ]);
-            
+
             return $group->id;
         } else {
             $model = new BlockGroup();
@@ -298,7 +298,7 @@ class BlockImporter extends Importer
                 return $model->id;
             }
         }
-        
+
         return 0;
     }
 }

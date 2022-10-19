@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'โครงการ',
     'block_group_text_elements' => 'ข้อความ',
     'block_group_media_group' => 'มีเดีย',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'การแสดงแบบจำกัด',
     'block_module_strictrender_help' => 'เมื่อการแสดงแบบจำกัดถูกเปิด โมดูลจะทำงานเฉพาะเส้นทางที่กำหนดไว้ (module, controller, action, params) โดยไม่ต้องดูการกระทำและการควบคุม',

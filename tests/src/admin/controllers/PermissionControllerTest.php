@@ -2,9 +2,7 @@
 
 namespace cmstests\src\admin\controllers;
 
-use luya\testsuite\scopes\PermissionScope;
 use cmstests\WebModelTestCase;
-use luya\cms\admin\controllers\DefaultController;
 use luya\cms\admin\controllers\PermissionController;
 
 class PermissionControllerTest extends WebModelTestCase

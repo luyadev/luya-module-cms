@@ -3,12 +3,12 @@
 namespace luya\cms\menu;
 
 use ArrayAccess;
-use Yii;
-use FilterIterator;
 use Countable;
+use FilterIterator;
 use luya\cms\frontend\events\MenuItemEvent;
 use luya\cms\Menu;
 use luya\helpers\ArrayHelper;
+use Yii;
 
 /**
  * Iterator filter to verify valid events
@@ -35,10 +35,10 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
         Yii::$app->menu->trigger(Menu::EVENT_ON_ITEM_FIND, $event);
         return $event->visible;
     }
-    
+
     /**
      * Callculate to number of items when using count() function against the QueryIterator object.
-     * 
+     *
      * > Use iterator_count in order to ensure the filtered items are counted as well.
      *
      * @return int The number of elements in the iterator.
@@ -55,9 +55,9 @@ class QueryIteratorFilter extends FilterIterator implements Countable, ArrayAcce
      * ```php
      * $ids = Yii::$app->find()->container('root')->all()->column('id');
      * ```
-     * 
+     *
      * The above example contains an array with all ids matching the given condition.
-     * 
+     *
      * @param string $name
      * @return array An array with the values of the given column name.
      * @since 3.1.0

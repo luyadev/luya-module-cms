@@ -5,12 +5,11 @@ namespace luya\cms\models;
 use luya\admin\aws\DetailViewActiveWindow;
 use luya\admin\models\StorageFile;
 use luya\admin\models\User;
-use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\ngrest\plugins\SelectRelationActiveQuery;
-use luya\admin\traits\TaggableTrait;
 use luya\cms\admin\Module;
 use luya\helpers\Json;
+use Yii;
 use yii\base\InvalidArgumentException;
 use yii\db\ActiveRecord;
 use yii\db\AfterSaveEvent;
@@ -18,8 +17,8 @@ use yii\helpers\VarDumper;
 
 /**
  * Log.
- * 
- * File has been created with `crud/create` command. 
+ *
+ * File has been created with `crud/create` command.
  *
  * @property integer $id
  * @property integer $user_id
@@ -34,9 +33,9 @@ use yii\helpers\VarDumper;
  */
 class Log extends NgRestModel
 {
-    const LOG_TYPE_INSERT = 1;
-    const LOG_TYPE_UPDATE = 2;
-    const LOG_TYPE_DELETE = 3;
+    public const LOG_TYPE_INSERT = 1;
+    public const LOG_TYPE_UPDATE = 2;
+    public const LOG_TYPE_DELETE = 3;
 
     /**
      * @inheritdoc
@@ -116,7 +115,7 @@ class Log extends NgRestModel
     {
         return [
             ['list', ['user_id', 'is_insertion', 'is_update', 'is_deletion', 'timestamp', 'table_name']],
-            
+
         ];
     }
 
@@ -138,7 +137,7 @@ class Log extends NgRestModel
                     'id',
                     [
                         'attribute' => 'user_id',
-                        'value' => function($model) {
+                        'value' => function ($model) {
                             return $model->user->firstname . ' ' . $model->user->lastname;
                         }
                     ],
@@ -148,14 +147,14 @@ class Log extends NgRestModel
                     [
                         'attribute' => 'data_json',
                         'format' => 'raw',
-                        'value' => function($model) {
+                        'value' => function ($model) {
                             return VarDumper::dumpAsString(Json::decode($model->data_json), 10, true);
                         }
                     ],
                     [
                         'attribute' => 'message',
                         'format' => 'raw',
-                        'value' => function($model) {
+                        'value' => function ($model) {
                             return VarDumper::dumpAsString(Json::decode($model->message), 10, true);
                         }
                     ]
@@ -181,7 +180,7 @@ class Log extends NgRestModel
         $this->user_id = (Yii::$app instanceof \luya\web\Application) ? Yii::$app->adminuser->getId() : 0;
         $this->data_json = json_encode($this->data_json);
     }
-    
+
     /**
      * Get the message as array
      *
@@ -195,7 +194,7 @@ class Log extends NgRestModel
             return [];
         }
     }
-    
+
     /**
      * Find informations for a given row, for detailed informations about the data set.
      *
@@ -240,7 +239,7 @@ class Log extends NgRestModel
             }
         }
     }
-    
+
     /**
      * Get the log message as a string
      *
@@ -262,7 +261,7 @@ class Log extends NgRestModel
                     return Module::t('log_action_insert_unkown', ['info' => $this->rowDescriber]);
             }
         }
-        
+
         if ($this->is_update) {
             switch ($tableName) {
                 case "cms_nav_item":
@@ -289,10 +288,10 @@ class Log extends NgRestModel
             }
         }
     }
-    
+
     /**
      * User relatiion.
-     * 
+     *
      * @return User
      */
     public function getUser()
@@ -367,7 +366,6 @@ class Log extends NgRestModel
             case self::LOG_TYPE_UPDATE:
                 $actionName = 'update';
                 break;
-                
         }
         return Log::add($type, [
             'tableName' => $model::tableName(),

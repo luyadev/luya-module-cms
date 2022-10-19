@@ -2,10 +2,10 @@
 
 namespace luya\cms\models;
 
-use Yii;
-use luya\admin\traits\SoftDeleteTrait;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\admin\Module;
+use Yii;
 
 /**
  * Represents a group of blocks.
@@ -40,7 +40,7 @@ class BlockGroup extends NgRestModel
     {
         return 'cms_block_group';
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -68,7 +68,7 @@ class BlockGroup extends NgRestModel
             'groupLabel' => Module::t('model_blockgroup_group_label'),
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -81,7 +81,7 @@ class BlockGroup extends NgRestModel
             'created_timestamp' => 'datetime'
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -91,7 +91,7 @@ class BlockGroup extends NgRestModel
             'groupLabel' => 'text',
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -101,7 +101,7 @@ class BlockGroup extends NgRestModel
             [['list'], ['groupLabel', 'identifier', 'created_timestamp', 'class']],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -109,7 +109,7 @@ class BlockGroup extends NgRestModel
     {
         return ['groupLabel'];
     }
-    
+
 
 
     /**

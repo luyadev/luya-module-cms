@@ -3,8 +3,8 @@
 namespace luya\cms\tags;
 
 use luya\cms\frontend\Module;
-use Yii;
 use luya\tag\BaseTag;
+use Yii;
 
 /**
  * Access Application Aliases.
@@ -22,12 +22,12 @@ class AliasTag extends BaseTag
     {
         return 'alias[@web]';
     }
-    
+
     public function readme()
     {
         return Module::t('tag_alias_readme');
     }
-    
+
     public function parse($value, $sub)
     {
         return Yii::getAlias($value, false);

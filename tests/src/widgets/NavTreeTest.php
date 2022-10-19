@@ -8,10 +8,10 @@
 
 namespace cmstests\src\widgets;
 
-use Yii;
 use cmstests\CmsFrontendTestCase;
 use luya\cms\menu\Item;
 use luya\cms\widgets\NavTree;
+use Yii;
 
 class NavTreeTest extends CmsFrontendTestCase
 {
@@ -122,7 +122,7 @@ class NavTreeTest extends CmsFrontendTestCase
 
         $this->assertSame($expectedHtml, NavTree::widget([
             'ignoreFirstListTag' => true,
-            'titleContent' => function(Item $item) {
+            'titleContent' => function (Item $item) {
                 return '::'.$item->title;
             }
         ]));

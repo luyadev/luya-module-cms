@@ -10,16 +10,15 @@ class ConcretImplementationBlock implements BlockInterface
     public function onRegister()
     {
     }
-    
+
     public function onRegisterFromCache()
     {
     }
 
     public function setup()
     {
-        
     }
-    
+
     /**
      * Get the name of the block in order to display in administration context.
      */
@@ -27,7 +26,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return 'Concrept Block';
     }
-    
+
     /**
      * Returns the configuration array.
      *
@@ -37,7 +36,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return [];
     }
-    
+
     /**
      * Returns the icon based on material icon names
      *
@@ -47,7 +46,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return '<i class="fa fa-icon">icon</i>';
     }
-    
+
     /**
      * Get the output in the frontend context.
      *
@@ -57,7 +56,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return 'frontend!';
     }
-    
+
     /**
      * Get the output in administration context.
      *
@@ -81,10 +80,10 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return DevelopmentGroup::class;
     }
-    
-    
+
+
     // getters & setters from outside
-    
+
     /**
      * Returns an array with additional help informations for specific field (var or cfg).
      *
@@ -94,9 +93,9 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return [];
     }
-    
+
     private $_envs = [];
-    
+
     /**
      * Set an environment option informations to the block with key value pairing.
      *
@@ -107,9 +106,9 @@ class ConcretImplementationBlock implements BlockInterface
     {
         $this->_envs[$key] = $value;
     }
-    
+
     private $_vars;
-    
+
     /**
      * Set the values for element vars with an array key value binding.
      *
@@ -119,9 +118,9 @@ class ConcretImplementationBlock implements BlockInterface
     {
         $this->_vars = $values;
     }
-    
+
     private $_cfgs = [];
-    
+
     /**
      * Set the values for element cfgs with an array key value binding.
      *
@@ -131,9 +130,9 @@ class ConcretImplementationBlock implements BlockInterface
     {
         $this->_cfgs = $values;
     }
-    
+
     private $_placeholders = [];
-    
+
     /**
      * Set the value from placeholders where the array key is the name of value the content of the placeholder.
      *
@@ -143,7 +142,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         $this->_placeholders = $placeholders;
     }
-    
+
     /**
      * Returns an array of key value pairing with additional informations to pass to the API and frontend.
      *
@@ -153,7 +152,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return ['foo' => 'bar'];
     }
-    
+
     /**
      * Returns all config vars element of key value pairing to pass to the API and frontend.
      *
@@ -163,7 +162,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return [];
     }
-    
+
     /**
      * Returns all config cfgs element of key value pairing to pass to the API and frontend.
      *
@@ -173,7 +172,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return [];
     }
-    
+
     /**
      * Returns all config placeholders element of key value pairing to pass to the API and frontend.
      *
@@ -183,12 +182,12 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return [];
     }
-    
+
     public function getConfigPlaceholdersByRowsExport()
     {
         return [];
     }
-    
+
     /**
      * Whether cache is enabled for this block or not.
      *
@@ -198,7 +197,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return false;
     }
-    
+
     /**
      * The time of cache expiration
      */
@@ -206,7 +205,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return 60;
     }
-    
+
     /**
      * Whether is an container element or not.
      */
@@ -214,7 +213,7 @@ class ConcretImplementationBlock implements BlockInterface
     {
         return false;
     }
-    
+
     /**
      * @inheritdoc
      */

@@ -40,11 +40,11 @@ final class Bootstrap implements BootstrapInterface
                         ['class' => 'luya\cms\frontend\components\RouteBehaviorUrlRule'],
                         ['class' => 'luya\cms\frontend\components\CatchAllUrlRule'],
                     ];
-                    
+
                     if ($event->sender->getModule('cms')->enableWebsiteHostRedirect) {
                         array_unshift($rules, ['class' => 'luya\cms\frontend\components\WebsiteBehaviorUrlRule']);
                     }
-                    
+
                     $event->sender->urlManager->addRules($rules);
                 }
             });

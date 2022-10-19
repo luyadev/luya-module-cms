@@ -3,12 +3,12 @@
 namespace cmstests\data\blocks;
 
 use cmstests\CmsFrontendTestCase;
-use luya\testsuite\fixtures\ActiveRecordFixture;
-use luya\cms\models\NavItemPage;
-use luya\testsuite\fixtures\NgRestModelFixture;
-use luya\cms\models\NavItemPageBlockItem;
-use luya\cms\models\Block;
 use luya\cms\base\InternalBaseBlock;
+use luya\cms\models\Block;
+use luya\cms\models\NavItemPage;
+use luya\cms\models\NavItemPageBlockItem;
+use luya\testsuite\fixtures\ActiveRecordFixture;
+use luya\testsuite\fixtures\NgRestModelFixture;
 
 class BlockVariationRegisterTest extends CmsFrontendTestCase
 {
@@ -26,7 +26,7 @@ class BlockVariationRegisterTest extends CmsFrontendTestCase
 
 
         $vars = $this->app->getModule('cmsadmin')->blockVariations;
-        
+
         $this->assertSame([
             'cmstests\data\blocks\TestingBlock' => [
                 'idf' => [
@@ -81,7 +81,7 @@ class BlockVariationRegisterTest extends CmsFrontendTestCase
                 ]
             ]
         ]);
-        
+
         $blockItemFixture = new NgRestModelFixture([
             'modelClass' => NavItemPageBlockItem::class,
             'fixtureData' => [
@@ -105,7 +105,7 @@ class BlockVariationRegisterTest extends CmsFrontendTestCase
 
         $this->assertSame('default', $page->renderPlaceholder('content'));
     }
-    
+
     public function testVariationWhichIsSetAndNotDefault()
     {
         $this->app->getModule('cmsadmin')->blockVariations = [
@@ -149,7 +149,7 @@ class BlockVariationRegisterTest extends CmsFrontendTestCase
                 ]
             ]
         ]);
-        
+
         $blockItemFixture = new NgRestModelFixture([
             'modelClass' => NavItemPageBlockItem::class,
             'fixtureData' => [

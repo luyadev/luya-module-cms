@@ -39,10 +39,10 @@ final class LinkInjector extends BaseBlockInjector
     private function getLinkUrl()
     {
         $content = $this->getContextConfigValue($this->varName);
-    
+
         return BlockHelper::linkObject($content);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -53,7 +53,7 @@ final class LinkInjector extends BaseBlockInjector
             'type' => 'zaa-link',
             'label' => $this->varLabel,
         ]);
-       
+
         $this->context->addExtraVar($this->varName, $this->getLinkUrl());
     }
 }

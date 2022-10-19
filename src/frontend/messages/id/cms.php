@@ -31,7 +31,7 @@ return [
     'block_group_project_elements' => 'Projek',
     'block_group_text_elements' => 'Teks',
     'block_group_media_group' => 'Media',
-    
+
     // 1.0.0
     'block_module_strictrender' => 'Strict Render',
     'block_module_strictrender_help' => 'Ketika strict render diaktifkan, modul hanya akan menjalankan rute yang disediakan (modul, kontroller, aksi, parameter) tanpa mendengarkan aksi dan rute kontroller',

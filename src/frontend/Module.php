@@ -2,11 +2,11 @@
 
 namespace luya\cms\frontend;
 
-use Yii;
 use luya\base\CoreModuleInterface;
 use luya\cms\models\Theme;
 use luya\theme\SetupEvent;
 use luya\theme\ThemeManager;
+use Yii;
 use yii\base\Application;
 
 /**
@@ -33,7 +33,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
         'page' => ['class' => 'luya\cms\tags\PageTag'],
         'alias' => ['class' => 'luya\cms\tags\AliasTag'],
     ];
-    
+
     /**
      * @var string Define an error view file who is going to be renderd when the errorAction points to the `cms/error/index` route.
      *
@@ -66,7 +66,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * @var boolean Whether the overlay toolbar of the CMS should be enabled or disabled.
      */
     public $overlayToolbar = true;
-    
+
     /**
      * @var bool If enableTagParsing is enabled tags like `link(1)` or `link(1)[Foo Bar]` will be parsed
      * and transformed into links based on the cms.
@@ -75,18 +75,18 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
 
     /**
      * @var boolean Wheather full page caching should be enabled or not.
-     * 
+     *
      * The following circumstances will lead into a full page cache:
-     * 
+     *
      * + $fullPageCache is enabled.
      * + its a get request
      * + nav item is_cacheable is enabled.
      * + the type is page (not redirect & not module)
-     * 
+     *
      * > This well speed up the page dramatically but could also lead into huge problems when you are using blocks which needs to collect
      * > data from dynamic sources likes ActiveRecords. Assuming you have a block with latest news or any other data with where
      * > condition based on time, random or active/inactive status - the data won't be populatet until any of the blocks or the page is edited.
-     * 
+     *
      * @since 2.1.0
      */
     public $fullPageCache = true;
@@ -97,13 +97,13 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * @since 3.4.0
      */
     public $fullPageCacheDuration = 7200; // 2 hours
-    
+
     /**
      * @var boolean Wheather host redirect for multi websites should be enabled or not.
      * @since 4.1.0
      */
     public $enableWebsiteHostRedirect = true;
-    
+
     /**
      * @inheritdoc
      */
@@ -118,20 +118,19 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             ],
         ];
     }
-    
+
     /**
      * @inheritDoc
      */
     public function luyaBootstrap(Application $app)
     {
         if (!$app->request->isConsoleRequest && !$app->request->isAdmin) {
-    
             if ($app->has('composition') && $app->has('website')) {
                 if (empty($app->composition->hostInfoMapping)) {
                     $app->composition->hostInfoMapping = $app->website->createHostInfoMapping();
                 }
             }
-            
+
             if ($app->has('themeManager')) {
                 // set active theme from database
                 $app->get('themeManager')->on(ThemeManager::EVENT_BEFORE_SETUP, function (SetupEvent $event) {
@@ -164,7 +163,7 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
             'cms' => 'cms.php',
         ]);
     }
-    
+
     /**
      * Translations for CMS frontend Module.
      *

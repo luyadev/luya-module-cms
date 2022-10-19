@@ -44,6 +44,5 @@ class NavItemPageBlockItemTest extends ModelTestCase
         $this->assertFalse($model->update());
 
         $this->assertArrayHasKey('prev_id', $model->getErrors());
-
     }
 }

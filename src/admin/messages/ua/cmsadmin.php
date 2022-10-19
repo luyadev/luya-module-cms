@@ -116,7 +116,7 @@ return [
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Будь ласка виберіть',
     'view_index_sidebar_autopreview' => 'Автоматичний перегляд',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Створити нову сторінку',
     'module_permission_update_pages' => 'Редагувати сторінку',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Створит версію',
     'button_update_version' => 'Оновити версію',
     'menu_group_item_env_permission' => 'Сторінка прав',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Створення копії поточної сторінки з усім його вмістом. Всі мови будуть скопійовані, але тільки опублікована версія.',
     'page_update_actions_deepcopy_btn' => 'Створити копію',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Назва тегу (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Неможливо створити сторінку з порожнього шаблону.',
     'view_update_variation_select' => 'Не вибрано жодного блокованого варіанта',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Конфігурація',
     'view_update_block_tooltip_delete' => 'Видалити',
     'view_update_block_tooltip_close' => 'Закрити редагування',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Останній раз оновлювалась',
     'cmsadmin_settings_homepage_title' => 'Сторінка за замовчуванням',
@@ -248,7 +248,7 @@ return [
 
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» cannot be empty.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restrict to User Groups',
     'model_website_user_ids_label' => 'Restrict to Users',
     'model_website_access_restrict' => 'Access restriction',
-        
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

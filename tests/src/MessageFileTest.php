@@ -2,9 +2,9 @@
 
 namespace cmstests\src;
 
-use Yii;
 use cmstests\CmsFrontendTestCase;
 use luya\testsuite\traits\MessageFileCompareTrait;
+use Yii;
 
 class MessageFileTest extends CmsFrontendTestCase
 {
@@ -14,7 +14,7 @@ class MessageFileTest extends CmsFrontendTestCase
     {
         $this->compareMessages(Yii::getAlias('@cmsadmin/messages'), 'en');
     }
-    
+
     public function testFrontendMessages()
     {
         $this->compareMessages(Yii::getAlias('@cms/messages'), 'en');

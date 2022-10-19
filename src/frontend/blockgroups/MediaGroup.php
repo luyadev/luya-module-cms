@@ -17,12 +17,12 @@ class MediaGroup extends BlockGroup
     {
         return 'media-group';
     }
-    
+
     public function label()
     {
         return Module::t('block_group_media_group');
     }
-    
+
     public function getPosition()
     {
         return 62;

@@ -10,7 +10,6 @@ namespace luya\cms\base;
  */
 interface NavItemTypeInterface
 {
-
     /**
      * Returns the databas-nummeric identifier to make the navItem relation.
      *

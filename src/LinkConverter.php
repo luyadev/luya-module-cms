@@ -3,12 +3,12 @@
 namespace luya\cms;
 
 use luya\cms\models\Nav;
-use Yii;
-use yii\base\BaseObject;
 use luya\helpers\ArrayHelper;
-use luya\web\WebsiteLink;
 use luya\web\EmailLink;
 use luya\web\TelephoneLink;
+use luya\web\WebsiteLink;
+use Yii;
+use yii\base\BaseObject;
 
 /**
  * Convert a given config into a {{luya\web\LinkInterface}} Object.
@@ -65,31 +65,31 @@ use luya\web\TelephoneLink;
  */
 class LinkConverter extends BaseObject
 {
-    const TYPE_INTERNAL_PAGE = 1;
-    
-    const TYPE_EXTERNAL_URL = 2;
-    
-    const TYPE_LINK_TO_FILE = 3;
-    
-    const TYPE_LINK_TO_EMAIL = 4;
-    
-    const TYPE_LINK_TO_TELEPHONE = 5;
+    public const TYPE_INTERNAL_PAGE = 1;
+
+    public const TYPE_EXTERNAL_URL = 2;
+
+    public const TYPE_LINK_TO_FILE = 3;
+
+    public const TYPE_LINK_TO_EMAIL = 4;
+
+    public const TYPE_LINK_TO_TELEPHONE = 5;
 
     /**
      * @var integer A numeric representation of the type of link.
      */
     public $type;
-    
+
     /**
      * @var mixed The value which will be associated to the type.
      */
     public $value;
-    
+
     /**
      * @var string Whether its _blank or _self.
      */
     public $target;
-    
+
     /**
      * Generate a link converter object from an array.
      *
@@ -104,14 +104,14 @@ class LinkConverter extends BaseObject
         $type = ArrayHelper::getValue($configuration, 'type');
         $value = ArrayHelper::getValue($configuration, 'value');
         $target = ArrayHelper::getValue($configuration, 'target');
-        
+
         if (empty($type)) {
             return false;
         }
-        
+
         return (new self(['type' => $type, 'value' => $value, 'target' => $target]));
     }
-    
+
     /**
      * Get the {{luya\web\LinkInterface}} from the given configuration trough type.
      *
@@ -120,36 +120,35 @@ class LinkConverter extends BaseObject
     public function getLink()
     {
         switch ($this->type) {
-            
             // internal page
             case self::TYPE_INTERNAL_PAGE:
                 return $this->getPageLink($this->value, $this->target);
                 break;
-                
-            // external url
+
+                // external url
             case self::TYPE_EXTERNAL_URL:
                 return $this->getWebsiteLink($this->value, $this->target);
                 break;
-                
-            // file from storage
+
+                // file from storage
             case self::TYPE_LINK_TO_FILE:
                 return $this->getFileLink($this->value, $this->target);
                 break;
-                
-            // mailto link
+
+                // mailto link
             case self::TYPE_LINK_TO_EMAIL:
                 return $this->getEmailLink($this->value);
                 break;
 
-            // tel link
+                // tel link
             case self::TYPE_LINK_TO_TELEPHONE:
                 return $this->getTelephoneLink($this->value);
                 break;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Get a Website Link Object.
      *
@@ -161,7 +160,7 @@ class LinkConverter extends BaseObject
     {
         return new WebsiteLink(['href' => $href, 'target' => $target]);
     }
-    
+
     /**
      * Get a File Link Object.
      *
@@ -177,7 +176,7 @@ class LinkConverter extends BaseObject
         }
         return $file;
     }
-    
+
     /**
      * Get CMS Page Link Object.
      *
@@ -188,7 +187,7 @@ class LinkConverter extends BaseObject
      */
     public function getPageLink($navId, $target, $lang = null)
     {
-        // in a headless context, the menu component might not exists, therefore just return all 
+        // in a headless context, the menu component might not exists, therefore just return all
         // available informations.
         if (!Yii::$app->get('menu', false)) {
             return Nav::find()
@@ -205,15 +204,15 @@ class LinkConverter extends BaseObject
             $linkQuery->lang($lang);
         }
         $link = $linkQuery->one();
-        
+
         // if a page is found, set the target value from the config.
         if ($link) {
             $link->setTarget($target);
         }
-        
+
         return $link;
     }
-    
+
     /**
      * Get an Email Link Object.
      *

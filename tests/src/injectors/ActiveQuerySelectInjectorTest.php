@@ -2,18 +2,18 @@
 
 namespace cmstests\src\injectors;
 
+use cmstests\data\blocks\import\TestBlock;
 use cmstests\ModelTestCase;
 use luya\cms\injectors\ActiveQuerySelectInjector;
-use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\cms\models\Layout;
-use cmstests\data\blocks\import\TestBlock;
+use luya\testsuite\fixtures\NgRestModelFixture;
 
 class ActiveQuerySelectInjectorTest extends ModelTestCase
 {
     public function afterSetup()
     {
         parent::afterSetup();
-        
+
         $fixture = new NgRestModelFixture([
             'modelClass' => Layout::class,
             'fixtureData' => [
@@ -47,7 +47,7 @@ class ActiveQuerySelectInjectorTest extends ModelTestCase
         $f = $block->getExtraValue('foobar');
         $x = $block->getVarValue('foobar');
         $y = $block->getConfigVarsExport();
-        
+
         $this->assertSame('foo', $y[0]['options'][0]['label']);
         $this->assertSame(1, $x);
         $this->assertSame(['node' => 'value'], $f->getJsonConfig());

@@ -3,9 +3,9 @@
 namespace cmstests\src\injectors;
 
 use cmstests\data\blocks\UnitTestBlock;
-use luya\cms\injectors\TagInjector;
 use cmstests\WebModelTestCase;
 use luya\admin\models\Tag;
+use luya\cms\injectors\TagInjector;
 use luya\testsuite\fixtures\ActiveRecordFixture;
 use luya\testsuite\traits\AdminDatabaseTableTrait;
 
@@ -56,18 +56,17 @@ class TagInjectorTest extends WebModelTestCase
                 ],
             ]
         ]);
-        
+
         $block = new StubTagBlock();
         $injector = new TagInjector(['context' => $block]);
         $injector->setup();
-        
+
         $vars = $block->getConfigVarsExport();
-       
+
         $this->assertSame(['items' => [
             ['label' => 'John', 'value' => 1],
             ['label' => 'Jane', 'value' => 2],
         ]], $vars[0]['options']);
-        
     }
 
     public function testEvalTagInjector()
@@ -86,12 +85,11 @@ class TagInjectorTest extends WebModelTestCase
                 ],
             ]
         ]);
-        
+
         $block = new StubTagBlock();
         $block->setVarValues(['tags' => [['value' => 2]]]);
         $injector = new TagInjector(['context' => $block, 'varName' => 'tags']);
         $injector->setup();
         $this->assertArrayHasKey('Jane', $injector->getAssignedTags());
-        
     }
 }

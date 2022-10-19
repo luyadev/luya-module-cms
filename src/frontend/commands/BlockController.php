@@ -2,13 +2,13 @@
 
 namespace luya\cms\frontend\commands;
 
-use Yii;
-use yii\helpers\Inflector;
-use yii\helpers\Console;
-use luya\helpers\StringHelper;
-use luya\helpers\FileHelper;
 use luya\cms\models\Block;
+use luya\helpers\FileHelper;
+use luya\helpers\StringHelper;
+use Yii;
 use yii\console\widgets\Table;
+use yii\helpers\Console;
+use yii\helpers\Inflector;
 
 /**
  * Block console commands.
@@ -24,49 +24,49 @@ class BlockController extends \luya\console\Command
      * @inheritdoc
      */
     public $defaultAction = 'create';
-    
+
     /**
      * @var string Type module
      */
-    const TYPE_MODULE = 'module';
-    
+    public const TYPE_MODULE = 'module';
+
     /**
      * @var string Type application block
      */
-    const TYPE_APP = 'app';
-    
+    public const TYPE_APP = 'app';
+
     /**
      * @var string The type of block, valid `app` (static::TYPE_APP) or `module` (static::TYPE_TMODULE) values.
      */
     public $type;
-    
+
     /**
      * @var string If type is `module` the name of the module must be provided with this $moduleName property.
      */
     public $moduleName;
-    
+
     /**
      * @var array Provide the configuration array which is inside the `config()` method of the block.
      */
     public $config;
-    
+
     /**
      * @var boolean Whether the block is a container/layout block or not this will enable/dsiable the $isContainer property
      */
     public $isContainer;
-    
+
     /**
      * @var boolean Whether the caching property should be displayed or not inside the block.
      */
     public $cacheEnabled;
-    
+
     /**
      * @var boolean If dry run is enabled the content of the block will be returned but no files will be created. This is usefull for unit testing.
      */
     public $dryRun = false;
-    
+
     private $_blockName;
-    
+
     /**
      * Setter method for $blockName, ensure the correct block name.
      *
@@ -77,10 +77,10 @@ class BlockController extends \luya\console\Command
         if (!StringHelper::endsWith($name, 'Block')) {
             $name .= 'Block';
         }
-        
+
         $this->_blockName = Inflector::camelize($name);
     }
-    
+
     /**
      * Getter method fro $blockName.
      *
@@ -90,22 +90,22 @@ class BlockController extends \luya\console\Command
     {
         return $this->_blockName;
     }
-    
+
     /**
      * @var array An array with the list of extras which are generated during the var creator process, example content `'foo' => 'value',`
      */
     public $extras = [];
-    
+
     /**
      * @var array An array with all phpdoc comments which should be added to the admin template, exmaple content `['{{extras.foobar}}']`.
      */
     public $phpdoc = [];
-    
+
     /**
      * @var array Am array with additional docblocks messages to render inside the view file.
      */
     public $viewFileDoc = [];
-    
+
     /**
      * Get an array with all modules where you can generate blocks for.
      *
@@ -149,7 +149,7 @@ class BlockController extends \luya\console\Command
             'color' => 'A color picker.',
         ];
     }
-    
+
     private function getVariableTypeInterfaceMap()
     {
         return [
@@ -190,7 +190,7 @@ class BlockController extends \luya\console\Command
             'radio' => "BlockHelper::radioArrayOption([1 => 'Label for 1'])",
         ];
     }
-    
+
     private function getExtraVarDef($type, $varName, $func)
     {
         $info = [
@@ -210,11 +210,11 @@ class BlockController extends \luya\console\Command
                 return 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),';
             },
         ];
-        
+
         if (array_key_exists($type, $info)) {
             return "'".$varName."' => ".$info[$type]($varName);
         }
-        
+
         return false;
     }
 
@@ -235,17 +235,17 @@ class BlockController extends \luya\console\Command
         $this->output(PHP_EOL.'-> Create new '.$prefix, Console::FG_YELLOW);
         $name = $this->prompt('Variable Name:', ['required' => true]);
         $label = $this->prompt('End-User Label:', ['required' => true]);
-    
+
         $v = [
             'var' => Inflector::variablize($name),
             'label' => $label,
         ];
-    
+
         $this->output('Added '.$prefix.PHP_EOL, Console::FG_GREEN);
-    
+
         return $v;
     }
-    
+
     /**
      * Create a variable based of user input.
      *
@@ -259,36 +259,36 @@ class BlockController extends \luya\console\Command
         $name = $this->prompt('Variable Name:', ['required' => true]);
         $label = $this->prompt('End-User Label:', ['required' => true]);
         $type = $this->select('Variable Type:', $this->getVariableTypes());
-    
+
         $v = [
             'var' => Inflector::variablize($name),
             'label' => $label,
             'type' => $this->getVariableTypeInterfaceMap()[$type],
         ];
-    
+
         if ($this->hasVariableTypeOption($type)) {
             $v['options'] = $this->getVariableTypeOption($type);
         }
-    
+
         if ($typeCast == 'var') {
             $func = 'getVarValue';
         } else {
             $func = 'getCfgValue';
         }
-    
+
         $extra = $this->getExtraVarDef($type, $v['var'], $func);
-    
+
         if ($extra !== false) {
             $this->phpdoc[] = '{{extras.'.$v['var'].'}}';
             $this->viewFileDoc[] = '$this->extraValue(\''.$v['var'].'\');';
             $this->extras[] = $extra;
         }
-    
+
         $this->output('Added '.$prefix.PHP_EOL, Console::FG_GREEN);
-    
+
         return $v;
     }
-    
+
     /**
      * Get the file namespace based on its type.
      *
@@ -313,10 +313,10 @@ class BlockController extends \luya\console\Command
         if ($this->type == self::TYPE_APP) {
             return Yii::$app->basePath;
         }
-        
+
         return Yii::$app->getModule($this->moduleName)->getBasePath();
     }
-    
+
     /**
      * Generate the view file for the block.
      *
@@ -332,7 +332,7 @@ class BlockController extends \luya\console\Command
             'luyaText' => $this->getGeneratorText('block/create'),
         ]);
     }
-    
+
     /**
      * Wizzard to create a new CMS block.
      *
@@ -359,22 +359,22 @@ class BlockController extends \luya\console\Command
         if (empty($this->blockName)) {
             $this->blockName = $this->prompt('Insert a name for your Block (e.g. HeadTeaser):', ['required' => true]);
         }
-        
+
         if ($this->isContainer === null) {
             $this->isContainer = $this->confirm("Do you want to add placeholders to your block that serve as a container for nested blocks?", false);
         }
-        
+
         if ($this->cacheEnabled === null) {
             $this->cacheEnabled = $this->confirm("Do you want to enable the caching for this block or not?", true);
         }
-        
+
         if ($this->config === null) {
             $this->config = [
                 'vars' => [], 'cfgs' => [], 'placeholders' => [],
             ];
-    
+
             $doConfigure = $this->confirm('Would you like to configure this Block? (vars, cfgs, placeholders)', false);
-    
+
             if ($doConfigure) {
                 $doVars = $this->confirm('Add new Variable (vars)?', false);
                 $i = 1;
@@ -408,12 +408,12 @@ class BlockController extends \luya\console\Command
                 }
             }
         }
-        
+
         $folder = $this->getFileBasePath() . DIRECTORY_SEPARATOR . 'blocks';
         $filePath = $folder . DIRECTORY_SEPARATOR . $this->blockName . '.php';
-        
+
         sort($this->phpdoc);
-        
+
         $content = $this->view->render('@cms/views/commands/block/create_block', [
             'namespace' => $this->getFileNamespace(),
             'className' => $this->blockName,
@@ -431,9 +431,8 @@ class BlockController extends \luya\console\Command
         if ($this->dryRun) {
             return $content;
         }
-        
+
         if (FileHelper::createDirectory($folder) && FileHelper::writeFile($filePath, $content)) {
-            
             // generate view file based on block object view context
             $object = Yii::createObject(['class' => $this->getFileNamespace() . '\\' . $this->blockName]);
             $viewsFolder = Yii::getAlias($object->getViewPath());
@@ -441,13 +440,13 @@ class BlockController extends \luya\console\Command
             if (FileHelper::createDirectory($viewsFolder) && FileHelper::writeFile($viewFilePath, $this->generateViewFile($this->blockName))) {
                 $this->outputInfo('View file for the block has been created: ' . $viewFilePath);
             }
-            
+
             return $this->outputSuccess("Block {$this->blockName} has been created: " . $filePath);
         }
-        
+
         return $this->outputError("Error while creating block '$filePath'");
     }
-    
+
     /**
      * Search for a given block by its class or return all.
      *
@@ -476,28 +475,28 @@ class BlockController extends \luya\console\Command
     {
         $rows = [];
         $query = Block::find();
-        
+
         foreach (StringHelper::explode($search) as $q) {
             $query->orFilterWhere(['like', 'class', $q]);
         }
-        
+
         $blocks = $query->with(['navItemPageBlockItems'])->all();
         foreach ($blocks as $block) {
             $rows[] = [$block->id, $block->class, $block->usageCount];
         }
-        
+
         if ($search) {
             $this->outputInfo("Filtering for: {$search}");
         }
-        
+
         $table = new Table();
         $table->setHeaders(['ID', 'Class', 'Usage count']);
         $table->setRows($rows);
         echo $table->run();
-        
+
         return $this->outputSuccess(count($blocks) . " block(s) found.");
     }
-    
+
     /**
      * Search for a given block and replace the class by replace argument.
      *
@@ -539,34 +538,34 @@ class BlockController extends \luya\console\Command
     public function actionMigrate($old, $replace)
     {
         $block = Block::find()->where(['like', 'class', $old])->one();
-        
+
         if (!$block) {
             return $this->outputError("Unable to find a block for '{$old}'");
         }
-        
+
         $this->outputInfo("Found block '{$block->class}' with ID {$block->id} used {$block->usageCount} times.");
-        
+
         // check if existing block have the new replace name
-        
+
         $replaceBlock = Block::find()->where(['like', 'class', $replace])->one();
-        
+
         if ($replaceBlock && $this->confirm("Do you want to replace {$block->class} (used {$block->usageCount}x) with {$replaceBlock->class} (used {$replaceBlock->usageCount}x)?")) {
             $block->updateAttributes(['class' => $replaceBlock->class]);
-            
+
             if (empty($replaceBlock->usageCount)) {
                 $replaceBlock->delete();
-                
+
                 return $this->outputSuccess("The block as been migrated, the block used for the replacement has been delete has there was no content.");
             } else {
                 $replaceBlock->updateAttributes(['class' => $block->class]);
-                
+
                 return $this->outputSuccess("The block has been migrated and the block class names has swaped as the replacement block had content.");
             }
         }
-        
+
         return $this->outputError("Abort by user.");
     }
-    
+
     /**
      * Search for blocks with none existing class files and remove them.
      *
@@ -584,7 +583,7 @@ class BlockController extends \luya\console\Command
                 $delete[] = $block;
             }
         }
-        
+
         if (!empty($delete) && $this->confirm('Are you sure to delete those blocks with its content? This can not be undone!')) {
             foreach ($delete as $deleteBlock) {
                 if ($deleteBlock->delete()) {
@@ -593,12 +592,12 @@ class BlockController extends \luya\console\Command
                     $this->outputError('Error while deleting ' . $deleteBlock->class);
                 }
             }
-            
+
             return $this->outputSuccess("Clean has been finished successful.");
         } elseif (empty($delete)) {
             return $this->outputSuccess("Nothing to cleanup.");
         }
-        
+
         return $this->outputError("Abort by user.");
     }
 }

@@ -21,7 +21,7 @@ use luya\cms\menu\Item;
  *     }
  *  ],
  * ```
- * 
+ *
  * @property integer $visible Menu item visibility getter/setter.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -33,7 +33,7 @@ class MenuItemEvent extends \yii\base\Event
      * @var Item
      */
     public $item;
-    
+
     /**
      * Whether the item is visible or not
      *
@@ -43,7 +43,7 @@ class MenuItemEvent extends \yii\base\Event
     {
         return !$this->item->isHidden;
     }
-    
+
     /**
      * Setter method for the item visibility
      *

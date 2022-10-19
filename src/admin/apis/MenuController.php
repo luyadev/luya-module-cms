@@ -2,15 +2,15 @@
 
 namespace luya\cms\admin\apis;
 
+use luya\admin\models\Group;
+use luya\cms\admin\helpers\MenuHelper;
+use luya\cms\models\Nav;
+use luya\cms\models\NavContainer;
 use luya\cms\models\Website;
+use luya\helpers\ArrayHelper;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\db\Query;
-use luya\helpers\ArrayHelper;
-use luya\cms\admin\helpers\MenuHelper;
-use luya\cms\models\Nav;
-use luya\admin\models\Group;
-use luya\cms\models\NavContainer;
 
 /**
  * Menu Api provides commont tasks to retrieve cmsadmin menu data and cms group permissions setting tasks.
@@ -86,7 +86,7 @@ class MenuController extends \luya\admin\base\RestController
                     'containers' => []
                 ];
             }
-            
+
             $data['websites'][$container->website_id]['containers'][] = [
                 'containerInfo' => $container,
                 'items' => isset(self::$_permissionItemData[$container->id]) ? self::$_permissionItemData[$container->id] : [],

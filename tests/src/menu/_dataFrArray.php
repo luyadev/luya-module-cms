@@ -1,9 +1,9 @@
 <?php
 
 return
-    array(
+    [
             43 =>
-            array(
+            [
                     'id' => '43',
                     'nav_id' => '1',
                     'lang' => 'fr',
@@ -26,9 +26,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 1,
-            ),
+            ],
             103 =>
-            array(
+            [
                     'id' => '103',
                     'nav_id' => '2',
                     'lang' => 'fr',
@@ -50,9 +50,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 1,
-            ),
+            ],
             108 =>
-            array(
+            [
                     'id' => '108',
                     'nav_id' => '6',
                     'lang' => 'fr',
@@ -75,9 +75,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 1,
-            ),
+            ],
             111 =>
-            array(
+            [
                     'id' => '111',
                     'nav_id' => '40',
                     'lang' => 'fr',
@@ -100,9 +100,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 1,
-            ),
+            ],
             112 =>
-            array(
+            [
                     'id' => '112',
                     'nav_id' => '22',
                     'lang' => 'fr',
@@ -124,9 +124,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 1,
-            ),
+            ],
             119 =>
-            array(
+            [
                     'id' => '119',
                     'nav_id' => '24',
                     'lang' => 'fr',
@@ -149,9 +149,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 1,
-            ),
+            ],
             122 =>
-            array(
+            [
                     'id' => '122',
                     'nav_id' => '13',
                     'lang' => 'fr',
@@ -174,9 +174,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 1,
-            ),
+            ],
             86 =>
-            array(
+            [
                     'id' => '86',
                     'nav_id' => '81',
                     'lang' => 'fr',
@@ -199,9 +199,9 @@ return
                     'module_name' => 'rsnews',
                     'container' => 'default',
                     'depth' => 1,
-            ),
+            ],
             104 =>
-            array(
+            [
                     'id' => '104',
                     'nav_id' => '43',
                     'lang' => 'fr',
@@ -224,9 +224,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             105 =>
-            array(
+            [
                     'id' => '105',
                     'nav_id' => '44',
                     'lang' => 'fr',
@@ -249,9 +249,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             106 =>
-            array(
+            [
                     'id' => '106',
                     'nav_id' => '46',
                     'lang' => 'fr',
@@ -274,9 +274,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             107 =>
-            array(
+            [
                     'id' => '107',
                     'nav_id' => '45',
                     'lang' => 'fr',
@@ -299,9 +299,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             110 =>
-            array(
+            [
                     'id' => '110',
                     'nav_id' => '91',
                     'lang' => 'fr',
@@ -324,9 +324,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             109 =>
-            array(
+            [
                     'id' => '109',
                     'nav_id' => '34',
                     'lang' => 'fr',
@@ -349,9 +349,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             123 =>
-            array(
+            [
                     'id' => '123',
                     'nav_id' => '14',
                     'lang' => 'fr',
@@ -374,9 +374,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             124 =>
-            array(
+            [
                     'id' => '124',
                     'nav_id' => '18',
                     'lang' => 'fr',
@@ -399,9 +399,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             125 =>
-            array(
+            [
                     'id' => '125',
                     'nav_id' => '50',
                     'lang' => 'fr',
@@ -424,9 +424,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             126 =>
-            array(
+            [
                     'id' => '126',
                     'nav_id' => '16',
                     'lang' => 'fr',
@@ -449,9 +449,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             127 =>
-            array(
+            [
                     'id' => '127',
                     'nav_id' => '17',
                     'lang' => 'fr',
@@ -474,9 +474,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             128 =>
-            array(
+            [
                     'id' => '128',
                     'nav_id' => '89',
                     'lang' => 'fr',
@@ -499,9 +499,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             113 =>
-            array(
+            [
                     'id' => '113',
                     'nav_id' => '49',
                     'lang' => 'fr',
@@ -524,9 +524,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             114 =>
-            array(
+            [
                     'id' => '114',
                     'nav_id' => '82',
                     'lang' => 'fr',
@@ -549,9 +549,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             115 =>
-            array(
+            [
                     'id' => '115',
                     'nav_id' => '51',
                     'lang' => 'fr',
@@ -574,9 +574,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             116 =>
-            array(
+            [
                     'id' => '116',
                     'nav_id' => '48',
                     'lang' => 'fr',
@@ -599,9 +599,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             117 =>
-            array(
+            [
                     'id' => '117',
                     'nav_id' => '39',
                     'lang' => 'fr',
@@ -624,9 +624,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             118 =>
-            array(
+            [
                     'id' => '118',
                     'nav_id' => '23',
                     'lang' => 'fr',
@@ -649,9 +649,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             120 =>
-            array(
+            [
                     'id' => '120',
                     'nav_id' => '25',
                     'lang' => 'fr',
@@ -674,9 +674,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             121 =>
-            array(
+            [
                     'id' => '121',
                     'nav_id' => '33',
                     'lang' => 'fr',
@@ -699,9 +699,9 @@ return
                     'module_name' => false,
                     'container' => 'default',
                     'depth' => 2,
-            ),
+            ],
             130 =>
-            array(
+            [
                     'id' => '130',
                     'nav_id' => '54',
                     'lang' => 'fr',
@@ -721,18 +721,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '36',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '36',
                             'type' => '1',
                             'value' => '2',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 1,
-            ),
+            ],
             136 =>
-            array(
+            [
                     'id' => '136',
                     'nav_id' => '60',
                     'lang' => 'fr',
@@ -755,9 +755,9 @@ return
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 1,
-            ),
+            ],
             131 =>
-            array(
+            [
                     'id' => '131',
                     'nav_id' => '56',
                     'lang' => 'fr',
@@ -777,18 +777,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '37',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '37',
                             'type' => '1',
                             'value' => '44',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 2,
-            ),
+            ],
             132 =>
-            array(
+            [
                     'id' => '132',
                     'nav_id' => '57',
                     'lang' => 'fr',
@@ -808,18 +808,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '38',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '38',
                             'type' => '1',
                             'value' => '46',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 2,
-            ),
+            ],
             133 =>
-            array(
+            [
                     'id' => '133',
                     'nav_id' => '58',
                     'lang' => 'fr',
@@ -839,18 +839,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '39',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '39',
                             'type' => '1',
                             'value' => '45',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 2,
-            ),
+            ],
             134 =>
-            array(
+            [
                     'id' => '134',
                     'nav_id' => '92',
                     'lang' => 'fr',
@@ -870,18 +870,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '40',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '40',
                             'type' => '1',
                             'value' => '91',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 2,
-            ),
+            ],
             135 =>
-            array(
+            [
                     'id' => '135',
                     'nav_id' => '59',
                     'lang' => 'fr',
@@ -901,18 +901,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '41',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '41',
                             'type' => '1',
                             'value' => '34',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 2,
-            ),
+            ],
             137 =>
-            array(
+            [
                     'id' => '137',
                     'nav_id' => '61',
                     'lang' => 'fr',
@@ -932,18 +932,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '43',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '43',
                             'type' => '1',
                             'value' => '25',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 2,
-            ),
+            ],
             138 =>
-            array(
+            [
                     'id' => '138',
                     'nav_id' => '62',
                     'lang' => 'fr',
@@ -963,18 +963,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '44',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '44',
                             'type' => '1',
                             'value' => '33',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-one',
                     'depth' => 2,
-            ),
+            ],
             147 =>
-            array(
+            [
                     'id' => '147',
                     'nav_id' => '74',
                     'lang' => 'fr',
@@ -994,18 +994,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '53',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '53',
                             'type' => '1',
                             'value' => '74',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-three',
                     'depth' => 1,
-            ),
+            ],
             148 =>
-            array(
+            [
                     'id' => '148',
                     'nav_id' => '75',
                     'lang' => 'fr',
@@ -1025,18 +1025,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '54',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '54',
                             'type' => '1',
                             'value' => '49',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-three',
                     'depth' => 2,
-            ),
+            ],
             149 =>
-            array(
+            [
                     'id' => '149',
                     'nav_id' => '83',
                     'lang' => 'fr',
@@ -1056,18 +1056,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '55',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '55',
                             'type' => '1',
                             'value' => '82',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-three',
                     'depth' => 2,
-            ),
+            ],
             150 =>
-            array(
+            [
                     'id' => '150',
                     'nav_id' => '76',
                     'lang' => 'fr',
@@ -1087,18 +1087,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '56',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '56',
                             'type' => '1',
                             'value' => '51',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-three',
                     'depth' => 2,
-            ),
+            ],
             151 =>
-            array(
+            [
                     'id' => '151',
                     'nav_id' => '77',
                     'lang' => 'fr',
@@ -1118,18 +1118,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '57',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '57',
                             'type' => '1',
                             'value' => '48',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-three',
                     'depth' => 2,
-            ),
+            ],
             153 =>
-            array(
+            [
                     'id' => '153',
                     'nav_id' => '79',
                     'lang' => 'fr',
@@ -1149,18 +1149,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '59',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '59',
                             'type' => '1',
                             'value' => '23',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-three',
                     'depth' => 2,
-            ),
+            ],
             139 =>
-            array(
+            [
                     'id' => '139',
                     'nav_id' => '65',
                     'lang' => 'fr',
@@ -1180,18 +1180,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '45',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '45',
                             'type' => '1',
                             'value' => '6',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-two',
                     'depth' => 1,
-            ),
+            ],
             140 =>
-            array(
+            [
                     'id' => '140',
                     'nav_id' => '66',
                     'lang' => 'fr',
@@ -1211,18 +1211,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '46',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '46',
                             'type' => '1',
                             'value' => '13',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-two',
                     'depth' => 1,
-            ),
+            ],
             146 =>
-            array(
+            [
                     'id' => '146',
                     'nav_id' => '72',
                     'lang' => 'fr',
@@ -1242,18 +1242,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '52',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '52',
                             'type' => '1',
                             'value' => '40',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-two',
                     'depth' => 1,
-            ),
+            ],
             141 =>
-            array(
+            [
                     'id' => '141',
                     'nav_id' => '67',
                     'lang' => 'fr',
@@ -1273,18 +1273,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '47',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '47',
                             'type' => '1',
                             'value' => '14',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-two',
                     'depth' => 2,
-            ),
+            ],
             142 =>
-            array(
+            [
                     'id' => '142',
                     'nav_id' => '68',
                     'lang' => 'fr',
@@ -1304,18 +1304,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '48',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '48',
                             'type' => '1',
                             'value' => '68',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-two',
                     'depth' => 2,
-            ),
+            ],
             143 =>
-            array(
+            [
                     'id' => '143',
                     'nav_id' => '69',
                     'lang' => 'fr',
@@ -1335,18 +1335,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '49',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '49',
                             'type' => '1',
                             'value' => '69',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-two',
                     'depth' => 2,
-            ),
+            ],
             144 =>
-            array(
+            [
                     'id' => '144',
                     'nav_id' => '70',
                     'lang' => 'fr',
@@ -1366,18 +1366,18 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '50',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '50',
                             'type' => '1',
                             'value' => '16',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-two',
                     'depth' => 2,
-            ),
+            ],
             145 =>
-            array(
+            [
                     'id' => '145',
                     'nav_id' => '71',
                     'lang' => 'fr',
@@ -1397,14 +1397,14 @@ return
                     'type' => '3',
                     'nav_item_type_id' => '51',
                     'redirect' =>
-                    array(
+                    [
                             'id' => '51',
                             'type' => '1',
                             'value' => '71',
                             'target' => '',
-                    ),
+                    ],
                     'module_name' => false,
                     'container' => 'footer-column-two',
                     'depth' => 2,
-            ),
-    );
+            ],
+    ];

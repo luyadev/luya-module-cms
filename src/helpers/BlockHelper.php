@@ -2,10 +2,10 @@
 
 namespace luya\cms\helpers;
 
-use Yii;
-use luya\TagParser;
 use luya\admin\helpers\Angular;
 use luya\cms\LinkConverter;
+use luya\TagParser;
+use Yii;
 
 /**
  * Helper methods for CMS Blocks.
@@ -15,10 +15,10 @@ use luya\cms\LinkConverter;
  *
  * The helper methods are basically tasks you are using a lot when dealing with block extra
  * value output or configuration of a block element like vars, cfgs.
- * 
+ *
  * The general setup of using block helper is to assigne the value into extra vars from a given cfg
  * or var input:
- * 
+ *
  * ```php
  * public function extraVars()
  * {
@@ -43,7 +43,7 @@ class BlockHelper
     {
         return Angular::optionsArrayInput($options);
     }
-    
+
     /**
      * Create the options array for a zaa-select field based on an key value pairing
      * array.
@@ -71,7 +71,7 @@ class BlockHelper
 
         return $array;
     }
-    
+
     /**
      * Create the Options list in the config for a zaa-checkbox-array based on an
      * key => value pairing array.
@@ -92,7 +92,7 @@ class BlockHelper
     {
         return ['items' => Angular::optionsArrayInput($options)];
     }
-    
+
     /**
      * Get all informations from an zaa-image-upload type:
      *
@@ -116,16 +116,16 @@ class BlockHelper
         if (empty($value)) {
             return false;
         }
-    
+
         $image = Yii::$app->storage->getImage($value);
-    
+
         if (!$image) {
             return false;
         }
-    
+
         if ($applyFilter && is_string($applyFilter)) {
             $filter = $image->applyFilter($applyFilter);
-    
+
             if ($filter) {
                 if ($returnObject) {
                     return $filter;
@@ -133,13 +133,13 @@ class BlockHelper
                 return $filter->toArray();
             }
         }
-    
+
         if ($returnObject) {
             return $image;
         }
         return $image->toArray();
     }
-    
+
     /**
      * Get the full array for the specific zaa-file-image-upload type
      *
@@ -158,24 +158,24 @@ class BlockHelper
     {
         if (!empty($value) && is_array($value)) {
             $data = [];
-    
+
             foreach ($value as $key => $item) {
                 $image = static::imageUpload($item['imageId'], $applyFilter, true);
                 if ($image) {
                     if ($item['caption']) {
                         $image->caption = $item['caption'];
                     }
-    
+
                     $data[$key] = ($returnObject) ? $image : $image->toArray();
                 }
             }
-    
+
             return $data;
         }
-    
+
         return [];
     }
-    
+
     /**
      * Get file information based on input fileId.
      *
@@ -218,10 +218,10 @@ class BlockHelper
                 return $file->toArray();
             }
         }
-    
+
         return false;
     }
-    
+
     /**
      * Get the full array for the specific zaa-file-array-upload type
      *
@@ -250,14 +250,14 @@ class BlockHelper
                     $data[$key] = ($returnObject) ? $file : $file->toArray();
                 }
             }
-    
+
             return $data;
         }
-    
+
         return [];
     }
-    
-    
+
+
     /**
      * Generate a link object based on the configuration (array).
      *
@@ -272,21 +272,21 @@ class BlockHelper
         if (empty($config) || !is_array($config)) {
             return false;
         }
-        
+
         $converter = LinkConverter::fromArray($config);
-        
+
         if (!$converter) {
             return false;
         }
-        
+
         return $converter->getLink();
     }
-    
+
     /**
      * Wrapper function for Markdown Parsing.
-     * 
+     *
      * An example of assigned a text variable into a parsed extra Variable:
-     * 
+     *
      * ```php
      * public function extraVars()
      * {

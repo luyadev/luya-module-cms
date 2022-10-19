@@ -116,7 +116,7 @@ return [
 // added translations in version 1.0.0-beta7:
     'view_index_create_page_please_choose' => 'Veuillez choisir',
     'view_index_sidebar_autopreview' => 'Aperçu automatique',
-    
+
 // added translations in version 1.0.0-beta8:
     'module_permission_add_new_page' => 'Créer une nouvelle page',
     'module_permission_update_pages' => 'Modifier la page',
@@ -140,14 +140,14 @@ return [
     'button_create_version' => 'Créer une version',
     'button_update_version' => 'Modifier une version',
     'menu_group_item_env_permission' => 'Permissions de la page',
-    
+
 // added translations in version 1.0.0-rc1:
     'page_update_actions_deepcopy_text' => 'Créer une copie de la page courante avec tout son contenu. La copie inclura toutes les langues, mais seulement pour la version publiée.',
     'page_update_actions_deepcopy_btn' => 'Créer une copie',
-    
+
 // added translations in version 1.0.0-rc2:
     'model_navitem_title_tag_label' => 'Balise title (SEO)',
-    
+
 // added translations in version 1.0.0-rc3:
     'model_navitempage_empty_draft_id' => 'Impossible de créer une page à partir d\'un modèle vide',
     'view_update_variation_select' => 'Normal',
@@ -173,7 +173,7 @@ return [
     'view_update_block_tooltip_editcfg' => 'Configurer',
     'view_update_block_tooltip_delete' => 'Supprimer',
     'view_update_block_tooltip_close' => 'Fermer',
-    
+
 // added translations in version 1.0.0:
     'cmsadmin_dashboard_lastupdate' => 'Dernières mises à jour de pages',
     'cmsadmin_settings_homepage_title' => 'Page par défaut',
@@ -245,10 +245,10 @@ return [
     'menu_group_protocol' => 'Protocole',
     'menu_group_protocol_model_event_logger' => 'Journal des événements du modèle',
     'unable_to_find_item_for_language' => 'La page demandée n\'a pas encore été traduite.',
-  
+
 // added translations in version 3.4:
     'js_block_attribute_empty' => '«%label%» ne peut être vide.',
-    
+
 // added translations in version 4.0:
     'menu_group_item_env_websites' => 'Sites web',
     'model_website_use_default_theme' => 'Utiliser le thème par défaut',
@@ -256,7 +256,7 @@ return [
     'model_website_group_ids_label' => 'Restreindre aux groupes d\'utilisateur',
     'model_website_user_ids_label' => 'Restreindre aux utilisateurs',
     'model_website_access_restrict' => 'Restrictions d\'accès',
-    
+
 // added translations in version 4.2.0:
     'model_block_translation_name_label' => 'Name',
     'model_block_class_label' => 'Class',

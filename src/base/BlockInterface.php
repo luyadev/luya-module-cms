@@ -13,26 +13,26 @@ namespace luya\cms\base;
 interface BlockInterface
 {
     // block methods defintions implementations
-    
+
     /**
      * Will called when the block is saved to the cache.
      *
      * @since 1.0.5
      */
     public function onRegister();
-    
+
     /**
      * Will called when the block is loaded from the cache.
      *
      * @since 1.0.5
      */
     public function onRegisterFromCache();
-    
+
     /**
      * Get the name of the block in order to display in administration context.
      */
     public function name();
-    
+
     /**
      * Returns the icon based on material icon names
      *
@@ -42,18 +42,18 @@ interface BlockInterface
 
     /**
      * This method is run when the block object is initialized in frontend context.
-     * 
+     *
      * @since 3.4.0
      */
     public function setup();
-    
+
     /**
      * Get the output in the frontend context.
      *
      * @return string
      */
     public function renderFrontend();
-    
+
     /**
      * Get the output in administration context.
      *
@@ -70,14 +70,14 @@ interface BlockInterface
      * @since 1.0.8
      */
     public function renderAdminPreview();
-    
+
     /**
      * Returns a class of the blocks group.
      *
      * @return \luya\cms\base\BlockGroup
      */
     public function blockGroup();
-    
+
     // getters & setters from outside
 
     /**
@@ -96,7 +96,7 @@ interface BlockInterface
      * @return array An array where the key is the cfg/var field var name and the value the helper text.
      */
     public function getFieldHelp();
-    
+
     /**
      * Set an environment option informations to the block with key value pairing.
      *
@@ -104,56 +104,56 @@ interface BlockInterface
      * @param mixed $value The value for the key.
      */
     public function setEnvOption($key, $value);
-    
+
     /**
      * Set the values for element vars with an array key value binding.
      *
      * @param array $values An array where key is the name of the var-element and value the content.
      */
     public function setVarValues(array $values);
-    
+
     /**
      * Set the values for element cfgs with an array key value binding.
      *
      * @param array $values An array where key is the name of the cfg-element and value the content.
      */
     public function setCfgValues(array $values);
-    
+
     /**
      * Set the value from placeholders where the array key is the name of value the content of the placeholder.
      *
      * @param array $placeholders An array with placeholders where key is name and the value the content e.g. `['content' => 'The placheholder Content']`.
      */
     public function setPlaceholderValues(array $placeholders);
-    
+
     /**
      * Returns an array of key value pairing with additional informations to pass to the API and frontend.
      *
      * @return array
      */
     public function getExtraVarValues();
-   
+
     /**
      * Returns all config vars element of key value pairing to pass to the Admin ANGULAR API
      *
      * @return array
      */
     public function getConfigVarsExport();
-   
+
     /**
      * Returns all config cfgs element of key value pairing to pass to the Admin ANGULAR API
      *
      * @return array
      */
     public function getConfigCfgsExport();
-    
+
     /**
      * Returns all config placeholders element of key value pairing to pass to the Admin ANGULAR API
      *
      * @return array
      */
     public function getConfigPlaceholdersExport();
-    
+
     /**
      * Returns the placeholder based rows.
      *
@@ -192,21 +192,21 @@ interface BlockInterface
      * @return boolean
      */
     public function getIsCacheEnabled();
-    
+
     /**
      * The time of cache expiration
      *
      * @return integer
      */
     public function getCacheExpirationTime();
-    
+
     /**
      * Whether this is a container element or not. Container elements usually have defined placeholders.
      *
      * @return boolean
      */
     public function getIsContainer();
-    
+
     /**
      * Whether the dirty marker dialog is enable or not.
      *

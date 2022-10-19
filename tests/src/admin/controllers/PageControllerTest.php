@@ -2,9 +2,9 @@
 
 namespace cmstests\src\admin\controllers;
 
-use luya\testsuite\scopes\PermissionScope;
 use cmstests\WebModelTestCase;
 use luya\cms\admin\controllers\PageController;
+use luya\testsuite\scopes\PermissionScope;
 
 class PageControllerTest extends WebModelTestCase
 {
@@ -13,7 +13,7 @@ class PageControllerTest extends WebModelTestCase
      */
     public function testActionUpdate()
     {
-        PermissionScope::run($this->app, function(PermissionScope $scope) {
+        PermissionScope::run($this->app, function (PermissionScope $scope) {
             $ctrl = new PageController('page', $this->app->getModule('cmsadmin'));
             $this->assertNotEmpty($ctrl->actionUpdate());
             $this->assertNotEmpty($ctrl->actionDrafts());

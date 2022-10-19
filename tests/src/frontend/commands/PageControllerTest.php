@@ -11,7 +11,7 @@ class PageControllerTest extends CmsConsoleTestCase
 {
     public function testActionCleanup()
     {
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $scope->createCmsNavFixture([]);
             $scope->createCmsNavItemFixture([]);
             $scope->createCmsNavItemPageFixture([]);
@@ -30,12 +30,12 @@ class PageControllerTest extends CmsConsoleTestCase
             $ctrl = new PageControllerStub('page', $this->app);
             $ctrl->sendInput('yes');
             $r = $ctrl->actionCleanup();
-            
+
             $this->assertSame(0, $r);
         });
 
 
-        PageScope::run($this->app, function(PageScope $scope) {
+        PageScope::run($this->app, function (PageScope $scope) {
             $scope->createCmsNavFixture([]);
             $scope->createCmsNavItemFixture([]);
             $scope->createCmsNavItemPageFixture([]);
@@ -54,7 +54,7 @@ class PageControllerTest extends CmsConsoleTestCase
             $ctrl = new PageControllerStub('page', $this->app);
             $ctrl->truncateStreams();
             $r = $ctrl->actionCleanup();
-            
+
             $this->assertSame(1, $r);
         });
     }

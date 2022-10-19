@@ -22,14 +22,14 @@ abstract class BlockGroup extends BaseObject
      * @return string
      */
     abstract public function identifier();
-    
+
     /**
      * The label used in the administration are for this group
      *
      * @return string
      */
     abstract public function label();
-    
+
     /**
      * The position index, lower will be a the top, higher will be at the bottom of the blocks list.
      *

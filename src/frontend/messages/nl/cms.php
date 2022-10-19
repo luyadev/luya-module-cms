@@ -1,4 +1,5 @@
 <?php
+
 return [
     'tb_composition' => 'Taal',
     'tb_properties' => 'Eigenschappen',

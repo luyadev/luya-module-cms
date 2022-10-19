@@ -2,10 +2,9 @@
 
 namespace luya\cms\frontend\components;
 
-use luya\helpers\StringHelper;
 use luya\helpers\Url;
-use Yii;
 use luya\web\UrlRule;
+use Yii;
 use yii\web\UrlNormalizerRedirectException;
 
 /**
@@ -22,22 +21,22 @@ class WebsiteBehaviorUrlRule extends UrlRule
      * @inheritdoc
      */
     public $pattern = '<module>/<controller>/<action>';
-    
+
     /**
      * @inheritdoc
      */
     public $route = '<module>/<controller>/<action>';
-    
+
     /**
      * @inheritdoc
      */
     public $defaults = ['controller' => 'default', 'action' => 'index'];
-    
+
     /**
      * @inheritdoc
      */
     public $mode = UrlRule::PARSING_ONLY;
-    
+
     /**
      * @inheritdoc
      */
@@ -48,7 +47,7 @@ class WebsiteBehaviorUrlRule extends UrlRule
             $request->setHostInfo($matchedWebsite['host']);
             throw new UrlNormalizerRedirectException(Url::to($request->getAbsoluteUrl()), 301);
         }
-        
+
         return false;
     }
 }

@@ -35,7 +35,7 @@ class Main extends \yii\web\AssetBundle
     public $depends = [
         'luya\admin\assets\Main',
     ];
-    
+
     /**
      * @inheritdoc
      */

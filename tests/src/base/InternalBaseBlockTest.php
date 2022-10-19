@@ -11,10 +11,10 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
     public function testConcretImplementation()
     {
         $object = new ConcretImplementationBlock();
-        
+
         $this->assertInstanceOf('luya\cms\base\BlockInterface', $object);
     }
-    
+
     public function testVarAppendingOfVars()
     {
         $block = new TestBlock();
@@ -24,7 +24,7 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
         $this->assertSame('append', $cfg[2]['var']);
         $this->assertSame('append2', $cfg[3]['var']);
     }
-    
+
     public function testVarNotAppendingOfVars()
     {
         $block = new TestBlock();
@@ -34,7 +34,7 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
         $this->assertSame('append', $cfg[0]['var']);
         $this->assertSame('append2', $cfg[1]['var']);
     }
-    
+
     public function testCfgAppendingOfVars()
     {
         $block = new TestBlock();
@@ -44,7 +44,7 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
         $this->assertSame('append', $cfg[1]['var']);
         $this->assertSame('append2', $cfg[2]['var']);
     }
-    
+
     public function testCfgNotAppendingOfVars()
     {
         $block = new TestBlock();
@@ -54,12 +54,12 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
         $this->assertSame('append', $cfg[0]['var']);
         $this->assertSame('append2', $cfg[1]['var']);
     }
-    
+
     public function testValueGetters()
     {
         $block = new TestBlock();
         $block->setVarValues(['null' => null, 'empty' => '', 'false' => false, '0' => 0, 'as0' => 0]);
-        
+
         $this->assertFalse($block->getVarValue('null', false));
         $this->assertFalse($block->getVarValue('empty', false));
         $this->assertFalse($block->getVarValue('false', false));
@@ -68,7 +68,7 @@ class InternalBaseBlockTest extends CmsFrontendTestCase
         //$this->assertFalse($block->getVarValue('0', false));
         //$this->assertFalse($block->getVarValue('as0', false));
     }
-    
+
     public function testRenderAdminPreview()
     {
         $block = new TestBlock();

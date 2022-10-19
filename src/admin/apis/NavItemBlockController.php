@@ -58,7 +58,7 @@ class NavItemBlockController extends \luya\admin\base\RestController
                 return ['response' => true];
             }
         }
-        
+
         return ['response' => false];
     }
 }

@@ -3,11 +3,10 @@
 namespace luya\cms\models;
 
 use luya\admin\buttons\DuplicateActiveButton;
-use Yii;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\cms\admin\Module;
 use luya\helpers\StringHelper;
 use luya\helpers\Url;
-use luya\cms\admin\Module;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -52,7 +51,7 @@ class Redirect extends NgRestModel
             ]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -75,7 +74,7 @@ class Redirect extends NgRestModel
             'redirect_path' => Module::t('redirect_model_atr_redirect_path_hint'),
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -139,12 +138,12 @@ class Redirect extends NgRestModel
             ]
         ];
     }
-    
+
     /**
      * Match Request Path against catch_path.
      *
      * Several version of the request path will be checked in order to ensure different siutations can be handled.
-     * 
+     *
      * `foo/*` catch_path would return `bar` when the request path is `foo/bar`.
      *
      * @param string $requestPath The path from the webserver (the URL which has been opened).
@@ -174,7 +173,7 @@ class Redirect extends NgRestModel
     private function inputToRegex($requestPath, $catchPath)
     {
         $pattern = str_replace('\*', '(.*)', preg_quote($catchPath, '/'));
-        
+
         if (preg_match('/'.$pattern.'/i', $requestPath, $result) == 1) {
             return $result;
         }
@@ -216,7 +215,7 @@ class Redirect extends NgRestModel
         // compare strings
         return ($requestPath == $catchPath);
     }
-    
+
     /**
      *
      * @param string $wildcard An optional wildcard string which can be used as with `*` in the redirect_path. {@since 3.5.0}

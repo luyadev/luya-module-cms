@@ -20,12 +20,12 @@ class BlockHelperTest extends CmsFrontendTestCase
             ['label' => 'bar', 'value' => 'foo']
         ], BlockHelper::selectArrayOption(['foo' => 'bar'], 'Prompt!'));
     }
-    
+
     public function testCheckboxArrayOption()
     {
         $this->assertSame(['items' => [['label' => 'World', 'value' => 'Hello']]], BlockHelper::checkboxArrayOption(['Hello' => 'World']));
     }
-    
+
     public function testImageUpload()
     {
         $this->assertFalse(BlockHelper::imageUpload(1));
@@ -37,7 +37,7 @@ class BlockHelperTest extends CmsFrontendTestCase
             ['imageId' => 2]
         ]));
     }
-    
+
     public function testFileUpload()
     {
         $this->assertFalse(BlockHelper::fileUpload(1));
@@ -56,15 +56,15 @@ class BlockHelperTest extends CmsFrontendTestCase
     {
         $url = BlockHelper::linkObject(['type' => 1, 'value' => 2]);
         $this->assertInstanceOf('luya\web\LinkInterface', $url);
-        
+
         $this->assertSame('_self', $url->getTarget());
     }
-    
+
     public function testExternalGenerateLinkObject()
     {
         $url = BlockHelper::linkObject(['type' => 2, 'value' => 'https://luya.io']);
         $this->assertInstanceOf('luya\web\LinkInterface', $url);
-    
+
         $this->assertSame('_blank', $url->getTarget());
     }
 
