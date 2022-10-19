@@ -640,6 +640,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public static function variations()
     {
+        /** @phpstan-ignore-next-line */
         return (new BlockVariationRegister(new static()));
     }
 

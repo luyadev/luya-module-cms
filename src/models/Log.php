@@ -197,8 +197,6 @@ class Log extends NgRestModel
 
     /**
      * Find informations for a given row, for detailed informations about the data set.
-     *
-     * @return string
      */
     public function getRowDescriber()
     {

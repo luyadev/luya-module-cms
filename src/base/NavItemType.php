@@ -4,6 +4,7 @@ namespace luya\cms\base;
 
 use luya\cms\models\NavItem;
 use yii\base\Controller;
+use yii\db\ActiveRecord;
 
 /**
  * Abstract class for all Item Types.
@@ -15,7 +16,7 @@ use yii\base\Controller;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class NavItemType extends \yii\db\ActiveRecord
+abstract class NavItemType extends ActiveRecord implements NavItemTypeInterface
 {
     /**
      * Get the response content for the item type

@@ -88,7 +88,6 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      * on: EVENT_BEFORE_DELETE, EVENT_AFTER_INSERT & EVENT_AFTER_UPDATE
      *
      * @param \yii\base\Event $event
-     * @return boolean
      */
     protected function eventLogger($event)
     {
@@ -254,21 +253,13 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * @param string $alias
      * @param integer $langId
-     * @return boolean
      */
     public function verifyAlias($alias, $langId)
     {
         if (Yii::$app->hasModule($alias) && $this->parent_nav_id == null) {
             $this->addError('alias', Module::t('nav_item_model_error_modulenameexists', ['alias' => $alias]));
-
             return false;
         }
-
-//        if ($this->parent_nav_id === null) {
-//            $this->addError('parent_nav_id', Module::t('nav_item_model_error_parentnavidcannotnull'));
-//
-//            return false;
-//        }
 
         /**
          * Group by website_id
@@ -282,15 +273,12 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             ->exists();
         if ($exists) {
             $this->addError('alias', Module::t('nav_item_model_error_urlsegementexistsalready'));
-
             return false;
         }
     }
 
     /**
      * Alias Validator.
-     *
-     * @return boolean
      */
     public function validateAlias()
     {
