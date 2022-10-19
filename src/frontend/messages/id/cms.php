@@ -38,11 +38,11 @@ return [
     'block_html_cfg_raw_label' => 'Render HTML di Admin',
 
     // 3.4.0
-    'tag_alias_readme' => 'The alias tag allows you to use aliases defined in your application as well as predefined aliases. As an example, you can use `alias[@web]` to link to images in the public html folder: `<img src="alias[@web]/image.jpg">`',
-    'tag_menu_readme' => 'Generate a link to a menu item where the key is the page id (you can see the page ids when hovering over the site navigation in the administration).',
-    'tag_page_readme' => 'Get the content of a full page or of a placeholder of a page. The first parameter is the page id (which you get by hovering over the site navigation in the administration): `page[1]`. If you only want to get the content of a placeholder of the cmslayout, use the second parameter: `page[1](placeholderName)`.',
-    'block_mirror_language_name' => 'Mirror Language',
-    'block_mirror_config_language_label' => 'Source Language',
-    'block_mirror_admin_empty_language' => 'Configure a <b><span class="material-icons">edit</span> source language</b> to mirror its content for the current placeholder.',
-    'block_mirror_admin_configured_language' => 'Mirroring this placeholder from <span class="material-icons">arrow_right_alt</span> <b>{name}</b>.',
+    'tag_alias_readme' => 'Tag alias memungkinkan Anda untuk menggunakan alias yang ditentukan dalam aplikasi Anda serta alias yang telah ditentukan sebelumnya. Sebagai contoh, Anda dapat menggunakan `alias[@web]` untuk menautkan ke gambar di folder html publik: `<img src="alias[@web]/image.jpg">`',
+    'tag_menu_readme' => 'Hasilkan tautan ke item menu di mana kuncinya adalah id halaman (Anda dapat melihat id halaman saat mengarahkan kursor ke navigasi situs di administrasi).',
+    'tag_page_readme' => 'Dapatkan konten halaman penuh atau placeholder halaman. Parameter pertama adalah id halaman (yang Anda dapatkan dengan mengarahkan kursor ke navigasi situs di administrasi): `page[1]`. Jika Anda hanya ingin mendapatkan konten dari placeholder cmslayout, gunakan parameter kedua: `page[1](placeholderName)`.',
+    'block_mirror_language_name' => 'Penyamaan bahasaa',
+    'block_mirror_config_language_label' => 'Sumber bahasa',
+    'block_mirror_admin_empty_language' => 'Konfigurasi <b><span class="material-icons">ubah</span> Sumber bahasa</b> untuk menyamakan konten dengan placeholder.',
+    'block_mirror_admin_configured_language' => 'Penyamaan placeholder dengan <span class="material-icons">arrow_right_alt</span> <b>{name}</b>.',
 ];
