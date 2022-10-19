@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.x
 
-+ [#]() Fixed a bug where deep page copy does not copy the languages. 
++ [#385](https://github.com/luyadev/luya-module-cms/pull/385) Fixed a bug where deep page copy does not copy the languages. 
 
 ## 4.4.0 (5. October 2022)
 
