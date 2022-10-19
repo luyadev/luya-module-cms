@@ -81,12 +81,17 @@ class NavController extends \luya\admin\base\RestController
             $newItem->parent_nav_id = $model->parent_nav_id;
             $newItem->title = $item->title . ' (copy)';
             $newItem->alias = $item->alias . '-' . time();
-            if ($newItem->save() && !empty($newItem->nav_item_type_id)) {
-                return $item->copyTypeContent($newItem);
+            $save = $newItem->save();
+            if ($save && !empty($newItem->nav_item_type_id)) {
+                $item->copyTypeContent($newItem);
+            }
+
+            if (!$save) {
+                return $this->sendModelError($newItem);
             }
         }
 
-        return $this->sendModelError($newItem);
+        return ['saved' => $save];
     }
 
     /**
