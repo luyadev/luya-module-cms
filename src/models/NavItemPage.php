@@ -277,9 +277,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                                 $type = strtolower($type);
                                 switch ($type) {
                                     case "vars": $blockObject->setVarValues($typeContent);
-                                    break;
+                                        break;
                                     case "cfgs": $blockObject->setCfgValues($typeContent);
-                                    break;
+                                        break;
                                     case "extras":
                                         foreach ($typeContent as $extraKey => $extraValue) {
                                             $blockObject->addExtraVar($extraKey, $extraValue);
