@@ -96,7 +96,7 @@ jobs:
       ## unit test with coverage
       - name: PHP Unit tests for PHP 7.4
         run: vendor/bin/phpunit --verbose --coverage-clover=clover.xml --configuration actions.phpunit.xml
-        if: matrix.php == '7.4
+        if: matrix.php == '7.4'
 
       ## coverage
       - name: Code coverage
