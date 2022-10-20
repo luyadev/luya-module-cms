@@ -240,7 +240,7 @@ class CmslayoutImporter extends Importer
         $a1 = $array1['placeholders'];
         $a2 = $array2['placeholders'];
 
-        if ((is_countable($a1) ? count($a1) : 0) !== count($a2)) {
+        if ((is_countable($a1) ? count($a1) : 0) !== (is_countable($a2) ? count($a2) : 0)) {
             return false;
         }
 
