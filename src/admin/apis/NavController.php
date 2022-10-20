@@ -56,8 +56,6 @@ class NavController extends \luya\admin\base\RestController
 
     /**
      * Create a page copy from existing page.
-     *
-     * @return bool
      */
     public function actionDeepPageCopy()
     {
@@ -91,7 +89,7 @@ class NavController extends \luya\admin\base\RestController
             }
         }
 
-        return ['saved' => $save];
+        return $model;
     }
 
     /**
