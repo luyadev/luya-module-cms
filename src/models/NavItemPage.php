@@ -89,7 +89,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     public function rules()
     {
         return [
-            [['layout_id', 'timestamp_create', 'create_user_id'], 'required', 'isEmpty' => fn($value) => empty($value)],
+            [['layout_id', 'timestamp_create', 'create_user_id'], 'required', 'isEmpty' => fn ($value) => empty($value)],
             [['layout_id', 'timestamp_create', 'timestamp_update', 'create_user_id', 'nav_item_id'], 'integer'],
             [['version_alias'], 'string']
         ];
@@ -131,7 +131,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         $fields = parent::fields();
         $fields['contentAsArray'] = 'contentAsArray';
-        $fields['version_alias'] = fn($model) => Module::t($model->version_alias);
+        $fields['version_alias'] = fn ($model) => Module::t($model->version_alias);
         return $fields;
     }
 

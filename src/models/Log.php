@@ -137,7 +137,7 @@ class Log extends NgRestModel
                     'id',
                     [
                         'attribute' => 'user_id',
-                        'value' => fn($model) => $model->user->firstname . ' ' . $model->user->lastname
+                        'value' => fn ($model) => $model->user->firstname . ' ' . $model->user->lastname
                     ],
                     'is_insertion:boolean',
                     'is_update:boolean',
@@ -145,12 +145,12 @@ class Log extends NgRestModel
                     [
                         'attribute' => 'data_json',
                         'format' => 'raw',
-                        'value' => fn($model) => VarDumper::dumpAsString(Json::decode($model->data_json), 10, true)
+                        'value' => fn ($model) => VarDumper::dumpAsString(Json::decode($model->data_json), 10, true)
                     ],
                     [
                         'attribute' => 'message',
                         'format' => 'raw',
-                        'value' => fn($model) => VarDumper::dumpAsString(Json::decode($model->message), 10, true)
+                        'value' => fn ($model) => VarDumper::dumpAsString(Json::decode($model->message), 10, true)
                     ]
                 ]
             ]

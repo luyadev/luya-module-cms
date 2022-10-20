@@ -116,7 +116,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function rules()
     {
         return [
-            ['nav_item_type_id', 'required', 'isEmpty' => fn($value) => empty($value), 'when' => fn() => !$this->isNewRecord],
+            ['nav_item_type_id', 'required', 'isEmpty' => fn ($value) => empty($value), 'when' => fn () => !$this->isNewRecord],
             [['description', 'keywords'], 'string'],
             [['title'], 'string', 'max' => 180],
             [['alias'], 'string', 'max' => 180],

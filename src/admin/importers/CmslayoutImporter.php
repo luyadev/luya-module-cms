@@ -94,7 +94,7 @@ class CmslayoutImporter extends Importer
             'recursive' => false,
             'caseSensitive' => false,
             'only' => ['*.php'],
-            'filter' => fn($path) => in_array(substr(basename($path), 0, 1), $this->ignorePrefix) ? false : null]);
+            'filter' => fn ($path) => in_array(substr(basename($path), 0, 1), $this->ignorePrefix) ? false : null]);
     }
 
     /**

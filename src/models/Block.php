@@ -52,7 +52,7 @@ class Block extends NgRestModel
             'group_id' => [
                 'class' => SelectModel::class,
                 'modelClass' => BlockGroup::class,
-                'labelField' => fn($model) => $model->getGroupLabel()
+                'labelField' => fn ($model) => $model->getGroupLabel()
             ],
             'class' => 'text',
             'is_disabled' => 'toggleStatus',

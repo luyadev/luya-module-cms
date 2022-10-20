@@ -193,11 +193,11 @@ class BlockController extends \luya\console\Command
     private function getExtraVarDef($type, $varName, $func)
     {
         $info = [
-            'image-upload' => fn($varName) => 'BlockHelper::imageUpload($this->'.$func.'(\''.$varName.'\'), false, true),',
-            'image-array-upload' => fn($varName) => 'BlockHelper::imageArrayUpload($this->'.$func.'(\''.$varName.'\'), false, true),',
-            'file-upload' => fn($varName) => 'BlockHelper::fileUpload($this->'.$func.'(\''.$varName.'\'), true),',
-            'file-array-upload' => fn($varName) => 'BlockHelper::fileArrayUpload($this->'.$func.'(\''.$varName.'\'), true),',
-            'cms-page' => fn($varName) => 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),',
+            'image-upload' => fn ($varName) => 'BlockHelper::imageUpload($this->'.$func.'(\''.$varName.'\'), false, true),',
+            'image-array-upload' => fn ($varName) => 'BlockHelper::imageArrayUpload($this->'.$func.'(\''.$varName.'\'), false, true),',
+            'file-upload' => fn ($varName) => 'BlockHelper::fileUpload($this->'.$func.'(\''.$varName.'\'), true),',
+            'file-array-upload' => fn ($varName) => 'BlockHelper::fileArrayUpload($this->'.$func.'(\''.$varName.'\'), true),',
+            'cms-page' => fn ($varName) => 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),',
         ];
 
         if (array_key_exists($type, $info)) {

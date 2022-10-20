@@ -139,7 +139,7 @@ class NavItemPageBlockItem extends ActiveRecord
     public function fields()
     {
         $fields = parent::fields();
-        $fields['objectdetail'] = fn($model) => NavItemPage::getBlockItem($model, $model->navItemPage);
+        $fields['objectdetail'] = fn ($model) => NavItemPage::getBlockItem($model, $model->navItemPage);
         return $fields;
     }
 
