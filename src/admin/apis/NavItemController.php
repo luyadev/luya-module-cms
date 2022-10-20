@@ -13,6 +13,7 @@ use luya\cms\models\NavItemPage;
 use luya\cms\models\NavItemPageBlockItem;
 use luya\cms\models\NavItemRedirect;
 use luya\helpers\ArrayHelper;
+use luya\helpers\Json;
 use luya\web\filters\ResponseCache;
 use Yii;
 use yii\caching\DbDependency;
@@ -419,7 +420,7 @@ class NavItemController extends \luya\admin\base\RestController
         $type = $navItem->getType();
         $layout = Layout::findOne($type->layout_id);
         if (!empty($layout)) {
-            $layout->json_config = json_decode($layout->json_config, true, 512, JSON_THROW_ON_ERROR);
+            $layout->json_config = Json::decodeSilent($layout->json_config, true, []);
         }
 
         return [
