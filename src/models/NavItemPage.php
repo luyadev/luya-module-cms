@@ -5,6 +5,7 @@ namespace luya\cms\models;
 use luya\cms\admin\Module;
 use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
+use luya\helpers\Json;
 use luya\traits\CacheableTrait;
 use Yii;
 use yii\base\InvalidConfigException;
@@ -365,9 +366,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     private function jsonToArray($json)
     {
-        $response = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-
-        return (empty($response)) ? [] : $response;
+        return Json::decodeSilent($json, true, []);
     }
 
     /**
@@ -388,7 +387,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             '__placeholders' => [],
         ];
 
-        $config = json_decode($nav_item_page->layout->json_config, true, 512, JSON_THROW_ON_ERROR);
+        $config = $this->jsonToArray($nav_item_page->layout->json_config);
 
         if (isset($config['placeholders'])) {
             foreach ($config['placeholders'] as $rowKey => $row) {
@@ -460,8 +459,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             return false;
         }
 
-        $blockItem['json_config_values'] = json_decode($blockItem['json_config_values'], true, 512, JSON_THROW_ON_ERROR);
-        $blockItem['json_config_cfg_values'] = json_decode($blockItem['json_config_cfg_values'], true, 512, JSON_THROW_ON_ERROR);
+        $blockItem['json_config_values'] = Json::decodeSilent($blockItem['json_config_values'], true, []);
+        $blockItem['json_config_cfg_values'] = Json::decodeSilent($blockItem['json_config_cfg_values'], true, []);
 
         $blockValue = $blockItem['json_config_values'];
         $blockCfgValue = $blockItem['json_config_cfg_values'];
