@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 4.x
+## 4.5.0 (20. October 2022)
 
 + Fixed PHP 7.4 as minimum version in composer.json, this was previously done by the luyadev/luya-module-admin dependency. Therefore using rector to align functionality with PHP 7.4.
 + [#385](https://github.com/luyadev/luya-module-cms/pull/385) Fixed a bug where deep page copy does not copy the languages. 
