@@ -367,7 +367,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     private function jsonToArray($json)
     {
         $array = Json::decodeSilent($json, true, []);
-    
+
         return empty($array) ? [] : $array;
     }
 
