@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.5.1 (20. October 2022)
 
-+ []() Decode possible not or wrong configured json values silently instead of throw an exception
++ [387](https://github.com/luyadev/luya-module-cms/pull/387) Decode possible not or wrong configured json values silently instead of throw an exception
 
 ## 4.5.0 (20. October 2022)
 
