@@ -261,7 +261,7 @@ abstract class Controller extends \luya\web\Controller
         } else {
             foreach ($menu->current->keywords as $word) {
                 if (preg_match_all('/' . preg_quote($word, '/') . '/i', $content, $matches)) {
-                    $keywords[] = [$word, count($matches[0])];
+                    $keywords[] = [$word, is_countable($matches[0]) ? count($matches[0]) : 0];
                 } else {
                     $keywords[] = [$word, 0];
                     $seoAlert++;

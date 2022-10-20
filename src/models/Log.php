@@ -137,9 +137,7 @@ class Log extends NgRestModel
                     'id',
                     [
                         'attribute' => 'user_id',
-                        'value' => function ($model) {
-                            return $model->user->firstname . ' ' . $model->user->lastname;
-                        }
+                        'value' => fn ($model) => $model->user->firstname . ' ' . $model->user->lastname
                     ],
                     'is_insertion:boolean',
                     'is_update:boolean',
@@ -147,16 +145,12 @@ class Log extends NgRestModel
                     [
                         'attribute' => 'data_json',
                         'format' => 'raw',
-                        'value' => function ($model) {
-                            return VarDumper::dumpAsString(Json::decode($model->data_json), 10, true);
-                        }
+                        'value' => fn ($model) => VarDumper::dumpAsString(Json::decode($model->data_json), 10, true)
                     ],
                     [
                         'attribute' => 'message',
                         'format' => 'raw',
-                        'value' => function ($model) {
-                            return VarDumper::dumpAsString(Json::decode($model->message), 10, true);
-                        }
+                        'value' => fn ($model) => VarDumper::dumpAsString(Json::decode($model->message), 10, true)
                     ]
                 ]
             ]
@@ -178,7 +172,7 @@ class Log extends NgRestModel
     {
         $this->timestamp = time();
         $this->user_id = (Yii::$app instanceof \luya\web\Application) ? Yii::$app->adminuser->getId() : 0;
-        $this->data_json = json_encode($this->data_json);
+        $this->data_json = json_encode($this->data_json, JSON_THROW_ON_ERROR);
     }
 
     /**

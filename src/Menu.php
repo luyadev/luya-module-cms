@@ -141,7 +141,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      */
     public $request;
 
-    private $_cachePrefix = 'MenuContainerCache';
+    private string $_cachePrefix = 'MenuContainerCache';
 
     private $_currentUrlRule;
 
@@ -151,7 +151,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
 
     private $_currentAppendix;
 
-    private $_languageContainer = [];
+    private array $_languageContainer = [];
 
     private $_languages;
 
@@ -623,9 +623,9 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             ->all();
     }
 
-    private $_paths = [];
+    private array $_paths = [];
 
-    private $_nodes = [];
+    private array $_nodes = [];
 
     /**
      * Helper method to build an index with all the alias paths to build the correct links.

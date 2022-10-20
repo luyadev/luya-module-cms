@@ -78,7 +78,7 @@ class QueryIterator extends BaseObject implements Iterator
      */
     public function getLoadedModel($id)
     {
-        return isset($this->_loadModels[$id]) ? $this->_loadModels[$id] : null;
+        return $this->_loadModels[$id] ?? null;
     }
 
     /* Iterator */

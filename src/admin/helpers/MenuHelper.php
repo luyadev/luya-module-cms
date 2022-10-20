@@ -67,7 +67,7 @@ class MenuHelper
 
                     // if not yet permitted, check in inheritance table.
                     if (!$permitted) {
-                        $value = isset(self::$_inheritData[$item['id']]) ? self::$_inheritData[$item['id']] : false;
+                        $value = self::$_inheritData[$item['id']] ?? false;
                         if ($value === true) {
                             $permitted = true;
                         }
@@ -99,7 +99,7 @@ class MenuHelper
         return self::$_navItems;
     }
 
-    private static $_inheritData = [];
+    private static array $_inheritData = [];
 
     /**
      * Find nav_id inheritances
@@ -116,7 +116,7 @@ class MenuHelper
     private static function loadInheritanceData($parentNavId = 0, $fromInheritNode = false)
     {
         // get items from singleton object
-        $items = isset(self::getNavItems()[$parentNavId]) ? self::getNavItems()[$parentNavId] : [];
+        $items = self::getNavItems()[$parentNavId] ?? [];
         foreach ($items as $item) {
             $internalCheck = false;
             foreach (Yii::$app->adminuser->identity->groups as $group) {
@@ -205,10 +205,10 @@ class MenuHelper
     public static function navGroupPermission($navId, $groupId)
     {
         // If the group does not exists, it means no permission restrictions are made for this group.
-        $definitions = isset(self::getNavGroupPermissions()[$groupId]) ? self::getNavGroupPermissions()[$groupId] : [];
+        $definitions = self::getNavGroupPermissions()[$groupId] ?? [];
 
         // the group has no permission defined, this means he can access ALL cms pages
-        if (count($definitions) == 0) {
+        if ((is_countable($definitions) ? count($definitions) : 0) == 0) {
             return true;
         }
 

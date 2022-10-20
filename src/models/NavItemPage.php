@@ -89,9 +89,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     public function rules()
     {
         return [
-            [['layout_id', 'timestamp_create', 'create_user_id'], 'required', 'isEmpty' => function ($value) {
-                return empty($value);
-            }],
+            [['layout_id', 'timestamp_create', 'create_user_id'], 'required', 'isEmpty' => fn ($value) => empty($value)],
             [['layout_id', 'timestamp_create', 'timestamp_update', 'create_user_id', 'nav_item_id'], 'integer'],
             [['version_alias'], 'string']
         ];
@@ -133,9 +131,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         $fields = parent::fields();
         $fields['contentAsArray'] = 'contentAsArray';
-        $fields['version_alias'] = function ($model) {
-            return Module::t($model->version_alias);
-        };
+        $fields['version_alias'] = fn ($model) => Module::t($model->version_alias);
         return $fields;
     }
 
@@ -258,7 +254,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
 
                     // inject variations variables
-                    $possibleVariations = isset($variations[$className]) ? $variations[$className] : false;
+                    $possibleVariations = $variations[$className] ?? false;
                     $ensuredVariation = false;
 
                     if ($possibleVariations && isset($possibleVariations[$placeholder['variation']])) {
@@ -369,7 +365,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     private function jsonToArray($json)
     {
-        $response = json_decode($json, true);
+        $response = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
         return (empty($response)) ? [] : $response;
     }
@@ -392,7 +388,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             '__placeholders' => [],
         ];
 
-        $config = json_decode($nav_item_page->layout->json_config, true);
+        $config = json_decode($nav_item_page->layout->json_config, true, 512, JSON_THROW_ON_ERROR);
 
         if (isset($config['placeholders'])) {
             foreach ($config['placeholders'] as $rowKey => $row) {
@@ -464,8 +460,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             return false;
         }
 
-        $blockItem['json_config_values'] = json_decode($blockItem['json_config_values'], true);
-        $blockItem['json_config_cfg_values'] = json_decode($blockItem['json_config_cfg_values'], true);
+        $blockItem['json_config_values'] = json_decode($blockItem['json_config_values'], true, 512, JSON_THROW_ON_ERROR);
+        $blockItem['json_config_cfg_values'] = json_decode($blockItem['json_config_cfg_values'], true, 512, JSON_THROW_ON_ERROR);
 
         $blockValue = $blockItem['json_config_values'];
         $blockCfgValue = $blockItem['json_config_cfg_values'];
@@ -521,7 +517,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
-            'variations' => isset($variations[$className]) ? $variations[$className] : false,
+            'variations' => $variations[$className] ?? false,
             'variation' => empty($blockItem['variation']) ? "0" : $blockItem['variation'], // as by angular selection
             'is_dirty_dialog_enabled' => $blockObject->getIsDirtyDialogEnabled(),
         ];

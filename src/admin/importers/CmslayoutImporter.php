@@ -52,7 +52,7 @@ class CmslayoutImporter extends Importer
             $layoutItem->delete();
         }
 
-        return $this->addLog("cms layout importer finished with ".count($layoutFiles) . " layout files.");
+        return $this->addLog("cms layout importer finished with ".(is_countable($layoutFiles) ? count($layoutFiles) : 0) . " layout files.");
     }
 
     /**
@@ -65,7 +65,7 @@ class CmslayoutImporter extends Importer
     protected function handleLayoutFile(&$layoutFiles, $path, $themeName = null)
     {
         $aliased = Yii::getAlias($path, false);
-        $filePath = $aliased ? $aliased : $path;
+        $filePath = $aliased ?: $path;
 
         if (is_dir($filePath)) {
             foreach ($this->getFilesFromFolder($filePath) as $file) {
@@ -94,9 +94,7 @@ class CmslayoutImporter extends Importer
             'recursive' => false,
             'caseSensitive' => false,
             'only' => ['*.php'],
-            'filter' => function ($path) {
-                return in_array(substr(basename($path), 0, 1), $this->ignorePrefix) ? false : null;
-            }]);
+            'filter' => fn ($path) => in_array(substr(basename($path), 0, 1), $this->ignorePrefix) ? false : null]);
     }
 
     /**
@@ -242,7 +240,7 @@ class CmslayoutImporter extends Importer
         $a1 = $array1['placeholders'];
         $a2 = $array2['placeholders'];
 
-        if (count($a1) !== count($a2)) {
+        if ((is_countable($a1) ? count($a1) : 0) !== (is_countable($a2) ? count($a2) : 0)) {
             return false;
         }
 

@@ -146,7 +146,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        return isset($this->_injectorObjects[$offset]) ? $this->_injectorObjects[$offset] : null;
+        return $this->_injectorObjects[$offset] ?? null;
     }
 
     /**
@@ -290,7 +290,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         return ($this->getEnvOption('context', false) === 'frontend') ? true : false;
     }
 
-    private $_envOptions = [];
+    private array $_envOptions = [];
 
     /**
      * Sets a key => value pair in env options.
@@ -327,7 +327,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         return (array_key_exists($key, $this->_envOptions)) ? $this->_envOptions[$key] : $default;
     }
 
-    private $_placeholderValues = [];
+    private array $_placeholderValues = [];
 
     /**
      * @inheritdoc
@@ -352,10 +352,10 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public function getPlaceholderValue($placholder)
     {
-        return (isset($this->getPlaceholderValues()[$placholder])) ? $this->getPlaceholderValues()[$placholder] : false;
+        return $this->getPlaceholderValues()[$placholder] ?? false;
     }
 
-    private $_varValues = [];
+    private array $_varValues = [];
 
     /**
      * @inheritdoc
@@ -390,7 +390,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         return (isset($this->_varValues[$key]) && $this->_varValues[$key] != '') ? $this->_varValues[$key] : $default;
     }
 
-    private $_cfgValues = [];
+    private array $_cfgValues = [];
 
     /**
      * @inheritdoc
@@ -447,7 +447,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         $this->_extraVars[$key] = $value;
     }
 
-    private $_extraVars = [];
+    private array $_extraVars = [];
 
     /**
      * @inheritdoc
@@ -458,7 +458,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         return $this->_extraVars;
     }
 
-    private $_assignExtraVars = false;
+    private bool $_assignExtraVars = false;
 
     /**
      *
@@ -473,7 +473,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
             $this->_assignExtraVars = true;
         }
 
-        return isset($this->_extraVars[$key]) ? $this->_extraVars[$key] : $default;
+        return $this->_extraVars[$key] ?? $default;
     }
 
     /**
@@ -486,7 +486,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         return [];
     }
 
-    private $_vars = [];
+    private array $_vars = [];
 
     /**
      * @inheritdoc
@@ -561,7 +561,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         return $rows;
     }
 
-    private $_cfgs = [];
+    private array $_cfgs = [];
 
     /**
      * @inheritdoc
@@ -680,7 +680,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
         $imageName = $this->getViewFileName('jpg');
 
         $reflector = new \ReflectionClass($this);
-        $dirPath = dirname(dirname($reflector->getFileName()));
+        $dirPath = dirname($reflector->getFileName(), 2);
         $imagePath = $dirPath . '/images/blocks/' . $imageName;
         // file get content resolved Yii aliases.
         $data = FileHelper::getFileContent($imagePath);

@@ -5,7 +5,9 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.x
 
++ Fixed PHP 7.4 as minimum version in composer.json, this was previously done by the luyadev/luya-module-admin dependency. Therefore using rector to align functionality with PHP 7.4.
 + [#385](https://github.com/luyadev/luya-module-cms/pull/385) Fixed a bug where deep page copy does not copy the languages. 
++ [#386](https://github.com/luyadev/luya-module-cms/pull/386) Added rector testing.
 
 ## 4.4.0 (5. October 2022)
 

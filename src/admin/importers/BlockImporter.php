@@ -65,7 +65,7 @@ class BlockImporter extends Importer
         return $this->addLog("Block importer finished with ".count($exists) . " blocks.");
     }
 
-    private $blockGroupIds = [];
+    private array $blockGroupIds = [];
 
     /**
      * Replace {{DS}} separator.

@@ -20,6 +20,6 @@ class m190219_142706_og_image extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn('cms_nav_item', 'image_id', $this->integer());
+        $this->dropColumn('cms_nav_item', 'image_id');
     }
 }

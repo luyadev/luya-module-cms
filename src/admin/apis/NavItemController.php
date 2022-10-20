@@ -195,6 +195,7 @@ class NavItemController extends \luya\admin\base\RestController
      */
     public function actionCreatePageVersion()
     {
+        $fromPageModel = null;
         $name = Yii::$app->request->post('name');
         $fromPageId = (int) Yii::$app->request->post('fromPageId');
         $navItemId = (int) Yii::$app->request->post('navItemId');
@@ -418,7 +419,7 @@ class NavItemController extends \luya\admin\base\RestController
         $type = $navItem->getType();
         $layout = Layout::findOne($type->layout_id);
         if (!empty($layout)) {
-            $layout->json_config = json_decode($layout->json_config, true);
+            $layout->json_config = json_decode($layout->json_config, true, 512, JSON_THROW_ON_ERROR);
         }
 
         return [

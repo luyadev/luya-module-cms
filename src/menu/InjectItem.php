@@ -221,7 +221,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
      */
     public function getLink()
     {
-        return ($this->_link === null) ? Yii::$app->menu->buildItemLink($this->alias, $this->getLang()) : $this->_link;
+        return $this->_link ?? Yii::$app->menu->buildItemLink($this->alias, $this->getLang());
     }
 
     private $_title;
@@ -412,7 +412,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     public function getId()
     {
         if ($this->_id === null) {
-            $this->_id = rand(10000, 1000000);
+            $this->_id = random_int(10000, 1_000_000);
         }
 
         return $this->_id;
@@ -438,7 +438,7 @@ class InjectItem extends BaseObject implements InjectItemInterface
     public function getNavId()
     {
         if ($this->_navId === null) {
-            $this->_navId = rand(10000, 1000000);
+            $this->_navId = random_int(10000, 1_000_000);
         }
         return $this->_navId;
     }

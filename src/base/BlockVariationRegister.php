@@ -41,7 +41,7 @@ class BlockVariationRegister
      */
     protected $block;
 
-    private $_variations = [];
+    private array $_variations = [];
 
     private $_tempIdentifier;
 

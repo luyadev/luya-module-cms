@@ -124,7 +124,7 @@ class LangSwitcher extends \luya\base\Widget
      * @var array An array with links which the link tag is already registered.
      * @since 1.0.9
      */
-    private static $registerLinkTags = [];
+    private static array $registerLinkTags = [];
 
     /**
      * Generate the item element.
@@ -284,7 +284,7 @@ class LangSwitcher extends \luya\base\Widget
         return $defaultValue;
     }
 
-    private static $_i18nUrlRuleParams = [];
+    private static array $_i18nUrlRuleParams = [];
 
     /**
      * Set a url rule paramter which can be taken when resolve pages for other languages.
@@ -346,7 +346,7 @@ class LangSwitcher extends \luya\base\Widget
         $array = I18n::decode($array);
 
         foreach ($array as $lang => $value) {
-            self::setUrlRuleParam($lang, $parmName ? $parmName : $attribute, $value);
+            self::setUrlRuleParam($lang, $parmName ?: $attribute, $value);
         }
     }
 }

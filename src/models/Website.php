@@ -117,34 +117,28 @@ class Website extends NgRestModel
             'group_ids' => [
                 'class' => CheckboxList::class,
                 'alias' => Module::t('model_website_group_ids_label'),
-                'data' => function () {
-                    return array_merge(
-                        [0 => Module::t('model_website_all')],
-                        Group::find()
-                            ->indexBy('id')
-                            ->select('name')
-                            ->column()
-                    );
-                },
+                'data' => fn () => array_merge(
+                    [0 => Module::t('model_website_all')],
+                    Group::find()
+                        ->indexBy('id')
+                        ->select('name')
+                        ->column()
+                ),
             ],
             'user_ids' => [
                 'class' => CheckboxList::class,
                 'alias' => Module::t('model_website_user_ids_label'),
-                'data' => function () {
-                    return array_merge(
-                        [0 => Module::t('model_website_all')],
-                        ArrayHelper::map(
-                            User::find()
-                                ->indexBy('id')
-                                ->select(['id', 'firstname',  'lastname'])
-                                ->all(),
-                            'id',
-                            function ($user) {
-                                return $user->firstname . ' ' . $user->lastname;
-                            }
-                        )
-                    );
-                },
+                'data' => fn () => array_merge(
+                    [0 => Module::t('model_website_all')],
+                    ArrayHelper::map(
+                        User::find()
+                            ->indexBy('id')
+                            ->select(['id', 'firstname',  'lastname'])
+                            ->all(),
+                        'id',
+                        fn ($user) => $user->firstname . ' ' . $user->lastname
+                    )
+                ),
             ],
         ];
     }
