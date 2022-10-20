@@ -66,7 +66,7 @@ abstract class NavItemType extends ActiveRecord implements NavItemTypeInterface
         return $this->_controller;
     }
 
-    private $_options = [];
+    private array $_options = [];
 
     /**
      * Setter method for options.
@@ -95,6 +95,6 @@ abstract class NavItemType extends ActiveRecord implements NavItemTypeInterface
      */
     public function getOption($key)
     {
-        return isset($this->_options[$key]) ? $this->_options[$key] : false;
+        return $this->_options[$key] ?? false;
     }
 }

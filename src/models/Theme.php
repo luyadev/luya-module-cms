@@ -161,7 +161,7 @@ class Theme extends NgRestModel
             return $this->_jsonConfig;
         }
 
-        return isset($this->_jsonConfig[$key]) ? $this->_jsonConfig[$key] : null;
+        return $this->_jsonConfig[$key] ?? null;
     }
 
     /**

@@ -116,11 +116,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     public function rules()
     {
         return [
-            ['nav_item_type_id', 'required', 'isEmpty' => function ($value) {
-                return empty($value);
-            }, 'when' => function () {
-                return !$this->isNewRecord;
-            }],
+            ['nav_item_type_id', 'required', 'isEmpty' => fn($value) => empty($value), 'when' => fn() => !$this->isNewRecord],
             [['description', 'keywords'], 'string'],
             [['title'], 'string', 'max' => 180],
             [['alias'], 'string', 'max' => 180],
@@ -265,7 +261,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
          * Group by website_id
          * @since 4.0.0
          */
-        $exists = $this->find()
+        $exists = static::find()
             ->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')
             ->leftJoin('cms_nav_container', 'cms_nav.nav_container_id=cms_nav_container.id')
             ->where(['cms_nav_item.alias' => $alias, 'cms_nav_item.lang_id' => $langId, 'cms_nav.parent_nav_id' => $this->parent_nav_id])

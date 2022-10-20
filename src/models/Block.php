@@ -25,7 +25,7 @@ use Yii;
  */
 class Block extends NgRestModel
 {
-    private $cachedDeletedId = 0;
+    private int $cachedDeletedId = 0;
 
     /**
      * @inheritdoc
@@ -52,9 +52,7 @@ class Block extends NgRestModel
             'group_id' => [
                 'class' => SelectModel::class,
                 'modelClass' => BlockGroup::class,
-                'labelField' => function ($model) {
-                    return $model->getGroupLabel();
-                }
+                'labelField' => fn($model) => $model->getGroupLabel()
             ],
             'class' => 'text',
             'is_disabled' => 'toggleStatus',

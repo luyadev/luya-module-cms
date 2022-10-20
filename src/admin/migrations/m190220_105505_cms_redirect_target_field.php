@@ -20,6 +20,6 @@ class m190220_105505_cms_redirect_target_field extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn('cms_nav_item_redirect', 'target', $this->string());
+        $this->dropColumn('cms_nav_item_redirect', 'target');
     }
 }

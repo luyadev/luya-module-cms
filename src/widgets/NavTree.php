@@ -62,15 +62,12 @@ class NavTree extends Widget
 {
     use CacheableTrait;
 
-    /**
-     * @var null|Item
-     */
-    private $_startItem;
+    private ?\luya\cms\menu\Item $_startItem = null;
 
     /**
      * @var null|QueryIteratorFilter The menu Query. If not defined the following query will be used `Yii::$app->menu->find()->where(['container' => 'default', 'parent_nav_id' => 0])->all()`
      */
-    private $_findQuery;
+    private ?\luya\cms\menu\QueryIteratorFilter $_findQuery = null;
 
     /**
      * @var string If the nav tree widget is used multiple times on the same side (for example for the main navigation and the mobile menu)
@@ -224,7 +221,7 @@ class NavTree extends Widget
     private function generateCacheKey()
     {
         $key = [
-            __CLASS__,
+            self::class,
             Yii::$app->composition->langShortCode,
             $this->variation,
             $this->linkActiveClass,

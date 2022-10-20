@@ -100,6 +100,7 @@ class NavController extends \luya\admin\base\RestController
      */
     public function actionDeepPageCopyAsTemplate()
     {
+        $newItem = null;
         $navId = (int) Yii::$app->request->getBodyParam('navId');
 
         if (empty($navId)) {
@@ -213,7 +214,7 @@ class NavController extends \luya\admin\base\RestController
         }
 
         foreach (Property::find()->where(['nav_id' => $navId])->andWhere(['not in', 'admin_prop_id', $doNotDeleteList])->all() as $prop) {
-            $prop->delete(false);
+            $prop->delete();
         }
     }
 
@@ -478,7 +479,7 @@ class NavController extends \luya\admin\base\RestController
 
         $redirect = $this->postArg('redirect');
 
-        $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), isset($redirect['target']) ? $redirect['target'] : null);
+        $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), $redirect['target'] ?? null);
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }
@@ -491,7 +492,7 @@ class NavController extends \luya\admin\base\RestController
         $this->menuFlush();
         $model = new Nav();
         $redirect = $this->postArg('redirect');
-        $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), isset($redirect['target']) ? $redirect['target'] : null);
+        $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), $redirect['target'] ?? null);
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }

@@ -33,7 +33,7 @@ use yii\helpers\VarDumper;
         </div>
         <div class="luya-cms-toolbar__button">
             <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-composition-container')">
-                <span class="luya-cms-toolbar__badge"><?= count($composition->getKeys()); ?></span> <span><?= Module::t('tb_composition'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
+                <span class="luya-cms-toolbar__badge"><?= is_countable($composition->getKeys()) ? count($composition->getKeys()) : 0; ?></span> <span><?= Module::t('tb_composition'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
         <?php if (isset($theme)) : ?>
@@ -43,11 +43,11 @@ use yii\helpers\VarDumper;
 			    </a>
 		    </div>
         <?php endif ?>
-	    
+
         <?php if (!empty($properties)): ?>
             <div class="luya-cms-toolbar__button">
                 <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-properties-container')">
-                    <span class="luya-cms-toolbar__badge"><?= count($properties); ?></span> <span><?= Module::t('tb_properties'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
+                    <span class="luya-cms-toolbar__badge"><?= is_countable($properties) ? count($properties) : 0; ?></span> <span><?= Module::t('tb_properties'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
                 </a>
             </div>
         <?php endif; ?>

@@ -89,7 +89,7 @@ class MenuController extends \luya\admin\base\RestController
 
             $data['websites'][$container->website_id]['containers'][] = [
                 'containerInfo' => $container,
-                'items' => isset(self::$_permissionItemData[$container->id]) ? self::$_permissionItemData[$container->id] : [],
+                'items' => self::$_permissionItemData[$container->id] ?? [],
             ];
         }
         // collect group informations
@@ -131,7 +131,7 @@ class MenuController extends \luya\admin\base\RestController
         return $this->_groups;
     }
 
-    private static $_permissionItemData = [];
+    private static array $_permissionItemData = [];
 
     /**
      * Build a trree with items for a given NavContainer.

@@ -38,7 +38,7 @@ use yii\helpers\Json;
 class NavItemPageBlockItem extends ActiveRecord
 {
     use CacheableTrait;
-    private $_olds = [];
+    private array $_olds = [];
 
     /**
      * @inheritdoc
@@ -139,9 +139,7 @@ class NavItemPageBlockItem extends ActiveRecord
     public function fields()
     {
         $fields = parent::fields();
-        $fields['objectdetail'] = function ($model) {
-            return NavItemPage::getBlockItem($model, $model->navItemPage);
-        };
+        $fields['objectdetail'] = fn($model) => NavItemPage::getBlockItem($model, $model->navItemPage);
         return $fields;
     }
 
@@ -339,7 +337,7 @@ class NavItemPageBlockItem extends ActiveRecord
 
     public static function originalFind()
     {
-        return Yii::createObject(ActiveQuery::class, [get_called_class()]);
+        return Yii::createObject(ActiveQuery::class, [static::class]);
     }
 
     /**

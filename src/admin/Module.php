@@ -136,7 +136,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public $cmsLayouts = [];
 
-    private $_blocks = [];
+    private array $_blocks = [];
 
     /**
      * Setter method for additional cms blocks.
@@ -212,7 +212,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public function getPreviewUrl()
     {
-        return $this->_previewUrl === null ? Url::home(true) . 'cms-page-preview' : $this->_previewUrl;
+        return $this->_previewUrl ?? Url::home(true) . 'cms-page-preview';
     }
 
     private $_blockVariations;
@@ -372,7 +372,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
         return parent::baseT('cmsadmin', $message, $params);
     }
 
-    private static $_authorUserId = 0;
+    private static int $_authorUserId = 0;
 
     /**
      * Setter method for author user ID in order ensure phpunit tests.

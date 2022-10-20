@@ -147,7 +147,7 @@ class UpdaterController extends Command
         return $this->outputSuccess('We have successfully updated your version index.');
     }
 
-    private $_classMapping = [
+    private array $_classMapping = [
         '\cmsadmin' => '\luya\cms\frontend',
         '\bootstrap4' => '\luya\bootstrap4',
         '\gallery' => '\luya\gallery\admin',

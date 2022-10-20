@@ -104,7 +104,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         return $this->where([self::FIELD_CONTAINER => $alias]);
     }
 
-    private $_where = [];
+    private array $_where = [];
 
     /**
      * Query where similar behavior of filtering items.
@@ -233,7 +233,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         return $this;
     }
 
-    private $_with = ['hidden' => false];
+    private array $_with = ['hidden' => false];
 
     /**
      * With/Without expression to hidde or display data from the Menu Query.
@@ -254,7 +254,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
         return $this;
     }
 
-    private $_preloadModels = false;
+    private bool $_preloadModels = false;
 
     /**
      * Preload models for the given Menu Query.

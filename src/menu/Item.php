@@ -86,7 +86,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     /**
      * @var array Privat property containing with informations for the Query Object.
      */
-    private $_with = [];
+    private array $_with = [];
 
     /**
      * @inheritdoc
@@ -304,7 +304,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
 
     private $_keywords;
 
-    private $_delimiters = [',', ';', '|'];
+    private array $_delimiters = [',', ';', '|'];
 
     /**
      * @return array An array with all keywords for this page
@@ -631,6 +631,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      */
     public function getTeardown()
     {
+        $data = [];
         $parent = $this->with($this->_with)->getParent();
         $current = $this;
         $data[$current->id] = $current;
