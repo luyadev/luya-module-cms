@@ -59,18 +59,19 @@ jobs:
   php-cs-fixer:
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout
-          uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-        - name: Install
-          run: composer install
+      - name: Install
+        run: composer install
 
-        - name: Run php-cs-fixer
-          run: composer phpcsfixer
+      - name: Run php-cs-fixer
+        run: composer phpcsfixer
 
-        - uses: stefanzweifel/git-auto-commit-action@v4
-          with:
-              commit_message: Apply php-cs-fixer changes
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply php-cs-fixer changes
+        continue-on-error: true # if is fork
 
   ## PHP UNIT
   phpunit:
