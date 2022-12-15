@@ -324,6 +324,6 @@ EOT;
 ?>
 
 EOT;
-        $this->assertSame($view, $ctrl->generateViewFile('MySuperBlock'));
+        $this->assertSame(str_replace(["\r\n", "\r"], "\n", $view), str_replace(["\r\n", "\r"], "\n", $ctrl->generateViewFile('MySuperBlock')));
     }
 }

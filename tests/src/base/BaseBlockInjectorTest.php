@@ -66,3 +66,12 @@ class LinkInjectorTest extends CmsFrontendTestCase
         $this->assertSame('zaa-text', $cfgs[0]['type']);
     }
 }
+
+
+class BaseBlockInjectorTest extends CmsFrontendTestCase
+{
+    public function testDummy()
+    {
+
+    }
+}

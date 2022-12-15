@@ -12,7 +12,7 @@ class CmsConsoleTestCase extends ConsoleApplicationTestCase
             'id' => 'basetestcase',
             'basePath' => dirname(__DIR__),
             'aliases' => [
-                '@cmstests' => dirname(__DIR__),
+                '@cmstests' => '.',
             ],
             'components' => [
                 'db' => [
