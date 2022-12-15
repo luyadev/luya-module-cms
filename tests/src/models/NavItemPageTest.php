@@ -103,7 +103,7 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertStringContainsString('luya-module-cms/views/cmslayouts/relative.php', $e->getMessage());
+            $this->assertStringContainsString('luya-module-cms/views/cmslayouts'.DIRECTORY_SEPARATOR.'relative.php', $e->getMessage());
         }
     }
 }
