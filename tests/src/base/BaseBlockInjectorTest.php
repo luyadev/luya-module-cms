@@ -72,6 +72,5 @@ class BaseBlockInjectorTest extends CmsFrontendTestCase
 {
     public function testDummy()
     {
-
     }
 }
