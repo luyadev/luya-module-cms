@@ -11,7 +11,7 @@ use Yii;
  *
  * This tag allows you to access the defined aliases from the application.
  *
- * Predefined: http://www.yiiframework.com/doc-2.0/guide-concept-aliases.html#predefined-aliases
+ * Predefined: https://www.yiiframework.com/doc-2.0/guide-concept-aliases.html#predefined-aliases
  *
  * @author Basil Suter <basil@nadar.io
  * @since 1.0.0
