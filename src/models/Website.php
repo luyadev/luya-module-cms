@@ -117,7 +117,7 @@ class Website extends NgRestModel
             'group_ids' => [
                 'class' => CheckboxList::class,
                 'alias' => Module::t('model_website_group_ids_label'),
-                'data' => fn () => array_merge(
+                'data' => fn () => ArrayHelper::merge(
                     [0 => Module::t('model_website_all')],
                     Group::find()
                         ->indexBy('id')
@@ -128,7 +128,7 @@ class Website extends NgRestModel
             'user_ids' => [
                 'class' => CheckboxList::class,
                 'alias' => Module::t('model_website_user_ids_label'),
-                'data' => fn () => array_merge(
+                'data' => fn () => ArrayHelper::merge(
                     [0 => Module::t('model_website_all')],
                     ArrayHelper::map(
                         User::find()
