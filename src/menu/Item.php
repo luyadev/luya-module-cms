@@ -47,7 +47,7 @@ use yii\base\BaseObject;
  * @property QueryIteratorFilter $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
  * @property QueryIteratorFilter $descendants Get all childrens with childrens children.
  * @property boolean $isHome Returns true if the item is the home item, otherwise false.
- * @property string $absoluteLink The link path with prepand website host `http://luya.io/home/about-us`.
+ * @property string $absoluteLink The link path with prepand website host `https://luya.io/home/about-us`.
  * @property integer $sortIndex Sort index position for the current siblings list.
  * @property boolean $hasChildren Check whether an item has childrens or not returning a boolean value.
  * @property boolean $hasParent Check whether the parent has items or not.
@@ -459,10 +459,10 @@ class Item extends BaseObject implements LinkInterface, Arrayable
     /**
      * Returns the link with an absolute scheme.
      *
-     * The link with an absolute scheme path example `http://luya.io/link` where link is the output
+     * The link with an absolute scheme path example `https://luya.io/link` where link is the output
      * from the {{luya\cms\menu\item::getLink}} method.
      *
-     * @return string The link path with prepand website host `http://luya.io/home/about-us`.
+     * @return string The link path with prepand website host `https://luya.io/home/about-us`.
      */
     public function getAbsoluteLink()
     {

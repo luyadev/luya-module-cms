@@ -896,7 +896,7 @@ class Nav extends ActiveRecord
      * @param string $title
      * @param string $alias
      * @param integer $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
-     * @param string $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+     * @param string $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = https://luya.io)
      * @param string $description
      * @param string $redirectTypeTarget redirect target (_blank, self) (since 2.0)
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
@@ -1004,7 +1004,7 @@ class Nav extends ActiveRecord
      * @param string $title
      * @param string $alias
      * @param integer $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
-     * @param string $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+     * @param string $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = https://luya.io)
      * @param string $description
      * @param string $redirectTypeTarget redirect target (_blank, self) (since 2.0)
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
