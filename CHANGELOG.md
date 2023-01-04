@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 4.5.2
 
++ [396](https://github.com/luyadev/luya-module-cms/pull/396) Fixed bug where it was not possible to select a website when creating or updating a nav container.
 + [392](https://github.com/luyadev/luya-module-cms/pull/392) Indexes break if there are disabled users
 
 ## 4.5.1 (20. October 2022)
