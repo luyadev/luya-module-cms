@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 4.5.2
+
++ [392](https://github.com/luyadev/luya-module-cms/pull/392) Indexes break if there are disabled users
+
 ## 4.5.1 (20. October 2022)
 
 + [387](https://github.com/luyadev/luya-module-cms/pull/387) Decode possible not or wrong configured json values silently instead of throw an exception
