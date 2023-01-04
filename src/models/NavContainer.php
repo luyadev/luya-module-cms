@@ -9,12 +9,14 @@ use luya\cms\behaviours\WebsiteScopeBehavior;
 use yii\db\ActiveQuery;
 
 /**
- * Represents the Navigation-Containers.
+ * Navigation-Containers Model.
  *
  * @property string $name
  * @property string $alias
  * @property integer $website_id
  * @property bool $is_deleted
+ * @property Website $website
+ * @property Nav[] $navs
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

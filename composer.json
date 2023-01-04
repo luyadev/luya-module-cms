@@ -29,7 +29,7 @@
         "php": ">=7.4"
     },
     "require-dev": {
-        "luyadev/luya-module-admin": "4.5.0",
+        "luyadev/luya-module-admin": "^4.5.0",
         "luyadev/luya-testsuite": "^3.1.2",
         "twbs/bootstrap": "^4.3.0",
         "unglue/client": "^1.3",
