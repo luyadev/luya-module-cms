@@ -1,0 +1,21 @@
+version: '3'
+services:
+  luyacmsdb:
+    image: mysql:5.7
+    container_name: luyacmsdb
+    volumes:
+      - ./tests/data/sql/latest:/docker-entrypoint-initdb.d
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_general_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: luyacms
+      MYSQL_DATABASE: luyacms
+      MYSQL_USER: luyacms
+      MYSQL_PASSWORD: luyacms
+  luyacmsphpunit:
+    build: 'tests/'
+    entrypoint: vendor/bin/phpunit
+    volumes:
+      - .:/app
+    working_dir: /app
