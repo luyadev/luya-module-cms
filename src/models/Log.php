@@ -314,7 +314,7 @@ class Log extends NgRestModel
             'message' => Json::encode($message),
             'data_json' => $additionalData,
         ]);
-        return $model->insert(false);
+        return $model->insert();
     }
 
     /**
