@@ -109,7 +109,7 @@ class LinkConverter extends BaseObject
             return false;
         }
 
-        return (new self(['type' => $type, 'value' => $value, 'target' => $target]));
+        return (new self(['type' => $type, 'value' => (string) $value, 'target' => $target]));
     }
 
     /**
@@ -158,7 +158,7 @@ class LinkConverter extends BaseObject
      */
     public function getWebsiteLink($href, $target)
     {
-        return new WebsiteLink(['href' => $href, 'target' => $target]);
+        return new WebsiteLink(['href' => (string) $href, 'target' => $target]);
     }
 
     /**
