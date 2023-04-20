@@ -47,12 +47,12 @@ class PhpBlockTest extends CmsFrontendTestCase
         $block->cacheEnabled = true;
 
         $block->getView()->registerAssetBundle(AssetBundle::class);
-//        $block->getView()->registerAssetBundle(JqueryAsset::class);
+        //        $block->getView()->registerAssetBundle(JqueryAsset::class);
 
         $block->onRegister();
 
         $this->assertSame([AssetBundle::class], \Yii::$app->cache->get(['blockassetbundles', $block->getEnvOption('id')]));
-//        $this->assertSame([AssetBundle::class, JqueryAsset::class], \Yii::$app->cache->get(['blockassetbundles', $block->getEnvOption('id')]));
+        //        $this->assertSame([AssetBundle::class, JqueryAsset::class], \Yii::$app->cache->get(['blockassetbundles', $block->getEnvOption('id')]));
     }
 
     public function testRelativeViewPath()
