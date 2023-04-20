@@ -3,11 +3,11 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 4.5.3
+## 4.5.3 (20. April 2023)
 
-+ [#399](https://github.com/luyadev/luya-module-cms/pull/399) php 8.1 compatibility issues
++ [#399](https://github.com/luyadev/luya-module-cms/pull/399) PHP 8.1 compatibility issues.
 
-## 4.5.2 (18. January 2022)
+## 4.5.2 (18. January 2023)
 
 + [#396](https://github.com/luyadev/luya-module-cms/pull/396) Fixed bug where it was not possible to select a website when creating or updating a nav container.
 + [#392](https://github.com/luyadev/luya-module-cms/pull/392) Indexes break if there are disabled users
