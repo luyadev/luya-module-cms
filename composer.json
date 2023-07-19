@@ -26,7 +26,7 @@
     "issues": "https://github.com/luyadev/luya-module-cms/issues"
   },
   "require": {
-    "php": ">=7.4"
+    "php": ">=8.0"
   },
   "require-dev": {
     "luyadev/luya-module-admin": "^4.5.0",
@@ -52,7 +52,7 @@
       "enabled": false
     },
     "platform": {
-      "php": "7.4"
+      "php": "8.0"
     },
     "allow-plugins": {
       "yiisoft/yii2-composer": true,

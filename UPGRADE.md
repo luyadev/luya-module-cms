@@ -2,6 +2,10 @@
 
 This document will help you upgrading from a LUYA admin module version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+## 4.x to 5.0
+
++ Drop support for 7.x, minimum php version is now 8.0
+
 ## 3.x to 4.0
 
 + [#320](https://github.com/luyadev/luya-module-cms/pull/320) **ENSURE YOU DON'T HAVE HIDDEN PAGES WHICH ARE HIDDEN BY TIME "SHOW UNTIL ..." SETTINGS** - Visibility for menu items has been replaced by the scheduler. this means when you have some active visibility timings, they needs to be replaced by yourself. f.e you have stored a from and to date somewhere and the menu item is now invisible, you can need to manualy change the visibility of that page to "hidden" since those where conditions do not exists in the query of menu items anymore.
