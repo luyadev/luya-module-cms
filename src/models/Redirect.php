@@ -169,7 +169,7 @@ class Redirect extends NgRestModel
      * @param string $catchPath
      * @since 4.0.0
      */
-    private function inputToRegex($requestPath, $catchPath): bool|string
+    private function inputToRegex($requestPath, $catchPath): bool|string|array
     {
         $pattern = str_replace('\*', '(.*)', preg_quote($catchPath, '/'));
 
