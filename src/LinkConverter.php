@@ -97,9 +97,8 @@ class LinkConverter extends BaseObject
      * value and target and do not throw an exception.
      *
      * @param array $configuration
-     * @return \luya\cms\LinkConverter|false
      */
-    public static function fromArray(array $configuration)
+    public static function fromArray(array $configuration): \luya\cms\LinkConverter|false
     {
         $type = ArrayHelper::getValue($configuration, 'type');
         $value = ArrayHelper::getValue($configuration, 'value');
@@ -114,39 +113,17 @@ class LinkConverter extends BaseObject
 
     /**
      * Get the {{luya\web\LinkInterface}} from the given configuration trough type.
-     *
-     * @return \luya\web\LinkInterface|boolean
      */
-    public function getLink()
+    public function getLink(): \luya\web\LinkInterface|bool
     {
-        switch ($this->type) {
-            // internal page
-            case self::TYPE_INTERNAL_PAGE:
-                return $this->getPageLink($this->value, $this->target);
-                break;
-
-                // external url
-            case self::TYPE_EXTERNAL_URL:
-                return $this->getWebsiteLink($this->value, $this->target);
-                break;
-
-                // file from storage
-            case self::TYPE_LINK_TO_FILE:
-                return $this->getFileLink($this->value, $this->target);
-                break;
-
-                // mailto link
-            case self::TYPE_LINK_TO_EMAIL:
-                return $this->getEmailLink($this->value);
-                break;
-
-                // tel link
-            case self::TYPE_LINK_TO_TELEPHONE:
-                return $this->getTelephoneLink($this->value);
-                break;
-        }
-
-        return false;
+        return match ($this->type) {
+            self::TYPE_INTERNAL_PAGE => $this->getPageLink($this->value, $this->target),
+            self::TYPE_EXTERNAL_URL => $this->getWebsiteLink($this->value, $this->target),
+            self::TYPE_LINK_TO_FILE => $this->getFileLink($this->value, $this->target),
+            self::TYPE_LINK_TO_EMAIL => $this->getEmailLink($this->value),
+            self::TYPE_LINK_TO_TELEPHONE => $this->getTelephoneLink($this->value),
+            default => false,
+        };
     }
 
     /**
@@ -166,9 +143,8 @@ class LinkConverter extends BaseObject
      *
      * @param integer $fileId
      * @param string $target
-     * @return \luya\admin\file\Item|boolean
      */
-    public function getFileLink($fileId, $target)
+    public function getFileLink($fileId, $target): \luya\admin\file\Item|bool
     {
         $file = Yii::$app->storage->getFile($fileId);
         if ($file) {
@@ -183,9 +159,8 @@ class LinkConverter extends BaseObject
      * @param integer $navId
      * @param string $target
      * @param string $lang
-     * @return \luya\cms\menu\Item|boolean
      */
-    public function getPageLink($navId, $target, $lang = null)
+    public function getPageLink($navId, $target, $lang = null): \luya\cms\menu\Item|bool
     {
         // in a headless context, the menu component might not exists, therefore just return all
         // available informations.

@@ -157,7 +157,6 @@ class MenuHelper
      * Check the inhertiance for a given navigation and group.
      *
      * @param integer $navId
-     * @param Group $group
      * @return boolean
      */
     public static function navGroupInheritanceNode($navId, Group $group)

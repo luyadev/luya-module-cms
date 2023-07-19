@@ -105,7 +105,7 @@ class Nav extends ActiveRecord
      * @return NgRestActiveQuery|ActiveQuery
      * @since 3.1.0
      */
-    public function getParents()
+    public function getParents(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasOne(static::class, ['parent_nav_id' => 'id']);
     }
@@ -118,7 +118,7 @@ class Nav extends ActiveRecord
      *
      * @return NgRestActiveQuery|ActiveQuery The corresponding nav item object for the active language.
      */
-    public function getActiveLanguageItem()
+    public function getActiveLanguageItem(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasOne(NavItem::class, ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->activeId]);
     }
@@ -131,7 +131,7 @@ class Nav extends ActiveRecord
      * @return NgRestActiveQuery|ActiveQuery The corresponding nav item object for the active language.
      * @since 3.1.2
      */
-    public function getDefaultLanguageItem()
+    public function getDefaultLanguageItem(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasOne(NavItem::class, ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->defaultLanguage['id']]);
     }
@@ -141,7 +141,7 @@ class Nav extends ActiveRecord
      *
      * @return NgRestActiveQuery|ActiveQuery
      */
-    public function getNavItems()
+    public function getNavItems(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasMany(NavItem::class, ['nav_id' => 'id']);
     }
@@ -150,7 +150,7 @@ class Nav extends ActiveRecord
      *
      * @return NgRestActiveQuery|ActiveQuery
      */
-    public function getNavContainer()
+    public function getNavContainer(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasOne(NavContainer::class, ['id' => 'nav_container_id']);
     }
@@ -176,7 +176,7 @@ class Nav extends ActiveRecord
      *
      * @return NgRestActiveQuery|ActiveQuery
      */
-    public function getProperties()
+    public function getProperties(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasMany(CmsProperty::class, ['nav_id' => 'id']);
     }
@@ -184,9 +184,8 @@ class Nav extends ActiveRecord
     /**
      *
      * @param string $varName
-     * @return boolean|\luya\admin\base\Property
      */
-    public function getProperty($varName)
+    public function getProperty($varName): bool|\luya\admin\base\Property
     {
         foreach ($this->properties as $prop) {
             if ($prop->adminProperty->var_name == $varName) {
@@ -200,7 +199,6 @@ class Nav extends ActiveRecord
     /**
      * See if a given group has perrmission for the current nav model.
      *
-     * @param Group $group
      * @return boolean
      */
     public function hasGroupPermission(Group $group)
@@ -224,7 +222,6 @@ class Nav extends ActiveRecord
     /**
      * See if the given group has permission to the current nav model.
      *
-     * @param Group $group
      * @return boolean
      */
     public function hasGroupPermissionSelected(Group $group)
@@ -241,7 +238,6 @@ class Nav extends ActiveRecord
     /**
      * See if a given group has inherited permission to the current nav model.
      *
-     * @param Group $group
      * @return boolean
      */
     public function isGroupPermissionInheritNode(Group $group)
@@ -561,7 +557,7 @@ class Nav extends ActiveRecord
      * @param string $alias
      * @return boolean|array If an array is returned, the creation had an error, the array contains the messages.
      */
-    public function createItemLanguageCopy($navItemId, $langId, $title, $alias)
+    public function createItemLanguageCopy($navItemId, $langId, $title, $alias): bool|array
     {
         $sourceNavItem = NavItem::findOne($navItemId);
 
@@ -606,7 +602,7 @@ class Nav extends ActiveRecord
      * @param boolean $isDraft
      * @return boolean|array If an array is returned, the creation had an error, the array contains the messages.
      */
-    public function createPageFromDraft($parentNavId, $navContainerId, $langId, $title, $alias, $description, $fromDraftNavId, $isDraft = false)
+    public function createPageFromDraft($parentNavId, $navContainerId, $langId, $title, $alias, $description, $fromDraftNavId, $isDraft = false): bool|array
     {
         if (!$isDraft && empty($isDraft) && !is_numeric($isDraft)) {
             $isDraft = 0;
@@ -710,7 +706,7 @@ class Nav extends ActiveRecord
      * @param string $isDraft
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
-    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)
+    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false): array|int
     {
         $_errors = [];
 
@@ -780,7 +776,7 @@ class Nav extends ActiveRecord
      * @param string $description
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
      */
-    public function createPageItem($navId, $langId, $title, $alias, $layoutId, $description)
+    public function createPageItem($navId, $langId, $title, $alias, $layoutId, $description): array|int
     {
         $_errors = [];
 
@@ -838,7 +834,7 @@ class Nav extends ActiveRecord
      * @param string $description
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
-    public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName, $description, $controllerName, $actionName, array $actionParams)
+    public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName, $description, $controllerName, $actionName, array $actionParams): array|int
     {
         $_errors = [];
 
@@ -901,7 +897,7 @@ class Nav extends ActiveRecord
      * @param string $redirectTypeTarget redirect target (_blank, self) (since 2.0)
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
-    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description, $redirectTypeTarget)
+    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description, $redirectTypeTarget): array|int
     {
         $_errors = [];
 
@@ -960,7 +956,7 @@ class Nav extends ActiveRecord
      * @param string $description
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
      */
-    public function createModuleItem($navId, $langId, $title, $alias, $moduleName, $description, $controllerName, $actionName, array $actionParams)
+    public function createModuleItem($navId, $langId, $title, $alias, $moduleName, $description, $controllerName, $actionName, array $actionParams): array|int
     {
         $_errors = [];
 
@@ -1009,7 +1005,7 @@ class Nav extends ActiveRecord
      * @param string $redirectTypeTarget redirect target (_blank, self) (since 2.0)
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the navItem ID is returned.
      */
-    public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description, $redirectTypeTarget)
+    public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description, $redirectTypeTarget): array|int
     {
         $_errors = [];
 

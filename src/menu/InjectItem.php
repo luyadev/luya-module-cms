@@ -130,7 +130,6 @@ class InjectItem extends BaseObject implements InjectItemInterface
     /**
      * Setter method for the item property.
      *
-     * @param \luya\cms\menu\Item $item
      * @return \luya\cms\menu\InjectItem
      */
     public function setItem(Item $item)
@@ -406,10 +405,8 @@ class InjectItem extends BaseObject implements InjectItemInterface
 
     /**
      * Getter method for the unique id.
-     *
-     * @return string|integer
      */
-    public function getId()
+    public function getId(): string|int
     {
         if ($this->_id === null) {
             $this->_id = random_int(10000, 1_000_000);

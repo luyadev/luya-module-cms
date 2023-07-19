@@ -159,7 +159,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      *
      * @since 1.0.4
      */
-    public function setBlocks($definition)
+    public function setBlocks(string|array $definition)
     {
         $this->_blocks = (array) $definition;
     }
@@ -364,7 +364,6 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      * Translations for CMS admin Module.
      *
      * @param string $message
-     * @param array $params
      * @return string
      */
     public static function t($message, array $params = [])

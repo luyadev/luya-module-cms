@@ -70,8 +70,6 @@ abstract class NavItemType extends ActiveRecord implements NavItemTypeInterface
 
     /**
      * Setter method for options.
-     *
-     * @param array $options
      */
     public function setOptions(array $options)
     {

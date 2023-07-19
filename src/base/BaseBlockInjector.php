@@ -82,7 +82,7 @@ abstract class BaseBlockInjector extends BaseObject
      * @return mixed
      * @throws InvalidConfigException
      */
-    public function getContextConfigValue($varName, $defaultValue = null)
+    public function getContextConfigValue($varName, mixed $defaultValue = null)
     {
         if ($this->type == InternalBaseBlock::INJECTOR_VAR) {
             return $this->context->getVarValue($varName, $defaultValue);

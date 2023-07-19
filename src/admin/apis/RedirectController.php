@@ -26,10 +26,9 @@ class RedirectController extends \luya\admin\ngrest\base\Api
      * path: hello/world
      *
      * @param string $path The path to check inside the redirect list.
-     * @return array|false
      * @since 1.0.9
      */
-    public function actionCatch($path)
+    public function actionCatch($path): array|false
     {
         $compositePath = Yii::$app->composition->prependTo($path);
         foreach (Redirect::find()->all() as $redirect) {

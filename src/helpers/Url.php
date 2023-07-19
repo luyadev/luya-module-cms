@@ -87,7 +87,7 @@ class Url extends \luya\helpers\Url
      * @return string
      * @see toModule()
      */
-    public static function toModuleRoute($moduleName, array $route, $scheme = false)
+    public static function toModuleRoute($moduleName, string|array $route, $scheme = false)
     {
         $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
 

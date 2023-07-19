@@ -50,7 +50,7 @@ class CatchAllUrlRule extends UrlRule
 
         // if there is a trailing slash given, the request is invalid as long as the urlManager suffix
         // does not contain a trailing slash.
-        if (rtrim($pathInfo, '//') !== $pathInfo && substr($manager->suffix, -1) !== '/') {
+        if (rtrim($pathInfo, '//') !== $pathInfo && !str_ends_with($manager->suffix, '/')) {
             return false;
         }
 

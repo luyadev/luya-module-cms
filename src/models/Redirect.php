@@ -149,7 +149,7 @@ class Redirect extends NgRestModel
      * @param string $requestPath The path from the webserver (the URL which has been opened).
      * @return boolean|string If the provided $catch_path matches the requestPath it returns true, or if a wild card is used the pattern is returned. {@since 3.5.0}
      */
-    public function matchRequestPath($requestPath)
+    public function matchRequestPath($requestPath): bool|string
     {
         foreach ([$requestPath, urlencode($requestPath), urldecode($requestPath)] as $path) {
             foreach ([$this->catch_path, urlencode($this->catch_path), urldecode($this->catch_path)] as $catch) {
@@ -167,10 +167,9 @@ class Redirect extends NgRestModel
      *
      * @param string $requestPath
      * @param string $catchPath
-     * @return boolean|string
      * @since 4.0.0
      */
-    private function inputToRegex($requestPath, $catchPath)
+    private function inputToRegex($requestPath, $catchPath): bool|string
     {
         $pattern = str_replace('\*', '(.*)', preg_quote($catchPath, '/'));
 
@@ -188,7 +187,7 @@ class Redirect extends NgRestModel
      * @return boolean|string Returns either true, false or if a wildcard is used, the value is returned {@since 3.5.0}
      * @since 1.0.8
      */
-    private function pathMatcher($input, $catchPath)
+    private function pathMatcher($input, $catchPath): bool|string
     {
         // ensure request path is prefix with slash
         $requestPath = '/'.ltrim($input, '/');

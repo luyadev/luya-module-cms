@@ -168,7 +168,6 @@ final class Module extends \luya\base\Module implements CoreModuleInterface
      * Translations for CMS frontend Module.
      *
      * @param string $message
-     * @param array $params
      * @return string
      */
     public static function t($message, array $params = [])

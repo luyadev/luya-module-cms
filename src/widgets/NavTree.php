@@ -306,7 +306,6 @@ class NavTree extends Widget
      * If the placeholder name isn't found as a property, it will be returned (e.g. alias)
      *
      * @param Item|null $item
-     * @param array $options
      * @return array
      */
     private function compileOption(Item $item, array $options)
@@ -325,9 +324,6 @@ class NavTree extends Widget
         return $options;
     }
 
-    /**
-     * @param Item $item
-     */
     public function setStartItem(Item $item)
     {
         $this->_startItem = $item;
@@ -341,9 +337,6 @@ class NavTree extends Widget
         return $this->_startItem;
     }
 
-    /**
-     * @param QueryIteratorFilter $findQuery
-     */
     public function setFindQuery(QueryIteratorFilter $findQuery = null)
     {
         $this->_findQuery = $findQuery;

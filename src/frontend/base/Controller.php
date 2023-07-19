@@ -119,7 +119,7 @@ abstract class Controller extends \luya\web\Controller
      * @throws NotFoundHttpException
      * @throws MethodNotAllowedHttpException
      */
-    public function renderItem($navItemId, $appendix = null, $setNavItemTypeId = false)
+    public function renderItem($navItemId, $appendix = null, bool|int $setNavItemTypeId = false)
     {
         $model = NavItem::find()->where(['id' => $navItemId])->with(['nav'])->one();
 

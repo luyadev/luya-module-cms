@@ -25,10 +25,9 @@ class Website extends Component
     private $_current = null;
 
     /**
-     * @return array|bool
      * @throws NotFoundHttpException
      */
-    public function getCurrent()
+    public function getCurrent(): array|bool
     {
         if ($this->_current === null) {
             $this->_current = $this->findOneByHostName(Yii::$app->request->hostName);
@@ -43,7 +42,7 @@ class Website extends Component
      * @param string $hostName
      * @return array|boolean If the website exists an array with informations as returned, otherwise false.
      */
-    public function findOneByHostName($hostName)
+    public function findOneByHostName($hostName): array|bool
     {
         $cache = $this->getHasCache($hostName);
         if ($cache) {

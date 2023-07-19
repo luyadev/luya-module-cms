@@ -184,7 +184,7 @@ class Log extends NgRestModel
     {
         try {
             return Json::decode($this->message);
-        } catch (InvalidArgumentException $err) {
+        } catch (InvalidArgumentException) {
             return [];
         }
     }
@@ -242,42 +242,30 @@ class Log extends NgRestModel
         $tableName = StorageFile::cleanBaseTableName($this->table_name);
 
         if ($this->is_insertion) {
-            switch ($tableName) {
-                case "cms_nav_item":
-                    return Module::t('log_action_insert_cms_nav_item', ['info' => $this->rowDescriber]);
-                case "cms_nav":
-                    return Module::t('log_action_insert_cms_nav', ['info' => $this->rowDescriber]);
-                case "cms_nav_item_page_block_item":
-                    return Module::t('log_action_insert_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
-                default:
-                    return Module::t('log_action_insert_unkown', ['info' => $this->rowDescriber]);
-            }
+            return match ($tableName) {
+                "cms_nav_item" => Module::t('log_action_insert_cms_nav_item', ['info' => $this->rowDescriber]),
+                "cms_nav" => Module::t('log_action_insert_cms_nav', ['info' => $this->rowDescriber]),
+                "cms_nav_item_page_block_item" => Module::t('log_action_insert_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]),
+                default => Module::t('log_action_insert_unkown', ['info' => $this->rowDescriber]),
+            };
         }
 
         if ($this->is_update) {
-            switch ($tableName) {
-                case "cms_nav_item":
-                    return Module::t('log_action_update_cms_nav_item', ['info' => $this->rowDescriber]);
-                case "cms_nav":
-                    return Module::t('log_action_update_cms_nav', ['info' => $this->rowDescriber]);
-                case "cms_nav_item_page_block_item":
-                    return Module::t('log_action_update_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
-                default:
-                    return Module::t('log_action_update_unkown', ['info' => $this->rowDescriber]);
-            }
+            return match ($tableName) {
+                "cms_nav_item" => Module::t('log_action_update_cms_nav_item', ['info' => $this->rowDescriber]),
+                "cms_nav" => Module::t('log_action_update_cms_nav', ['info' => $this->rowDescriber]),
+                "cms_nav_item_page_block_item" => Module::t('log_action_update_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]),
+                default => Module::t('log_action_update_unkown', ['info' => $this->rowDescriber]),
+            };
         }
 
         if ($this->is_deletion) {
-            switch ($tableName) {
-                case "cms_nav_item":
-                    return Module::t('log_action_delete_cms_nav_item', ['info' => $this->rowDescriber]);
-                case "cms_nav":
-                    return Module::t('log_action_delete_cms_nav', ['info' => $this->rowDescriber]);
-                case "cms_nav_item_page_block_item":
-                    return Module::t('log_action_delete_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
-                default:
-                    return Module::t('log_action_delete_unkown');
-            }
+            return match ($tableName) {
+                "cms_nav_item" => Module::t('log_action_delete_cms_nav_item', ['info' => $this->rowDescriber]),
+                "cms_nav" => Module::t('log_action_delete_cms_nav', ['info' => $this->rowDescriber]),
+                "cms_nav_item_page_block_item" => Module::t('log_action_delete_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]),
+                default => Module::t('log_action_delete_unkown'),
+            };
         }
     }
 
@@ -296,10 +284,8 @@ class Log extends NgRestModel
      * + 1 = insertion
      * + 2 = update
      * + 3 = deletion
-     * @param array $message
      * @param string $tableName
      * @param integer $rowId
-     * @param array $additionalData
      * @return boolean
      */
     public static function add($type, array $message, $tableName, $rowId = 0, array $additionalData = [])
@@ -321,8 +307,6 @@ class Log extends NgRestModel
      * Log data using AfterSaveEvent of Active Records.
      *
      * @param integer $type
-     * @param array $message
-     * @param AfterSaveEvent $event
      * @return boolean
      * @since 3.3.0
      */
@@ -342,7 +326,6 @@ class Log extends NgRestModel
      * Add log entry based on active record models.
      *
      * @param integer $type
-     * @param ActiveRecord $model
      * @return boolean
      * @since 2.1.1
      */

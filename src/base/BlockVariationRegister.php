@@ -36,21 +36,12 @@ use yii\helpers\Inflector;
  */
 class BlockVariationRegister
 {
-    /**
-     * @var \luya\cms\base\InternalBaseBlock Internal base block from where the BlockFlavor has been instantiatet.
-     */
-    protected $block;
-
     private array $_variations = [];
 
     private $_tempIdentifier;
 
-    /**
-     * @param InternalBaseBlock $block
-     */
-    public function __construct(InternalBaseBlock $block)
+    public function __construct(protected InternalBaseBlock $block)
     {
-        $this->block = $block;
     }
 
     /**
@@ -95,7 +86,6 @@ class BlockVariationRegister
     /**
      * Flavor CFG variables.
      *
-     * @param array $config
      * @return \luya\cms\base\BlockVariationRegister
      */
     public function cfgs(array $config)
@@ -107,7 +97,6 @@ class BlockVariationRegister
     /**
      * Flavor VAR variables.
      *
-     * @param array $config
      * @return \luya\cms\base\BlockVariationRegister
      */
     public function vars(array $config)
@@ -119,7 +108,6 @@ class BlockVariationRegister
     /**
      * Flavor EXTRA variables.
      *
-     * @param array $config
      * @return \luya\cms\base\BlockVariationRegister
      */
     public function extras(array $config)

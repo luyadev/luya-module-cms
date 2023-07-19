@@ -318,11 +318,10 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      * Get a env option by $key. If $key does not exist it will return given $default or false.
      *
      * @param $key
-     * @param mixed $default
      *
      * @return mixed
      */
-    public function getEnvOption($key, $default = false)
+    public function getEnvOption($key, mixed $default = false)
     {
         return (array_key_exists($key, $this->_envOptions)) ? $this->_envOptions[$key] : $default;
     }
@@ -385,7 +384,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      * @param mixed  $default A default value that will be returned if the key isn't found or empty.
      * @return mixed
      */
-    public function getVarValue($key, $default = false)
+    public function getVarValue($key, mixed $default = false)
     {
         return (isset($this->_varValues[$key]) && $this->_varValues[$key] != '') ? $this->_varValues[$key] : $default;
     }
@@ -420,7 +419,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      * @param mixed  $default A default value that will be returned if the key isn't found or empty.
      * @return mixed
      */
-    public function getCfgValue($key, $default = false)
+    public function getCfgValue($key, mixed $default = false)
     {
         return (isset($this->_cfgValues[$key]) && $this->_cfgValues[$key] != '') ? $this->_cfgValues[$key] : $default;
     }
@@ -442,7 +441,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      * @param string $key
      * @param mixed $value
      */
-    public function addExtraVar($key, $value)
+    public function addExtraVar($key, mixed $value)
     {
         $this->_extraVars[$key] = $value;
     }
@@ -508,7 +507,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * Add a var variable to the config.
      *
-     * @param array $varConfig
      * @param boolean Whether the variable should be append to the end instead of prepanding.
      */
     public function addVar(array $varConfig, $append = false)
@@ -583,7 +581,6 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * Add a cfg variable to the config.
      *
-     * @param array $cfgConfig
      * @param boolean Whether the variable should be append to the end instead of prepanding.
      */
     public function addCfg(array $cfgConfig, $append = false)
@@ -600,7 +597,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
      */
     public function getViewFileName($extension)
     {
-        $className = get_class($this);
+        $className = $this::class;
 
         if (preg_match('/\\\\([\w]+)$/', $className, $matches)) {
             $className = $matches[1];
@@ -617,7 +614,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     protected function ensureModule()
     {
         $moduleName = $this->module;
-        if (substr($moduleName, 0, 1) !== '@') {
+        if (!str_starts_with($moduleName, '@')) {
             $moduleName = '@'.$moduleName;
         }
 

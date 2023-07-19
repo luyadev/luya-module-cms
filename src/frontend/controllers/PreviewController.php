@@ -25,9 +25,8 @@ class PreviewController extends Controller
      * @param integer $date The date from the preview frame, is false when not using the preview frame from the cms.
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
-     * @return \yii\web\Response|string
      */
-    public function actionIndex($itemId, $version = false, $date = false)
+    public function actionIndex($itemId, $version = false, $date = false): \yii\web\Response|string
     {
         if (Yii::$app->adminuser->isGuest) {
             throw new ForbiddenHttpException('Unable to see the preview page, session expired or not logged in.');

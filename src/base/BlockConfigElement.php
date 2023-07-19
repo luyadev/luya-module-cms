@@ -18,8 +18,6 @@ use Exception;
  */
 abstract class BlockConfigElement
 {
-    public $item = [];
-
     protected $id;
 
     /**
@@ -27,9 +25,8 @@ abstract class BlockConfigElement
      * @param array $item The element config with all fields.
      * @throws Exception
      */
-    public function __construct(array $item)
+    public function __construct(public array $item)
     {
-        $this->item = $item;
         if (!$this->has(['var', 'label', 'type'])) {
             throw new Exception('Required attributes in config var element is missing. var, label and type are required.');
         }
@@ -61,10 +58,9 @@ abstract class BlockConfigElement
      * Get the element value.
      *
      * @param string $key
-     * @param mixed $default
      * @return string
      */
-    protected function get($key, $default = null)
+    protected function get($key, mixed $default = null)
     {
         if (!$this->has($key)) {
             return $default;

@@ -249,7 +249,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 $blockResponse = $isCachingEnabled ? $this->getHasCache($cacheKey) : false;
 
                 if ($blockResponse === false) {
-                    $className = get_class($blockObject);
+                    $className = $blockObject::class;
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
@@ -418,7 +418,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      *
      * @param string $placeholderVar
      * @param integer $prevId
-     * @param NavItemPage $navItemPage
      * @return array
      */
     public static function getPlaceholder($placeholderVar, $prevId, NavItemPage $navItemPage)
@@ -496,7 +495,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
         $variations = Yii::$app->getModule('cmsadmin')->blockVariations;
 
-        $className = get_class($blockObject);
+        $className = $blockObject::class;
         $shortName = (new \ReflectionClass($blockObject))->getShortName();
 
         return [

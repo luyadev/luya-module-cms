@@ -81,7 +81,6 @@ class BlockImporter extends Importer
     /**
      * Handle an array with definitions whether they are files or folders.
      *
-     * @param array $definitions
      * @return array
      * @since 1.0.8
      */
@@ -110,7 +109,6 @@ class BlockImporter extends Importer
     /**
      * Handle a block defintion for different folders
      *
-     * @param array $directories
      * @param string $blockDefinition
      * @return array
      * @since 2.0.0
@@ -266,7 +264,6 @@ class BlockImporter extends Importer
     /**
      * The the group of a block based on the block object.
      *
-     * @param BlockInterface $blockObject
      * @return integer
      */
     protected function getBlockGroupId(BlockInterface $blockObject)

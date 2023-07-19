@@ -107,7 +107,6 @@ class MenuController extends \luya\admin\base\RestController
     /**
      * Checks whether a group hass full permission or not
      *
-     * @param Group $group
      * @return bool
      */
     private function groupHasFullPermission(Group $group)
@@ -136,7 +135,6 @@ class MenuController extends \luya\admin\base\RestController
     /**
      * Build a trree with items for a given NavContainer.
      *
-     * @param NavContainer $container
      * @param int $parentNavId
      * @param array $parentGroup
      * @param int $index

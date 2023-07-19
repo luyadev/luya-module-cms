@@ -145,7 +145,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * @return NgRestActiveQuery|ActiveQuery
      */
-    public function getCreateUser()
+    public function getCreateUser(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'create_user_id']);
     }
@@ -155,7 +155,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * @return NgRestActiveQuery|ActiveQuery
      */
-    public function getUpdateUser()
+    public function getUpdateUser(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'update_user_id']);
     }
@@ -178,7 +178,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      * @return \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule|\luya\cms\models\NavItemRedirect Returns the object based on the type
      * @throws Exception
      */
-    public function getType()
+    public function getType(): \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule|\luya\cms\models\NavItemRedirect
     {
         if ($this->_type === null) {
             // what kind of item type are we looking for
@@ -207,7 +207,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * @return NgRestActiveQuery|ActiveQuery
      */
-    public function getNav()
+    public function getNav(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasOne(Nav::class, ['id' => 'nav_id']);
     }
@@ -225,7 +225,6 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
     /**
      * Update attributes of the current nav item type relation.
      *
-     * @param array $postData
      * @return boolean Whether the update has been successfull or not
      */
     public function updateType(array $postData)
@@ -393,7 +392,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      *
      * @return NgRestActiveQuery|ActiveQuery
      */
-    public function getLang()
+    public function getLang(): \luya\admin\ngrest\base\NgRestActiveQuery|\yii\db\ActiveQuery
     {
         return $this->hasOne(Lang::class, ['id' => 'lang_id']);
     }
@@ -533,16 +532,12 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      */
     public function copyTypeContent(NavItem $targetNavItem)
     {
-        switch ($this->nav_item_type) {
-            case self::TYPE_PAGE:
-                return $this->copyPageItem($targetNavItem);
-            case self::TYPE_MODULE:
-                return $this->copyModuleItem($targetNavItem);
-            case self::TYPE_REDIRECT:
-                return $this->copyRedirectItem($targetNavItem);
-        }
-
-        throw new Exception("Unable to find nav item type.");
+        return match ($this->nav_item_type) {
+            self::TYPE_PAGE => $this->copyPageItem($targetNavItem),
+            self::TYPE_MODULE => $this->copyModuleItem($targetNavItem),
+            self::TYPE_REDIRECT => $this->copyRedirectItem($targetNavItem),
+            default => throw new Exception("Unable to find nav item type."),
+        };
     }
 
     /**

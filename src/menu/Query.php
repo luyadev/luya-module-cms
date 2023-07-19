@@ -75,8 +75,6 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
 
     /**
      * Setter method for menu Container.
-     *
-     * @param Menu $menu
      */
     public function setMenu(Menu $menu)
     {
@@ -208,7 +206,6 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * one where definition can bet set.
      *
      * @see {{Query::where()}}
-     * @param array $args
      * @return \luya\cms\menu\Query
      */
     public function andWhere(array $args)
@@ -242,7 +239,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * for example `['hidden']`.
      * @return \luya\cms\menu\Query
      */
-    public function with($types)
+    public function with(string|array $types)
     {
         $types = (array) $types;
         foreach ($types as $type) {
@@ -373,7 +370,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      * @return Query
      * @since 2.2.0
      */
-    public function tags($tags)
+    public function tags(string|array $tags)
     {
         $ids = TagRelation::find()
             ->select(['pk_id'])
@@ -394,7 +391,7 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      *
      * @return \luya\cms\menu\Item|boolean Returns the Item object or false if nothing found.
      */
-    public function one()
+    public function one(): \luya\cms\menu\Item|bool
     {
         $data = $this->filter($this->menu[$this->getLang()], $this->_where, $this->_with);
 
@@ -495,8 +492,6 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
      *
      * @param string $value
      * @param string $field
-     * @param array $where
-     * @param array $with
      * @return boolean
      */
     private function arrayFilter($value, $field, array $where, array $with)
@@ -507,24 +502,16 @@ class Query extends BaseObject implements QueryOperatorFieldInterface
 
         foreach ($where as $expression) {
             if ($expression['field'] == $field) {
-                switch ($expression['op']) {
-                    case '==':
-                        return ($value === $expression['value']);
-                    case '>':
-                        return ($value > $expression['value']);
-                    case '>=':
-                        return ($value >= $expression['value']);
-                    case '<':
-                        return ($value < $expression['value']);
-                    case '<=':
-                        return ($value <= $expression['value']);
-                    case 'in':
-                        return in_array($value, $expression['value']);
-                    case '!=':
-                        return ($value != $expression['value']);
-                    default:
-                        return ($value == $expression['value']);
-                }
+                return match ($expression['op']) {
+                    '==' => $value === $expression['value'],
+                    '>' => $value > $expression['value'],
+                    '>=' => $value >= $expression['value'],
+                    '<' => $value < $expression['value'],
+                    '<=' => $value <= $expression['value'],
+                    'in' => in_array($value, $expression['value']),
+                    '!=' => $value != $expression['value'],
+                    default => $value == $expression['value'],
+                };
             }
         }
 

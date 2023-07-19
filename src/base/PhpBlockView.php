@@ -187,7 +187,7 @@ class PhpBlockView extends View
      * @param mixed $defaultvalue If the env value is not found this value will be returned.
      * @return mixed
      */
-    public function env($key, $defaultvalue = null)
+    public function env($key, mixed $defaultvalue = null)
     {
         return $this->context->getEnvOption($key, $defaultvalue);
     }
@@ -219,7 +219,7 @@ class PhpBlockView extends View
      * @param string $template The template as a string which replates the $key enclosed in {{
      * @return string If a template is provided and $value is not empty return the wrapped template, otherwise the original $value input.
      */
-    public function wrapTemplate($key, $value, $template)
+    public function wrapTemplate($key, mixed $value, $template)
     {
         if (!$template || empty($value)) {
             return $value;
@@ -297,8 +297,6 @@ class PhpBlockView extends View
     /**
      *Register assets to the given app view
      *
-     * @param array $blockAssets
-     * @param array $assetBundles
      * @throws \yii\base\InvalidConfigException
      * @since 1.0.5
      */

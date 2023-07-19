@@ -76,9 +76,8 @@ class NavItemController extends \luya\admin\base\RestController
      *
      * @param integer $navItemId The id of the item to delete.
      * @throws ForbiddenHttpException
-     * @return array|boolean
      */
-    public function actionDelete($navItemId)
+    public function actionDelete($navItemId): array|bool
     {
         if (!Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)) {
             throw new ForbiddenHttpException("Unable to perform this action due to permission restrictions");
@@ -287,10 +286,9 @@ class NavItemController extends \luya\admin\base\RestController
      *
      * @param integer $navItemId The id of the nav_item item which should be changed
      * @param integer $navItemType The NEW type of content for the above nav_item.id
-     * @return array|bool
      * @throws Exception
      */
-    public function actionUpdatePageItem($navItemId, $navItemType)
+    public function actionUpdatePageItem($navItemId, $navItemType): array|bool
     {
         $model = NavItem::findOne($navItemId);
 

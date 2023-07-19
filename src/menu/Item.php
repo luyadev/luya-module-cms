@@ -283,7 +283,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      *
      * @return boolean|string The name of the module or false if not found or wrong type
      */
-    public function getModuleName()
+    public function getModuleName(): bool|string
     {
         if ($this->getType() === 2) {
             return $this->itemArray['module_name'];
@@ -363,7 +363,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * @return \luya\admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
      * found the return value is false.
      */
-    public function getUserCreated()
+    public function getUserCreated(): \luya\admin\models\User|bool
     {
         return User::findOne($this->itemArray['create_user_id']);
     }
@@ -374,7 +374,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * @return \luya\admin\models\User|boolean Returns an ActiceRecord for the admin user who last time updated this page, if not
      * found the return value is false.
      */
-    public function getUserUpdated()
+    public function getUserUpdated(): \luya\admin\models\User|bool
     {
         return User::findOne($this->itemArray['update_user_id']);
     }
@@ -385,7 +385,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * @return \luya\admin\image\Item|boolean The Image object or false if no image has been uploaded
      * @since 2.0.0
      */
-    public function getImage()
+    public function getImage(): \luya\admin\image\Item|bool
     {
         return Yii::$app->storage->getImage($this->itemArray['image_id']);
     }
@@ -517,7 +517,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      *
      * @return \luya\cms\menu\Item|boolean Returns the parent item-object or false if not exists.
      */
-    public function getParent()
+    public function getParent(): \luya\cms\menu\Item|bool
     {
         return (new Query())
             ->where(['nav_id' => $this->parentNavId, 'container' => $this->getContainer()])
@@ -595,7 +595,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      *
      * @return \luya\cms\menu\Item|boolean Returns the next sibling based on the current sibling, if not found false is returned.
      */
-    public function getNextSibling()
+    public function getNextSibling(): \luya\cms\menu\Item|bool
     {
         return (new Query())
             ->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])
@@ -613,7 +613,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      *
      * @return \luya\cms\menu\Item|boolean Returns the previous sibling based on the current sibling, if not found false is returned.
      */
-    public function getPrevSibling()
+    public function getPrevSibling(): \luya\cms\menu\Item|bool
     {
         return (new Query())
             ->where(['parent_nav_id' => $this->parentNavId, 'container' => $this->container])
@@ -751,7 +751,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * @param mixed $defaultValue The default value which will be returned if the property is not set for the current page.
      * @return string|mixed Returns the value of {{luya\admin\base\Property::getValue}} if set, otherwise $defaultValue.
      */
-    public function getPropertyValue($varName, $defaultValue = null)
+    public function getPropertyValue($varName, mixed $defaultValue = null)
     {
         return $this->getProperty($varName) ? $this->getProperty($varName)->getValue() : $defaultValue;
     }
@@ -802,7 +802,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
      * @param string|array $without Can be a string `hidden` or an array `['hidden']`.
      * @return \luya\cms\menu\Item
      */
-    public function without($without)
+    public function without(string|array $without)
     {
         $without = (array) $without;
 

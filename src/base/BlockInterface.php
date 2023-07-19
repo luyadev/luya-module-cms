@@ -69,7 +69,7 @@ interface BlockInterface
      * @return string|boolean False if no preview available, otherwise the html img as string.
      * @since 1.0.8
      */
-    public function renderAdminPreview();
+    public function renderAdminPreview(): string|bool;
 
     /**
      * Returns a class of the blocks group.

@@ -56,7 +56,7 @@ class DefaultController extends Controller
                 && !Yii::$app->menu->current->is404Page
                 && $this->isAdminLoggedIn()
                 && (int) NavItem::find()->where(['nav_id' => Yii::$app->menu->current->navId, 'lang_id' => Yii::$app->adminLanguage->activeId])->select(['is_cacheable'])->scalar();
-        } catch (NotFoundHttpException $notFound) {
+        } catch (NotFoundHttpException) {
             return false;
         }
     }

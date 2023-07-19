@@ -136,11 +136,6 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      */
     public $encoding = true;
 
-    /**
-     * @var \luya\web\Request Request object
-     */
-    public $request;
-
     private string $_cachePrefix = 'MenuContainerCache';
 
     private $_currentUrlRule;
@@ -165,16 +160,13 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @param \luya\web\Request $request The request object resolved by DI.
      * @param array $config
      */
-    public function __construct(\luya\web\Request $request, array $config = [])
+    public function __construct(public \luya\web\Request $request, array $config = [])
     {
-        $this->request = $request;
         parent::__construct($config);
     }
 
     /**
      * Set url rules for the current page item in order to retrieve at another point of the appliation when building language links.
-     *
-     * @param array $rule
      */
     public function setCurrentUrlRule(array $rule)
     {
@@ -336,7 +328,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @param string $shortCode E.g. de or en
      * @return array|boolean If the shortCode exists an array with informations as returned, otherwise false.
      */
-    public function getLanguage($shortCode)
+    public function getLanguage($shortCode): array|bool
     {
         return (array_key_exists($shortCode, $this->getLanguages())) ? $this->getLanguages()[$shortCode] : false;
     }
@@ -424,7 +416,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * this container.
      * @return array|\luya\cms\menu\QueryIterator All siblings or children items, if not found an empty array will return.
      */
-    public function getLevelContainer($level, Item $baseItem = null)
+    public function getLevelContainer($level, Item $baseItem = null): array|\luya\cms\menu\QueryIterator
     {
         // define if the requested level is the root line (level 1) or not
         $rootLine = ($level === 1) ? true : false;
@@ -458,7 +450,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * @param integer $level Level menu starts with 1
      * @return \luya\cms\menu\Item|boolean An item-object for the specific level current, false otherwise.
      */
-    public function getLevelCurrent($level)
+    public function getLevelCurrent($level): \luya\cms\menu\Item|bool
     {
         $i = 1;
         foreach ($this->getCurrent()->with('hidden')->getTeardown() as $item) {
@@ -663,11 +655,8 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
 
     /**
      * helper method to see if the request url can be found in the active container.
-     *
-     * @param array $urlParts
-     * @return bool|Item
      */
-    private function aliasMatch(array $urlParts, $strictParsing = false)
+    private function aliasMatch(array $urlParts, $strictParsing = false): bool|\luya\cms\menu\Item
     {
         if ($strictParsing) {
             $query = (new MenuQuery())
@@ -765,10 +754,6 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
         return $languageContainer;
     }
 
-    /**
-     *
-     * @param \luya\cms\menu\InjectItemInterface $item
-     */
     public function injectItem(InjectItemInterface $item)
     {
         $this->_languageContainer[$item->getLang()][$item->getId()] = $item->toArray();

@@ -241,7 +241,6 @@ class Block extends NgRestModel
     /**
      * Find the the class names for a certain amount of block ids.
      *
-     * @param array $ids
      * @return array
      */
     public static function findObjectClassesById(array $ids)
@@ -270,10 +269,9 @@ class Block extends NgRestModel
      * @param integer $blockId The id of the cms_block table
      * @param integer $id The context id, the cms_nav_item_page_block_item unique id
      * @param string $context admin or frontend
-     * @param mixed $pageObject
      * @return \luya\cms\base\BlockInterface
      */
-    public static function createObject($class, $blockId, $id, $context, $pageObject = null)
+    public static function createObject($class, $blockId, $id, $context, mixed $pageObject = null)
     {
         if (!class_exists($class)) {
             return false;

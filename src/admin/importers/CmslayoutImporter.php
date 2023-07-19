@@ -129,7 +129,7 @@ class CmslayoutImporter extends Importer
                         $json = false;
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $json = false;
             }
         }

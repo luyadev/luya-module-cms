@@ -152,7 +152,7 @@ class Theme extends NgRestModel
         if ($this->_jsonConfig === null) {
             try {
                 $this->_jsonConfig = Json::decode($this->json_config);
-            } catch (InvalidArgumentException $ex) {
+            } catch (InvalidArgumentException) {
                 $this->_jsonConfig = [];
             }
         }
@@ -166,8 +166,6 @@ class Theme extends NgRestModel
 
     /**
      * Set the json config by given theme config.
-     *
-     * @param ThemeConfig $config
      */
     public function setThemeConfig(ThemeConfig $config)
     {

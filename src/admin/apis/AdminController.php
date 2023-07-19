@@ -101,7 +101,7 @@ class AdminController extends \luya\admin\base\RestController
                 $obj = $block->getObject(0, 'admin');
 
                 // check if in hidden blocks
-                if (!$obj || in_array(get_class($obj), $this->module->hiddenBlocks)) {
+                if (!$obj || in_array($obj::class, $this->module->hiddenBlocks)) {
                     continue;
                 }
 
