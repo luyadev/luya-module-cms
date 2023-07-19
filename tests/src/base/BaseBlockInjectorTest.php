@@ -40,7 +40,7 @@ class StubInjector extends BaseBlockInjector
     }
 }
 
-class LinkInjectorTest extends CmsFrontendTestCase
+class BaseBlockInjectorTest extends CmsFrontendTestCase
 {
     public function testLinkInjector()
     {
