@@ -36,7 +36,6 @@ class BlockHelper
     /**
      * Create option inputs for radio type.
      *
-     * @param array $options
      * @return array
      */
     public static function radioArrayOption(array $options)
@@ -111,7 +110,7 @@ class BlockHelper
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return boolean|array|luya\admin\image\Item Returns false when not found, returns an array with all data for the image on success.
      */
-    public static function imageUpload($value, $applyFilter = false, $returnObject = false)
+    public static function imageUpload(string|int $value, bool|string $applyFilter = false, $returnObject = false): bool|array|\luya\admin\image\Item
     {
         if (empty($value)) {
             return false;
@@ -149,12 +148,12 @@ class BlockHelper
      *
      * Each array item will have all file query item data and a caption key.
      *
-     * @param string|int $value The specific var or cfg fieldvalue.
+     * @param string|int|array $value The specific var or cfg fieldvalue.
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
      */
-    public static function imageArrayUpload($value, $applyFilter = false, $returnObject = false)
+    public static function imageArrayUpload(string|int|array $value, bool|string $applyFilter = false, $returnObject = false)
     {
         if (!empty($value) && is_array($value)) {
             $data = [];
@@ -206,7 +205,7 @@ class BlockHelper
      * @return boolean|array|\luya\admin\file\Item Returns an array or the {{\luya\admin\file\Item}} object if the file could be find, otherwise the response is false. Make
      * sure to check whether return value is false or not to ensure no exception will be thrown.
      */
-    public static function fileUpload($fileId, $returnObject = false)
+    public static function fileUpload($fileId, $returnObject = false): bool|array|\luya\admin\file\Item
     {
         if (!empty($fileId)) {
             $file = Yii::$app->storage->getFile($fileId);
@@ -231,11 +230,11 @@ class BlockHelper
      *
      * Each array item will have all file query item data and a caption key.
      *
-     * @param string|int $value The specific var or cfg fieldvalue.
+     * @param array|string|int $value The specific var or cfg fieldvalue.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
      */
-    public static function fileArrayUpload($value, $returnObject = false)
+    public static function fileArrayUpload(array|string|int $value, $returnObject = false)
     {
         if (!empty($value) && is_array($value)) {
             $data = [];
@@ -267,7 +266,7 @@ class BlockHelper
      * + target: (optional)
      * @return \luya\web\LinkInterface|false Returns a linkable resource object or false if configuration is wrong.
      */
-    public static function linkObject($config)
+    public static function linkObject($config): \luya\web\LinkInterface|false
     {
         if (empty($config) || !is_array($config)) {
             return false;

@@ -13,9 +13,24 @@ services:
       MYSQL_DATABASE: luyacms
       MYSQL_USER: luyacms
       MYSQL_PASSWORD: luyacms
+
+  luyacmscomposer:
+    image: composer:latest
+    volumes:
+      - ./:/app
+    command: composer install
+
   luyacmsphpunit:
     build: 'tests/'
     entrypoint: vendor/bin/phpunit
     volumes:
       - .:/app
     working_dir: /app
+
+  luyacmsrector:
+    image: php:8.0-cli
+    entrypoint: vendor/bin/rector
+    volumes:
+      - .:/app
+    working_dir: /app
+
