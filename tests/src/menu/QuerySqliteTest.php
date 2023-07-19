@@ -94,6 +94,8 @@ class QuerySqliteTest extends WebApplicationTestCase
             $scope->createPage('test', null, []);
 
             $column = $this->app->menu->find()->all()->column('id');
+
+            $this->assertSame([1003 => '1003'], $column);
         });
     }
 }

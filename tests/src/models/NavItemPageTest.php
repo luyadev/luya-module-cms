@@ -34,7 +34,8 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertStringContainsString('luya-module-cms/testfile', $e->getMessage());
+            // since its resolved, @app should not be included anymore
+            $this->assertStringNotContainsString('@app', $e->getMessage());
         }
     }
 
@@ -103,7 +104,7 @@ class NavItemPageTest extends WebModelTestCase
         try {
             $model->getContent();
         } catch (\Exception $e) {
-            $this->assertStringContainsString('luya-module-cms/views/cmslayouts'.DIRECTORY_SEPARATOR.'relative.php', $e->getMessage());
+            $this->assertStringContainsString('views/cmslayouts'.DIRECTORY_SEPARATOR.'relative.php', $e->getMessage());
         }
     }
 }
