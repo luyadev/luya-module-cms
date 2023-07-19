@@ -414,9 +414,9 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
      * siblings/children calculation, this can be case when you have several contains do not want to use the "current" Item
      * as base calucation, because getCurrent() could be in another container so it would get you all level container items for
      * this container.
-     * @return array|\luya\cms\menu\QueryIterator All siblings or children items, if not found an empty array will return.
+     * @return array|\luya\cms\menu\QueryIteratorFilter All siblings or children items, if not found an empty array will return.
      */
-    public function getLevelContainer($level, Item $baseItem = null): array|\luya\cms\menu\QueryIterator
+    public function getLevelContainer($level, Item $baseItem = null): array|\luya\cms\menu\QueryIteratorFilter
     {
         // define if the requested level is the root line (level 1) or not
         $rootLine = ($level === 1) ? true : false;
