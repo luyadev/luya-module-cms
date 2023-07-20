@@ -194,7 +194,7 @@ class LinkConverter extends BaseObject
         if ($anchor) {
             $link->setAnchor($anchor);
         }
-        
+
         return $link;
     }
 
