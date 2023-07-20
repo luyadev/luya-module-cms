@@ -1157,6 +1157,7 @@ CREATE TABLE `cms_nav_item_redirect` (
   `type` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
   `target` varchar(255) NOT NULL,
+  `anchor` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
