@@ -91,6 +91,11 @@ class LinkConverter extends BaseObject
     public $target;
 
     /**
+     * @var string Optional anchor definition for internal page links
+     */
+    public $anchor;
+
+    /**
      * Generate a link converter object from an array.
      *
      * If type is empty, false is returned. This allows us to have predefined values from
@@ -117,7 +122,7 @@ class LinkConverter extends BaseObject
     public function getLink(): \luya\web\LinkInterface|bool
     {
         return match ($this->type) {
-            self::TYPE_INTERNAL_PAGE => $this->getPageLink($this->value, $this->target),
+            self::TYPE_INTERNAL_PAGE => $this->getPageLink($this->value, $this->target, null, $this->anchor),
             self::TYPE_EXTERNAL_URL => $this->getWebsiteLink($this->value, $this->target),
             self::TYPE_LINK_TO_FILE => $this->getFileLink($this->value, $this->target),
             self::TYPE_LINK_TO_EMAIL => $this->getEmailLink($this->value),
@@ -159,8 +164,9 @@ class LinkConverter extends BaseObject
      * @param integer $navId
      * @param string $target
      * @param string $lang
+     * @param string $anchor Optional anchor element
      */
-    public function getPageLink($navId, $target, $lang = null): \luya\cms\menu\Item|bool
+    public function getPageLink($navId, $target, $lang = null, $anchor = null): \luya\cms\menu\Item|bool
     {
         // in a headless context, the menu component might not exists, therefore just return all
         // available informations.
@@ -185,6 +191,10 @@ class LinkConverter extends BaseObject
             $link->setTarget($target);
         }
 
+        if ($anchor) {
+            $link->setAnchor($anchor);
+        }
+        
         return $link;
     }
 

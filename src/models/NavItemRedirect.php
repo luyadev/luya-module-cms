@@ -16,6 +16,7 @@ use yii\base\InvalidConfigException;
  * @property integer $type The type of redirect (1 = page, 2 = URL, 3 = Link to File)
  * @property string $value Depending on the type (1 = cms_nav.id, 2 = https://luya.io)
  * @property string $target
+ * @property string $anchor
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -46,7 +47,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
         return [
             [['type', 'value'], 'required'],
             [['type'], 'integer'],
-            [['target'], 'string'],
+            [['target', 'anchor'], 'string'],
         ];
     }
 
@@ -71,6 +72,7 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
         $converter->value = $this->value;
         $converter->type = $this->type;
         $converter->target = $this->target;
+        $converter->anchor = $this->anchor;
         return $converter->getLink();
     }
 

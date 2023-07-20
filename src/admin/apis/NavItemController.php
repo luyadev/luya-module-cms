@@ -337,6 +337,7 @@ class NavItemController extends \luya\admin\base\RestController
                     $this->setPostAttribute($typeModel, 'type');
                     $this->setPostAttribute($typeModel, 'value');
                     $this->setPostAttribute($typeModel, 'target');
+                    $this->setPostAttribute($typeModel, 'anchor');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
@@ -386,6 +387,7 @@ class NavItemController extends \luya\admin\base\RestController
                     $this->setPostAttribute($typeModel, 'type');
                     $this->setPostAttribute($typeModel, 'value');
                     $this->setPostAttribute($typeModel, 'target');
+                    $this->setPostAttribute($typeModel, 'anchor');
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }

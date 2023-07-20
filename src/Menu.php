@@ -355,7 +355,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     public function getRedirectMap()
     {
         if ($this->_redirectMap === null) {
-            $this->_redirectMap = (new DbQuery())->select(['id', 'type', 'value', 'target'])->from('cms_nav_item_redirect')->indexBy('id')->all();
+            $this->_redirectMap = (new DbQuery())->select(['id', 'type', 'value', 'target', 'anchor'])->from('cms_nav_item_redirect')->indexBy('id')->all();
         }
 
         return $this->_redirectMap;

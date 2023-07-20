@@ -104,6 +104,18 @@ class Item extends BaseObject implements LinkInterface, Arrayable
         return $this->getLink();
     }
 
+    private $_anchor;
+
+    public function setAnchor($anchor)
+    {
+        $this->_anchor = ltrim($anchor, '#');
+    }
+
+    public function getAnchor()
+    {
+        return $this->_anchor;
+    }
+
     private $_target;
 
     /**
@@ -424,10 +436,15 @@ class Item extends BaseObject implements LinkInterface, Arrayable
                 'type' => $this->redirectMapData('type'),
                 'value' => $this->redirectMapData('value'),
                 'target' => $this->redirectMapData('target'),
+                'anchor' => $this->redirectMapData('anchor')
             ]);
 
             if ($this->redirectMapData('target')) {
                 $this->setTarget($this->redirectMapData('target'));
+            }
+
+            if ($this->redirectMapData('anchor')) {
+                $this->setAnchor($this->redirectMapData('anchor'));
             }
 
             switch ($converter->type) {
@@ -438,7 +455,11 @@ class Item extends BaseObject implements LinkInterface, Arrayable
                         return;
                     }
                     $page = $converter->getPageLink($converter->value, $converter->target, $this->lang);
-                    return $page ? $page->getHref() : '';
+                    $link = $page ? $page->getHref() : '';
+                    if ($this->getAnchor()) {
+                        $link .= "#{$this->getAnchor()}";
+                    }
+                    return $link;
                 case $converter::TYPE_LINK_TO_EMAIL:
                     return $converter->getEmailLink($converter->value)->getHref();
                 case $converter::TYPE_LINK_TO_FILE:
