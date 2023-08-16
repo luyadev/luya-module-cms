@@ -139,11 +139,11 @@ EOT;
         $ctrl->config = [
             'vars' => [
                 ['var' => 'foo', 'type' => 'self::TYPE_TEXT', 'label' => 'Foo'],
-                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
+                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options' => 'OPTIONS!'],
             ],
             'cfgs' => [
                 ['var' => 'foo', 'type' => 'self::TYPE_TEXT', 'label' => 'Foo'],
-                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
+                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options' => 'OPTIONS!'],
             ],
             'placeholders' => [
                 ['var' => 'foo', 'label' => 'Foo'],
@@ -281,11 +281,11 @@ EOT;
         $ctrl->config = [
             'vars' => [
                 ['var' => 'foo', 'type' => 'self::TYPE_TEXT', 'label' => 'Foo'],
-                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
+                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options' => 'OPTIONS!'],
             ],
             'cfgs' => [
                 ['var' => 'foo', 'type' => 'self::TYPE_TEXT', 'label' => 'Foo'],
-                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options'=> 'OPTIONS!'],
+                ['var' => 'bar', 'type' => 'self::TYPE_IMAGEUPLOAD', 'label' => 'Bar', 'options' => 'OPTIONS!'],
             ],
             'placeholders' => [
                 ['var' => 'foo', 'label' => 'Foo'],

@@ -236,8 +236,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         // foreach all placeholders but preserve varaibles above to make calculations
         foreach ($placeholders as $key => $placeholder) {
             $i++;
-            $prev = $key-1;
-            $next = $key+1;
+            $prev = $key - 1;
+            $next = $key + 1;
             $cacheKey = ['blockcache', (int) $placeholder['id']];
 
             /** @var $blockObject \luya\cms\base\InternalBaseBlock */
@@ -328,7 +328,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $blockObject->onRegisterFromCache();
                 }
 
-                $string.= $blockResponse;
+                $string .= $blockResponse;
                 unset($blockResponse);
             }
         }

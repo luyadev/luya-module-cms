@@ -174,7 +174,7 @@ class MenuController extends \luya\admin\base\RestController
 
             self::$_permissionItemData[$container->id][] = $array;
 
-            $this->getItems($container, $nav->id, $array['groups'], $index+1);
+            $this->getItems($container, $nav->id, $array['groups'], $index + 1);
         }
     }
 
