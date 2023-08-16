@@ -79,6 +79,7 @@ use yii\helpers\Inflector;
  * @property $title The navigation menu title.
  * @property $lang The language container name.
  * @property $description Alternative page descriptions.
+ * @property $parentNavId Parent page definition
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -332,6 +333,8 @@ class InjectItem extends BaseObject implements InjectItemInterface
         $this->_lang = $lang;
     }
 
+    private $_parentNavId;
+
     /**
      * Getter method for the parent nav id from the childOf item.
      *
@@ -339,7 +342,21 @@ class InjectItem extends BaseObject implements InjectItemInterface
      */
     public function getParentNavId()
     {
-        return $this->item->navId;
+        if ($this->_parentNavId === null) {
+            return $this->item->navId;
+        }
+
+        return $this->_parentNavId;
+    }
+
+    /**
+     * Overide default implementation of evaluated process for parent nav id
+     *
+     * @param int $parentNavId
+     */
+    public function setParentNavId($parentNavId)
+    {
+        $this->_parentNavId = $parentNavId;
     }
 
     /**
