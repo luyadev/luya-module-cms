@@ -196,8 +196,8 @@ class NavItemPageBlockItem extends ActiveRecord
     {
         $this->updateNavItemTimesamp();
         if (!empty($this->_olds)) {
-            $oldPlaceholderVar = $this->_olds['placeholder_var'];
-            $oldPrevId = (int) $this->_olds['prev_id'];
+            $oldPlaceholderVar = $this->_olds['placeholder_var'] ?? false;
+            $oldPrevId = (int) $this->_olds['prev_id'] ?? 0;
             if ($oldPlaceholderVar != $this->placeholder_var || $oldPrevId != $this->prev_id) {
                 $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
             }
