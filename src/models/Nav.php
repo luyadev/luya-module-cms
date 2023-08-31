@@ -912,7 +912,7 @@ class Nav extends ActiveRecord
             'is_hidden' => true,
             'is_offline' => true,
         ];
-        
+
         $navItem->attributes = [
             'lang_id' => $langId,
             'title' => $title,
