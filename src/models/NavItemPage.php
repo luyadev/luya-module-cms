@@ -423,9 +423,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     public static function getPlaceholder($placeholderVar, $prevId, NavItemPage $navItemPage)
     {
         $nav_item_page_block_item_data = NavItemPageBlockItem::find()
+            ->select(['id', 'block_id', 'json_config_values', 'json_config_cfg_values', 'nav_item_page_id', 'is_dirty', 'is_hidden', 'variation'])
             ->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPage->id, 'placeholder_var' => $placeholderVar])
             ->orderBy(['sort_index' => SORT_ASC])
-            ->with(['block'])
+            ->with(['block' => function($q) {
+                $q->select(['id', 'class']);
+            }])
             ->all();
 
         $data = [];
