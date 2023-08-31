@@ -479,7 +479,7 @@ class NavController extends \luya\admin\base\RestController
 
         $redirect = $this->postArg('redirect');
 
-        $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), $redirect['target'] ?? null);
+        $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $redirect['type'], $redirect['value'], $this->postArg('description'), $redirect['target'] ?? null, $redirect['anchor'] ?? null);
         if (is_array($create)) {
             Yii::$app->response->statusCode = 422;
         }

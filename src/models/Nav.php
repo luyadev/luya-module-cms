@@ -897,7 +897,7 @@ class Nav extends ActiveRecord
      * @param string $redirectTypeTarget redirect target (_blank, self) (since 2.0)
      * @return array|integer If an array is returned the validationed failed, the array contains the error messages. If sucess the nav ID is returned.
      */
-    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description, $redirectTypeTarget): array|int
+    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description, $redirectTypeTarget, $anchor = null): array|int
     {
         $_errors = [];
 
@@ -912,6 +912,7 @@ class Nav extends ActiveRecord
             'is_hidden' => true,
             'is_offline' => true,
         ];
+        
         $navItem->attributes = [
             'lang_id' => $langId,
             'title' => $title,
@@ -919,7 +920,13 @@ class Nav extends ActiveRecord
             'description' => $description,
             'nav_item_type' => NavItem::TYPE_REDIRECT,
         ];
-        $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue, 'target' => $redirectTypeTarget];
+
+        $navItemRedirect->attributes = [
+            'type' => $redirectType,
+            'value' => $redirectTypeValue,
+            'target' => $redirectTypeTarget,
+            'anchor' => $anchor,
+        ];
 
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
@@ -940,7 +947,7 @@ class Nav extends ActiveRecord
 
         $navItem->nav_item_type_id = $navItemRedirect->id;
         $navItem->nav_id = $nav->id;
-        $navItemId = $navItem->save(false); // as validation is done already
+        $navItem->save(false); // as validation is done already
 
         return $nav->id;
     }
