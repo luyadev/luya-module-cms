@@ -175,10 +175,10 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
      * primary key for the corresponding type table (page, module, redirect). This approach has been choosen
      * do dynamically extend type of pages whithout any limitation.
      *
-     * @return \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule|\luya\cms\models\NavItemRedirect Returns the object based on the type
+     * @return \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule|\luya\cms\models\NavItemRedirect|bool Returns the object based on the type
      * @throws Exception
      */
-    public function getType(): \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule|\luya\cms\models\NavItemRedirect
+    public function getType(): \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule|\luya\cms\models\NavItemRedirect|bool
     {
         if ($this->_type === null) {
             // what kind of item type are we looking for
