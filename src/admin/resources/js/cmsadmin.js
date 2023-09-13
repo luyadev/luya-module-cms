@@ -112,8 +112,14 @@
                 "label": "@label",
                 "i18n": "@i18n",
                 "id": "@fieldid",
-                "name": "@fieldname"
+                "name": "@fieldname",
+				"clearable": "@clearable"
             },
+			controller : ['$scope', function($scope) {
+				$scope.resetValue = function() {
+					$scope.model = null
+				}
+			}],
             template: function() {
             	return  '<div class="form-group form-side-by-side" ng-class="{\'input--hide-label\': i18n}">' +
                             '<div class="form-side form-side-label">' +
@@ -121,6 +127,7 @@
                             '</div>' +
                             '<div class="form-side">' +
                                 '<menu-dropdown class="menu-dropdown" nav-id="model"></menu-dropdown>' +
+								'<button ng-if="clearable && model" ng-click="resetValue()" type="button" class="btn btn-sm btn-secondary"><i class="material-icons">clear</i></button>' + 
                             '</div>' +
                         '</div>';
             }
