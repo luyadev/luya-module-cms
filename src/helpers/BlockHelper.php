@@ -105,12 +105,12 @@ class BlockHelper
      * 'imageFiltered' => BlockHelper::ImageUpload($this->getVarValue('myImage'), 'small-thumbnail'),
      * ```
      *
-     * @param string|int $value Provided the value
+     * @param string|int|null $value Provided the value
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return boolean|array|luya\admin\image\Item Returns false when not found, returns an array with all data for the image on success.
      */
-    public static function imageUpload(string|int $value, bool|string $applyFilter = false, $returnObject = false): bool|array|\luya\admin\image\Item
+    public static function imageUpload(string|int|null $value, bool|string $applyFilter = false, $returnObject = false): bool|array|\luya\admin\image\Item
     {
         if (empty($value)) {
             return false;
@@ -148,12 +148,12 @@ class BlockHelper
      *
      * Each array item will have all file query item data and a caption key.
      *
-     * @param string|int|array $value The specific var or cfg fieldvalue.
+     * @param string|int|null|array $value The specific var or cfg fieldvalue.
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
      */
-    public static function imageArrayUpload(string|int|array $value, bool|string $applyFilter = false, $returnObject = false)
+    public static function imageArrayUpload(string|int|null|array $value, bool|string $applyFilter = false, $returnObject = false)
     {
         if (!empty($value) && is_array($value)) {
             $data = [];
@@ -230,11 +230,11 @@ class BlockHelper
      *
      * Each array item will have all file query item data and a caption key.
      *
-     * @param array|string|int $value The specific var or cfg fieldvalue.
+     * @param array|string|null|int $value The specific var or cfg fieldvalue.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
      */
-    public static function fileArrayUpload(array|string|int $value, $returnObject = false)
+    public static function fileArrayUpload(array|string|null|int $value, $returnObject = false)
     {
         if (!empty($value) && is_array($value)) {
             $data = [];
