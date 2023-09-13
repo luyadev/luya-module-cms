@@ -47,7 +47,8 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
         return [
             [['type', 'value'], 'required'],
             [['type'], 'integer'],
-            [['target', 'anchor'], 'string'],
+            [['target', 'anchor'], 'string', 'max' => 255],
+            [['value'], 'string', 'max' => 255, 'strict' => false],
         ];
     }
 

@@ -5,6 +5,11 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 5.x
 
++ Drop PHP 7.x versions
++ Added anchor option to cms page redirects
++ cms injector option to set parentNavId
++ add clearable option to zaaCmsPage
+
 ## 4.5.3 (20. April 2023)
 
 + [#399](https://github.com/luyadev/luya-module-cms/pull/399) PHP 8.1 compatibility issues.
