@@ -85,7 +85,7 @@
     height: 36px;
     margin-top: -36px;
     transition: .2s ease-in-out opacity;
-    z-index: z-index(block-toolbar);
+    z-index: 1;
 
     .toolbar-item {
         border: none !important;
