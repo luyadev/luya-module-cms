@@ -196,8 +196,10 @@ class NavItemPageBlockItem extends ActiveRecord
     {
         $this->updateNavItemTimesamp();
         if (!empty($this->_olds)) {
+
             $oldPlaceholderVar = $this->_olds['placeholder_var'] ?? false;
-            $oldPrevId = (int) $this->_olds['prev_id'] ?? 0;
+            $oldPrevId = isset($this->_olds['prev_id']) ? (int) $this->_olds['prev_id'] : 0;
+
             if ($oldPlaceholderVar != $this->placeholder_var || $oldPrevId != $this->prev_id) {
                 $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
             }
@@ -250,7 +252,7 @@ class NavItemPageBlockItem extends ActiveRecord
     {
         $this->updateNavItemTimesamp();
         if (!empty($this->_olds)) {
-            $this->reindex($this->_olds['nav_item_page_id'], $this->_olds['placeholder_var'], $this->_olds['prev_id']);
+            $this->reindex($this->_olds['nav_item_page_id'] ?? 0, $this->_olds['placeholder_var'] ?? null, $this->_olds['prev_id'] ?? 0);
         }
     }
 
@@ -299,9 +301,9 @@ class NavItemPageBlockItem extends ActiveRecord
     /**
      * Reindex the page block items in order to get requestd sorting.
      *
-     * @param unknown $navItemPageId
-     * @param unknown $placeholderVar
-     * @param unknown $prevId
+     * @param string|int $navItemPageId
+     * @param string $placeholderVar
+     * @param string|int $prevId
      */
     private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
