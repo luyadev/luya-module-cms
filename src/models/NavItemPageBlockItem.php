@@ -199,7 +199,7 @@ class NavItemPageBlockItem extends ActiveRecord
 
             $oldPlaceholderVar = $this->_olds['placeholder_var'] ?? false;
             $oldPrevId = isset($this->_olds['prev_id']) ? (int) $this->_olds['prev_id'] : 0;
-
+            
             if ($oldPlaceholderVar != $this->placeholder_var || $oldPrevId != $this->prev_id) {
                 $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
             }
@@ -301,9 +301,11 @@ class NavItemPageBlockItem extends ActiveRecord
     /**
      * Reindex the page block items in order to get requestd sorting.
      *
-     * @param string $placeholderVar
+     * @param string|int|null $navItemPageId
+     * @param string|null $placeholderVar
+     * @param string|int|null $prevId
      */
-    private function reindex(string|int $navItemPageId, $placeholderVar, string|int $prevId)
+    private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
         $index = 0;
         $datas = self::originalFind()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy(['sort_index' => SORT_ASC, 'timestamp_create' => SORT_DESC])->all();
