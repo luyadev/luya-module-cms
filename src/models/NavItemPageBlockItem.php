@@ -301,11 +301,9 @@ class NavItemPageBlockItem extends ActiveRecord
     /**
      * Reindex the page block items in order to get requestd sorting.
      *
-     * @param string|int $navItemPageId
      * @param string $placeholderVar
-     * @param string|int $prevId
      */
-    private function reindex($navItemPageId, $placeholderVar, $prevId)
+    private function reindex(string|int $navItemPageId, $placeholderVar, string|int $prevId)
     {
         $index = 0;
         $datas = self::originalFind()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy(['sort_index' => SORT_ASC, 'timestamp_create' => SORT_DESC])->all();
