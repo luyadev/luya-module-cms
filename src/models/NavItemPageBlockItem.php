@@ -199,7 +199,7 @@ class NavItemPageBlockItem extends ActiveRecord
 
             $oldPlaceholderVar = $this->_olds['placeholder_var'] ?? false;
             $oldPrevId = isset($this->_olds['prev_id']) ? (int) $this->_olds['prev_id'] : 0;
-            
+
             if ($oldPlaceholderVar != $this->placeholder_var || $oldPrevId != $this->prev_id) {
                 $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
             }
