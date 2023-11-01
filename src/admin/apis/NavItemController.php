@@ -454,7 +454,8 @@ class NavItemController extends \luya\admin\base\RestController
         $result = Nav::moveToBefore($moveItemId, $droppedBeforeItemId);
 
         if ($result !== true) {
-            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
+            $title = isset($result['title']) ? ' "'.$result['title'].'"' : '';
+            Yii::$app->response->setStatusCode(422, "Found URL alias duplication in drop target{$title}.");
         }
 
         return ['success' => $result];
@@ -472,7 +473,8 @@ class NavItemController extends \luya\admin\base\RestController
         $result = Nav::moveToAfter($moveItemId, $droppedAfterItemId);
 
         if ($result !== true) {
-            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
+            $title = isset($result['title']) ? ' "'.$result['title'].'"' : '';
+            Yii::$app->response->setStatusCode(422, "Found URL alias duplication in drop target{$title}.");
         }
 
         return ['success' => $result];
@@ -490,7 +492,8 @@ class NavItemController extends \luya\admin\base\RestController
         $result = Nav::moveToChild($moveItemId, $droppedOnItemId);
 
         if ($result !== true) {
-            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
+            $title = isset($result['title']) ? ' "'.$result['title'].'"' : '';
+            Yii::$app->response->setStatusCode(422, "Found URL alias duplication in drop target{$title}.");
         }
 
         return ['success' => $result];
