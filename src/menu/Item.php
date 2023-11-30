@@ -474,7 +474,13 @@ class Item extends BaseObject implements LinkInterface, Arrayable
             return Yii::$app->urlManager->prependBaseUrl('');
         }
 
-        return $this->itemArray['link'];
+        $link = $this->itemArray['link'];
+        
+        if ($this->getAnchor()) {
+            $link .= "#{$this->getAnchor()}";
+        }
+
+        return $link;
     }
 
     /**
