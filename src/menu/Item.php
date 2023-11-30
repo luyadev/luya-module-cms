@@ -475,7 +475,7 @@ class Item extends BaseObject implements LinkInterface, Arrayable
         }
 
         $link = $this->itemArray['link'];
-        
+
         if ($this->getAnchor()) {
             $link .= "#{$this->getAnchor()}";
         }
