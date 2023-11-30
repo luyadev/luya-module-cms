@@ -108,12 +108,13 @@ class LinkConverter extends BaseObject
         $type = ArrayHelper::getValue($configuration, 'type');
         $value = ArrayHelper::getValue($configuration, 'value');
         $target = ArrayHelper::getValue($configuration, 'target');
+        $anchor = ArrayHelper::getValue($configuration, 'anchor');
 
         if (empty($type)) {
             return false;
         }
 
-        return (new self(['type' => $type, 'value' => (string) $value, 'target' => $target]));
+        return (new self(['type' => $type, 'value' => (string) $value, 'target' => $target, 'anchor' => $anchor]));
     }
 
     /**
