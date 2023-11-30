@@ -3,12 +3,14 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 5.x
+## 5.0.0 (30. November 2023)
 
-+ Drop PHP 7.x versions
-+ Added anchor option to cms page redirects
-+ cms injector option to set parentNavId
-+ add clearable option to zaaCmsPage
+> **This release contains new migrations and requires to run the migrate command after updating. Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.**
+
++ Support for PHP 7.x versions has been deprecated and dropped. Users are encouraged to upgrade to PHP 8.0 or higher for optimal performance and security.
++ A new feature includes the addition of an anchor option for CMS page redirects. Now, redirects can be specified with anchors to navigate to specific sections within the destination page.
++ Introducing a CMS injector option that facilitates the setting of `parentNavId`. This functionality enables more precise navigation structuring within the CMS.
++ The zaaCmsPage component now supports a clearable option, providing users with the capability to clear content when necessary.
 
 ## 4.5.3 (20. April 2023)
 

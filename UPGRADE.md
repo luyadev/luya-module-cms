@@ -4,7 +4,8 @@ This document will help you upgrading from a LUYA admin module version into anot
 
 ## 4.x to 5.0
 
-+ Drop support for 7.x, minimum php version is now 8.0
++ This release contains the new migrations which are required for the user and file table. Therefore make sure to run the `./vendor/bin/luya migrate` command after `composer update`.
++ Support for PHP 7.x has been discontinued. The minimum required PHP version is now 8.0.
 
 ## 3.x to 4.0
 
