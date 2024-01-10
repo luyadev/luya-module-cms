@@ -20,7 +20,7 @@ return [
     'block_module_modulename_label' => 'Modul neve',
     'block_module_modulecontroller_label' => 'Vezérlő neve (kontroller utótag nélkül)',
     'block_module_moduleaction_label' => 'Művelet neve (műveleti előtag nélkül)',
-    'block_module_moduleactionargs_label' => 'Műveleti argumentumok (json: {"var” :"érték "})',
+    'block_module_moduleactionargs_label' => 'Műveleti argumentumok (json: {"var":"value"})',
     'block_module_no_module' => 'Még nincs megadva modul.',
     'block_module_integration' => 'Modul integráció',
     'block_html_name' => 'HTML',

@@ -41,7 +41,7 @@ return [
     'view_update_draft_no_lang_error' => 'De sjabloon is niet ingesteld in deze taal.',
     'view_update_no_translations' => 'Deze pagina is nog niet vertaald.',
     'view_update_page_is_module' => 'Deze pagina is een <strong>module</strong>.',
-    'view_update_page_is_redirect_internal' => 'Deze pagina is een <strong>interne omleiding</strong> tot <show-internal-redirection nav-id = "typeData.value" />.',
+    'view_update_page_is_redirect_internal' => 'Deze pagina is een <strong>interne omleiding</strong> tot <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Deze pagina is een <strong>externe omleiding</strong> om <a ng-href="{{typeData.value}}"> {{typeData.value}} </a>',
     'menu_node_cms' => 'Pagina\'s',
     'menu_node_cmssettings' => 'CMS Instellingen',

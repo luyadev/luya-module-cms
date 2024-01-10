@@ -197,7 +197,7 @@ return [
     'redirect_model_atr_catch_path_hint' => 'Ścieżka, która powinna zostać przekierowana. Jeśli chcesz dopasować wszystkie podścieżki ścieżki, możesz użyć znaku wieloznacznego * jak w / blog *, który będzie pasował do każdej podścieżki / blogu. ',
     'redirect_model_atr_catch_path_error' => 'Ścieżka musi zaczynać się od ukośnika.',
     'redirect_model_atr_redirect_path' => 'Miejsce docelowe',
-    'redirect_model_atr_redirect_path_hint' => 'Możesz użyć ścieżki abolute zaczynającej się od https: // lub http: //, ścieżki odnoszącej się do katalogu głównego strony zaczynającej się od / lub ścieżki w stosunku do ścieżki, która jest przekierowana (np. przekierowanie z / shop / start / shop / maintenance). ',
+    'redirect_model_atr_redirect_path_hint' => 'Możesz użyć ścieżki abolute zaczynającej się od https:// lub http://, ścieżki odnoszącej się do katalogu głównego strony zaczynającej się od / lub ścieżki w stosunku do ścieżki, która jest przekierowana (np. przekierowanie z / shop / start / shop / maintenance). ',
     'redirect_model_atr_redirect_status_code' => 'Kod statusu HTTP',
     'redirect_model_atr_redirect_status_code_hint' => 'Typ przekierowania. Podczas korzystania z 301: Przenoszone na stałe, przeglądarki będą buforować przekierowanie, aby zmiany w miejscu docelowym mogły nie zadziałać bez czyszczenia pamięci podręcznej przeglądarki. ',
     'redirect_model_atr_redirect_status_code_opt_301' => '301: Przeniesiony na stałe',

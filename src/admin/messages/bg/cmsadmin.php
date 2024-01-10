@@ -45,7 +45,7 @@ return [
     'view_update_draft_no_lang_error' => 'Шаблонът не е настроен на този език.',
     'view_update_no_translations' => 'Тази страница все още не е преведена.',
     'view_update_page_is_module' => 'Тази страница е <strong>модул</strong>.',
-    'view_update_page_is_redirect_internal' => 'Тази страница е <strong>вътрешно пренасочване</strong> към <show-internal-redirection nav-id = "typeData.value" />.',
+    'view_update_page_is_redirect_internal' => 'Тази страница е <strong>вътрешно пренасочване</strong> към <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Тази страница е <strong>външно пренасочване</strong> към <a ng-href="{{typeData.value}}"> {{typeData.value}} </a>',
     'menu_node_cms' => 'Страници',
     'menu_node_cmssettings' => 'Настройки на CMS',

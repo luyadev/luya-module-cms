@@ -20,7 +20,7 @@ return [
     'block_module_modulename_label' => '模块名称',
     'block_module_modulecontroller_label' => '控制器名称（不带controller后缀）',
     'block_module_moduleaction_label' => '动作名称（不带action前缀）',
-    'block_module_moduleactionargs_label' => '动作参数（json：{“var”：“value”}）',
+    'block_module_moduleactionargs_label' => '动作参数（json: {"var":"value"}）',
     'block_module_no_module' => '尚未指定模块。',
     'block_module_integration' => '模块整合',
     'block_html_name' => 'HTML',

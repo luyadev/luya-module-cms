@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 5.0.1
+
++ [#400](https://github.com/luyadev/luya-module-cms/pull/400) Improved translations (bg, cn, es, fr, hu, id, kr, nl, pl) and updated link to new guide.
+
 ## 5.0.0 (30. November 2023)
 
 > **This release contains new migrations and requires to run the migrate command after updating. Check the [UPGRADE document](UPGRADE.md) to read more about breaking changes.**

@@ -62,7 +62,7 @@ After successfully installation and configuration run the migrate, import and se
 
 ## Developers
 
-If you want to contribute, make sure to read the [guidelines](https://luya.io/guide/luya-guideline).
+If you want to contribute, make sure to read the [guidelines](https://luya.io/guide/dev/guideline).
 
 ## Unit Testing
 

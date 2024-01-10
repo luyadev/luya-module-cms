@@ -20,7 +20,7 @@ return [
     'block_module_modulename_label' => 'Nombre del módulo',
     'block_module_modulecontroller_label' => 'Nombre del Controlador (sin sufijo del controlador)',
     'block_module_moduleaction_label' => 'Nombre de acción (sin prefijo de acción)',
-    'block_module_moduleactionargs_label' => 'Acción Argumente (json: { "var": "valor"})',
+    'block_module_moduleactionargs_label' => 'Acción Argumente (json: {"var":"value"})',
     'block_module_no_module' => 'Todavía no se ha proporcionado ningún módulo.',
     'block_module_integration' => 'Integración de módulos',
     'block_html_name' => 'HTML',
