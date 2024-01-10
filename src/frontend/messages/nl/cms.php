@@ -20,7 +20,7 @@ return [
     'block_module_modulename_label' => 'Module naam',
     'block_module_modulecontroller_label' => 'Controller Name (zonder controller-achtervoegsel)',
     'block_module_moduleaction_label' => 'Action Name (zonder actieprefix )',
-    'block_module_moduleactionargs_label' => 'Action Arguments (json: {"var": "value"})',
+    'block_module_moduleactionargs_label' => 'Action Arguments (json: {"var":"value"})',
     'block_module_no_module' => 'Er is nog geen module gespecificeerd.',
     'block_module_integration' => 'Module integratie',
     'block_html_name' => 'HTML',

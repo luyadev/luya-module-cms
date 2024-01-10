@@ -41,7 +41,7 @@ return [
     'view_update_draft_no_lang_error' => '템플릿이 이 언어로 설정되어 있지 않습니다.',
     'view_update_no_translations' => '이 페이지는 아직 번역되지 않았습니다.',
     'view_update_page_is_module' => '이 페이지는 <strong> module </strong>입니다.',
-    'view_update_page_is_redirect_internal' => '이 페이지는 <show-internal-redirection nav-id = "typeData.value"/>에 대한 <strong>external redirection </strong>입니다.',
+    'view_update_page_is_redirect_internal' => '이 페이지는 <show-internal-redirection nav-id="typeData.value" />에 대한 <strong>external redirection </strong>입니다.',
     'view_update_page_is_redirect_external' => '이 페이지는 <strong>external redirection</strong> to <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
     'menu_node_cms' => '페이지 관리',
     'menu_node_cmssettings' => '페이지 설정',

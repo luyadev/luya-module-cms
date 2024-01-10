@@ -42,7 +42,7 @@ return [
     'view_update_no_translations' => 'Ezt az oldalt még nem fordították le.',
     'view_update_page_is_module' => 'Ez az oldal egy <strong>modul</strong>.',
     'view_update_page_is_redirect_internal' => 'Ez az oldal egy <strong>belső átirányítás</strong> <show-internal-redirection nav-id="typeData.value" />.',
-    'view_update_page_is_redirect_external' => 'Ez az oldal egy <strong>külső átirányítás</strong> a következőre <a ng-href="{{typeData.value}}">: {TypeData.value}}</a>',
+    'view_update_page_is_redirect_external' => 'Ez az oldal egy <strong>külső átirányítás</strong> a következőre <a ng-href="{{typeData.value}}">: {{typeData.value}}</a>',
     'menu_node_cms' => 'Oldalak',
     'menu_node_cmssettings' => 'CMS beállítások',
     'menu_group_env' => 'környezetvédelem',

@@ -20,7 +20,7 @@ return [
     'block_module_modulename_label' => 'Nama modul',
     'block_module_modulecontroller_label' => 'Nama kontroller (tanpa akhiran kontroller)',
     'block_module_moduleaction_label' => 'Nama aksi (tanpa imbuhan aksi)',
-    'block_module_moduleactionargs_label' => 'Argumen aksi (json: {"var": "value"})',
+    'block_module_moduleactionargs_label' => 'Argumen aksi (json: {"var":"value"})',
     'block_module_no_module' => 'Tidak ada modul yang dispesifikasi',
     'block_module_integration' => 'Modul integrasi',
     'block_html_name' => 'HTML',
