@@ -446,9 +446,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
 
     /**
-     * Get the arrayable values from a specific block id.
+     * Get the arrayable values from a specific block.
      *
-     * @param integer $blockId
+     * @param \luya\cms\models\NavItemPageBlockItem $blockItem
+     * @param \luya\cms\models\NavItemPage $navItemPage
      * @return array
      */
     public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage)
@@ -458,7 +459,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             return false;
         }
 
-        $blockObject = $blockItem->block->getObject($blockItem->id, 'admin', $navItemPage);
+        $blockObject = $blockItem->block->getObject($blockItem->id, 'admin', $navItemPage->getNavItem());
         if ($blockObject === false) {
             return false;
         }
