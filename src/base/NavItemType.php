@@ -9,9 +9,9 @@ use yii\db\ActiveRecord;
 /**
  * Abstract class for all Item Types.
  *
+* @property NavItem $navItem
  * @property Controller $controller The controller object.
  * @property array $options Optional settings for the nav item type.
- * @property NavItem $navItem
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -25,6 +25,8 @@ abstract class NavItemType extends ActiveRecord implements NavItemTypeInterface
      */
     abstract public function getContent();
 
+    private $_navItem;
+    
     /**
      * Get the corresponding nav item type for this type object
      *
@@ -32,7 +34,11 @@ abstract class NavItemType extends ActiveRecord implements NavItemTypeInterface
      */
     public function getNavItem()
     {
-        return $this->hasOne(NavItem::class, ['nav_item_type_id' => 'id'])->where(['nav_item_type' => static::getNummericType()]);
+        if ($this->_navItem === null) {
+            $this->_navItem = $this->hasOne(NavItem::class, ['nav_item_type_id' => 'id'])->where(['nav_item_type' => static::getNummericType()]);
+        }
+
+        return $this->_navItem;
     }
 
     /**
