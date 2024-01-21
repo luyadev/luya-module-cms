@@ -448,13 +448,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     /**
      * Get the arrayable values from a specific block.
      *
-     * @param \luya\cms\models\NavItemPageBlockItem $blockItem
-     * @param \luya\cms\models\NavItemPage $navItemPage
-     * @return array
+     * @return array|false
      */
     public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage)
     {
-        // if the block relation could be found, return false.
+        // if the block relation could not be found, return false.
         if (!$blockItem->block) {
             return false;
         }
