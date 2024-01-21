@@ -447,10 +447,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
     /**
      * Get the arrayable values from a specific block.
-     *
-     * @return array|false
      */
-    public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage)
+    public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage): array|false
     {
         // if the block relation could not be found, return false.
         if (!$blockItem->block) {
