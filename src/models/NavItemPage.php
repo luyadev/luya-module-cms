@@ -298,13 +298,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $prevIsEqual = array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id'];
                     $blockObject->setEnvOption('isPrevEqual', $prevIsEqual);
                     $blockObject->setEnvOption('isNextEqual', array_key_exists($next, $placeholders) && $placeholder['block_id'] == $placeholders[$next]['block_id']);
-
-                    if (!$prevIsEqual) {
-                        $equalIndex = 1;
-                    } else {
-                        $equalIndex++;
-                    }
-                    $blockObject->setEnvOption('equalIndex', $equalIndex);
+                    $blockObject->setEnvOption('equalIndex', (!$prevIsEqual) ? ($equalIndex = 1) : ($equalIndex++));
 
                     // render sub placeholders and set into object
                     $insertedHolders = [];
@@ -432,9 +426,27 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             ->all();
 
         $data = [];
+        $i = 0;
+        $equalIndex = 1;
+        $blocksCount = count($nav_item_page_block_item_data);
 
-        foreach ($nav_item_page_block_item_data as $blockItem) {
-            $item = self::getBlockItem($blockItem, $navItemPage);
+        foreach ($nav_item_page_block_item_data as $key => $blockItem) {
+            $i++;
+            $prev = $key - 1;
+            $next = $key + 1;
+            $prevIsEqual = array_key_exists($prev, $nav_item_page_block_item_data) && $blockItem['block_id'] == $nav_item_page_block_item_data[$prev]['block_id'];
+            
+            $envOptions = [
+                'index' => $i,
+                'itemsCount' => $blocksCount,
+                'isFirst' => ($i == 1),
+                'isLast' => ($i == $blocksCount),
+                'isPrevEqual' => $prevIsEqual,
+                'isNextEqual' => array_key_exists($next, $nav_item_page_block_item_data) && $blockItem['block_id'] == $nav_item_page_block_item_data[$next]['block_id'],
+                'equalIndex' => (!$prevIsEqual) ? ($equalIndex = 1) : ($equalIndex++)
+            ];
+
+            $item = self::getBlockItem($blockItem, $navItemPage, $envOptions);
             if ($item) {
                 $data[] = $item;
             }
@@ -447,8 +459,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
     /**
      * Get the arrayable values from a specific block.
+     * 
+     * @param array $envOptions Optional env options
      */
-    public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage): array|false
+    public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage, $envOptions = null): array|false
     {
         // if the block relation could not be found, return false.
         if (!$blockItem->block) {
@@ -468,6 +482,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
         $blockObject->setVarValues((empty($blockValue)) ? [] : $blockValue);
         $blockObject->setCfgValues((empty($blockCfgValue)) ? [] : $blockCfgValue);
+
+        if (is_array($envOptions)) {
+            foreach ($envOptions as $optKey => $optValue) {
+                $blockObject->setEnvOption($optKey, $optValue);
+            }
+        }
 
         $placeholders = [];
 
