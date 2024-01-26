@@ -36,7 +36,7 @@
 
 .cmsadmin-blockholder-collapsed {
     @media (min-width: $mobile-nav-breakpoint) {
-        margin: 0 $blockholder-width-small 0 0;
+        margin: -10px $blockholder-width-small 0 0;
     }
 }
 
