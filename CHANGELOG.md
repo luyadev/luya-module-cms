@@ -6,6 +6,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 ## 5.0.1
 
 + [#404](https://github.com/luyadev/luya-module-cms/pull/404) Cmsadmin padding fix for blockholder collapsed
++ [#406](https://github.com/luyadev/luya-module-cms/pull/406) Fixed website and theme status ActiveButtons (PHP 8)
 + [#400](https://github.com/luyadev/luya-module-cms/pull/400) Improved translations (bg, cn, es, fr, hu, id, kr, nl, pl) and updated link to new guide.
 
 ## 5.0.0 (30. November 2023)
