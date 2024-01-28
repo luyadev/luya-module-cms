@@ -172,6 +172,8 @@ class Website extends NgRestModel
             [
                 'class' => 'luya\admin\buttons\ToggleStatusActiveButton',
                 'attribute' => 'is_default',
+                'enableValue' => 1,
+                'disableValue' => 0,
                 'uniqueStatus' => true,
                 'modelNameAttribute' => 'name',
                 'label' => 'Set default',
