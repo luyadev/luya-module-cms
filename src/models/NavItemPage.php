@@ -432,9 +432,27 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             ->all();
 
         $data = [];
+        $i = 0;
+        $equalIndex = 1;
+        $blocksCount = count($nav_item_page_block_item_data);
 
-        foreach ($nav_item_page_block_item_data as $blockItem) {
-            $item = self::getBlockItem($blockItem, $navItemPage);
+        foreach ($nav_item_page_block_item_data as $key => $blockItem) {
+            $i++;
+            $prev = $key - 1;
+            $next = $key + 1;
+            $prevIsEqual = array_key_exists($prev, $nav_item_page_block_item_data) && $blockItem['block_id'] == $nav_item_page_block_item_data[$prev]['block_id'];
+
+            $envOptions = [
+                'index' => $i,
+                'itemsCount' => $blocksCount,
+                'isFirst' => ($i == 1),
+                'isLast' => ($i == $blocksCount),
+                'isPrevEqual' => $prevIsEqual,
+                'isNextEqual' => array_key_exists($next, $nav_item_page_block_item_data) && $blockItem['block_id'] == $nav_item_page_block_item_data[$next]['block_id'],
+                'equalIndex' => (!$prevIsEqual) ? ($equalIndex = 1) : ($equalIndex++)
+            ];
+
+            $item = self::getBlockItem($blockItem, $navItemPage, $envOptions);
             if ($item) {
                 $data[] = $item;
             }
@@ -451,7 +469,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      * @param integer $blockId
      * @return array
      */
-    public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage)
+    public static function getBlockItem(NavItemPageBlockItem $blockItem, NavItemPage $navItemPage, array $envOptions = [])
     {
         // if the block relation could be found, return false.
         if (!$blockItem->block) {
@@ -471,7 +489,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
         $blockObject->setVarValues((empty($blockValue)) ? [] : $blockValue);
         $blockObject->setCfgValues((empty($blockCfgValue)) ? [] : $blockCfgValue);
-
+        foreach ($envOptions as $envKey => $envValue) {
+            $blockObject->setEnvOption($envKey, $envValue);
+        }
         $placeholders = [];
 
         foreach ($blockObject->getConfigPlaceholdersByRowsExport() as $rowKey => $row) {
