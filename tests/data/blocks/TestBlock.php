@@ -33,6 +33,11 @@ class TestBlock extends PhpBlock
 
     public function admin()
     {
-        return [$this->getVarValue('var1'), $this->getVarValue('var2')];
+        return [
+            $this->getVarValue('var1'),
+            $this->getVarValue('var2'),
+            $this->getCfgValue('cfg1'),
+            $this->getEnvOptions(),
+        ];
     }
 }
