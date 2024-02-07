@@ -3,8 +3,11 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 5.0.1
+## 5.1.0
 
+> This release contains a very small change when using the block `getEnvOption('pageObject')`. Check the [UPGRADE document](UPGRADE.md) to read more about.
+
++ [#408](https://github.com/luyadev/luya-module-cms/pull/408) Resolved an issue where the CMS `pageObject` returned an ActiveQuery instead of the expected `NavItemPage` object. For more details, refer to the [UPGRADE document](UPGRADE.md).
 + [#404](https://github.com/luyadev/luya-module-cms/pull/404) Cmsadmin padding fix for blockholder collapsed
 + [#406](https://github.com/luyadev/luya-module-cms/pull/406) Fixed website and theme status ActiveButtons (PHP 8)
 + [#400](https://github.com/luyadev/luya-module-cms/pull/400) Improved translations (bg, cn, es, fr, hu, id, kr, nl, pl) and updated link to new guide.

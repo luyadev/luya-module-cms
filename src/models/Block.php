@@ -249,15 +249,12 @@ class Block extends NgRestModel
     }
 
     /**
-     * Get the object from current object-context (classname).
-     *
-     * @param [type] $id
-     * @param [type] $context
-     * @param [type] $pageObject
-     * @return void
+     * @param int $id
+     * @param string $context
+     * @param NavItemPage|null $pageObject
      * @since 1.0.6
      */
-    public function getObject($id, $context, $pageObject = null)
+    public function getObject($id, $context, NavItemPage $pageObject = null): false|\luya\cms\base\BlockInterface
     {
         return self::createObject($this->class, $this->id, $id, $context, $pageObject);
     }
@@ -265,13 +262,13 @@ class Block extends NgRestModel
     /**
      * Creates the block object and stores the object within a static block container.
      *
-     * @param string $class
-     * @param integer $blockId The id of the cms_block table
-     * @param integer $id The context id, the cms_nav_item_page_block_item unique id
+     * @param string $class The block object class name.
+     * @param int $blockId The id of the cms_block table
+     * @param int $id The context id, the cms_nav_item_page_block_item unique id
      * @param string $context admin or frontend
-     * @return \luya\cms\base\BlockInterface
+     * @param NavItemPage|null $pageObject
      */
-    public static function createObject($class, $blockId, $id, $context, mixed $pageObject = null)
+    public static function createObject($class, $blockId, $id, $context, NavItemPage $pageObject = null): false|\luya\cms\base\BlockInterface
     {
         if (!class_exists($class)) {
             return false;
