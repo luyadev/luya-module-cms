@@ -249,7 +249,7 @@ class Block extends NgRestModel
     }
 
     /**
-     * @param string $id
+     * @param int $id
      * @param string $context
      * @param NavItemPage|null $pageObject
      * @since 1.0.6
@@ -262,9 +262,9 @@ class Block extends NgRestModel
     /**
      * Creates the block object and stores the object within a static block container.
      *
-     * @param string $class
-     * @param string $blockId The id of the cms_block table
-     * @param string $id The context id, the cms_nav_item_page_block_item unique id
+     * @param string $class The block object class name.
+     * @param int $blockId The id of the cms_block table
+     * @param int $id The context id, the cms_nav_item_page_block_item unique id
      * @param string $context admin or frontend
      * @param NavItemPage|null $pageObject
      */
