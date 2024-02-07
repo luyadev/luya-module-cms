@@ -2,6 +2,30 @@
 
 This document will help you upgrading from a LUYA admin module version into another. For more detailed informations about the breaking changes **click the issue detail link**, there you can examples of how to change your code.
 
+## 5.0 to 5.1
+
+**Upgrade Notice: Changes to `Block->getEnvOption('pageObject')` Behavior**
+
+In previous versions, the method `getEnvOption('pageObject')` incorrectly returned an `ActiveQuery` object, which was intended to resolve into a `NavItem` instance. We have corrected this issue in the latest update. Now, `getEnvOption('pageObject')` properly returns a `NavItemPage` object as expected.
+
+**Action Required for Developers:**
+
+If your code utilizes the `getEnvOption('pageObject')` method, you will need to make adjustments to ensure compatibility with the current version. To access the `NavItem` object, which was the original behavior facilitated through an `ActiveQuery`, you should now use the following approach: `getEnvOption('pageObject')->navItem`.
+
+**Example of Required Code Adjustments:**
+
+- **Previous Approach:** To obtain the title of a `NavItem`, you might have used:
+  ```php
+  getEnvOption('pageObject')->one()->title
+  ```
+
+- **New Approach:** To achieve the same outcome in the updated version, you should modify your code to:
+  ```php
+  getEnvOption('pageObject')->navItem->title
+  ```
+
+This change ensures more intuitive access to the `NavItem` properties directly through the `NavItemPage` object, streamlining the process of fetching page-related data. Please review your projects and update any relevant code segments to align with this new method of accessing `NavItem` properties.
+
 ## 4.x to 5.0
 
 + This release contains the new migrations which are required for the user and file table. Therefore make sure to run the `./vendor/bin/luya migrate` command after `composer update`.

@@ -67,5 +67,5 @@ If you want to contribute, make sure to read the [guidelines](https://luya.io/gu
 ## Unit Testing
 
 1. `cp phpunit.xml.dist phpunit.xml`
-2. `docker-compose up`
-3. `docker-compose run luyacmsphpunit tests` to run all tests or `docker-compose run luyacmsphpunit tests/src/helpers/UrlTest.php` to run a specific test.
+2. `docker compose up`
+3. `docker compose run luyacmsphpunit tests` to run all tests or `docker compose run luyacmsphpunit tests/src/helpers/UrlTest.php` to run a specific test.

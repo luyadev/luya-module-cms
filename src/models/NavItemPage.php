@@ -25,6 +25,7 @@ use yii\db\Query;
  * @property string $version_alias
  * @property Layout $layout
  * @property NavItem $forceNavItem
+ * @property NavItemPageBlockItems[] $navItemPageBlockItems
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -241,7 +242,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             $cacheKey = ['blockcache', (int) $placeholder['id']];
 
             /** @var $blockObject \luya\cms\base\InternalBaseBlock */
-            $blockObject = Block::createObject($placeholder['class'], $placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
+            $blockObject = Block::createObject($placeholder['class'], $placeholder['block_id'], $placeholder['id'], 'frontend', $this);
 
             if ($blockObject) {
                 $isCachingEnabled = $blockObject->getIsCacheEnabled() && $this->isGuest();
