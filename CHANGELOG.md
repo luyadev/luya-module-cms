@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 5.1.1
+
++ [#410](https://github.com/luyadev/luya-module-cms/pull/410) Disabled sorting functionality for the "group" extra field in the block CRUD interface due to an exception being thrown. This issue occurred because the field is declared as an `extraAttribute`.
+
 ## 5.1.0 (7. February 2024)
 
 > This release contains a very small change when using the block `getEnvOption('pageObject')`. Check the [UPGRADE document](UPGRADE.md) to read more about.

@@ -88,7 +88,7 @@ class BlockGroup extends NgRestModel
     public function ngRestExtraAttributeTypes()
     {
         return [
-            'groupLabel' => 'text',
+            'groupLabel' => ['text', 'sortField' => false],
         ];
     }
 
