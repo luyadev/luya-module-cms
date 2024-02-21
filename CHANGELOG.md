@@ -5,7 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 5.1.1
 
-+ [#410](https://github.com/luyadev/luya-module-cms/pull/410) Fixed block group extra attribute sorting issue.
++ [#410](https://github.com/luyadev/luya-module-cms/pull/410) Disabled sorting functionality for the "group" extra field in the block CRUD interface due to an exception being thrown. This issue occurred because the field is declared as an `extraAttribute`.
 
 ## 5.1.0 (7. February 2024)
 
