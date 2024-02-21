@@ -256,6 +256,9 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
             return false;
         }
 
+        // when no parent nav id is given, the post value is `null` therefore we have the explicit set the value to `0`.
+        $parentNavId = $this->parent_nav_id ?: 0;
+
         /**
          * Group by website_id
          * @since 4.0.0
@@ -263,7 +266,7 @@ class NavItem extends ActiveRecord implements GenericSearchInterface
         $exists = static::find()
             ->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')
             ->leftJoin('cms_nav_container', 'cms_nav.nav_container_id=cms_nav_container.id')
-            ->where(['cms_nav_item.alias' => $alias, 'cms_nav_item.lang_id' => $langId, 'cms_nav.parent_nav_id' => $this->parent_nav_id])
+            ->where(['cms_nav_item.alias' => $alias, 'cms_nav_item.lang_id' => $langId, 'cms_nav.parent_nav_id' => $parentNavId])
             ->groupBy('cms_nav_container.website_id')
             ->exists();
         if ($exists) {
