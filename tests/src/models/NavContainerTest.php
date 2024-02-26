@@ -46,6 +46,11 @@ class NavContainerTest extends CmsFrontendTestCase
 
             $this->assertEquals(2, $navContainer->website_id);
             $this->assertSame('test container', $navContainer->name);
+
+            $website = $navContainer->website;
+
+            $this->assertEquals(2, $website->id);
+            $this->assertSame('test', $website->name);
         });
     }
 }

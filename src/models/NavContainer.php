@@ -11,6 +11,7 @@ use yii\db\ActiveQuery;
 /**
  * Navigation-Containers Model.
  *
+ * @property integer $id
  * @property string $name
  * @property string $alias
  * @property integer $website_id
@@ -58,7 +59,7 @@ class NavContainer extends NgRestModel
     {
         return [
             [['name', 'alias', 'website_id'], 'required'],
-            [['website_id', 'is_deleted', 'website_id'], 'integer'],
+            [['website_id'], 'integer'],
             [['is_deleted'], 'boolean']
         ];
     }
@@ -113,6 +114,6 @@ class NavContainer extends NgRestModel
      */
     public function getWebsite()
     {
-        return $this->hasOne(Website::class, ['website_id' => 'id']);
+        return $this->hasOne(Website::class, ['id' => 'website_id']);
     }
 }
