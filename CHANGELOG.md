@@ -5,6 +5,7 @@ In order to read more about upgrading and BC breaks have a look at the [UPGRADE 
 
 ## 5.1.1
 
++ [#415](https://github.com/luyadev/luya-module-cms/pull/415) Fixed navItem relation for inactive page versions.
 + [#412](https://github.com/luyadev/luya-module-cms/pull/412) Fixed website relation for nav container (when accessing `navContainer->website`).
 + [#410](https://github.com/luyadev/luya-module-cms/pull/410) Disabled sorting functionality for the "group" extra field in the block CRUD interface due to an exception being thrown. This issue occurred because the field is declared as an `extraAttribute`.
 + [#409](https://github.com/luyadev/luya-module-cms/issues/409) Implemented a new validation check to prevent slug duplication within the same language and navigation hierarchy when creating a new page. This enhancement ensures unique page identification and avoids conflicts in site structure.
