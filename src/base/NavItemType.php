@@ -32,7 +32,7 @@ abstract class NavItemType extends ActiveRecord implements NavItemTypeInterface
      */
     public function getNavItem()
     {
-        return $this->hasOne(NavItem::class, ['nav_item_type_id' => 'id'])->where(['nav_item_type' => static::getNummericType()]);
+        return $this->hasOne(NavItem::class, ['id' => 'nav_item_id'])->where(['nav_item_type' => static::getNummericType()]);
     }
 
     /**
