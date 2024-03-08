@@ -576,6 +576,14 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getNavItem()
+    {
+        return $this->hasOne(NavItem::class, ['id' => 'nav_item_id'])->where(['nav_item_type' => static::getNummericType()]);
+    }
+
+    /**
      * This method is used to force the parent nav item for the corresponding page item whether the type matches or not:
      *
      * @return \luya\cms\models\NavItem

@@ -3,6 +3,7 @@
 namespace NavItemPageTest;
 
 use cmstests\WebModelTestCase;
+use luya\cms\models\NavItem;
 use luya\cms\models\NavItemPage;
 use luya\testsuite\fixtures\NgRestModelFixture;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
@@ -106,5 +107,45 @@ class NavItemPageTest extends WebModelTestCase
         } catch (\Exception $e) {
             $this->assertStringContainsString('views/cmslayouts'.DIRECTORY_SEPARATOR.'relative.php', $e->getMessage());
         }
+    }
+
+    public function testNavItemForPageVersions()
+    {
+        $navItemFixture = $this->createCmsNavItemFixture([
+            1 => [
+                'id' => 1,
+                'nav_id' => 11,
+                'alias' => 'foobar',
+                'nav_item_type' => 1,
+                'nav_item_type_id' => 2,
+            ]
+        ]);
+
+        $pageFixture = $this->createCmsNavItemPageFixture([
+            'version1' => [
+                'id' => 1,
+                'nav_item_id' => 1,
+                'version_alias' => 'first',
+            ],
+            'version2' => [
+                'id' => 2,
+                'nav_item_id' => 1,
+                'version_alias' => 'second',
+            ]
+        ]);
+
+        $navItem = $navItemFixture->getModel(1);
+        $pageVersion1 = $pageFixture->getModel('version1'); // inactive page version
+        $pageVersion2 = $pageFixture->getModel('version2'); // active page version
+
+        $this->assertInstanceOf(NavItem::class, $pageVersion1->navItem);
+        $this->assertSame(1, $pageVersion1->navItem->id);
+        $this->assertSame(11, $pageVersion1->navItem->nav_id);
+        $this->assertSame('foobar', $pageVersion1->navItem->alias);
+
+        $this->assertInstanceOf(NavItem::class, $pageVersion2->navItem);
+        $this->assertSame(1, $pageVersion2->navItem->id);
+        $this->assertSame(11, $pageVersion2->navItem->nav_id);
+        $this->assertSame('foobar', $pageVersion2->navItem->alias);
     }
 }
