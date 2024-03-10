@@ -10,16 +10,16 @@ use Yii;
  *
  * @property PhpBlock $context Get the block context.
  * @property PhpBlock $block The block context.
- * @property integer $index Get the current index number of the block inside the current placeholder.
+ * @property integer $index Get the current index number/position of the block within this placeholder.
  * @property boolean $isFirst Whether this is the first block element inside this placeholder or not.
  * @property boolean $isLast Whether this is the last block element inside this placeholder or not.
  * @property integer $itemsCount Returns the number of items inside this placeholder.
  * @property boolean $isNextEqual Whether the next element (the element after the current element) is the same or not.
  * @property boolean $isPrevEqual Whether the previous element (the element before the current element) is the same or not.
- * @property integer $equalIndex Get the index number within the equal elements.
+ * @property integer $equalIndex Get the current index number/position of this element within the list of *same* elements.
  * @property integer $id Returns the Unique ID for this block (absolute unique value).
  * @property integer $blockId Returns the block type ID from database, assume two text blocks would have the same ID.
- * @property \luya\cms\models\NavItem $pageObject Returns the NavItem object for the context the block is implemented.
+ * @property \luya\cms\models\NavItemPage $pageObject Returns the `NavItemPage` object where the block is located.
  * @property View $appView The application view object in order to register data to the layout view.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -156,11 +156,11 @@ class PhpBlockView extends View
     }
 
     /**
-     * Returns the {{luya\cms\models\NavItem}} context Page Object.
+     * Returns the context {{luya\cms\models\NavItemPage}} object.
      *
      * Returns the context page object where the block is implemented.
      *
-     * @return \luya\cms\models\NavItem
+     * @return \luya\cms\models\NavItemPage
      * @since 1.0.2
      */
     public function getPageObject()
@@ -171,17 +171,17 @@ class PhpBlockView extends View
     /**
      * Get a block environment value.
      *
-     * + **id**: Return the unique identifier for this block, each blocks has its id from the database, this is absolute unique. {{luya\cms\models\NavItemPageBlockItem}} -> id
+     * + **id**: Returns the unique identifier for this block, each blocks has its id from the database, this is absolute unique. {{luya\cms\models\NavItemPageBlockItem}} -> id
      * + **blockId**: Returns the id of the block in the database. Two blocks of the same type would have the same blockId. {{luya\cms\models\Block}} -> id
-     * + **context**: Returns frontend or backend to find out in which context you are.
-     * + **pageObject**: Returns the {{luya\cms\models\NavItem}} Object where you can run `getNav()` to retrievew the Nav Object.
+     * + **context**: Returns `frontend` or `admin` to find out in which context you are.
+     * + **pageObject**: Returns the {{luya\cms\models\NavItemPage}} object where the block is located. Thereof you can also retrieve the related {{luya\cms\models\NavItem}} and {{luya\cms\models\Nav}} objects via `getNavItem()` and `getNav()`.
      * + **isFirst**: Returns whether this block is the first in its placeholder or not.
-     * + **isLast**: Return whether his block is the last in its placeholder or not.
-     * + **index**: Returns the number of the index/position within this placheholder.
+     * + **isLast**: Returns whether this block is the last in its placeholder or not.
+     * + **index**: Returns the index number/position within this placeholder.
      * + **itemsCount**: Returns the number of items inside this placeholder.
      * + **isPrevEqual**: Returns whether the previous item is of the same origin (block type, like text block) as the current.
      * + **isNextEqual**: Returns whether the next item is of the same origin (block type, like text block) as the current.
-     * + **equalIndex**: Get the current index/position of this element within the list of *same* elements.
+     * + **equalIndex**: Returns the current index number/position of this element within the list of *same* elements.
      *
      * @param string $key The key identifier of the context variable.
      * @param mixed $defaultvalue If the env value is not found this value will be returned.
