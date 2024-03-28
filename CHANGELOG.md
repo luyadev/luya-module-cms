@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-## 5.1.1
+## 5.1.1 (28. March 2024)
 
 + [#415](https://github.com/luyadev/luya-module-cms/pull/415) Fixed navItem relation for inactive page versions.
 + [#412](https://github.com/luyadev/luya-module-cms/pull/412) Fixed website relation for nav container (when accessing `navContainer->website`).
