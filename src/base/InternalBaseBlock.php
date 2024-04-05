@@ -12,10 +12,10 @@ use yii\base\BaseObject;
 use yii\helpers\Inflector;
 
 /**
- * Concret Block implementation based on BlockInterface.
+ * Concrete Block implementation based on BlockInterface.
  *
- * This is an use case for the block implemenation as InternBaseBlock fro
- * two froms of implementations.
+ * This is an use case for the block implementation as InternBaseBlock for
+ * two forms of implementations.
  *
  * + {{\luya\cms\base\PhpBlock}}
  *
@@ -288,6 +288,24 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     public function isFrontendContext()
     {
         return ($this->getEnvOption('context', false) === 'frontend') ? true : false;
+    }
+
+    private $_page;
+
+    /**
+     * @inheritdoc
+     */
+    public function setPage($page)
+    {
+        $this->_page = $page;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPage()
+    {
+        return $this->_page;
     }
 
     private array $_envOptions = [];

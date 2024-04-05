@@ -98,6 +98,20 @@ interface BlockInterface
     public function getFieldHelp();
 
     /**
+     * Set the block's {{luya\cms\models\NavItemPage}} object.
+     * 
+     * @param NavItemPage $page The page object.
+     */
+    public function setPage($page);
+
+    /**
+     * Returns the block's {{luya\cms\models\NavItemPage}} object.
+     * 
+     * @return NavItemPage
+     */
+    public function getPage();
+
+    /**
      * Set an environment option informations to the block with key value pairing.
      *
      * @param string $key The identifier key.
