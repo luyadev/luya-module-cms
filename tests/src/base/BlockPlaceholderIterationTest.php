@@ -101,6 +101,86 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
         $this->assertSame('<div class="render-frontend"><box><div class="block">foo</div></box><box><div class="block">bar</div></box></div>', $page->renderPlaceholder('content'));
     }
 
+    public function testPageObjectPlaceholderIteration()
+    {
+        $this->app->setComponents([
+            'db' => [
+                'class' => 'yii\db\Connection',
+                'dsn' => 'sqlite::memory:',
+            ]
+        ]);
+
+        $blockFixture = new NgRestModelFixture([
+            'modelClass' => Block::class,
+            'fixtureData' => [
+                'block1' => [
+                    'id' => 1,
+                    'group_id' => 1,
+                    'class' => TestingPageObjectBlock::class,
+                    'is_disabled' => 0,
+                ],
+            ]
+        ]);
+
+        $pageFixture = new ActiveRecordFixture([
+            'modelClass' => NavItemPage::class,
+            'fixtureData' => [
+                'page1' => [
+                    'id' => 1,
+                    'layout_id' => 1,
+                    'nav_item_id' => 1,
+                    'timestamp_create' => time(),
+                    'version_alias' => 'barfoo',
+                ],
+            ]
+        ]);
+
+        $blockItemFixture = new NgRestModelFixture([
+            'modelClass' => NavItemPageBlockItem::class,
+            'fixtureData' => [
+                'item1' => [
+                    'id' => 1,
+                    'block_id' => 1,
+                    'placeholder_var' => 'content',
+                    'nav_item_page_id' => 1,
+                    'prev_id' => 0,
+                    'json_config_values' => '{}',
+                    'json_config_cfg_values' => '{}',
+                    'variation' => '',
+                    'is_hidden' => 0,
+                ],
+            ]
+        ]);
+
+        $block1 = $blockFixture->getModel('block1');
+        $page1 = $pageFixture->getModel('page1');
+        $blockItem1 = $blockItemFixture->getModel('item1');
+
+        // admin:
+
+        $adminBlockItems = NavItemPage::getPlaceholder('content', 0, $page1);
+
+        $pageObject = $adminBlockItems[0]['twig_admin'];
+
+        $this->assertInstanceOf(NavItemPage::class, $pageObject);
+        $this->assertSame(1, $pageObject->id);
+        $this->assertSame(1, $pageObject->layout_id);
+        $this->assertSame(1, $pageObject->nav_item_id);
+        $this->assertSame('barfoo', $pageObject->version_alias);
+
+        // frontend:
+
+        $frontendPageObjects = json_decode($page1->renderPlaceholder('content'), true);
+
+        $pageObject = $frontendPageObjects[0];
+
+        $this->assertSame('luya\cms\models\NavItemPage', $pageObject['className']);
+        $this->assertSame(1, $pageObject['id']);
+        $this->assertSame(1, $pageObject['layoutId']);
+        $this->assertSame(1, $pageObject['navItemId']);
+        $this->assertSame('barfoo', $pageObject['versionAlias']);
+    }
+
     public function testEnvOptionsPlaceholderIteration()
     {
         $this->app->setComponents([
@@ -175,14 +255,14 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
         ]);
 
         $block1 = $blockFixture->getModel('block1');
-        $page = $pageFixture->getModel('page1');
+        $page1 = $pageFixture->getModel('page1');
         $blockItem1 = $blockItemFixture->getModel('item1');
         $blockItem2 = $blockItemFixture->getModel('item2');
         $blockItem3 = $blockItemFixture->getModel('item3');
 
         // admin:
 
-        $adminBlockItems = NavItemPage::getPlaceholder('content', 0, $page);
+        $adminBlockItems = NavItemPage::getPlaceholder('content', 0, $page1);
 
         $envOptions1 = $adminBlockItems[0]['twig_admin'];
         $envOptions2 = $adminBlockItems[1]['twig_admin'];
@@ -191,8 +271,6 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
         $this->assertSame(1, $envOptions1['id']);
         $this->assertSame(1, $envOptions1['blockId']);
         $this->assertSame('admin', $envOptions1['context']);
-        //@TODO assertInstanceOf() for pageObject
-        $this->assertNotEquals(false, $envOptions1['pageObject']);
         $this->assertSame(1, $envOptions1['index']);
         $this->assertSame(3, $envOptions1['itemsCount']);
         $this->assertTrue($envOptions1['isFirst']);
@@ -204,8 +282,6 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
         $this->assertSame(2, $envOptions2['id']);
         $this->assertSame(1, $envOptions2['blockId']);
         $this->assertSame('admin', $envOptions2['context']);
-        //@TODO assertInstanceOf() for pageObject
-        $this->assertNotEquals(false, $envOptions2['pageObject']);
         $this->assertSame(2, $envOptions2['index']);
         $this->assertSame(3, $envOptions2['itemsCount']);
         $this->assertFalse($envOptions2['isFirst']);
@@ -217,8 +293,6 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
         $this->assertSame(3, $envOptions3['id']);
         $this->assertSame(1, $envOptions3['blockId']);
         $this->assertSame('admin', $envOptions3['context']);
-        //@TODO assertInstanceOf() for pageObject
-        $this->assertNotEquals(false, $envOptions2['pageObject']);
         $this->assertSame(3, $envOptions3['index']);
         $this->assertSame(3, $envOptions3['itemsCount']);
         $this->assertFalse($envOptions3['isFirst']);
@@ -229,7 +303,7 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
 
         // frontend:
 
-        $frontendEnvOptions = json_decode($page->renderPlaceholder('content'), true);
+        $frontendEnvOptions = json_decode($page1->renderPlaceholder('content'), true);
 
         $envOptions1 = $frontendEnvOptions[0];
         $envOptions2 = $frontendEnvOptions[1];
@@ -238,8 +312,6 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
         $this->assertSame(1, $envOptions1['id']);
         $this->assertSame(1, $envOptions1['blockId']);
         $this->assertSame('frontend', $envOptions1['context']);
-        //@TODO assertInstanceOf() for pageObject
-        $this->assertNotEquals(false, $envOptions1['pageObject']);
         $this->assertSame(1, $envOptions1['index']);
         $this->assertSame(3, $envOptions1['itemsCount']);
         $this->assertTrue($envOptions1['isFirst']);
@@ -251,8 +323,6 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
         $this->assertSame(2, $envOptions2['id']);
         $this->assertSame(1, $envOptions2['blockId']);
         $this->assertSame('frontend', $envOptions2['context']);
-        //@TODO assertInstanceOf() for pageObject
-        $this->assertNotEquals(false, $envOptions2['pageObject']);
         $this->assertSame(2, $envOptions2['index']);
         $this->assertSame(3, $envOptions2['itemsCount']);
         $this->assertFalse($envOptions2['isFirst']);
@@ -264,8 +334,6 @@ class BlockPlaceholderIterationTest extends CmsFrontendTestCase
         $this->assertSame(3, $envOptions3['id']);
         $this->assertSame(1, $envOptions3['blockId']);
         $this->assertSame('frontend', $envOptions3['context']);
-        //@TODO assertInstanceOf() for pageObject
-        $this->assertNotEquals(false, $envOptions3['pageObject']);
         $this->assertSame(3, $envOptions3['index']);
         $this->assertSame(3, $envOptions3['itemsCount']);
         $this->assertFalse($envOptions3['isFirst']);
@@ -330,6 +398,38 @@ class TestingLayoutBlock extends InternalBaseBlock
     public function placeholderRenderIteration(\luya\cms\base\BlockInterface $block)
     {
         return '<box>'.$block->renderFrontend().'</box>';
+    }
+}
+
+class TestingPageObjectBlock extends InternalBaseBlock
+{
+    public function name()
+    {
+        return 'PageObject';
+    }
+
+    public function config()
+    {
+        return [];
+    }
+
+    public function renderFrontend()
+    {
+        // simplify data of page object before stringify
+        $page = [
+            'className' => get_class($this->page),
+            'id' => $this->page->id,
+            'layoutId' => $this->page->layout_id,
+            'navItemId' => $this->page->nav_item_id,
+            'versionAlias' => $this->page->version_alias,
+        ];
+
+        return (($this->getEnvOption('isFirst')) ? '[' : '') . json_encode($page, JSON_NUMERIC_CHECK) . (($this->getEnvOption('isLast')) ? ']' : ',');
+    }
+
+    public function renderAdmin()
+    {
+        return $this->page;
     }
 }
 
