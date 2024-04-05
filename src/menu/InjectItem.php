@@ -70,6 +70,8 @@ use yii\helpers\Inflector;
  * ]
  * ```
  *
+ * Be aware that the parent item must be available for current language.
+ *
  * @property $childOf integer The child of id in order read data from this parent item.
  * @property $item \luya\cms\menu\Item The resolved Item.
  * @property $navId integer|string The navId for this inject item.
