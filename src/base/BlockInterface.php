@@ -99,14 +99,14 @@ interface BlockInterface
 
     /**
      * Set the block's {{luya\cms\models\NavItemPage}} object.
-     * 
+     *
      * @param NavItemPage $page The page object.
      */
     public function setPage($page);
 
     /**
      * Returns the block's {{luya\cms\models\NavItemPage}} object.
-     * 
+     *
      * @return NavItemPage
      */
     public function getPage();
