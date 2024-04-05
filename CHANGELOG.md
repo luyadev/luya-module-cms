@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
+## 5.2.0
+
++ [#418](https://github.com/luyadev/luya-module-cms/pull/418) Added new block's `page` property in both admin and frontend context as a replacement for `getEnvOption('pageObject')`, which is now deprecated.
+
 ## 5.1.1 (28. March 2024)
 
 + [#415](https://github.com/luyadev/luya-module-cms/pull/415) Fixed navItem relation for inactive page versions.
