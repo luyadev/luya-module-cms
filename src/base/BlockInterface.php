@@ -2,6 +2,8 @@
 
 namespace luya\cms\base;
 
+use luya\cms\models\NavItemPage;
+
 /**
  * Interface for all Blocks.
  *
@@ -102,14 +104,14 @@ interface BlockInterface
      *
      * @param NavItemPage $page The page object.
      */
-    public function setPage($page);
+    public function setPage(NavItemPage $page);
 
     /**
      * Returns the block's {{luya\cms\models\NavItemPage}} object.
      *
      * @return NavItemPage
      */
-    public function getPage();
+    public function getPage(): NavItemPage;
 
     /**
      * Set an environment option informations to the block with key value pairing.

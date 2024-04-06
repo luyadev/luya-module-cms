@@ -4,6 +4,7 @@ namespace luya\cms\base;
 
 use luya\admin\base\TypesInterface;
 use luya\cms\frontend\blockgroups\MainGroup;
+use luya\cms\models\NavItemPage;
 use luya\helpers\ArrayHelper;
 use luya\helpers\FileHelper;
 use luya\helpers\Html;
@@ -295,7 +296,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * @inheritdoc
      */
-    public function setPage($page)
+    public function setPage(NavItemPage $page)
     {
         $this->_page = $page;
     }
@@ -303,7 +304,7 @@ abstract class InternalBaseBlock extends BaseObject implements BlockInterface, T
     /**
      * @inheritdoc
      */
-    public function getPage()
+    public function getPage(): NavItemPage
     {
         return $this->_page;
     }
