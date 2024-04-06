@@ -4,8 +4,9 @@ namespace cmstests\data\blocks;
 
 use luya\cms\base\BlockInterface;
 use luya\cms\frontend\blockgroups\DevelopmentGroup;
+use luya\cms\models\NavItemPage;
 
-class ConcretImplementationBlock implements BlockInterface
+class ConcreteImplementationBlock implements BlockInterface
 {
     public function onRegister()
     {
@@ -92,6 +93,28 @@ class ConcretImplementationBlock implements BlockInterface
     public function getFieldHelp()
     {
         return [];
+    }
+
+    private $_page;
+
+    /**
+     * Set the block's {{luya\cms\models\NavItemPage}} object.
+     *
+     * @param NavItemPage $page The page object.
+     */
+    public function setPage(NavItemPage $page)
+    {
+        $this->_page = $page;
+    }
+
+    /**
+     * Returns the block's {{luya\cms\models\NavItemPage}} object.
+     *
+     * @return NavItemPage
+     */
+    public function getPage(): NavItemPage
+    {
+        return $this->_page;
     }
 
     private $_envs = [];

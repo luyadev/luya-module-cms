@@ -281,7 +281,9 @@ class Block extends NgRestModel
         $object->setEnvOption('id', $id);
         $object->setEnvOption('blockId', $blockId);
         $object->setEnvOption('context', $context);
-        $object->setEnvOption('pageObject', $pageObject);
+        $object->setEnvOption('pageObject', $pageObject); // deprecated since 5.2.0
+
+        $object->setPage($pageObject);
 
         $object->setup();
 

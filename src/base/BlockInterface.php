@@ -2,6 +2,8 @@
 
 namespace luya\cms\base;
 
+use luya\cms\models\NavItemPage;
+
 /**
  * Interface for all Blocks.
  *
@@ -96,6 +98,20 @@ interface BlockInterface
      * @return array An array where the key is the cfg/var field var name and the value the helper text.
      */
     public function getFieldHelp();
+
+    /**
+     * Set the block's {{luya\cms\models\NavItemPage}} object.
+     *
+     * @param NavItemPage $page The page object.
+     */
+    public function setPage(NavItemPage $page);
+
+    /**
+     * Returns the block's {{luya\cms\models\NavItemPage}} object.
+     *
+     * @return NavItemPage
+     */
+    public function getPage(): NavItemPage;
 
     /**
      * Set an environment option informations to the block with key value pairing.

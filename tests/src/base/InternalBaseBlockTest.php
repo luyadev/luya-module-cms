@@ -8,9 +8,9 @@ use luya\helpers\Html;
 
 class InternalBaseBlockTest extends CmsFrontendTestCase
 {
-    public function testConcretImplementation()
+    public function testConcreteImplementation()
     {
-        $object = new ConcretImplementationBlock();
+        $object = new ConcreteImplementationBlock();
 
         $this->assertInstanceOf('luya\cms\base\BlockInterface', $object);
     }
