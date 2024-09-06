@@ -122,7 +122,7 @@ class BlockHelper
             return false;
         }
 
-        if ($applyFilter && is_string($applyFilter)) {
+        if ($applyFilter && is_string($applyFilter) && ($image->getResolutionHeight() !== 0 && $image->getResolutionWidth() !== 0)) {
             $filter = $image->applyFilter($applyFilter);
 
             if ($filter) {

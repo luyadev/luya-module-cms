@@ -3,7 +3,6 @@
 namespace luya\cms\models;
 
 use luya\admin\base\GenericSearchInterface;
-
 use luya\admin\helpers\Angular;
 use luya\admin\models\Lang;
 use luya\admin\models\User;
