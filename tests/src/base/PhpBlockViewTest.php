@@ -3,7 +3,7 @@
 namespace cmstests\src\base;
 
 use cmstests\CmsFrontendTestCase;
-use cmstests\data\blocks\ConcretImplementationBlock;
+use cmstests\data\blocks\ConcreteImplementationBlock;
 use cmstests\data\blocks\PhpTestBlock;
 use luya\cms\base\PhpBlockView;
 use luya\web\View;
@@ -127,11 +127,11 @@ class PhpBlockViewTest extends CmsFrontendTestCase
 
     public function testGetBlock()
     {
-        $block = new ConcretImplementationBlock();
+        $block = new ConcreteImplementationBlock();
         $view = new PhpBlockView();
         $view->context = $block;
 
-        $this->assertInstanceOf(ConcretImplementationBlock::class, $view->getBlock());
+        $this->assertInstanceOf(ConcreteImplementationBlock::class, $view->getBlock());
     }
 
     public function testGetters()

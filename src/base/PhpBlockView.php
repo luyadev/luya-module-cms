@@ -162,10 +162,25 @@ class PhpBlockView extends View
      *
      * @return \luya\cms\models\NavItemPage
      * @since 1.0.2
+     * @deprecated 5.2.0
+     * @see getPage()
      */
     public function getPageObject()
     {
         return $this->context->getEnvOption('pageObject');
+    }
+
+    /**
+     * Returns the context {{luya\cms\models\NavItemPage}} object.
+     *
+     * Returns the context page object where the block is implemented.
+     *
+     * @return \luya\cms\models\NavItemPage
+     * @since 5.2.0
+    */
+    public function getPage()
+    {
+        return $this->context->getPage();
     }
 
     /**
@@ -174,7 +189,7 @@ class PhpBlockView extends View
      * + **id**: Returns the unique identifier for this block, each blocks has its id from the database, this is absolute unique. {{luya\cms\models\NavItemPageBlockItem}} -> id
      * + **blockId**: Returns the id of the block in the database. Two blocks of the same type would have the same blockId. {{luya\cms\models\Block}} -> id
      * + **context**: Returns `frontend` or `admin` to find out in which context you are.
-     * + **pageObject**: Returns the {{luya\cms\models\NavItemPage}} object where the block is located. Thereof you can also retrieve the related {{luya\cms\models\NavItem}} and {{luya\cms\models\Nav}} objects via `getNavItem()` and `getNav()`.
+     * + **pageObject**: Returns the {{luya\cms\models\NavItemPage}} object where the block is located. Thereof you can also retrieve the related {{luya\cms\models\NavItem}} and {{luya\cms\models\Nav}} objects via `getNavItem()` and `getNav()` (deprecated since 5.2.0).
      * + **isFirst**: Returns whether this block is the first in its placeholder or not.
      * + **isLast**: Returns whether this block is the last in its placeholder or not.
      * + **index**: Returns the index number/position within this placeholder.
